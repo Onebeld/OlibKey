@@ -5,15 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OlibPasswordManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Loaded="Window_Loaded"
+        FontFamily="{StaticResource Montserrat}"
+        Title="Olib Password Manager" Height="450" Width="800" Background="#FFE2E2E2" MinWidth="600" MinHeight="350">
     <Grid>
-        <Menu>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="3">
             <MenuItem Header="Файл">
+                <MenuItem Header="Создать базу данных" Click="OpenCreateData"/>
+                <MenuItem Header="Открыть базу данных"/>
+                <Separator/>
                 <MenuItem Header="Добавить новый логин"/>
                 <Separator/>
-                <MenuItem Header="Настройки"/>
-                <MenuItem Header="Выйти из Olib Password Manager" InputGestureText="Alt + F4"/>
+                <MenuItem Header="Настройки" Click="OpenSettingsWindow"/>
+                <MenuItem Header="Выйти из Olib Password Manager" InputGestureText="Alt + F4" Click="ClosedApplication"/>
+            </MenuItem>
+            <MenuItem Header="Инструменты">
+                <MenuItem Header="Генератор паролей" Click="OpenPasswordGeneratorWindow"/>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="Проверить на наличие обновлении"/>
+                <MenuItem Header="О программе" Click="OpenAboutWindow"/>
             </MenuItem>
         </Menu>
+        <ListView Grid.Row="2" Grid.Column="1"/>
+        <Border Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="#A5A5A5" BorderThickness="1">
+            <Button Content="Добавить" Margin="10" Click="CreatePassword"/>
+        </Border>
+        <Border Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="#A5A5A5" BorderThickness="1">
+            <TextBox Margin="10"/>
+        </Border>
+        <Frame x:Name="frame" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" Source="/Pages/StartScreen.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

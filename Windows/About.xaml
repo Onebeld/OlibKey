@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OlibPasswordManager.Windows"
         mc:Ignorable="d"
+        FontFamily="{StaticResource Montserrat}"
         Title="О программе" Height="250" Width="400">
     <Grid>
 

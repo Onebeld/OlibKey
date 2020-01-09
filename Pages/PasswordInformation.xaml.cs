@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OlibPasswordManager.Properties.Core;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OlibPasswordManager.Pages
 {
@@ -18,16 +11,20 @@ namespace OlibPasswordManager.Pages
     /// </summary>
     public partial class PasswordInformation : Page
     {
-        public PasswordInformation()
-        {
-            InitializeComponent();
-        }
+        public PasswordInformation() => InitializeComponent();
 
+        #region CopyText
         private void CopyPassword(object sender, RoutedEventArgs e)
         {
             Clipboard.Clear();
             Clipboard.SetText(txtPassword.Password);
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(txtNameAccount.Text);
+        }
+        #endregion
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
@@ -43,6 +40,22 @@ namespace OlibPasswordManager.Pages
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
                 txtPasswordCollapsed.Text = null;
             }
+        }
+
+        private void ChangedPassword(object sender, RoutedEventArgs e) => NavigationService.Navigate(new Uri("/Pages/ChangePassword.xaml", UriKind.Relative));
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            int i = App.MainWindow.PasswordList.SelectedIndex;
+
+            txtName.Text = User.UsersList[User.IndexUser].Name;
+            txtNameAccount.Text = User.UsersList[User.IndexUser].PasswordName;
+            txtPassword.Password = User.UsersList[User.IndexUser].Password;
+            labelCreateData.Content = User.UsersList[User.IndexUser].TimeCreate;
+            labelChangeData.Content = User.UsersList[User.IndexUser].TimeChanged;
+
+            if (User.UsersList[User.IndexUser].TimeChanged == null) txtLabelChange.Visibility = Visibility.Collapsed;
+            else txtLabelChange.Visibility = Visibility.Visible;
         }
     }
 }

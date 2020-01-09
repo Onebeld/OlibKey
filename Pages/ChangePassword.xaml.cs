@@ -10,27 +10,41 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using OlibPasswordManager.Windows;
 using OlibPasswordManager.Properties.Core;
-using System.Threading.Tasks;
+using OlibPasswordManager.Windows;
 
 namespace OlibPasswordManager.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для CreatePassword.xaml
+    /// Логика взаимодействия для ChangePassword.xaml
     /// </summary>
-    public partial class CreatePassword : Page
+    public partial class ChangePassword : Page
     {
-        public CreatePassword()
-        {
-            InitializeComponent();
-        }
+        public ChangePassword() => InitializeComponent();
+
+        private void ButtonCancel(object sender, RoutedEventArgs e) => NavigationService.GoBack();
 
         private void OpenPasswordGeneration(object sender, RoutedEventArgs e)
         {
             PasswordGenerator generator = new PasswordGenerator();
             generator.saveButton.Visibility = Visibility.Visible;
             if ((bool)generator.ShowDialog()) txtPassword.Password = generator.txtPassword.Text;
+        }
+
+        private void ChangedPassword(object sender, RoutedEventArgs e)
+        {
+            User.UsersList[User.IndexUser].Name = txtName.Text;
+            User.UsersList[User.IndexUser].PasswordName = txtNameAccount.Text;
+            User.UsersList[User.IndexUser].Password = txtPassword.Password;
+            User.UsersList[User.IndexUser].Note = txtNote.Text;
+            User.UsersList[User.IndexUser].TimeChanged = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy");
+
+            App.MainWindow.PasswordList.ItemsSource = null;
+            App.MainWindow.PasswordList.ItemsSource = User.UsersList;
+
+            App.MainWindow.PasswordList.SelectedIndex = User.IndexUser;
+
+            NavigationService.GoBack();
         }
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
@@ -54,34 +68,26 @@ namespace OlibPasswordManager.Pages
             if ((bool)cbHide.IsChecked) txtPassword.Password = txtPasswordCollapsed.Text;
         }
 
-        private void CloseCreatePassword(object sender, RoutedEventArgs e)
+        private void DeletePassword(object sender, RoutedEventArgs e)
         {
-            txtName.Text = null;
-            txtNameAccount.Text = null;
-            txtPassword.Password = null;
-            txtPasswordCollapsed.Text = null;
-            txtNote.Text = null;
-            txtWebSite.Text = null;
-            NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
-        }
-
-        private void SavePasswordInList(object sender, RoutedEventArgs e)
-        {
-
-            User.UsersList.Add(new User
+            if (MessageBox.Show("Вы точно хотите удалить элемент?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
             {
-                Name = txtName.Text,
-                Note = txtNote.Text,
-                Password = txtPassword.Password,
-                PasswordName = txtNameAccount.Text,
-                WebSite = txtWebSite.Text,
-                TimeCreate = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy")
-            });
+                User.UsersList.RemoveAt(App.MainWindow.PasswordList.SelectedIndex);
+            }
 
             App.MainWindow.PasswordList.ItemsSource = null;
             App.MainWindow.PasswordList.ItemsSource = User.UsersList;
 
             NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            txtName.Text = User.UsersList[User.IndexUser].Name;
+            txtNameAccount.Text = User.UsersList[User.IndexUser].PasswordName;
+            txtPassword.Password = User.UsersList[User.IndexUser].Password;
+            txtWebSite.Text = User.UsersList[User.IndexUser].WebSite;
+            txtNote.Text = User.UsersList[User.IndexUser].Note;
         }
     }
 }

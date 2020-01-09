@@ -1,9 +1,11 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using OlibPasswordManager.Pages;
 using OlibPasswordManager.Properties.Core;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace OlibPasswordManager
 {
@@ -12,10 +14,14 @@ namespace OlibPasswordManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        string dir;
+        string masterPassword;
+
         #region Pages
         private CreatePassword PasswordPage;
         private PasswordInformation PasswordInformation;
         #endregion
+
         public MainWindow() => InitializeComponent();
 
         #region OpenWindow
@@ -35,19 +41,72 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using StreamWriter sw = new StreamWriter("Build.txt");
-            sw.Write("1.0.0.21");
+            sw.Write("1.0.0.50");
+
+            App.Settings = new Settings();
+
+            if (File.Exists("settings.json")) App.Settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json"));
+
+            User.UsersList = new List<User>();
+            User.UsersList.Add(new User
+            {
+                Name = "ВКонтакте",
+                Note = "",
+                Password = "1532142432",
+                PasswordName = "dmitry",
+                WebSite = "vk.com"
+            });
+            PasswordList.ItemsSource = User.UsersList;
         }
 
-        private async void OpenCreateData(object sender, RoutedEventArgs e)
+        private void OpenCreateData(object sender, RoutedEventArgs e)
         {
             Windows.CreateData data = new Windows.CreateData();
             if ((bool)data.ShowDialog())
             {
-                string dir = data.txtPathSelection.Text + "\\" + data.txtName.Text + ".aes";
-                await Task.Delay(500);
-
-                EncryptorPro.FileEncrypt(dir, data.txtPassword.Password);
+                dir = data.txtPathSelection.Text + "\\" + data.txtName.Text + ".aes";
+                masterPassword = data.txtPassword.Password;
             }
+        }
+
+        private void SaveBase(object sender, RoutedEventArgs e)
+        {
+            if (!File.Exists(dir))
+            {
+                Encryptor.FileEncrypt(dir, masterPassword, FileMode.Create);
+            }
+            else
+            {
+                Encryptor.FileEncrypt(dir, masterPassword, FileMode.Open);
+            }
+        }
+
+        private void OpenBase(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            if ((bool)fileDialog.ShowDialog())
+            {
+
+            }
+        }
+
+        private void PasswordList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PasswordInformation != null) PasswordInformation = null;
+
+            if (PasswordList.SelectedItem != null)
+            {
+                PasswordInformation = new PasswordInformation();
+
+                User.IndexUser = PasswordList.SelectedIndex;
+
+                frame.NavigationService.Navigate(PasswordInformation);
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(App.Settings));
         }
     }
 }

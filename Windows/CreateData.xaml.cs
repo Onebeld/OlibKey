@@ -55,10 +55,5 @@ namespace OlibPasswordManager.Windows
                 txtPasswordCollapsed.Text = null;
             }
         }
-
-        private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            txtPassword.Password = txtPasswordCollapsed.Text;
-        }
     }
 }

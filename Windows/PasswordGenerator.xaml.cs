@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 using OlibPasswordManager.Properties.Core;
 
 namespace OlibPasswordManager.Windows
@@ -111,6 +113,51 @@ namespace OlibPasswordManager.Windows
             if (txtPassword.Text.Length < 1) txtPassword.Text = RandomPassword();
             DialogResult = true;
             Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists("settings.json"))
+            {
+                chkAllowLowercase.IsChecked = App.Settings.GeneratorAllowLowercase;
+                chkAllowNumber.IsChecked = App.Settings.GeneratorAllowNumber;
+                chkAllowOther.IsChecked = App.Settings.GeneratorAllowOther;
+                chkAllowSpace.IsChecked = App.Settings.GeneratorAllowSpace;
+                chkAllowSpecial.IsChecked = App.Settings.GeneratorAllowSpecial;
+                chkAllowUnderscore.IsChecked = App.Settings.GeneratorAllowUnderscore;
+                chkAllowUppercase.IsChecked = App.Settings.GeneratorAllowUppercase;
+                chkRequireLowercase.IsChecked = App.Settings.GeneratorRequireLowercase;
+                chkRequireNumber.IsChecked = App.Settings.GeneratorRequireNumber;
+                chkRequireOther.IsChecked = App.Settings.GeneratorRequireOther;
+                chkRequireSpace.IsChecked = App.Settings.GeneratorRequireSpace;
+                chkRequireSpecial.IsChecked = App.Settings.GeneratorRequireSpecial;
+                chkRequireUnderscore.IsChecked = App.Settings.GeneratorRequireUnderscore;
+                chkRequireUppercase.IsChecked = App.Settings.GeneratorRequireUppercase;
+                txtMaxLenght.Text = App.Settings.GeneratorMaxCount;
+                txtMinLenght.Text = App.Settings.GeneratorMinCount;
+                txtOther.Text = App.Settings.GeneratorTextOther;
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.Settings.GeneratorAllowLowercase = (bool)chkAllowLowercase.IsChecked;
+            App.Settings.GeneratorAllowNumber = (bool)chkAllowNumber.IsChecked;
+            App.Settings.GeneratorAllowOther = (bool)chkAllowOther.IsChecked;
+            App.Settings.GeneratorAllowSpace = (bool)chkAllowSpace.IsChecked;
+            App.Settings.GeneratorAllowSpecial = (bool)chkAllowSpecial.IsChecked;
+            App.Settings.GeneratorAllowUnderscore = (bool)chkAllowUnderscore.IsChecked;
+            App.Settings.GeneratorAllowUppercase = (bool)chkAllowUppercase.IsChecked;
+            App.Settings.GeneratorRequireLowercase = (bool)chkRequireLowercase.IsChecked;
+            App.Settings.GeneratorRequireNumber = (bool)chkRequireNumber.IsChecked;
+            App.Settings.GeneratorRequireOther = (bool)chkRequireOther.IsChecked;
+            App.Settings.GeneratorRequireSpace = (bool)chkRequireSpace.IsChecked;
+            App.Settings.GeneratorRequireSpecial = (bool)chkRequireSpecial.IsChecked;
+            App.Settings.GeneratorRequireUnderscore = (bool)chkRequireUnderscore.IsChecked;
+            App.Settings.GeneratorRequireUppercase = (bool)chkRequireUppercase.IsChecked;
+            App.Settings.GeneratorTextOther = txtOther.Text;
+            App.Settings.GeneratorMaxCount = txtMaxLenght.Text;
+            App.Settings.GeneratorMinCount = txtMinLenght.Text;
         }
     }
 }

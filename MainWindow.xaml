@@ -6,13 +6,26 @@
         xmlns:local="clr-namespace:OlibPasswordManager"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
+        Closing="Window_Closing"
         FontFamily="{StaticResource Montserrat}"
         Title="Olib Password Manager" Height="450" Width="800" Background="#FFE2E2E2" MinWidth="600" MinHeight="350">
+    <Window.Resources>
+        <DataTemplate x:Key="ListPassword">
+            <Grid Margin="0,2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{Binding Path=Name}" FontSize="16"/>
+                <TextBlock Text="{Binding Path=PasswordName}" Grid.Row="1"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="0"/>
             <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -20,10 +33,11 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Menu Grid.ColumnSpan="3">
+        <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}">
             <MenuItem Header="Файл">
                 <MenuItem Header="Создать базу данных" Click="OpenCreateData"/>
-                <MenuItem Header="Открыть базу данных"/>
+                <MenuItem Header="Открыть базу данных" Click="OpenBase"/>
+                <MenuItem Header="Сохранить базу" Click="SaveBase"/>
                 <Separator/>
                 <MenuItem Header="Добавить новый логин"/>
                 <Separator/>
@@ -38,8 +52,8 @@
                 <MenuItem Header="О программе" Click="OpenAboutWindow"/>
             </MenuItem>
         </Menu>
-        <ListView Grid.Row="2" Grid.Column="1"/>
-        <Border Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="#A5A5A5" BorderThickness="1">
+        <ListBox x:Name="PasswordList" Grid.Row="2" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
+        <Border Grid.Column="1" Grid.Row="3" Background="White" BorderBrush="#A5A5A5" BorderThickness="1" >
             <Button Content="Добавить" Margin="10" Click="CreatePassword"/>
         </Border>
         <Border Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="#A5A5A5" BorderThickness="1">

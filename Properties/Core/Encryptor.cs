@@ -6,61 +6,7 @@ using System.Text;
 
 namespace OlibPasswordManager.Properties.Core
 {
-    public static class Encryptor
-    {
-        public static string EncryptText(string raw)
-        {
-            byte[] encrypted;
-
-            using AesManaged aes = new AesManaged();
-
-            encrypted = Encrypt(raw, aes.Key, aes.IV);
-            return Encoding.UTF8.GetString(encrypted);
-        }
-        public static string DecryptText(string raw)
-        {
-            byte[] decrypt = Encoding.UTF8.GetBytes(raw);
-
-            using AesManaged aes = new AesManaged();
-
-            string s = Decrypt(decrypt, aes.Key, aes.IV);
-            return s;
-        }
-
-        private static byte[] Encrypt(string plainText, byte[] Key, byte[] IV)
-        {
-            byte[] encrypted;
-            using (AesManaged aes = new AesManaged())
-            {
-                ICryptoTransform encryptor = aes.CreateEncryptor(Key, IV);
-
-                using MemoryStream ms = new MemoryStream();
-                using CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write);
-                using (StreamWriter sw = new StreamWriter(cs)) sw.Write(plainText);
-
-                encrypted = ms.ToArray();
-            }
-            // Return encrypted data    
-            return encrypted;
-        }
-        private static string Decrypt(byte[] cipherText, byte[] Key, byte[] IV)
-        {
-            string plaintext = null;
-            using (AesManaged aes = new AesManaged())
-            {
-                ICryptoTransform decryptor = aes.CreateDecryptor(Key, IV);
-
-                using MemoryStream ms = new MemoryStream(cipherText);
-                using CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
-                using StreamReader reader = new StreamReader(cs);
-
-                plaintext = reader.ReadToEnd();
-            }
-            return plaintext;
-        }
-    }
-
-    public class EncryptorPro
+    public class Encryptor
     {
         //  Call this function to remove the key from memory after use for security
         [DllImport("KERNEL32.DLL", EntryPoint = "RtlZeroMemory")]
@@ -91,12 +37,12 @@ namespace OlibPasswordManager.Properties.Core
         /// </summary>
         /// <param name="inputFile"></param>
         /// <param name="masterPassword"></param>
-        public static void FileEncrypt(string inputFile, string masterPassword)
+        public static void FileEncrypt(string inputFile, string masterPassword, FileMode fileMode)
         {
             byte[] salt = GenerateRandomSalt();
             CryptoStream cs;
 
-            using (FileStream fsCrypt = new FileStream(inputFile, FileMode.Create))
+            using (FileStream fsCrypt = new FileStream(inputFile, fileMode))
             {
                 byte[] passwordBytes = Encoding.UTF8.GetBytes(masterPassword);
 
@@ -146,8 +92,9 @@ namespace OlibPasswordManager.Properties.Core
         /// <param name="inputFile"></param>
         /// <param name="outputFile"></param>
         /// <param name="masterPassword"></param>
-        public static void FileDecrypt(string inputFile, string outputFile, string masterPassword)
+        public static string FileDecrypt(string inputFile, string outputFile, string masterPassword)
         {
+            string file;
             byte[] passwordBytes = Encoding.UTF8.GetBytes(masterPassword);
             byte[] salt = new byte[32];
 
@@ -163,7 +110,7 @@ namespace OlibPasswordManager.Properties.Core
             AES.Key = key.GetBytes(AES.KeySize / 8);
             AES.IV = key.GetBytes(AES.BlockSize / 8);
             AES.Padding = PaddingMode.PKCS7;
-            AES.Mode = CipherMode.CFB;
+            AES.Mode = CipherMode.CBC;
 
             CryptoStream cs = new CryptoStream(fsCrypt, AES.CreateDecryptor(), CryptoStreamMode.Read);
 
@@ -187,6 +134,7 @@ namespace OlibPasswordManager.Properties.Core
             {
                 Console.WriteLine("Error: " + ex.Message);
             }
+            file = File.ReadAllText(outputFile);
             try
             {
                 cs.Close();
@@ -200,6 +148,10 @@ namespace OlibPasswordManager.Properties.Core
                 fsOut.Close();
                 fsCrypt.Close();
             }
+
+            File.Delete(outputFile);
+
+            return file;
         }
     }
 }

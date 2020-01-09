@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OlibPasswordManager.Windows"
         mc:Ignorable="d"
+        FontFamily="{StaticResource Montserrat}"
         Title="Создать базу данных" Height="450" Width="500" Background="#FFE2E2E2">
     <Grid>
         <Grid.RowDefinitions>
@@ -30,7 +31,7 @@
                     <StackPanel>
                         <Label Content="Мастер-пароль"/>
                         <PasswordBox x:Name="txtPassword" Margin="5"/>
-                        <TextBox x:Name="txtPasswordCollapsed" Margin="5" Visibility="Collapsed" IsReadOnly="True" TextChanged="txtPasswordCollapsed_TextChanged"/>
+                        <TextBox x:Name="txtPasswordCollapsed" Margin="5" Visibility="Collapsed" IsReadOnly="True"/>
                         <CheckBox x:Name="cbHide" Margin="5" Content="Показать" VerticalAlignment="Center" Checked="CollapsedPassword" Unchecked="CollapsedPassword"/>
                     </StackPanel>
                 </Border>

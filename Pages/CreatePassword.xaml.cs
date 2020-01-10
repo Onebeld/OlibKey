@@ -7,7 +7,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Drawing;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OlibPasswordManager.Windows;
@@ -89,6 +88,23 @@ namespace OlibPasswordManager.Pages
             App.MainWindow.PasswordList.ItemsSource = User.UsersList;
 
             NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
+        }
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
+
+        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (pbHard.Value < 100)
+            {
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235,20,0));
+            }
+            else if (pbHard.Value < 200)
+            {
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235, 235, 0));
+            }
+            else
+            {
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(20, 235, 0));
+            }
         }
     }
 }

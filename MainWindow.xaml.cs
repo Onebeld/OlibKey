@@ -2,17 +2,18 @@
 using Newtonsoft.Json;
 using OlibPasswordManager.Pages;
 using OlibPasswordManager.Properties.Core;
+using OlibPasswordManager.Windows;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Linq;
 
 namespace OlibPasswordManager
 {
     public static class Global
     {
-        public static string Dir { get; set; }
         public static string MasterPassword { get; set; }
     }
 
@@ -29,10 +30,11 @@ namespace OlibPasswordManager
         public MainWindow() => InitializeComponent();
 
         #region OpenWindow
-        private void OpenAboutWindow(object sender, RoutedEventArgs e) => new Windows.About().ShowDialog();
+        private void OpenAboutWindow(object sender, RoutedEventArgs e) => new About().ShowDialog();
         private void OpenSettingsWindow(object sender, RoutedEventArgs e) => new Windows.Settings().ShowDialog();
-        private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) => new Windows.PasswordGenerator().ShowDialog();
-        private void OpenRequireMasterPassword() => new Windows.RequireMasterPassword().ShowDialog();
+        private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) => new PasswordGenerator().ShowDialog();
+        private void OpenRequireMasterPassword() => new RequireMasterPassword().ShowDialog();
+        private void OpenChangeMasterPassword(object sender, RoutedEventArgs e) => new ChangeMasterPassword().ShowDialog();
 
         #endregion
 
@@ -46,36 +48,44 @@ namespace OlibPasswordManager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using StreamWriter sw = new StreamWriter("Build.txt");
-            sw.Write("1.0.0.70");
+            //using StreamWriter sw = new StreamWriter("Build.txt");
+            //sw.Write("1.0.0.90");
 
-            App.Settings = new Settings();
+            App.Settings = new Properties.Core.Settings();
 
-            if (File.Exists("settings.json")) App.Settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json"));
+            if (File.Exists("settings.json"))
+            {
+                App.Settings = JsonConvert.DeserializeObject<Properties.Core.Settings>(File.ReadAllText("settings.json"));
+            }
 
             User.UsersList = new List<User>();
             PasswordList.ItemsSource = User.UsersList;
+
+            if (App.Settings.AppGlobalString != null)
+            {
+                new RequireMasterPassword().ShowDialog();
+            }
         }
 
         private void OpenCreateData(object sender, RoutedEventArgs e)
         {
-            Windows.CreateData data = new Windows.CreateData();
+            Windows.CreateData data = new CreateData();
             if ((bool)data.ShowDialog())
             {
-                Global.Dir = data.txtPathSelection.Text + "\\" + data.txtName.Text + ".olib";
+                App.Settings.AppGlobalString = data.txtPathSelection.Text;
                 Global.MasterPassword = data.txtPassword.Password;
+
+                string json = JsonConvert.SerializeObject(User.UsersList);
+                File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
             }
         }
 
-        private void SaveBase(object sender, RoutedEventArgs e)
-        {
-            Save();
-        }
+        private void SaveBase(object sender, RoutedEventArgs e) => Save();
 
         private void Save()
         {
             string json = JsonConvert.SerializeObject(User.UsersList);
-            File.WriteAllText(Global.Dir, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
+            File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
         }
 
         private void OpenBase(object sender, RoutedEventArgs e) => DopOpenBase();
@@ -88,7 +98,7 @@ namespace OlibPasswordManager
             };
             if ((bool)fileDialog.ShowDialog())
             {
-                Global.Dir = fileDialog.FileName;
+                App.Settings.AppGlobalString = fileDialog.FileName;
                 OpenRequireMasterPassword();
             }
         }
@@ -134,7 +144,7 @@ namespace OlibPasswordManager
                         frame.NavigationService.Navigate(PasswordPage);
                         break;
                     case Key.G:
-                        new Windows.PasswordGenerator().ShowDialog();
+                        new PasswordGenerator().ShowDialog();
                         break;
                     case Key.O:
                         DopOpenBase();
@@ -142,5 +152,7 @@ namespace OlibPasswordManager
                 }
             }
         }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e) => PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == txtSearch.Text);
     }
 }

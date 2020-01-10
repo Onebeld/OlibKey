@@ -6,8 +6,10 @@
         xmlns:local="clr-namespace:OlibPasswordManager.Windows"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        MinHeight="350"
+        MinWidth="450"
         FontFamily="{StaticResource Montserrat}"
-        Title="Создать базу данных" Height="450" Width="500" Background="#ecf0f5">
+        Title="Создать базу данных" Height="350" Width="450" Background="#ecf0f5">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -15,31 +17,29 @@
         </Grid.RowDefinitions>
         <ScrollViewer>
             <StackPanel Margin="10">
-                <Border Margin="0,5" Background="White" CornerRadius="5">
-                    <StackPanel>
-                        <Label Content="Название"/>
-                        <TextBox x:Name="txtName" Margin="5"/>
-                    </StackPanel>
-                </Border>
-                <Border Margin="0,5" Background="White" CornerRadius="5">
+                <Border Style="{DynamicResource PageBorder}">
                     <StackPanel>
                         <Label Content="Путь хранения"/>
-                        <TextBox x:Name="txtPathSelection" Margin="5"/>
+                        <TextBox x:Name="txtPathSelection" Margin="5" IsReadOnly="True"/>
                         <Button Content="Выбрать" Margin="5" HorizontalAlignment="Left" Click="PathSelection"/>
                     </StackPanel>
                 </Border>
-                <Border Margin="0,5" Background="White" CornerRadius="5">
+                <Border Style="{DynamicResource PageBorder}">
                     <StackPanel>
                         <Label Content="Мастер-пароль"/>
-                        <PasswordBox x:Name="txtPassword" Margin="5"/>
+                        <PasswordBox x:Name="txtPassword" Margin="5" PasswordChanged="txtPassword_PasswordChanged"/>
                         <TextBox x:Name="txtPasswordCollapsed" Margin="5" Visibility="Collapsed" IsReadOnly="True"/>
                         <CheckBox x:Name="cbHide" Margin="5" Content="Показать" VerticalAlignment="Center" Checked="CollapsedPassword" Unchecked="CollapsedPassword"/>
+                        <DockPanel>
+                            <Label Content="Сложность:"/>
+                            <ProgressBar x:Name="pbHard" Margin="5" Maximum="300" ValueChanged="pbHard_ValueChanged"/>
+                        </DockPanel>
                     </StackPanel>
                 </Border>
                 <AccessText Text="Обратите внимание! Если вы забудете мастер-пароль, вы не сможете восстановить хранилище!" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center"/>
             </StackPanel>
         </ScrollViewer>
-        <Border Grid.Row="1" Background="White">
+        <Border Grid.Row="1" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1">
             <Button Content="Сохранить" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5" Margin="10" Click="Button_Click"/>
         </Border>
     </Grid>

@@ -5,9 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OlibPasswordManager.Windows"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource Montserrat}"
-        Title="О программе" Height="250" Width="400">
+        MinHeight="300"
+        MinWidth="350"
+        Title="О программе" Height="300" Width="350" Background="#ecf0f5">
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+                <Image Source="{StaticResource OlibDrawingImage}" Height="100"/>
+                <Image Source="{StaticResource OlibPasswordManagerDrawingImage}" Height="70" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Версия: " FontSize="14" Padding="0"/>
+                <Label x:Name="Version" FontSize="14" Padding="0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Автор: " FontSize="14" Padding="0"/>
+                <Label x:Name="Author" FontSize="14" Padding="0"/>
+            </StackPanel>
+        </StackPanel>
+        <Border Grid.Row="1" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Margin="5,10" Padding="5" Click="Button_Click_1">
+                        <Button.Content>
+                            <Image Source="{StaticResource VK_Blue_LogoDrawingImage}"/>
+                        </Button.Content>
+                    </Button>
+                    <Button Margin="5,10" Padding="5" Click="Button_Click_2">
+                        <Button.Content>
+                            <Image Source="{StaticResource GitHubDrawingImage}"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <Button Content="Закрыть" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,5" Margin="10" Click="Button_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

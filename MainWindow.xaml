@@ -27,6 +27,61 @@
                 <TextBlock Text="{Binding Path=PasswordName}" Foreground="#777777" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </DataTemplate>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type ListBoxItem}">
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" Background="White" SnapsToDevicePixels="true">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="Bd2" Background="White"/>
+                                <ContentPresenter Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="#FFE0E0E0"/>
+                                <Setter Property="Background" TargetName="Bd2" Value="#FFE0E0E0"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="#FFE0E0E0"/>
+                                <Setter Property="Background" TargetName="Bd2" Value="#931d60"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="#FFE0E0E0"/>
+                                <Setter Property="Background" TargetName="Bd2" Value="#931d60"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -42,9 +97,9 @@
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}" BorderBrush="#dddddd" BorderThickness="0,0,0,1">
             <MenuItem Header="Файл">
-                <MenuItem Header="Создать базу данных" Click="OpenCreateData"/>
-                <MenuItem Header="Открыть базу данных" Click="OpenBase" InputGestureText="Ctrl + O"/>
-                <MenuItem Header="Сохранить базу" Click="SaveBase"/>
+                <MenuItem Header="Создать хранилище" Click="OpenCreateData"/>
+                <MenuItem Header="Открыть хранилище" Click="OpenBase" InputGestureText="Ctrl + O"/>
+                <MenuItem Header="Сохранить хранилище" Click="SaveBase"/>
                 <Separator/>
                 <MenuItem Header="Добавить новый логин" Click="MenuItem_Click" InputGestureText="Ctrl + N"/>
                 <Separator/>
@@ -53,18 +108,22 @@
             </MenuItem>
             <MenuItem Header="Инструменты">
                 <MenuItem Header="Генератор паролей" Click="OpenPasswordGeneratorWindow" InputGestureText="Ctrl + G"/>
+                <MenuItem Header="Изменить мастер-пароль" Click="OpenChangeMasterPassword"/>
             </MenuItem>
             <MenuItem Header="Справка">
-                <MenuItem Header="Проверить на наличие обновлении"/>
+                <!--<MenuItem Header="Проверить на наличие обновлении"/>-->
                 <MenuItem Header="О программе" Click="OpenAboutWindow"/>
             </MenuItem>
         </Menu>
-        <ListBox x:Name="PasswordList" BorderBrush="#dddddd" BorderThickness="1,0,1,0" Grid.Row="2" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
+        <ListBox x:Name="PasswordList" SelectedItem="SelectedUnit" BorderBrush="#dddddd" BorderThickness="1,0,1,0" Grid.Row="2" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
         <Border Grid.Column="1" Grid.Row="3" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1" >
             <Button Content="Добавить" Margin="10" Click="CreatePassword"/>
         </Border>
         <Border Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="#dddddd" BorderThickness="1,0,1,1">
-            <TextBox Margin="10" x:Name="txtSearch"/>
+            <DockPanel Margin="10">
+                <Image Source="{DynamicResource loupeDrawingImage}" Height="20" Margin="0,0,5,0"/>
+                <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged"/>
+            </DockPanel>
         </Border>
         <Frame x:Name="frame" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" Source="/Pages/StartScreen.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>

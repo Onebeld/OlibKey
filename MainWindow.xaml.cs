@@ -6,17 +6,21 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace OlibPasswordManager
 {
+    public static class Global
+    {
+        public static string Dir { get; set; }
+        public static string MasterPassword { get; set; }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        string dir;
-        string masterPassword;
-
         #region Pages
         private CreatePassword PasswordPage;
         private PasswordInformation PasswordInformation;
@@ -28,6 +32,8 @@ namespace OlibPasswordManager
         private void OpenAboutWindow(object sender, RoutedEventArgs e) => new Windows.About().ShowDialog();
         private void OpenSettingsWindow(object sender, RoutedEventArgs e) => new Windows.Settings().ShowDialog();
         private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) => new Windows.PasswordGenerator().ShowDialog();
+        private void OpenRequireMasterPassword() => new Windows.RequireMasterPassword().ShowDialog();
+
         #endregion
 
         private void ClosedApplication(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
@@ -41,21 +47,13 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using StreamWriter sw = new StreamWriter("Build.txt");
-            sw.Write("1.0.0.50");
+            sw.Write("1.0.0.70");
 
             App.Settings = new Settings();
 
             if (File.Exists("settings.json")) App.Settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json"));
 
             User.UsersList = new List<User>();
-            User.UsersList.Add(new User
-            {
-                Name = "ВКонтакте",
-                Note = "",
-                Password = "1532142432",
-                PasswordName = "dmitry",
-                WebSite = "vk.com"
-            });
             PasswordList.ItemsSource = User.UsersList;
         }
 
@@ -64,29 +62,34 @@ namespace OlibPasswordManager
             Windows.CreateData data = new Windows.CreateData();
             if ((bool)data.ShowDialog())
             {
-                dir = data.txtPathSelection.Text + "\\" + data.txtName.Text + ".aes";
-                masterPassword = data.txtPassword.Password;
+                Global.Dir = data.txtPathSelection.Text + "\\" + data.txtName.Text + ".olib";
+                Global.MasterPassword = data.txtPassword.Password;
             }
         }
 
         private void SaveBase(object sender, RoutedEventArgs e)
         {
-            if (!File.Exists(dir))
-            {
-                Encryptor.FileEncrypt(dir, masterPassword, FileMode.Create);
-            }
-            else
-            {
-                Encryptor.FileEncrypt(dir, masterPassword, FileMode.Open);
-            }
+            Save();
         }
 
-        private void OpenBase(object sender, RoutedEventArgs e)
+        private void Save()
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
+            string json = JsonConvert.SerializeObject(User.UsersList);
+            File.WriteAllText(Global.Dir, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
+        }
+
+        private void OpenBase(object sender, RoutedEventArgs e) => DopOpenBase();
+
+        private void DopOpenBase()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Filter = "Olib-files (*.olib)|*.olib"
+            };
             if ((bool)fileDialog.ShowDialog())
             {
-
+                Global.Dir = fileDialog.FileName;
+                OpenRequireMasterPassword();
             }
         }
 
@@ -107,6 +110,37 @@ namespace OlibPasswordManager
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             File.WriteAllText("settings.json", JsonConvert.SerializeObject(App.Settings));
+            try
+            {
+                Save();
+            }
+            catch { }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            PasswordPage = new CreatePassword();
+            frame.NavigationService.Navigate(PasswordPage);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                switch (e.Key)
+                {
+                    case Key.N:
+                        PasswordPage = new CreatePassword();
+                        frame.NavigationService.Navigate(PasswordPage);
+                        break;
+                    case Key.G:
+                        new Windows.PasswordGenerator().ShowDialog();
+                        break;
+                    case Key.O:
+                        DopOpenBase();
+                        break;
+                }
+            }
         }
     }
 }

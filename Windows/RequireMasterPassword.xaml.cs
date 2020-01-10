@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using OlibPasswordManager.Properties.Core;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +21,39 @@ namespace OlibPasswordManager.Windows
     /// </summary>
     public partial class RequireMasterPassword : Window
     {
-        public RequireMasterPassword()
+        public RequireMasterPassword() => InitializeComponent();
+
+        private void Button_Click(object sender, RoutedEventArgs e) => Require();
+        private void PressEnter(object sender, KeyEventArgs e)
         {
-            InitializeComponent();
+            if (e.Key == Key.Enter)
+            {
+                Require();
+            }
         }
+
+        private void Require()
+        {
+            try
+            {
+                string s = File.ReadAllText(Global.Dir);
+                User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(s, txtPassword.Password), txtPassword.Password), txtPassword.Password), txtPassword.Password), txtPassword.Password));
+                App.MainWindow.PasswordList.ItemsSource = null;
+                App.MainWindow.PasswordList.ItemsSource = User.UsersList;
+
+                Global.MasterPassword = txtPassword.Password;
+
+                App.Settings.AppGlobalString = Global.Dir;
+
+                s = null;
+
+                Close();
+            }
+            catch
+            {
+                MessageBox.Show("Неверный мастер пароль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }

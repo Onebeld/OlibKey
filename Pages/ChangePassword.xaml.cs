@@ -33,11 +33,13 @@ namespace OlibPasswordManager.Pages
 
         private void ChangedPassword(object sender, RoutedEventArgs e)
         {
+
             User.UsersList[User.IndexUser].Name = txtName.Text;
             User.UsersList[User.IndexUser].PasswordName = txtNameAccount.Text;
             User.UsersList[User.IndexUser].Password = txtPassword.Password;
             User.UsersList[User.IndexUser].Note = txtNote.Text;
             User.UsersList[User.IndexUser].TimeChanged = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy");
+            User.UsersList[User.IndexUser].Image = $"http://www.google.com/s2/favicons?domain={txtWebSite.Text}";
 
             App.MainWindow.PasswordList.ItemsSource = null;
             App.MainWindow.PasswordList.ItemsSource = User.UsersList;

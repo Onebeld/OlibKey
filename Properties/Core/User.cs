@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Controls;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace OlibPasswordManager.Properties.Core
 {
@@ -16,5 +19,6 @@ namespace OlibPasswordManager.Properties.Core
         public string WebSite { get; set; }
         public string TimeCreate { get; set; }
         public string TimeChanged { get; set; }
+        public string Image { get; set; }
     }
 }

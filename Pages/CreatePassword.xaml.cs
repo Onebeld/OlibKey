@@ -7,12 +7,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using System.Drawing;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OlibPasswordManager.Windows;
 using OlibPasswordManager.Properties.Core;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace OlibPasswordManager.Pages
 {
@@ -67,6 +68,11 @@ namespace OlibPasswordManager.Pages
 
         private void SavePasswordInList(object sender, RoutedEventArgs e)
         {
+            BitmapImage bitmap = new BitmapImage();
+
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri($"http://www.google.com/s2/favicons?domain={txtWebSite.Text}");
+            bitmap.EndInit();
 
             User.UsersList.Add(new User
             {
@@ -75,7 +81,8 @@ namespace OlibPasswordManager.Pages
                 Password = txtPassword.Password,
                 PasswordName = txtNameAccount.Text,
                 WebSite = txtWebSite.Text,
-                TimeCreate = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy")
+                TimeCreate = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy"),
+                Image = $"http://www.google.com/s2/favicons?domain={txtWebSite.Text}"
             });
 
             App.MainWindow.PasswordList.ItemsSource = null;

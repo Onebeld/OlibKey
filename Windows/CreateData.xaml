@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OlibPasswordManager.Windows"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource Montserrat}"
-        Title="Создать базу данных" Height="450" Width="500" Background="#FFE2E2E2">
+        Title="Создать базу данных" Height="450" Width="500" Background="#ecf0f5">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

@@ -1,5 +1,6 @@
 ﻿using OlibPasswordManager.Properties.Core;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -23,6 +24,11 @@ namespace OlibPasswordManager.Pages
         {
             Clipboard.Clear();
             Clipboard.SetText(txtNameAccount.Text);
+        }
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(txtWebSite.Text);
         }
         #endregion
 
@@ -51,11 +57,22 @@ namespace OlibPasswordManager.Pages
             txtName.Text = User.UsersList[User.IndexUser].Name;
             txtNameAccount.Text = User.UsersList[User.IndexUser].PasswordName;
             txtPassword.Password = User.UsersList[User.IndexUser].Password;
+            txtWebSite.Text = User.UsersList[User.IndexUser].WebSite;
             labelCreateData.Content = User.UsersList[User.IndexUser].TimeCreate;
             labelChangeData.Content = User.UsersList[User.IndexUser].TimeChanged;
 
             if (User.UsersList[User.IndexUser].TimeChanged == null) txtLabelChange.Visibility = Visibility.Collapsed;
             else txtLabelChange.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "http://" + txtWebSite.Text,
+                UseShellExecute = true
+            };
+            Process.Start(psi);
         }
     }
 }

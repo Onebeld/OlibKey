@@ -9,6 +9,8 @@ namespace OlibPasswordManager.Properties.Core
         public string GeneratorMinCount { get; set; }
         public string GeneratorMaxCount { get; set; }
 
+        public string AppGlobalString { get; set; }
+
         public bool GeneratorAllowLowercase { get; set; }
         public bool GeneratorAllowUppercase { get; set; }
         public bool GeneratorAllowNumber { get; set; }

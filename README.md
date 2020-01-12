@@ -1,4 +1,6 @@
 # Olib Password Manager
+![](https://github.com/MagnificentEagle/OlibPasswordManager/blob/master/forRepository/Logo.png)
+
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/MagnificentEagle/OlibPasswordManager) ![GitHub](https://img.shields.io/github/license/MagnificentEagle/OlibPasswordManager)
 
 Olib Password Manager is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET Core 3.1 WPF.

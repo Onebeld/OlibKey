@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace OlibPasswordManager.Properties.Core
@@ -9,6 +10,8 @@ namespace OlibPasswordManager.Properties.Core
         public string GeneratorMinCount { get; set; }
         public string GeneratorMaxCount { get; set; }
 
+        public string GlobalLanguage { get; set; }
+        public bool GlobalFirstLanguage { get; set; } = true;
         public string AppGlobalString { get; set; }
 
         public bool GeneratorAllowLowercase { get; set; }

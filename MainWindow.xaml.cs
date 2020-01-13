@@ -48,15 +48,10 @@ namespace OlibPasswordManager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //using StreamWriter sw = new StreamWriter("Build.txt");
-            //sw.Write("1.0.0.90");
+            using StreamWriter sw = new StreamWriter("Build.txt");
+            sw.Write("1.1.0.110");
 
             App.Settings = new Properties.Core.Settings();
-
-            if (File.Exists("settings.json"))
-            {
-                App.Settings = JsonConvert.DeserializeObject<Properties.Core.Settings>(File.ReadAllText("settings.json"));
-            }
 
             User.UsersList = new List<User>();
             PasswordList.ItemsSource = User.UsersList;

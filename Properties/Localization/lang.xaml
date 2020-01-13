@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:local="clr-namespace:OlibPasswordManager.Properties.Localization">
+    <!--#region MainWindow-->
+    <v:String x:Key="File">File</v:String>
+    <v:String x:Key="Tools">Tools</v:String>
+    <v:String x:Key="Reference">Reference</v:String>
+    <v:String x:Key="Add">Add</v:String>
+    <v:String x:Key="CreateBase">Create storage</v:String>
+    <v:String x:Key="OpenBase">Open storage</v:String>
+    <v:String x:Key="SaveBase">Save storage</v:String>
+    <v:String x:Key="AddLogin">Add log in</v:String>
+    <v:String x:Key="Settings">Settings</v:String>
+    <v:String x:Key="ExitFrom">Exit from Olib Password Manager</v:String>
+    <v:String x:Key="PasswordGenerator">Password generator</v:String>
+    <v:String x:Key="ChangeMasterPassword">Change Master Password</v:String>
+    <v:String x:Key="AboutPrograms">About the program...</v:String>
+    <v:String x:Key="CheckUpdates">Check for Updates</v:String>
+    <!--#endregion-->
+</ResourceDictionary>

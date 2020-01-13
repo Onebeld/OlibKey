@@ -96,28 +96,28 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}" BorderBrush="#dddddd" BorderThickness="0,0,0,1">
-            <MenuItem Header="Файл">
-                <MenuItem Header="Создать хранилище" Click="OpenCreateData"/>
-                <MenuItem Header="Открыть хранилище" Click="OpenBase" InputGestureText="Ctrl + O"/>
-                <MenuItem Header="Сохранить хранилище" Click="SaveBase"/>
+            <MenuItem Header="{DynamicResource File}">
+                <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData"/>
+                <MenuItem Header="{DynamicResource OpenBase}" Click="OpenBase" InputGestureText="Ctrl + O"/>
+                <MenuItem Header="{DynamicResource SaveBase}" Click="SaveBase"/>
                 <Separator/>
-                <MenuItem Header="Добавить новый логин" Click="MenuItem_Click" InputGestureText="Ctrl + N"/>
+                <MenuItem Header="{DynamicResource AddLogin}" Click="MenuItem_Click" InputGestureText="Ctrl + N"/>
                 <Separator/>
-                <MenuItem Header="Настройки" Click="OpenSettingsWindow"/>
-                <MenuItem Header="Выйти из Olib Password Manager" InputGestureText="Alt + F4" Click="ClosedApplication"/>
+                <MenuItem Header="{DynamicResource Settings}" Click="OpenSettingsWindow"/>
+                <MenuItem Header="{DynamicResource ExitFrom}" InputGestureText="Alt + F4" Click="ClosedApplication"/>
             </MenuItem>
-            <MenuItem Header="Инструменты">
-                <MenuItem Header="Генератор паролей" Click="OpenPasswordGeneratorWindow" InputGestureText="Ctrl + G"/>
-                <MenuItem Header="Изменить мастер-пароль" Click="OpenChangeMasterPassword"/>
+            <MenuItem Header="{DynamicResource Tools}">
+                <MenuItem Header="{DynamicResource PasswordGenerator}" Click="OpenPasswordGeneratorWindow" InputGestureText="Ctrl + G"/>
+                <MenuItem Header="{DynamicResource ChangeMasterPassword}" Click="OpenChangeMasterPassword"/>
             </MenuItem>
-            <MenuItem Header="Справка">
+            <MenuItem Header="{DynamicResource Reference}">
                 <!--<MenuItem Header="Проверить на наличие обновлении"/>-->
-                <MenuItem Header="О программе" Click="OpenAboutWindow"/>
+                <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow"/>
             </MenuItem>
         </Menu>
         <ListBox x:Name="PasswordList" SelectedItem="SelectedUnit" BorderBrush="#dddddd" BorderThickness="1,0,1,0" Grid.Row="2" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
         <Border Grid.Column="1" Grid.Row="3" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1" >
-            <Button Content="Добавить" Margin="10" Click="CreatePassword"/>
+            <Button Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>
         </Border>
         <Border Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="#dddddd" BorderThickness="1,0,1,1">
             <DockPanel Margin="10">

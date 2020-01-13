@@ -93,7 +93,7 @@ namespace OlibPasswordManager.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.0.0.90;component/windows/createdata.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.1.0.110;component/windows/createdata.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Windows\CreateData.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

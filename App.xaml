@@ -6,6 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Properties/Localization/lang.xaml"/>
                 <ResourceDictionary Source="/Properties/Icons/ProgramIcons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Montserrat">./Properties/Fonts/Montserrat-Regular.ttf#Montserrat</FontFamily>

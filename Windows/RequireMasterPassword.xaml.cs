@@ -51,7 +51,7 @@ namespace OlibPasswordManager.Windows
             }
             catch
             {
-                MessageBox.Show("Неверный мастер пароль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["MB3"], (string)Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

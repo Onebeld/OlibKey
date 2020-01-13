@@ -17,6 +17,7 @@ namespace OlibPasswordManager
     /// </summary>
     public partial class App : Application
     {
+        public static MainWindow MainWindow;
         public static Settings Settings;
 
         public static List<CultureInfo> Languages { get; } = new List<CultureInfo>();

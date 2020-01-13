@@ -72,7 +72,7 @@ namespace OlibPasswordManager.Pages
 
         private void DeletePassword(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы точно хотите удалить элемент?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+            if (MessageBox.Show((string)Application.Current.Resources["MB2"], (string)Application.Current.Resources["Message"], MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
             {
                 User.UsersList.RemoveAt(App.MainWindow.PasswordList.SelectedIndex);
             }

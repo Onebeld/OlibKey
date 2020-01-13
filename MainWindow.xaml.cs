@@ -5,10 +5,10 @@ using OlibPasswordManager.Properties.Core;
 using OlibPasswordManager.Windows;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Linq;
 
 namespace OlibPasswordManager
 {
@@ -27,18 +27,43 @@ namespace OlibPasswordManager
         private PasswordInformation PasswordInformation;
         #endregion
 
-        public MainWindow() => InitializeComponent();
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
 
         #region OpenWindow
-        private void OpenAboutWindow(object sender, RoutedEventArgs e) => new About().ShowDialog();
-        private void OpenSettingsWindow(object sender, RoutedEventArgs e) => new Windows.Settings().ShowDialog();
-        private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) => new PasswordGenerator().ShowDialog();
-        private void OpenRequireMasterPassword() => new RequireMasterPassword().ShowDialog();
-        private void OpenChangeMasterPassword(object sender, RoutedEventArgs e) => new ChangeMasterPassword().ShowDialog();
+        private void OpenAboutWindow(object sender, RoutedEventArgs e)
+        {
+            new About().ShowDialog();
+        }
+
+        private void OpenSettingsWindow(object sender, RoutedEventArgs e)
+        {
+            new Windows.Settings().ShowDialog();
+        }
+
+        private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e)
+        {
+            new PasswordGenerator().ShowDialog();
+        }
+
+        private void OpenRequireMasterPassword()
+        {
+            new RequireMasterPassword().ShowDialog();
+        }
+
+        private void OpenChangeMasterPassword(object sender, RoutedEventArgs e)
+        {
+            new ChangeMasterPassword().ShowDialog();
+        }
 
         #endregion
 
-        private void ClosedApplication(object sender, RoutedEventArgs e) => Application.Current.Shutdown();
+        private void ClosedApplication(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
 
         private void CreatePassword(object sender, RoutedEventArgs e)
         {
@@ -49,7 +74,7 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using StreamWriter sw = new StreamWriter("Build.txt");
-            sw.Write("1.1.0.110");
+            sw.Write("1.1.0.116");
 
             App.Settings = new Properties.Core.Settings();
 
@@ -64,7 +89,7 @@ namespace OlibPasswordManager
 
         private void OpenCreateData(object sender, RoutedEventArgs e)
         {
-            Windows.CreateData data = new CreateData();
+            CreateData data = new CreateData();
             if ((bool)data.ShowDialog())
             {
                 App.Settings.AppGlobalString = data.txtPathSelection.Text;
@@ -75,15 +100,28 @@ namespace OlibPasswordManager
             }
         }
 
-        private void SaveBase(object sender, RoutedEventArgs e) => Save();
+        private void SaveBase(object sender, RoutedEventArgs e)
+        {
+            Save();
+        }
 
         private void Save()
         {
-            string json = JsonConvert.SerializeObject(User.UsersList);
-            File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
+            try
+            {
+                string json = JsonConvert.SerializeObject(User.UsersList);
+                File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
+            }
+            catch
+            {
+                MessageBox.Show((string)Application.Current.Resources["MB1"], (string)Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private void OpenBase(object sender, RoutedEventArgs e) => DopOpenBase();
+        private void OpenBase(object sender, RoutedEventArgs e)
+        {
+            DopOpenBase();
+        }
 
         private void DopOpenBase()
         {
@@ -100,7 +138,10 @@ namespace OlibPasswordManager
 
         private void PasswordList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PasswordInformation != null) PasswordInformation = null;
+            if (PasswordInformation != null)
+            {
+                PasswordInformation = null;
+            }
 
             if (PasswordList.SelectedItem != null)
             {
@@ -148,6 +189,9 @@ namespace OlibPasswordManager
             }
         }
 
-        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e) => PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == txtSearch.Text);
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == txtSearch.Text);
+        }
     }
 }

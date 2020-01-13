@@ -17,5 +17,81 @@
     <v:String x:Key="ChangeMasterPassword">Изменить мастер-пароль</v:String>
     <v:String x:Key="AboutPrograms">О программе...</v:String>
     <v:String x:Key="CheckUpdates">Проверить наличие обновлении</v:String>
+
+    <v:String x:Key="Password">Пароль:</v:String>
+    <v:String x:Key="Password+">Пароль</v:String>
+    <v:String x:Key="Show">Показать</v:String>
+    <v:String x:Key="Complexity">Сложность:</v:String>
+    <v:String x:Key="ChangeP">Изменить</v:String>
+    <!--#endregion-->
+    
+    <!--#region MessageBox-->
+    <v:String x:Key="MB1">Сначала вы должны загрузить или создать хранилище!</v:String>
+    <v:String x:Key="Error">Ошибка</v:String>
+    <v:String x:Key="Message">Сообщение</v:String>
+    <v:String x:Key="MB2">Вы точно хотите удалить элемент?</v:String>
+    <v:String x:Key="Successfully">Успешно!</v:String>
+    <!--#endregion-->
+    
+    <!--#region Windows-->
+    <!--#region PasswordGenerator-->
+    <v:String x:Key="Specifications">Характеристики</v:String>
+    <v:String x:Key="Lowercase">Строчные (abc)</v:String>
+    <v:String x:Key="Uppercase">Заглавные (ABC)</v:String>
+    <v:String x:Key="MinLenght">Мин. длина:</v:String>
+    <v:String x:Key="MaxLenght">Макс. длина:</v:String>
+    <v:String x:Key="Numbers">Цифры (123)</v:String>
+    <v:String x:Key="Special">Специальные ($%#)</v:String>
+    <v:String x:Key="Underscore">Нижняя черта (_)</v:String>
+    <v:String x:Key="Space">Пробел ( )</v:String>
+    <v:String x:Key="Generate">Генерировать</v:String>
+    <v:String x:Key="PasswordSave">Сохранить</v:String>
+    <v:String x:Key="Allow">Допускать</v:String>
+    <v:String x:Key="Require">Требовать</v:String>
+    <!--#endregion-->
+    
+    <!--#region ChangeMasterPassword-->
+    <v:String x:Key="OldMasterPassword">Старый мастер-пароль</v:String>
+    <v:String x:Key="NewMasterPassword">Новый мастер-пароль</v:String>
+    <!--#endregion-->
+    
+    <!--#region CreateStorage-->
+    <v:String x:Key="AccessText">Обратите внимание! Если вы забудете мастер-пароль, вы не сможете восстановить хранилище!</v:String>
+    <v:String x:Key="MasterPassword">Мастер-пароль</v:String>
+    <v:String x:Key="Directory">Путь хранения</v:String>
+    <v:String x:Key="Select">Выбрать</v:String>
+    <!--#endregion-->
+
+    <!--#region RequireMasterPassword-->
+    <v:String x:Key="Open">Открыть</v:String>
+    <v:String x:Key="EnterMP">Введите мастер-пароль</v:String>
+    <!--#endregion-->
+
+    <!--#region About-->
+    <v:String x:Key="Version">Версия:</v:String>
+    <v:String x:Key="Author">©2020 Дмитрий Жутков</v:String>
+    <v:String x:Key="Close">Закрыть</v:String>
+    <v:String x:Key="AccessText1">Позволяет хранить пароли, заметки, паспорта и другие личные данные в зашифрованном виде.</v:String>
+    <!--#endregion-->
+    <!--#endregion-->
+    
+    <!--#region Pages-->
+    <v:String x:Key="Name">Название</v:String>
+    <v:String x:Key="Username">Имя пользователя</v:String>
+    <v:String x:Key="WebSite">Веб-сайт</v:String>
+    <v:String x:Key="Notes">Заметки</v:String>
+    <v:String x:Key="ChangeElement">Изменить элемент</v:String>
+    <v:String x:Key="AddElement">Добавить элемент</v:String>
+    <v:String x:Key="Copy">Копировать</v:String>
+    <v:String x:Key="GoTo">Перейти</v:String>
+    <v:String x:Key="ItemInformation">Информация об элементе</v:String>
+    <v:String x:Key="Create">Создан:</v:String>
+    <v:String x:Key="Update">Обновлен:</v:String>
+    
+    <!--#region ChangePassword-->
+    <v:String x:Key="ToApply">Применить</v:String>
+    <v:String x:Key="Cancel">Отмена</v:String>
+    <v:String x:Key="Delete">Удалить</v:String>
+    <!--#endregion-->
     <!--#endregion-->
 </ResourceDictionary>

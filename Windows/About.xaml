@@ -10,7 +10,7 @@
         FontFamily="{StaticResource Montserrat}"
         MinHeight="300"
         MinWidth="350"
-        Title="О программе" Height="300" Width="350" Background="#ecf0f5">
+        Title="{DynamicResource AboutPrograms}" Height="300" Width="350" Background="#ecf0f5">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,13 +22,14 @@
                 <Image Source="{StaticResource OlibPasswordManagerDrawingImage}" Height="70" Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Версия: " FontSize="14" Padding="0"/>
-                <Label x:Name="Version" FontSize="14" Padding="0"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="Автор: " FontSize="14" Padding="0"/>
+                <Label Content="{DynamicResource Author}" FontSize="14" Padding="0"/>
                 <Label x:Name="Author" FontSize="14" Padding="0"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="{DynamicResource Version}" FontSize="14" Padding="0"/>
+                <Label x:Name="Version" FontSize="14" Padding="0"/>
+            </StackPanel>
+            <AccessText Text="{DynamicResource AccessText1}" TextWrapping="Wrap" TextAlignment="Center"/>
         </StackPanel>
         <Border Grid.Row="1" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1">
             <Grid>
@@ -44,7 +45,7 @@
                         </Button.Content>
                     </Button>
                 </StackPanel>
-                <Button Content="Закрыть" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,5" Margin="10" Click="Button_Click"/>
+                <Button Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,5" Margin="10" Click="Button_Click"/>
             </Grid>
         </Border>
     </Grid>

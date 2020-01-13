@@ -37,12 +37,12 @@ namespace OlibPasswordManager.Windows
 
                 File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(s, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
 
-                MessageBox.Show("Успешно!", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show((string)Application.Current.Resources["Successfully"], (string)Application.Current.Resources["Message"], MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
             }
             catch
             {
-                MessageBox.Show("Неверный мастер пароль!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.Resources["MB3"], (string)Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

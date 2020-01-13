@@ -48,10 +48,6 @@ namespace OlibPasswordManager.Windows
             if (!IsFirst)
             {
                 App.Language = new CultureInfo(cbLang.SelectedValue.ToString());
-                //File.WriteAllText("settings.json", JsonConvert.SerializeObject(App.Settings));
-                //int x = Application.ResourceAssembly.Location.Length - 4;
-                //Process.Start(Application.ResourceAssembly.Location.Substring(0, x) + ".exe");
-                //Application.Current.Shutdown();
             }
             IsFirst = false;
         }

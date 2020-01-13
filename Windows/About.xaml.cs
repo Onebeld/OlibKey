@@ -22,10 +22,7 @@ namespace OlibPasswordManager.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Random r = new Random();
-
-            Version.Content = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            Author.Content = r.Next(0, 50) < 1 ? "Дмитрий Мирзоян" : "Дмитрий Жутков";
+            Version.Content = " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => Close();

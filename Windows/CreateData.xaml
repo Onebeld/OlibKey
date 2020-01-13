@@ -9,7 +9,7 @@
         MinHeight="350"
         MinWidth="450"
         FontFamily="{StaticResource Montserrat}"
-        Title="Создать базу данных" Height="350" Width="450" Background="#ecf0f5">
+        Title="{DynamicResource CreateBase}" Height="350" Width="450" Background="#ecf0f5">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -19,28 +19,28 @@
             <StackPanel Margin="10">
                 <Border Style="{DynamicResource PageBorder}">
                     <StackPanel>
-                        <Label Content="Путь хранения"/>
+                        <Label Content="{DynamicResource Directory}"/>
                         <TextBox x:Name="txtPathSelection" Margin="5" IsReadOnly="True"/>
-                        <Button Content="Выбрать" Margin="5" HorizontalAlignment="Left" Click="PathSelection"/>
+                        <Button Content="{DynamicResource Select}" Margin="5" HorizontalAlignment="Left" Click="PathSelection"/>
                     </StackPanel>
                 </Border>
                 <Border Style="{DynamicResource PageBorder}">
                     <StackPanel>
-                        <Label Content="Мастер-пароль"/>
+                        <Label Content="{DynamicResource MasterPassword}"/>
                         <PasswordBox x:Name="txtPassword" Margin="5" PasswordChanged="txtPassword_PasswordChanged"/>
                         <TextBox x:Name="txtPasswordCollapsed" Margin="5" Visibility="Collapsed" IsReadOnly="True"/>
-                        <CheckBox x:Name="cbHide" Margin="5" Content="Показать" VerticalAlignment="Center" Checked="CollapsedPassword" Unchecked="CollapsedPassword"/>
+                        <CheckBox x:Name="cbHide" Margin="5" Content="{DynamicResource Show}" VerticalAlignment="Center" Checked="CollapsedPassword" Unchecked="CollapsedPassword"/>
                         <DockPanel>
-                            <Label Content="Сложность:"/>
+                            <Label Content="{DynamicResource Complexity}"/>
                             <ProgressBar x:Name="pbHard" Margin="5" Maximum="300" ValueChanged="pbHard_ValueChanged"/>
                         </DockPanel>
                     </StackPanel>
                 </Border>
-                <AccessText Text="Обратите внимание! Если вы забудете мастер-пароль, вы не сможете восстановить хранилище!" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center"/>
+                <AccessText Text="{DynamicResource AccessText}" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center"/>
             </StackPanel>
         </ScrollViewer>
         <Border Grid.Row="1" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1">
-            <Button Content="Сохранить" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5" Margin="10" Click="Button_Click"/>
+            <Button Content="{DynamicResource PasswordSave}" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="5" Margin="10" Click="Button_Click"/>
         </Border>
     </Grid>
 </Window>

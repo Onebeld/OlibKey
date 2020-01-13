@@ -15,7 +15,84 @@
     <v:String x:Key="ExitFrom">Exit from Olib Password Manager</v:String>
     <v:String x:Key="PasswordGenerator">Password generator</v:String>
     <v:String x:Key="ChangeMasterPassword">Change Master Password</v:String>
-    <v:String x:Key="AboutPrograms">About the program...</v:String>
+    <v:String x:Key="AboutPrograms">About the program</v:String>
     <v:String x:Key="CheckUpdates">Check for Updates</v:String>
+
+    <v:String x:Key="Password">Password:</v:String>
+    <v:String x:Key="Password+">Password</v:String>
+    <v:String x:Key="Show">Schow</v:String>
+    <v:String x:Key="Complexity">Complexity:</v:String>
+    <v:String x:Key="ChangeP">Change</v:String>
+    <!--#endregion-->
+
+    <!--#region MessageBox-->
+    <v:String x:Key="MB1">You must first upload or create storage!</v:String>
+    <v:String x:Key="Error">Error</v:String>
+    <v:String x:Key="Message">Message</v:String>
+    <v:String x:Key="MB2">Are you sure you want to delete the item?</v:String>
+    <v:String x:Key="MB3">Wrong password master!</v:String>
+    <v:String x:Key="Successfully">Successfully!</v:String>
+    <!--#endregion-->
+    
+    <!--#region Windows-->
+    <!--#region PasswordGenerator-->
+    <v:String x:Key="Specifications">Specifications</v:String>
+    <v:String x:Key="Lowercase">Lowercase (abc)</v:String>
+    <v:String x:Key="Uppercase">Uppercase (ABC)</v:String>
+    <v:String x:Key="MinLenght">Min. lenght:</v:String>
+    <v:String x:Key="MaxLenght">Max. lenght:</v:String>
+    <v:String x:Key="Numbers">Numbers (123)</v:String>
+    <v:String x:Key="Special">Special ($%#)</v:String>
+    <v:String x:Key="Underscore">Underscore (_)</v:String>
+    <v:String x:Key="Space">Space ( )</v:String>
+    <v:String x:Key="Generate">Generate</v:String>
+    <v:String x:Key="PasswordSave">Save</v:String>
+    <v:String x:Key="Allow">Allow</v:String>
+    <v:String x:Key="Require">Require</v:String>
+    <!--#endregion-->
+    
+    <!--#region ChangeMasterPassword-->
+    <v:String x:Key="OldMasterPassword">Old master password</v:String>
+    <v:String x:Key="NewMasterPassword">New master password</v:String>
+    <!--#endregion-->
+
+    <!--#region CreateStorage-->
+    <v:String x:Key="AccessText">Note! If you forget the master password, you cannot restore the storage!</v:String>
+    <v:String x:Key="MasterPassword">Master password</v:String>
+    <v:String x:Key="Directory">Storage path</v:String>
+    <v:String x:Key="Select">Select</v:String>
+    <!--#endregion-->
+    
+    <!--#region RequireMasterPassword-->
+    <v:String x:Key="Open">Open</v:String>
+    <v:String x:Key="EnterMP">Enter Master Password</v:String>
+    <!--#endregion-->
+    
+    <!--#region About-->
+    <v:String x:Key="Version">Version:</v:String>
+    <v:String x:Key="Author">©2020 Dmitry Zhutkov</v:String>
+    <v:String x:Key="Close">Close</v:String>
+    <v:String x:Key="AccessText1">Allows you to store passwords, notes, passports and other personal data in encrypted form.</v:String>
+    <!--#endregion-->
+    <!--#endregion-->
+
+    <!--#region Pages-->
+    <v:String x:Key="Name">Name</v:String>
+    <v:String x:Key="Username">Username</v:String>
+    <v:String x:Key="WebSite">Web-site</v:String>
+    <v:String x:Key="Notes">Notes</v:String>
+    <v:String x:Key="ChangeElement">Change element</v:String>
+    <v:String x:Key="AddElement">Add element</v:String>
+    <v:String x:Key="Copy">Copy</v:String>
+    <v:String x:Key="GoTo">Go to</v:String>
+    <v:String x:Key="ItemInformation">Item Information</v:String>
+    <v:String x:Key="Create">Create:</v:String>
+    <v:String x:Key="Update">Update:</v:String>
+
+    <!--#region ChangePassword-->
+    <v:String x:Key="ToApply">To apply</v:String>
+    <v:String x:Key="Cancel">Cancel</v:String>
+    <v:String x:Key="Delete">Delete</v:String>
+    <!--#endregion-->
     <!--#endregion-->
 </ResourceDictionary>

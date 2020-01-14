@@ -74,7 +74,7 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using StreamWriter sw = new StreamWriter("Build.txt");
-            sw.Write("1.1.0.117");
+            sw.Write("1.1.0.120");
 
             App.Settings = new Properties.Core.Settings();
 

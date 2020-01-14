@@ -31,6 +31,11 @@ namespace OlibPasswordManager.Pages
             Clipboard.Clear();
             Clipboard.SetText(txtWebSite.Text);
         }
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(txtCardNumber.Text);
+        }
         #endregion
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
@@ -61,6 +66,11 @@ namespace OlibPasswordManager.Pages
             labelChangeData.Content = User.UsersList[User.IndexUser].TimeChanged;
             txtNote.Text = User.UsersList[User.IndexUser].Note;
 
+            txtCardName.Text = User.UsersList[User.IndexUser].CardName;
+            txtCardNumber.Text = User.UsersList[User.IndexUser].Number;
+            txtDate.Text = User.UsersList[User.IndexUser].DateCard;
+            txtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
+
             if (txtNote.Text == "") brNote.Visibility = Visibility.Collapsed;
             else brNote.Visibility = Visibility.Visible;
             if (txtWebSite.Text == "") brWebSite.Visibility = Visibility.Collapsed;
@@ -68,6 +78,8 @@ namespace OlibPasswordManager.Pages
 
             if (User.UsersList[User.IndexUser].TimeChanged == null) txtLabelChange.Visibility = Visibility.Collapsed;
             else txtLabelChange.Visibility = Visibility.Visible;
+
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

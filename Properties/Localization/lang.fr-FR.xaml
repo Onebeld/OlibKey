@@ -1,0 +1,97 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=System.Runtime"
+                    xmlns:local="clr-namespace:OlibPasswordManager.Properties.Localization">
+    <!--#region MainWindow-->
+    <v:String x:Key="File">Fichier</v:String>
+    <v:String x:Key="Tools">Les outils</v:String>
+    <v:String x:Key="Reference">Aide</v:String>
+    <v:String x:Key="Add">Ajouter</v:String>
+    <v:String x:Key="CreateBase">Créer du stockage</v:String>
+    <v:String x:Key="OpenBase">Référentiel ouvert</v:String>
+    <v:String x:Key="SaveBase">Enregistrer le stockage</v:String>
+    <v:String x:Key="AddLogin">Ajouter une connexion</v:String>
+    <v:String x:Key="Settings">Paramètres</v:String>
+    <v:String x:Key="ExitFrom">Déconnectez-vous d'Olib Password Manager</v:String>
+    <v:String x:Key="PasswordGenerator">Générateur de mot de passe</v:String>
+    <v:String x:Key="ChangeMasterPassword">Changer le mot de passe principal</v:String>
+    <v:String x:Key="AboutPrograms">À propos du programme...</v:String>
+    <v:String x:Key="CheckUpdates">Vérifier les mises à jour</v:String>
+
+    <v:String x:Key="Password">Mot de passe:</v:String>
+    <v:String x:Key="Password+">Mot de passe</v:String>
+    <v:String x:Key="Show">Afficher</v:String>
+    <v:String x:Key="Complexity">Difficulté:</v:String>
+    <v:String x:Key="ChangeP">Modifier</v:String>
+    <!--#endregion-->
+
+    <!--#region MessageBox-->
+    <v:String x:Key="MB1">Vous devez d'abord télécharger ou créer du stockage!</v:String>
+    <v:String x:Key="Error">Erreur</v:String>
+    <v:String x:Key="Message">Message</v:String>
+    <v:String x:Key="MB2">Voulez-vous vraiment supprimer l'élément?</v:String>
+    <v:String x:Key="Successfully">Avec succès!</v:String>
+    <!--#endregion-->
+
+    <!--#region Windows-->
+    <!--#region PasswordGenerator-->
+    <v:String x:Key="Specifications">Caractéristiques</v:String>
+    <v:String x:Key="Lowercase">Minuscules (abc)</v:String>
+    <v:String x:Key="Uppercase">Majuscules (ABC)</v:String>
+    <v:String x:Key="MinLenght">Min longueur:</v:String>
+    <v:String x:Key="MaxLenght">Max longueur:</v:String>
+    <v:String x:Key="Numbers">Les chiffres (123)</v:String>
+    <v:String x:Key="Special">Spécial ($%#)</v:String>
+    <v:String x:Key="Underscore">Conclusion (_)</v:String>
+    <v:String x:Key="Space">Barre d'espace ( )</v:String>
+    <v:String x:Key="Generate">Générer</v:String>
+    <v:String x:Key="PasswordSave">Enregistrer</v:String>
+    <v:String x:Key="Allow">Admettre</v:String>
+    <v:String x:Key="Require">Exiger</v:String>
+    <!--#endregion-->
+
+    <!--#region ChangeMasterPassword-->
+    <v:String x:Key="OldMasterPassword">Ancien mot de passe principal</v:String>
+    <v:String x:Key="NewMasterPassword">Nouveau mot de passe principal</v:String>
+    <!--#endregion-->
+
+    <!--#region CreateStorage-->
+    <v:String x:Key="AccessText">Faites attention! Si vous oubliez le mot de passe principal, vous ne pouvez pas restaurer le stockage!</v:String>
+    <v:String x:Key="MasterPassword">Mot de passe principal</v:String>
+    <v:String x:Key="Directory">Chemin de stockage</v:String>
+    <v:String x:Key="Select">Sélectionnez</v:String>
+    <!--#endregion-->
+
+    <!--#region RequireMasterPassword-->
+    <v:String x:Key="Open">Ouverte</v:String>
+    <v:String x:Key="EnterMP">Entrez le mot de passe principal</v:String>
+    <!--#endregion-->
+
+    <!--#region About-->
+    <v:String x:Key="Version">Version:</v:String>
+    <v:String x:Key="Author">©2020 Dmitry Zhutkov</v:String>
+    <v:String x:Key="Close">Fermer</v:String>
+    <v:String x:Key="AccessText1">Vous permet de stocker des mots de passe, des notes, des passeports et d'autres données personnelles sous forme cryptée.</v:String>
+    <!--#endregion-->
+    <!--#endregion-->
+
+    <!--#region Pages-->
+    <v:String x:Key="Name">Le titre</v:String>
+    <v:String x:Key="Username">Identifiant</v:String>
+    <v:String x:Key="WebSite">Site Internet</v:String>
+    <v:String x:Key="Notes">Remarques</v:String>
+    <v:String x:Key="ChangeElement">Modifier l'élément</v:String>
+    <v:String x:Key="AddElement">Ajouter un élément</v:String>
+    <v:String x:Key="Copy">Copier</v:String>
+    <v:String x:Key="GoTo">Allez à</v:String>
+    <v:String x:Key="ItemInformation">Informations sur l'article</v:String>
+    <v:String x:Key="Create">Créé par:</v:String>
+    <v:String x:Key="Update">Mise à jour:</v:String>
+
+    <!--#region ChangePassword-->
+    <v:String x:Key="ToApply">Pour postuler</v:String>
+    <v:String x:Key="Cancel">Annuler</v:String>
+    <v:String x:Key="Delete">Effacer</v:String>
+    <!--#endregion-->
+    <!--#endregion-->
+</ResourceDictionary>

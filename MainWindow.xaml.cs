@@ -3,9 +3,13 @@ using Newtonsoft.Json;
 using OlibPasswordManager.Pages;
 using OlibPasswordManager.Properties.Core;
 using OlibPasswordManager.Windows;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -22,6 +26,7 @@ namespace OlibPasswordManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string str;
         #region Pages
         private CreatePassword PasswordPage;
         private PasswordInformation PasswordInformation;
@@ -192,6 +197,34 @@ namespace OlibPasswordManager
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == txtSearch.Text);
+        }
+
+        private async void CheckUpdate(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (WebClient wb = new WebClient())
+                {
+                    wb.DownloadStringCompleted += (s, e) => str = e.Result;
+                    await wb.DownloadStringTaskAsync(new Uri($"https://raw.githubusercontent.com/BigBoss500/Olib/master/versions/version.xml"));
+                }
+                float latest = float.Parse(str.Replace(".", ""));
+                float current = float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
+                if (latest > current)
+                {
+                    if (MessageBox.Show((string)Application.Current.Resources["MB4"], (string)Application.Current.Resources["Message"], MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    {
+                        var psi = new ProcessStartInfo
+                        {
+                            FileName = "https://github.com/MagnificentEagle/OlibPasswordManager/releases",
+                            UseShellExecute = true
+                        };
+                        Process.Start(psi);
+                    }
+                }
+            }
+            catch { }
+
         }
     }
 }

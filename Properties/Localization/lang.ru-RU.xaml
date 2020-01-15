@@ -30,6 +30,8 @@
     <v:String x:Key="Error">Ошибка</v:String>
     <v:String x:Key="Message">Сообщение</v:String>
     <v:String x:Key="MB2">Вы точно хотите удалить элемент?</v:String>
+    <v:String x:Key="MB3">Неправильный мастер пароль!</v:String>
+    <v:String x:Key="MB4">Доступно обновление! Хотите перейти на сайт для скачивания?</v:String>
     <v:String x:Key="Successfully">Успешно!</v:String>
     <!--#endregion-->
     

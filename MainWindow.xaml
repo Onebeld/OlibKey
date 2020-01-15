@@ -111,7 +111,7 @@
                 <MenuItem Header="{DynamicResource ChangeMasterPassword}" Click="OpenChangeMasterPassword"/>
             </MenuItem>
             <MenuItem Header="{DynamicResource Reference}">
-                <!--<MenuItem Header="Проверить на наличие обновлении"/>-->
+                <MenuItem Header="{DynamicResource Update}" Click="CheckUpdate"/>
                 <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow"/>
             </MenuItem>
         </Menu>

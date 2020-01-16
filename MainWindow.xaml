@@ -99,7 +99,7 @@
             <MenuItem Header="{DynamicResource File}">
                 <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData"/>
                 <MenuItem Header="{DynamicResource OpenBase}" Click="OpenBase" InputGestureText="Ctrl + O"/>
-                <MenuItem Header="{DynamicResource SaveBase}" Click="SaveBase"/>
+                <MenuItem Header="{DynamicResource SaveBase}" Click="SaveBase" InputGestureText="Ctrl + S"/>
                 <Separator/>
                 <MenuItem Header="{DynamicResource AddLogin}" Click="MenuItem_Click" InputGestureText="Ctrl + N"/>
                 <Separator/>

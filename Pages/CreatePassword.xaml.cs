@@ -66,11 +66,6 @@ namespace OlibPasswordManager.Pages
 
         private void SavePasswordInList(object sender, RoutedEventArgs e)
         {
-            BitmapImage bitmap = new BitmapImage();
-
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri($"http://www.google.com/s2/favicons?domain={txtWebSite.Text}");
-            bitmap.EndInit();
             if (cbType.SelectedIndex == 0)
             {
                 User.UsersList.Add(new User
@@ -91,10 +86,9 @@ namespace OlibPasswordManager.Pages
                 {
                     Name = txtName.Text,
                     Note = txtNote.Text,
-                    Icon = (DrawingImage)Application.Current.Resources["bank_cardDrawingImage"],
+                    PasswordName = txtCardNumber.Text,
                     TimeCreate = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy"),
                     CardName = txtCardName.Text,
-                    Number = txtCardNumber.Text,
                     DateCard = txtDate.Text,
                     SecurityCode = txtSecurityCode.Password,
                     Type = cbType.SelectedIndex
@@ -155,6 +149,29 @@ namespace OlibPasswordManager.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             cbType.SelectedIndex = 0;
+        }
+
+        private void CollapsedSecurityCode(object sender, RoutedEventArgs e)
+        {
+            if ((bool)cbHide.IsChecked)
+            {
+                txtSecurityCode.Visibility = Visibility.Collapsed;
+                txtSecurityCodeCollapsed.Text = txtPassword.Password;
+                txtSecurityCodeCollapsed.Visibility = Visibility.Visible;
+            }
+            else if (!(bool)cbHide.IsChecked)
+            {
+                txtSecurityCode.Visibility = Visibility.Visible;
+                txtSecurityCodeCollapsed.Visibility = Visibility.Collapsed;
+                txtSecurityCodeCollapsed.Text = null;
+            }
+        }
+        private void txtSecurityCode_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if ((bool)cbHide.IsChecked)
+            {
+                txtSecurityCode.Password = txtSecurityCodeCollapsed.Text;
+            }
         }
     }
 }

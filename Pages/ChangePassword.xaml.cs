@@ -90,6 +90,25 @@ namespace OlibPasswordManager.Pages
             txtPassword.Password = User.UsersList[User.IndexUser].Password;
             txtWebSite.Text = User.UsersList[User.IndexUser].WebSite;
             txtNote.Text = User.UsersList[User.IndexUser].Note;
+
+            txtCardName.Text = User.UsersList[User.IndexUser].CardName;
+            txtCardNumber.Text = User.UsersList[User.IndexUser].PasswordName;
+            txtDate.Text = User.UsersList[User.IndexUser].DateCard;
+            txtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
+
+            if (User.UsersList[User.IndexUser].Type == 0)
+            {
+                bUsername.Visibility = Visibility.Collapsed;
+                bPassword.Visibility = Visibility.Collapsed;
+                bWebSite.Visibility = Visibility.Collapsed;
+            }
+            else if (User.UsersList[User.IndexUser].Type == 1)
+            {
+                bCardName.Visibility = Visibility.Collapsed;
+                bCardNumber.Visibility = Visibility.Collapsed;
+                bDate.Visibility = Visibility.Collapsed;
+                bSecurityCode.Visibility = Visibility.Collapsed;
+            }
         }
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
         private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

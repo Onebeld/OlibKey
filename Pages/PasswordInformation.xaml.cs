@@ -36,6 +36,11 @@ namespace OlibPasswordManager.Pages
             Clipboard.Clear();
             Clipboard.SetText(txtCardNumber.Text);
         }
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Clipboard.Clear();
+            Clipboard.SetText(txtSecurityCode.Password);
+        }
         #endregion
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
@@ -67,19 +72,31 @@ namespace OlibPasswordManager.Pages
             txtNote.Text = User.UsersList[User.IndexUser].Note;
 
             txtCardName.Text = User.UsersList[User.IndexUser].CardName;
-            txtCardNumber.Text = User.UsersList[User.IndexUser].Number;
+            txtCardNumber.Text = User.UsersList[User.IndexUser].PasswordName;
             txtDate.Text = User.UsersList[User.IndexUser].DateCard;
             txtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
 
             if (txtNote.Text == "") brNote.Visibility = Visibility.Collapsed;
             else brNote.Visibility = Visibility.Visible;
-            if (txtWebSite.Text == "") brWebSite.Visibility = Visibility.Collapsed;
-            else brWebSite.Visibility = Visibility.Visible;
+            if (txtWebSite.Text == "") bWebSite.Visibility = Visibility.Collapsed;
+            else bWebSite.Visibility = Visibility.Visible;
 
             if (User.UsersList[User.IndexUser].TimeChanged == null) txtLabelChange.Visibility = Visibility.Collapsed;
             else txtLabelChange.Visibility = Visibility.Visible;
 
-
+            if (User.UsersList[User.IndexUser].Type == 0)
+            {
+                bCardName.Visibility = Visibility.Collapsed;
+                bCardNumber.Visibility = Visibility.Collapsed;
+                bDate.Visibility = Visibility.Collapsed;
+                bSecurityCode.Visibility = Visibility.Collapsed;
+            }
+            else if (User.UsersList[User.IndexUser].Type == 1)
+            {
+                bUsername.Visibility = Visibility.Collapsed;
+                bPassword.Visibility = Visibility.Collapsed;
+                bWebSite.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -108,5 +125,7 @@ namespace OlibPasswordManager.Pages
                 pbHard.Foreground = new SolidColorBrush(Color.FromRgb(20, 235, 0));
             }
         }
+
+        
     }
 }

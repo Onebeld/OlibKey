@@ -4,8 +4,6 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 namespace OlibPasswordManager.Pages
 {
@@ -22,6 +20,7 @@ namespace OlibPasswordManager.Pages
             if ((bool)generator.ShowDialog()) txtPassword.Password = generator.txtPassword.Text;
         }
 
+
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
             if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
@@ -34,7 +33,7 @@ namespace OlibPasswordManager.Pages
             {
                 txtPassword.Visibility = Visibility.Visible;
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = null;
+                txtPasswordCollapsed.Text = string.Empty;
             }
         }
 
@@ -45,12 +44,12 @@ namespace OlibPasswordManager.Pages
 
         private void CloseCreatePassword(object sender, RoutedEventArgs e)
         {
-            txtName.Text = null;
-            txtNameAccount.Text = null;
-            txtPassword.Password = null;
-            txtPasswordCollapsed.Text = null;
-            txtNote.Text = null;
-            txtWebSite.Text = null;
+            txtName.Text = string.Empty;
+            txtNameAccount.Text = string.Empty;
+            txtPassword.Password = string.Empty;
+            txtPasswordCollapsed.Text = string.Empty;
+            txtNote.Text = string.Empty;
+            txtWebSite.Text = string.Empty;
             NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
         }
 

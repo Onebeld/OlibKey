@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Controls;
-using System.Drawing;
-using System.Windows.Media.Imaging;
+﻿using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace OlibPasswordManager.Properties.Core
@@ -22,10 +17,8 @@ namespace OlibPasswordManager.Properties.Core
         public string TimeCreate { get; set; }
         public string TimeChanged { get; set; }
         public string Image { get; set; }
-        public DrawingImage Icon { get; set; }
 
         public string CardName { get; set; }
-        public string CardType { get; set; }
         public string DateCard { get; set; }
         public string SecurityCode { get; set; }
     }

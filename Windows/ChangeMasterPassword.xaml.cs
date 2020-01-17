@@ -20,10 +20,7 @@ namespace OlibPasswordManager.Windows
     /// </summary>
     public partial class ChangeMasterPassword : Window
     {
-        public ChangeMasterPassword()
-        {
-            InitializeComponent();
-        }
+        public ChangeMasterPassword() => InitializeComponent();
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -48,13 +45,13 @@ namespace OlibPasswordManager.Windows
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHide.IsChecked)
+            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Collapsed;
                 txtPasswordCollapsed.Text = txtPassword.Password;
                 txtPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (!(bool)cbHide.IsChecked)
+            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Visible;
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
@@ -64,13 +61,13 @@ namespace OlibPasswordManager.Windows
 
         private void OldCollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHide.IsChecked)
+            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
             {
                 txtOldPassword.Visibility = Visibility.Collapsed;
                 txtOldPasswordCollapsed.Text = txtPassword.Password;
                 txtOldPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (!(bool)cbHide.IsChecked)
+            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
             {
                 txtOldPassword.Visibility = Visibility.Visible;
                 txtOldPasswordCollapsed.Visibility = Visibility.Collapsed;
@@ -92,15 +89,15 @@ namespace OlibPasswordManager.Windows
         {
             if (pbHard.Value < 100)
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235, 20, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(196, 20, 3));
             }
             else if (pbHard.Value < 200)
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235, 235, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(222, 222, 64));
             }
             else
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(20, 235, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(27, 199, 11));
             }
         }
     }

@@ -34,7 +34,7 @@ namespace OlibPasswordManager.Windows
 
                 string other = txtOther.Text;
 
-                if ((bool)chkRequireOther.IsChecked && other.Length < 1)
+                if (chkRequireOther.IsChecked != null && ((bool)chkRequireOther.IsChecked && other.Length < 1))
                 {
                     MessageBox.Show("Вы не можете требовать символы из пустой строки!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     txtOther.Focus();
@@ -43,13 +43,13 @@ namespace OlibPasswordManager.Windows
 
                 string allowed = "";
 
-                if ((bool)chkAllowLowercase.IsChecked) allowed += LOWER;
-                if ((bool)chkAllowUppercase.IsChecked) allowed += UPPER;
-                if ((bool)chkAllowNumber.IsChecked) allowed += NUMBER;
-                if ((bool)chkAllowSpecial.IsChecked) allowed += SPECIAL;
-                if ((bool)chkAllowUnderscore.IsChecked) allowed += "_";
-                if ((bool)chkAllowSpace.IsChecked) allowed += " ";
-                if ((bool)chkAllowOther.IsChecked) allowed += other;
+                if (chkAllowLowercase.IsChecked != null && (bool)chkAllowLowercase.IsChecked) allowed += LOWER;
+                if (chkAllowUppercase.IsChecked != null && (bool) chkAllowUppercase.IsChecked) allowed += UPPER;
+                if (chkAllowNumber.IsChecked != null && (bool) chkAllowNumber.IsChecked) allowed += NUMBER;
+                if (chkAllowSpecial.IsChecked != null && (bool) chkAllowSpecial.IsChecked) allowed += SPECIAL;
+                if (chkAllowUnderscore.IsChecked != null && (bool) chkAllowUnderscore.IsChecked) allowed += "_";
+                if (chkAllowSpace.IsChecked != null && (bool) chkAllowSpace.IsChecked) allowed += " ";
+                if (chkAllowOther.IsChecked != null && (bool) chkAllowOther.IsChecked) allowed += other;
 
                 int min_chars = int.Parse(txtMinLenght.Text);
                 int max_chars = int.Parse(txtMaxLenght.Text);
@@ -117,26 +117,24 @@ namespace OlibPasswordManager.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (File.Exists("settings.json"))
-            {
-                chkAllowLowercase.IsChecked = App.Settings.GeneratorAllowLowercase;
-                chkAllowNumber.IsChecked = App.Settings.GeneratorAllowNumber;
-                chkAllowOther.IsChecked = App.Settings.GeneratorAllowOther;
-                chkAllowSpace.IsChecked = App.Settings.GeneratorAllowSpace;
-                chkAllowSpecial.IsChecked = App.Settings.GeneratorAllowSpecial;
-                chkAllowUnderscore.IsChecked = App.Settings.GeneratorAllowUnderscore;
-                chkAllowUppercase.IsChecked = App.Settings.GeneratorAllowUppercase;
-                chkRequireLowercase.IsChecked = App.Settings.GeneratorRequireLowercase;
-                chkRequireNumber.IsChecked = App.Settings.GeneratorRequireNumber;
-                chkRequireOther.IsChecked = App.Settings.GeneratorRequireOther;
-                chkRequireSpace.IsChecked = App.Settings.GeneratorRequireSpace;
-                chkRequireSpecial.IsChecked = App.Settings.GeneratorRequireSpecial;
-                chkRequireUnderscore.IsChecked = App.Settings.GeneratorRequireUnderscore;
-                chkRequireUppercase.IsChecked = App.Settings.GeneratorRequireUppercase;
-                txtMaxLenght.Text = App.Settings.GeneratorMaxCount;
-                txtMinLenght.Text = App.Settings.GeneratorMinCount;
-                txtOther.Text = App.Settings.GeneratorTextOther;
-            }
+            if (!File.Exists("settings.json")) return;
+            chkAllowLowercase.IsChecked = App.Settings.GeneratorAllowLowercase;
+            chkAllowNumber.IsChecked = App.Settings.GeneratorAllowNumber;
+            chkAllowOther.IsChecked = App.Settings.GeneratorAllowOther;
+            chkAllowSpace.IsChecked = App.Settings.GeneratorAllowSpace;
+            chkAllowSpecial.IsChecked = App.Settings.GeneratorAllowSpecial;
+            chkAllowUnderscore.IsChecked = App.Settings.GeneratorAllowUnderscore;
+            chkAllowUppercase.IsChecked = App.Settings.GeneratorAllowUppercase;
+            chkRequireLowercase.IsChecked = App.Settings.GeneratorRequireLowercase;
+            chkRequireNumber.IsChecked = App.Settings.GeneratorRequireNumber;
+            chkRequireOther.IsChecked = App.Settings.GeneratorRequireOther;
+            chkRequireSpace.IsChecked = App.Settings.GeneratorRequireSpace;
+            chkRequireSpecial.IsChecked = App.Settings.GeneratorRequireSpecial;
+            chkRequireUnderscore.IsChecked = App.Settings.GeneratorRequireUnderscore;
+            chkRequireUppercase.IsChecked = App.Settings.GeneratorRequireUppercase;
+            txtMaxLenght.Text = App.Settings.GeneratorMaxCount;
+            txtMinLenght.Text = App.Settings.GeneratorMinCount;
+            txtOther.Text = App.Settings.GeneratorTextOther;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -59,7 +59,7 @@ namespace OlibPasswordManager.Pages
             }
         }
 
-        private void ChangedPassword(object sender, RoutedEventArgs e) => NavigationService.Navigate(new Uri("/Pages/ChangePassword.xaml", UriKind.Relative));
+        private void ChangedPassword(object sender, RoutedEventArgs e) => NavigationService?.Navigate(new Uri("/Pages/ChangePassword.xaml", UriKind.Relative));
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -76,32 +76,30 @@ namespace OlibPasswordManager.Pages
             txtDate.Text = User.UsersList[User.IndexUser].DateCard;
             txtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
 
-            if (txtNote.Text == "") brNote.Visibility = Visibility.Collapsed;
-            else brNote.Visibility = Visibility.Visible;
-            if (txtWebSite.Text == "") bWebSite.Visibility = Visibility.Collapsed;
-            else bWebSite.Visibility = Visibility.Visible;
+            brNote.Visibility = txtNote.Text == "" ? Visibility.Collapsed : Visibility.Visible;
+            bWebSite.Visibility = txtWebSite.Text == "" ? Visibility.Collapsed : Visibility.Visible;
 
-            if (User.UsersList[User.IndexUser].TimeChanged == null) txtLabelChange.Visibility = Visibility.Collapsed;
-            else txtLabelChange.Visibility = Visibility.Visible;
+            txtLabelChange.Visibility = User.UsersList[User.IndexUser].TimeChanged == null ? Visibility.Collapsed : Visibility.Visible;
 
-            if (User.UsersList[User.IndexUser].Type == 0)
+            switch (User.UsersList[User.IndexUser].Type)
             {
-                bCardName.Visibility = Visibility.Collapsed;
-                bCardNumber.Visibility = Visibility.Collapsed;
-                bDate.Visibility = Visibility.Collapsed;
-                bSecurityCode.Visibility = Visibility.Collapsed;
-            }
-            else if (User.UsersList[User.IndexUser].Type == 1)
-            {
-                bUsername.Visibility = Visibility.Collapsed;
-                bPassword.Visibility = Visibility.Collapsed;
-                bWebSite.Visibility = Visibility.Collapsed;
+                case 0:
+                    bCardName.Visibility = Visibility.Collapsed;
+                    bCardNumber.Visibility = Visibility.Collapsed;
+                    bDate.Visibility = Visibility.Collapsed;
+                    bSecurityCode.Visibility = Visibility.Collapsed;
+                    break;
+                case 1:
+                    bUsername.Visibility = Visibility.Collapsed;
+                    bPassword.Visibility = Visibility.Collapsed;
+                    bWebSite.Visibility = Visibility.Collapsed;
+                    break;
             }
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var psi = new ProcessStartInfo
+            ProcessStartInfo psi = new ProcessStartInfo
             {
                 FileName = "http://" + txtWebSite.Text,
                 UseShellExecute = true
@@ -114,18 +112,16 @@ namespace OlibPasswordManager.Pages
         {
             if (pbHard.Value < 100)
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235, 20, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(196, 20, 3));
             }
             else if (pbHard.Value < 200)
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235, 235, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(222, 222, 64));
             }
             else
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(20, 235, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(27, 199, 11));
             }
         }
-
-        
     }
 }

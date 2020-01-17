@@ -20,10 +20,8 @@ namespace OlibPasswordManager.Windows
     {
         public About() => InitializeComponent();
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Version.Content = " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-        }
+        private void Window_Loaded(object sender, RoutedEventArgs e) => Version.Content =
+            " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
         private void Button_Click(object sender, RoutedEventArgs e) => Close();
 

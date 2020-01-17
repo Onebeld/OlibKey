@@ -34,19 +34,19 @@ namespace OlibPasswordManager.Windows
 
         private void PathSelection(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog dialog = new SaveFileDialog { Filter = "Olib-files (*.olib)|*.olib" };
+            var dialog = new SaveFileDialog { Filter = "Olib-files (*.olib)|*.olib" };
             if ((bool)dialog.ShowDialog()) txtPathSelection.Text = dialog.FileName;
         }
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHide.IsChecked)
+            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Collapsed;
                 txtPasswordCollapsed.Text = txtPassword.Password;
                 txtPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (!(bool)cbHide.IsChecked)
+            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Visible;
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
@@ -60,15 +60,15 @@ namespace OlibPasswordManager.Windows
         {
             if (pbHard.Value < 100)
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235, 20, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(196, 20, 3));
             }
             else if (pbHard.Value < 200)
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(235, 235, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(222, 222, 64));
             }
             else
             {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(20, 235, 0));
+                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(27, 199, 11));
             }
         }
     }

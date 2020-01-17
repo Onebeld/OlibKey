@@ -43,17 +43,8 @@ namespace OlibPasswordManager
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (File.Exists("settings.json"))
-            {
                 Settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json"));
-            }
-            if (GlobalSettings.Default.GlobalFirstLang)
-            {
-                Language = CultureInfo.CurrentCulture;
-            }
-            else
-            {
-                Language = GlobalSettings.Default.GlobalLanguage;
-            }
+            Language = GlobalSettings.Default.GlobalFirstLang ? CultureInfo.CurrentCulture : GlobalSettings.Default.GlobalLanguage;
 
             MainWindow = new MainWindow();
             MainWindow.Show();
@@ -68,16 +59,15 @@ namespace OlibPasswordManager
                 if (value == null) throw new ArgumentNullException("value");
                 if (value == System.Threading.Thread.CurrentThread.CurrentUICulture) return;
 
-                //1. Меняем язык приложения:
                 System.Threading.Thread.CurrentThread.CurrentUICulture = value;
 
-                //2. Создаём ResourceDictionary для новой культуры
-                ResourceDictionary dict = new ResourceDictionary();
+                var dict = new ResourceDictionary();
                 if (GlobalSettings.Default.GlobalFirstLang)
                 {
                     try
                     {
-                        dict.Source = new Uri(string.Format("/Properties/Localization/lang.{0}.xaml", CultureInfo.CurrentCulture.ToString()), UriKind.Relative);
+                        dict.Source = new Uri(
+                            $"/Properties/Localization/lang.{CultureInfo.CurrentCulture}.xaml", UriKind.Relative);
                     }
                     catch
                     {
@@ -89,7 +79,7 @@ namespace OlibPasswordManager
                 {
                     try
                     {
-                        dict.Source = new Uri(string.Format("/Properties/Localization/lang.{0}.xaml", value.Name), UriKind.Relative);
+                        dict.Source = new Uri($"/Properties/Localization/lang.{value.Name}.xaml", UriKind.Relative);
                     }
                     catch
                     {
@@ -97,8 +87,7 @@ namespace OlibPasswordManager
                     }
                 }
 
-                //3. Находим старую ResourceDictionary и удаляем его и добавляем новую ResourceDictionary
-                ResourceDictionary oldDict = (from d in Current.Resources.MergedDictionaries
+                var oldDict = (from d in Current.Resources.MergedDictionaries
                                               where d.Source != null && d.Source.OriginalString.StartsWith("/Properties/Localization/lang.")
                                               select d).FirstOrDefault();
                 if (oldDict != null)
@@ -112,8 +101,7 @@ namespace OlibPasswordManager
                     Current.Resources.MergedDictionaries.Add(dict);
                 }
 
-                //4. Вызываем евент для оповещения всех окон.
-                LanguageChanged(Current, new EventArgs());
+                LanguageChanged?.Invoke(Current, new EventArgs());
             }
         }
     }

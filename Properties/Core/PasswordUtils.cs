@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -7,8 +8,7 @@ namespace OlibPasswordManager.Properties.Core
 {
     class PasswordUtils
     {
-        public static string[] badPasswords = new string[]
-        {
+        public static string[] BadPasswords = {
             "123456", "123456789", "qwerty", "111111", "1234567", "666666", "12345678", 
             "7777777", "123321", "0", "654321", "1234567890", "123123", "555555", "vkontakte", 
             "gfhjkm", "159753", "777777", "TempPassWord", "qazwsx", "1q2w3e", "1234", "112233", 
@@ -35,8 +35,6 @@ namespace OlibPasswordManager.Properties.Core
             "iloveu", "пароль"
         };
 
-        public static Random rnd = new Random();
-
         public static int CheckPasswordStrength(string password)
         {
             double multi0 = 1.0;
@@ -44,25 +42,24 @@ namespace OlibPasswordManager.Properties.Core
             double multi2 = 1.0;
             double multi3 = 0;
             int score = 0;
-            foreach (var bp in badPasswords)
+            foreach (var bp in BadPasswords)
             {
                 if (password.ToLower().Contains(bp.ToLower()))
                     multi0 = 0.75;
                 else
-                    if (bp.ToLower() == password.ToLower())
+                    if (string.Equals(bp, password, StringComparison.CurrentCultureIgnoreCase))
                     multi0 = 0.125;
             }
-            List<char> usedChars = new List<char>();
-            foreach (var chr in password)
+            var usedChars = new List<char>();
+            foreach (var chr in password.Where(chr => !usedChars.Contains(chr)))
             {
-                if (!usedChars.Contains(chr))
-                    usedChars.Add(chr);
+                usedChars.Add(chr);
             }
             multi1 = FrequencyFactor(password.ToLower());
 
             score += password.Length * 15;
 
-            Dictionary<string, double> patterns = new Dictionary<string, double> { { @"1234567890", 0.0 }, 
+            var patterns = new Dictionary<string, double> { { @"1234567890", 0.0 }, 
                                                                          { @"[a-z]", 0.1 }, 
                                                                          { @"[ёа-я]", 0.2 }, 
                                                                          { @"[A-Z]", 0.2 }, 
@@ -70,9 +67,9 @@ namespace OlibPasswordManager.Properties.Core
                                                                          {  "[!,@#\\$%\\^&\\*?_~=;:'\"<>[]()~`\\\\|/]", 0.4 },  
                                                                          { @"[¶©]", 0.5} }; 
 
-            foreach (var pattern in patterns)
-                if (Regex.Matches(password, pattern.Key).Count > 0)
-                    multi2 += pattern.Value;
+            foreach (var (key, value) in patterns)
+                if (Regex.Matches(password, key).Count > 0)
+                    multi2 += value;
 
             if (password.Length > 2)
                 multi3 += 0;
@@ -89,7 +86,7 @@ namespace OlibPasswordManager.Properties.Core
 
         static double FrequencyFactor(string password)
         {
-            HashSet<char> differentSymbols = new HashSet<char>(password.ToCharArray());
+            var differentSymbols = new HashSet<char>(password.ToCharArray());
 
             return Map(differentSymbols.Count, 1.0, password.Length, 0.1, 1);
         }

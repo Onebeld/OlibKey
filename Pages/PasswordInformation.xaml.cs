@@ -99,7 +99,7 @@ namespace OlibPasswordManager.Pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ProcessStartInfo psi = new ProcessStartInfo
+            var psi = new ProcessStartInfo
             {
                 FileName = "http://" + txtWebSite.Text,
                 UseShellExecute = true

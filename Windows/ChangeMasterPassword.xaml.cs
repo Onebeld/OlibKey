@@ -1,17 +1,10 @@
 ﻿using Newtonsoft.Json;
 using OlibPasswordManager.Properties.Core;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OlibPasswordManager.Windows
 {
@@ -26,7 +19,7 @@ namespace OlibPasswordManager.Windows
         {
             try
             {
-                string s = File.ReadAllText(App.Settings.AppGlobalString);
+                var s = File.ReadAllText(App.Settings.AppGlobalString);
                 User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(s, txtOldPassword.Password), txtOldPassword.Password), txtOldPassword.Password), txtOldPassword.Password), txtOldPassword.Password));
 
                 s = JsonConvert.SerializeObject(User.UsersList);
@@ -88,17 +81,11 @@ namespace OlibPasswordManager.Windows
         private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (pbHard.Value < 100)
-            {
                 pbHard.Foreground = new SolidColorBrush(Color.FromRgb(196, 20, 3));
-            }
             else if (pbHard.Value < 200)
-            {
                 pbHard.Foreground = new SolidColorBrush(Color.FromRgb(222, 222, 64));
-            }
             else
-            {
                 pbHard.Foreground = new SolidColorBrush(Color.FromRgb(27, 199, 11));
-            }
         }
     }
 }

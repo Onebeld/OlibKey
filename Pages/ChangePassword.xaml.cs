@@ -65,9 +65,7 @@ namespace OlibPasswordManager.Pages
             if (MessageBox.Show((string) Application.Current.Resources["MB2"],
                     (string) Application.Current.Resources["Message"], MessageBoxButton.YesNo,
                     MessageBoxImage.Information) == MessageBoxResult.Yes)
-            {
                 User.UsersList.RemoveAt(App.MainWindow.PasswordList.SelectedIndex);
-            }
 
             App.MainWindow.PasswordList.ItemsSource = null;
             App.MainWindow.PasswordList.ItemsSource = User.UsersList;
@@ -107,17 +105,11 @@ namespace OlibPasswordManager.Pages
         private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if (pbHard.Value < 100)
-            {
                 pbHard.Foreground = new SolidColorBrush(Color.FromRgb(196, 20, 3));
-            }
             else if (pbHard.Value < 200)
-            {
                 pbHard.Foreground = new SolidColorBrush(Color.FromRgb(222, 222, 64));
-            }
             else
-            {
                 pbHard.Foreground = new SolidColorBrush(Color.FromRgb(27, 199, 11));
-            }
         }
     }
 }

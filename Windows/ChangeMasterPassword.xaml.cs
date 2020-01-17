@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using OlibPasswordManager.Properties.Core;
 using System.Collections.Generic;
 using System.IO;
@@ -48,7 +49,7 @@ namespace OlibPasswordManager.Windows
             {
                 txtPassword.Visibility = Visibility.Visible;
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = null;
+                txtPasswordCollapsed.Text = string.Empty;
             }
         }
 

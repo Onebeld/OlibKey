@@ -15,11 +15,8 @@ namespace OlibPasswordManager.Windows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             User.UsersList.Clear();
-
-
             App.MainWindow.PasswordList.ItemsSource = null;
             App.MainWindow.PasswordList.ItemsSource = User.UsersList;
-
             DialogResult = true;
         }
 
@@ -41,26 +38,12 @@ namespace OlibPasswordManager.Windows
             {
                 txtPassword.Visibility = Visibility.Visible;
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = null;
+                txtPasswordCollapsed.Text = string.Empty;
             }
         }
 
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
 
-        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (pbHard.Value < 100)
-            {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(196, 20, 3));
-            }
-            else if (pbHard.Value < 200)
-            {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(222, 222, 64));
-            }
-            else
-            {
-                pbHard.Foreground = new SolidColorBrush(Color.FromRgb(27, 199, 11));
-            }
-        }
+        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
     }
 }

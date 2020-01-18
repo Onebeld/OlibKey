@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Effects;
 
 namespace OlibPasswordManager
@@ -25,14 +24,7 @@ namespace OlibPasswordManager
             UpdateShaderValue(InputProperty);
         }
 
-        public Brush Input
-        {
-            get => (Brush) GetValue(InputProperty);
-            set => SetValue(InputProperty, value);
-        }
-
         public static readonly DependencyProperty InputProperty =
             RegisterPixelShaderSamplerProperty("Input", typeof(InvertEffect), 0);
-
     }
 }

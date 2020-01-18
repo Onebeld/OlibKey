@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace OlibPasswordManager.Properties.Core
 {
-    public class Crypto
+    public static class Crypto
     {
         private static readonly RNGCryptoServiceProvider Rand = new RNGCryptoServiceProvider();
 
@@ -18,12 +18,10 @@ namespace OlibPasswordManager.Properties.Core
             {
                 var fourBytes = new byte[4];
                 Rand.GetBytes(fourBytes);
-
                 scale = BitConverter.ToUInt32(fourBytes, 0);
             }
 
-            return (int) (min + (max - min) *
-                          (scale / (double) uint.MaxValue));
+            return (int) (min + (max - min) * (scale / (double) uint.MaxValue));
         }
     }
 }

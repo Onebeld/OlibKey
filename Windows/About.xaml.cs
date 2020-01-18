@@ -27,11 +27,7 @@ namespace OlibPasswordManager.Windows
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var psi = new ProcessStartInfo
-            {
-                FileName = "https://vk.com/olibpasswordmanager",
-                UseShellExecute = true
-            };
+            var psi = new ProcessStartInfo {FileName = "https://vk.com/olibpasswordmanager", UseShellExecute = true};
             Process.Start(psi);
         }
 
@@ -39,8 +35,7 @@ namespace OlibPasswordManager.Windows
         {
             var psi = new ProcessStartInfo
             {
-                FileName = "https://github.com/MagnificentEagle/OlibPasswordManager",
-                UseShellExecute = true
+                FileName = "https://github.com/MagnificentEagle/OlibPasswordManager", UseShellExecute = true
             };
             Process.Start(psi);
         }

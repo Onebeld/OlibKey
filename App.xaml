@@ -6,36 +6,38 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Properties/Localization/lang.xaml"/>
-                <ResourceDictionary Source="/Properties/Icons/ProgramIcons.xaml"/>
-                <ResourceDictionary Source="/Properties/Icons/ElementIcon.xaml"/>
+                <ResourceDictionary Source="/Properties/Localization/lang.xaml" />
+                <ResourceDictionary Source="/Properties/Icons/ProgramIcons.xaml" />
+                <ResourceDictionary Source="/Properties/Icons/ElementIcon.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Montserrat">./Properties/Fonts/Montserrat-Regular.ttf#Montserrat</FontFamily>
 
             <Style TargetType="{x:Type PasswordBox}">
-                <Setter Property="PasswordChar" Value="●"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-                <Setter Property="HorizontalContentAlignment" Value="Left"/>
-                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                <Setter Property="AllowDrop" Value="true"/>
-                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+                <Setter Property="PasswordChar" Value="●" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="AllowDrop" Value="true" />
+                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+                <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type PasswordBox}">
                             <Border x:Name="border" BorderThickness="1" CornerRadius="5" BorderBrush="#A5A5A5">
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                    <Setter Property="Opacity" TargetName="border" Value="0.56" />
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
                                 </Trigger>
                                 <Trigger Property="IsKeyboardFocused" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -44,10 +46,11 @@
                 <Style.Triggers>
                     <MultiTrigger>
                         <MultiTrigger.Conditions>
-                            <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                            <Condition Property="IsSelectionActive" Value="false"/>
+                            <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                            <Condition Property="IsSelectionActive" Value="false" />
                         </MultiTrigger.Conditions>
-                        <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                        <Setter Property="SelectionBrush"
+                                Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                     </MultiTrigger>
                 </Style.Triggers>
             </Style>
@@ -55,15 +58,18 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TextBox}">
-                            <Border x:Name="border" BorderThickness="1" CornerRadius="5" BorderBrush="#A5A5A5" SnapsToDevicePixels="True">
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <Border x:Name="border" BorderThickness="1" CornerRadius="5" BorderBrush="#A5A5A5"
+                                    SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
                                 </Trigger>
                                 <Trigger Property="IsKeyboardFocused" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042"/>
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -72,33 +78,39 @@
                 <Style.Triggers>
                     <MultiTrigger>
                         <MultiTrigger.Conditions>
-                            <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                            <Condition Property="IsSelectionActive" Value="false"/>
+                            <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                            <Condition Property="IsSelectionActive" Value="false" />
                         </MultiTrigger.Conditions>
-                        <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                        <Setter Property="SelectionBrush"
+                                Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                     </MultiTrigger>
                 </Style.Triggers>
             </Style>
             <Style TargetType="{x:Type Button}">
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Padding" Value="10,1"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="10,1" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Border x:Name="border" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#A5A5A5">
-                                <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border x:Name="border" Background="White" CornerRadius="5" BorderThickness="1"
+                                    BorderBrush="#A5A5A5">
+                                <ContentPresenter x:Name="contentPresenter" Focusable="False"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#FFE0E0E0"/>
+                                    <Setter Property="Background" TargetName="border" Value="#FFE0E0E0" />
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="#931d60"/>
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042"/>
+                                    <Setter Property="Background" TargetName="border" Value="#931d60" />
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
                                     <Setter Property="Effect" TargetName="contentPresenter">
                                         <Setter.Value>
-                                            <l1:InvertEffect/>
+                                            <l1:InvertEffect />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>
@@ -108,11 +120,11 @@
                 </Setter>
             </Style>
             <Style x:Key="PageBorder" TargetType="Border">
-                <Setter Property="Background" Value="White"/>
-                <Setter Property="CornerRadius" Value="5"/>
-                <Setter Property="Margin" Value="0,5"/>
-                <Setter Property="BorderBrush" Value="#dddddd"/>
-                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Background" Value="White" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="Margin" Value="0,5" />
+                <Setter Property="BorderBrush" Value="#dddddd" />
+                <Setter Property="BorderThickness" Value="1" />
             </Style>
             
             

@@ -41,7 +41,7 @@ namespace OlibPasswordManager
 
         private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) => new PasswordGenerator().ShowDialog();
 
-        private void OpenRequireMasterPassword() => new RequireMasterPassword().ShowDialog();
+        private static void OpenRequireMasterPassword() => new RequireMasterPassword().ShowDialog();
 
         private void OpenChangeMasterPassword(object sender, RoutedEventArgs e) => new ChangeMasterPassword().ShowDialog();
 
@@ -112,10 +112,7 @@ namespace OlibPasswordManager
 
         private void PasswordList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PasswordInformation != null)
-            {
-                PasswordInformation = null;
-            }
+            if (PasswordInformation != null) PasswordInformation = null;
 
             if (PasswordList.SelectedItem == null) return;
             PasswordInformation = new PasswordInformation();

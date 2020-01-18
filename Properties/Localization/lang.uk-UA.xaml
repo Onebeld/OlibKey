@@ -31,6 +31,10 @@
     <v:String x:Key="MB2">Ви точно хочете видалити елемент?</v:String>
     <v:String x:Key="MB3">Неправильний майстер пароль!</v:String>
     <v:String x:Key="MB4">Доступно оновлення! Хочете перейти на сайт для скачування?</v:String>
+    <v:String x:Key="MB5">Чи не вдалося перевірити на наявність оновленні</v:String>
+    <v:String x:Key="MB6">Ви не можете вимагати символи з порожнього рядка!</v:String>
+    <v:String x:Key="MB7">Не вибрано жодної галочки або не зазначена довжина пароля!</v:String>
+    <v:String x:Key="MB8">На даний момент немає нових оновлень</v:String>
     <v:String x:Key="Successfully">Успішно!</v:String>
     <!--#endregion-->
 

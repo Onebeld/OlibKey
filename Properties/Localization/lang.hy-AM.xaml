@@ -31,6 +31,10 @@
     <v:String x:Key="MB2">Դուք  իրոք ցանկանում եք ջնջել նյութը?</v:String>
     <v:String x:Key="MB3">Սխալ վարպետության գաղտնաբառ!</v:String>
     <v:String x:Key="MB4">Թարմացումը հասանելի է: Ցանկանում եք գնալ կայք ներբեռնման համար?</v:String>
+    <v:String x:Key="MB5">Չհաջողվեց ստուգել թարմացումը</v:String>
+    <v:String x:Key="MB6">Դուք չեք կարող պահանջել նիշ դատարկ տողից:</v:String>
+    <v:String x:Key="MB7">Ընտրված չէ նշման նշան կամ գաղտնաբառի երկարություն:</v:String>
+    <v:String x:Key="MB8">Այս պահին նոր թարմացումներ չկան:</v:String>
     <v:String x:Key="Successfully">Հաջող!</v:String>
     <!--#endregion-->
 

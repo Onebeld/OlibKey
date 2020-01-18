@@ -31,6 +31,10 @@
     <v:String x:Key="MB2">Are you sure you want to delete the item?</v:String>
     <v:String x:Key="MB3">Wrong password master!</v:String>
     <v:String x:Key="MB4">Update Available! Want to go to the download site?</v:String>
+    <v:String x:Key="MB5">Failed to check for update</v:String>
+    <v:String x:Key="MB6">You cannot require characters from an empty string!</v:String>
+    <v:String x:Key="MB7">No checkmarks selected or password length specified!</v:String>
+    <v:String x:Key="MB8">На данный момент нет новых обновлений</v:String>
     <v:String x:Key="Successfully">Successfully!</v:String>
     <!--#endregion-->
     

@@ -22,7 +22,7 @@ namespace OlibPasswordManager.Windows
                 string other = TxtOther.Text;
                 if (ChkRequireOther.IsChecked != null && ((bool) ChkRequireOther.IsChecked && other.Length < 1))
                 {
-                    MessageBox.Show("Вы не можете требовать символы из пустой строки!", "Ошибка", MessageBoxButton.OK,
+                    MessageBox.Show((string) Application.Current.Resources["MB6"], (string) Application.Current.Resources["Error"], MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     TxtOther.Focus();
                     return TxtPassword.Text;
@@ -60,7 +60,7 @@ namespace OlibPasswordManager.Windows
             }
             catch
             {
-                MessageBox.Show("Не выбрано ни одной галочки или не указана длина пароля!", "Ошибка",
+                MessageBox.Show((string)Application.Current.Resources["MB7"], (string)Application.Current.Resources["Error"],
                     MessageBoxButton.OK, MessageBoxImage.Error);
                 return TxtPassword.Text;
             }

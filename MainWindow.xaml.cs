@@ -60,13 +60,14 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.1.0.140");
+            sw.Write("1.1.0.145");
 
             App.Settings = new Properties.Core.Settings();
 
             User.UsersList = new List<User>();
             PasswordList.ItemsSource = User.UsersList;
 
+            CheckUpdate(false);
             if (App.Settings.AppGlobalString != null) new RequireMasterPassword().ShowDialog();
         }
 
@@ -162,20 +163,29 @@ namespace OlibPasswordManager
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e) => PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == TxtSearch.Text);
 
-        private async void CheckUpdate(object sender, RoutedEventArgs e)
+        private void CheckUpdateButton(object sender, RoutedEventArgs e) => CheckUpdate(true);
+
+        private async void CheckUpdate(bool b)
         {
             try
             {
                 using (var wb = new WebClient())
                 {
                     wb.DownloadStringCompleted += (s, args) => _str = args.Result;
-                    await wb.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/BigBoss500/Olib/master/versions/version.xml"));
+                    await wb.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/MagnificentEagle/OlibPasswordManager/master/forRepository/version.txt"));
                 }
                 var latest = float.Parse(_str.Replace(".", ""));
                 var current = float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
+                if (!(latest > current) && b)
+                {
+                    MessageBox.Show((string) Application.Current.Resources["MB8"],
+                        (string) Application.Current.Resources["Message"], MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
                 if (!(latest > current)) return;
-                if (MessageBox.Show((string) Application.Current.Resources["MB4"],
-                        (string) Application.Current.Resources["Message"], MessageBoxButton.YesNo,
+                if (MessageBox.Show((string)Application.Current.Resources["MB4"],
+                        (string)Application.Current.Resources["Message"], MessageBoxButton.YesNo,
                         MessageBoxImage.Information) != MessageBoxResult.Yes) return;
                 var psi = new ProcessStartInfo
                 {
@@ -186,7 +196,12 @@ namespace OlibPasswordManager
             }
             catch
             {
-                // ignored
+                if (b)
+                {
+                    MessageBox.Show((string) Application.Current.Resources["MB5"],
+                        (string) Application.Current.Resources["Error"], MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
             }
         }
     }

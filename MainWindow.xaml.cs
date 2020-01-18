@@ -24,12 +24,12 @@ namespace OlibPasswordManager
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private string _str;
         #region Pages
-        private CreatePassword PasswordPage;
-        private PasswordInformation PasswordInformation;
+        private CreatePassword _passwordPage;
+        private PasswordInformation _passwordInformation;
         #endregion
 
         public MainWindow() => InitializeComponent();
@@ -51,14 +51,14 @@ namespace OlibPasswordManager
 
         private void CreatePassword(object sender, RoutedEventArgs e)
         {
-            PasswordPage = new CreatePassword();
-            frame.NavigationService.Navigate(PasswordPage);
+            _passwordPage = new CreatePassword();
+            frame.NavigationService.Navigate(_passwordPage);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.1.0.124");
+            sw.Write("1.1.0.127");
 
             App.Settings = new Properties.Core.Settings();
 
@@ -71,7 +71,8 @@ namespace OlibPasswordManager
         private void OpenCreateData(object sender, RoutedEventArgs e)
         {
             CreateData data = new CreateData();
-            if (!(bool) data.ShowDialog()) return;
+            var b = data.ShowDialog();
+            if (b != null && (bool) b) return;
             App.Settings.AppGlobalString = data.txtPathSelection.Text;
             Global.MasterPassword = data.txtPassword.Password;
 
@@ -79,9 +80,9 @@ namespace OlibPasswordManager
             File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
         }
 
-        private void SaveBase(object sender, RoutedEventArgs e) => Save();
+        private void SaveBase(object sender, RoutedEventArgs e) => Save(true);
 
-        private void Save()
+        private void Save(bool b)
         {
             try
             {
@@ -90,7 +91,9 @@ namespace OlibPasswordManager
             }
             catch
             {
-                MessageBox.Show((string)Application.Current.Resources["MB1"], (string)Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
+                if (b)
+                    MessageBox.Show((string) Application.Current.Resources["MB1"],
+                        (string) Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -105,21 +108,22 @@ namespace OlibPasswordManager
             {
                 Filter = "Olib-files (*.olib)|*.olib"
             };
-            if (!(bool) fileDialog.ShowDialog()) return;
+            var b = fileDialog.ShowDialog();
+            if (b != null && (bool) b) return;
             App.Settings.AppGlobalString = fileDialog.FileName;
             OpenRequireMasterPassword();
         }
 
         private void PasswordList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (PasswordInformation != null) PasswordInformation = null;
+            if (_passwordInformation != null) _passwordInformation = null;
 
             if (PasswordList.SelectedItem == null) return;
-            PasswordInformation = new PasswordInformation();
+            _passwordInformation = new PasswordInformation();
 
             User.IndexUser = PasswordList.SelectedIndex;
 
-            frame.NavigationService.Navigate(PasswordInformation);
+            frame.NavigationService.Navigate(_passwordInformation);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -127,7 +131,7 @@ namespace OlibPasswordManager
             File.WriteAllText("settings.json", JsonConvert.SerializeObject(App.Settings));
             try
             {
-                Save();
+                Save(false);
             }
             catch
             {
@@ -137,8 +141,8 @@ namespace OlibPasswordManager
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            PasswordPage = new CreatePassword();
-            frame.NavigationService.Navigate(PasswordPage);
+            _passwordPage = new CreatePassword();
+            frame.NavigationService.Navigate(_passwordPage);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -147,8 +151,8 @@ namespace OlibPasswordManager
             switch (e.Key)
             {
                 case Key.N:
-                    PasswordPage = new CreatePassword();
-                    frame.NavigationService.Navigate(PasswordPage);
+                    _passwordPage = new CreatePassword();
+                    frame.NavigationService.Navigate(_passwordPage);
                     break;
                 case Key.G:
                     new PasswordGenerator().ShowDialog();
@@ -157,7 +161,7 @@ namespace OlibPasswordManager
                     DopOpenBase();
                     break;
                 case Key.S:
-                    Save();
+                    Save(true);
                     break;
             }
         }

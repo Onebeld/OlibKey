@@ -3,21 +3,21 @@ using OlibPasswordManager.Windows;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace OlibPasswordManager.Pages
 {
     /// <summary>
     /// Логика взаимодействия для CreatePassword.xaml
     /// </summary>
-    public partial class CreatePassword : Page
+    public partial class CreatePassword
     {
         public CreatePassword() => InitializeComponent();
 
         private void OpenPasswordGeneration(object sender, RoutedEventArgs e)
         {
             var generator = new PasswordGenerator {saveButton = {Visibility = Visibility.Visible}};
-            if ((bool)generator.ShowDialog()) txtPassword.Password = generator.txtPassword.Text;
+            var b = generator.ShowDialog();
+            if (b != null && (bool) b) txtPassword.Password = generator.txtPassword.Text;
         }
 
 

@@ -10,7 +10,7 @@ namespace OlibPasswordManager.Windows
     /// <summary>
     /// Логика взаимодействия для Settings.xaml
     /// </summary>
-    public partial class Settings : Window
+    public partial class Settings
     {
         private bool _isFirst = true;
 

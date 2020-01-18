@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using OlibPasswordManager.Properties.Core;
 using OlibPasswordManager.Windows;
 
@@ -10,7 +9,7 @@ namespace OlibPasswordManager.Pages
     /// <summary>
     /// Логика взаимодействия для ChangePassword.xaml
     /// </summary>
-    public partial class ChangePassword : Page
+    public partial class ChangePassword
     {
         public ChangePassword() => InitializeComponent();
 
@@ -19,7 +18,8 @@ namespace OlibPasswordManager.Pages
         private void OpenPasswordGeneration(object sender, RoutedEventArgs e)
         {
             PasswordGenerator generator = new PasswordGenerator {saveButton = {Visibility = Visibility.Visible}};
-            if ((bool)generator.ShowDialog()) txtPassword.Password = generator.txtPassword.Text;
+            var b = generator.ShowDialog();
+            if (b != null && (bool) b) txtPassword.Password = generator.txtPassword.Text;
         }
 
         private void ChangedPassword(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ namespace OlibPasswordManager.Pages
             {
                 txtPassword.Visibility = Visibility.Visible;
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = null;
+                txtPasswordCollapsed.Text = string.Empty;
             }
         }
 

@@ -19,65 +19,49 @@ namespace OlibPasswordManager.Windows
                 const string UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const string NUMBER = "0123456789";
                 const string SPECIAL = @"~!@#$%^&*():;[]{}<>,.?/\|";
-
                 string other = txtOther.Text;
-
-                if (chkRequireOther.IsChecked != null && ((bool)chkRequireOther.IsChecked && other.Length < 1))
+                if (chkRequireOther.IsChecked != null && ((bool) chkRequireOther.IsChecked && other.Length < 1))
                 {
-                    MessageBox.Show("Вы не можете требовать символы из пустой строки!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Вы не можете требовать символы из пустой строки!", "Ошибка", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
                     txtOther.Focus();
                     return txtPassword.Text;
                 }
 
                 string allowed = "";
-
-                if (chkAllowLowercase.IsChecked != null && (bool)chkAllowLowercase.IsChecked) allowed += LOWER;
+                if (chkAllowLowercase.IsChecked != null && (bool) chkAllowLowercase.IsChecked) allowed += LOWER;
                 if (chkAllowUppercase.IsChecked != null && (bool) chkAllowUppercase.IsChecked) allowed += UPPER;
                 if (chkAllowNumber.IsChecked != null && (bool) chkAllowNumber.IsChecked) allowed += NUMBER;
                 if (chkAllowSpecial.IsChecked != null && (bool) chkAllowSpecial.IsChecked) allowed += SPECIAL;
                 if (chkAllowUnderscore.IsChecked != null && (bool) chkAllowUnderscore.IsChecked) allowed += "_";
                 if (chkAllowSpace.IsChecked != null && (bool) chkAllowSpace.IsChecked) allowed += " ";
                 if (chkAllowOther.IsChecked != null && (bool) chkAllowOther.IsChecked) allowed += other;
-
                 int min_chars = int.Parse(txtMinLenght.Text);
                 int max_chars = int.Parse(txtMaxLenght.Text);
                 int num_chars = Crypto.RandomInteger(min_chars, max_chars);
-
                 string password = "";
-
-                if ((bool)chkRequireLowercase.IsChecked &&
-                    (password.IndexOfAny(LOWER.ToCharArray()) == -1))
+                if (chkRequireLowercase.IsChecked != null && ((bool) chkRequireLowercase.IsChecked && (password.IndexOfAny(LOWER.ToCharArray()) == -1)))
                     password += RandomChar(LOWER);
-                if ((bool)chkRequireUppercase.IsChecked &&
-                    (password.IndexOfAny(UPPER.ToCharArray()) == -1))
+                if (chkRequireUppercase.IsChecked != null && ((bool) chkRequireUppercase.IsChecked && (password.IndexOfAny(UPPER.ToCharArray()) == -1)))
                     password += RandomChar(UPPER);
-                if ((bool)chkRequireNumber.IsChecked &&
-                    (password.IndexOfAny(NUMBER.ToCharArray()) == -1))
+                if (chkRequireNumber.IsChecked != null && ((bool) chkRequireNumber.IsChecked && (password.IndexOfAny(NUMBER.ToCharArray()) == -1)))
                     password += RandomChar(NUMBER);
-                if ((bool)chkRequireSpecial.IsChecked &&
-                    (password.IndexOfAny(SPECIAL.ToCharArray()) == -1))
+                if (chkRequireSpecial.IsChecked != null && ((bool) chkRequireSpecial.IsChecked && (password.IndexOfAny(SPECIAL.ToCharArray()) == -1)))
                     password += RandomChar(SPECIAL);
-                if ((bool)chkRequireUnderscore.IsChecked &&
-                    (password.IndexOfAny("_".ToCharArray()) == -1))
+                if (chkRequireUnderscore.IsChecked != null && ((bool) chkRequireUnderscore.IsChecked && (password.IndexOfAny("_".ToCharArray()) == -1)))
                     password += "_";
-                if ((bool)chkRequireSpace.IsChecked &&
-                    (password.IndexOfAny(" ".ToCharArray()) == -1))
-                    password += " ";
-                if ((bool)chkRequireOther.IsChecked &&
-                    (password.IndexOfAny(other.ToCharArray()) == -1))
+                if (chkRequireSpace.IsChecked != null && ((bool) chkRequireSpace.IsChecked && (password.IndexOfAny(" ".ToCharArray()) == -1))) password += " ";
+                if (chkRequireOther.IsChecked != null && ((bool) chkRequireOther.IsChecked && (password.IndexOfAny(other.ToCharArray()) == -1)))
                     password += RandomChar(other);
-
                 while (password.Length < num_chars)
-                    password += allowed.Substring(
-                        Crypto.RandomInteger(0, allowed.Length - 1), 1);
-
+                    password += allowed.Substring(Crypto.RandomInteger(0, allowed.Length - 1), 1);
                 password = RandomizeString(password);
-
                 return password;
             }
             catch
             {
-                MessageBox.Show("Не выбрано ни одной галочки или не указана длина пароля!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Не выбрано ни одной галочки или не указана длина пароля!", "Ошибка",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
                 return txtPassword.Text;
             }
         }
@@ -91,6 +75,7 @@ namespace OlibPasswordManager.Windows
                 result += str.Substring(i, 1);
                 str = str.Remove(i, 1);
             }
+
             return result;
         }
 
@@ -127,20 +112,20 @@ namespace OlibPasswordManager.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            App.Settings.GeneratorAllowLowercase = (bool)chkAllowLowercase.IsChecked;
-            App.Settings.GeneratorAllowNumber = (bool)chkAllowNumber.IsChecked;
-            App.Settings.GeneratorAllowOther = (bool)chkAllowOther.IsChecked;
-            App.Settings.GeneratorAllowSpace = (bool)chkAllowSpace.IsChecked;
-            App.Settings.GeneratorAllowSpecial = (bool)chkAllowSpecial.IsChecked;
-            App.Settings.GeneratorAllowUnderscore = (bool)chkAllowUnderscore.IsChecked;
-            App.Settings.GeneratorAllowUppercase = (bool)chkAllowUppercase.IsChecked;
-            App.Settings.GeneratorRequireLowercase = (bool)chkRequireLowercase.IsChecked;
-            App.Settings.GeneratorRequireNumber = (bool)chkRequireNumber.IsChecked;
-            App.Settings.GeneratorRequireOther = (bool)chkRequireOther.IsChecked;
-            App.Settings.GeneratorRequireSpace = (bool)chkRequireSpace.IsChecked;
-            App.Settings.GeneratorRequireSpecial = (bool)chkRequireSpecial.IsChecked;
-            App.Settings.GeneratorRequireUnderscore = (bool)chkRequireUnderscore.IsChecked;
-            App.Settings.GeneratorRequireUppercase = (bool)chkRequireUppercase.IsChecked;
+            App.Settings.GeneratorAllowLowercase = (bool) chkAllowLowercase.IsChecked;
+            App.Settings.GeneratorAllowNumber = (bool) chkAllowNumber.IsChecked;
+            App.Settings.GeneratorAllowOther = (bool) chkAllowOther.IsChecked;
+            App.Settings.GeneratorAllowSpace = (bool) chkAllowSpace.IsChecked;
+            App.Settings.GeneratorAllowSpecial = (bool) chkAllowSpecial.IsChecked;
+            App.Settings.GeneratorAllowUnderscore = (bool) chkAllowUnderscore.IsChecked;
+            App.Settings.GeneratorAllowUppercase = (bool) chkAllowUppercase.IsChecked;
+            App.Settings.GeneratorRequireLowercase = (bool) chkRequireLowercase.IsChecked;
+            App.Settings.GeneratorRequireNumber = (bool) chkRequireNumber.IsChecked;
+            App.Settings.GeneratorRequireOther = (bool) chkRequireOther.IsChecked;
+            App.Settings.GeneratorRequireSpace = (bool) chkRequireSpace.IsChecked;
+            App.Settings.GeneratorRequireSpecial = (bool) chkRequireSpecial.IsChecked;
+            App.Settings.GeneratorRequireUnderscore = (bool) chkRequireUnderscore.IsChecked;
+            App.Settings.GeneratorRequireUppercase = (bool) chkRequireUppercase.IsChecked;
             App.Settings.GeneratorTextOther = txtOther.Text;
             App.Settings.GeneratorMaxCount = txtMaxLenght.Text;
             App.Settings.GeneratorMinCount = txtMinLenght.Text;

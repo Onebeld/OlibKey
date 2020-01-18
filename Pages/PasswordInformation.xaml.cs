@@ -2,15 +2,13 @@
 using System;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace OlibPasswordManager.Pages
 {
     /// <summary>
     /// Логика взаимодействия для PasswordInformation.xaml
     /// </summary>
-    public partial class PasswordInformation : Page
+    public partial class PasswordInformation
     {
         public PasswordInformation() => InitializeComponent();
 
@@ -44,17 +42,17 @@ namespace OlibPasswordManager.Pages
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHide.IsChecked)
+            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Collapsed;
                 txtPasswordCollapsed.Text = txtPassword.Password;
                 txtPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (!(bool)cbHide.IsChecked)
+            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Visible;
                 txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = null;
+                txtPasswordCollapsed.Text = string.Empty;
             }
         }
 

@@ -1,11 +1,9 @@
-﻿using System.Windows.Controls;
-
-namespace OlibPasswordManager.Pages
+﻿namespace OlibPasswordManager.Pages
 {
     /// <summary>
     /// Логика взаимодействия для StartScreen.xaml
     /// </summary>
-    public partial class StartScreen : Page
+    public partial class StartScreen
     {
         public StartScreen() => InitializeComponent();
     }

@@ -1,14 +1,13 @@
 ﻿using Microsoft.Win32;
 using OlibPasswordManager.Properties.Core;
 using System.Windows;
-using System.Windows.Media;
 
 namespace OlibPasswordManager.Windows
 {
     /// <summary>
     /// Логика взаимодействия для CreateData.xaml
     /// </summary>
-    public partial class CreateData : Window
+    public partial class CreateData
     {
         public CreateData() => InitializeComponent();
 
@@ -23,7 +22,8 @@ namespace OlibPasswordManager.Windows
         private void PathSelection(object sender, RoutedEventArgs e)
         {
             var dialog = new SaveFileDialog { Filter = "Olib-files (*.olib)|*.olib" };
-            if ((bool)dialog.ShowDialog()) txtPathSelection.Text = dialog.FileName;
+            var b = dialog.ShowDialog();
+            if (b != null && (bool)b) txtPathSelection.Text = dialog.FileName;
         }
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)

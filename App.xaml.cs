@@ -12,12 +12,13 @@ namespace OlibPasswordManager
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
-        public static MainWindow MainWindow;
+        public new static MainWindow MainWindow;
         public static Settings Settings;
 
-        public static List<CultureInfo> Languages { get; } = new List<CultureInfo>();
+        private static List<CultureInfo> Languages => new List<CultureInfo>();
+
         private void App_LanguageChanged(object sender, EventArgs e)
         {
             GlobalSettings.Default.GlobalLanguage = Language;
@@ -54,22 +55,21 @@ namespace OlibPasswordManager
             set
             {
                 if (value == null) throw new ArgumentNullException("value");
-                if (value == System.Threading.Thread.CurrentThread.CurrentUICulture) return;
-
+                if (ReferenceEquals(value, System.Threading.Thread.CurrentThread.CurrentUICulture)) return;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = value;
-
                 var dict = new ResourceDictionary();
                 if (GlobalSettings.Default.GlobalFirstLang)
                 {
                     try
                     {
-                        dict.Source = new Uri(
-                            $"/Properties/Localization/lang.{CultureInfo.CurrentCulture}.xaml", UriKind.Relative);
+                        dict.Source = new Uri($"/Properties/Localization/lang.{CultureInfo.CurrentCulture}.xaml",
+                            UriKind.Relative);
                     }
                     catch
                     {
                         dict.Source = new Uri("/Properties/Localization/lang.xaml", UriKind.Relative);
                     }
+
                     GlobalSettings.Default.GlobalFirstLang = false;
                 }
                 else
@@ -85,8 +85,8 @@ namespace OlibPasswordManager
                 }
 
                 var oldDict = (from d in Current.Resources.MergedDictionaries
-                                              where d.Source != null && d.Source.OriginalString.StartsWith("/Properties/Localization/lang.")
-                                              select d).FirstOrDefault();
+                    where d.Source != null && d.Source.OriginalString.StartsWith("/Properties/Localization/lang.")
+                    select d).FirstOrDefault();
                 if (oldDict != null)
                 {
                     int ind = Current.Resources.MergedDictionaries.IndexOf(oldDict);

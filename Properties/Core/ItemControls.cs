@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace OlibPasswordManager.Properties.Core
 {
-    public class ItemControls
+    public static class ItemControls
     {
         public static void ColorProgressBar(ProgressBar b)
         {

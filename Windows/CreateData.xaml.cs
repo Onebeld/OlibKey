@@ -22,8 +22,7 @@ namespace OlibPasswordManager.Windows
         private void PathSelection(object sender, RoutedEventArgs e)
         {
             var dialog = new SaveFileDialog { Filter = "Olib-files (*.olib)|*.olib" };
-            var b = dialog.ShowDialog();
-            if (b != null && (bool)b) TxtPathSelection.Text = dialog.FileName;
+            if ((bool)dialog.ShowDialog()) TxtPathSelection.Text = dialog.FileName;
         }
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)

@@ -74,6 +74,10 @@
     <v:String x:Key="Close">Close</v:String>
     <v:String x:Key="AccessText1">Allows you to store passwords, notes, passports and other personal data in encrypted form.</v:String>
     <!--#endregion-->
+
+    <!--#region Settings-->
+    <v:String x:Key="Language">Language:</v:String>
+    <!--#endregion-->
     <!--#endregion-->
 
     <!--#region Pages-->
@@ -88,6 +92,14 @@
     <v:String x:Key="ItemInformation">Item Information</v:String>
     <v:String x:Key="Create">Create:</v:String>
     <v:String x:Key="Update">Update:</v:String>
+    <v:String x:Key="Type">Type</v:String>
+    <v:String x:Key="Login">Login</v:String>
+    <v:String x:Key="BankCard">Bank card</v:String>
+
+    <v:String x:Key="CardName">Cardholder Name</v:String>
+    <v:String x:Key="CardNumber">Number</v:String>
+    <v:String x:Key="YearOfService">Year of service</v:String>
+    <v:String x:Key="SecurityCodeCard">Security code</v:String>
 
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">To apply</v:String>

@@ -9,7 +9,10 @@
         Title="{DynamicResource Settings}" Height="350" Width="450">
     <Grid>
         <StackPanel Margin="5">
-            <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged"/>
+            <DockPanel>
+                <Label Content="{DynamicResource Language}"/>
+                <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged"/>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Window>

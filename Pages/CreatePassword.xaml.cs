@@ -79,7 +79,7 @@ namespace OlibPasswordManager.Pages
                         TimeCreate = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy"),
                         CardName = txtCardName.Text,
                         DateCard = txtDate.Text,
-                        SecurityCode = txtSecurityCode.Password,
+                        SecurityCode = TxtSecurityCode.Password,
                         Type = cbType.SelectedIndex
                     });
                     break;
@@ -124,23 +124,23 @@ namespace OlibPasswordManager.Pages
 
         private void CollapsedSecurityCode(object sender, RoutedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
+            if (CbSecurityCodeHide.IsChecked != null && (bool)CbSecurityCodeHide.IsChecked)
             {
-                txtSecurityCode.Visibility = Visibility.Collapsed;
-                txtSecurityCodeCollapsed.Text = txtPassword.Password;
-                txtSecurityCodeCollapsed.Visibility = Visibility.Visible;
+                TxtSecurityCode.Visibility = Visibility.Collapsed;
+                TxtSecurityCodeCollapsed.Text = txtPassword.Password;
+                TxtSecurityCodeCollapsed.Visibility = Visibility.Visible;
             }
             else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
             {
-                txtSecurityCode.Visibility = Visibility.Visible;
-                txtSecurityCodeCollapsed.Visibility = Visibility.Collapsed;
-                txtSecurityCodeCollapsed.Text = string.Empty;
+                TxtSecurityCode.Visibility = Visibility.Visible;
+                TxtSecurityCodeCollapsed.Visibility = Visibility.Collapsed;
+                TxtSecurityCodeCollapsed.Text = string.Empty;
             }
         }
         private void TxtSecurityCode_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
-                txtSecurityCode.Password = txtSecurityCodeCollapsed.Text;
+            if (CbSecurityCodeHide.IsChecked != null && (bool)CbSecurityCodeHide.IsChecked)
+                TxtSecurityCode.Password = TxtSecurityCodeCollapsed.Text;
         }
     }
 }

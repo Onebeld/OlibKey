@@ -74,6 +74,10 @@
     <v:String x:Key="Close">Закрити</v:String>
     <v:String x:Key="AccessText1">Дозволяє зберігати паролі, замітки, паспорти та інші особисті дані в зашифрованому вигляді.</v:String>
     <!--#endregion-->
+
+    <!--#region Settings-->
+    <v:String x:Key="Language">Мова:</v:String>
+    <!--#endregion-->
     <!--#endregion-->
 
     <!--#region Pages-->
@@ -88,6 +92,15 @@
     <v:String x:Key="ItemInformation">Інформація про елемент</v:String>
     <v:String x:Key="Create">Створено:</v:String>
     <v:String x:Key="Update">Оновлений:</v:String>
+
+    <v:String x:Key="Type">Тип</v:String>
+    <v:String x:Key="Login">Логін</v:String>
+    <v:String x:Key="BankCard">Банківська картка</v:String>
+
+    <v:String x:Key="CardName">Ім'я власника карти</v:String>
+    <v:String x:Key="CardNumber">Номер</v:String>
+    <v:String x:Key="YearOfService">Рік обслуговування</v:String>
+    <v:String x:Key="SecurityCodeCard">Код безпеки</v:String>
 
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Застосувати</v:String>

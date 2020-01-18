@@ -5,7 +5,7 @@
     <v:String x:Key="File">Datei</v:String>
     <v:String x:Key="Tools">Die Werkzeuge</v:String>
     <v:String x:Key="Reference">Hilfe</v:String>
-    <v:String x:Key="Add">hinzufügen</v:String>
+    <v:String x:Key="Add">Hinzufügen</v:String>
     <v:String x:Key="CreateBase">Speicher erstellen</v:String>
     <v:String x:Key="OpenBase">Öffnen Sie das Repository</v:String>
     <v:String x:Key="SaveBase">Speichern Sie den Speicher</v:String>
@@ -72,6 +72,10 @@
     <v:String x:Key="Close">Schliessen</v:String>
     <v:String x:Key="AccessText1">Ermöglicht das verschlüsselte Speichern von Passwörtern, Notizen, Reisepässen und anderen persönlichen Daten.</v:String>
     <!--#endregion-->
+
+    <!--#region Settings-->
+    <v:String x:Key="Language">Sprache:</v:String>
+    <!--#endregion-->
     <!--#endregion-->
 
     <!--#region Pages-->
@@ -86,6 +90,14 @@
     <v:String x:Key="ItemInformation">Artikelinformationen</v:String>
     <v:String x:Key="Create">Erstellt von:</v:String>
     <v:String x:Key="Update">Aktualisiert:</v:String>
+    <v:String x:Key="Type">Typ</v:String>
+    <v:String x:Key="Login">Benutzername</v:String>
+    <v:String x:Key="BankCard">EC Karte</v:String>
+
+    <v:String x:Key="CardName">Name des Karteninhabers</v:String>
+    <v:String x:Key="CardNumber">Nummer</v:String>
+    <v:String x:Key="YearOfService">Dienstjahr</v:String>
+    <v:String x:Key="SecurityCodeCard">Sicherheitscode</v:String>
 
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Bewerben</v:String>

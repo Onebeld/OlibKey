@@ -72,6 +72,10 @@
     <v:String x:Key="Close">Fermer</v:String>
     <v:String x:Key="AccessText1">Vous permet de stocker des mots de passe, des notes, des passeports et d'autres données personnelles sous forme cryptée.</v:String>
     <!--#endregion-->
+
+    <!--#region Settings-->
+    <v:String x:Key="Language">Langue:</v:String>
+    <!--#endregion-->
     <!--#endregion-->
 
     <!--#region Pages-->
@@ -86,6 +90,14 @@
     <v:String x:Key="ItemInformation">Informations sur l'article</v:String>
     <v:String x:Key="Create">Créé par:</v:String>
     <v:String x:Key="Update">Mise à jour:</v:String>
+    <v:String x:Key="Type">Tapez</v:String>
+    <v:String x:Key="Login">Identifiant</v:String>
+    <v:String x:Key="BankCard">Carte bancaire</v:String>
+
+    <v:String x:Key="CardName">Nom du titulaire de la carte</v:String>
+    <v:String x:Key="CardNumber">Numéro</v:String>
+    <v:String x:Key="YearOfService">Année de service</v:String>
+    <v:String x:Key="SecurityCodeCard">Code de sécurité</v:String>
 
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Pour postuler</v:String>

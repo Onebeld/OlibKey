@@ -42,7 +42,7 @@ namespace OlibPasswordManager
         private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) =>
             new PasswordGenerator().ShowDialog();
 
-        private static void OpenRequireMasterPassword() => new RequireMasterPassword().ShowDialog();
+        private void OpenRequireMasterPassword() => new RequireMasterPassword().ShowDialog();
 
         private void OpenChangeMasterPassword(object sender, RoutedEventArgs e) =>
             new ChangeMasterPassword().ShowDialog();
@@ -60,7 +60,7 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.1.0.127");
+            sw.Write("1.1.0.140");
 
             App.Settings = new Properties.Core.Settings();
 
@@ -73,8 +73,7 @@ namespace OlibPasswordManager
         private void OpenCreateData(object sender, RoutedEventArgs e)
         {
             CreateData data = new CreateData();
-            var b = data.ShowDialog();
-            if (b != null && (bool) b) return;
+            if (!(bool)data.ShowDialog()) return;
             App.Settings.AppGlobalString = data.TxtPathSelection.Text;
             Global.MasterPassword = data.TxtPassword.Password;
 
@@ -113,8 +112,7 @@ namespace OlibPasswordManager
             {
                 Filter = "Olib-files (*.olib)|*.olib"
             };
-            var b = fileDialog.ShowDialog();
-            if (b != null && (bool) b) return;
+            if (!(bool)fileDialog.ShowDialog()) return;
             App.Settings.AppGlobalString = fileDialog.FileName;
             OpenRequireMasterPassword();
         }

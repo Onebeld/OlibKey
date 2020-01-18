@@ -30,7 +30,8 @@ namespace OlibPasswordManager.Windows
                 new KeyValuePair<string, string>("ru-RU", "Русский"),
                 new KeyValuePair<string, string>("uk-UA", "Український"),
                 new KeyValuePair<string, string>("de-DE", "Deutsch"),
-                new KeyValuePair<string, string>("fr-FR", "Français")
+                new KeyValuePair<string, string>("fr-FR", "Français"),
+                new KeyValuePair<string, string>("hy-AM", "Հայերեն")
             };
             foreach (var i in valuePair1) CbLang.Items.Add(i);
 

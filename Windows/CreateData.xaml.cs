@@ -23,27 +23,27 @@ namespace OlibPasswordManager.Windows
         {
             var dialog = new SaveFileDialog { Filter = "Olib-files (*.olib)|*.olib" };
             var b = dialog.ShowDialog();
-            if (b != null && (bool)b) txtPathSelection.Text = dialog.FileName;
+            if (b != null && (bool)b) TxtPathSelection.Text = dialog.FileName;
         }
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
+            if (CbHide.IsChecked != null && (bool)CbHide.IsChecked)
             {
-                txtPassword.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = txtPassword.Password;
-                txtPasswordCollapsed.Visibility = Visibility.Visible;
+                TxtPassword.Visibility = Visibility.Collapsed;
+                TxtPasswordCollapsed.Text = TxtPassword.Password;
+                TxtPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
+            else if (CbHide.IsChecked != null && !(bool)CbHide.IsChecked)
             {
-                txtPassword.Visibility = Visibility.Visible;
-                txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = string.Empty;
+                TxtPassword.Visibility = Visibility.Visible;
+                TxtPasswordCollapsed.Visibility = Visibility.Collapsed;
+                TxtPasswordCollapsed.Text = string.Empty;
             }
         }
 
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPassword.Password);
 
-        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
+        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
     }
 }

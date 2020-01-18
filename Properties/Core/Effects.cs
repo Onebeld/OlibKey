@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media.Effects;
 
-namespace OlibPasswordManager
+namespace OlibPasswordManager.Properties.Core
 {
     internal class InvertEffect : ShaderEffect
     {

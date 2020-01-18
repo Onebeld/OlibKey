@@ -15,9 +15,9 @@ namespace OlibPasswordManager.Pages
 
         private void OpenPasswordGeneration(object sender, RoutedEventArgs e)
         {
-            var generator = new PasswordGenerator {saveButton = {Visibility = Visibility.Visible}};
+            var generator = new PasswordGenerator {SaveButton = {Visibility = Visibility.Visible}};
             var b = generator.ShowDialog();
-            if (b != null && (bool) b) txtPassword.Password = generator.txtPassword.Text;
+            if (b != null && (bool) b) txtPassword.Password = generator.TxtPassword.Text;
         }
 
 
@@ -37,7 +37,7 @@ namespace OlibPasswordManager.Pages
             }
         }
 
-        private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
+        private void TxtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (cbHide.IsChecked != null && (bool)cbHide.IsChecked) txtPassword.Password = txtPasswordCollapsed.Text;
         }
@@ -91,11 +91,11 @@ namespace OlibPasswordManager.Pages
 
             NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
         }
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
+        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
 
-        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
+        private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
 
-        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (cbType.SelectedIndex)
             {
@@ -137,7 +137,7 @@ namespace OlibPasswordManager.Pages
                 txtSecurityCodeCollapsed.Text = string.Empty;
             }
         }
-        private void txtSecurityCode_PasswordChanged(object sender, RoutedEventArgs e)
+        private void TxtSecurityCode_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
                 txtSecurityCode.Password = txtSecurityCodeCollapsed.Text;

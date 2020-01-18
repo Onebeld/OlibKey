@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OlibPasswordManager"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Closing="Window_Closing"
@@ -23,7 +22,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Image Source="{Binding Path=Image}" Grid.RowSpan="2" Height="16"/>
-                <TextBlock Text="{Binding Path=Name}" FontSize="16" Grid.Column="1"/>
+                <TextBlock Text="{Binding Path=Name}" FontSize="16" Grid.Row="0" Grid.Column="1"/>
                 <TextBlock Text="{Binding Path=PasswordName}" Foreground="#777777" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </DataTemplate>
@@ -122,9 +121,9 @@
         <Border Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="#dddddd" BorderThickness="1,0,1,1">
             <DockPanel Margin="10">
                 <Image Source="{DynamicResource loupeDrawingImage}" Height="20" Margin="0,0,5,0"/>
-                <TextBox x:Name="txtSearch" TextChanged="txtSearch_TextChanged"/>
+                <TextBox x:Name="TxtSearch" TextChanged="txtSearch_TextChanged"/>
             </DockPanel>
         </Border>
-        <Frame x:Name="frame" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" Source="/Pages/StartScreen.xaml" NavigationUIVisibility="Hidden"/>
+        <Frame x:Name="FrameWindow" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" Source="/Pages/StartScreen.xaml" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

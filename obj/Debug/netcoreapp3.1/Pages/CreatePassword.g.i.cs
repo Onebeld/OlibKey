@@ -259,7 +259,7 @@ namespace OlibPasswordManager.Pages {
             this.cbType = ((System.Windows.Controls.ComboBox)(target));
             
             #line 24 "..\..\..\..\Pages\CreatePassword.xaml"
-            this.cbType.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.cbType_SelectionChanged);
+            this.cbType.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(this.CbType_SelectionChanged);
             
             #line default
             #line hidden
@@ -298,7 +298,7 @@ namespace OlibPasswordManager.Pages {
             this.txtSecurityCode = ((System.Windows.Controls.PasswordBox)(target));
             
             #line 63 "..\..\..\..\Pages\CreatePassword.xaml"
-            this.txtSecurityCode.PasswordChanged += new System.Windows.RoutedEventHandler(this.txtSecurityCode_PasswordChanged);
+            this.txtSecurityCode.PasswordChanged += new System.Windows.RoutedEventHandler(this.TxtSecurityCode_PasswordChanged);
             
             #line default
             #line hidden
@@ -307,7 +307,7 @@ namespace OlibPasswordManager.Pages {
             this.txtSecurityCodeCollapsed = ((System.Windows.Controls.TextBox)(target));
             
             #line 64 "..\..\..\..\Pages\CreatePassword.xaml"
-            this.txtSecurityCodeCollapsed.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.txtPasswordCollapsed_TextChanged);
+            this.txtSecurityCodeCollapsed.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.TxtPasswordCollapsed_TextChanged);
             
             #line default
             #line hidden
@@ -334,7 +334,7 @@ namespace OlibPasswordManager.Pages {
             this.txtPassword = ((System.Windows.Controls.PasswordBox)(target));
             
             #line 71 "..\..\..\..\Pages\CreatePassword.xaml"
-            this.txtPassword.PasswordChanged += new System.Windows.RoutedEventHandler(this.txtPassword_PasswordChanged);
+            this.txtPassword.PasswordChanged += new System.Windows.RoutedEventHandler(this.TxtPassword_PasswordChanged);
             
             #line default
             #line hidden
@@ -343,7 +343,7 @@ namespace OlibPasswordManager.Pages {
             this.txtPasswordCollapsed = ((System.Windows.Controls.TextBox)(target));
             
             #line 72 "..\..\..\..\Pages\CreatePassword.xaml"
-            this.txtPasswordCollapsed.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.txtPasswordCollapsed_TextChanged);
+            this.txtPasswordCollapsed.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.TxtPasswordCollapsed_TextChanged);
             
             #line default
             #line hidden
@@ -375,7 +375,7 @@ namespace OlibPasswordManager.Pages {
             this.pbHard = ((System.Windows.Controls.ProgressBar)(target));
             
             #line 79 "..\..\..\..\Pages\CreatePassword.xaml"
-            this.pbHard.ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(this.pbHard_ValueChanged);
+            this.pbHard.ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(this.PbHard_ValueChanged);
             
             #line default
             #line hidden

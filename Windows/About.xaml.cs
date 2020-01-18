@@ -6,7 +6,7 @@ namespace OlibPasswordManager.Windows
     /// <summary>
     /// Логика взаимодействия для About.xaml
     /// </summary>
-    public partial class About : Window
+    public partial class About
     {
         public About() => InitializeComponent();
 

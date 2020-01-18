@@ -35,15 +35,17 @@ namespace OlibPasswordManager
         public MainWindow() => InitializeComponent();
 
         #region OpenWindow
-        private void OpenAboutWindow(object sender, RoutedEventArgs e) => new About().ShowDialog();
 
+        private void OpenAboutWindow(object sender, RoutedEventArgs e) => new About().ShowDialog();
         private void OpenSettingsWindow(object sender, RoutedEventArgs e) => new Windows.Settings().ShowDialog();
 
-        private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) => new PasswordGenerator().ShowDialog();
+        private void OpenPasswordGeneratorWindow(object sender, RoutedEventArgs e) =>
+            new PasswordGenerator().ShowDialog();
 
         private static void OpenRequireMasterPassword() => new RequireMasterPassword().ShowDialog();
 
-        private void OpenChangeMasterPassword(object sender, RoutedEventArgs e) => new ChangeMasterPassword().ShowDialog();
+        private void OpenChangeMasterPassword(object sender, RoutedEventArgs e) =>
+            new ChangeMasterPassword().ShowDialog();
 
         #endregion
 
@@ -52,7 +54,7 @@ namespace OlibPasswordManager
         private void CreatePassword(object sender, RoutedEventArgs e)
         {
             _passwordPage = new CreatePassword();
-            frame.NavigationService.Navigate(_passwordPage);
+            FrameWindow.NavigationService.Navigate(_passwordPage);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -73,8 +75,8 @@ namespace OlibPasswordManager
             CreateData data = new CreateData();
             var b = data.ShowDialog();
             if (b != null && (bool) b) return;
-            App.Settings.AppGlobalString = data.txtPathSelection.Text;
-            Global.MasterPassword = data.txtPassword.Password;
+            App.Settings.AppGlobalString = data.TxtPathSelection.Text;
+            Global.MasterPassword = data.TxtPassword.Password;
 
             string json = JsonConvert.SerializeObject(User.UsersList);
             File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
@@ -87,7 +89,13 @@ namespace OlibPasswordManager
             try
             {
                 string json = JsonConvert.SerializeObject(User.UsersList);
-                File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
+                File.WriteAllText(App.Settings.AppGlobalString,
+                    Encryptor.EncryptString(
+                        Encryptor.EncryptString(
+                            Encryptor.EncryptString(
+                                Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword),
+                                    Global.MasterPassword), Global.MasterPassword), Global.MasterPassword),
+                        Global.MasterPassword));
             }
             catch
             {
@@ -97,10 +105,7 @@ namespace OlibPasswordManager
             }
         }
 
-        private void OpenBase(object sender, RoutedEventArgs e)
-        {
-            DopOpenBase();
-        }
+        private void OpenBase(object sender, RoutedEventArgs e) => DopOpenBase();
 
         private void DopOpenBase()
         {
@@ -116,33 +121,24 @@ namespace OlibPasswordManager
 
         private void PasswordList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_passwordInformation != null) _passwordInformation = null;
-
             if (PasswordList.SelectedItem == null) return;
             _passwordInformation = new PasswordInformation();
 
             User.IndexUser = PasswordList.SelectedIndex;
 
-            frame.NavigationService.Navigate(_passwordInformation);
+            FrameWindow.NavigationService.Navigate(_passwordInformation);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             File.WriteAllText("settings.json", JsonConvert.SerializeObject(App.Settings));
-            try
-            {
-                Save(false);
-            }
-            catch
-            {
-                // ignored
-            }
+            Save(false);
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             _passwordPage = new CreatePassword();
-            frame.NavigationService.Navigate(_passwordPage);
+            FrameWindow.NavigationService.Navigate(_passwordPage);
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -152,7 +148,7 @@ namespace OlibPasswordManager
             {
                 case Key.N:
                     _passwordPage = new CreatePassword();
-                    frame.NavigationService.Navigate(_passwordPage);
+                    FrameWindow.NavigationService.Navigate(_passwordPage);
                     break;
                 case Key.G:
                     new PasswordGenerator().ShowDialog();
@@ -166,7 +162,7 @@ namespace OlibPasswordManager
             }
         }
 
-        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e) => PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == txtSearch.Text);
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e) => PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == TxtSearch.Text);
 
         private async void CheckUpdate(object sender, RoutedEventArgs e)
         {
@@ -175,7 +171,7 @@ namespace OlibPasswordManager
                 using (var wb = new WebClient())
                 {
                     wb.DownloadStringCompleted += (s, args) => _str = args.Result;
-                    await wb.DownloadStringTaskAsync(new Uri($"https://raw.githubusercontent.com/BigBoss500/Olib/master/versions/version.xml"));
+                    await wb.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/BigBoss500/Olib/master/versions/version.xml"));
                 }
                 var latest = float.Parse(_str.Replace(".", ""));
                 var current = float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));

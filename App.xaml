@@ -1,7 +1,7 @@
 ﻿<Application x:Class="OlibPasswordManager.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:l1="clr-namespace:OlibPasswordManager"
+             xmlns:core="clr-namespace:OlibPasswordManager.Properties.Core"
              Startup="Application_Startup">
     <Application.Resources>
         <ResourceDictionary>
@@ -110,7 +110,7 @@
                                     <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
                                     <Setter Property="Effect" TargetName="contentPresenter">
                                         <Setter.Value>
-                                            <l1:InvertEffect />
+                                            <core:InvertEffect />
                                         </Setter.Value>
                                     </Setter>
                                 </Trigger>

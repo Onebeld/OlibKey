@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OlibPasswordManager.Windows"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         FontFamily="{StaticResource Montserrat}"
-        Title="Настройки" Height="350" Width="450">
+        Title="{DynamicResource Settings}" Height="350" Width="450">
     <Grid>
         <StackPanel Margin="5">
-            <ComboBox x:Name="cbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged"/>
+            <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged"/>
         </StackPanel>
     </Grid>
 </Window>

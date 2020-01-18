@@ -10,7 +10,7 @@ namespace OlibPasswordManager.Windows
     /// <summary>
     /// Логика взаимодействия для ChangeMasterPassword.xaml
     /// </summary>
-    public partial class ChangeMasterPassword : Window
+    public partial class ChangeMasterPassword
     {
         public ChangeMasterPassword() => InitializeComponent();
 
@@ -19,10 +19,10 @@ namespace OlibPasswordManager.Windows
             try
             {
                 var s = File.ReadAllText(App.Settings.AppGlobalString);
-                User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(s, txtOldPassword.Password), txtOldPassword.Password), txtOldPassword.Password), txtOldPassword.Password), txtOldPassword.Password));
+                User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(s, TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password));
 
                 s = JsonConvert.SerializeObject(User.UsersList);
-                Global.MasterPassword = txtPassword.Password;
+                Global.MasterPassword = TxtPassword.Password;
 
                 File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(s, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
 
@@ -37,46 +37,47 @@ namespace OlibPasswordManager.Windows
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
+            if (CbHide.IsChecked != null && (bool)CbHide.IsChecked)
             {
-                txtPassword.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = txtPassword.Password;
-                txtPasswordCollapsed.Visibility = Visibility.Visible;
+                TxtPassword.Visibility = Visibility.Collapsed;
+                TxtPasswordCollapsed.Text = TxtPassword.Password;
+                TxtPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
+            else if (CbHide.IsChecked != null && !(bool)CbHide.IsChecked)
             {
-                txtPassword.Visibility = Visibility.Visible;
-                txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = string.Empty;
+                TxtPassword.Visibility = Visibility.Visible;
+                TxtPasswordCollapsed.Visibility = Visibility.Collapsed;
+                TxtPasswordCollapsed.Text = string.Empty;
             }
         }
 
         private void OldCollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
+            if (CbOldHide.IsChecked != null && (bool)CbOldHide.IsChecked)
             {
-                txtOldPassword.Visibility = Visibility.Collapsed;
-                txtOldPasswordCollapsed.Text = txtPassword.Password;
-                txtOldPasswordCollapsed.Visibility = Visibility.Visible;
+                TxtOldPassword.Visibility = Visibility.Collapsed;
+                TxtOldPasswordCollapsed.Text = TxtPassword.Password;
+                TxtOldPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
+            else if (CbOldHide.IsChecked != null && !(bool)CbOldHide.IsChecked)
             {
-                txtOldPassword.Visibility = Visibility.Visible;
-                txtOldPasswordCollapsed.Visibility = Visibility.Collapsed;
+                TxtOldPassword.Visibility = Visibility.Visible;
+                TxtOldPasswordCollapsed.Visibility = Visibility.Collapsed;
+                TxtOldPasswordCollapsed.Text = string.Empty;
             }
         }
 
         private void txtOldPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked) txtOldPassword.Password = txtPasswordCollapsed.Text;
+            if (CbHide.IsChecked != null && (bool)CbHide.IsChecked) TxtOldPassword.Password = TxtOldPasswordCollapsed.Text;
         }
 
         private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked) txtPassword.Password = txtPasswordCollapsed.Text;
+            if (CbHide.IsChecked != null && (bool)CbHide.IsChecked) TxtPassword.Password = TxtPasswordCollapsed.Text;
         }
 
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
-        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPassword.Password);
+        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
     }
 }

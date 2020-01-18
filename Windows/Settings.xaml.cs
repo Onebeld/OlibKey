@@ -22,8 +22,8 @@ namespace OlibPasswordManager.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            cbLang.SelectedValuePath = "Key";
-            cbLang.DisplayMemberPath = "Value";
+            CbLang.SelectedValuePath = "Key";
+            CbLang.DisplayMemberPath = "Value";
             var valuePair1 = new[]
             {
                 new KeyValuePair<string, string>("en-US", "English"),
@@ -32,14 +32,14 @@ namespace OlibPasswordManager.Windows
                 new KeyValuePair<string, string>("de-DE", "Deutsch"),
                 new KeyValuePair<string, string>("fr-FR", "Français")
             };
-            foreach (var i in valuePair1) cbLang.Items.Add(i);
+            foreach (var i in valuePair1) CbLang.Items.Add(i);
 
-            cbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == GlobalSettings.Default.GlobalLanguage.Name);
+            CbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == GlobalSettings.Default.GlobalLanguage.Name);
         }
 
         private void cbLang_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!_isFirst) App.Language = new CultureInfo(cbLang.SelectedValue.ToString());
+            if (!_isFirst) App.Language = new CultureInfo(CbLang.SelectedValue.ToString());
             _isFirst = false;
         }
 

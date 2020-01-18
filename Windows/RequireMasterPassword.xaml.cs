@@ -28,12 +28,12 @@ namespace OlibPasswordManager.Windows
                 User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(
                     Encryptor.DecryptString(
                         Encryptor.DecryptString(
-                            Encryptor.DecryptString(Encryptor.DecryptString(s, txtPassword.Password),
-                                txtPassword.Password), txtPassword.Password), txtPassword.Password),
-                    txtPassword.Password));
+                            Encryptor.DecryptString(Encryptor.DecryptString(s, TxtPassword.Password),
+                                TxtPassword.Password), TxtPassword.Password), TxtPassword.Password),
+                    TxtPassword.Password));
                 App.MainWindow.PasswordList.ItemsSource = null;
                 App.MainWindow.PasswordList.ItemsSource = User.UsersList;
-                Global.MasterPassword = txtPassword.Password;
+                Global.MasterPassword = TxtPassword.Password;
                 App.Settings.AppGlobalString = App.Settings.AppGlobalString;
                 Close();
             }

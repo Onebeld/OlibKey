@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OlibPasswordManager.Windows"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         MinHeight="350"
@@ -20,19 +19,19 @@
                 <Border Style="{DynamicResource PageBorder}">
                     <StackPanel>
                         <Label Content="{DynamicResource Directory}"/>
-                        <TextBox x:Name="txtPathSelection" Margin="5" IsReadOnly="True"/>
+                        <TextBox x:Name="TxtPathSelection" Margin="5" IsReadOnly="True"/>
                         <Button Content="{DynamicResource Select}" Margin="5" HorizontalAlignment="Left" Click="PathSelection"/>
                     </StackPanel>
                 </Border>
                 <Border Style="{DynamicResource PageBorder}">
                     <StackPanel>
                         <Label Content="{DynamicResource MasterPassword}"/>
-                        <PasswordBox x:Name="txtPassword" Margin="5" PasswordChanged="txtPassword_PasswordChanged"/>
-                        <TextBox x:Name="txtPasswordCollapsed" Margin="5" Visibility="Collapsed" IsReadOnly="True"/>
-                        <CheckBox x:Name="cbHide" Margin="5" Content="{DynamicResource Show}" VerticalAlignment="Center" Checked="CollapsedPassword" Unchecked="CollapsedPassword"/>
+                        <PasswordBox x:Name="TxtPassword" Margin="5" PasswordChanged="txtPassword_PasswordChanged"/>
+                        <TextBox x:Name="TxtPasswordCollapsed" Margin="5" Visibility="Collapsed" IsReadOnly="True"/>
+                        <CheckBox x:Name="CbHide" Margin="5" Content="{DynamicResource Show}" VerticalAlignment="Center" Checked="CollapsedPassword" Unchecked="CollapsedPassword"/>
                         <DockPanel>
                             <Label Content="{DynamicResource Complexity}"/>
-                            <ProgressBar x:Name="pbHard" Margin="5" Maximum="300" ValueChanged="pbHard_ValueChanged"/>
+                            <ProgressBar x:Name="PbHard" Margin="5" Maximum="300" ValueChanged="pbHard_ValueChanged"/>
                         </DockPanel>
                     </StackPanel>
                 </Border>

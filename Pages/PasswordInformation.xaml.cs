@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace OlibPasswordManager.Pages
 {
@@ -16,43 +17,43 @@ namespace OlibPasswordManager.Pages
         private void CopyPassword(object sender, RoutedEventArgs e)
         {
             Clipboard.Clear();
-            Clipboard.SetText(txtPassword.Password);
+            Clipboard.SetText(TxtPassword.Password);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Clipboard.Clear();
-            Clipboard.SetText(txtNameAccount.Text);
+            Clipboard.SetText(TxtNameAccount.Text);
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             Clipboard.Clear();
-            Clipboard.SetText(txtWebSite.Text);
+            Clipboard.SetText(TxtWebSite.Text);
         }
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             Clipboard.Clear();
-            Clipboard.SetText(txtCardNumber.Text);
+            Clipboard.SetText(TxtCardNumber.Text);
         }
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Clipboard.Clear();
-            Clipboard.SetText(txtSecurityCode.Password);
+            Clipboard.SetText(TxtSecurityCode.Password);
         }
         #endregion
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)
         {
-            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
+            if (CbHide.IsChecked != null && (bool)CbHide.IsChecked)
             {
-                txtPassword.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = txtPassword.Password;
-                txtPasswordCollapsed.Visibility = Visibility.Visible;
+                TxtPassword.Visibility = Visibility.Collapsed;
+                TxtPasswordCollapsed.Text = TxtPassword.Password;
+                TxtPasswordCollapsed.Visibility = Visibility.Visible;
             }
-            else if (cbHide.IsChecked != null && !(bool)cbHide.IsChecked)
+            else if (CbHide.IsChecked != null && !(bool)CbHide.IsChecked)
             {
-                txtPassword.Visibility = Visibility.Visible;
-                txtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                txtPasswordCollapsed.Text = string.Empty;
+                TxtPassword.Visibility = Visibility.Visible;
+                TxtPasswordCollapsed.Visibility = Visibility.Collapsed;
+                TxtPasswordCollapsed.Text = string.Empty;
             }
         }
 
@@ -60,36 +61,36 @@ namespace OlibPasswordManager.Pages
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            txtName.Text = User.UsersList[User.IndexUser].Name;
-            txtNameAccount.Text = User.UsersList[User.IndexUser].PasswordName;
-            txtPassword.Password = User.UsersList[User.IndexUser].Password;
-            txtWebSite.Text = User.UsersList[User.IndexUser].WebSite;
-            labelCreateData.Content = User.UsersList[User.IndexUser].TimeCreate;
-            labelChangeData.Content = User.UsersList[User.IndexUser].TimeChanged;
-            txtNote.Text = User.UsersList[User.IndexUser].Note;
+            TxtName.Text = User.UsersList[User.IndexUser].Name;
+            TxtNameAccount.Text = User.UsersList[User.IndexUser].PasswordName;
+            TxtPassword.Password = User.UsersList[User.IndexUser].Password;
+            TxtWebSite.Text = User.UsersList[User.IndexUser].WebSite;
+            LabelCreateData.Content = User.UsersList[User.IndexUser].TimeCreate;
+            LabelChangeData.Content = User.UsersList[User.IndexUser].TimeChanged;
+            TxtNote.Text = User.UsersList[User.IndexUser].Note;
 
-            txtCardName.Text = User.UsersList[User.IndexUser].CardName;
-            txtCardNumber.Text = User.UsersList[User.IndexUser].PasswordName;
-            txtDate.Text = User.UsersList[User.IndexUser].DateCard;
-            txtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
+            TxtCardName.Text = User.UsersList[User.IndexUser].CardName;
+            TxtCardNumber.Text = User.UsersList[User.IndexUser].PasswordName;
+            TxtDate.Text = User.UsersList[User.IndexUser].DateCard;
+            TxtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
 
-            brNote.Visibility = txtNote.Text == "" ? Visibility.Collapsed : Visibility.Visible;
-            bWebSite.Visibility = txtWebSite.Text == "" ? Visibility.Collapsed : Visibility.Visible;
+            BrNote.Visibility = TxtNote.Text == "" ? Visibility.Collapsed : Visibility.Visible;
+            BWebSite.Visibility = TxtWebSite.Text == "" ? Visibility.Collapsed : Visibility.Visible;
 
-            txtLabelChange.Visibility = User.UsersList[User.IndexUser].TimeChanged == null ? Visibility.Collapsed : Visibility.Visible;
+            TxtLabelChange.Visibility = User.UsersList[User.IndexUser].TimeChanged == null ? Visibility.Collapsed : Visibility.Visible;
 
             switch (User.UsersList[User.IndexUser].Type)
             {
                 case 0:
-                    bCardName.Visibility = Visibility.Collapsed;
-                    bCardNumber.Visibility = Visibility.Collapsed;
-                    bDate.Visibility = Visibility.Collapsed;
-                    bSecurityCode.Visibility = Visibility.Collapsed;
+                    BCardName.Visibility = Visibility.Collapsed;
+                    BCardNumber.Visibility = Visibility.Collapsed;
+                    BDate.Visibility = Visibility.Collapsed;
+                    BSecurityCode.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
-                    bUsername.Visibility = Visibility.Collapsed;
-                    bPassword.Visibility = Visibility.Collapsed;
-                    bWebSite.Visibility = Visibility.Collapsed;
+                    BUsername.Visibility = Visibility.Collapsed;
+                    BPassword.Visibility = Visibility.Collapsed;
+                    BWebSite.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -98,13 +99,34 @@ namespace OlibPasswordManager.Pages
         {
             var psi = new ProcessStartInfo
             {
-                FileName = "http://" + txtWebSite.Text,
+                FileName = "http://" + TxtWebSite.Text,
                 UseShellExecute = true
             };
             Process.Start(psi);
         }
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPassword.Password);
 
-        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
+        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
+
+        private void TxtSecurityCodeCollapsed_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (CbSecurityCodeHide.IsChecked != null && (bool)CbSecurityCodeHide.IsChecked) TxtSecurityCode.Password = TxtSecurityCodeCollapsed.Text;
+        }
+
+        private void CbSecurityCodeHide_OnChecked(object sender, RoutedEventArgs e)
+        {
+            if (CbSecurityCodeHide.IsChecked != null && (bool) CbSecurityCodeHide.IsChecked)
+            {
+                TxtSecurityCode.Visibility = Visibility.Collapsed;
+                TxtSecurityCodeCollapsed.Text = TxtPassword.Password;
+                TxtSecurityCodeCollapsed.Visibility = Visibility.Visible;
+            }
+            else if (CbSecurityCodeHide.IsChecked != null && !(bool) CbSecurityCodeHide.IsChecked)
+            {
+                TxtSecurityCode.Visibility = Visibility.Visible;
+                TxtSecurityCodeCollapsed.Visibility = Visibility.Collapsed;
+                TxtSecurityCodeCollapsed.Text = string.Empty;
+            }
+        }
     }
 }

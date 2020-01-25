@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace OlibPasswordManager
 {
@@ -126,7 +127,7 @@ namespace OlibPasswordManager
             FrameWindow.NavigationService.Navigate(_passwordInformation);
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             File.WriteAllText("settings.json", JsonConvert.SerializeObject(App.Settings));
             Save(false);

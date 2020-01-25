@@ -15,10 +15,10 @@ namespace OlibPasswordManager.Windows
         {
             try
             {
-                const string LOWER = "abcdefghijklmnopqrstuvwxyz";
-                const string UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-                const string NUMBER = "0123456789";
-                const string SPECIAL = @"~!@#$%^&*():;[]{}<>,.?/\|";
+                const string lower = "abcdefghijklmnopqrstuvwxyz";
+                const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                const string number = "0123456789";
+                const string special = @"~!@#$%^&*():;[]{}<>,.?/\|";
                 string other = TxtOther.Text;
                 if (ChkRequireOther.IsChecked != null && ((bool) ChkRequireOther.IsChecked && other.Length < 1))
                 {
@@ -29,10 +29,10 @@ namespace OlibPasswordManager.Windows
                 }
 
                 string allowed = "";
-                if (ChkAllowLowercase.IsChecked != null && (bool) ChkAllowLowercase.IsChecked) allowed += LOWER;
-                if (ChkAllowUppercase.IsChecked != null && (bool) ChkAllowUppercase.IsChecked) allowed += UPPER;
-                if (ChkAllowNumber.IsChecked != null && (bool) ChkAllowNumber.IsChecked) allowed += NUMBER;
-                if (ChkAllowSpecial.IsChecked != null && (bool) ChkAllowSpecial.IsChecked) allowed += SPECIAL;
+                if (ChkAllowLowercase.IsChecked != null && (bool) ChkAllowLowercase.IsChecked) allowed += lower;
+                if (ChkAllowUppercase.IsChecked != null && (bool) ChkAllowUppercase.IsChecked) allowed += upper;
+                if (ChkAllowNumber.IsChecked != null && (bool) ChkAllowNumber.IsChecked) allowed += number;
+                if (ChkAllowSpecial.IsChecked != null && (bool) ChkAllowSpecial.IsChecked) allowed += special;
                 if (ChkAllowUnderscore.IsChecked != null && (bool) ChkAllowUnderscore.IsChecked) allowed += "_";
                 if (ChkAllowSpace.IsChecked != null && (bool) ChkAllowSpace.IsChecked) allowed += " ";
                 if (ChkAllowOther.IsChecked != null && (bool) ChkAllowOther.IsChecked) allowed += other;
@@ -40,14 +40,14 @@ namespace OlibPasswordManager.Windows
                 int max_chars = int.Parse(TxtMaxLenght.Text);
                 int num_chars = Crypto.RandomInteger(min_chars, max_chars);
                 string password = "";
-                if (ChkRequireLowercase.IsChecked != null && ((bool) ChkRequireLowercase.IsChecked && (password.IndexOfAny(LOWER.ToCharArray()) == -1)))
-                    password += RandomChar(LOWER);
-                if (ChkRequireUppercase.IsChecked != null && ((bool) ChkRequireUppercase.IsChecked && (password.IndexOfAny(UPPER.ToCharArray()) == -1)))
-                    password += RandomChar(UPPER);
-                if (ChkRequireNumber.IsChecked != null && ((bool) ChkRequireNumber.IsChecked && (password.IndexOfAny(NUMBER.ToCharArray()) == -1)))
-                    password += RandomChar(NUMBER);
-                if (ChkRequireSpecial.IsChecked != null && ((bool) ChkRequireSpecial.IsChecked && (password.IndexOfAny(SPECIAL.ToCharArray()) == -1)))
-                    password += RandomChar(SPECIAL);
+                if (ChkRequireLowercase.IsChecked != null && ((bool) ChkRequireLowercase.IsChecked && (password.IndexOfAny(lower.ToCharArray()) == -1)))
+                    password += RandomChar(lower);
+                if (ChkRequireUppercase.IsChecked != null && ((bool) ChkRequireUppercase.IsChecked && (password.IndexOfAny(upper.ToCharArray()) == -1)))
+                    password += RandomChar(upper);
+                if (ChkRequireNumber.IsChecked != null && ((bool) ChkRequireNumber.IsChecked && (password.IndexOfAny(number.ToCharArray()) == -1)))
+                    password += RandomChar(number);
+                if (ChkRequireSpecial.IsChecked != null && ((bool) ChkRequireSpecial.IsChecked && (password.IndexOfAny(special.ToCharArray()) == -1)))
+                    password += RandomChar(special);
                 if (ChkRequireUnderscore.IsChecked != null && ((bool) ChkRequireUnderscore.IsChecked && (password.IndexOfAny("_".ToCharArray()) == -1)))
                     password += "_";
                 if (ChkRequireSpace.IsChecked != null && ((bool) ChkRequireSpace.IsChecked && (password.IndexOfAny(" ".ToCharArray()) == -1))) password += " ";

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using OlibPasswordManager.Properties.Core;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace OlibPasswordManager.Windows
 {
@@ -41,8 +42,12 @@ namespace OlibPasswordManager.Windows
             }
         }
 
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPassword.Password);
+        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox b = (PasswordBox)sender;
+            PbHard.Value = PasswordUtils.CheckPasswordStrength(b.Password);
+        }
 
-        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
+        private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
     }
 }

@@ -26,12 +26,12 @@
                 <Border Style="{DynamicResource PageBorder}">
                     <StackPanel>
                         <Label Content="{DynamicResource MasterPassword}"/>
-                        <PasswordBox x:Name="TxtPassword" Margin="5" PasswordChanged="txtPassword_PasswordChanged"/>
+                        <PasswordBox x:Name="TxtPassword" Margin="5" PasswordChanged="TxtPassword_PasswordChanged"/>
                         <TextBox x:Name="TxtPasswordCollapsed" Margin="5" Visibility="Collapsed" IsReadOnly="True"/>
                         <CheckBox x:Name="CbHide" Margin="5" Content="{DynamicResource Show}" VerticalAlignment="Center" Checked="CollapsedPassword" Unchecked="CollapsedPassword"/>
                         <DockPanel>
                             <Label Content="{DynamicResource Complexity}"/>
-                            <ProgressBar x:Name="PbHard" Margin="5" Maximum="300" ValueChanged="pbHard_ValueChanged"/>
+                            <ProgressBar x:Name="PbHard" Margin="5" Maximum="300" ValueChanged="PbHard_ValueChanged"/>
                         </DockPanel>
                     </StackPanel>
                 </Border>

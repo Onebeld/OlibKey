@@ -99,7 +99,12 @@ namespace OlibPasswordManager.Pages
                     break;
             }
         }
-        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e) => PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPassword.Password);
+        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox b = (PasswordBox) sender;
+            PbHard.Value = PasswordUtils.CheckPasswordStrength(b.Password);
+        }
+
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
 
         private void CbSecurityCodeHide_OnChecked(object sender, RoutedEventArgs e)

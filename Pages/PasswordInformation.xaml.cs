@@ -78,19 +78,18 @@ namespace OlibPasswordManager.Pages
             BWebSite.Visibility = TxtWebSite.Text == "" ? Visibility.Collapsed : Visibility.Visible;
 
             TxtLabelChange.Visibility = User.UsersList[User.IndexUser].TimeChanged == null ? Visibility.Collapsed : Visibility.Visible;
-
             switch (User.UsersList[User.IndexUser].Type)
             {
                 case 0:
+                    BUsername.Visibility = Visibility.Collapsed;
+                    BPassword.Visibility = Visibility.Collapsed;
+                    BWebSite.Visibility = Visibility.Collapsed;
+                    break;
+                case 1:
                     BCardName.Visibility = Visibility.Collapsed;
                     BCardNumber.Visibility = Visibility.Collapsed;
                     BDate.Visibility = Visibility.Collapsed;
                     BSecurityCode.Visibility = Visibility.Collapsed;
-                    break;
-                case 1:
-                    BUsername.Visibility = Visibility.Collapsed;
-                    BPassword.Visibility = Visibility.Collapsed;
-                    BWebSite.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -104,7 +103,11 @@ namespace OlibPasswordManager.Pages
             };
             Process.Start(psi);
         }
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPassword.Password);
+        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox b = (PasswordBox)sender;
+            PbHard.Value = PasswordUtils.CheckPasswordStrength(b.Password);
+        }
 
         private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
 

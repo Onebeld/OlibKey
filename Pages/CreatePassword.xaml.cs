@@ -91,7 +91,11 @@ namespace OlibPasswordManager.Pages
 
             NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
         }
-        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e) => pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPassword.Password);
+        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox b = (PasswordBox) sender;
+            pbHard.Value = PasswordUtils.CheckPasswordStrength(b.Password);
+        }
 
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
 

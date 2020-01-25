@@ -31,9 +31,7 @@ namespace OlibPasswordManager
         private CreatePassword _passwordPage;
         private PasswordInformation _passwordInformation;
         #endregion
-
         public MainWindow() => InitializeComponent();
-
         #region OpenWindow
 
         private void OpenAboutWindow(object sender, RoutedEventArgs e) => new About().ShowDialog();
@@ -161,7 +159,7 @@ namespace OlibPasswordManager
             }
         }
 
-        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e) => PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == TxtSearch.Text);
+        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) => PasswordList.SelectedItem = User.UsersList.FirstOrDefault(x => x.Name == TxtSearch.Text);
 
         private void CheckUpdateButton(object sender, RoutedEventArgs e) => CheckUpdate(true);
 

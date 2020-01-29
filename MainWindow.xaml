@@ -114,7 +114,7 @@
                 <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow"/>
             </MenuItem>
         </Menu>
-        <ListBox x:Name="PasswordList" SelectedItem="SelectedUnit" BorderBrush="#dddddd" BorderThickness="1,0,1,0" Grid.Row="2" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
+        <ListBox x:Name="PasswordList" SelectedItem="SelectedUnit" BorderBrush="#dddddd" BorderThickness="1,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
         <Border Grid.Column="1" Grid.Row="3" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1" >
             <Button Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>
         </Border>

@@ -59,26 +59,23 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.1.0.148");
-
-            App.Settings = new Properties.Core.Settings();
+            sw.Write("1.1.0.154");
 
             User.UsersList = new List<User>();
-            PasswordList.ItemsSource = User.UsersList;
 
             CheckUpdate(false);
-            if (App.Settings.AppGlobalString != null) new RequireMasterPassword().ShowDialog();
+            if (Additional.GlobalSettings.AppGlobalString != null) new RequireMasterPassword().ShowDialog();
         }
 
         private void OpenCreateData(object sender, RoutedEventArgs e)
         {
             CreateData data = new CreateData();
             if (!(bool)data.ShowDialog()) return;
-            App.Settings.AppGlobalString = data.TxtPathSelection.Text;
+            Additional.GlobalSettings.AppGlobalString = data.TxtPathSelection.Text;
             Global.MasterPassword = data.TxtPassword.Password;
 
             string json = JsonConvert.SerializeObject(User.UsersList);
-            File.WriteAllText(App.Settings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
+            File.WriteAllText(Additional.GlobalSettings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
         }
 
         private void SaveBase(object sender, RoutedEventArgs e) => Save(true);
@@ -88,7 +85,7 @@ namespace OlibPasswordManager
             try
             {
                 string json = JsonConvert.SerializeObject(User.UsersList);
-                File.WriteAllText(App.Settings.AppGlobalString,
+                File.WriteAllText(Additional.GlobalSettings.AppGlobalString,
                     Encryptor.EncryptString(
                         Encryptor.EncryptString(
                             Encryptor.EncryptString(
@@ -113,7 +110,7 @@ namespace OlibPasswordManager
                 Filter = "Olib-files (*.olib)|*.olib"
             };
             if (!(bool)fileDialog.ShowDialog()) return;
-            App.Settings.AppGlobalString = fileDialog.FileName;
+            Additional.GlobalSettings.AppGlobalString = fileDialog.FileName;
             OpenRequireMasterPassword();
         }
 
@@ -129,7 +126,7 @@ namespace OlibPasswordManager
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            File.WriteAllText("settings.json", JsonConvert.SerializeObject(App.Settings));
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(Additional.GlobalSettings));
             Save(false);
         }
 

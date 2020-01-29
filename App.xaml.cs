@@ -15,7 +15,6 @@ namespace OlibPasswordManager
     public partial class App
     {
         public new static MainWindow MainWindow;
-        public static Settings Settings;
 
         private static List<CultureInfo> Languages => new List<CultureInfo>();
 
@@ -41,7 +40,8 @@ namespace OlibPasswordManager
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (File.Exists("settings.json"))
-                Settings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json"));
+                Additional.GlobalSettings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json"));
+            else Additional.GlobalSettings = new Settings();
             Language = GlobalSettings.Default.GlobalFirstLang ? CultureInfo.CurrentCulture : GlobalSettings.Default.GlobalLanguage;
 
             MainWindow = new MainWindow();
@@ -93,10 +93,7 @@ namespace OlibPasswordManager
                     Current.Resources.MergedDictionaries.Remove(oldDict);
                     Current.Resources.MergedDictionaries.Insert(ind, dict);
                 }
-                else
-                {
-                    Current.Resources.MergedDictionaries.Add(dict);
-                }
+                else Current.Resources.MergedDictionaries.Add(dict);
 
                 LanguageChanged?.Invoke(Current, new EventArgs());
             }

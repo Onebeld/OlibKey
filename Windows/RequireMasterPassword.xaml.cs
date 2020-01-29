@@ -24,7 +24,7 @@ namespace OlibPasswordManager.Windows
         {
             try
             {
-                var s = File.ReadAllText(App.Settings.AppGlobalString);
+                var s = File.ReadAllText(Additional.GlobalSettings.AppGlobalString);
                 User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(
                     Encryptor.DecryptString(
                         Encryptor.DecryptString(
@@ -34,7 +34,7 @@ namespace OlibPasswordManager.Windows
                 App.MainWindow.PasswordList.ItemsSource = null;
                 App.MainWindow.PasswordList.ItemsSource = User.UsersList;
                 Global.MasterPassword = TxtPassword.Password;
-                App.Settings.AppGlobalString = App.Settings.AppGlobalString;
+                Additional.GlobalSettings.AppGlobalString = Additional.GlobalSettings.AppGlobalString;
                 Close();
             }
             catch

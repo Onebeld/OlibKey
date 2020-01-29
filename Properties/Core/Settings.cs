@@ -1,5 +1,10 @@
 ﻿namespace OlibPasswordManager.Properties.Core
 {
+    public class Additional
+    {
+        public static Settings GlobalSettings { get; set; }
+    }
+
     public class Settings
     {
         public string GeneratorMinCount { get; set; }

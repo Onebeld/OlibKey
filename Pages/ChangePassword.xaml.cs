@@ -87,15 +87,15 @@ namespace OlibPasswordManager.Pages
             switch (User.UsersList[User.IndexUser].Type)
             {
                 case 0:
-                    BUsername.Visibility = Visibility.Collapsed;
-                    BPassword.Visibility = Visibility.Collapsed;
-                    BWebSite.Visibility = Visibility.Collapsed;
-                    break;
-                case 1:
                     BCardName.Visibility = Visibility.Collapsed;
                     BCardNumber.Visibility = Visibility.Collapsed;
                     BDate.Visibility = Visibility.Collapsed;
                     BSecurityCode.Visibility = Visibility.Collapsed;
+                    break;
+                case 1:
+                    BUsername.Visibility = Visibility.Collapsed;
+                    BPassword.Visibility = Visibility.Collapsed;
+                    BWebSite.Visibility = Visibility.Collapsed;
                     break;
             }
         }

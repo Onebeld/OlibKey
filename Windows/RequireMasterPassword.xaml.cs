@@ -44,5 +44,6 @@ namespace OlibPasswordManager.Windows
             }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e) => TxtPassword.Focus();
     }
 }

@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Microsoft.DotNet.ILCompiler/1.0.0-alpha-28528-01": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard/_._": {}
+        },
+        "build": {
+          "build/Microsoft.DotNet.ILCompiler.targets": {}
+        }
+      },
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -14,6 +23,35 @@
     }
   },
   "libraries": {
+    "Microsoft.DotNet.ILCompiler/1.0.0-alpha-28528-01": {
+      "sha512": "A69H6Nz/3yiPQjA9IV8bLjGkyFsNMCT2ZKZvePwcuIWsZ/nip4Xujt8AgS25hT3WshhcpOz/tTs8WCJ/JFr0xQ==",
+      "type": "package",
+      "path": "microsoft.dotnet.ilcompiler/1.0.0-alpha-28528-01",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "build/BuildFrameworkNativeObjects.proj",
+        "build/BuildIntegration.proj",
+        "build/CoreRTNatVis.natvis",
+        "build/Microsoft.DotNet.ILCompiler.targets",
+        "build/Microsoft.NETCore.Native.Publish.targets",
+        "build/Microsoft.NETCore.Native.Unix.props",
+        "build/Microsoft.NETCore.Native.Windows.props",
+        "build/Microsoft.NETCore.Native.targets",
+        "build/findvcvarsall.bat",
+        "microsoft.dotnet.ilcompiler.1.0.0-alpha-28528-01.nupkg.sha512",
+        "microsoft.dotnet.ilcompiler.nuspec",
+        "ref/netstandard/_._",
+        "runtime.json",
+        "tools/netstandard/ILCompiler.Build.Tasks.dll",
+        "tools/netstandard/ILCompiler.Build.Tasks.pdb",
+        "tools/netstandard/System.Collections.Immutable.dll",
+        "tools/netstandard/System.Reflection.Metadata.dll",
+        "version.txt"
+      ]
+    },
     "Newtonsoft.Json/12.0.3": {
       "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
@@ -48,39 +86,33 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.DotNet.ILCompiler >= 1.0.0-alpha-*",
       "Newtonsoft.Json >= 12.0.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dmitr\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\dmitr\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.1.0",
     "restore": {
-      "projectUniqueName": "E:\\OlibPasswordManager\\OlibPasswordManager.csproj",
+      "projectUniqueName": "F:\\OlibPasswordManager\\OlibPasswordManager.csproj",
       "projectName": "Olib Password Manager",
-      "projectPath": "E:\\OlibPasswordManager\\OlibPasswordManager.csproj",
+      "projectPath": "F:\\OlibPasswordManager\\OlibPasswordManager.csproj",
       "packagesPath": "C:\\Users\\dmitr\\.nuget\\packages\\",
-      "outputPath": "E:\\OlibPasswordManager\\obj\\",
+      "outputPath": "F:\\OlibPasswordManager\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "E:\\OlibPasswordManager\\NuGet.Config",
+        "F:\\OlibPasswordManager\\NuGet.Config",
         "C:\\Users\\dmitr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
         "https://api.nuget.org/v3/index.json": {},
-        "https://dotnet.myget.org/F/dotnet-core/api/v3/index.json": {}
+        "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
@@ -96,6 +128,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Microsoft.DotNet.ILCompiler": {
+            "target": "Package",
+            "version": "[1.0.0-alpha-*, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"
@@ -119,7 +155,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200-preview-014883\\RuntimeIdentifierGraph.json"
       }
     }
   }

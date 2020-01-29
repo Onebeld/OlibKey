@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "hoMR3EW2JiHWf4bb5X392iX/NjObbk6FIKfhF5nN2sU4kugTwb47y6RUu5w8Py8qIe+3yzQcvFFm1viv0gWrDw==",
+  "success": true,
+  "projectFilePath": "F:\\OlibPasswordManager\\OlibPasswordManager.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\1.0.0-alpha-28528-01\\microsoft.dotnet.ilcompiler.1.0.0-alpha-28528-01.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

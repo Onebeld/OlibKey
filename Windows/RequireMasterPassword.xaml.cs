@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OlibPasswordManager.Properties.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -34,6 +35,7 @@ namespace OlibPasswordManager.Windows
                 App.MainWindow.PasswordList.ItemsSource = null;
                 App.MainWindow.PasswordList.ItemsSource = User.UsersList;
                 Global.MasterPassword = TxtPassword.Password;
+                App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/ChangePassword.xaml", UriKind.Relative));
                 Additional.GlobalSettings.AppGlobalString = Additional.GlobalSettings.AppGlobalString;
                 Close();
             }

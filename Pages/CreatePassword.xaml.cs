@@ -42,16 +42,7 @@ namespace OlibPasswordManager.Pages
             if (cbHide.IsChecked != null && (bool)cbHide.IsChecked) txtPassword.Password = txtPasswordCollapsed.Text;
         }
 
-        private void CloseCreatePassword(object sender, RoutedEventArgs e)
-        {
-            txtName.Text = string.Empty;
-            txtNameAccount.Text = string.Empty;
-            txtPassword.Password = string.Empty;
-            txtPasswordCollapsed.Text = string.Empty;
-            txtNote.Text = string.Empty;
-            txtWebSite.Text = string.Empty;
-            NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
-        }
+        private void CloseCreatePassword(object sender, RoutedEventArgs e) => NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
 
         private void SavePasswordInList(object sender, RoutedEventArgs e)
         {
@@ -81,6 +72,14 @@ namespace OlibPasswordManager.Pages
                         DateCard = txtDate.Text,
                         SecurityCode = TxtSecurityCode.Password,
                         Type = cbType.SelectedIndex
+                    });
+                    break;
+                case 2:
+                    User.UsersList.Add(new User
+                    {
+                        Name = txtName.Text,
+                        TimeCreate = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy"),
+                        Note = txtNote.Text
                     });
                     break;
             }

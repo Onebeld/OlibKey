@@ -39,9 +39,7 @@ namespace OlibPasswordManager
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            if (File.Exists("settings.json"))
-                Additional.GlobalSettings = JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json"));
-            else Additional.GlobalSettings = new Settings();
+            Additional.GlobalSettings = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json")) : new Settings();
             Language = GlobalSettings.Default.GlobalFirstLang ? CultureInfo.CurrentCulture : GlobalSettings.Default.GlobalLanguage;
 
             MainWindow = new MainWindow();
@@ -54,7 +52,7 @@ namespace OlibPasswordManager
             get => System.Threading.Thread.CurrentThread.CurrentUICulture;
             set
             {
-                if (value == null) throw new ArgumentNullException("value");
+                if (value == null) throw new ArgumentNullException(nameof(value));
                 if (ReferenceEquals(value, System.Threading.Thread.CurrentThread.CurrentUICulture)) return;
                 System.Threading.Thread.CurrentThread.CurrentUICulture = value;
                 var dict = new ResourceDictionary();

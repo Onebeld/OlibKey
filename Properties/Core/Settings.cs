@@ -25,5 +25,6 @@
         public bool GeneratorRequireSpace { get; set; }
         public bool GeneratorRequireOther { get; set; }
         public string GeneratorTextOther { get; set; }
+        public string ApplyTheme { get; set; }
     }
 }

@@ -10,8 +10,12 @@
     <Grid>
         <StackPanel Margin="5">
             <DockPanel>
-                <Label Content="{DynamicResource Language}"/>
+                <Label Content="{DynamicResource Language}" Width="80"/>
                 <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged"/>
+            </DockPanel>
+            <DockPanel Margin="0,5">
+                <Label Content="Тема:" Width="80"/>
+                <ComboBox x:Name="CbTheme" Margin="10,0" SelectionChanged="CbTheme_OnSelectionChanged"/>
             </DockPanel>
         </StackPanel>
     </Grid>

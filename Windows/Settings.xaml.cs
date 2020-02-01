@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using OlibPasswordManager.Properties.Core;
 
 namespace OlibPasswordManager.Windows
 {
@@ -22,6 +23,16 @@ namespace OlibPasswordManager.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            CbTheme.SelectedValuePath = "Key";
+            CbTheme.DisplayMemberPath = "Value";
+            KeyValuePair<string, string>[] valuePair = {
+                new KeyValuePair<string, string>("Light", "Светлая"),
+                new KeyValuePair<string, string>("Dark", "Темная")
+            };
+            foreach (KeyValuePair<string, string> i in valuePair) CbTheme.Items.Add(i);
+
+            CbTheme.SelectedIndex = valuePair.ToList().FindIndex(i => i.Key == Additional.GlobalSettings.ApplyTheme);
+
             CbLang.SelectedValuePath = "Key";
             CbLang.DisplayMemberPath = "Value";
             var valuePair1 = new[]
@@ -48,6 +59,12 @@ namespace OlibPasswordManager.Windows
         {
             GlobalSettings.Default.GlobalLanguage = App.Language;
             GlobalSettings.Default.Save();
+        }
+
+        private void CbTheme_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Additional.GlobalSettings.ApplyTheme = CbTheme.SelectedValue.ToString();
+            Application.Current.Resources.MergedDictionaries[3].Source = new Uri($"/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative);
         }
     }
 }

@@ -89,29 +89,29 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="17"/>
             <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}" BorderBrush="#dddddd" BorderThickness="0,0,0,1">
             <MenuItem Header="{DynamicResource File}">
-                <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData"/>
-                <MenuItem Header="{DynamicResource OpenBase}" Click="OpenBase" InputGestureText="Ctrl + O"/>
-                <MenuItem Header="{DynamicResource SaveBase}" Click="SaveBase" InputGestureText="Ctrl + S"/>
+                <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem Header="{DynamicResource OpenBase}" Click="OpenBase" InputGestureText="Ctrl + O" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem Header="{DynamicResource SaveBase}" Click="SaveBase" InputGestureText="Ctrl + S" Template="{DynamicResource MenuItemTemplate1}"/>
                 <Separator/>
-                <MenuItem Header="{DynamicResource AddLogin}" Click="MenuItem_Click" InputGestureText="Ctrl + N"/>
+                <MenuItem Header="{DynamicResource AddLogin}" Click="MenuItem_Click" InputGestureText="Ctrl + N" Template="{DynamicResource MenuItemTemplate1}"/>
                 <Separator/>
-                <MenuItem Header="{DynamicResource Settings}" Click="OpenSettingsWindow"/>
-                <MenuItem Header="{DynamicResource ExitFrom}" InputGestureText="Alt + F4" Click="ClosedApplication"/>
+                <MenuItem Header="{DynamicResource Settings}" Click="OpenSettingsWindow" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem Header="{DynamicResource ExitFrom}" InputGestureText="Alt + F4" Click="ClosedApplication" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
             <MenuItem Header="{DynamicResource Tools}">
-                <MenuItem Header="{DynamicResource PasswordGenerator}" Click="OpenPasswordGeneratorWindow" InputGestureText="Ctrl + G"/>
-                <MenuItem Header="{DynamicResource ChangeMasterPassword}" Click="OpenChangeMasterPassword"/>
+                <MenuItem Header="{DynamicResource PasswordGenerator}" Click="OpenPasswordGeneratorWindow" InputGestureText="Ctrl + G" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem Header="{DynamicResource ChangeMasterPassword}" Click="OpenChangeMasterPassword" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
             <MenuItem Header="{DynamicResource Reference}">
-                <MenuItem Header="{DynamicResource CheckUpdates}" Click="CheckUpdateButton"/>
-                <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow"/>
+                <MenuItem Header="{DynamicResource CheckUpdates}" Click="CheckUpdateButton" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
         </Menu>
         <ListBox x:Name="PasswordList" SelectedItem="SelectedUnit" BorderBrush="#dddddd" BorderThickness="1,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>

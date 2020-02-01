@@ -59,7 +59,7 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.1.0.154");
+            sw.Write("1.2.0.161");
 
             User.UsersList = new List<User>();
 
@@ -165,11 +165,9 @@ namespace OlibPasswordManager
         {
             try
             {
-                using (var wb = new WebClient())
-                {
-                    wb.DownloadStringCompleted += (s, args) => _str = args.Result;
-                    await wb.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/MagnificentEagle/OlibPasswordManager/master/forRepository/version.txt"));
-                }
+                using var wb = new WebClient();
+                wb.DownloadStringCompleted += (s, args) => _str = args.Result;
+                await wb.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/MagnificentEagle/OlibPasswordManager/master/forRepository/version.txt"));
                 var latest = float.Parse(_str.Replace(".", ""));
                 var current = float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
                 if (!(latest > current) && b)

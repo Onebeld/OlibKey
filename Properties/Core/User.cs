@@ -22,7 +22,6 @@ namespace OlibPasswordManager.Properties.Core
         public string DateCard { get; set; }
         public string SecurityCode { get; set; }
 
-        public string PassportName { get; set; }
         public string PassportNumber { get; set; }
         public string PassportPlaceOfIssue { get; set; }
     }

@@ -79,7 +79,10 @@ namespace OlibPasswordManager.Pages
                     {
                         Name = txtName.Text,
                         TimeCreate = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy"),
-                        Note = txtNote.Text
+                        Note = txtNote.Text,
+                        PasswordName = txtPassportName.Text,
+                        PassportNumber = txtPassportNumber.Text,
+                        PassportPlaceOfIssue = txtPassportPlaceOfIssue.Text
                     });
                     break;
             }
@@ -110,6 +113,9 @@ namespace OlibPasswordManager.Pages
                     bUsername.Visibility = Visibility.Visible;
                     bPassword.Visibility = Visibility.Visible;
                     bWebSite.Visibility = Visibility.Visible;
+                    bPassportName.Visibility = Visibility.Collapsed;
+                    bPassportNumber.Visibility = Visibility.Collapsed;
+                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
                     bCardName.Visibility = Visibility.Visible;
@@ -119,6 +125,21 @@ namespace OlibPasswordManager.Pages
                     bUsername.Visibility = Visibility.Collapsed;
                     bPassword.Visibility = Visibility.Collapsed;
                     bWebSite.Visibility = Visibility.Collapsed;
+                    bPassportName.Visibility = Visibility.Collapsed;
+                    bPassportNumber.Visibility = Visibility.Collapsed;
+                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    bCardName.Visibility = Visibility.Collapsed;
+                    bCardNumber.Visibility = Visibility.Collapsed;
+                    bDate.Visibility = Visibility.Collapsed;
+                    bSecurityCode.Visibility = Visibility.Collapsed;
+                    bUsername.Visibility = Visibility.Collapsed;
+                    bPassword.Visibility = Visibility.Collapsed;
+                    bWebSite.Visibility = Visibility.Collapsed;
+                    bPassportName.Visibility = Visibility.Visible;
+                    bPassportNumber.Visibility = Visibility.Visible;
+                    bPassportPlaceOfIssue.Visibility = Visibility.Visible;
                     break;
             }
         }

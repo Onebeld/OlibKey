@@ -74,6 +74,10 @@ namespace OlibPasswordManager.Pages
             TxtDate.Text = User.UsersList[User.IndexUser].DateCard;
             TxtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
 
+            txtPassportName.Text = User.UsersList[User.IndexUser].PasswordName;
+            txtPassportNumber.Text = User.UsersList[User.IndexUser].PassportNumber;
+            txtPassportPlaceOfIssue.Text = User.UsersList[User.IndexUser].PassportPlaceOfIssue;
+
             BrNote.Visibility = TxtNote.Text == "" ? Visibility.Collapsed : Visibility.Visible;
             BWebSite.Visibility = TxtWebSite.Text == "" ? Visibility.Collapsed : Visibility.Visible;
 
@@ -85,11 +89,26 @@ namespace OlibPasswordManager.Pages
                     BCardNumber.Visibility = Visibility.Collapsed;
                     BDate.Visibility = Visibility.Collapsed;
                     BSecurityCode.Visibility = Visibility.Collapsed;
+                    txtPassportName.Visibility = Visibility.Collapsed;
+                    txtPassportNumber.Visibility = Visibility.Collapsed;
+                    txtPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
                     BUsername.Visibility = Visibility.Collapsed;
                     BPassword.Visibility = Visibility.Collapsed;
                     BWebSite.Visibility = Visibility.Collapsed;
+                    txtPassportName.Visibility = Visibility.Collapsed;
+                    txtPassportNumber.Visibility = Visibility.Collapsed;
+                    txtPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    BUsername.Visibility = Visibility.Collapsed;
+                    BPassword.Visibility = Visibility.Collapsed;
+                    BWebSite.Visibility = Visibility.Collapsed;
+                    BCardName.Visibility = Visibility.Collapsed;
+                    BCardNumber.Visibility = Visibility.Collapsed;
+                    BDate.Visibility = Visibility.Collapsed;
+                    BSecurityCode.Visibility = Visibility.Collapsed;
                     break;
             }
         }

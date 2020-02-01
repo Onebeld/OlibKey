@@ -24,9 +24,26 @@ namespace OlibPasswordManager.Pages
 
         private void ChangedPassword(object sender, RoutedEventArgs e)
         {
+            switch (User.UsersList[User.IndexUser].Type)
+            {
+                case 0:
+                    User.UsersList[User.IndexUser].CardName = TxtCardName.Text;
+                    User.UsersList[User.IndexUser].PasswordName = TxtCardNumber.Text;
+                    User.UsersList[User.IndexUser].DateCard = TxtDate.Text;
+                    User.UsersList[User.IndexUser].SecurityCode = TxtSecurityCode.Password;
+                    break;
+                case 1:
+                    User.UsersList[User.IndexUser].PasswordName = TxtNameAccount.Text;
+                    User.UsersList[User.IndexUser].Password = TxtPassword.Password;
+                    User.UsersList[User.IndexUser].WebSite = TxtWebSite.Text;
+                    break;
+                case 2:
+                    User.UsersList[User.IndexUser].PasswordName = txtPassportName.Text;
+                    User.UsersList[User.IndexUser].PassportNumber = txtPassportNumber.Text;
+                    User.UsersList[User.IndexUser].PassportPlaceOfIssue = txtPassportPlaceOfIssue.Text;
+                    break;
+            }
             User.UsersList[User.IndexUser].Name = TxtName.Text;
-            User.UsersList[User.IndexUser].PasswordName = TxtNameAccount.Text;
-            User.UsersList[User.IndexUser].Password = TxtPassword.Password;
             User.UsersList[User.IndexUser].Note = TxtNote.Text;
             User.UsersList[User.IndexUser].TimeChanged = DateTime.Now.ToString("HH:mm:ss dd.MM.yyyy");
 
@@ -84,6 +101,10 @@ namespace OlibPasswordManager.Pages
             TxtDate.Text = User.UsersList[User.IndexUser].DateCard;
             TxtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
 
+            txtPassportName.Text = User.UsersList[User.IndexUser].PasswordName;
+            txtPassportNumber.Text = User.UsersList[User.IndexUser].PassportNumber;
+            txtPassportPlaceOfIssue.Text = User.UsersList[User.IndexUser].PassportPlaceOfIssue;
+
             switch (User.UsersList[User.IndexUser].Type)
             {
                 case 0:
@@ -91,8 +112,23 @@ namespace OlibPasswordManager.Pages
                     BCardNumber.Visibility = Visibility.Collapsed;
                     BDate.Visibility = Visibility.Collapsed;
                     BSecurityCode.Visibility = Visibility.Collapsed;
+                    bPassportName.Visibility = Visibility.Collapsed;
+                    bPassportNumber.Visibility = Visibility.Collapsed;
+                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
+                    BUsername.Visibility = Visibility.Collapsed;
+                    BPassword.Visibility = Visibility.Collapsed;
+                    BWebSite.Visibility = Visibility.Collapsed;
+                    bPassportName.Visibility = Visibility.Collapsed;
+                    bPassportNumber.Visibility = Visibility.Collapsed;
+                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
+                    break;
+                case 2:
+                    BCardName.Visibility = Visibility.Collapsed;
+                    BCardNumber.Visibility = Visibility.Collapsed;
+                    BDate.Visibility = Visibility.Collapsed;
+                    BSecurityCode.Visibility = Visibility.Collapsed;
                     BUsername.Visibility = Visibility.Collapsed;
                     BPassword.Visibility = Visibility.Collapsed;
                     BWebSite.Visibility = Visibility.Collapsed;

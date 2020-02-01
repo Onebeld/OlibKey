@@ -42,6 +42,11 @@ namespace OlibPasswordManager
             Additional.GlobalSettings = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json")) : new Settings();
             Language = GlobalSettings.Default.GlobalFirstLang ? CultureInfo.CurrentCulture : GlobalSettings.Default.GlobalLanguage;
 
+            if (Additional.GlobalSettings.ApplyTheme != null)
+            {
+                Resources.MergedDictionaries[3].Source = new Uri($"/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative);
+            }
+
             MainWindow = new MainWindow();
             MainWindow.Show();
         }

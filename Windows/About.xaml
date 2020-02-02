@@ -10,7 +10,7 @@
         FontFamily="{StaticResource Montserrat}"
         MinHeight="300"
         MinWidth="350"
-        Title="{DynamicResource AboutPrograms}" Height="300" Width="350" Background="#ecf0f5">
+        Title="{DynamicResource AboutPrograms}" Height="300" Width="350" Background="#FF5A0F26">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -18,20 +18,20 @@
         </Grid.RowDefinitions>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
-                <Image Source="{StaticResource OlibDrawingImage}" Height="100"/>
+                <Image Source="{StaticResource OlibDrawingImage}" Height="100" />
                 <Image Source="{StaticResource OlibPasswordManagerDrawingImage}" Height="70" Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="{DynamicResource Author}" FontSize="14" Padding="0"/>
-                <Label x:Name="Author" FontSize="14" Padding="0"/>
+                <Label Content="{DynamicResource Author}" FontSize="14" Padding="0" Foreground="White"/>
+                <Label FontSize="14" Padding="0" Foreground="White"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Label Content="{DynamicResource Version}" FontSize="14" Padding="0"/>
-                <Label x:Name="Version" FontSize="14" Padding="0"/>
+                <Label Content="{DynamicResource Version}" FontSize="14" Padding="0" Foreground="White"/>
+                <Label x:Name="Version" FontSize="14" Padding="0" Foreground="White"/>
             </StackPanel>
-            <AccessText Text="{DynamicResource AccessText1}" TextWrapping="Wrap" TextAlignment="Center"/>
+            <AccessText Text="{DynamicResource AccessText1}" TextWrapping="Wrap" TextAlignment="Center" Foreground="White"/>
         </StackPanel>
-        <Border Grid.Row="1" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1">
+        <Border Grid.Row="1" Background="{DynamicResource GlobalBorderColor}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,0,0">
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Button Margin="5,10" Padding="5" Click="Button_Click_1">

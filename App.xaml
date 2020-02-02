@@ -12,12 +12,6 @@
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Montserrat">./Properties/Fonts/Montserrat-Regular.ttf#Montserrat</FontFamily>
 
-            <SolidColorBrush x:Key="BackgroundWindow" Color="{DynamicResource backgroundWindow}"/>
-            <SolidColorBrush x:Key="ForegroundWindow" Color="{DynamicResource foregroundWindow}"/>
-            <SolidColorBrush x:Key="BorderColorWindow" Color="{DynamicResource borderColorWindow}"/>
-            <SolidColorBrush x:Key="HoverBackground" Color="{DynamicResource hoverBackground}"/>
-            <SolidColorBrush x:Key="PageBordersColor" Color="{DynamicResource pageBordersColor}"/>
-
             <Style TargetType="{x:Type PasswordBox}">
                 <Setter Property="PasswordChar" Value="●" />
                 <Setter Property="BorderThickness" Value="1" />
@@ -25,7 +19,8 @@
                 <Setter Property="HorizontalContentAlignment" Value="Left" />
                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                 <Setter Property="AllowDrop" Value="true" />
-                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
+                    <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
                 <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
                 <Setter Property="Template">
                     <Setter.Value>
@@ -40,10 +35,10 @@
                                     <Setter Property="Opacity" TargetName="border" Value="0.56" />
                                 </Trigger>
                                 <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#931d60" />
                                 </Trigger>
                                 <Trigger Property="IsKeyboardFocused" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#931d60" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -61,7 +56,8 @@
                 </Style.Triggers>
             </Style>
             <Style TargetType="{x:Type TextBox}">
-                <Setter Property="Template">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
+                    <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TextBox}">
                             <Border x:Name="border" BorderThickness="1" CornerRadius="5" Background="{DynamicResource BackgroundWindow}" BorderBrush="{DynamicResource BorderColorWindow}"
@@ -72,10 +68,10 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#931d60" />
                                 </Trigger>
                                 <Trigger Property="IsKeyboardFocused" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#931d60" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
@@ -142,6 +138,7 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="Padding" Value="10,1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -159,7 +156,7 @@
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="true">
                                     <Setter Property="Background" TargetName="border" Value="#931d60" />
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#400042" />
+                                    <Setter Property="BorderBrush" TargetName="border" Value="#931d60" />
                                     <Setter Property="TextElement.Foreground" Value="White"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>

@@ -23,7 +23,7 @@
                 <GradientStop Color="#FF931D60" Offset="0.5"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Image Source="{StaticResource 1Olib_bone_DrawingImage}" Margin="80"/>
-        <Image Source="{StaticResource 1OlibPasswordManagerDrawingImage}" VerticalAlignment="Bottom" Height="40" Margin="0,0,0,10"/>
+        <Image Source="{StaticResource Olib_bone_DrawingImage}" Margin="80"/>
+        <Image Source="{StaticResource OlibPasswordManagerDrawingImage}" VerticalAlignment="Bottom" Height="40" Margin="0,0,0,10"/>
     </Grid>
 </Page>

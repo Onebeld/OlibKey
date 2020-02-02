@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="BackgroundWindow" Color="Black"/>
+    <SolidColorBrush x:Key="ForegroundWindow" Color="White"/>
+    <SolidColorBrush x:Key="BorderColorWindow" Color="#A5A5A5"/>
+    <SolidColorBrush x:Key="HoverBackground" Color="#2B2B2B"/>
+    <SolidColorBrush x:Key="PageBordersColor" Color="#282828"/>
+    <SolidColorBrush x:Key="ForegroundOpacity" Color="#777777"/>
+    <SolidColorBrush x:Key="GlobalBorderColor" Color="#1C1C1C"/>
+</ResourceDictionary>

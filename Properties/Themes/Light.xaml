@@ -1,8 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Color x:Key="backgroundWindow">White</Color>
-    <Color x:Key="foregroundWindow">Black</Color>
-    <Color x:Key="borderColorWindow">#A5A5A5</Color>
-    <Color x:Key="hoverBackground">#FFE0E0E0</Color>
-    <Color x:Key="pageBordersColor">#dddddd</Color>
+    <SolidColorBrush x:Key="BackgroundWindow" Color="White"/>
+    <SolidColorBrush x:Key="ForegroundWindow" Color="Black"/>
+    <SolidColorBrush x:Key="BorderColorWindow" Color="#A5A5A5"/>
+    <SolidColorBrush x:Key="HoverBackground" Color="#FFE0E0E0"/>
+    <SolidColorBrush x:Key="PageBordersColor" Color="#f9fafc"/>
+    <SolidColorBrush x:Key="ForegroundOpacity" Color="#777777"/>
+    <SolidColorBrush x:Key="GlobalBorderColor" Color="#f9fafc"/>
 </ResourceDictionary>

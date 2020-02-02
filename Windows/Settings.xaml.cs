@@ -14,6 +14,7 @@ namespace OlibPasswordManager.Windows
     public partial class Settings
     {
         private bool _isFirst = true;
+        private bool _isFirstTheme = true;
 
         public Settings()
         {
@@ -30,9 +31,9 @@ namespace OlibPasswordManager.Windows
                 new KeyValuePair<string, string>("Dark", "Темная")
             };
             foreach (KeyValuePair<string, string> i in valuePair) CbTheme.Items.Add(i);
-
-            CbTheme.SelectedIndex = valuePair.ToList().FindIndex(i => i.Key == Additional.GlobalSettings.ApplyTheme);
-
+            CbTheme.SelectedIndex = Additional.GlobalSettings.ApplyTheme != null
+                    ? valuePair.ToList().FindIndex(i => i.Key == Additional.GlobalSettings.ApplyTheme)
+                    : 0;
             CbLang.SelectedValuePath = "Key";
             CbLang.DisplayMemberPath = "Value";
             var valuePair1 = new[]
@@ -63,8 +64,28 @@ namespace OlibPasswordManager.Windows
 
         private void CbTheme_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Additional.GlobalSettings.ApplyTheme = CbTheme.SelectedValue.ToString();
-            Application.Current.Resources.MergedDictionaries[3].Source = new Uri($"/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative);
+            if (!_isFirstTheme)
+            {
+                Additional.GlobalSettings.ApplyTheme = CbTheme.SelectedValue.ToString();
+
+                var dict = new ResourceDictionary
+                {
+                    Source = new Uri($"/Properties/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative)
+                };
+
+                var oldDict = (from d in Application.Current.Resources.MergedDictionaries
+                    where d.Source != null && d.Source.OriginalString.StartsWith("/Properties/Themes/")
+                    select d).FirstOrDefault();
+                if (oldDict != null)
+                {
+                    int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
+                    Application.Current.Resources.MergedDictionaries.Remove(oldDict);
+                            Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
+                }
+                else Application.Current.Resources.MergedDictionaries.Add(dict);
+            }
+
+            _isFirstTheme = false;
         }
     }
 }

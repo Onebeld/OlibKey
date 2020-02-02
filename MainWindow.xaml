@@ -9,7 +9,7 @@
         KeyDown="Window_KeyDown"
         WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource Montserrat}"
-        Title="Olib Password Manager" Height="450" Width="800" Background="#ecf0f5" MinWidth="600" MinHeight="350">
+        Title="Olib Password Manager" Height="450" Width="800" Background="#FF5A0F26" MinWidth="600" MinHeight="350">
     <Window.Resources>
         <DataTemplate x:Key="ListPassword">
             <Grid Margin="0,2">
@@ -22,7 +22,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Image Source="{Binding Path=Image}" Grid.RowSpan="2" Height="16"/>
-                <TextBlock Text="{Binding Path=Name}" FontSize="16" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="{Binding Path=Name}" FontSize="16" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource ForegroundWindow}"/>
                 <TextBlock Text="{Binding Path=PasswordName}" Foreground="#777777" Grid.Row="1" Grid.Column="1"/>
             </Grid>
         </DataTemplate>
@@ -42,13 +42,13 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                        <Border x:Name="Bd" Background="White" SnapsToDevicePixels="true">
+                        <Border x:Name="Bd" Background="Transparent" SnapsToDevicePixels="true">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Border x:Name="Bd2" Background="White"/>
+                                <Border x:Name="Bd2" Background="Transparent"/>
                                 <ContentPresenter Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             </Grid>
                         </Border>
@@ -57,15 +57,15 @@
                                 <MultiTrigger.Conditions>
                                     <Condition Property="IsMouseOver" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="Bd" Value="#FFE0E0E0"/>
-                                <Setter Property="Background" TargetName="Bd2" Value="#FFE0E0E0"/>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource HoverBackground}"/>
+                                <Setter Property="Background" TargetName="Bd2" Value="{DynamicResource HoverBackground}"/>
                             </MultiTrigger>
                             <MultiTrigger>
                                 <MultiTrigger.Conditions>
                                     <Condition Property="Selector.IsSelectionActive" Value="False"/>
                                     <Condition Property="IsSelected" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="Bd" Value="#FFE0E0E0"/>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource HoverBackground}"/>
                                 <Setter Property="Background" TargetName="Bd2" Value="#931d60"/>
                             </MultiTrigger>
                             <MultiTrigger>
@@ -73,7 +73,7 @@
                                     <Condition Property="Selector.IsSelectionActive" Value="True"/>
                                     <Condition Property="IsSelected" Value="True"/>
                                 </MultiTrigger.Conditions>
-                                <Setter Property="Background" TargetName="Bd" Value="#FFE0E0E0"/>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource HoverBackground}"/>
                                 <Setter Property="Background" TargetName="Bd2" Value="#931d60"/>
                             </MultiTrigger>
                         </ControlTemplate.Triggers>
@@ -89,12 +89,12 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="17"/>
+            <RowDefinition Height="16"/>
             <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}" BorderBrush="#dddddd" BorderThickness="0,0,0,1">
+        <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}" BorderBrush="{DynamicResource PageBordersColor}">
             <MenuItem Header="{DynamicResource File}">
                 <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData" Template="{DynamicResource MenuItemTemplate1}"/>
                 <MenuItem Header="{DynamicResource OpenBase}" Click="OpenBase" InputGestureText="Ctrl + O" Template="{DynamicResource MenuItemTemplate1}"/>
@@ -114,11 +114,11 @@
                 <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
         </Menu>
-        <ListBox x:Name="PasswordList" SelectedItem="SelectedUnit" BorderBrush="#dddddd" BorderThickness="1,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
-        <Border Grid.Column="1" Grid.Row="3" Background="#f9fafc" BorderBrush="#dddddd" BorderThickness="1" >
+        <ListBox x:Name="PasswordList" Background="{DynamicResource BackgroundWindow}" SelectedItem="SelectedUnit" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
+        <Border Grid.Column="1" Grid.Row="3" Background="{DynamicResource GlobalBorderColor}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,1,0" >
             <Button Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>
         </Border>
-        <Border Grid.Column="1" Grid.Row="1" Background="White" BorderBrush="#dddddd" BorderThickness="1,0,1,1">
+        <Border Grid.Column="1" Grid.Row="1" Background="#FF400042" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,1">
             <DockPanel Margin="10">
                 <Image Source="{DynamicResource loupeDrawingImage}" Height="20" Margin="0,0,5,0"/>
                 <TextBox x:Name="TxtSearch" TextChanged="TxtSearch_TextChanged"/>

@@ -15,6 +15,7 @@ namespace OlibPasswordManager
     public partial class App
     {
         public new static MainWindow MainWindow;
+        public static ResourceDictionary ResourceTheme;
 
         private static List<CultureInfo> Languages => new List<CultureInfo>();
 
@@ -42,9 +43,11 @@ namespace OlibPasswordManager
             Additional.GlobalSettings = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json")) : new Settings();
             Language = GlobalSettings.Default.GlobalFirstLang ? CultureInfo.CurrentCulture : GlobalSettings.Default.GlobalLanguage;
 
+            ResourceTheme = Resources.MergedDictionaries[3];
+
             if (Additional.GlobalSettings.ApplyTheme != null)
             {
-                Resources.MergedDictionaries[3].Source = new Uri($"/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative);
+                ResourceTheme.Source = new Uri($"/Properties/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative);
             }
 
             MainWindow = new MainWindow();

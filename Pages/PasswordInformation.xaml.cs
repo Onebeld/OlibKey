@@ -89,17 +89,17 @@ namespace OlibPasswordManager.Pages
                     BCardNumber.Visibility = Visibility.Collapsed;
                     BDate.Visibility = Visibility.Collapsed;
                     BSecurityCode.Visibility = Visibility.Collapsed;
-                    txtPassportName.Visibility = Visibility.Collapsed;
-                    txtPassportNumber.Visibility = Visibility.Collapsed;
-                    txtPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
+                    bPassportName.Visibility = Visibility.Collapsed;
+                    bPassportNumber.Visibility = Visibility.Collapsed;
+                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
                     BUsername.Visibility = Visibility.Collapsed;
                     BPassword.Visibility = Visibility.Collapsed;
                     BWebSite.Visibility = Visibility.Collapsed;
-                    txtPassportName.Visibility = Visibility.Collapsed;
-                    txtPassportNumber.Visibility = Visibility.Collapsed;
-                    txtPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
+                    bPassportName.Visibility = Visibility.Collapsed;
+                    bPassportNumber.Visibility = Visibility.Collapsed;
+                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
                     break;
                 case 2:
                     BUsername.Visibility = Visibility.Collapsed;

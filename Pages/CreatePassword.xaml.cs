@@ -82,7 +82,8 @@ namespace OlibPasswordManager.Pages
                         Note = txtNote.Text,
                         PasswordName = txtPassportName.Text,
                         PassportNumber = txtPassportNumber.Text,
-                        PassportPlaceOfIssue = txtPassportPlaceOfIssue.Text
+                        PassportPlaceOfIssue = txtPassportPlaceOfIssue.Text,
+                        Type = cbType.SelectedIndex
                     });
                     break;
             }

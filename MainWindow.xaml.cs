@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.ComponentModel;
+using System.Windows.Data;
 
 namespace OlibPasswordManager
 {
@@ -59,7 +60,7 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.2.0.182");
+            sw.Write("1.2.0.183");
 
             User.UsersList = new List<User>();
 
@@ -197,6 +198,11 @@ namespace OlibPasswordManager
                         MessageBoxImage.Error);
                 }
             }
+        }
+
+        private void EventSetter_OnHandler(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

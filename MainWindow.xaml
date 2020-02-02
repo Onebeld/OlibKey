@@ -11,21 +11,6 @@
         FontFamily="{StaticResource Montserrat}"
         Title="Olib Password Manager" Height="450" Width="800" Background="#FF5A0F26" MinWidth="600" MinHeight="350">
     <Window.Resources>
-        <DataTemplate x:Key="ListPassword">
-            <Grid Margin="0,2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Image Source="{Binding Path=Image}" Grid.RowSpan="2" Height="16"/>
-                <TextBlock Text="{Binding Path=Name}" FontSize="16" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource ForegroundWindow}"/>
-                <TextBlock Text="{Binding Path=PasswordName}" Foreground="#777777" Grid.Row="1" Grid.Column="1"/>
-            </Grid>
-        </DataTemplate>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -114,7 +99,31 @@
                 <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
         </Menu>
-        <ListBox x:Name="PasswordList" Background="{DynamicResource BackgroundWindow}" SelectedItem="SelectedUnit" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged" ItemTemplate="{StaticResource ListPassword}"/>
+        <ListBox x:Name="PasswordList" Background="{DynamicResource BackgroundWindow}" SelectedItem="SelectedUnit" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="Image">
+                    <EventSetter Event="Loaded" Handler="EventSetter_OnHandler"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Image Source="{Binding Path=Image}" Grid.RowSpan="2" Height="16" />
+                        <TextBlock Text="{Binding Path=Name}" x:Name="Gas" FontSize="16" Grid.Row="0" Grid.Column="1"
+                                   Foreground="{DynamicResource ForegroundWindow}" />
+                        <TextBlock Text="{Binding Path=PasswordName}" Foreground="#777777" Grid.Row="1" Grid.Column="1" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         <Border Grid.Column="1" Grid.Row="3" Background="{DynamicResource GlobalBorderColor}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,1,0" >
             <Button Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>
         </Border>

@@ -87,6 +87,11 @@
 
     <!--#region Settings-->
     <v:String x:Key="Language">Мова:</v:String>
+    <v:String x:Key="Theme">Тема:</v:String>
+    <v:String x:Key="CBHideProgram">Приховати програму при закритті</v:String>
+
+    <v:String x:Key="Light">Світла</v:String>
+    <v:String x:Key="Dark">Темна</v:String>
     <!--#endregion-->
     <!--#endregion-->
 

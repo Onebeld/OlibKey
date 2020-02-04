@@ -87,6 +87,11 @@
 
     <!--#region Settings-->
     <v:String x:Key="Language">Լեզուն:</v:String>
+    <v:String x:Key="Theme">Թեման:</v:String>
+    <v:String x:Key="CBHideProgram">Թաքցնել ծրագիրը փակելիս</v:String>
+
+    <v:String x:Key="Light">Պայծառ</v:String>
+    <v:String x:Key="Dark">Մութ</v:String>
     <!--#endregion-->
     <!--#endregion-->
 

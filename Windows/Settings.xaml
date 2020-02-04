@@ -6,19 +6,33 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Closing="Settings_OnClosing"
+        WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource Montserrat}"
-        Title="{DynamicResource Settings}" Height="350" Width="450">
+        Title="{DynamicResource Settings}" Height="350" Width="450" Background="#FF5A0F26" MinHeight="300" MinWidth="300">
     <Grid>
-        <StackPanel Margin="5">
-            <CheckBox x:Name="cbCollapsedWindow" Content="Скрыть программу при закрытии" Margin="10,0"/>
-            <DockPanel Margin="0,10,0,0">
-                <Label Content="{DynamicResource Language}" Width="80"/>
-                <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged"/>
-            </DockPanel>
-            <DockPanel Margin="0,5">
-                <Label Content="Тема:" Width="80"/>
-                <ComboBox x:Name="CbTheme" Margin="10,0" SelectionChanged="CbTheme_OnSelectionChanged"/>
-            </DockPanel>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="5">
+                <CheckBox x:Name="cbCollapsedWindow" Content="{DynamicResource CBHideProgram}" Foreground="White"
+                          Margin="10,0" />
+                <DockPanel Margin="0,10,0,0">
+                    <Label Content="{DynamicResource Language}" Width="80" Foreground="White" />
+                    <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged" />
+                </DockPanel>
+                <DockPanel Margin="0,5">
+                    <Label Content="{DynamicResource Theme}" Width="80" Foreground="White" />
+                    <ComboBox x:Name="CbTheme" Margin="10,0" SelectionChanged="CbTheme_OnSelectionChanged" />
+                </DockPanel>
+            </StackPanel>
+        </ScrollViewer>
+        
+        <Border Grid.Row="1" Background="{DynamicResource GlobalBorderColor}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,0,0">
+            <Grid>
+                <Button Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,5" Margin="10" Click="Button_Click"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

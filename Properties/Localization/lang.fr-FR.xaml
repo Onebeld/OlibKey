@@ -87,6 +87,11 @@
 
     <!--#region Settings-->
     <v:String x:Key="Language">Langue:</v:String>
+    <v:String x:Key="Theme">Thème:</v:String>
+    <v:String x:Key="CBHideProgram">Masquer le programme à la fermeture</v:String>
+
+    <v:String x:Key="Light">Lumineux</v:String>
+    <v:String x:Key="Dark">Sombre</v:String>
     <!--#endregion-->
     <!--#endregion-->
 

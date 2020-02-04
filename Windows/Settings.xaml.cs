@@ -30,8 +30,8 @@ namespace OlibPasswordManager.Windows
             CbTheme.SelectedValuePath = "Key";
             CbTheme.DisplayMemberPath = "Value";
             KeyValuePair<string, string>[] valuePair = {
-                new KeyValuePair<string, string>("Light", "Светлая"),
-                new KeyValuePair<string, string>("Dark", "Темная")
+                new KeyValuePair<string, string>("Light", (string) Application.Current.Resources["Light"]),
+                new KeyValuePair<string, string>("Dark", (string) Application.Current.Resources["Dark"])
             };
             foreach (KeyValuePair<string, string> i in valuePair) CbTheme.Items.Add(i);
             CbTheme.SelectedIndex = Additional.GlobalSettings.ApplyTheme != null
@@ -67,6 +67,7 @@ namespace OlibPasswordManager.Windows
             GlobalSettings.Default.Save();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e) => Close();
         private void CbTheme_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!_isFirstTheme)

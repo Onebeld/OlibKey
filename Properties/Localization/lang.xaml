@@ -87,6 +87,11 @@
 
     <!--#region Settings-->
     <v:String x:Key="Language">Language:</v:String>
+    <v:String x:Key="Theme">Theme:</v:String>
+    <v:String x:Key="CBHideProgram">Hide program when closing</v:String>
+
+    <v:String x:Key="Light">Light</v:String>
+    <v:String x:Key="Dark">Dark</v:String>
     <!--#endregion-->
     <!--#endregion-->
 

@@ -75,6 +75,9 @@ namespace OlibPasswordManager
             Clipboard.SetText(TxtSecurityCode.Password);
         }
         #endregion
+        #region Timers
+        private void TimerAutoSafe(object sender, EventArgs e) => Save(false);
+        #endregion
 
         private void ClosedApplication(object sender, RoutedEventArgs e)
         {
@@ -93,9 +96,20 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.2.0.216");
+            sw.Write("1.2.0.228");
 
             User.UsersList = new List<User>();
+
+            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+
+            if (Additional.GlobalSettings.AppGlobalString != null)
+            {
+                App.MainWindow.UnlockMenuItem.IsEnabled = false;
+            }
+
+            timer.Tick += TimerAutoSafe;
+            timer.Interval = new TimeSpan(0, 3, 0);
+            timer.Start();
 
             CheckUpdate(false);
             if (Additional.GlobalSettings.AppGlobalString != null) new RequireMasterPassword().ShowDialog();
@@ -368,6 +382,29 @@ namespace OlibPasswordManager
                 TxtPasswordCollapsed.Visibility = Visibility.Collapsed;
                 TxtPasswordCollapsed.Text = string.Empty;
             }
+        }
+
+        private void UnlockMenuItem_OnClick(object sender, RoutedEventArgs e) => OpenRequireMasterPassword();
+
+        private void LockMenuItem_OnClick(object sender, RoutedEventArgs e) => LockPasswordBase();
+
+        private void LockPasswordBase()
+        {
+            Save(true);
+
+            App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
+
+            App.MainWindow.SaveMenuItem.IsEnabled = false;
+            App.MainWindow.ChangeMenuItem.IsEnabled = false;
+            App.MainWindow.NewLoginMenuItem.IsEnabled = false;
+            App.MainWindow.UnlockMenuItem.IsEnabled = true;
+            App.MainWindow.LockMenuItem.IsEnabled = false;
+
+            Global.MasterPassword = null;
+
+            App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
+            App.MainWindow.PasswordList.ItemsSource = null;
+            User.UsersList.Clear();
         }
     }
 }

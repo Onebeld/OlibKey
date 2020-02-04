@@ -104,16 +104,18 @@
             <MenuItem Header="{DynamicResource File}">
                 <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData" Template="{DynamicResource MenuItemTemplate1}"/>
                 <MenuItem Header="{DynamicResource OpenBase}" Click="OpenBase" InputGestureText="Ctrl + O" Template="{DynamicResource MenuItemTemplate1}"/>
-                <MenuItem Header="{DynamicResource SaveBase}" Click="SaveBase" InputGestureText="Ctrl + S" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem x:Name="SaveMenuItem" Header="{DynamicResource SaveBase}" Click="SaveBase" IsEnabled="False" InputGestureText="Ctrl + S" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem x:Name="LockMenuItem" Header="Заблокировать хранилище" Click="LockMenuItem_OnClick" IsEnabled="False" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem x:Name="UnlockMenuItem" Header="Разблокировать хранилище" Click="UnlockMenuItem_OnClick" Template="{DynamicResource MenuItemTemplate1}"/>
                 <Separator/>
-                <MenuItem Header="{DynamicResource AddLogin}" Click="MenuItem_Click" InputGestureText="Ctrl + N" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem x:Name="NewLoginMenuItem" Header="{DynamicResource AddLogin}" IsEnabled="False" Click="MenuItem_Click" InputGestureText="Ctrl + N" Template="{DynamicResource MenuItemTemplate1}"/>
                 <Separator/>
                 <MenuItem Header="{DynamicResource Settings}" Click="OpenSettingsWindow" Template="{DynamicResource MenuItemTemplate1}"/>
                 <MenuItem Header="{DynamicResource ExitFrom}" InputGestureText="Alt + F4" Click="ClosedApplication" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
             <MenuItem Header="{DynamicResource Tools}">
                 <MenuItem Header="{DynamicResource PasswordGenerator}" Click="OpenPasswordGeneratorWindow" InputGestureText="Ctrl + G" Template="{DynamicResource MenuItemTemplate1}"/>
-                <MenuItem Header="{DynamicResource ChangeMasterPassword}" Click="OpenChangeMasterPassword" Template="{DynamicResource MenuItemTemplate1}"/>
+                <MenuItem x:Name="ChangeMenuItem" Header="{DynamicResource ChangeMasterPassword}" IsEnabled="False" Click="OpenChangeMasterPassword" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
             <MenuItem Header="{DynamicResource Reference}">
                 <MenuItem Header="{DynamicResource CheckUpdates}" Click="CheckUpdateButton" Template="{DynamicResource MenuItemTemplate1}"/>
@@ -325,7 +327,7 @@
             <Border Grid.Column="1" Grid.Row="3" Background="{DynamicResource GlobalBorderColor}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,1,0" >
             <Button Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>
         </Border>
-        <Border Grid.Column="1" Grid.Row="1" Background="#FF400042" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,1">
+        <Border Grid.Column="1" Grid.Row="1" Background="#931d60" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,1">
             <DockPanel Margin="10">
                 <Image Source="{DynamicResource loupeDrawingImage}" Height="20" Margin="0,0,5,0"/>
                 <TextBox x:Name="TxtSearch" TextChanged="TxtSearch_TextChanged"/>

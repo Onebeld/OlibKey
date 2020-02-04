@@ -34,9 +34,18 @@ namespace OlibPasswordManager.Windows
                     TxtPassword.Password));
                 App.MainWindow.PasswordList.ItemsSource = null;
                 App.MainWindow.PasswordList.ItemsSource = User.UsersList;
+                App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
+                App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
                 Global.MasterPassword = TxtPassword.Password;
-                App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/ChangePassword.xaml", UriKind.Relative));
+                App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
                 Additional.GlobalSettings.AppGlobalString = Additional.GlobalSettings.AppGlobalString;
+
+                App.MainWindow.SaveMenuItem.IsEnabled = true;
+                App.MainWindow.ChangeMenuItem.IsEnabled = true;
+                App.MainWindow.NewLoginMenuItem.IsEnabled = true;
+                App.MainWindow.UnlockMenuItem.IsEnabled = false;
+                App.MainWindow.LockMenuItem.IsEnabled = true;
+
                 Close();
             }
             catch

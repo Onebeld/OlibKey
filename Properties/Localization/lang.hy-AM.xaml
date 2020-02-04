@@ -22,6 +22,12 @@
     <v:String x:Key="Show">Ցույց տալ</v:String>
     <v:String x:Key="Complexity">Բարդությունը:</v:String>
     <v:String x:Key="ChangeP">Փոխել</v:String>
+    <v:String x:Key="Back">Ետ</v:String>
+
+    <v:String x:Key="ListOfItems">Նյութերի ցուցակ</v:String>
+    <v:String x:Key="LockStorage">Կողպեք պահոցը</v:String>
+    <v:String x:Key="UnlockStorage">Բացել պահեստը</v:String>
+    <v:String x:Key="ShowOPM">Ուցադրել Olib Password Manager</v:String>
     <!--#endregion-->
 
     <!--#region MessageBox-->
@@ -106,6 +112,10 @@
     <v:String x:Key="YearOfService">Ծառայության տարեթիվը</v:String>
     <v:String x:Key="SecurityCodeCard">Անվտանգության ծածկագիր</v:String>
 
+    <v:String x:Key="Passport">Անձնագիր</v:String>
+    <v:String x:Key="FullName">Ամբողջական անուն</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Անձնագրերի շարքը և համարը</v:String>
+    <v:String x:Key="PlaceOfIssue">Թողարկման վայրը</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Գործադրել</v:String>
     <v:String x:Key="Cancel">Չեղյալ</v:String>

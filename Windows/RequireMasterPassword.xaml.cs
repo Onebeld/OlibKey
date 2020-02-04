@@ -32,6 +32,7 @@ namespace OlibPasswordManager.Windows
                             Encryptor.DecryptString(Encryptor.DecryptString(s, TxtPassword.Password),
                                 TxtPassword.Password), TxtPassword.Password), TxtPassword.Password),
                     TxtPassword.Password));
+
                 App.MainWindow.PasswordList.ItemsSource = null;
                 App.MainWindow.PasswordList.ItemsSource = User.UsersList;
                 App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
@@ -45,6 +46,9 @@ namespace OlibPasswordManager.Windows
                 App.MainWindow.NewLoginMenuItem.IsEnabled = true;
                 App.MainWindow.UnlockMenuItem.IsEnabled = false;
                 App.MainWindow.LockMenuItem.IsEnabled = true;
+
+                App.MainWindow.LockNotifyIcon.IsEnabled = true;
+                App.MainWindow.UnlockNotifyIcon.IsEnabled = false;
 
                 Close();
             }

@@ -96,7 +96,7 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.2.0.228");
+            sw.Write("1.2.0.229");
 
             User.UsersList = new List<User>();
 
@@ -104,7 +104,8 @@ namespace OlibPasswordManager
 
             if (Additional.GlobalSettings.AppGlobalString != null)
             {
-                App.MainWindow.UnlockMenuItem.IsEnabled = false;
+                UnlockMenuItem.IsEnabled = false;
+                UnlockNotifyIcon.IsEnabled = false;
             }
 
             timer.Tick += TimerAutoSafe;
@@ -392,18 +393,22 @@ namespace OlibPasswordManager
         {
             Save(true);
 
-            App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
+            FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
 
-            App.MainWindow.SaveMenuItem.IsEnabled = false;
-            App.MainWindow.ChangeMenuItem.IsEnabled = false;
-            App.MainWindow.NewLoginMenuItem.IsEnabled = false;
-            App.MainWindow.UnlockMenuItem.IsEnabled = true;
-            App.MainWindow.LockMenuItem.IsEnabled = false;
+            SaveMenuItem.IsEnabled = false;
+            ChangeMenuItem.IsEnabled = false;
+            NewLoginMenuItem.IsEnabled = false;
+            UnlockMenuItem.IsEnabled = true;
+            LockMenuItem.IsEnabled = false;
+
+            LockNotifyIcon.IsEnabled = false;
+            UnlockNotifyIcon.IsEnabled = true;
+
 
             Global.MasterPassword = null;
 
-            App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
-            App.MainWindow.PasswordList.ItemsSource = null;
+            PasswordListNotifyIcon.ItemsSource = null;
+            PasswordList.ItemsSource = null;
             User.UsersList.Clear();
         }
     }

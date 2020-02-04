@@ -22,6 +22,12 @@
     <v:String x:Key="Show">Показать</v:String>
     <v:String x:Key="Complexity">Сложность:</v:String>
     <v:String x:Key="ChangeP">Изменить</v:String>
+    <v:String x:Key="Back">Назад</v:String>
+
+    <v:String x:Key="ListOfItems">Список элементов</v:String>
+    <v:String x:Key="LockStorage">Заблокировать хранилище</v:String>
+    <v:String x:Key="UnlockStorage">Разблокировать хранилище</v:String>
+    <v:String x:Key="ShowOPM">Показать Olib Password Manager</v:String>
     <!--#endregion-->
     
     <!--#region MessageBox-->
@@ -104,7 +110,11 @@
     <v:String x:Key="CardNumber">Номер</v:String>
     <v:String x:Key="YearOfService">Год обслуживания</v:String>
     <v:String x:Key="SecurityCodeCard">Код безопасности</v:String>
-    
+
+    <v:String x:Key="Passport">Паспорт</v:String>
+    <v:String x:Key="FullName">ФИО</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Серия и номер паспорта</v:String>
+    <v:String x:Key="PlaceOfIssue">Место выдачи</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Применить</v:String>
     <v:String x:Key="Cancel">Отмена</v:String>

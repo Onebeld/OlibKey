@@ -22,6 +22,12 @@
     <v:String x:Key="Show">Afficher</v:String>
     <v:String x:Key="Complexity">Difficulté:</v:String>
     <v:String x:Key="ChangeP">Modifier</v:String>
+    <v:String x:Key="Back">Retour</v:String>
+
+    <v:String x:Key="ListOfItems">Liste d'articles</v:String>
+    <v:String x:Key="LockStorage">Verrouiller le coffre-fort</v:String>
+    <v:String x:Key="UnlockStorage">Déverrouillez le stockage</v:String>
+    <v:String x:Key="ShowOPM">Afficher Olib Password Manager</v:String>
     <!--#endregion-->
 
     <!--#region MessageBox-->
@@ -105,6 +111,10 @@
     <v:String x:Key="YearOfService">Année de service</v:String>
     <v:String x:Key="SecurityCodeCard">Code de sécurité</v:String>
 
+    <v:String x:Key="Passport">Passeport</v:String>
+    <v:String x:Key="FullName">Nom complet</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Série et numéro de passeport</v:String>
+    <v:String x:Key="PlaceOfIssue">Lieu d'émission</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Pour postuler</v:String>
     <v:String x:Key="Cancel">Annuler</v:String>

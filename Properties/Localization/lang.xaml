@@ -22,6 +22,12 @@
     <v:String x:Key="Show">Schow</v:String>
     <v:String x:Key="Complexity">Complexity:</v:String>
     <v:String x:Key="ChangeP">Change</v:String>
+    <v:String x:Key="Back">Back</v:String>
+
+    <v:String x:Key="ListOfItems">List of items</v:String>
+    <v:String x:Key="LockStorage">Lock storage</v:String>
+    <v:String x:Key="UnlockStorage">Unlock storage</v:String>
+    <v:String x:Key="ShowOPM">Show Olib Password Manager</v:String>
     <!--#endregion-->
 
     <!--#region MessageBox-->
@@ -34,7 +40,7 @@
     <v:String x:Key="MB5">Failed to check for update</v:String>
     <v:String x:Key="MB6">You cannot require characters from an empty string!</v:String>
     <v:String x:Key="MB7">No checkmarks selected or password length specified!</v:String>
-    <v:String x:Key="MB8">На данный момент нет новых обновлений</v:String>
+    <v:String x:Key="MB8">There are no new updates at this time.</v:String>
     <v:String x:Key="Successfully">Successfully!</v:String>
     <!--#endregion-->
     
@@ -98,13 +104,17 @@
     <v:String x:Key="Update">Update:</v:String>
     <v:String x:Key="Type">Type</v:String>
     <v:String x:Key="Login">Login</v:String>
-    <v:String x:Key="BankCard">Bank card</v:String>
 
+    <v:String x:Key="BankCard">Bank card</v:String>
     <v:String x:Key="CardName">Cardholder Name</v:String>
     <v:String x:Key="CardNumber">Number</v:String>
     <v:String x:Key="YearOfService">Year of service</v:String>
     <v:String x:Key="SecurityCodeCard">Security code</v:String>
 
+    <v:String x:Key="Passport">Passport</v:String>
+    <v:String x:Key="FullName">Full name</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Passport Series and Number</v:String>
+    <v:String x:Key="PlaceOfIssue">Place of issue</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">To apply</v:String>
     <v:String x:Key="Cancel">Cancel</v:String>

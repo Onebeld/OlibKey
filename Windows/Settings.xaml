@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
+        Closing="Settings_OnClosing"
         FontFamily="{StaticResource Montserrat}"
         Title="{DynamicResource Settings}" Height="350" Width="450">
     <Grid>
         <StackPanel Margin="5">
-            <DockPanel>
+            <CheckBox x:Name="cbCollapsedWindow" Content="Скрыть программу при закрытии" Margin="10,0"/>
+            <DockPanel Margin="0,10,0,0">
                 <Label Content="{DynamicResource Language}" Width="80"/>
                 <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged"/>
             </DockPanel>

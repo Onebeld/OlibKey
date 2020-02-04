@@ -50,6 +50,9 @@ namespace OlibPasswordManager.Pages
             App.MainWindow.PasswordList.ItemsSource = null;
             App.MainWindow.PasswordList.ItemsSource = User.UsersList;
 
+            App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
+            App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
+
             App.MainWindow.PasswordList.SelectedIndex = User.IndexUser;
 
             NavigationService?.GoBack();

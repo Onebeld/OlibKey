@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Hardcodet.NotifyIcon.Wpf.NetCore/1.0.10": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.0/Hardcodet.Wpf.TaskbarNotification.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Hardcodet.Wpf.TaskbarNotification.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App"
+        ]
+      },
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -14,6 +26,20 @@
     }
   },
   "libraries": {
+    "Hardcodet.NotifyIcon.Wpf.NetCore/1.0.10": {
+      "sha512": "prJSwIir+xSCc3zvsAWtmE4hBx1WFL0iAf+ZSbhQ+sK8bC0Js0XjU8LeUi96FdB2IBpiAdLlcgEDfySJVy+EUA==",
+      "type": "package",
+      "path": "hardcodet.notifyicon.wpf.netcore/1.0.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "hardcodet.notifyicon.wpf.netcore.1.0.10.nupkg.sha512",
+        "hardcodet.notifyicon.wpf.netcore.nuspec",
+        "lib/netcoreapp3.0/Hardcodet.Wpf.TaskbarNotification.dll",
+        "lib/netcoreapp3.0/Hardcodet.Wpf.TaskbarNotification.xml"
+      ]
+    },
     "Newtonsoft.Json/12.0.3": {
       "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
@@ -48,6 +74,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Hardcodet.NotifyIcon.Wpf.NetCore >= 1.0.10",
       "Newtonsoft.Json >= 12.0.3"
     ]
   },
@@ -89,6 +116,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Hardcodet.NotifyIcon.Wpf.NetCore": {
+            "target": "Package",
+            "version": "[1.0.10, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[12.0.3, )"
@@ -107,6 +138,9 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App": {
+            "privateAssets": "none"
           },
           "Microsoft.WindowsDesktop.App.WPF": {
             "privateAssets": "none"

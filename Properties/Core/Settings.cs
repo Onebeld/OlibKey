@@ -26,5 +26,6 @@
         public bool GeneratorRequireOther { get; set; }
         public string GeneratorTextOther { get; set; }
         public string ApplyTheme { get; set; }
+        public bool CollapseOnClose { get; set; }
     }
 }

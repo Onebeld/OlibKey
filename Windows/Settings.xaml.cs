@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
 using OlibPasswordManager.Properties.Core;
 
 namespace OlibPasswordManager.Windows
@@ -47,6 +50,8 @@ namespace OlibPasswordManager.Windows
             };
             foreach (var i in valuePair1) CbLang.Items.Add(i);
 
+            cbCollapsedWindow.IsChecked = Additional.GlobalSettings.CollapseOnClose;
+
             CbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == GlobalSettings.Default.GlobalLanguage.Name);
         }
 
@@ -86,6 +91,14 @@ namespace OlibPasswordManager.Windows
             }
 
             _isFirstTheme = false;
+        }
+
+        private void Settings_OnClosing(object sender, CancelEventArgs e)
+        {
+            if (cbCollapsedWindow.IsChecked != null)
+                Additional.GlobalSettings.CollapseOnClose = (bool) cbCollapsedWindow.IsChecked;
+
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(Additional.GlobalSettings));
         }
     }
 }

@@ -30,8 +30,8 @@ namespace OlibPasswordManager.Windows
             CbTheme.SelectedValuePath = "Key";
             CbTheme.DisplayMemberPath = "Value";
             KeyValuePair<string, string>[] valuePair = {
-                new KeyValuePair<string, string>("Light", (string) Application.Current.Resources["Light"]),
-                new KeyValuePair<string, string>("Dark", (string) Application.Current.Resources["Dark"])
+                new KeyValuePair<string, string>("Light", (string)FindResource("Light")),
+                new KeyValuePair<string, string>("Dark", (string)FindResource("Dark"))
             };
             foreach (KeyValuePair<string, string> i in valuePair) CbTheme.Items.Add(i);
             CbTheme.SelectedIndex = Additional.GlobalSettings.ApplyTheme != null

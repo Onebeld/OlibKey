@@ -50,12 +50,14 @@ namespace OlibPasswordManager.Windows
                 App.MainWindow.LockNotifyIcon.IsEnabled = true;
                 App.MainWindow.UnlockNotifyIcon.IsEnabled = false;
 
+                App.MainWindow.AddButton.IsEnabled = true;
+
                 Close();
             }
             catch
             {
-                MessageBox.Show((string) Application.Current.Resources["MB3"],
-                    (string) Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)FindResource("MB3"),
+                    (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -191,7 +191,7 @@
                             <RowDefinition/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Content="{DynamicResource ListOfItems}" VerticalContentAlignment="Center" FontSize="16" FontFamily="{StaticResource Montserrat}" Foreground="White"/>
+                        <Label Grid.Row="0" Content="{DynamicResource ListOfItems}" VerticalContentAlignment="Center" FontSize="16" FontFamily="{StaticResource Montserrat}" Foreground="{DynamicResource ForegroundWindow}"/>
                         <ListBox x:Name="PasswordListNotifyIcon" FontFamily="{StaticResource Montserrat}" SelectionChanged="PasswordListNotifyIcon_OnSelectionChanged" Background="{DynamicResource BackgroundWindow}" BorderBrush="{DynamicResource PageBordersColor}" Grid.Row="1" VirtualizingPanel.ScrollUnit="Pixel" ItemTemplate="{StaticResource PasswordF}"/>
                         <Border x:Name="BorderInformation" Visibility="Collapsed" Grid.Row="0" Grid.RowSpan="3" Background="#FF5A0F26">
                             <Grid>
@@ -229,7 +229,7 @@
                                         </Border>
                                         <Border Style="{DynamicResource PageBorder}" x:Name="bPassportPlaceOfIssue">
                                             <StackPanel>
-                                                <Label Content="Место выдачи" Foreground="{DynamicResource ForegroundWindow}"/>
+                                                <Label Content="{DynamicResource PlaceOfIssue}" Foreground="{DynamicResource ForegroundWindow}"/>
                                                 <TextBox x:Name="txtPassportPlaceOfIssue" Margin="5"/>
                                             </StackPanel>
                                         </Border>
@@ -327,7 +327,7 @@
 
         <ListBox x:Name="PasswordList" Background="{DynamicResource BackgroundWindow}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" ItemTemplate="{StaticResource PasswordF}" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged"/>
             <Border Grid.Column="1" Grid.Row="3" Background="{DynamicResource GlobalBorderColor}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,1,0" >
-            <Button Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>
+            <Button x:Name="AddButton" IsEnabled="False" Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>
         </Border>
         <Border Grid.Column="1" Grid.Row="1" Background="#931d60" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,1">
             <DockPanel Margin="10">

@@ -12,6 +12,10 @@
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Montserrat">./Properties/Fonts/Montserrat-Regular.ttf#Montserrat</FontFamily>
 
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="{StaticResource Montserrat}"/>
+            </Style>
+
             <Style TargetType="{x:Type PasswordBox}">
                 <Setter Property="PasswordChar" Value="●" />
                 <Setter Property="BorderThickness" Value="1" />

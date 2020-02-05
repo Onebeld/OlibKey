@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0.235] - 2020-02-05
+### Added
+- Dark theme added.
+- Added taskbar icon.
+- Added the ability to encrypt passports.
+- Added autosave storage in three minutes.
+- Added a theme selection to the settings window.
+- Added the ability to lock and unlock storage.
+- Added a small window when you click on the icon in the taskbar, allowing you to view passwords and nothing more.
+
+### Changed
+- Changed the appearance of the settings window.
+- The appearance of the program is slightly changed.
+- The storage encryption logic has been slightly changed.
+- The localization is slightly changed.
+- Now you will not be able to add a login until you create or unlock a storage.
+- The background color of the windows is changed.
+
+### Fixed
+- Fixed a bug when selecting an item from the list, instead of a login, data for a bank card was displayed.
+
 ## [1.1.0.145] - 2020-01-18
 ### Added
 - Additional hotkeys added.
@@ -24,5 +45,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed termination of the program when there are no connected storages yet.
 
 ## [1.0.0.90] - 2020-01-10
-### Added
 - First release.

@@ -37,6 +37,26 @@ Var StartMenuFolder
 !insertmacro MUI_LANGUAGE "Russian"
 !insertmacro MUI_LANGUAGE "Armenian"
 !insertmacro MUI_LANGUAGE "Ukrainian"
+
+LangString DESC_OPM ${LANG_ENGLISH} "Install Olib Password Manager"
+LangString DESC_OPM ${LANG_GERMAN} "Installation Olib Password Manager"
+LangString DESC_OPM ${LANG_FRENCH} "L'installation Olib Password Manager"
+LangString DESC_OPM ${LANG_RUSSIAN} "Установка Olib Password Manager"
+LangString DESC_OPM ${LANG_ARMENIAN} "Տեղադրում Olib Password Manager"
+LangString DESC_OPM ${LANG_UKRAINIAN} "Установка Olib Password Manager"
+
+LangString DESC_Core ${LANG_ENGLISH} "Install .NET Core 3.1. Need to run the program."
+LangString DESC_Core ${LANG_GERMAN} "Installation .NET Core 3.1. Erforderlich, um das Programm auszuführen."
+LangString DESC_Core ${LANG_FRENCH} "L'installation .NET Core 3.1. Requis pour exécuter le programme"
+LangString DESC_Core ${LANG_RUSSIAN} "Установка .NET Core 3.1. Необходим для запуска программы"
+LangString DESC_Core ${LANG_ARMENIAN} "Տեղադրում .NET Core 3.1. Ծրագիրը գործարկելու համար պահանջվում է:"
+LangString DESC_Core ${LANG_UKRAINIAN} "Установка .NET Core 3.1. Необхідний для запуску програми"
+
+!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
+    !insertmacro MUI_DESCRIPTION_TEXT ${opm} $(DESC_OPM)
+    !insertmacro MUI_DESCRIPTION_TEXT ${core} $(DESC_Core)
+!insertmacro MUI_FUNCTION_DESCRIPTION_END
+
 Section "Olib Password Manager" opm
     SetOutPath $INSTDIR
     File OlibPasswordManager.exe
@@ -64,8 +84,14 @@ Section ".NET Core 3.1" core
 SectionEnd
 
 Section "Uninstall"
-    Delete "Uninstall.exe"
+    Delete "OlibPasswordManager.exe"
+    Delete "OlibPasswordManager.dll"
+    Delete "Newtonsoft.Json.dll"
+    Delete "OlibPasswordManager.deps.json"
+    Delete "OlibPasswordManager.runtimeconfig.dev.json"
+    Delete "OlibPasswordManager.runtimeconfig.json"
     DeleteRegKey /ifempty HKCU "Software\OlibPasswordManager"
+    Delete "Uninstall.exe"
     RMDir "$INSTDIR"
 
     !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder

@@ -95,14 +95,19 @@ namespace OlibPasswordManager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.2.0.230");
+            //using var sw = new StreamWriter("Build.txt");
+            //sw.Write("1.2.0.233");
 
             User.UsersList = new List<User>();
 
             System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
 
             if (Additional.GlobalSettings.AppGlobalString != null)
+            {
+                UnlockMenuItem.IsEnabled = true;
+                UnlockNotifyIcon.IsEnabled = true;
+            }
+            else
             {
                 UnlockMenuItem.IsEnabled = false;
                 UnlockNotifyIcon.IsEnabled = false;
@@ -145,8 +150,8 @@ namespace OlibPasswordManager
             catch
             {
                 if (b)
-                    MessageBox.Show((string) Application.Current.Resources["MB1"],
-                        (string) Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show((string)FindResource("MB1"),
+                        (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -227,14 +232,14 @@ namespace OlibPasswordManager
                 var current = float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
                 if (!(latest > current) && b)
                 {
-                    MessageBox.Show((string) Application.Current.Resources["MB8"],
-                        (string) Application.Current.Resources["Message"], MessageBoxButton.OK,
+                    MessageBox.Show((string)FindResource("MB8"),
+                        (string)FindResource("Message"), MessageBoxButton.OK,
                         MessageBoxImage.Information);
                     return;
                 }
                 if (!(latest > current)) return;
-                if (MessageBox.Show((string)Application.Current.Resources["MB4"],
-                        (string)Application.Current.Resources["Message"], MessageBoxButton.YesNo,
+                if (MessageBox.Show((string)FindResource("MB4"),
+                        (string)FindResource("Message"), MessageBoxButton.YesNo,
                         MessageBoxImage.Information) != MessageBoxResult.Yes) return;
                 var psi = new ProcessStartInfo
                 {
@@ -247,8 +252,8 @@ namespace OlibPasswordManager
             {
                 if (b)
                 {
-                    MessageBox.Show((string) Application.Current.Resources["MB5"],
-                        (string) Application.Current.Resources["Error"], MessageBoxButton.OK,
+                    MessageBox.Show((string)FindResource("MB5"),
+                        (string)FindResource("Error"), MessageBoxButton.OK,
                         MessageBoxImage.Error);
                 }
             }
@@ -394,6 +399,8 @@ namespace OlibPasswordManager
             Save(true);
 
             FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
+
+            AddButton.IsEnabled = false;
 
             SaveMenuItem.IsEnabled = false;
             ChangeMenuItem.IsEnabled = false;

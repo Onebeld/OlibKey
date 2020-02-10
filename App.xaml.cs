@@ -16,7 +16,6 @@ namespace OlibPasswordManager
     {
         public new static MainWindow MainWindow;
         private static ResourceDictionary ResourceTheme;
-        public static NotifyIconOPM IconOpm;
 
         private static List<CultureInfo> Languages => new List<CultureInfo>();
 

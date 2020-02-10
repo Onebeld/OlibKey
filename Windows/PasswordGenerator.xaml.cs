@@ -83,7 +83,23 @@ namespace OlibPasswordManager.Windows
 
         private void SavePassword(object sender, RoutedEventArgs e)
         {
+            string p, c;
             if (TxtPassword.Text.Length < 1) TxtPassword.Text = RandomPassword();
+
+            using (StreamWriter outputFile = new StreamWriter("password.txt"))
+            {
+                outputFile.WriteLine("Complexity;Password");
+
+                for (int i = 0; i < 5000; i++)
+                {
+                    p = RandomPassword();
+                    c = PasswordUtils.CheckPasswordStrength(p).ToString();
+
+                    outputFile.WriteLine($"{c};{p}");
+                }
+            }
+            
+
             DialogResult = true;
             Close();
         }

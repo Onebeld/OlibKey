@@ -145,4 +145,16 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+    <DrawingImage x:Key="FacebookDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V257.7 H257.7 V0 H0 Z">
+                <DrawingGroup Transform="1,0,0,1,-4.6,-4.6">
+                    <GeometryDrawing Brush="#FF157DC3" Geometry="F1 M257.7,257.7z M0,0z M248.1,262.3A14.19,14.19,0,0,0,262.3,248.1L262.3,18.8A14.19,14.19,0,0,0,248.1,4.6L18.8,4.6A14.25,14.25,0,0,0,4.6,18.8L4.6,248.1A14.19,14.19,0,0,0,18.8,262.3z" />
+                </DrawingGroup>
+                <DrawingGroup Transform="1,0,0,1,-4.6,-4.6">
+                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M257.7,257.7z M0,0z M182.4,262.3L182.4,162.5 215.9,162.5 220.9,123.6 182.4,123.6 182.4,98.8C182.4,87.5,185.5,79.9,201.7,79.9L222.3,79.9 222.3,45A272.24,272.24,0,0,0,192.3,43.5C162.6,43.5,142.3,61.6,142.3,94.9L142.3,123.6 108.7,123.6 108.7,162.5 142.3,162.5 142.3,262.3z" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>

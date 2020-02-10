@@ -44,6 +44,11 @@
                             <Image Source="{StaticResource GitHubDrawingImage}"/>
                         </Button.Content>
                     </Button>
+                    <Button Margin="5,10" Padding="5" Click="Button_Click_3">
+                        <Button.Content>
+                            <Image Source="{StaticResource FacebookDrawingImage}"/>
+                        </Button.Content>
+                    </Button>
                 </StackPanel>
                 <Button Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Padding="10,5" Margin="10" Click="Button_Click"/>
             </Grid>

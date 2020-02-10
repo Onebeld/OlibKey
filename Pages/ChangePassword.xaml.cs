@@ -27,15 +27,15 @@ namespace OlibPasswordManager.Pages
             switch (User.UsersList[User.IndexUser].Type)
             {
                 case 0:
+                    User.UsersList[User.IndexUser].PasswordName = TxtNameAccount.Text;
+                    User.UsersList[User.IndexUser].Password = TxtPassword.Password;
+                    User.UsersList[User.IndexUser].WebSite = TxtWebSite.Text;
+                    break;
+                case 1:
                     User.UsersList[User.IndexUser].CardName = TxtCardName.Text;
                     User.UsersList[User.IndexUser].PasswordName = TxtCardNumber.Text;
                     User.UsersList[User.IndexUser].DateCard = TxtDate.Text;
                     User.UsersList[User.IndexUser].SecurityCode = TxtSecurityCode.Password;
-                    break;
-                case 1:
-                    User.UsersList[User.IndexUser].PasswordName = TxtNameAccount.Text;
-                    User.UsersList[User.IndexUser].Password = TxtPassword.Password;
-                    User.UsersList[User.IndexUser].WebSite = TxtWebSite.Text;
                     break;
                 case 2:
                     User.UsersList[User.IndexUser].PasswordName = txtPassportName.Text;

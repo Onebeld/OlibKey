@@ -9,6 +9,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Hardcodet.Wpf.TaskbarNotification;
+using OlibPasswordManager.Properties.Core;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -269,7 +271,7 @@ namespace OlibPasswordManager.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.2.0.160;component/pages/changepassword.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.235;component/pages/changepassword.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\ChangePassword.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

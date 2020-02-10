@@ -95,8 +95,8 @@ namespace OlibPasswordManager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //using var sw = new StreamWriter("Build.txt");
-            //sw.Write("1.2.0.233");
+            using var sw = new StreamWriter("Build.txt");
+            sw.Write("1.3.0.235");
 
             User.UsersList = new List<User>();
 

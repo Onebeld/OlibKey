@@ -29,5 +29,15 @@ namespace OlibPasswordManager.Windows
             };
             Process.Start(psi);
         }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = "https://www.facebook.com/olibpasswordmanager/",
+                UseShellExecute = true
+            };
+            Process.Start(psi);
+        }
     }
 }

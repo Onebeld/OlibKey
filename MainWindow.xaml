@@ -123,7 +123,7 @@
             </MenuItem>
         </Menu>
 
-        <tb:TaskbarIcon Grid.Row="0" Grid.Column="0" x:Name="myNotifyIcon"
+        <tb:TaskbarIcon x:Name="asd" Grid.Row="0" Grid.Column="0" x:Name="myNotifyIcon"
                         Visibility="Visible"
                         ToolTipText="Olib Password Manager"
                         IconSource="./icon.ico"

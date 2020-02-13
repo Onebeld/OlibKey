@@ -5,6 +5,12 @@
 
 Olib Password Manager is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET Core 3.1 WPF.
 
+For feedback and the latest news, use the links below:
+
+[Facebook](https://www.facebook.com/olibpasswordmanager/?ref=aymt_homepage_panel&eid=ARAA4Mn8v3ZSafKTICcoEgyj6FJ8K-uk8ZuGpGJKJFaayB8eXGf4IHUWrmIMkLhctf9m2oBQFtj7_vKm) - the rest of the community.
+
+[VKontakte](https://www.facebook.com/olibpasswordmanager/?ref=aymt_homepage_panel&eid=ARAA4Mn8v3ZSafKTICcoEgyj6FJ8K-uk8ZuGpGJKJFaayB8eXGf4IHUWrmIMkLhctf9m2oBQFtj7_vKm) - only Russian community.
+
 ## Why this project?
 There are many different password managers. One is free, the other is paid, the third has the most functionality, and the fourth has less. **My goal of this project** is to combine the best of other managers and implement it together.
 

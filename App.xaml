@@ -11,11 +11,6 @@
                 <ResourceDictionary Source="/Properties/Themes/Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <FontFamily x:Key="Montserrat">./Properties/Fonts/Montserrat-Regular.ttf#Montserrat</FontFamily>
-
-            <Style TargetType="{x:Type Label}">
-                <Setter Property="FontFamily" Value="{StaticResource Montserrat}"/>
-            </Style>
-
             <Style TargetType="{x:Type PasswordBox}">
                 <Setter Property="PasswordChar" Value="●" />
                 <Setter Property="BorderThickness" Value="1" />
@@ -61,7 +56,7 @@
             </Style>
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
-                    <Setter Property="Template">
+                <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type TextBox}">
                             <Border x:Name="border" BorderThickness="1" CornerRadius="5" Background="{DynamicResource BackgroundWindow}" BorderBrush="{DynamicResource BorderColorWindow}"
@@ -91,6 +86,15 @@
                                 Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                     </MultiTrigger>
                 </Style.Triggers>
+            </Style>
+            <Style x:Key="FocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Geometry x:Key="Checkmark">F1 M 10.0,1.2 L 4.7,9.1 L 4.5,9.1 L 0,5.2 L 1.3,3.5 L 4.3,6.1L 8.3,0 L 10.0,1.2 Z</Geometry>
             <ControlTemplate x:Key="MenuItemTemplate1" TargetType="{x:Type MenuItem}">
@@ -174,6 +178,53 @@
                 <Setter Property="Margin" Value="0,5" />
                 <Setter Property="BorderBrush" Value="{DynamicResource PageBordersColor}" />
                 <Setter Property="BorderThickness" Value="1" />
+            </Style>
+
+            <Style TargetType="{x:Type ListBoxItem}">
+                <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Border x:Name="Bd" Background="Transparent" SnapsToDevicePixels="true">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border x:Name="Bd2" Background="Transparent"/>
+                                    <ContentPresenter Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource HoverBackground}"/>
+                                    <Setter Property="Background" TargetName="Bd2" Value="{DynamicResource HoverBackground}"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource HoverBackground}"/>
+                                    <Setter Property="Background" TargetName="Bd2" Value="#931d60"/>
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                        <Condition Property="IsSelected" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="Background" TargetName="Bd" Value="{DynamicResource HoverBackground}"/>
+                                    <Setter Property="Background" TargetName="Bd2" Value="#931d60"/>
+                                </MultiTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

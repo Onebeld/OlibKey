@@ -32,6 +32,8 @@ namespace OlibPasswordManager
         #region Pages
         private CreatePassword _passwordPage;
         private PasswordInformation _passwordInformation;
+
+        private string PageTitle;
         #endregion
         public MainWindow() => InitializeComponent();
         #region OpenWindow
@@ -48,37 +50,9 @@ namespace OlibPasswordManager
             new ChangeMasterPassword().ShowDialog();
 
         #endregion
-        #region CopyText
-        private void CopyPassword(object sender, RoutedEventArgs e)
-        {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtPassword.Password);
-        }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtNameAccount.Text);
-        }
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtWebSite.Text);
-        }
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtCardNumber.Text);
-        }
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtSecurityCode.Password);
-        }
-        #endregion
         #region Timers
         private void TimerAutoSafe(object sender, EventArgs e) => Save(false);
         #endregion
-
         private void ClosedApplication(object sender, RoutedEventArgs e)
         {
             File.WriteAllText("settings.json", JsonConvert.SerializeObject(Additional.GlobalSettings));
@@ -96,7 +70,7 @@ namespace OlibPasswordManager
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.3.0.235");
+            sw.Write("1.3.0.250");
 
             User.UsersList = new List<User>();
 
@@ -118,7 +92,9 @@ namespace OlibPasswordManager
             timer.Start();
 
             CheckUpdate(false);
-            if (Additional.GlobalSettings.AppGlobalString != null) new RequireMasterPassword().ShowDialog();
+            if (Additional.GlobalSettings.AppGlobalString != null)
+                if (File.Exists(Additional.GlobalSettings.AppGlobalString))
+                    new RequireMasterPassword().ShowDialog();
         }
 
         private void OpenCreateData(object sender, RoutedEventArgs e)
@@ -171,11 +147,21 @@ namespace OlibPasswordManager
         private void PasswordList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (PasswordList.SelectedItem == null) return;
-            _passwordInformation = new PasswordInformation();
 
             User.IndexUser = PasswordList.SelectedIndex;
 
-            FrameWindow.NavigationService.Navigate(_passwordInformation);
+            if (_passwordInformation is null)
+            {
+                _passwordInformation = new PasswordInformation();
+                FrameWindow.NavigationService.Navigate(_passwordInformation);
+            }
+            if (PageTitle != "JGftyILgb458")
+            {
+                FrameWindow.NavigationService.Navigate(_passwordInformation);
+            }
+
+            _passwordInformation.PageControl.Load();
+
         }
 
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -277,117 +263,9 @@ namespace OlibPasswordManager
         private void PasswordListNotifyIcon_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (PasswordListNotifyIcon.SelectedIndex == -1) return;
-
             User.IndexUser = PasswordListNotifyIcon.SelectedIndex;
-
-            TxtName.Text = User.UsersList[User.IndexUser].Name;
-            TxtNameAccount.Text = User.UsersList[User.IndexUser].PasswordName;
-            TxtPassword.Password = User.UsersList[User.IndexUser].Password;
-            TxtWebSite.Text = User.UsersList[User.IndexUser].WebSite;
-            LabelCreateData.Content = User.UsersList[User.IndexUser].TimeCreate;
-            LabelChangeData.Content = User.UsersList[User.IndexUser].TimeChanged;
-            TxtNote.Text = User.UsersList[User.IndexUser].Note;
-
-            TxtCardName.Text = User.UsersList[User.IndexUser].CardName;
-            TxtCardNumber.Text = User.UsersList[User.IndexUser].PasswordName;
-            TxtDate.Text = User.UsersList[User.IndexUser].DateCard;
-            TxtSecurityCode.Password = User.UsersList[User.IndexUser].SecurityCode;
-
-            txtPassportName.Text = User.UsersList[User.IndexUser].PasswordName;
-            txtPassportNumber.Text = User.UsersList[User.IndexUser].PassportNumber;
-            txtPassportPlaceOfIssue.Text = User.UsersList[User.IndexUser].PassportPlaceOfIssue;
-
-            BrNote.Visibility = TxtNote.Text == "" ? Visibility.Collapsed : Visibility.Visible;
-            BWebSite.Visibility = TxtWebSite.Text == "" ? Visibility.Collapsed : Visibility.Visible;
-
-            TxtLabelChange.Visibility = User.UsersList[User.IndexUser].TimeChanged == null ? Visibility.Collapsed : Visibility.Visible;
-            switch (User.UsersList[User.IndexUser].Type)
-            {
-                case 0:
-                    BCardName.Visibility = Visibility.Collapsed;
-                    BCardNumber.Visibility = Visibility.Collapsed;
-                    BDate.Visibility = Visibility.Collapsed;
-                    BSecurityCode.Visibility = Visibility.Collapsed;
-                    bPassportName.Visibility = Visibility.Collapsed;
-                    bPassportNumber.Visibility = Visibility.Collapsed;
-                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
-                    break;
-                case 1:
-                    BUsername.Visibility = Visibility.Collapsed;
-                    BPassword.Visibility = Visibility.Collapsed;
-                    BWebSite.Visibility = Visibility.Collapsed;
-                    bPassportName.Visibility = Visibility.Collapsed;
-                    bPassportNumber.Visibility = Visibility.Collapsed;
-                    bPassportPlaceOfIssue.Visibility = Visibility.Collapsed;
-                    break;
-                case 2:
-                    BUsername.Visibility = Visibility.Collapsed;
-                    BPassword.Visibility = Visibility.Collapsed;
-                    BWebSite.Visibility = Visibility.Collapsed;
-                    BCardName.Visibility = Visibility.Collapsed;
-                    BCardNumber.Visibility = Visibility.Collapsed;
-                    BDate.Visibility = Visibility.Collapsed;
-                    BSecurityCode.Visibility = Visibility.Collapsed;
-                    break;
-            }
-
+            NotifyControl.Load();
             BorderInformation.Visibility = Visibility.Visible;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            var psi = new ProcessStartInfo
-            {
-                FileName = "http://" + TxtWebSite.Text,
-                UseShellExecute = true
-            };
-            Process.Start(psi);
-        }
-
-
-        private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordBox b = (PasswordBox)sender;
-            PbHard.Value = PasswordUtils.CheckPasswordStrength(b.Password);
-        }
-
-        private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
-
-        private void TxtSecurityCodeCollapsed_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (CbSecurityCodeHide.IsChecked != null && (bool)CbSecurityCodeHide.IsChecked) TxtSecurityCode.Password = TxtSecurityCodeCollapsed.Text;
-        }
-
-        private void CbSecurityCodeHide_OnChecked(object sender, RoutedEventArgs e)
-        {
-            if (CbSecurityCodeHide.IsChecked != null && (bool)CbSecurityCodeHide.IsChecked)
-            {
-                TxtSecurityCode.Visibility = Visibility.Collapsed;
-                TxtSecurityCodeCollapsed.Text = TxtPassword.Password;
-                TxtSecurityCodeCollapsed.Visibility = Visibility.Visible;
-            }
-            else if (CbSecurityCodeHide.IsChecked != null && !(bool)CbSecurityCodeHide.IsChecked)
-            {
-                TxtSecurityCode.Visibility = Visibility.Visible;
-                TxtSecurityCodeCollapsed.Visibility = Visibility.Collapsed;
-                TxtSecurityCodeCollapsed.Text = string.Empty;
-            }
-        }
-
-        private void CollapsedPassword(object sender, RoutedEventArgs e)
-        {
-            if (CbHide.IsChecked != null && (bool)CbHide.IsChecked)
-            {
-                TxtPassword.Visibility = Visibility.Collapsed;
-                TxtPasswordCollapsed.Text = TxtPassword.Password;
-                TxtPasswordCollapsed.Visibility = Visibility.Visible;
-            }
-            else if (CbHide.IsChecked != null && !(bool)CbHide.IsChecked)
-            {
-                TxtPassword.Visibility = Visibility.Visible;
-                TxtPasswordCollapsed.Visibility = Visibility.Collapsed;
-                TxtPasswordCollapsed.Text = string.Empty;
-            }
         }
 
         private void UnlockMenuItem_OnClick(object sender, RoutedEventArgs e) => OpenRequireMasterPassword();
@@ -411,12 +289,13 @@ namespace OlibPasswordManager
             LockNotifyIcon.IsEnabled = false;
             UnlockNotifyIcon.IsEnabled = true;
 
-
             Global.MasterPassword = null;
 
             PasswordListNotifyIcon.ItemsSource = null;
             PasswordList.ItemsSource = null;
             User.UsersList.Clear();
         }
+
+        private void FrameWindow_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e) => PageTitle = ((Page)e.Content).Title;
     }
 }

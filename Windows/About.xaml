@@ -8,9 +8,10 @@
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
         FontFamily="{StaticResource Montserrat}"
+        Background="#FF5A0F26"
         MinHeight="300"
         MinWidth="350"
-        Title="{DynamicResource AboutPrograms}" Height="300" Width="350" Background="#FF5A0F26">
+        Title="{DynamicResource AboutPrograms}" Height="300" Width="350">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

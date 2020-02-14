@@ -97,9 +97,6 @@ namespace OlibPasswordManager
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using var sw = new StreamWriter("Build.txt");
-            sw.Write("1.3.0.264");
-
             User.UsersList = new List<User>();
 
             System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
@@ -116,7 +113,7 @@ namespace OlibPasswordManager
             }
 
             timer.Tick += TimerAutoSafe;
-            timer.Interval = new TimeSpan(0, 3, 0);
+            timer.Interval = new TimeSpan(0, 2, 0);
             timer.Start();
 
             CheckUpdate(false);
@@ -153,6 +150,7 @@ namespace OlibPasswordManager
                                 Encryptor.EncryptString(Encryptor.EncryptString(json, MasterPassword),
                                     MasterPassword), MasterPassword), MasterPassword),
                         MasterPassword));
+                IconSave();
             }
             catch
             {
@@ -160,6 +158,33 @@ namespace OlibPasswordManager
                     MessageBox.Show((string)FindResource("MB1"),
                         (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private async void IconSave()
+        {
+            saveIcon.Visibility = Visibility.Visible;
+            DoubleAnimation anim = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                DecelerationRatio = 0.5,
+                AccelerationRatio = 0.5,
+                From = 0,
+                To = 1,
+            };
+            Timeline.SetDesiredFrameRate(anim, 60);
+            saveIcon.BeginAnimation(OpacityProperty, anim);
+            await Task.Delay(2000);
+            DoubleAnimation anim1 = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                DecelerationRatio = 0.5,
+                AccelerationRatio = 0.5,
+                From = saveIcon.Opacity,
+                To = 0
+            };
+            anim1.Completed += (s, r) => saveIcon.Visibility = Visibility.Collapsed;
+            Timeline.SetDesiredFrameRate(anim1, 60);
+            saveIcon.BeginAnimation(OpacityProperty, anim1);
         }
 
         private void OpenBase(object sender, RoutedEventArgs e) => DopOpenBase();

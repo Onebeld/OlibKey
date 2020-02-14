@@ -56,7 +56,7 @@
                 <AccessText x:Name="NotText" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="White"/>
             </DockPanel>
         </Border>
-        
+        <Image x:Name="saveIcon" Grid.Column="2" Opacity="0" Visibility="Collapsed" Grid.Row="1" Panel.ZIndex="10" Source="{StaticResource saveDrawingImage}" Margin="5" HorizontalAlignment="Right"/>
         <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}" BorderBrush="{DynamicResource PageBordersColor}">
             <MenuItem Header="{DynamicResource File}">
                 <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData" Template="{DynamicResource MenuItemTemplate1}"/>
@@ -79,7 +79,7 @@
                 <MenuItem Header="{DynamicResource AboutPrograms}" Click="OpenAboutWindow" Template="{DynamicResource MenuItemTemplate1}"/>
             </MenuItem>
         </Menu>
-
+        
         <tb:TaskbarIcon Grid.Row="0" Grid.Column="0"
                         Visibility="Visible"
                         ToolTipText="Olib Password Manager"
@@ -129,7 +129,7 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-
+        
         <ListBox x:Name="PasswordList" Background="{DynamicResource BackgroundWindow}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,0,1,0" Grid.Row="2" VirtualizingPanel.ScrollUnit="Pixel" ItemTemplate="{StaticResource PasswordF}" Grid.Column="1" SelectionChanged="PasswordList_SelectionChanged"/>
             <Border Grid.Column="1" Grid.Row="3" Background="{DynamicResource GlobalBorderColor}" BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,1,0" >
             <Button x:Name="AddButton" IsEnabled="False" Content="{DynamicResource Add}" Margin="10" Click="CreatePassword"/>

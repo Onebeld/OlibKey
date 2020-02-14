@@ -269,7 +269,7 @@ namespace OlibPasswordManager.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.235;component/pages/changepassword.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.266;component/pages/changepassword.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\ChangePassword.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

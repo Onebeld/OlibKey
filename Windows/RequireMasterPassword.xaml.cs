@@ -60,7 +60,6 @@ namespace OlibPasswordManager.Windows
                     (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void Window_Loaded(object sender, RoutedEventArgs e) => TxtPassword.Focus();
     }
 }

@@ -33,7 +33,7 @@ namespace OlibPasswordManager.Windows
                 new KeyValuePair<string, string>("Light", (string)FindResource("Light")),
                 new KeyValuePair<string, string>("Dark", (string)FindResource("Dark"))
             };
-            foreach (KeyValuePair<string, string> i in valuePair) CbTheme.Items.Add(i);
+            foreach (var i in valuePair) CbTheme.Items.Add(i);
             CbTheme.SelectedIndex = Additional.GlobalSettings.ApplyTheme != null
                     ? valuePair.ToList().FindIndex(i => i.Key == Additional.GlobalSettings.ApplyTheme)
                     : 0;
@@ -49,9 +49,7 @@ namespace OlibPasswordManager.Windows
                 new KeyValuePair<string, string>("hy-AM", "Հայերեն")
             };
             foreach (var i in valuePair1) CbLang.Items.Add(i);
-
             cbCollapsedWindow.IsChecked = Additional.GlobalSettings.CollapseOnClose;
-
             CbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == GlobalSettings.Default.GlobalLanguage.Name);
         }
 
@@ -90,7 +88,6 @@ namespace OlibPasswordManager.Windows
                 }
                 else Application.Current.Resources.MergedDictionaries.Add(dict);
             }
-
             _isFirstTheme = false;
         }
 
@@ -98,7 +95,6 @@ namespace OlibPasswordManager.Windows
         {
             if (cbCollapsedWindow.IsChecked != null)
                 Additional.GlobalSettings.CollapseOnClose = (bool) cbCollapsedWindow.IsChecked;
-
             File.WriteAllText("settings.json", JsonConvert.SerializeObject(Additional.GlobalSettings));
         }
     }

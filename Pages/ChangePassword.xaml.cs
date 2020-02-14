@@ -56,6 +56,8 @@ namespace OlibPasswordManager.Pages
             App.MainWindow.PasswordList.SelectedIndex = User.IndexUser;
 
             NavigationService?.GoBack();
+
+            App.MainWindow.Notification((string)FindResource("Not2"));
         }
 
         private void CollapsedPassword(object sender, RoutedEventArgs e)

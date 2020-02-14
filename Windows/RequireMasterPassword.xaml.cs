@@ -37,7 +37,7 @@ namespace OlibPasswordManager.Windows
                 App.MainWindow.PasswordList.ItemsSource = User.UsersList;
                 App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
                 App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
-                Global.MasterPassword = TxtPassword.Password;
+                App.MainWindow.MasterPassword = TxtPassword.Password;
                 App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
                 Additional.GlobalSettings.AppGlobalString = Additional.GlobalSettings.AppGlobalString;
 

@@ -49,6 +49,14 @@
             <RowDefinition/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
+
+        <Border x:Name="bNotification" Opacity="0" Visibility="Collapsed" Grid.Column="2" Grid.Row="1" Panel.ZIndex="10" Margin="5" Width="Auto" CornerRadius="5" Background="Green" HorizontalAlignment="Right">
+            <DockPanel Margin="5">
+                <Image Source="{StaticResource TickMarkDrawingImage}"  Margin="0,0,15,0"/>
+                <AccessText x:Name="NotText" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="White"/>
+            </DockPanel>
+        </Border>
+        
         <Menu Grid.ColumnSpan="3" FontFamily="{StaticResource Montserrat}" BorderBrush="{DynamicResource PageBordersColor}">
             <MenuItem Header="{DynamicResource File}">
                 <MenuItem Header="{DynamicResource CreateBase}" Click="OpenCreateData" Template="{DynamicResource MenuItemTemplate1}"/>

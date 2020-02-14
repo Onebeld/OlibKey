@@ -44,6 +44,12 @@
     <v:String x:Key="Successfully">Erfolgreich!</v:String>
     <!--#endregion-->
 
+    <!--#region Notifications-->
+    <v:String x:Key="Not1">Artikel erfolgreich gespeichert!</v:String>
+    <v:String x:Key="Not2">Artikel erfolgreich geändert!</v:String>
+    <v:String x:Key="Not3">Speicher erfolgreich erstellt!</v:String>
+    <!--#endregion-->
+
     <!--#region Windows-->
     <!--#region PasswordGenerator-->
     <v:String x:Key="Specifications">Eigenschaften</v:String>

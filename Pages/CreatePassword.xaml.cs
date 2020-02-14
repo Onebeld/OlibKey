@@ -96,6 +96,8 @@ namespace OlibPasswordManager.Pages
             App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
 
             NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
+
+            App.MainWindow.Notification((string)FindResource("Not1"));
         }
         private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {

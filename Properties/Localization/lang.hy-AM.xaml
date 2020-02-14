@@ -44,6 +44,12 @@
     <v:String x:Key="Successfully">Հաջող!</v:String>
     <!--#endregion-->
 
+    <!--#region Notifications-->
+    <v:String x:Key="Not1">Ապրանքը հաջողությամբ պահպանվեց:</v:String>
+    <v:String x:Key="Not2">Նյութը հաջողությամբ փոփոխված է:</v:String>
+    <v:String x:Key="Not3">Պահպանումը հաջողությամբ ստեղծվեց:</v:String>
+    <!--#endregion-->
+    
     <!--#region Windows-->
     <!--#region PasswordGenerator-->
     <v:String x:Key="Specifications">Բնութագիր</v:String>

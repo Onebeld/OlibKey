@@ -19,4 +19,11 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+    <DrawingImage x:Key="TickMarkDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V414.3 H511.7 V0 H0 Z">
+                <GeometryDrawing Brush="White" Geometry="F1 M511.7,414.3z M0,0z M434.8,0L434.8,0 174.2,260.7 76.8,163.3 0,240.2 174.1,414.3 196.6,391.9 196.6,391.9 511.7,76.8 434.8,0z" />
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>

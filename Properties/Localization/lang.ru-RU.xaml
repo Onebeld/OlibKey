@@ -44,6 +44,12 @@
     <v:String x:Key="Successfully">Успешно!</v:String>
     <!--#endregion-->
     
+    <!--#region Notifications-->
+    <v:String x:Key="Not1">Элемент сохранен успешно!</v:String>
+    <v:String x:Key="Not2">Элемент успешно изменен!</v:String>
+    <v:String x:Key="Not3">Хранилище успешно создано!</v:String>
+    <!--#endregion-->
+    
     <!--#region Windows-->
     <!--#region PasswordGenerator-->
     <v:String x:Key="Specifications">Характеристики</v:String>

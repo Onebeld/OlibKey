@@ -17,7 +17,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
                 <Image Source="{StaticResource OlibDrawingImage}" Height="100" />
                 <Image Source="{StaticResource OlibPasswordManagerDrawingImage}" Height="70" Margin="5"/>

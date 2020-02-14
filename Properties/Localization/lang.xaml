@@ -43,7 +43,13 @@
     <v:String x:Key="MB8">There are no new updates at this time.</v:String>
     <v:String x:Key="Successfully">Successfully!</v:String>
     <!--#endregion-->
-    
+
+    <!--#region Notifications-->
+    <v:String x:Key="Not1">Item saved successfully!</v:String>
+    <v:String x:Key="Not2">Item successfully modified!</v:String>
+    <v:String x:Key="Not3">Storage successfully created!</v:String>
+    <!--#endregion-->
+
     <!--#region Windows-->
     <!--#region PasswordGenerator-->
     <v:String x:Key="Specifications">Specifications</v:String>

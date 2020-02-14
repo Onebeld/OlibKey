@@ -22,9 +22,9 @@ namespace OlibPasswordManager.Windows
                 User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(s, TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password));
 
                 s = JsonConvert.SerializeObject(User.UsersList);
-                Global.MasterPassword = TxtPassword.Password;
+                App.MainWindow.MasterPassword = TxtPassword.Password;
 
-                File.WriteAllText(Additional.GlobalSettings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(s, Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword), Global.MasterPassword));
+                File.WriteAllText(Additional.GlobalSettings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(s, App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword));
 
                 MessageBox.Show((string)Application.Current.Resources["Successfully"], (string)Application.Current.Resources["Message"], MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();
@@ -32,6 +32,7 @@ namespace OlibPasswordManager.Windows
             catch
             {
                 MessageBox.Show((string)Application.Current.Resources["MB3"], (string)Application.Current.Resources["Error"], MessageBoxButton.OK, MessageBoxImage.Error);
+                App.MainWindow.MasterPassword = null;
             }
         }
 

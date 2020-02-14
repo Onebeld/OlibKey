@@ -17,6 +17,7 @@ namespace OlibPasswordManager.Windows
             User.UsersList.Clear();
             App.MainWindow.PasswordList.ItemsSource = null;
             App.MainWindow.PasswordList.ItemsSource = User.UsersList;
+            App.MainWindow.Notification((string)FindResource("Not3"));
             DialogResult = true;
         }
 

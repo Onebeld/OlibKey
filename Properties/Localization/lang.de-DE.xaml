@@ -28,6 +28,8 @@
     <v:String x:Key="LockStorage">Tresor verriegeln</v:String>
     <v:String x:Key="UnlockStorage">Speicher entsperren</v:String>
     <v:String x:Key="ShowOPM">Zeigen Olib Password Manager</v:String>
+
+    <v:String x:Key="WarningSettings">Einige Einstellungen ändern das Programm möglicherweise nicht vollständig. Starten Sie dazu die Anwendung neu.</v:String>
     <!--#endregion-->
 
     <!--#region MessageBox-->
@@ -95,6 +97,7 @@
     <v:String x:Key="Language">Sprache:</v:String>
     <v:String x:Key="Theme">Theme:</v:String>
     <v:String x:Key="CBHideProgram">Programm beim Schließen ausblenden</v:String>
+    <v:String x:Key="CBAutorunApplication">Führen Sie mit Windows aus</v:String>
 
     <v:String x:Key="Light">Hell</v:String>
     <v:String x:Key="Dark">Dunkel</v:String>

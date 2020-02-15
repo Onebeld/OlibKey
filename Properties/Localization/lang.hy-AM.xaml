@@ -28,6 +28,8 @@
     <v:String x:Key="LockStorage">Կողպեք պահոցը</v:String>
     <v:String x:Key="UnlockStorage">Բացել պահեստը</v:String>
     <v:String x:Key="ShowOPM">Ուցադրել Olib Password Manager</v:String>
+
+    <v:String x:Key="WarningSettings">Որոշ պարամետրեր կարող են ամբողջությամբ չփոխել ծրագիրը: Դա անելու համար վերագործարկեք հայտը:</v:String>
     <!--#endregion-->
 
     <!--#region MessageBox-->
@@ -95,6 +97,7 @@
     <v:String x:Key="Language">Լեզուն:</v:String>
     <v:String x:Key="Theme">Թեման:</v:String>
     <v:String x:Key="CBHideProgram">Թաքցնել ծրագիրը փակելիս</v:String>
+    <v:String x:Key="CBAutorunApplication">Գործարկել Windows- ի հետ</v:String>
 
     <v:String x:Key="Light">Պայծառ</v:String>
     <v:String x:Key="Dark">Մութ</v:String>

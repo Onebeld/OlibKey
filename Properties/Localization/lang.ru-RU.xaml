@@ -28,6 +28,8 @@
     <v:String x:Key="LockStorage">Заблокировать хранилище</v:String>
     <v:String x:Key="UnlockStorage">Разблокировать хранилище</v:String>
     <v:String x:Key="ShowOPM">Показать Olib Password Manager</v:String>
+
+    <v:String x:Key="WarningSettings">Некоторые настройки могут не полностью изменить программу. Для этого нужно перезапустить приложение.</v:String>
     <!--#endregion-->
     
     <!--#region MessageBox-->
@@ -95,6 +97,7 @@
     <v:String x:Key="Language">Язык:</v:String>
     <v:String x:Key="Theme">Тема:</v:String>
     <v:String x:Key="CBHideProgram">Скрыть программу при закрытии</v:String>
+    <v:String x:Key="CBAutorunApplication">Запускать вместе с Windows</v:String>
 
     <v:String x:Key="Light">Светлая</v:String>
     <v:String x:Key="Dark">Темная</v:String>

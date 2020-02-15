@@ -28,6 +28,8 @@
     <v:String x:Key="LockStorage">Lock storage</v:String>
     <v:String x:Key="UnlockStorage">Unlock storage</v:String>
     <v:String x:Key="ShowOPM">Show Olib Password Manager</v:String>
+
+    <v:String x:Key="WarningSettings">Some settings may not completely change the program. To do this, restart the application.</v:String>
     <!--#endregion-->
 
     <!--#region MessageBox-->
@@ -95,6 +97,7 @@
     <v:String x:Key="Language">Language:</v:String>
     <v:String x:Key="Theme">Theme:</v:String>
     <v:String x:Key="CBHideProgram">Hide program when closing</v:String>
+    <v:String x:Key="CBAutorunApplication">Run with Windows</v:String>
 
     <v:String x:Key="Light">Light</v:String>
     <v:String x:Key="Dark">Dark</v:String>

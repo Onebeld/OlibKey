@@ -28,6 +28,8 @@
     <v:String x:Key="LockStorage">Verrouiller le coffre-fort</v:String>
     <v:String x:Key="UnlockStorage">Déverrouillez le stockage</v:String>
     <v:String x:Key="ShowOPM">Afficher Olib Password Manager</v:String>
+
+    <v:String x:Key="WarningSettings">Certains paramètres peuvent ne pas modifier complètement le programme. Pour ce faire, redémarrez l'application.</v:String>
     <!--#endregion-->
 
     <!--#region MessageBox-->
@@ -95,6 +97,7 @@
     <v:String x:Key="Language">Langue:</v:String>
     <v:String x:Key="Theme">Thème:</v:String>
     <v:String x:Key="CBHideProgram">Masquer le programme à la fermeture</v:String>
+    <v:String x:Key="CBAutorunApplication">Exécuter avec Windows</v:String>
 
     <v:String x:Key="Light">Lumineux</v:String>
     <v:String x:Key="Dark">Sombre</v:String>

@@ -43,6 +43,9 @@
     <v:String x:Key="MB6">You cannot require characters from an empty string!</v:String>
     <v:String x:Key="MB7">No checkmarks selected or password length specified!</v:String>
     <v:String x:Key="MB8">There are no new updates at this time.</v:String>
+
+    <v:String x:Key="MB9">An unexpected error has occurred. Information about the problem is in the log file. Error text:</v:String>
+
     <v:String x:Key="Successfully">Successfully!</v:String>
     <!--#endregion-->
 

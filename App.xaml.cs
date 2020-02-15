@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using Newtonsoft.Json;
 using OlibPasswordManager.Properties.Core;
@@ -17,6 +18,8 @@ namespace OlibPasswordManager
     {
         public new static MainWindow MainWindow;
         private static ResourceDictionary ResourceTheme;
+
+        private static object sync = new object();
 
         private static List<CultureInfo> Languages => new List<CultureInfo>();
 
@@ -139,6 +142,24 @@ namespace OlibPasswordManager
 
                 LanguageChanged?.Invoke(Current, new EventArgs());
             }
+        }
+
+        private void WriteLog(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        {
+            // Путь .\\Log
+            string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+            if (!Directory.Exists(pathToLog))
+                Directory.CreateDirectory(pathToLog); // Создаем директорию, если нужно
+            string filename = Path.Combine(pathToLog, string.Format("{0}_{1:dd.MM.yyy}.log",
+            AppDomain.CurrentDomain.FriendlyName, DateTime.Now));
+            string fullText = string.Format("[{0:dd.MM.yyy HH:mm:ss.fff}] [{1}.{2}()]\n{3}\r\n",
+            DateTime.Now, e.Exception.TargetSite.DeclaringType, e.Exception.TargetSite.Name, e.Exception);
+            lock (sync)
+            {
+                File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
+            }
+
+            MessageBox.Show((string)FindResource("MB9") + $"\n{e.Exception.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }

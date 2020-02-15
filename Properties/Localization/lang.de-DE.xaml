@@ -43,6 +43,9 @@
     <v:String x:Key="MB6">Sie können keine Zeichen aus einer leeren Zeichenfolge verlangen!</v:String>
     <v:String x:Key="MB7">Keine Häkchen ausgewählt oder Passwortlänge angegeben!</v:String>
     <v:String x:Key="MB8">Derzeit gibt es keine neuen Updates.</v:String>
+
+    <v:String x:Key="MB9">Ein unerwarteter Fehler ist aufgetreten. Informationen zum Problem finden Sie in der Protokolldatei. Fehlertext:</v:String>
+
     <v:String x:Key="Successfully">Erfolgreich!</v:String>
     <!--#endregion-->
 

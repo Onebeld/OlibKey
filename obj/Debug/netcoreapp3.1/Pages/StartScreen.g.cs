@@ -53,7 +53,7 @@ namespace OlibPasswordManager.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.290;component/pages/startscreen.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.292;component/pages/startscreen.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\StartScreen.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

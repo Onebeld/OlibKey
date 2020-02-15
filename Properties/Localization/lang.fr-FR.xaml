@@ -43,6 +43,9 @@
     <v:String x:Key="MB6">Vous ne pouvez pas exiger des caractères d'une chaîne vide!</v:String>
     <v:String x:Key="MB7">Aucune coche sélectionnée ou longueur de mot de passe spécifiée!</v:String>
     <v:String x:Key="MB8">Il n'y a aucune nouvelle mise à jour pour le moment.</v:String>
+
+    <v:String x:Key="MB9">Une erreur inattendue s'est produite. Des informations sur le problème se trouvent dans le fichier journal. Texte d'erreur:</v:String>
+
     <v:String x:Key="Successfully">Avec succès!</v:String>
     <!--#endregion-->
 

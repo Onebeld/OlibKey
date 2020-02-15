@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using OlibPasswordManager.Properties.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using Newtonsoft.Json;
-using OlibPasswordManager.Properties.Core;
 
 namespace OlibPasswordManager.Windows
 {
@@ -17,6 +19,7 @@ namespace OlibPasswordManager.Windows
     public partial class Settings
     {
         private bool _isFirst = true;
+        private bool _isFirstAutorun = true;
         private bool _isFirstTheme = true;
 
         public Settings()
@@ -34,8 +37,8 @@ namespace OlibPasswordManager.Windows
                 new KeyValuePair<string, string>("Dark", (string)FindResource("Dark"))
             };
             foreach (var i in valuePair) CbTheme.Items.Add(i);
-            CbTheme.SelectedIndex = Additional.GlobalSettings.ApplyTheme != null
-                    ? valuePair.ToList().FindIndex(i => i.Key == Additional.GlobalSettings.ApplyTheme)
+            CbTheme.SelectedIndex = AppSettings.Items.ApplyTheme != null
+                    ? valuePair.ToList().FindIndex(i => i.Key == AppSettings.Items.ApplyTheme)
                     : 0;
             CbLang.SelectedValuePath = "Key";
             CbLang.DisplayMemberPath = "Value";
@@ -49,7 +52,8 @@ namespace OlibPasswordManager.Windows
                 new KeyValuePair<string, string>("hy-AM", "Հայերեն")
             };
             foreach (var i in valuePair1) CbLang.Items.Add(i);
-            cbCollapsedWindow.IsChecked = Additional.GlobalSettings.CollapseOnClose;
+            cbCollapsedWindow.IsChecked = AppSettings.Items.CollapseOnClose;
+            cbAutorun.IsChecked = AppSettings.Items.AutorunApplication;
             CbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == GlobalSettings.Default.GlobalLanguage.Name);
         }
 
@@ -70,21 +74,21 @@ namespace OlibPasswordManager.Windows
         {
             if (!_isFirstTheme)
             {
-                Additional.GlobalSettings.ApplyTheme = CbTheme.SelectedValue.ToString();
+                AppSettings.Items.ApplyTheme = CbTheme.SelectedValue.ToString();
 
                 var dict = new ResourceDictionary
                 {
-                    Source = new Uri($"/Properties/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative)
+                    Source = new Uri($"/Properties/Themes/{AppSettings.Items.ApplyTheme}.xaml", UriKind.Relative)
                 };
 
                 var oldDict = (from d in Application.Current.Resources.MergedDictionaries
-                    where d.Source != null && d.Source.OriginalString.StartsWith("/Properties/Themes/")
-                    select d).FirstOrDefault();
+                               where d.Source != null && d.Source.OriginalString.StartsWith("/Properties/Themes/")
+                               select d).FirstOrDefault();
                 if (oldDict != null)
                 {
                     int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict);
                     Application.Current.Resources.MergedDictionaries.Remove(oldDict);
-                            Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
+                    Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
                 }
                 else Application.Current.Resources.MergedDictionaries.Add(dict);
             }
@@ -94,8 +98,36 @@ namespace OlibPasswordManager.Windows
         private void Settings_OnClosing(object sender, CancelEventArgs e)
         {
             if (cbCollapsedWindow.IsChecked != null)
-                Additional.GlobalSettings.CollapseOnClose = (bool) cbCollapsedWindow.IsChecked;
-            File.WriteAllText("settings.json", JsonConvert.SerializeObject(Additional.GlobalSettings));
+                AppSettings.Items.CollapseOnClose = (bool)cbCollapsedWindow.IsChecked;
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(AppSettings.Items));
+        }
+
+        private void CBAutorun(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if ((bool)cbAutorun.IsChecked)
+                {
+                    AppSettings.Items.AutorunApplication = (bool)cbAutorun.IsChecked;
+
+                    string s = Assembly.GetExecutingAssembly().Location;
+
+                    int x1 = s.Length - 4;
+                    s = "\"" + s.Remove(x1) + ".exe" + "\"";
+
+                    rkApp.SetValue("OlibPasswordManager", s + " /StartupHide");
+                }
+                else
+                {
+                    AppSettings.Items.AutorunApplication = (bool)cbAutorun.IsChecked;
+                    rkApp.DeleteValue("OlibPasswordManager", false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Не получилось поменять настройки:\n{ex.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

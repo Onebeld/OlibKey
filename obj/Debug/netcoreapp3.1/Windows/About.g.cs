@@ -62,7 +62,7 @@ namespace OlibPasswordManager.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.235;component/windows/about.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.289;component/windows/about.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Windows\About.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -18,13 +18,13 @@ namespace OlibPasswordManager.Windows
         {
             try
             {
-                var s = File.ReadAllText(Additional.GlobalSettings.AppGlobalString);
+                var s = File.ReadAllText(AppSettings.Items.AppGlobalString);
                 User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(Encryptor.DecryptString(s, TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password), TxtOldPassword.Password));
 
                 s = JsonConvert.SerializeObject(User.UsersList);
                 App.MainWindow.MasterPassword = TxtPassword.Password;
 
-                File.WriteAllText(Additional.GlobalSettings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(s, App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword));
+                File.WriteAllText(AppSettings.Items.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(s, App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword), App.MainWindow.MasterPassword));
 
                 MessageBox.Show((string)Application.Current.Resources["Successfully"], (string)Application.Current.Resources["Message"], MessageBoxButton.OK, MessageBoxImage.Information);
                 Close();

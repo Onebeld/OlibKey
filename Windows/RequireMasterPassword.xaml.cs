@@ -25,7 +25,7 @@ namespace OlibPasswordManager.Windows
         {
             try
             {
-                var s = File.ReadAllText(Additional.GlobalSettings.AppGlobalString);
+                var s = File.ReadAllText(AppSettings.Items.AppGlobalString);
                 User.UsersList = JsonConvert.DeserializeObject<List<User>>(Encryptor.DecryptString(
                     Encryptor.DecryptString(
                         Encryptor.DecryptString(
@@ -39,7 +39,7 @@ namespace OlibPasswordManager.Windows
                 App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
                 App.MainWindow.MasterPassword = TxtPassword.Password;
                 App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
-                Additional.GlobalSettings.AppGlobalString = Additional.GlobalSettings.AppGlobalString;
+                AppSettings.Items.AppGlobalString = AppSettings.Items.AppGlobalString;
 
                 App.MainWindow.SaveMenuItem.IsEnabled = true;
                 App.MainWindow.ChangeMenuItem.IsEnabled = true;
@@ -51,6 +51,8 @@ namespace OlibPasswordManager.Windows
                 App.MainWindow.UnlockNotifyIcon.IsEnabled = false;
 
                 App.MainWindow.AddButton.IsEnabled = true;
+
+                App.MainWindow.IsUnlockedBase = true;
 
                 Close();
             }

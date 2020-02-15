@@ -107,44 +107,44 @@ namespace OlibPasswordManager.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             if (!File.Exists("settings.json")) return;
-            ChkAllowLowercase.IsChecked = Additional.GlobalSettings.GeneratorAllowLowercase;
-            ChkAllowNumber.IsChecked = Additional.GlobalSettings.GeneratorAllowNumber;
-            ChkAllowOther.IsChecked = Additional.GlobalSettings.GeneratorAllowOther;
-            ChkAllowSpace.IsChecked = Additional.GlobalSettings.GeneratorAllowSpace;
-            ChkAllowSpecial.IsChecked = Additional.GlobalSettings.GeneratorAllowSpecial;
-            ChkAllowUnderscore.IsChecked = Additional.GlobalSettings.GeneratorAllowUnderscore;
-            ChkAllowUppercase.IsChecked = Additional.GlobalSettings.GeneratorAllowUppercase;
-            ChkRequireLowercase.IsChecked = Additional.GlobalSettings.GeneratorRequireLowercase;
-            ChkRequireNumber.IsChecked = Additional.GlobalSettings.GeneratorRequireNumber;
-            ChkRequireOther.IsChecked = Additional.GlobalSettings.GeneratorRequireOther;
-            ChkRequireSpace.IsChecked = Additional.GlobalSettings.GeneratorRequireSpace;
-            ChkRequireSpecial.IsChecked = Additional.GlobalSettings.GeneratorRequireSpecial;
-            ChkRequireUnderscore.IsChecked = Additional.GlobalSettings.GeneratorRequireUnderscore;
-            ChkRequireUppercase.IsChecked = Additional.GlobalSettings.GeneratorRequireUppercase;
-            TxtMaxLenght.Text = Additional.GlobalSettings.GeneratorMaxCount;
-            TxtMinLenght.Text = Additional.GlobalSettings.GeneratorMinCount;
-            TxtOther.Text = Additional.GlobalSettings.GeneratorTextOther;
+            ChkAllowLowercase.IsChecked = AppSettings.Items.GeneratorAllowLowercase;
+            ChkAllowNumber.IsChecked = AppSettings.Items.GeneratorAllowNumber;
+            ChkAllowOther.IsChecked = AppSettings.Items.GeneratorAllowOther;
+            ChkAllowSpace.IsChecked = AppSettings.Items.GeneratorAllowSpace;
+            ChkAllowSpecial.IsChecked = AppSettings.Items.GeneratorAllowSpecial;
+            ChkAllowUnderscore.IsChecked = AppSettings.Items.GeneratorAllowUnderscore;
+            ChkAllowUppercase.IsChecked = AppSettings.Items.GeneratorAllowUppercase;
+            ChkRequireLowercase.IsChecked = AppSettings.Items.GeneratorRequireLowercase;
+            ChkRequireNumber.IsChecked = AppSettings.Items.GeneratorRequireNumber;
+            ChkRequireOther.IsChecked = AppSettings.Items.GeneratorRequireOther;
+            ChkRequireSpace.IsChecked = AppSettings.Items.GeneratorRequireSpace;
+            ChkRequireSpecial.IsChecked = AppSettings.Items.GeneratorRequireSpecial;
+            ChkRequireUnderscore.IsChecked = AppSettings.Items.GeneratorRequireUnderscore;
+            ChkRequireUppercase.IsChecked = AppSettings.Items.GeneratorRequireUppercase;
+            TxtMaxLenght.Text = AppSettings.Items.GeneratorMaxCount;
+            TxtMinLenght.Text = AppSettings.Items.GeneratorMinCount;
+            TxtOther.Text = AppSettings.Items.GeneratorTextOther;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Additional.GlobalSettings.GeneratorAllowLowercase = (bool) ChkAllowLowercase.IsChecked;
-            Additional.GlobalSettings.GeneratorAllowNumber = (bool) ChkAllowNumber.IsChecked;
-            Additional.GlobalSettings.GeneratorAllowOther = (bool) ChkAllowOther.IsChecked;
-            Additional.GlobalSettings.GeneratorAllowSpace = (bool) ChkAllowSpace.IsChecked;
-            Additional.GlobalSettings.GeneratorAllowSpecial = (bool) ChkAllowSpecial.IsChecked;
-            Additional.GlobalSettings.GeneratorAllowUnderscore = (bool) ChkAllowUnderscore.IsChecked;
-            Additional.GlobalSettings.GeneratorAllowUppercase = (bool) ChkAllowUppercase.IsChecked;
-            Additional.GlobalSettings.GeneratorRequireLowercase = (bool) ChkRequireLowercase.IsChecked;
-            Additional.GlobalSettings.GeneratorRequireNumber = (bool) ChkRequireNumber.IsChecked;
-            Additional.GlobalSettings.GeneratorRequireOther = (bool) ChkRequireOther.IsChecked;
-            Additional.GlobalSettings.GeneratorRequireSpace = (bool) ChkRequireSpace.IsChecked;
-            Additional.GlobalSettings.GeneratorRequireSpecial = (bool) ChkRequireSpecial.IsChecked;
-            Additional.GlobalSettings.GeneratorRequireUnderscore = (bool) ChkRequireUnderscore.IsChecked;
-            Additional.GlobalSettings.GeneratorRequireUppercase = (bool) ChkRequireUppercase.IsChecked;
-            Additional.GlobalSettings.GeneratorTextOther = TxtOther.Text;
-            Additional.GlobalSettings.GeneratorMaxCount = TxtMaxLenght.Text;
-            Additional.GlobalSettings.GeneratorMinCount = TxtMinLenght.Text;
+            AppSettings.Items.GeneratorAllowLowercase = (bool) ChkAllowLowercase.IsChecked;
+            AppSettings.Items.GeneratorAllowNumber = (bool) ChkAllowNumber.IsChecked;
+            AppSettings.Items.GeneratorAllowOther = (bool) ChkAllowOther.IsChecked;
+            AppSettings.Items.GeneratorAllowSpace = (bool) ChkAllowSpace.IsChecked;
+            AppSettings.Items.GeneratorAllowSpecial = (bool) ChkAllowSpecial.IsChecked;
+            AppSettings.Items.GeneratorAllowUnderscore = (bool) ChkAllowUnderscore.IsChecked;
+            AppSettings.Items.GeneratorAllowUppercase = (bool) ChkAllowUppercase.IsChecked;
+            AppSettings.Items.GeneratorRequireLowercase = (bool) ChkRequireLowercase.IsChecked;
+            AppSettings.Items.GeneratorRequireNumber = (bool) ChkRequireNumber.IsChecked;
+            AppSettings.Items.GeneratorRequireOther = (bool) ChkRequireOther.IsChecked;
+            AppSettings.Items.GeneratorRequireSpace = (bool) ChkRequireSpace.IsChecked;
+            AppSettings.Items.GeneratorRequireSpecial = (bool) ChkRequireSpecial.IsChecked;
+            AppSettings.Items.GeneratorRequireUnderscore = (bool) ChkRequireUnderscore.IsChecked;
+            AppSettings.Items.GeneratorRequireUppercase = (bool) ChkRequireUppercase.IsChecked;
+            AppSettings.Items.GeneratorTextOther = TxtOther.Text;
+            AppSettings.Items.GeneratorMaxCount = TxtMaxLenght.Text;
+            AppSettings.Items.GeneratorMinCount = TxtMinLenght.Text;
         }
     }
 }

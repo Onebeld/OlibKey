@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows;
 using Newtonsoft.Json;
 using OlibPasswordManager.Properties.Core;
+using OlibPasswordManager.Windows;
 
 namespace OlibPasswordManager
 {
@@ -37,21 +38,56 @@ namespace OlibPasswordManager
             Languages.Add(new CultureInfo("hy-AM"));
         }
 
-
-        private void Application_Startup(object sender, StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
-            Additional.GlobalSettings = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Settings>(File.ReadAllText("settings.json")) : new Settings();
+            AppSettings.Items = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Properties.Core.Settings>(File.ReadAllText("settings.json")) : new Properties.Core.Settings();
             Language = GlobalSettings.Default.GlobalFirstLang ? CultureInfo.CurrentCulture : GlobalSettings.Default.GlobalLanguage;
 
             ResourceTheme = Resources.MergedDictionaries[3];
 
-            if (Additional.GlobalSettings.ApplyTheme != null)
+            if (AppSettings.Items.ApplyTheme != null)
             {
-                ResourceTheme.Source = new Uri($"/Properties/Themes/{Additional.GlobalSettings.ApplyTheme}.xaml", UriKind.Relative);
+                ResourceTheme.Source = new Uri($"/Properties/Themes/{AppSettings.Items.ApplyTheme}.xaml", UriKind.Relative);
             }
 
             MainWindow = new MainWindow();
-            MainWindow.Show();
+            bool startHide = false;
+            if (AppSettings.Items.AutorunApplication)
+            {
+                foreach (var i in e.Args)
+                {
+                    if (i == "/StartupHide")
+                    {
+                        startHide = true;
+                    }
+                }
+            }
+            if (startHide)
+            {
+                MainWindow.Show();
+                MainWindow.Hide();
+            }
+            else
+            {
+                MainWindow.Show();
+            }
+
+            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+
+            timer.Tick += MainWindow.TimerAutoSafe;
+            timer.Interval = new TimeSpan(0, 2, 0);
+            timer.Start();
+
+            MainWindow.CheckUpdate(false);
+            if (AppSettings.Items.AppGlobalString != null)
+                if (File.Exists(AppSettings.Items.AppGlobalString))
+                {
+                    MainWindow.Title = $"Olib Password Manager - {Path.GetFileName(AppSettings.Items.AppGlobalString)}";
+                    if (!MainWindow.IsUnlockedBase)
+                        new RequireMasterPassword().ShowDialog();
+                }
+
+            base.OnStartup(e);
         }
 
         public static event EventHandler LanguageChanged;

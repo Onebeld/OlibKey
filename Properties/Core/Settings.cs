@@ -1,8 +1,8 @@
 ﻿namespace OlibPasswordManager.Properties.Core
 {
-    public class Additional
+    public static class AppSettings
     {
-        public static Settings GlobalSettings { get; set; }
+        public static Settings Items { get; set; }
     }
 
     public class Settings
@@ -27,5 +27,6 @@
         public string GeneratorTextOther { get; set; }
         public string ApplyTheme { get; set; }
         public bool CollapseOnClose { get; set; }
+        public bool AutorunApplication { get; set; }
     }
 }

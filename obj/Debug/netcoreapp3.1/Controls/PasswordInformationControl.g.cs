@@ -301,7 +301,7 @@ namespace OlibPasswordManager {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.235;component/controls/passwordinformationcontrol.xam" +
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.289;component/controls/passwordinformationcontrol.xam" +
                     "l", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Controls\PasswordInformationControl.xaml"

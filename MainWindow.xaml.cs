@@ -25,6 +25,7 @@ namespace OlibPasswordManager
     public partial class MainWindow
     {
         public string MasterPassword { get; set; }
+        public bool IsUnlockedBase { get; set; }
 
         private string _str;
 
@@ -50,11 +51,11 @@ namespace OlibPasswordManager
 
         #endregion
         #region Timers
-        private void TimerAutoSafe(object sender, EventArgs e) => Save(false);
+        public void TimerAutoSafe(object sender, EventArgs e) => Save(false);
         #endregion
         private void ClosedApplication(object sender, RoutedEventArgs e)
         {
-            File.WriteAllText("settings.json", JsonConvert.SerializeObject(Additional.GlobalSettings));
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(AppSettings.Items));
             Save(false);
 
             Application.Current.Shutdown();
@@ -99,9 +100,8 @@ namespace OlibPasswordManager
         {
             User.UsersList = new List<User>();
 
-            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
 
-            if (Additional.GlobalSettings.AppGlobalString != null)
+            if (AppSettings.Items.AppGlobalString != null)
             {
                 UnlockMenuItem.IsEnabled = true;
                 UnlockNotifyIcon.IsEnabled = true;
@@ -111,29 +111,17 @@ namespace OlibPasswordManager
                 UnlockMenuItem.IsEnabled = false;
                 UnlockNotifyIcon.IsEnabled = false;
             }
-
-            timer.Tick += TimerAutoSafe;
-            timer.Interval = new TimeSpan(0, 2, 0);
-            timer.Start();
-
-            CheckUpdate(false);
-            if (Additional.GlobalSettings.AppGlobalString != null)
-                if (File.Exists(Additional.GlobalSettings.AppGlobalString))
-                {
-                    Title = $"Olib Password Manager - {Path.GetFileName(Additional.GlobalSettings.AppGlobalString)}";
-                    new RequireMasterPassword().ShowDialog();
-                }
         }
 
         private void OpenCreateData(object sender, RoutedEventArgs e)
         {
             CreateData data = new CreateData();
             if (!(bool)data.ShowDialog()) return;
-            Additional.GlobalSettings.AppGlobalString = data.TxtPathSelection.Text;
+            AppSettings.Items.AppGlobalString = data.TxtPathSelection.Text;
             MasterPassword = data.TxtPassword.Password;
 
             string json = JsonConvert.SerializeObject(User.UsersList);
-            File.WriteAllText(Additional.GlobalSettings.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, MasterPassword), MasterPassword), MasterPassword), MasterPassword), MasterPassword));
+            File.WriteAllText(AppSettings.Items.AppGlobalString, Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(Encryptor.EncryptString(json, MasterPassword), MasterPassword), MasterPassword), MasterPassword), MasterPassword));
         }
 
         private void SaveBase(object sender, RoutedEventArgs e) => Save(true);
@@ -143,7 +131,7 @@ namespace OlibPasswordManager
             try
             {
                 string json = JsonConvert.SerializeObject(User.UsersList);
-                File.WriteAllText(Additional.GlobalSettings.AppGlobalString,
+                File.WriteAllText(AppSettings.Items.AppGlobalString,
                     Encryptor.EncryptString(
                         Encryptor.EncryptString(
                             Encryptor.EncryptString(
@@ -199,8 +187,8 @@ namespace OlibPasswordManager
 
             LockPasswordBase();
 
-            Additional.GlobalSettings.AppGlobalString = fileDialog.FileName;
-            Title = $"Olib Password Manager - {Path.GetFileName(Additional.GlobalSettings.AppGlobalString)}";
+            AppSettings.Items.AppGlobalString = fileDialog.FileName;
+            Title = $"Olib Password Manager - {Path.GetFileName(AppSettings.Items.AppGlobalString)}";
             OpenRequireMasterPassword();
         }
 
@@ -226,10 +214,10 @@ namespace OlibPasswordManager
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            File.WriteAllText("settings.json", JsonConvert.SerializeObject(Additional.GlobalSettings));
+            File.WriteAllText("settings.json", JsonConvert.SerializeObject(AppSettings.Items));
             Save(false);
 
-            if (Additional.GlobalSettings.CollapseOnClose)
+            if (AppSettings.Items.CollapseOnClose)
             {
                 Application.Current.MainWindow.Hide();
                 e.Cancel = true;
@@ -267,7 +255,7 @@ namespace OlibPasswordManager
 
         private void CheckUpdateButton(object sender, RoutedEventArgs e) => CheckUpdate(true);
 
-        private async void CheckUpdate(bool b)
+        public async void CheckUpdate(bool b)
         {
             try
             {
@@ -337,6 +325,8 @@ namespace OlibPasswordManager
             Save(true);
 
             FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
+
+            IsUnlockedBase = false;
 
             AddButton.IsEnabled = false;
 

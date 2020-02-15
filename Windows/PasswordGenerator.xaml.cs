@@ -146,5 +146,15 @@ namespace OlibPasswordManager.Windows
             AppSettings.Items.GeneratorMaxCount = TxtMaxLenght.Text;
             AppSettings.Items.GeneratorMinCount = TxtMinLenght.Text;
         }
+
+        private void CopyGeneratedPassword(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(TxtPassword.Text);
+            }
+            catch {}
+        }
     }
 }

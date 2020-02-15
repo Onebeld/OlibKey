@@ -61,7 +61,7 @@ namespace OlibPasswordManager.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.292;component/windows/requiremasterpassword.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.295;component/windows/requiremasterpassword.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Windows\RequireMasterPassword.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

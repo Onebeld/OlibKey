@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0.295] - 2020-02-15
+### Added
+- Added notification of changes, item additions, and storage creation.
+- Added save indicator.
+- Added "Copy" button in password generator.
+- Added button to go to Facebook in About.
+- Autostart option added.
+- Added warning text in settings.
+
+### Changed
+- Information in the About window is centered.
+- Two separate components for viewing passwords is now one.
+
+### Fixed
+- Fixed a bug where the program ends sometimes after copying some text.
+- Critical bug fixed, If you open one more with open storage, do not unlock it and save it, then when you open the latter, what is opened earlier is displayed.
+- Fixed a bug where, after changing the login or bank card, the changes were not displayed
+
 ## [1.2.0.235] - 2020-02-05
 ### Added
 - Dark theme added.

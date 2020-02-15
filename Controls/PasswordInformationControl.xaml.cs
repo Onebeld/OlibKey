@@ -1,5 +1,4 @@
 ﻿using OlibPasswordManager.Properties.Core;
-using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,28 +15,48 @@ namespace OlibPasswordManager
         #region CopyText
         private void CopyPassword(object sender, RoutedEventArgs e)
         {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtPassword.Password);
+            try
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(TxtPassword.Password);
+            }
+            catch { }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtNameAccount.Text);
+            try
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(TxtNameAccount.Text);
+            }
+            catch { }
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtWebSite.Text);
+            try
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(TxtWebSite.Text);
+            }
+            catch { }
         }
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtCardNumber.Text);
+            try
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(TxtCardNumber.Text);
+            }
+            catch { }
         }
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            Clipboard.Clear();
-            Clipboard.SetText(TxtSecurityCode.Password);
+            try
+            {
+                Clipboard.Clear();
+                Clipboard.SetText(TxtSecurityCode.Password);
+            }
+            catch { }
         }
         #endregion
 

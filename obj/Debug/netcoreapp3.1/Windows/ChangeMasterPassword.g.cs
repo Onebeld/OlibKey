@@ -109,7 +109,7 @@ namespace OlibPasswordManager.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.292;component/windows/changemasterpassword.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibPasswordManager;V1.3.0.295;component/windows/changemasterpassword.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Windows\ChangeMasterPassword.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

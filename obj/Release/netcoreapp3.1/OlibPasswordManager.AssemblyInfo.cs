@@ -14,11 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Dmitry Zhutkov")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("Dmitry Zhutkov")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("1.2.0.235")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.2.0")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("1.3.0.295")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.3.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("OlibPasswordManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OlibPasswordManager")]
-[assembly: System.Reflection.AssemblyVersionAttribute("1.2.0.235")]
+[assembly: System.Reflection.AssemblyVersionAttribute("1.3.0.295")]
 
 // Создано классом WriteCodeFragment MSBuild.
 

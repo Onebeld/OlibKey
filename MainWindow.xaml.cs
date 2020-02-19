@@ -186,7 +186,6 @@ namespace OlibPasswordManager
             if (!(bool)fileDialog.ShowDialog()) return;
 
             LockPasswordBase();
-
             AppSettings.Items.AppGlobalString = fileDialog.FileName;
             Title = $"Olib Password Manager - {Path.GetFileName(AppSettings.Items.AppGlobalString)}";
             OpenRequireMasterPassword();

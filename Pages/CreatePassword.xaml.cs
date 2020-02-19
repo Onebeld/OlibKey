@@ -3,6 +3,7 @@ using OlibPasswordManager.Windows;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace OlibPasswordManager.Pages
 {
@@ -73,6 +74,7 @@ namespace OlibPasswordManager.Pages
                         SecurityCode = TxtSecurityCode.Password,
                         Type = cbType.SelectedIndex
                     });
+
                     break;
                 case 2:
                     User.UsersList.Add(new User
@@ -94,6 +96,24 @@ namespace OlibPasswordManager.Pages
 
             App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
             App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
+
+            ListBoxItem listBoxItem = (ListBoxItem)App.MainWindow.PasswordList.ItemContainerGenerator.ContainerFromIndex(User.UsersList.Count - 1);
+
+            ContentPresenter myContentPresenter = ItemControls.FindVisualChild<ContentPresenter>(listBoxItem);
+            DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
+            Image myImage = (Image)myDataTemplate.FindName("imageIcon", myContentPresenter);
+
+            switch (cbType.SelectedIndex)
+            {
+                case 0:
+                    break;
+                case 1:
+                    myImage.Source = (DrawingImage)FindResource("TickMarkDrawingImage");
+                    break;
+                case 2:
+                    myImage.Source = (DrawingImage)FindResource("saveDrawingImage");
+                    break;
+            }
 
             NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
 

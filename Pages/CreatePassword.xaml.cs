@@ -61,6 +61,7 @@ namespace OlibPasswordManager.Pages
                         Image = $"http://www.google.com/s2/favicons?domain={txtWebSite.Text}",
                         Type = cbType.SelectedIndex
                     });
+                    User.AccountsList.Add(new Controls.ListBoxItemControl());
                     break;
                 case 1:
                     User.UsersList.Add(new User
@@ -74,7 +75,7 @@ namespace OlibPasswordManager.Pages
                         SecurityCode = TxtSecurityCode.Password,
                         Type = cbType.SelectedIndex
                     });
-
+                    User.AccountsList.Add(new Controls.ListBoxItemControl());
                     break;
                 case 2:
                     User.UsersList.Add(new User
@@ -87,33 +88,16 @@ namespace OlibPasswordManager.Pages
                         PassportPlaceOfIssue = txtPassportPlaceOfIssue.Text,
                         Type = cbType.SelectedIndex
                     });
+                    User.AccountsList.Add(new Controls.ListBoxItemControl());
                     break;
             }
 
 
             App.MainWindow.PasswordList.ItemsSource = null;
-            App.MainWindow.PasswordList.ItemsSource = User.UsersList;
+            App.MainWindow.PasswordList.ItemsSource = User.AccountsList;
 
             App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
-            App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
-
-            ListBoxItem listBoxItem = (ListBoxItem)App.MainWindow.PasswordList.ItemContainerGenerator.ContainerFromIndex(User.UsersList.Count - 1);
-
-            ContentPresenter myContentPresenter = ItemControls.FindVisualChild<ContentPresenter>(listBoxItem);
-            DataTemplate myDataTemplate = myContentPresenter.ContentTemplate;
-            Image myImage = (Image)myDataTemplate.FindName("imageIcon", myContentPresenter);
-
-            switch (cbType.SelectedIndex)
-            {
-                case 0:
-                    break;
-                case 1:
-                    myImage.Source = (DrawingImage)FindResource("TickMarkDrawingImage");
-                    break;
-                case 2:
-                    myImage.Source = (DrawingImage)FindResource("saveDrawingImage");
-                    break;
-            }
+            App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.AccountsList;
 
             NavigationService?.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
 

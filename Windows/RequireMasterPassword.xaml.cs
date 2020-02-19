@@ -34,9 +34,10 @@ namespace OlibPasswordManager.Windows
                     TxtPassword.Password));
 
                 App.MainWindow.PasswordList.ItemsSource = null;
-                App.MainWindow.PasswordList.ItemsSource = User.UsersList;
+                App.MainWindow.PasswordList.ItemsSource = User.AccountsList;
+
                 App.MainWindow.PasswordListNotifyIcon.ItemsSource = null;
-                App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.UsersList;
+                App.MainWindow.PasswordListNotifyIcon.ItemsSource = User.AccountsList;
                 App.MainWindow.MasterPassword = TxtPassword.Password;
                 App.MainWindow.FrameWindow.NavigationService.Navigate(new Uri("/Pages/StartScreen.xaml", UriKind.Relative));
                 AppSettings.Items.AppGlobalString = AppSettings.Items.AppGlobalString;

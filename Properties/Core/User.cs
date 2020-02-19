@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using OlibPasswordManager.Controls;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace OlibPasswordManager.Properties.Core
 {
     public class User
     {
+        public static ObservableCollection<ListBoxItemControl> AccountsList { get; set; }
         public static List<User> UsersList { get; set; }
+
         public static int IndexUser { get; set; }
 
         public int Type { get; set; }

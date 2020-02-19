@@ -14,10 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added button to go to Facebook in About.
 - Autostart option added.
 - Added warning text in settings.
+- Added the name of the file storage in the program header.
 
 ### Changed
 - Information in the About window is centered.
 - Two separate components for viewing passwords is now one.
+- Autosave is now activated every 2 minutes.
 
 ### Fixed
 - Fixed a bug where the program ends sometimes after copying some text.

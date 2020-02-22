@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "d0mJCWjWcBMky9D4tPhf+4/D1YaI2zMKoJBjgi1qqi6z2yoPoK/dxaYaN1IUpjZae6facAbAodVsOrqS20CgSA==",
+  "dgSpecHash": "823lGp6H3uWJAQjAN8nidupAJq8EvPuFbgHr6Oei5CCDLP67H42z37soDb2H0fVWRamn9TWzXm/XF1RsE1xxgA==",
   "success": true,
-  "projectFilePath": "F:\\OlibPasswordManager\\OlibPasswordManager.csproj",
+  "projectFilePath": "F:\\ProjectsVS\\OlibKey\\OlibKey.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\dmitr\\.nuget\\packages\\hardcodet.notifyicon.wpf.netcore\\1.0.10\\hardcodet.notifyicon.wpf.netcore.1.0.10.nupkg.sha512",
     "C:\\Users\\dmitr\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []

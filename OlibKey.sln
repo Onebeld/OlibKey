@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29814.53
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey", "OlibKey.csproj", "{E178CF85-0649-4FF8-8157-7BEA17896B2A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E178CF85-0649-4FF8-8157-7BEA17896B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E178CF85-0649-4FF8-8157-7BEA17896B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E178CF85-0649-4FF8-8157-7BEA17896B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E178CF85-0649-4FF8-8157-7BEA17896B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5D04A75-2C4E-4A86-9BA7-D85DA0A58E69}
+	EndGlobalSection
+EndGlobal

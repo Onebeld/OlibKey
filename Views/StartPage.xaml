@@ -1,0 +1,31 @@
+﻿<Page x:Class="OlibKey.Views.StartPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OlibKey.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="350" d:DesignWidth="300"
+      Title="StartPage">
+    <Grid>
+        <Border Panel.ZIndex="-5">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <LinearGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                            <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform Angle="-37" CenterY="0.5" CenterX="0.5"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </LinearGradientBrush.RelativeTransform>
+                    <GradientStop Color="#FF400042"/>
+                    <GradientStop Color="#FF5A0F26" Offset="1"/>
+                    <GradientStop Color="#FF931D60" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Image Source="{StaticResource Olib_bone_DrawingImage}" Margin="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Image Source="{StaticResource OlibKeyTextDrawingImage}" Margin="50,10" VerticalAlignment="Bottom" MaxHeight="30"/>
+    </Grid>
+</Page>

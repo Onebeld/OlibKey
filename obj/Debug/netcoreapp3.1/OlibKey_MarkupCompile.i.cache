@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\ProjectsVS\OlibKey\obj\Debug\netcoreapp3.1\
+F:\OlibKey\obj\Debug\netcoreapp3.1\
 OlibKey
 none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
-F:\ProjectsVS\OlibKey\App.xaml
-91040609542
+F:\OlibKey\App.xaml
+11-1413090755
 
 221836641619
 193-815568740
-Controls\AccountListItem.xaml;IconsAndImages\Icons.xaml;MainWindow.xaml;Views\ChangedPasswordPage.xaml;Views\CreatePasswordPage.xaml;Views\CreatePasswordStorageWindow.xaml;Views\PasswordInformationPage.xaml;Views\RequireMasterPasswordWindow.xaml;Views\StartPage.xaml;
+Controls\AccountListItem.xaml;IconsAndImages\Icons.xaml;MainWindow.xaml;Themes\Dark.xaml;Themes\Light.xaml;Views\ChangedPasswordPage.xaml;Views\CreatePasswordPage.xaml;Views\CreatePasswordStorageWindow.xaml;Views\PasswordInformationPage.xaml;Views\RequireMasterPasswordWindow.xaml;Views\StartPage.xaml;
 
 False
 

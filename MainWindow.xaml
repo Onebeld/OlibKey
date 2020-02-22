@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:OlibKey.ModelViews"
         mc:Ignorable="d"
-        Title="OlibKey" Height="450" Width="800" MinWidth="600" MinHeight="350">
+        Title="OlibKey" Height="450" Width="800" MinWidth="600" MinHeight="350" Background="#FF5A0F26">
     <Window.DataContext>
         <viewmodels:MainViewModel/>
     </Window.DataContext>
@@ -38,13 +38,13 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
+            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Background="White"/>
             <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" Source="/Views/StartPage.xaml" NavigationUIVisibility="Hidden" Grid.RowSpan="2" />
             <ListBox x:Name="lBox" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
-            <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="Black">
+            <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="Black" Background="White">
                 <Button Command="{Binding NewCreatePassword}" Content="Добавить" Margin="10"/>
             </Border>
-            <Label Grid.Column="2" Content="{Binding NameStorage}" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Grid.Column="2" Content="{Binding NameStorage}" Background="White" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

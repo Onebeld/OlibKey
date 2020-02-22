@@ -57,11 +57,11 @@
   "project": {
     "version": "2.0.0",
     "restore": {
-      "projectUniqueName": "F:\\ProjectsVS\\OlibKey\\OlibKey.csproj",
+      "projectUniqueName": "F:\\OlibKey\\OlibKey.csproj",
       "projectName": "OlibKey",
-      "projectPath": "F:\\ProjectsVS\\OlibKey\\OlibKey.csproj",
+      "projectPath": "F:\\OlibKey\\OlibKey.csproj",
       "packagesPath": "C:\\Users\\dmitr\\.nuget\\packages\\",
-      "outputPath": "F:\\ProjectsVS\\OlibKey\\obj\\",
+      "outputPath": "F:\\OlibKey\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\dmitr\\AppData\\Roaming\\NuGet\\NuGet.Config",

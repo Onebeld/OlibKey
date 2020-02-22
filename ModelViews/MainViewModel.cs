@@ -1,5 +1,6 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Controls;
+using OlibKey.Core;
 using OlibKey.Utilities;
 using OlibKey.Views;
 using System.Collections.ObjectModel;
@@ -141,7 +142,7 @@ namespace OlibKey.ModelViews
         public void LoadAccounts()
         {
             ClearAccountsList();
-            foreach (AccountModel accounts in AccountLoader.LoadFiles())
+            foreach (AccountModel accounts in SaveAndLoadAccount.LoadFiles(PathStorage))
             {
                 AddAccount(accounts);
             }

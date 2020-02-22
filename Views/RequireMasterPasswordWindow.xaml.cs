@@ -17,9 +17,21 @@ namespace OlibKey.Views
     /// </summary>
     public partial class RequireMasterPasswordWindow : Window
     {
+        public Action LoadStorageCallback { get; set; }
+
         public RequireMasterPasswordWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

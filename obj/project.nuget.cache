@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "823lGp6H3uWJAQjAN8nidupAJq8EvPuFbgHr6Oei5CCDLP67H42z37soDb2H0fVWRamn9TWzXm/XF1RsE1xxgA==",
+  "dgSpecHash": "j7wMEy6HZi95dhbQ84gnzY3260ta1fir6+mTEQGilVrJ6aQlaIQRpV17rR/A4ItMaodgV4maS9vJiCPkomwE+g==",
   "success": true,
-  "projectFilePath": "F:\\ProjectsVS\\OlibKey\\OlibKey.csproj",
+  "projectFilePath": "F:\\OlibKey\\OlibKey.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dmitr\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],

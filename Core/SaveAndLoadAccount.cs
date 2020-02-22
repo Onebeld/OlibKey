@@ -1,36 +1,48 @@
-﻿using OlibKey.AccountStructures;
-using System;
+﻿using Newtonsoft.Json;
+using OlibKey.AccountStructures;
+using OlibKey.ModelViews;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Windows;
 
 namespace OlibKey.Core
 {
     public class SaveAndLoadAccount
     {
-        public static List<AccountModel> LoadFiles(string directoryLocation)
+        public static List<AccountModel> LoadFiles(string directoryLocation, string masterPassword)
         {
-
             List<AccountModel> accounts = new List<AccountModel>();
+            var s = File.ReadAllText(directoryLocation);
 
-            for (int i = 0; i < accname.Count; i++)
-            {
-                AccountModel am = new AccountModel()
-                {
-                    AccountName = accname[i],
-                    Email = emailss[i],
-                    Username = usernam[i],
-                    Password = passwrd[i],
-                    DateOfBirth = dofbrth[i],
-                    SecurityInfo = scrtyin[i],
-                    ExtraInfo1 = extinf1[i],
-                    ExtraInfo2 = extinf2[i],
-                    ExtraInfo3 = extinf3[i],
-                    ExtraInfo4 = extinf4[i],
-                    ExtraInfo5 = extinf5[i]
-                };
-                accounts.Add(am);
-            }
+            accounts = JsonConvert.DeserializeObject<List<AccountModel>>(Encryptor.DecryptString(
+                Encryptor.DecryptString(
+                    Encryptor.DecryptString(
+                        Encryptor.DecryptString(Encryptor.DecryptString(s, masterPassword),
+                            masterPassword), masterPassword), masterPassword),
+                masterPassword));
+
             return accounts;
+        }
+        public static void SaveFiles(List<AccountModel> accounts, string directoryLocation, bool b)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(accounts);
+
+                File.WriteAllText(directoryLocation,
+                        Encryptor.EncryptString(
+                            Encryptor.EncryptString(
+                                Encryptor.EncryptString(
+                                    Encryptor.EncryptString(Encryptor.EncryptString(json, MainViewModel.MasterPassword),
+                                        MainViewModel.MasterPassword), MainViewModel.MasterPassword), MainViewModel.MasterPassword),
+                            MainViewModel.MasterPassword));
+            }
+            catch
+            {
+                if (b)
+                    MessageBox.Show("Не удалось сохранить.",
+                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

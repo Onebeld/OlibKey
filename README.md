@@ -15,10 +15,10 @@ For feedback and the latest news, use the links below:
 There are many different password managers. One is free, the other is paid, the third has the most functionality, and the fourth has less. **My goal of this project** is to combine the best of other managers and implement it together.
 
 ## Requirements
-To run Olib Password Manager, **you must** have .NET Core version 3.1 and higher.
+To run OlibKey, **you must** have .NET Core version 3.1 and higher.
 
 ## Functional
-With Olib Password Manager, you can store passwords on your computer **using AES encryption**.
+With OlibKey, you can store passwords on your computer **using AES encryption**.
 
 ## Where can I download preview versions?
 To view the preliminary version and find out future functions, just go to the repository directory: _bin/Debug/netcoreapp3.1_

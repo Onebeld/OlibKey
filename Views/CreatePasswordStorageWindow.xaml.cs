@@ -1,6 +1,8 @@
 ﻿using Microsoft.Win32;
+using OlibKey.Core;
 using OlibKey.ModelViews;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace OlibKey.Views
 {
@@ -36,6 +38,17 @@ namespace OlibKey.Views
             {
                 TxtPathSelection.Text = saveFileDialog.FileName;
             }
+        }
+        private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPasswordCollapsed.Text);
+            TxtPassword.Password = TxtPasswordCollapsed.Text;
+        }
+
+        private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (TxtPassword.IsSelectionActive)
+                TxtPasswordCollapsed.Text = TxtPassword.Password;
         }
     }
 }

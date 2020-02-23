@@ -6,6 +6,7 @@ using OlibKey.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Input;
 
 namespace OlibKey.ModelViews
@@ -27,6 +28,12 @@ namespace OlibKey.ModelViews
         public ICommand NewPasswordStorage { get; set; }
         public ICommand NewCreatePassword { get; set; }
         public ICommand RequireMasterPassword { get; set; }
+        public ICommand ExitProgram { get; set; }
+        public ICommand OpenStorage { get; set; }
+        public ICommand SaveStorage { get; set; }
+        public ICommand BlockingStorage { get; set; }
+        public ICommand UnblockingStorage { get; set; }
+        public ICommand CheckUpdate { get; set; }
         #endregion
 
         public MainViewModel()
@@ -87,6 +94,18 @@ namespace OlibKey.ModelViews
             NewPasswordStorage = new Command(NewPasswordStorageVoid);
             NewCreatePassword = new Command(NewCreatePasswordVoid);
             RequireMasterPassword = new Command(RequireMasterPasswordVoid);
+            ExitProgram = new Command(ExitProgramVoid);
+            OpenStorage = new Command(OpenStorageVoid);
+            SaveStorage = new Command(SaveAccount);
+            BlockingStorage = new Command(BlockingStorageVoid);
+            UnblockingStorage = new Command(RequireMasterPasswordVoid);
+            CheckUpdate = new Command(CheckUpdateVoid);
+        }
+
+        public void ExitProgramVoid()
+        {
+            SaveAccount();
+            Application.Current.Shutdown();
         }
 
         public void NewPasswordStorageVoid()
@@ -116,6 +135,21 @@ namespace OlibKey.ModelViews
             requireMaster.ShowDialog();
         }
 
+        public void OpenStorageVoid()
+        {
+
+        }
+
+        public void BlockingStorageVoid()
+        {
+
+        }
+
+        public void CheckUpdateVoid()
+        {
+
+        }
+
         public void AddAccount() { AddAccount(CreatePasswordPage.AccountModel); }
         public void AddAccount(AccountModel accountContent)
         {
@@ -131,10 +165,7 @@ namespace OlibKey.ModelViews
             AccountsList.Add(ali);
         }
 
-        public void DeleteAccount()
-        {
-            AccountsList.Remove(SelectedAccountItem);
-        }
+        public void DeleteAccount() => AccountsList.Remove(SelectedAccountItem);
 
         public void ShowEditAccountWindow(AccountModel account)
         {
@@ -144,10 +175,7 @@ namespace OlibKey.ModelViews
             }
         }
 
-        public void ShowEditAccountWindow()
-        {
-            UpdateSelectedItem();
-        }
+        public void ShowEditAccountWindow() => UpdateSelectedItem();
 
         public void ShowAccountContent(AccountModel account)
         {
@@ -172,9 +200,21 @@ namespace OlibKey.ModelViews
                 AddAccount(accounts);
             }
         }
+
         public void SaveAccount()
         {
+            if (PathStorage != null)
+            {
+                List<AccountModel> oeoe = new List<AccountModel>();
 
+                foreach (AccountListItem item in AccountsList)
+                {
+                    AccountModel m = item.DataContext as AccountModel;
+                    oeoe.Add(m);
+                }
+
+                SaveAndLoadAccount.SaveFiles(oeoe, PathStorage, false);
+            }
         }
         public void ClearAccountsList()
         {

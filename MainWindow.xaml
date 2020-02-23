@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:OlibKey.ModelViews"
         mc:Ignorable="d"
+        Closing="Window_Closing"
         Title="OlibKey" Height="450" Width="800" MinWidth="600" MinHeight="350" Background="#FF5A0F26">
     <Window.DataContext>
         <viewmodels:MainViewModel/>
@@ -17,15 +18,15 @@
         <Menu>
             <MenuItem Header="Файл">
                 <MenuItem Header="Создать хранилище" Command="{Binding NewPasswordStorage}"/>
-                <MenuItem Header="Открыть хранилище" InputGestureText="Ctrl + O"/>
-                <MenuItem Header="Сохранить хранилище" InputGestureText="Ctrl + S"/>
-                <MenuItem Header="Заблокировать хранилище"/>
-                <MenuItem Header="Разблокировать хранилище"/>
+                <MenuItem Header="Открыть хранилище" Command="{Binding OpenStorage}" InputGestureText="Ctrl + O"/>
+                <MenuItem Header="Сохранить хранилище" Command="{Binding SaveStorage}" InputGestureText="Ctrl + S"/>
+                <MenuItem Header="Заблокировать хранилище" Command="{Binding BlockingStorage}"/>
+                <MenuItem Header="Разблокировать хранилище" Command="{Binding UnblockingStorage}"/>
                 <Separator/>
                 <MenuItem Header="Добавить логин" InputGestureText="Ctrl + N" Command="{Binding NewCreatePassword}"/>
                 <Separator/>
                 <MenuItem Header="Настройки"/>
-                <MenuItem Header="Выйти из OlibKey" InputGestureText="Alt + F4"/>
+                <MenuItem Header="Выйти из OlibKey" Command="{Binding ExitProgram}" InputGestureText="Alt + F4"/>
             </MenuItem>
             <MenuItem Header="Инструменты">
                 <MenuItem Header="Генератор паролей" InputGestureText="Ctrl + G"/>
@@ -47,13 +48,13 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Background="White"/>
+            <Border Grid.Column="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 1 0" Background="#931d60"/>
             <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" Source="/Views/StartPage.xaml" NavigationUIVisibility="Hidden" Grid.RowSpan="2" />
-            <ListBox x:Name="lBox" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1"/>
-            <Border Grid.Column="1" Grid.Row="2" BorderThickness="1" BorderBrush="Black" Background="White">
+            <ListBox x:Name="lBox" BorderThickness="0 1 1 1" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource BackgroundWindow}" BorderBrush="{DynamicResource BorderColorWindow}" Grid.Row="1" Grid.Column="1"/>
+            <Border Grid.Column="1" Grid.Row="2" BorderThickness="0 0 1 0" BorderBrush="{DynamicResource BorderColorWindow}" Background="{DynamicResource GlobalBorderColor}">
                 <Button Command="{Binding NewCreatePassword}" Content="Добавить" Margin="10"/>
             </Border>
-            <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}" Background="White" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 0 1" Background="{DynamicResource GlobalBorderColor}" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

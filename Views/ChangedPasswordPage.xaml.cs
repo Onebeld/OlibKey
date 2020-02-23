@@ -2,17 +2,10 @@
 using OlibKey.Core;
 using OlibKey.ModelViews;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OlibKey.Views
 {
@@ -32,7 +25,7 @@ namespace OlibKey.Views
 
             AccountModelChange = accountModel;
 
-            DataContext = accountModel;
+            DataContext = AccountModelChange;
 
             switch (accountModel.TypeAccount)
             {
@@ -53,17 +46,39 @@ namespace OlibKey.Views
 
         private void ChangedAccountClick(object sender, RoutedEventArgs e)
         {
+            AccountModelChange.AccountName = txtNameAccount.Text;
+            switch (AccountModelChange.TypeAccount)
+            {
+                case 0:
+                    AccountModelChange.Username = txtUsername.Text;
+                    break;
+                case 1:
+                    AccountModelChange.Username = txtNumberCart.Text;
+                    break;
+                case 2:
+                    AccountModelChange.Username = txtPasportName.Text;
+                    break;
+            }
+            AccountModelChange.Password = txtPasswordCollapsed.Text;
+            AccountModelChange.WebSite = txtWebSite.Text;
+            AccountModelChange.TypeBankCart = txtTypeCart.Text;
+            AccountModelChange.DateCard = txtCartUnable.Text;
+            AccountModelChange.SecurityCode = txtSecutityCodeCollapsed.Text;
+            AccountModelChange.PassportNumber = txtPasportNumber.Text;
+            AccountModelChange.PassportPlaceOfIssue = txtPasportD.Text;
+            AccountModelChange.Note = txtNotes.Text;
             if (AccountModelChange.WebSite != null)
             {
                 AccountModelChange.IconWebSite = "http://www.google.com/s2/favicons?domain=" + AccountModelChange.WebSite;
             }
             AccountModelChange.TimeChanged = DateTime.Now.ToString();
             ChangedAccountCallbackFunc();
+            NavigationService.GoBack();
         }
 
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
 
-        private void ExitAddPassword(object sender, RoutedEventArgs e)
+        private void DeletePassword(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Вы точно хотите удалить элемент?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
@@ -72,11 +87,12 @@ namespace OlibKey.Views
             }
         }
 
+        private void CancelChangedPassword(object sender, RoutedEventArgs e) => NavigationService.GoBack();
+
         private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
             pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPasswordCollapsed.Text);
-            if (txtPasswordCollapsed.IsSelectionActive)
-                txtPassword.Password = txtPasswordCollapsed.Text;
+            txtPassword.Password = txtPasswordCollapsed.Text;
         }
 
         private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
@@ -93,8 +109,7 @@ namespace OlibKey.Views
 
         private void txtSecutityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (txtSecutityCodeCollapsed.IsSelectionActive)
-                txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
+            txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
         }
 
         private void cbHide_Checked(object sender, RoutedEventArgs e)

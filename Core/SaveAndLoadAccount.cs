@@ -11,10 +11,9 @@ namespace OlibKey.Core
     {
         public static List<AccountModel> LoadFiles(string directoryLocation, string masterPassword)
         {
-            List<AccountModel> accounts = new List<AccountModel>();
             var s = File.ReadAllText(directoryLocation);
 
-            accounts = JsonConvert.DeserializeObject<List<AccountModel>>(Encryptor.DecryptString(
+            List<AccountModel> accounts = JsonConvert.DeserializeObject<List<AccountModel>>(Encryptor.DecryptString(
                 Encryptor.DecryptString(
                     Encryptor.DecryptString(
                         Encryptor.DecryptString(Encryptor.DecryptString(s, masterPassword),

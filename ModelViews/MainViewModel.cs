@@ -3,7 +3,9 @@ using OlibKey.Controls;
 using OlibKey.Core;
 using OlibKey.Utilities;
 using OlibKey.Views;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Input;
 
 namespace OlibKey.ModelViews
@@ -13,6 +15,7 @@ namespace OlibKey.ModelViews
         private ObservableCollection<AccountListItem> list = new ObservableCollection<AccountListItem>();
         private int _selectedIndex;
         private string _nameStorage;
+        private bool _isNoBlockedStorage;
 
         #region Pages
         public PasswordInformationPage PasswordInformationPage { get; set; }
@@ -23,6 +26,7 @@ namespace OlibKey.ModelViews
         #region Commands
         public ICommand NewPasswordStorage { get; set; }
         public ICommand NewCreatePassword { get; set; }
+        public ICommand RequireMasterPassword { get; set; }
         #endregion
 
         public MainViewModel()
@@ -46,6 +50,15 @@ namespace OlibKey.ModelViews
         {
             get => _nameStorage;
             set => RaisePropertyChanged(ref _nameStorage, value);
+        }
+        public bool IsNoBlockedStorage
+        {
+            get => _isNoBlockedStorage;
+            set => RaisePropertyChanged(ref _isNoBlockedStorage, value);
+        }
+        public bool IsNoPathStorage
+        {
+            get => PathStorage != null && MasterPassword != null;
         }
 
         public static string PathStorage { get; set; }
@@ -73,6 +86,7 @@ namespace OlibKey.ModelViews
         {
             NewPasswordStorage = new Command(NewPasswordStorageVoid);
             NewCreatePassword = new Command(NewCreatePasswordVoid);
+            RequireMasterPassword = new Command(RequireMasterPasswordVoid);
         }
 
         public void NewPasswordStorageVoid()
@@ -80,7 +94,8 @@ namespace OlibKey.ModelViews
             CreatePasswordStorageWindow = new CreatePasswordStorageWindow();
             if ((bool)CreatePasswordStorageWindow.ShowDialog())
             {
-
+                NameStorage = Path.GetFileName(CreatePasswordStorageWindow.TxtPathSelection.Text);
+                IsNoBlockedStorage = true;
             }
         }
 
@@ -92,11 +107,18 @@ namespace OlibKey.ModelViews
             };
             App.MainWindow.frame.NavigationService.Navigate(CreatePasswordPage);
         }
+        public void RequireMasterPasswordVoid()
+        {
+            RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow
+            {
+                LoadStorageCallback = LoadAccounts
+            };
+            requireMaster.ShowDialog();
+        }
 
         public void AddAccount() { AddAccount(CreatePasswordPage.AccountModel); }
         public void AddAccount(AccountModel accountContent)
         {
-            //e
             AccountListItem ali = new AccountListItem
             {
                 DataContext = accountContent,
@@ -131,9 +153,11 @@ namespace OlibKey.ModelViews
         {
             if (account != null)
             {
-                PasswordInformationPage = new PasswordInformationPage(account);
-                PasswordInformationPage.DeletedAccount = DeleteAccount;
-                PasswordInformationPage.ChangedAccount = ShowEditAccountWindow;
+                PasswordInformationPage = new PasswordInformationPage(account)
+                {
+                    DeletedAccount = DeleteAccount,
+                    ChangedAccount = ShowEditAccountWindow
+                };
                 App.MainWindow.frame.Navigate(PasswordInformationPage);
                 SelectedAccountStructure = account;
             }
@@ -141,11 +165,16 @@ namespace OlibKey.ModelViews
 
         public void LoadAccounts()
         {
+            List<AccountModel> accountModels = SaveAndLoadAccount.LoadFiles(PathStorage, MasterPassword);
             ClearAccountsList();
-            foreach (AccountModel accounts in SaveAndLoadAccount.LoadFiles(PathStorage))
+            foreach (AccountModel accounts in accountModels)
             {
                 AddAccount(accounts);
             }
+        }
+        public void SaveAccount()
+        {
+
         }
         public void ClearAccountsList()
         {

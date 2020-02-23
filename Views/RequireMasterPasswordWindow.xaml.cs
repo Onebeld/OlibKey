@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OlibKey.ModelViews;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OlibKey.Views
 {
@@ -22,16 +14,24 @@ namespace OlibKey.Views
         public RequireMasterPasswordWindow()
         {
             InitializeComponent();
+            tbMasterPassword.Focus();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CancelButton(object sender, RoutedEventArgs e) => Close();
+
+        private void LoadStorageButton(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            try
+            {
+                MainViewModel.MasterPassword = tbMasterPassword.Text;
+                LoadStorageCallback?.Invoke();
+                Close();
+            }
+            catch
+            {
+                MainViewModel.MasterPassword = null;
+                MessageBox.Show("Неверный мастер-пароль.", "Ошибка");
+            }
         }
     }
 }

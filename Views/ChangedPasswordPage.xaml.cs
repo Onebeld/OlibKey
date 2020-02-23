@@ -72,28 +72,6 @@ namespace OlibKey.Views
             }
         }
 
-        private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            switch (cbType.SelectedIndex)
-            {
-                case 0:
-                    PasswordSection.Visibility = Visibility.Visible;
-                    BankCartSection.Visibility = Visibility.Collapsed;
-                    PasportSection.Visibility = Visibility.Collapsed;
-                    break;
-                case 1:
-                    PasswordSection.Visibility = Visibility.Collapsed;
-                    BankCartSection.Visibility = Visibility.Visible;
-                    PasportSection.Visibility = Visibility.Collapsed;
-                    break;
-                case 2:
-                    PasswordSection.Visibility = Visibility.Collapsed;
-                    BankCartSection.Visibility = Visibility.Collapsed;
-                    PasportSection.Visibility = Visibility.Visible;
-                    break;
-            }
-        }
-
         private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
             pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPasswordCollapsed.Text);

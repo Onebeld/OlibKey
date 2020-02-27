@@ -34,7 +34,11 @@ namespace OlibKey.Views
 
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
 
-        private void ExitAddPassword(object sender, RoutedEventArgs e) => NavigationService.Navigate(MainViewModel.StartPage);
+        private void ExitAddPassword(object sender, RoutedEventArgs e)
+        {
+            StartPage startPage = new StartPage();
+            NavigationService.Navigate(startPage);
+        }
 
         private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -62,12 +66,13 @@ namespace OlibKey.Views
         {
             pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPasswordCollapsed.Text);
             if (txtPasswordCollapsed.IsSelectionActive)
-                txtPassword.Password = txtPasswordCollapsed.Text; 
+                txtPassword.Password = txtPasswordCollapsed.Text;
         }
 
         private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            txtPasswordCollapsed.Text = txtPassword.Password;
+            if (txtPassword.IsSelectionActive)
+                txtPasswordCollapsed.Text = txtPassword.Password;
         }
 
         private void txtSecutityCode_PasswordChanged(object sender, RoutedEventArgs e)

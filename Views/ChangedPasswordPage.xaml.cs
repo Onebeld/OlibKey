@@ -46,28 +46,7 @@ namespace OlibKey.Views
 
         private void ChangedAccountClick(object sender, RoutedEventArgs e)
         {
-            AccountModelChange.AccountName = txtNameAccount.Text;
-            switch (AccountModelChange.TypeAccount)
-            {
-                case 0:
-                    AccountModelChange.Username = txtUsername.Text;
-                    break;
-                case 1:
-                    AccountModelChange.Username = txtNumberCart.Text;
-                    break;
-                case 2:
-                    AccountModelChange.Username = txtPasportName.Text;
-                    break;
-            }
-            AccountModelChange.Password = txtPasswordCollapsed.Text;
-            AccountModelChange.WebSite = txtWebSite.Text;
-            AccountModelChange.TypeBankCart = txtTypeCart.Text;
-            AccountModelChange.DateCard = txtCartUnable.Text;
-            AccountModelChange.SecurityCode = txtSecutityCodeCollapsed.Text;
-            AccountModelChange.PassportNumber = txtPasportNumber.Text;
-            AccountModelChange.PassportPlaceOfIssue = txtPasportD.Text;
-            AccountModelChange.Note = txtNotes.Text;
-            if (AccountModelChange.WebSite != null)
+            if (AccountModelChange.WebSite != null || AccountModelChange.WebSite != "")
             {
                 AccountModelChange.IconWebSite = "http://www.google.com/s2/favicons?domain=" + AccountModelChange.WebSite;
             }
@@ -83,16 +62,21 @@ namespace OlibKey.Views
             if (MessageBox.Show("Вы точно хотите удалить элемент?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 DeleteAccountCallbackFunc();
-                NavigationService.Navigate(MainViewModel.StartPage);
+                StartPage startPage = new StartPage();
+                NavigationService.Navigate(startPage);
             }
         }
 
-        private void CancelChangedPassword(object sender, RoutedEventArgs e) => NavigationService.GoBack();
+        private void CancelChangedPassword(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
+        }
 
         private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
             pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPasswordCollapsed.Text);
-            txtPassword.Password = txtPasswordCollapsed.Text;
+            if (!txtPassword.IsSelectionActive)
+                txtPassword.Password = txtPasswordCollapsed.Text;
         }
 
         private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)

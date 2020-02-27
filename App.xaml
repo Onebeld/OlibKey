@@ -4,6 +4,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Localization/lang.xaml" />
                 <ResourceDictionary Source="/IconsAndImages/Icons.xaml"/>
                 <ResourceDictionary Source="/Themes/Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>

@@ -7,6 +7,61 @@
       mc:Ignorable="d" 
       d:DesignHeight="350" d:DesignWidth="300"
       Title="StartPage">
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Angle" TargetName="rotateGradient" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="-37" To="323"
+                                         RepeatBehavior="Forever"
+                                         Duration="0:0:10" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Y" TargetName="translateImage" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="50" To="0"
+                                         Duration="0:0:1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Opacity" TargetName="imageOlibBone" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0" To="1"
+                                         Duration="0:0:1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Y" TargetName="translateImage1" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="36" To="0"
+                                         BeginTime="0:0:1"
+                                         Duration="0:0:1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Opacity" TargetName="imageOlibKey" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0" To="1"
+                                         BeginTime="0:0:1"
+                                         Duration="0:0:1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="BlurRadius" TargetName="shadowImage" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0" To="15"
+                                         AutoReverse="True"
+                                         RepeatBehavior="Forever"
+                                         Duration="0:0:2" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="BlurRadius" TargetName="shadowImage1" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0" To="15"
+                                         AutoReverse="True"
+                                         RepeatBehavior="Forever"
+                                         Duration="0:0:2" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Page.Triggers>
     <Grid>
         <Border Panel.ZIndex="-5">
             <Border.Background>
@@ -15,17 +70,41 @@
                         <TransformGroup>
                             <ScaleTransform CenterY="0.5" CenterX="0.5"/>
                             <SkewTransform CenterY="0.5" CenterX="0.5"/>
-                            <RotateTransform Angle="-37" CenterY="0.5" CenterX="0.5"/>
+                            <RotateTransform x:Name="rotateGradient" Angle="-37" CenterY="0.5" CenterX="0.5"/>
                             <TranslateTransform/>
                         </TransformGroup>
                     </LinearGradientBrush.RelativeTransform>
-                    <GradientStop Color="#FF400042"/>
-                    <GradientStop Color="#FF5A0F26" Offset="1"/>
+                    <GradientStop Color="#FF400042" />
                     <GradientStop Color="#FF931D60" Offset="0.5"/>
+                    <GradientStop Color="#FF5A0F26" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <Image Source="{StaticResource Olib_bone_DrawingImage}" Margin="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Image Source="{StaticResource OlibKeyTextDrawingImage}" Margin="50,10" VerticalAlignment="Bottom" MaxHeight="30"/>
+        <Image x:Name="imageOlibBone" Source="{StaticResource Olib_bone_DrawingImage}" Margin="60" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+            <Image.Effect>
+                <DropShadowEffect x:Name="shadowImage" Color="White" ShadowDepth="0" BlurRadius="10"/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform x:Name="translateImage" Y="50"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+        <Image x:Name="imageOlibKey" Opacity="0" Source="{StaticResource OlibKeyTextDrawingImage}" Margin="50,10" VerticalAlignment="Bottom" MaxHeight="30" RenderTransformOrigin="0.5,0.5">
+            <Image.Effect>
+                <DropShadowEffect x:Name="shadowImage1" Color="White" ShadowDepth="0" BlurRadius="10"/>
+            </Image.Effect>
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform x:Name="translateImage1" Y="45"/>
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
     </Grid>
 </Page>

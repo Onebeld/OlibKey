@@ -159,8 +159,8 @@ namespace OlibKey.ModelViews
                 ShowContentCallback = ShowAccountContent,
                 EditContentCallback = ShowEditAccountWindow
             };
-
-            App.MainWindow.frame.Navigate(StartPage);
+            StartPage startPage = new StartPage();
+            App.MainWindow.frame.Navigate(startPage);
 
             AccountsList.Add(ali);
         }

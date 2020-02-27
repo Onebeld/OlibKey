@@ -6,6 +6,7 @@
         xmlns:viewmodels="clr-namespace:OlibKey.ModelViews"
         mc:Ignorable="d"
         Closing="Window_Closing"
+        WindowStartupLocation="CenterScreen"
         Title="OlibKey" Height="450" Width="800" MinWidth="600" MinHeight="350" Background="#FF5A0F26">
     <Window.DataContext>
         <viewmodels:MainViewModel/>

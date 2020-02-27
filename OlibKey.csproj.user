@@ -33,6 +33,24 @@
     <Page Update="IconsAndImages\Icons.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Localization\lang.de-DE.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Localization\lang.fr-FR.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Localization\lang.hy-AM.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Localization\lang.ru-RU.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Localization\lang.uk-UA.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Localization\lang.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

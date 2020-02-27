@@ -1,11 +1,19 @@
-﻿using OlibKey.AccountStructures;
+﻿using Newtonsoft.Json;
+using OlibKey.AccountStructures;
 using OlibKey.Controls;
 using OlibKey.Core;
 using OlibKey.Utilities;
 using OlibKey.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,6 +25,8 @@ namespace OlibKey.ModelViews
         private int _selectedIndex;
         private string _nameStorage;
         private bool _isNoBlockedStorage;
+
+        private string _strResult;
 
         #region Pages
         public PasswordInformationPage PasswordInformationPage { get; set; }
@@ -105,7 +115,12 @@ namespace OlibKey.ModelViews
         public void ExitProgramVoid()
         {
             SaveAccount();
-            Application.Current.Shutdown();
+            if (App.Setting.CollapseWhenClosing)
+            {
+                Application.Current.MainWindow.Hide();
+            }
+            else
+                Application.Current.Shutdown();
         }
 
         public void NewPasswordStorageVoid()
@@ -145,9 +160,42 @@ namespace OlibKey.ModelViews
 
         }
 
-        public void CheckUpdateVoid()
+        public async void CheckUpdateVoid(bool b)
         {
-
+            try
+            {
+                using var wb = new WebClient();
+                wb.DownloadStringCompleted += (s, args) => _strResult = args.Result;
+                await wb.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/MagnificentEagle/OlibPasswordManager/master/forRepository/version.txt"));
+                var latest = float.Parse(_strResult.Replace(".", ""));
+                var current = float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
+                if (!(latest > current) && b)
+                {
+                    MessageBox.Show((string)Application.Current.FindResource("MB8"),
+                        (string)Application.Current.FindResource("Message"), MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
+                if (!(latest > current)) return;
+                if (MessageBox.Show((string)Application.Current.FindResource("MB4"),
+                        (string)Application.Current.FindResource("Message"), MessageBoxButton.YesNo,
+                        MessageBoxImage.Information) != MessageBoxResult.Yes) return;
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "https://github.com/MagnificentEagle/OlibPasswordManager/releases",
+                    UseShellExecute = true
+                };
+                Process.Start(psi);
+            }
+            catch
+            {
+                if (b)
+                {
+                    MessageBox.Show((string)Application.Current.FindResource("MB5"),
+                        (string)Application.Current.FindResource("Error"), MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
         }
 
         public void AddAccount() { AddAccount(CreatePasswordPage.AccountModel); }
@@ -215,6 +263,8 @@ namespace OlibKey.ModelViews
 
                 SaveAndLoadAccount.SaveFiles(oeoe, PathStorage, false);
             }
+            App.Setting.PathStorage = PathStorage;
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Roaming\\OlibKey\\settings.json", JsonConvert.SerializeObject(App.Setting));
         }
         public void ClearAccountsList()
         {

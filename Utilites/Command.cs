@@ -11,7 +11,6 @@ namespace OlibKey.Utilities
         {
             _action = action;
         }
-
         public void Execute(object parameter)
         {
             _action();

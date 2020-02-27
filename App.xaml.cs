@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using OlibKey.Structures;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -18,7 +20,7 @@ namespace OlibKey
     {
         public new static MainWindow MainWindow;
         private static ResourceDictionary ResourceTheme;
-        public static Core.IniFile IniFile;
+        public static Setting Setting;
 
         private static object sync = new object();
 
@@ -44,8 +46,15 @@ namespace OlibKey
 
         protected override void OnStartup(StartupEventArgs e) 
         {
+            Setting = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Roaming\\OlibKey\\settings.json")) : new Setting();
+
             Language = Lang.Default.IsFirstLanguage ? CultureInfo.CurrentCulture : Lang.Default.DefaultLanguage;
             ResourceTheme = Resources.MergedDictionaries[2];
+
+            if (Setting.Theme != null)
+            {
+                ResourceTheme.Source = new Uri($"/Properties/Themes/{Setting.Theme}.xaml", UriKind.Relative);
+            }
 
             MainWindow = new MainWindow();
             MainWindow.Show();

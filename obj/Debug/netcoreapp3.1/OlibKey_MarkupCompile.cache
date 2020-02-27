@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 F:\OlibKey\App.xaml
-11-1413090755
+1718130228
 
-21673986135
+23-1683813338
 193-815568740
-Controls\AccountListItem.xaml;IconsAndImages\Icons.xaml;MainWindow.xaml;Themes\Dark.xaml;Themes\Light.xaml;Views\ChangedPasswordPage.xaml;Views\CreatePasswordPage.xaml;Views\CreatePasswordStorageWindow.xaml;Views\PasswordInformationPage.xaml;Views\RequireMasterPasswordWindow.xaml;Views\StartPage.xaml;
+Controls\AccountListItem.xaml;IconsAndImages\Icons.xaml;Localization\lang.de-DE.xaml;Localization\lang.fr-FR.xaml;Localization\lang.hy-AM.xaml;Localization\lang.ru-RU.xaml;Localization\lang.uk-UA.xaml;Localization\lang.xaml;MainWindow.xaml;Themes\Dark.xaml;Themes\Light.xaml;Views\ChangedPasswordPage.xaml;Views\CreatePasswordPage.xaml;Views\CreatePasswordStorageWindow.xaml;Views\PasswordInformationPage.xaml;Views\RequireMasterPasswordWindow.xaml;Views\StartPage.xaml;
 
-False
+True
 

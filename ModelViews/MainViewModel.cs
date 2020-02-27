@@ -73,10 +73,7 @@ namespace OlibKey.ModelViews
             get => _isNoBlockedStorage;
             set => RaisePropertyChanged(ref _isNoBlockedStorage, value);
         }
-        public bool IsNoPathStorage
-        {
-            get => PathStorage != null && MasterPassword != null;
-        }
+        public bool IsNoPathStorage => PathStorage != null && MasterPassword != null;
 
         public static string PathStorage { get; set; }
         public static string MasterPassword { get; set; }
@@ -93,10 +90,8 @@ namespace OlibKey.ModelViews
 
         private void UpdateSelectedItem()
         {
-            if (SelectedAccountItem != null && SelectedAccountItem.DataContext != null)
-            {
+            if (SelectedAccountItem?.DataContext != null)
                 SelectedAccountStructure = SelectedAccountItem.DataContext as AccountModel;
-            }
         }
 
         private void SetupCommandBindings()
@@ -116,9 +111,7 @@ namespace OlibKey.ModelViews
         {
             SaveAccount();
             if (App.Setting.CollapseWhenClosing)
-            {
                 Application.Current.MainWindow.Hide();
-            }
             else
                 Application.Current.Shutdown();
         }
@@ -126,11 +119,9 @@ namespace OlibKey.ModelViews
         public void NewPasswordStorageVoid()
         {
             CreatePasswordStorageWindow = new CreatePasswordStorageWindow();
-            if ((bool)CreatePasswordStorageWindow.ShowDialog())
-            {
-                NameStorage = Path.GetFileName(CreatePasswordStorageWindow.TxtPathSelection.Text);
-                IsNoBlockedStorage = true;
-            }
+            if (!(bool) CreatePasswordStorageWindow.ShowDialog()) return;
+            NameStorage = Path.GetFileName(CreatePasswordStorageWindow.TxtPathSelection.Text);
+            IsNoBlockedStorage = true;
         }
 
         public void NewCreatePasswordVoid()
@@ -160,7 +151,7 @@ namespace OlibKey.ModelViews
 
         }
 
-        public async void CheckUpdateVoid(bool b)
+        public async void CheckUpdateVoid()
         {
             try
             {
@@ -253,13 +244,7 @@ namespace OlibKey.ModelViews
         {
             if (PathStorage != null)
             {
-                List<AccountModel> oeoe = new List<AccountModel>();
-
-                foreach (AccountListItem item in AccountsList)
-                {
-                    AccountModel m = item.DataContext as AccountModel;
-                    oeoe.Add(m);
-                }
+                List<AccountModel> oeoe = AccountsList.Select(item => item.DataContext as AccountModel).ToList();
 
                 SaveAndLoadAccount.SaveFiles(oeoe, PathStorage, false);
             }

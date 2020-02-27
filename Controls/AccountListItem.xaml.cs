@@ -53,10 +53,8 @@ namespace OlibKey.Controls
                     imageIcon.Source = (ImageSource)FindResource("contactDrawingImage");
                     break;
                 default:
-                    if (AccountContext.WebSite == null)
-                    {
-                        imageIcon.Source = (ImageSource)FindResource("globeDrawingImage");
-                    }
+                    if (string.IsNullOrEmpty(AccountContext.WebSite))
+                        imageIcon.Source = (ImageSource) FindResource("globeDrawingImage");
                     break;
             }
         }

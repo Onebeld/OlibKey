@@ -10,10 +10,7 @@ namespace OlibKey
     {
         public Action CloseProgramCallback { get; set; }
         private void CloseProgram() => CloseProgramCallback?.Invoke();
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        public MainWindow() => InitializeComponent();
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

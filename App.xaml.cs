@@ -52,9 +52,7 @@ namespace OlibKey
             ResourceTheme = Resources.MergedDictionaries[2];
 
             if (Setting.Theme != null)
-            {
                 ResourceTheme.Source = new Uri($"/Properties/Themes/{Setting.Theme}.xaml", UriKind.Relative);
-            }
 
             MainWindow = new MainWindow();
             MainWindow.Show();

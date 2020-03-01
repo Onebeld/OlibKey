@@ -1,6 +1,7 @@
 ﻿using OlibKey.ModelViews;
 using System;
 using System.Windows;
+using System.Windows.Input;
 
 namespace OlibKey.Views
 {
@@ -19,7 +20,7 @@ namespace OlibKey.Views
 
         private void CancelButton(object sender, RoutedEventArgs e) => Close();
 
-        private void LoadStorageButton(object sender, RoutedEventArgs e)
+        private  void LoadStorage()
         {
             try
             {
@@ -32,6 +33,13 @@ namespace OlibKey.Views
                 MainViewModel.MasterPassword = null;
                 MessageBox.Show("Неверный мастер-пароль.", "Ошибка");
             }
+        }
+
+        private void LoadStorageButton(object sender, RoutedEventArgs e) => LoadStorage();
+
+        private void TbMasterPassword_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) LoadStorage();
         }
     }
 }

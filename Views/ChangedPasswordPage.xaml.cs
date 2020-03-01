@@ -1,11 +1,10 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Core;
-using OlibKey.ModelViews;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Navigation;
+using System.Windows.Media;
 
 namespace OlibKey.Views
 {
@@ -14,7 +13,7 @@ namespace OlibKey.Views
     /// </summary>
     public partial class ChangedPasswordPage : Page
     {
-        public AccountModel AccountModelChange;
+        private readonly AccountModel _accountModelChange;
         public Action ChangedAccountCallback { get; set; }
         public Action DeleteAccountCallback { get; set; }
         private void ChangedAccountCallbackFunc() => ChangedAccountCallback?.Invoke();
@@ -23,9 +22,9 @@ namespace OlibKey.Views
         {
             InitializeComponent();
 
-            AccountModelChange = accountModel;
+            _accountModelChange = accountModel;
 
-            DataContext = AccountModelChange;
+            DataContext = _accountModelChange;
 
             switch (accountModel.TypeAccount)
             {
@@ -46,43 +45,39 @@ namespace OlibKey.Views
 
         private void ChangedAccountClick(object sender, RoutedEventArgs e)
         {
-            if (AccountModelChange.WebSite != null || AccountModelChange.WebSite != "")
-            {
-                AccountModelChange.IconWebSite = "http://www.google.com/s2/favicons?domain=" + AccountModelChange.WebSite;
-            }
-            AccountModelChange.TimeChanged = DateTime.Now.ToString();
+            if (txtWebSite.Text != "")
+                txtIconWebSite.Text =
+                    "http://www.google.com/s2/favicons?domain=" + _accountModelChange.WebSite;
+            else
+                App.MainWindow.Model.SelectedAccountItem.imageIcon.Source =
+                    (ImageSource) FindResource("globeDrawingImage");
+
+            txtDateChanged.Text = DateTime.Now.ToString();
             ChangedAccountCallbackFunc();
-            NavigationService.GoBack();
+            NavigationService?.GoBack();
         }
 
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
 
         private void DeletePassword(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы точно хотите удалить элемент?", "Сообщение", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                DeleteAccountCallbackFunc();
-                StartPage startPage = new StartPage();
-                NavigationService.Navigate(startPage);
-            }
-        }
-
-        private void CancelChangedPassword(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
+            if (MessageBox.Show("Вы точно хотите удалить элемент?", "Сообщение", MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) != MessageBoxResult.Yes) return;
+            DeleteAccountCallbackFunc();
+            StartPage startPage = new StartPage();
+            NavigationService?.Navigate(startPage);
         }
 
         private void txtPasswordCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
             pbHard.Value = PasswordUtils.CheckPasswordStrength(txtPasswordCollapsed.Text);
-            if (!txtPassword.IsSelectionActive)
+            if (txtPassword.IsSelectionActive)
                 txtPassword.Password = txtPasswordCollapsed.Text;
         }
 
         private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (txtPassword.IsSelectionActive)
-                txtPasswordCollapsed.Text = txtPassword.Password;
+            txtPasswordCollapsed.Text = txtPassword.Password;
         }
 
         private void txtSecutityCode_PasswordChanged(object sender, RoutedEventArgs e)
@@ -120,6 +115,17 @@ namespace OlibKey.Views
             {
                 txtSecutityCode.Visibility = Visibility.Visible;
                 txtSecutityCodeCollapsed.Visibility = Visibility.Collapsed;
+            }
+        }
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow
+            {
+                SaveButton = { Visibility = Visibility.Visible }
+            };
+            if ((bool)generatorWindow.ShowDialog())
+            {
+                txtPassword.Password = generatorWindow.TxtPassword.Text;
             }
         }
     }

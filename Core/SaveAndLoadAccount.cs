@@ -13,12 +13,7 @@ namespace OlibKey.Core
         {
             var s = File.ReadAllText(directoryLocation);
 
-            List<AccountModel> accounts = JsonConvert.DeserializeObject<List<AccountModel>>(Encryptor.DecryptString(
-                Encryptor.DecryptString(
-                    Encryptor.DecryptString(
-                        Encryptor.DecryptString(Encryptor.DecryptString(s, masterPassword),
-                            masterPassword), masterPassword), masterPassword),
-                masterPassword));
+            List<AccountModel> accounts = JsonConvert.DeserializeObject<List<AccountModel>>(Encryptor.DecryptString(s, masterPassword));
 
             return accounts;
         }
@@ -28,13 +23,7 @@ namespace OlibKey.Core
             {
                 string json = JsonConvert.SerializeObject(accounts);
 
-                File.WriteAllText(directoryLocation,
-                        Encryptor.EncryptString(
-                            Encryptor.EncryptString(
-                                Encryptor.EncryptString(
-                                    Encryptor.EncryptString(Encryptor.EncryptString(json, MainViewModel.MasterPassword),
-                                        MainViewModel.MasterPassword), MainViewModel.MasterPassword), MainViewModel.MasterPassword),
-                            MainViewModel.MasterPassword));
+                File.WriteAllText(directoryLocation, Encryptor.EncryptString(json, MainViewModel.MasterPassword));
             }
             catch
             {

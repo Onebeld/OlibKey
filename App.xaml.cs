@@ -2,21 +2,20 @@
 using OlibKey.Structures;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using OlibKey.ModelViews;
+using OlibKey.Views;
 
 namespace OlibKey
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         public new static MainWindow MainWindow;
         private static ResourceDictionary ResourceTheme;
@@ -46,16 +45,34 @@ namespace OlibKey
 
         protected override void OnStartup(StartupEventArgs e) 
         {
-            Setting = File.Exists("settings.json") ? JsonConvert.DeserializeObject<Setting>(File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Roaming\\OlibKey\\settings.json")) : new Setting();
+            Setting = File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey\\settings.json")
+                ? JsonConvert.DeserializeObject<Setting>(File.ReadAllText(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+                    "\\OlibKey\\settings.json"))
+                : new Setting();
 
             Language = Lang.Default.IsFirstLanguage ? CultureInfo.CurrentCulture : Lang.Default.DefaultLanguage;
-            ResourceTheme = Resources.MergedDictionaries[2];
 
+            ResourceTheme = Resources.MergedDictionaries[2];
             if (Setting.Theme != null)
-                ResourceTheme.Source = new Uri($"/Properties/Themes/{Setting.Theme}.xaml", UriKind.Relative);
+                ResourceTheme.Source = new Uri($"/Themes/{Setting.Theme}.xaml", UriKind.Relative);
 
             MainWindow = new MainWindow();
             MainWindow.Show();
+
+            if (Setting.PathStorage != null && Setting.PathStorage != "")
+            {
+                MainViewModel.PathStorage = Setting.PathStorage;
+                MainWindow.Model.NameStorage = Path.GetFileName(App.Setting.PathStorage);
+
+                RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
+                {
+                    LoadStorageCallback = MainWindow.Model.LoadAccounts
+                };
+                passwordWindow.ShowDialog();
+            }
+
+            MainWindow.CheckUpdate(false);
 
             base.OnStartup(e);
         }
@@ -74,12 +91,12 @@ namespace OlibKey
                 {
                     try
                     {
-                        dict.Source = new Uri($"/Properties/Localization/lang.{CultureInfo.CurrentCulture}.xaml",
+                        dict.Source = new Uri($"/Localization/lang.{CultureInfo.CurrentCulture}.xaml",
                             UriKind.Relative);
                     }
                     catch
                     {
-                        dict.Source = new Uri("/Properties/Localization/lang.xaml", UriKind.Relative);
+                        dict.Source = new Uri("/Localization/lang.xaml", UriKind.Relative);
                     }
 
                     Lang.Default.IsFirstLanguage = false;
@@ -88,11 +105,11 @@ namespace OlibKey
                 {
                     try
                     {
-                        dict.Source = new Uri($"/Properties/Localization/lang.{value.Name}.xaml", UriKind.Relative);
+                        dict.Source = new Uri($"/Localization/lang.{value.Name}.xaml", UriKind.Relative);
                     }
                     catch
                     {
-                        dict.Source = new Uri("/Properties/Localization/lang.xaml", UriKind.Relative);
+                        dict.Source = new Uri("/Localization/lang.xaml", UriKind.Relative);
                     }
                 }
 
@@ -113,14 +130,11 @@ namespace OlibKey
 
         private void WriteLog(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            // Путь .\\Log
             string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
             if (!Directory.Exists(pathToLog))
-                Directory.CreateDirectory(pathToLog); // Создаем директорию, если нужно
-            string filename = Path.Combine(pathToLog, string.Format("{0}_{1:dd.MM.yyy}.log",
-            AppDomain.CurrentDomain.FriendlyName, DateTime.Now));
-            string fullText = string.Format("[{0:dd.MM.yyy HH:mm:ss.fff}] [{1}.{2}()]\n{3}\r\n",
-            DateTime.Now, e.Exception.TargetSite.DeclaringType, e.Exception.TargetSite.Name, e.Exception);
+                Directory.CreateDirectory(pathToLog);
+            string filename = Path.Combine(pathToLog, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
+            string fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] [{e.Exception.TargetSite.DeclaringType}.{e.Exception.TargetSite.Name}()]\n{e.Exception}\r\n";
             lock (sync)
             {
                 File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));

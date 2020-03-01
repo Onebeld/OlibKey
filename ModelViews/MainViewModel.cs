@@ -16,6 +16,7 @@ using System.Text;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32;
 
 namespace OlibKey.ModelViews
 {
@@ -26,8 +27,6 @@ namespace OlibKey.ModelViews
         private string _nameStorage;
         private bool _isNoBlockedStorage;
 
-        private string _strResult;
-
         #region Pages
         public PasswordInformationPage PasswordInformationPage { get; set; }
         public CreatePasswordPage CreatePasswordPage { get; set; }
@@ -36,8 +35,8 @@ namespace OlibKey.ModelViews
         #endregion
         #region Commands
         public ICommand NewPasswordStorage { get; set; }
+        public ICommand PasswordGenerator { get; set; }
         public ICommand NewCreatePassword { get; set; }
-        public ICommand RequireMasterPassword { get; set; }
         public ICommand ExitProgram { get; set; }
         public ICommand OpenStorage { get; set; }
         public ICommand SaveStorage { get; set; }
@@ -73,7 +72,6 @@ namespace OlibKey.ModelViews
             get => _isNoBlockedStorage;
             set => RaisePropertyChanged(ref _isNoBlockedStorage, value);
         }
-        public bool IsNoPathStorage => PathStorage != null && MasterPassword != null;
 
         public static string PathStorage { get; set; }
         public static string MasterPassword { get; set; }
@@ -98,20 +96,20 @@ namespace OlibKey.ModelViews
         {
             NewPasswordStorage = new Command(NewPasswordStorageVoid);
             NewCreatePassword = new Command(NewCreatePasswordVoid);
-            RequireMasterPassword = new Command(RequireMasterPasswordVoid);
             ExitProgram = new Command(ExitProgramVoid);
             OpenStorage = new Command(OpenStorageVoid);
             SaveStorage = new Command(SaveAccount);
             BlockingStorage = new Command(BlockingStorageVoid);
             UnblockingStorage = new Command(RequireMasterPasswordVoid);
             CheckUpdate = new Command(CheckUpdateVoid);
+            PasswordGenerator = new Command(PasswordGeneratorVoid);
         }
 
         public void ExitProgramVoid()
         {
             SaveAccount();
             if (App.Setting.CollapseWhenClosing)
-                Application.Current.MainWindow.Hide();
+                Application.Current.MainWindow?.Hide();
             else
                 Application.Current.Shutdown();
         }
@@ -141,9 +139,28 @@ namespace OlibKey.ModelViews
             requireMaster.ShowDialog();
         }
 
+        public void PasswordGeneratorVoid()
+        {
+            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow();
+            generatorWindow.ShowDialog();
+        }
         public void OpenStorageVoid()
         {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Olib-files (*.olib)|*.olib"
+            };
 
+            if (!(bool) openFileDialog.ShowDialog()) return;
+
+            PathStorage = openFileDialog.FileName;
+            NameStorage = Path.GetFileName(openFileDialog.FileName);
+
+            RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow
+            {
+                LoadStorageCallback = LoadAccounts
+            };
+            requireMaster.ShowDialog();
         }
 
         public void BlockingStorageVoid()
@@ -151,43 +168,7 @@ namespace OlibKey.ModelViews
 
         }
 
-        public async void CheckUpdateVoid()
-        {
-            try
-            {
-                using var wb = new WebClient();
-                wb.DownloadStringCompleted += (s, args) => _strResult = args.Result;
-                await wb.DownloadStringTaskAsync(new Uri("https://raw.githubusercontent.com/MagnificentEagle/OlibPasswordManager/master/forRepository/version.txt"));
-                var latest = float.Parse(_strResult.Replace(".", ""));
-                var current = float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
-                if (!(latest > current) && b)
-                {
-                    MessageBox.Show((string)Application.Current.FindResource("MB8"),
-                        (string)Application.Current.FindResource("Message"), MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                    return;
-                }
-                if (!(latest > current)) return;
-                if (MessageBox.Show((string)Application.Current.FindResource("MB4"),
-                        (string)Application.Current.FindResource("Message"), MessageBoxButton.YesNo,
-                        MessageBoxImage.Information) != MessageBoxResult.Yes) return;
-                var psi = new ProcessStartInfo
-                {
-                    FileName = "https://github.com/MagnificentEagle/OlibPasswordManager/releases",
-                    UseShellExecute = true
-                };
-                Process.Start(psi);
-            }
-            catch
-            {
-                if (b)
-                {
-                    MessageBox.Show((string)Application.Current.FindResource("MB5"),
-                        (string)Application.Current.FindResource("Error"), MessageBoxButton.OK,
-                        MessageBoxImage.Error);
-                }
-            }
-        }
+        public void CheckUpdateVoid() => App.MainWindow.CheckUpdate(true);
 
         public void AddAccount() { AddAccount(CreatePasswordPage.AccountModel); }
         public void AddAccount(AccountModel accountContent)
@@ -208,36 +189,28 @@ namespace OlibKey.ModelViews
 
         public void ShowEditAccountWindow(AccountModel account)
         {
-            if (account != null)
-            {
-                SelectedAccountStructure = account;
-            }
+            if (account != null) SelectedAccountStructure = account;
         }
 
         public void ShowEditAccountWindow() => UpdateSelectedItem();
 
         public void ShowAccountContent(AccountModel account)
         {
-            if (account != null)
+            if (account == null) return;
+            PasswordInformationPage = new PasswordInformationPage(account)
             {
-                PasswordInformationPage = new PasswordInformationPage(account)
-                {
-                    DeletedAccount = DeleteAccount,
-                    ChangedAccount = ShowEditAccountWindow
-                };
-                App.MainWindow.frame.Navigate(PasswordInformationPage);
-                SelectedAccountStructure = account;
-            }
+                DeletedAccount = DeleteAccount,
+                ChangedAccount = ShowEditAccountWindow
+            };
+            App.MainWindow.frame.Navigate(PasswordInformationPage);
+            SelectedAccountStructure = account;
         }
 
         public void LoadAccounts()
         {
             List<AccountModel> accountModels = SaveAndLoadAccount.LoadFiles(PathStorage, MasterPassword);
             ClearAccountsList();
-            foreach (AccountModel accounts in accountModels)
-            {
-                AddAccount(accounts);
-            }
+            foreach (AccountModel accounts in accountModels) AddAccount(accounts);
         }
 
         public void SaveAccount()
@@ -247,9 +220,14 @@ namespace OlibKey.ModelViews
                 List<AccountModel> oeoe = AccountsList.Select(item => item.DataContext as AccountModel).ToList();
 
                 SaveAndLoadAccount.SaveFiles(oeoe, PathStorage, false);
+
+                App.Setting.PathStorage = PathStorage;
             }
-            App.Setting.PathStorage = PathStorage;
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Roaming\\OlibKey\\settings.json", JsonConvert.SerializeObject(App.Setting));
+
+            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey"))
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey");
+
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey\\settings.json", JsonConvert.SerializeObject(App.Setting));
         }
         public void ClearAccountsList()
         {

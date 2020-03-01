@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Title="OlibKey" Height="450" Width="800" MinWidth="600" MinHeight="350" Background="#FF5A0F26">
     <Window.DataContext>
-        <viewmodels:MainViewModel/>
+        <viewmodels:MainViewModel x:Name="Model"/>
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -30,17 +30,17 @@
                 <MenuItem Header="Выйти из OlibKey" Command="{Binding ExitProgram}" InputGestureText="Alt + F4"/>
             </MenuItem>
             <MenuItem Header="Инструменты">
-                <MenuItem Header="Генератор паролей" InputGestureText="Ctrl + G"/>
+                <MenuItem Header="Генератор паролей" InputGestureText="Ctrl + G" Command="{Binding PasswordGenerator}"/>
                 <MenuItem Header="Изменить мастер-пароль"/>
             </MenuItem>
             <MenuItem Header="Справка">
-                <MenuItem Header="Проверить наличие обновлении"/>
+                <MenuItem Header="Проверить наличие обновлении" Command="{Binding CheckUpdate}"/>
                 <MenuItem Header="О программе..."/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>

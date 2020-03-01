@@ -2,6 +2,7 @@
 using OlibKey.Core;
 using OlibKey.ModelViews;
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -28,7 +29,7 @@ namespace OlibKey.Views
             {
                 AccountModel.IconWebSite = "http://www.google.com/s2/favicons?domain=" + AccountModel.WebSite;
             }
-            AccountModel.TimeCreate = DateTime.Now.ToString();
+            AccountModel.TimeCreate = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             AddAccountCallbackFunc();
         }
 
@@ -37,7 +38,7 @@ namespace OlibKey.Views
         private void ExitAddPassword(object sender, RoutedEventArgs e)
         {
             StartPage startPage = new StartPage();
-            NavigationService.Navigate(startPage);
+            NavigationService?.Navigate(startPage);
         }
 
         private void cbType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -71,8 +72,7 @@ namespace OlibKey.Views
 
         private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if (txtPassword.IsSelectionActive)
-                txtPasswordCollapsed.Text = txtPassword.Password;
+            txtPasswordCollapsed.Text = txtPassword.Password;
         }
 
         private void txtSecutityCode_PasswordChanged(object sender, RoutedEventArgs e)
@@ -110,6 +110,18 @@ namespace OlibKey.Views
             {
                 txtSecutityCode.Visibility = Visibility.Visible;
                 txtSecutityCodeCollapsed.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow
+            {
+                SaveButton = {Visibility = Visibility.Visible}
+            };
+            if ((bool)generatorWindow.ShowDialog())
+            {
+                txtPassword.Password = generatorWindow.TxtPassword.Text;
             }
         }
     }

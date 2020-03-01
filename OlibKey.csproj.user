@@ -16,6 +16,9 @@
     <Compile Update="Views\CreatePasswordStorageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\PasswordGeneratorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\PasswordInformationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -61,6 +64,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CreatePasswordStorageWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\PasswordGeneratorWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PasswordInformationPage.xaml">

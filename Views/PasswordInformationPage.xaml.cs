@@ -116,7 +116,7 @@ namespace OlibKey.Views
                 DeleteAccountCallback = DeletedAccount,
                 ChangedAccountCallback = ChangedAccount,
             };
-            NavigationService.Navigate(ChangedPasswordPage);
+            NavigationService?.Navigate(ChangedPasswordPage);
         }
     }
 }

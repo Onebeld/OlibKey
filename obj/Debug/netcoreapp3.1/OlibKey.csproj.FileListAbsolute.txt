@@ -72,3 +72,11 @@ F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.AssemblyInfoInputs.cache
 F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.AssemblyInfo.cs
 F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.csproj.CopyComplete
 F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.genruntimeconfig.cache
+F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.de-DE.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.fr-FR.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.hy-AM.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.ru-RU.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.uk-UA.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\PasswordGeneratorWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\PasswordGeneratorWindow.baml

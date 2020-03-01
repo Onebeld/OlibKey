@@ -18,26 +18,39 @@
                     </Storyboard>
                 </BeginStoryboard>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Y" TargetName="translateImage" Timeline.DesiredFrameRate="60">
-                        <DoubleAnimation From="50" To="0"
+                    <Storyboard TargetProperty="ScaleX" TargetName="translateImage" DecelerationRatio="1" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0.7" To="1"
                                          Duration="0:0:1" />
                     </Storyboard>
                 </BeginStoryboard>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Opacity" TargetName="imageOlibBone" Timeline.DesiredFrameRate="60">
+                    <Storyboard TargetProperty="ScaleY" TargetName="translateImage" DecelerationRatio="1" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0.7" To="1"
+                                         Duration="0:0:1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Opacity" TargetName="imageOlibBone" DecelerationRatio="1" Timeline.DesiredFrameRate="60">
                         <DoubleAnimation From="0" To="1"
                                          Duration="0:0:1" />
                     </Storyboard>
                 </BeginStoryboard>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Y" TargetName="translateImage1" Timeline.DesiredFrameRate="60">
-                        <DoubleAnimation From="36" To="0"
+                    <Storyboard TargetProperty="ScaleX" TargetName="translateImage1" DecelerationRatio="1" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0.7" To="1"
                                          BeginTime="0:0:1"
                                          Duration="0:0:1" />
                     </Storyboard>
                 </BeginStoryboard>
                 <BeginStoryboard>
-                    <Storyboard TargetProperty="Opacity" TargetName="imageOlibKey" Timeline.DesiredFrameRate="60">
+                    <Storyboard TargetProperty="ScaleY" TargetName="translateImage1" DecelerationRatio="1" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="0.7" To="1"
+                                         BeginTime="0:0:1"
+                                         Duration="0:0:1" />
+                    </Storyboard>
+                </BeginStoryboard>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Opacity" TargetName="imageOlibKey" DecelerationRatio="1" Timeline.DesiredFrameRate="60">
                         <DoubleAnimation From="0" To="1"
                                          BeginTime="0:0:1"
                                          Duration="0:0:1" />
@@ -86,10 +99,10 @@
             </Image.Effect>
             <Image.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
+                    <ScaleTransform x:Name="translateImage" ScaleX="0.5" ScaleY="0.5"/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform x:Name="translateImage" Y="50"/>
+                    <TranslateTransform/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>
@@ -99,10 +112,10 @@
             </Image.Effect>
             <Image.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform/>
+                    <ScaleTransform x:Name="translateImage1" ScaleX="0.5" ScaleY="0.5"/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform x:Name="translateImage1" Y="45"/>
+                    <TranslateTransform/>
                 </TransformGroup>
             </Image.RenderTransform>
         </Image>

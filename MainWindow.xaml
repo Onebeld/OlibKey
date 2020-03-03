@@ -15,29 +15,39 @@
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="17"/>
-            <RowDefinition/>
+            <RowDefinition Height="17" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="{DynamicResource File}">
-                <MenuItem Header="{DynamicResource CreateBase}" Command="{Binding NewPasswordStorage}"/>
-                <MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenStorage}" InputGestureText="Ctrl + O"/>
-                <MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveStorage}" InputGestureText="Ctrl + S" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
-                <MenuItem Header="{DynamicResource LockStorage}" Command="{Binding BlockingStorage}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
-                <MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnblockingStorage}" IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}"/>
-                <Separator/>
-                <MenuItem Header="{DynamicResource AddLogin}" InputGestureText="Ctrl + N" Command="{Binding NewCreatePassword}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
-                <Separator/>
-                <MenuItem Header="{DynamicResource Settings}" Command="{Binding SettingsWindowCommand}"/>
-                <MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgram}" InputGestureText="Alt + F4"/>
+                <MenuItem Header="{DynamicResource CreateBase}" Command="{Binding NewPasswordStorage}" />
+                <MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenStorage}"
+                          InputGestureText="Ctrl + O" />
+                <MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveStorage}"
+                          InputGestureText="Ctrl + S"
+                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                <MenuItem Header="{DynamicResource LockStorage}" Command="{Binding BlockingStorage}"
+                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                <MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnblockingStorage}"
+                          IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                <Separator />
+                <MenuItem Header="{DynamicResource AddLogin}" InputGestureText="Ctrl + N"
+                          Command="{Binding NewCreatePassword}"
+                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                <Separator />
+                <MenuItem Header="{DynamicResource Settings}" Command="{Binding SettingsWindowCommand}" />
+                <MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgram}"
+                          InputGestureText="Alt + F4" />
             </MenuItem>
             <MenuItem Header="{DynamicResource Tools}">
-                <MenuItem Header="{DynamicResource PasswordGenerator}" InputGestureText="Ctrl + G" Command="{Binding PasswordGenerator}"/>
-                <MenuItem Header="{DynamicResource ChangeMasterPassword}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
+                <MenuItem Header="{DynamicResource PasswordGenerator}" InputGestureText="Ctrl + G"
+                          Command="{Binding PasswordGenerator}" />
+                <MenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPassword}"
+                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
             </MenuItem>
             <MenuItem Header="{DynamicResource Reference}">
-                <MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdate}"/>
-                <MenuItem Header="{DynamicResource AboutPrograms}"  Command="{Binding AboutWindowCommand}"/>
+                <MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdate}" />
+                <MenuItem Header="{DynamicResource AboutPrograms}" Command="{Binding AboutWindowCommand}" />
             </MenuItem>
         </Menu>
 
@@ -49,36 +59,63 @@
                         DoubleClickCommand="{Binding ShowWindow}">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{DynamicResource ShowOPM}" Command="{Binding ShowWindow}"/>
-                    <MenuItem Header="{DynamicResource LockStorage}" Command="{Binding BlockingStorage}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
-                    <MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnblockingStorage}" IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}"/>
-                    <Separator/>
+                    <MenuItem Header="{DynamicResource ShowOPM}" Command="{Binding ShowWindow}" />
+                    <MenuItem Header="{DynamicResource LockStorage}" Command="{Binding BlockingStorage}"
+                              IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                    <MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnblockingStorage}"
+                              IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                    <Separator />
                     <MenuItem Header="{DynamicResource ExitFrom}" Click="MenuItem_OnClick" />
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
-
         </tb:TaskbarIcon>
 
-            <Grid Grid.Row="1">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="40" />
+                <RowDefinition />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0"/>
-                <ColumnDefinition Width="23*"/>
-                <ColumnDefinition Width="57*"/>
+                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="23*" />
+                <ColumnDefinition Width="57*" />
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 1 1" Background="#931d60"/>
-            <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" Source="/Views/StartPage.xaml" NavigationUIVisibility="Hidden" Grid.RowSpan="2" />
-            <ListBox x:Name="lBox" BorderThickness="0 0 1 0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource BackgroundWindow}" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"  BorderBrush="{DynamicResource BorderColorWindow}" Grid.Row="1" Grid.Column="1"/>
-            <Button Grid.Row="1" Click="MoveUpButton" Grid.Column="1" Content="↑" Margin="5" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-            <Button Grid.Row="1" Click="MoveDownButton" Grid.Column="1" Content="↓" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-            <Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0" BorderBrush="{DynamicResource BorderColorWindow}" Background="{DynamicResource GlobalBorderColor}">
-                <Button Command="{Binding NewCreatePassword}" Content="{DynamicResource Add}" Margin="10" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Border x:Name="bNotification" Opacity="0" Visibility="Collapsed" Grid.Column="2"
+                    Panel.ZIndex="10" Margin="5" Width="Auto" CornerRadius="5" Background="Green"
+                    HorizontalAlignment="Right">
+                <DockPanel Margin="5">
+                    <Image Source="{StaticResource TickMarkDrawingImage}" Margin="0,0,15,0" />
+                    <AccessText x:Name="NotText" VerticalAlignment="Center" TextWrapping="Wrap" Foreground="White" />
+                </DockPanel>
             </Border>
-            <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}" Foreground="{DynamicResource ForegroundWindow}" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 0 1" Background="{DynamicResource GlobalBorderColor}" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Image x:Name="saveIcon" Grid.Column="2" Opacity="0" Visibility="Collapsed" Panel.ZIndex="10"
+                   Source="{StaticResource saveDrawingImage}" Margin="5" HorizontalAlignment="Right" />
+
+
+
+            <Border Grid.Column="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 1 1" Background="#931d60" />
+            <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" Source="/Views/StartPage.xaml"
+                   NavigationUIVisibility="Hidden" Grid.RowSpan="2" />
+            <ListBox x:Name="lBox" BorderThickness="0 0 1 0" HorizontalContentAlignment="Stretch"
+                     ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}"
+                     Background="{DynamicResource BackgroundWindow}"
+                     SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"
+                     BorderBrush="{DynamicResource BorderColorWindow}" Grid.Row="1" Grid.Column="1" />
+            <Button Grid.Row="1" Click="MoveUpButton" Grid.Column="1" Content="↑" Margin="5" HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom" />
+            <Button Grid.Row="1" Click="MoveDownButton" Grid.Column="1" Content="↓" Margin="5"
+                    HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+            <Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0"
+                    BorderBrush="{DynamicResource BorderColorWindow}" Background="{DynamicResource GlobalBorderColor}">
+                <Button Command="{Binding NewCreatePassword}" Content="{DynamicResource Add}" Margin="10"
+                        IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+            <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}"
+                   Foreground="{DynamicResource ForegroundWindow}" BorderBrush="{DynamicResource BorderColorWindow}"
+                   BorderThickness="0 0 0 1" Background="{DynamicResource GlobalBorderColor}" FontSize="18"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
         </Grid>
     </Grid>
 </Window>

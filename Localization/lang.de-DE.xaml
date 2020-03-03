@@ -23,6 +23,7 @@
     <v:String x:Key="Complexity">Schwierigkeit:</v:String>
     <v:String x:Key="ChangeP">Bearbeiten</v:String>
     <v:String x:Key="Back">Zurück</v:String>
+    <v:String x:Key="Done">Fertig</v:String>
 
     <v:String x:Key="ListOfItems">Liste der Artikel</v:String>
     <v:String x:Key="LockStorage">Tresor verriegeln</v:String>

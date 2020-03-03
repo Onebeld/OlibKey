@@ -1,10 +1,8 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Core;
 using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace OlibKey.Views
@@ -57,6 +55,7 @@ namespace OlibKey.Views
             txtDateChanged.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
             ChangedAccountCallbackFunc();
             NavigationService?.GoBack();
+            App.MainWindow.Notification((string)Application.Current.FindResource("Not2"));
         }
 
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);

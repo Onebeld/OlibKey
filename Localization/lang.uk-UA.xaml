@@ -23,6 +23,7 @@
     <v:String x:Key="Complexity">Складність:</v:String>
     <v:String x:Key="ChangeP">Змінити</v:String>
     <v:String x:Key="Back">Назад</v:String>
+    <v:String x:Key="Done">Готово</v:String>
 
     <v:String x:Key="ListOfItems">Список елементів</v:String>
     <v:String x:Key="LockStorage">Заблокувати сховище</v:String>

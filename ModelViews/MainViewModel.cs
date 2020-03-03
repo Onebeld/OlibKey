@@ -7,13 +7,8 @@ using OlibKey.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
-using System.Net;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
@@ -35,6 +30,7 @@ namespace OlibKey.ModelViews
         public static StartPage StartPage { get; set; }
         #endregion
         #region Commands
+        public ICommand ChangeMasterPassword { get; set; }
         public ICommand SettingsWindowCommand { get; set; }
         public ICommand ShowWindow { get; set; }
         public ICommand AboutWindowCommand { get; set; }
@@ -103,10 +99,16 @@ namespace OlibKey.ModelViews
                 SelectedAccountStructure = SelectedAccountItem.DataContext as AccountModel;
         }
 
-        private  void AboutWindowVoid()
+        private void AboutWindowVoid()
         {
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.ShowDialog();
+        }
+
+        private void ChangeMasterPasswordVoid()
+        {
+            ChangeMasterPasswordWindow passwordWindow = new ChangeMasterPasswordWindow();
+            passwordWindow.ShowDialog();
         }
 
         public void MoveUp() => MoveItem(-1);
@@ -144,6 +146,7 @@ namespace OlibKey.ModelViews
             AboutWindowCommand = new Command(AboutWindowVoid);
             SettingsWindowCommand = new Command(SettingsWindowVoid);
             ShowWindow = new Command(ShowWindowVoid);
+            ChangeMasterPassword = new Command(ChangeMasterPasswordVoid);
         }
 
         private void SettingsWindowVoid()
@@ -176,6 +179,7 @@ namespace OlibKey.ModelViews
             if (!(bool) CreatePasswordStorageWindow.ShowDialog()) return;
             NameStorage = Path.GetFileName(CreatePasswordStorageWindow.TxtPathSelection.Text);
             IsUnlockStorage = true;
+            App.MainWindow.Notification((string)Application.Current.FindResource("Not3"));
         }
 
         public void NewCreatePasswordVoid()
@@ -294,6 +298,8 @@ namespace OlibKey.ModelViews
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey");
 
             File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey\\settings.json", JsonConvert.SerializeObject(App.Setting));
+
+            App.MainWindow.IconSave();
         }
         public void ClearAccountsList()
         {

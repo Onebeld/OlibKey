@@ -5,15 +5,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
@@ -25,7 +18,6 @@ namespace OlibKey.Views
     public partial class SettingsWindow : Window
     {
         private bool _isFirst = true;
-        private bool _isFirstAutorun = true;
         private bool _isFirstTheme = true;
 
         public SettingsWindow() => InitializeComponent();
@@ -107,29 +99,20 @@ namespace OlibKey.Views
 
         private void CBAutorun(object sender, RoutedEventArgs e)
         {
-            try
+            RegistryKey rkApp =
+                Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if ((bool) cbAutorun.IsChecked)
             {
-                RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-                if ((bool)cbAutorun.IsChecked)
-                {
-                    App.Setting.AutorunApplication = (bool)cbAutorun.IsChecked;
-
-                    string s = Assembly.GetExecutingAssembly().Location;
-
-                    int x1 = s.Length - 4;
-                    s = "\"" + s.Remove(x1) + ".exe" + "\"";
-
-                    rkApp.SetValue("OlibKey", s + " /StartupHide");
-                }
-                else
-                {
-                    App.Setting.AutorunApplication = (bool)cbAutorun.IsChecked;
-                    rkApp.DeleteValue("OlibKey", false);
-                }
+                App.Setting.AutorunApplication = (bool) cbAutorun.IsChecked;
+                string s = Assembly.GetExecutingAssembly().Location;
+                int x1 = s.Length - 4;
+                s = "\"" + s.Remove(x1) + ".exe" + "\"";
+                rkApp.SetValue("OlibKey", s + " /StartupHide");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show($"Не получилось поменять настройки:\n{ex.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                App.Setting.AutorunApplication = (bool) cbAutorun.IsChecked;
+                rkApp.DeleteValue("OlibKey", false);
             }
         }
     }

@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Net;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace OlibKey
 {
@@ -21,6 +23,61 @@ namespace OlibKey
             e.Cancel = true;
         }
 
+        public async void Notification(string s)
+        {
+            bNotification.Visibility = Visibility.Visible;
+            NotText.Text = s;
+            DoubleAnimation anim = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                DecelerationRatio = 0.5,
+                AccelerationRatio = 0.5,
+                From = 0,
+                To = 1,
+            };
+            Timeline.SetDesiredFrameRate(anim, 60);
+            bNotification.BeginAnimation(OpacityProperty, anim);
+            await Task.Delay(3000);
+            DoubleAnimation anim1 = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                DecelerationRatio = 0.5,
+                AccelerationRatio = 0.5,
+                From = bNotification.Opacity,
+                To = 0
+            };
+            anim1.Completed += (s, r) => bNotification.Visibility = Visibility.Collapsed;
+            Timeline.SetDesiredFrameRate(anim1, 60);
+            bNotification.BeginAnimation(OpacityProperty, anim1);
+        }
+
+        public async void IconSave()
+        {
+            saveIcon.Visibility = Visibility.Visible;
+            DoubleAnimation anim = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                DecelerationRatio = 0.5,
+                AccelerationRatio = 0.5,
+                From = 0,
+                To = 1,
+            };
+            Timeline.SetDesiredFrameRate(anim, 60);
+            saveIcon.BeginAnimation(OpacityProperty, anim);
+            await Task.Delay(2000);
+            DoubleAnimation anim1 = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromSeconds(0.5),
+                DecelerationRatio = 0.5,
+                AccelerationRatio = 0.5,
+                From = saveIcon.Opacity,
+                To = 0
+            };
+            anim1.Completed += (s, r) => saveIcon.Visibility = Visibility.Collapsed;
+            Timeline.SetDesiredFrameRate(anim1, 60);
+            saveIcon.BeginAnimation(OpacityProperty, anim1);
+        }
+
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
@@ -28,7 +85,8 @@ namespace OlibKey
                 switch (e.Key)
                 {
                     case Key.N:
-                        Model.AddAccount();
+                        if (Model.IsUnlockStorage)
+                            Model.AddAccount();
                         break;
                     case Key.G:
                         Model.PasswordGeneratorVoid();
@@ -37,7 +95,8 @@ namespace OlibKey
                         Model.OpenStorageVoid();
                         break;
                     case Key.S:
-                        Model.SaveAccount();
+                        if (Model.IsUnlockStorage)
+                            Model.SaveAccount();
                         break;
                 }
             }

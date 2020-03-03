@@ -23,6 +23,7 @@
     <v:String x:Key="Complexity">Բարդությունը:</v:String>
     <v:String x:Key="ChangeP">Փոխել</v:String>
     <v:String x:Key="Back">Ետ</v:String>
+    <v:String x:Key="Done">Կատարված է</v:String>
 
     <v:String x:Key="ListOfItems">Նյութերի ցուցակ</v:String>
     <v:String x:Key="LockStorage">Կողպեք պահոցը</v:String>

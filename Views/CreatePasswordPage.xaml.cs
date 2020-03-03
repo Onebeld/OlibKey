@@ -28,6 +28,7 @@ namespace OlibKey.Views
             }
             AccountModel.TimeCreate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
             AddAccountCallbackFunc();
+            App.MainWindow.Notification((string)Application.Current.FindResource("Not1"));
         }
 
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);

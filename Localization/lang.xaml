@@ -23,6 +23,7 @@
     <v:String x:Key="Complexity">Complexity:</v:String>
     <v:String x:Key="ChangeP">Change</v:String>
     <v:String x:Key="Back">Back</v:String>
+    <v:String x:Key="Done">Done</v:String>
 
     <v:String x:Key="ListOfItems">List of items</v:String>
     <v:String x:Key="LockStorage">Lock storage</v:String>

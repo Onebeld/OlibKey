@@ -58,7 +58,32 @@ namespace OlibKey
                 ResourceTheme.Source = new Uri($"/Themes/{Setting.ApplyTheme}.xaml", UriKind.Relative);
 
             MainWindow = new MainWindow();
-            MainWindow.Show();
+            bool startHide = false;
+            if (Setting.AutorunApplication)
+            {
+                foreach (var i in e.Args)
+                {
+                    if (i == "/StartupHide")
+                    {
+                        startHide = true;
+                    }
+                }
+            }
+            if (startHide)
+            {
+                MainWindow.Show();
+                MainWindow.Hide();
+            }
+            else
+            {
+                MainWindow.Show();
+            }
+
+            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
+
+            timer.Tick += (s, d) => MainWindow.Model.SaveAccount();
+            timer.Interval = new TimeSpan(0, 2, 0);
+            timer.Start();
 
             if (!string.IsNullOrEmpty(Setting.PathStorage))
             {

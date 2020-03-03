@@ -23,6 +23,7 @@
     <v:String x:Key="Complexity">Difficulté:</v:String>
     <v:String x:Key="ChangeP">Modifier</v:String>
     <v:String x:Key="Back">Retour</v:String>
+    <v:String x:Key="Done">Terminé</v:String>
 
     <v:String x:Key="ListOfItems">Liste d'articles</v:String>
     <v:String x:Key="LockStorage">Verrouiller le coffre-fort</v:String>

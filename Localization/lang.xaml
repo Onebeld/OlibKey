@@ -11,7 +11,7 @@
     <v:String x:Key="SaveBase">Save storage</v:String>
     <v:String x:Key="AddLogin">Add log in</v:String>
     <v:String x:Key="Settings">Settings</v:String>
-    <v:String x:Key="ExitFrom">Exit from Olib Password Manager</v:String>
+    <v:String x:Key="ExitFrom">Exit from OlibKey</v:String>
     <v:String x:Key="PasswordGenerator">Password generator</v:String>
     <v:String x:Key="ChangeMasterPassword">Change Master Password</v:String>
     <v:String x:Key="AboutPrograms">About the program</v:String>
@@ -27,7 +27,7 @@
     <v:String x:Key="ListOfItems">List of items</v:String>
     <v:String x:Key="LockStorage">Lock storage</v:String>
     <v:String x:Key="UnlockStorage">Unlock storage</v:String>
-    <v:String x:Key="ShowOPM">Show Olib Password Manager</v:String>
+    <v:String x:Key="ShowOPM">Show OlibKey</v:String>
 
     <v:String x:Key="WarningSettings">Some settings may not completely change the program. To do this, restart the application.</v:String>
     <!--#endregion-->
@@ -60,8 +60,7 @@
     <v:String x:Key="Specifications">Specifications</v:String>
     <v:String x:Key="Lowercase">Lowercase (abc)</v:String>
     <v:String x:Key="Uppercase">Uppercase (ABC)</v:String>
-    <v:String x:Key="MinLenght">Min. lenght:</v:String>
-    <v:String x:Key="MaxLenght">Max. lenght:</v:String>
+    <v:String x:Key="Lenght">Lenght:</v:String>
     <v:String x:Key="Numbers">Numbers (123)</v:String>
     <v:String x:Key="Special">Special ($%#)</v:String>
     <v:String x:Key="Underscore">Underscore (_)</v:String>
@@ -69,7 +68,6 @@
     <v:String x:Key="Generate">Generate</v:String>
     <v:String x:Key="PasswordSave">Save</v:String>
     <v:String x:Key="Allow">Allow</v:String>
-    <v:String x:Key="Require">Require</v:String>
     <!--#endregion-->
     
     <!--#region ChangeMasterPassword-->
@@ -124,6 +122,7 @@
 
     <v:String x:Key="BankCard">Bank card</v:String>
     <v:String x:Key="CardName">Cardholder Name</v:String>
+    <v:String x:Key="CartType">Card type</v:String>
     <v:String x:Key="CardNumber">Number</v:String>
     <v:String x:Key="YearOfService">Year of service</v:String>
     <v:String x:Key="SecurityCodeCard">Security code</v:String>

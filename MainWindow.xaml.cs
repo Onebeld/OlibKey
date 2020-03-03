@@ -86,5 +86,9 @@ namespace OlibKey
             Model.SaveAccount();
             Application.Current.Shutdown();
         }
+
+        private void MoveUpButton(object sender, RoutedEventArgs e) => Model.MoveUp();
+
+        private void MoveDownButton(object sender, RoutedEventArgs e) => Model.MoveDown();
     }
 }

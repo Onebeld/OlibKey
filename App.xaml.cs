@@ -60,7 +60,7 @@ namespace OlibKey
             MainWindow = new MainWindow();
             MainWindow.Show();
 
-            if (Setting.PathStorage != null && Setting.PathStorage != "")
+            if (!string.IsNullOrEmpty(Setting.PathStorage))
             {
                 MainViewModel.PathStorage = Setting.PathStorage;
                 MainWindow.Model.NameStorage = Path.GetFileName(App.Setting.PathStorage);

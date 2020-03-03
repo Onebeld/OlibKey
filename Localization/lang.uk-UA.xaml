@@ -11,7 +11,7 @@
     <v:String x:Key="SaveBase">Зберегти сховище</v:String>
     <v:String x:Key="AddLogin">Додати логін</v:String>
     <v:String x:Key="Settings">Налаштування</v:String>
-    <v:String x:Key="ExitFrom">Вийти з Olib Password Manager</v:String>
+    <v:String x:Key="ExitFrom">Вийти з OlibKey</v:String>
     <v:String x:Key="PasswordGenerator">Генератор паролей</v:String>
     <v:String x:Key="ChangeMasterPassword">Змінити майстер-пароль</v:String>
     <v:String x:Key="AboutPrograms">Про програму...</v:String>
@@ -27,7 +27,7 @@
     <v:String x:Key="ListOfItems">Список елементів</v:String>
     <v:String x:Key="LockStorage">Заблокувати сховище</v:String>
     <v:String x:Key="UnlockStorage">Розблокувати сховище</v:String>
-    <v:String x:Key="ShowOPM">Показати Olib Password Manager</v:String>
+    <v:String x:Key="ShowOPM">Показати OlibKey</v:String>
 
     <v:String x:Key="WarningSettings">Деякі настройки можуть не повністю змінити програму. Для цього потрібно перезапустити програму.</v:String>
     <!--#endregion-->
@@ -60,12 +60,10 @@
     <v:String x:Key="Specifications">Характеристики</v:String>
     <v:String x:Key="Lowercase">Рядкові (abc)</v:String>
     <v:String x:Key="Uppercase">Заголовні (ABC)</v:String>
-    <v:String x:Key="MinLenght">Мін. довжина:</v:String>
-    <v:String x:Key="MaxLenght">Макс. довжина:</v:String>
+    <v:String x:Key="Lenght">Довжина:</v:String>
     <v:String x:Key="Numbers">Цифри (123)</v:String>
     <v:String x:Key="Special">Спеціальні ($%#)</v:String>
     <v:String x:Key="Underscore">Нижня межа (_)</v:String>
-    <v:String x:Key="Space">Пропуск ( )</v:String>
     <v:String x:Key="Generate">Генерувати</v:String>
     <v:String x:Key="PasswordSave">Зберегти</v:String>
     <v:String x:Key="Allow">Допускати</v:String>
@@ -125,6 +123,7 @@
     <v:String x:Key="BankCard">Банківська картка</v:String>
 
     <v:String x:Key="CardName">Ім'я власника карти</v:String>
+    <v:String x:Key="CartType">Тип карти</v:String>
     <v:String x:Key="CardNumber">Номер</v:String>
     <v:String x:Key="YearOfService">Рік обслуговування</v:String>
     <v:String x:Key="SecurityCodeCard">Код безпеки</v:String>

@@ -109,38 +109,26 @@ namespace OlibKey.ModelViews
             aboutWindow.ShowDialog();
         }
 
-        //public void MoveUp()
-        //{
-        //    MoveItem(-1);
-        //}
+        public void MoveUp() => MoveItem(-1);
 
-        //public void MoveDown()
-        //{
-        //    MoveItem(1);
-        //}
+        public void MoveDown() => MoveItem(1);
 
-        //private void MoveItem(int direction)
-        //{
-        //    // Checking selected item
-        //    if (SelectedAccountItem == null)
-        //        return; // No selected item - nothing to do
+        private void MoveItem(int direction)
+        {
+            if (SelectedAccountItem == null)
+                return;
 
-        //    // Calculate new index using move direction
-        //    int newIndex = SelectedIndex + direction;
+            int newIndex = SelectedIndex + direction;
 
-        //    // Checking bounds of the range
-        //    if (newIndex < 0 || newIndex >= AccountsList.Count)
-        //        return; // Index out of range - nothing to do
+            if (newIndex < 0 || newIndex >= AccountsList.Count)
+                return;
 
-        //    AccountListItem selected = SelectedAccountItem;
+            AccountListItem selected = SelectedAccountItem;
 
-        //    // Removing removable element
-        //    AccountsList.Remove(selected);
-        //    // Insert it in new position
-        //    AccountsList.Insert(newIndex, selected);
-        //    // Restore selection
-        //    SelectedIndex = newIndex;
-        //}
+            AccountsList.Remove(selected);
+            AccountsList.Insert(newIndex, selected);
+            SelectedIndex = newIndex;
+        }
 
         private void SetupCommandBindings()
         {
@@ -224,6 +212,8 @@ namespace OlibKey.ModelViews
             PathStorage = openFileDialog.FileName;
             NameStorage = Path.GetFileName(openFileDialog.FileName);
 
+            BlockingStorageVoid();
+
             RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow
             {
                 LoadStorageCallback = LoadAccounts
@@ -235,7 +225,8 @@ namespace OlibKey.ModelViews
         {
             SaveAccount();
             ClearAccountsList();
-            App.MainWindow.frame.NavigationService.Navigate(CreatePasswordPage);
+            StartPage page = new StartPage();
+            App.MainWindow.frame.NavigationService.Navigate(page);
             IsLockStorage = true;
             IsUnlockStorage = false;
         }
@@ -289,6 +280,7 @@ namespace OlibKey.ModelViews
 
         public void SaveAccount()
         {
+            if (!IsUnlockStorage) return;
             if (PathStorage != null)
             {
                 List<AccountModel> oeoe = AccountsList.Select(item => item.DataContext as AccountModel).ToList();

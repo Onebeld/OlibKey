@@ -1,11 +1,8 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Core;
-using OlibKey.ModelViews;
 using System;
-using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
 
 namespace OlibKey.Views
 {
@@ -29,7 +26,7 @@ namespace OlibKey.Views
             {
                 AccountModel.IconWebSite = "http://www.google.com/s2/favicons?domain=" + AccountModel.WebSite;
             }
-            AccountModel.TimeCreate = DateTime.Now.ToString(CultureInfo.InvariantCulture);
+            AccountModel.TimeCreate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
             AddAccountCallbackFunc();
         }
 

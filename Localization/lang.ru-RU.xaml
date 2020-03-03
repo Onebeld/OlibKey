@@ -23,11 +23,12 @@
     <v:String x:Key="Complexity">Сложность:</v:String>
     <v:String x:Key="ChangeP">Изменить</v:String>
     <v:String x:Key="Back">Назад</v:String>
+    <v:String x:Key="Done">Готово</v:String>
 
     <v:String x:Key="ListOfItems">Список элементов</v:String>
     <v:String x:Key="LockStorage">Заблокировать хранилище</v:String>
     <v:String x:Key="UnlockStorage">Разблокировать хранилище</v:String>
-    <v:String x:Key="ShowOPM">Показать Olib Password Manager</v:String>
+    <v:String x:Key="ShowOPM">Показать OlibKey</v:String>
 
     <v:String x:Key="WarningSettings">Некоторые настройки могут не полностью изменить программу. Для этого нужно перезапустить приложение.</v:String>
     <!--#endregion-->
@@ -60,12 +61,10 @@
     <v:String x:Key="Specifications">Характеристики</v:String>
     <v:String x:Key="Lowercase">Строчные (abc)</v:String>
     <v:String x:Key="Uppercase">Заглавные (ABC)</v:String>
-    <v:String x:Key="MinLenght">Мин. длина:</v:String>
-    <v:String x:Key="MaxLenght">Макс. длина:</v:String>
+    <v:String x:Key="Lenght">Длина:</v:String>
     <v:String x:Key="Numbers">Цифры (123)</v:String>
     <v:String x:Key="Special">Специальные ($%#)</v:String>
     <v:String x:Key="Underscore">Нижняя черта (_)</v:String>
-    <v:String x:Key="Space">Пробел ( )</v:String>
     <v:String x:Key="Generate">Генерировать</v:String>
     <v:String x:Key="PasswordSave">Сохранить</v:String>
     <v:String x:Key="Allow">Допускать</v:String>
@@ -124,6 +123,7 @@
     <v:String x:Key="BankCard">Банковская карта</v:String>
 
     <v:String x:Key="CardName">Имя владельца карты</v:String>
+    <v:String x:Key="CartType">Тип карты</v:String>
     <v:String x:Key="CardNumber">Номер</v:String>
     <v:String x:Key="YearOfService">Год обслуживания</v:String>
     <v:String x:Key="SecurityCodeCard">Код безопасности</v:String>

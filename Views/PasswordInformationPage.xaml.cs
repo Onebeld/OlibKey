@@ -120,5 +120,11 @@ namespace OlibKey.Views
             };
             NavigationService?.Navigate(ChangedPasswordPage);
         }
+
+        private void PasswordInformationPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            txtPassword.Password = txtPasswordCollapsed.Text;
+            txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Core;
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -53,7 +54,7 @@ namespace OlibKey.Views
                 App.MainWindow.Model.SelectedAccountItem.imageIcon.Source =
                     (ImageSource) FindResource("globeDrawingImage");
 
-            txtDateChanged.Text = DateTime.Now.ToString();
+            txtDateChanged.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
             ChangedAccountCallbackFunc();
             NavigationService?.GoBack();
         }
@@ -86,13 +87,11 @@ namespace OlibKey.Views
             if(txtSecutityCodeCollapsed.IsSelectionActive)
                 txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
         }
-
         private void txtSecutityCode_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (txtSecutityCode.IsSelectionActive)
                 txtSecutityCodeCollapsed.Text = txtSecutityCode.Password;
         }
-
 
         private void cbHide_Checked(object sender, RoutedEventArgs e)
         {
@@ -130,6 +129,12 @@ namespace OlibKey.Views
             {
                 txtPassword.Password = generatorWindow.TxtPassword.Text;
             }
+        }
+
+        private void ChangedPasswordPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
+            txtPassword.Password = txtPasswordCollapsed.Text;
         }
     }
 }

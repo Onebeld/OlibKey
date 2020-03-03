@@ -11,7 +11,7 @@
     <v:String x:Key="SaveBase">Պահպանել պահեստ</v:String>
     <v:String x:Key="AddLogin">Ավելացնել լոգին</v:String>
     <v:String x:Key="Settings">Կարգավորումներ</v:String>
-    <v:String x:Key="ExitFrom">Դուրս գալ Olib Password Manager-ից</v:String>
+    <v:String x:Key="ExitFrom">Դուրս գալ OlibKey-ից</v:String>
     <v:String x:Key="PasswordGenerator">Գաղտնաբառի գեներատոր</v:String>
     <v:String x:Key="ChangeMasterPassword">Փոխել վարպետության-գաղտաբառը</v:String>
     <v:String x:Key="AboutPrograms">Ծրագրի մասին...</v:String>
@@ -27,7 +27,7 @@
     <v:String x:Key="ListOfItems">Նյութերի ցուցակ</v:String>
     <v:String x:Key="LockStorage">Կողպեք պահոցը</v:String>
     <v:String x:Key="UnlockStorage">Բացել պահեստը</v:String>
-    <v:String x:Key="ShowOPM">Ուցադրել Olib Password Manager</v:String>
+    <v:String x:Key="ShowOPM">Ուցադրել OlibKey</v:String>
 
     <v:String x:Key="WarningSettings">Որոշ պարամետրեր կարող են ամբողջությամբ չփոխել ծրագիրը: Դա անելու համար վերագործարկեք հայտը:</v:String>
     <!--#endregion-->
@@ -60,12 +60,10 @@
     <v:String x:Key="Specifications">Բնութագիր</v:String>
     <v:String x:Key="Lowercase">Փոքրատառ (abc)</v:String>
     <v:String x:Key="Uppercase">Մեծատառ (ABC)</v:String>
-    <v:String x:Key="MinLenght">Մին երկարությունը:</v:String>
-    <v:String x:Key="MaxLenght">Մաքս երկարությունը:</v:String>
+    <v:String x:Key="Lenght">Երկարությունը</v:String>
     <v:String x:Key="Numbers">Թվեր (123)</v:String>
     <v:String x:Key="Special">Հատուկ ($%#)</v:String>
     <v:String x:Key="Underscore">Ստորին գիծ (_)</v:String>
-    <v:String x:Key="Space">Արանք ( )</v:String>
     <v:String x:Key="Generate">Արտադրել</v:String>
     <v:String x:Key="PasswordSave">Պահպանել</v:String>
     <v:String x:Key="Allow">Թույլ տալ</v:String>
@@ -125,6 +123,7 @@
     <v:String x:Key="BankCard">Բանկային քարտ</v:String>
 
     <v:String x:Key="CardName">Քարտի սեփականատիրոջ անունը</v:String>
+    <v:String x:Key="CartType">Քարտի տեսակը</v:String>
     <v:String x:Key="CardNumber">Համարը</v:String>
     <v:String x:Key="YearOfService">Ծառայության տարեթիվը</v:String>
     <v:String x:Key="SecurityCodeCard">Անվտանգության ծածկագիր</v:String>

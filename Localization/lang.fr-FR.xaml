@@ -11,7 +11,7 @@
     <v:String x:Key="SaveBase">Enregistrer le stockage</v:String>
     <v:String x:Key="AddLogin">Ajouter une connexion</v:String>
     <v:String x:Key="Settings">Paramètres</v:String>
-    <v:String x:Key="ExitFrom">Déconnectez-vous d'Olib Password Manager</v:String>
+    <v:String x:Key="ExitFrom">Déconnectez-vous d'OlibKey</v:String>
     <v:String x:Key="PasswordGenerator">Générateur de mot de passe</v:String>
     <v:String x:Key="ChangeMasterPassword">Changer le mot de passe principal</v:String>
     <v:String x:Key="AboutPrograms">À propos du programme...</v:String>
@@ -27,7 +27,7 @@
     <v:String x:Key="ListOfItems">Liste d'articles</v:String>
     <v:String x:Key="LockStorage">Verrouiller le coffre-fort</v:String>
     <v:String x:Key="UnlockStorage">Déverrouillez le stockage</v:String>
-    <v:String x:Key="ShowOPM">Afficher Olib Password Manager</v:String>
+    <v:String x:Key="ShowOPM">Afficher OlibKey</v:String>
 
     <v:String x:Key="WarningSettings">Certains paramètres peuvent ne pas modifier complètement le programme. Pour ce faire, redémarrez l'application.</v:String>
     <!--#endregion-->
@@ -60,12 +60,10 @@
     <v:String x:Key="Specifications">Caractéristiques</v:String>
     <v:String x:Key="Lowercase">Minuscules (abc)</v:String>
     <v:String x:Key="Uppercase">Majuscules (ABC)</v:String>
-    <v:String x:Key="MinLenght">Min longueur:</v:String>
-    <v:String x:Key="MaxLenght">Max longueur:</v:String>
+    <v:String x:Key="Lenght">Longueur:</v:String>
     <v:String x:Key="Numbers">Les chiffres (123)</v:String>
     <v:String x:Key="Special">Spécial ($%#)</v:String>
     <v:String x:Key="Underscore">Conclusion (_)</v:String>
-    <v:String x:Key="Space">Barre d'espace ( )</v:String>
     <v:String x:Key="Generate">Générer</v:String>
     <v:String x:Key="PasswordSave">Enregistrer</v:String>
     <v:String x:Key="Allow">Admettre</v:String>
@@ -124,6 +122,7 @@
     <v:String x:Key="BankCard">Carte bancaire</v:String>
 
     <v:String x:Key="CardName">Nom du titulaire de la carte</v:String>
+    <v:String x:Key="CartType">Type de carte</v:String>
     <v:String x:Key="CardNumber">Numéro</v:String>
     <v:String x:Key="YearOfService">Année de service</v:String>
     <v:String x:Key="SecurityCodeCard">Code de sécurité</v:String>

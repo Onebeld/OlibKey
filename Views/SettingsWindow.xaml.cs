@@ -54,7 +54,7 @@ namespace OlibKey.Views
                 new KeyValuePair<string, string>("hy-AM", "Հայերեն")
             };
             foreach (var i in valuePair1) CbLang.Items.Add(i);
-            cbCollapsedWindow.IsChecked = App.Setting.CollapseOnClose;
+            cbCollapsedWindow.IsChecked = App.Setting.CollapseWhenClosing;
             cbAutorun.IsChecked = App.Setting.AutorunApplication;
             CbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == Lang.Default.DefaultLanguage.Name);
         }
@@ -100,7 +100,7 @@ namespace OlibKey.Views
         private void Settings_OnClosing(object sender, CancelEventArgs e)
         {
             if (cbCollapsedWindow.IsChecked != null)
-                App.Setting.CollapseOnClose = (bool)cbCollapsedWindow.IsChecked;
+                App.Setting.CollapseWhenClosing = (bool)cbCollapsedWindow.IsChecked;
             File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                               "\\OlibKey\\settings.json", JsonConvert.SerializeObject(App.Setting));
         }

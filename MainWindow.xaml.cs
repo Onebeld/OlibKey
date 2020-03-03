@@ -80,5 +80,11 @@ namespace OlibKey
                 }
             }
         }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Model.SaveAccount();
+            Application.Current.Shutdown();
+        }
     }
 }

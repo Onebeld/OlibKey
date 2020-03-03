@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:OlibKey.ModelViews"
         mc:Ignorable="d"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         Closing="Window_Closing"
         WindowStartupLocation="CenterScreen"
         KeyDown="Window_KeyDown"
@@ -39,7 +40,26 @@
                 <MenuItem Header="{DynamicResource AboutPrograms}"  Command="{Binding AboutWindowCommand}"/>
             </MenuItem>
         </Menu>
-        <Grid Grid.Row="1">
+
+        <tb:TaskbarIcon Grid.Row="0" Grid.Column="0"
+                        Visibility="Visible"
+                        ToolTipText="OlibKey"
+                        IconSource="favicon.ico"
+                        MenuActivation="RightClick"
+                        DoubleClickCommand="{Binding ShowWindow}">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{DynamicResource ShowOPM}" Command="{Binding ShowWindow}"/>
+                    <MenuItem Header="{DynamicResource LockStorage}" Command="{Binding BlockingStorage}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
+                    <MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnblockingStorage}" IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Separator/>
+                    <MenuItem Header="{DynamicResource ExitFrom}" Click="MenuItem_OnClick" />
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+
+        </tb:TaskbarIcon>
+
+            <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>

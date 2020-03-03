@@ -36,6 +36,7 @@ namespace OlibKey.ModelViews
         #endregion
         #region Commands
         public ICommand SettingsWindowCommand { get; set; }
+        public ICommand ShowWindow { get; set; }
         public ICommand AboutWindowCommand { get; set; }
         public ICommand NewPasswordStorage { get; set; }
         public ICommand PasswordGenerator { get; set; }
@@ -154,6 +155,7 @@ namespace OlibKey.ModelViews
             PasswordGenerator = new Command(PasswordGeneratorVoid);
             AboutWindowCommand = new Command(AboutWindowVoid);
             SettingsWindowCommand = new Command(SettingsWindowVoid);
+            ShowWindow = new Command(ShowWindowVoid);
         }
 
         private void SettingsWindowVoid()
@@ -169,6 +171,15 @@ namespace OlibKey.ModelViews
                 Application.Current.MainWindow?.Hide();
             else
                 Application.Current.Shutdown();
+        }
+
+        public void ShowWindowVoid()
+        {
+            if (Application.Current.MainWindow == null) return;
+            Application.Current.MainWindow.Visibility = Visibility.Visible;
+            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            Application.Current.MainWindow.Topmost = true;
+            Application.Current.MainWindow.Topmost = false;
         }
 
         public void NewPasswordStorageVoid()

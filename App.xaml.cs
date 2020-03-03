@@ -54,8 +54,8 @@ namespace OlibKey
             Language = Lang.Default.IsFirstLanguage ? CultureInfo.CurrentCulture : Lang.Default.DefaultLanguage;
 
             ResourceTheme = Resources.MergedDictionaries[2];
-            if (Setting.Theme != null)
-                ResourceTheme.Source = new Uri($"/Themes/{Setting.Theme}.xaml", UriKind.Relative);
+            if (Setting.ApplyTheme != null)
+                ResourceTheme.Source = new Uri($"/Themes/{Setting.ApplyTheme}.xaml", UriKind.Relative);
 
             MainWindow = new MainWindow();
             MainWindow.Show();
@@ -64,6 +64,7 @@ namespace OlibKey
             {
                 MainViewModel.PathStorage = Setting.PathStorage;
                 MainWindow.Model.NameStorage = Path.GetFileName(App.Setting.PathStorage);
+                MainWindow.Model.IsLockStorage = true;
 
                 RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
                 {

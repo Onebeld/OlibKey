@@ -30,6 +30,7 @@
                 <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
                 <Setter Property="Background" Value="{DynamicResource BackgroundWindow}"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource BorderColorWindow}"/>
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -90,16 +91,9 @@
                 </Style.Triggers>
             </Style>
             <Style TargetType="{x:Type PasswordBox}">
-                <Setter Property="PasswordChar" Value="●" />
-                <Setter Property="BorderThickness" Value="1" />
                 <Setter Property="CaretBrush" Value="{DynamicResource ForegroundWindow}"/>
-                <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-                <Setter Property="HorizontalContentAlignment" Value="Left" />
                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                <Setter Property="AllowDrop" Value="true" />
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
-                <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
-                <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type PasswordBox}">

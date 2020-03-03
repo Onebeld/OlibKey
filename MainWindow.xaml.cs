@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Input;
 
 namespace OlibKey
 {
@@ -18,6 +19,28 @@ namespace OlibKey
         {
             Model.ExitProgramVoid();
             e.Cancel = true;
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                switch (e.Key)
+                {
+                    case Key.N:
+                        Model.AddAccount();
+                        break;
+                    case Key.G:
+                        Model.PasswordGeneratorVoid();
+                        break;
+                    case Key.O:
+                        Model.OpenStorageVoid();
+                        break;
+                    case Key.S:
+                        Model.SaveAccount();
+                        break;
+                }
+            }
         }
 
         public async void CheckUpdate(bool b)

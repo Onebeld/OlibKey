@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Closing="Window_Closing"
         WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown"
         Title="OlibKey" Height="450" Width="800" MinWidth="600" MinHeight="350" Background="#FF5A0F26">
     <Window.DataContext>
         <viewmodels:MainViewModel x:Name="Model"/>
@@ -17,25 +18,25 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Menu>
-            <MenuItem Header="Файл">
-                <MenuItem Header="Создать хранилище" Command="{Binding NewPasswordStorage}"/>
-                <MenuItem Header="Открыть хранилище" Command="{Binding OpenStorage}" InputGestureText="Ctrl + O"/>
-                <MenuItem Header="Сохранить хранилище" Command="{Binding SaveStorage}" InputGestureText="Ctrl + S"/>
-                <MenuItem Header="Заблокировать хранилище" Command="{Binding BlockingStorage}"/>
-                <MenuItem Header="Разблокировать хранилище" Command="{Binding UnblockingStorage}"/>
+            <MenuItem Header="{DynamicResource File}">
+                <MenuItem Header="{DynamicResource CreateBase}" Command="{Binding NewPasswordStorage}"/>
+                <MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenStorage}" InputGestureText="Ctrl + O"/>
+                <MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveStorage}" InputGestureText="Ctrl + S" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
+                <MenuItem Header="{DynamicResource LockStorage}" Command="{Binding BlockingStorage}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
+                <MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnblockingStorage}" IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}"/>
                 <Separator/>
-                <MenuItem Header="Добавить логин" InputGestureText="Ctrl + N" Command="{Binding NewCreatePassword}"/>
+                <MenuItem Header="{DynamicResource AddLogin}" InputGestureText="Ctrl + N" Command="{Binding NewCreatePassword}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
                 <Separator/>
-                <MenuItem Header="Настройки"/>
-                <MenuItem Header="Выйти из OlibKey" Command="{Binding ExitProgram}" InputGestureText="Alt + F4"/>
+                <MenuItem Header="{DynamicResource Settings}" Command="{Binding SettingsWindowCommand}"/>
+                <MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgram}" InputGestureText="Alt + F4"/>
             </MenuItem>
-            <MenuItem Header="Инструменты">
-                <MenuItem Header="Генератор паролей" InputGestureText="Ctrl + G" Command="{Binding PasswordGenerator}"/>
-                <MenuItem Header="Изменить мастер-пароль"/>
+            <MenuItem Header="{DynamicResource Tools}">
+                <MenuItem Header="{DynamicResource PasswordGenerator}" InputGestureText="Ctrl + G" Command="{Binding PasswordGenerator}"/>
+                <MenuItem Header="{DynamicResource ChangeMasterPassword}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
             </MenuItem>
-            <MenuItem Header="Справка">
-                <MenuItem Header="Проверить наличие обновлении" Command="{Binding CheckUpdate}"/>
-                <MenuItem Header="О программе..."/>
+            <MenuItem Header="{DynamicResource Reference}">
+                <MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdate}"/>
+                <MenuItem Header="{DynamicResource AboutPrograms}"  Command="{Binding AboutWindowCommand}"/>
             </MenuItem>
         </Menu>
         <Grid Grid.Row="1">
@@ -46,16 +47,16 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="23*"/>
+                <ColumnDefinition Width="57*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 1 0" Background="#931d60"/>
+            <Border Grid.Column="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 1 1" Background="#931d60"/>
             <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" Source="/Views/StartPage.xaml" NavigationUIVisibility="Hidden" Grid.RowSpan="2" />
-            <ListBox x:Name="lBox" BorderThickness="0 1 1 1" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource BackgroundWindow}" BorderBrush="{DynamicResource BorderColorWindow}" Grid.Row="1" Grid.Column="1"/>
-            <Border Grid.Column="1" Grid.Row="2" BorderThickness="0 0 1 0" BorderBrush="{DynamicResource BorderColorWindow}" Background="{DynamicResource GlobalBorderColor}">
-                <Button Command="{Binding NewCreatePassword}" Content="Добавить" Margin="10"/>
+            <ListBox x:Name="lBox" BorderThickness="0 0 1 0" HorizontalContentAlignment="Stretch" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource BackgroundWindow}" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"  BorderBrush="{DynamicResource BorderColorWindow}" Grid.Row="1" Grid.Column="1"/>
+            <Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0" BorderBrush="{DynamicResource BorderColorWindow}" Background="{DynamicResource GlobalBorderColor}">
+                <Button Command="{Binding NewCreatePassword}" Content="{DynamicResource Add}" Margin="10" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
-            <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 0 1" Background="{DynamicResource GlobalBorderColor}" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}" Foreground="{DynamicResource ForegroundWindow}" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 0 1" Background="{DynamicResource GlobalBorderColor}" FontSize="18" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>

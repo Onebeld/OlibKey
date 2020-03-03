@@ -24,6 +24,8 @@ namespace OlibKey.Views
 
             DataContext = AccountModel;
 
+            txtPassword.Password = model.Password;
+
             switch (model.TypeAccount)
             {
                 case 0:

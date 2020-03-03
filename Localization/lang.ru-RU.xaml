@@ -11,7 +11,7 @@
     <v:String x:Key="SaveBase">Сохранить хранилище</v:String>
     <v:String x:Key="AddLogin">Добавить логин</v:String>
     <v:String x:Key="Settings">Настройки</v:String>
-    <v:String x:Key="ExitFrom">Выйти из Olib Password Manager</v:String>
+    <v:String x:Key="ExitFrom">Выйти из OlibKey</v:String>
     <v:String x:Key="PasswordGenerator">Генератор паролей</v:String>
     <v:String x:Key="ChangeMasterPassword">Изменить мастер-пароль</v:String>
     <v:String x:Key="AboutPrograms">О программе...</v:String>

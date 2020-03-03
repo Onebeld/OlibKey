@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "j7wMEy6HZi95dhbQ84gnzY3260ta1fir6+mTEQGilVrJ6aQlaIQRpV17rR/A4ItMaodgV4maS9vJiCPkomwE+g==",
+  "dgSpecHash": "HAIUViFYQhxfAS8C3AavFi2tSkbZV6J+bQ9gg9l8xlFGXTvIlzf0uFUD8LO9AR+8BLpmur6E0w2sIYV1/HcfCA==",
   "success": true,
   "projectFilePath": "F:\\OlibKey\\OlibKey.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\dmitr\\.nuget\\packages\\hardcodet.notifyicon.wpf.netcore\\1.0.10\\hardcodet.notifyicon.wpf.netcore.1.0.10.nupkg.sha512",
     "C:\\Users\\dmitr\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []

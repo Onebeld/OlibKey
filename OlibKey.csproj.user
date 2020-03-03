@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\AboutWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ChangedPasswordPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,6 +26,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\RequireMasterPasswordWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SettingsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\StartPage.xaml.cs">
@@ -57,6 +63,9 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AboutWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ChangedPasswordPage.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -73,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RequireMasterPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SettingsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\StartPage.xaml">

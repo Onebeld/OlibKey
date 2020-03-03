@@ -21,21 +21,6 @@ namespace OlibKey.Controls
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Clipboard.Clear();
-                switch (int.Parse(((FrameworkElement)e.Source).Uid))
-                {
-                    case 1: Clipboard.SetText(AccountContext.Username); break;
-                    case 2: Clipboard.SetText(AccountContext.Password); break;
-                    case 3: EditContentCallback?.Invoke(AccountContext); break;
-                }
-            }
-            catch{}
-        }
-
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ShowContentCallback?.Invoke(AccountContext);

@@ -72,7 +72,13 @@ namespace OlibKey.Views
 
         private void TxtPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            txtPasswordCollapsed.Text = txtPassword.Password;
+            if (txtPassword.IsSelectionActive)
+                txtPasswordCollapsed.Text = txtPassword.Password;
+        }
+        private void txtSecutityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (txtSecutityCodeCollapsed.IsSelectionActive)
+                txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
         }
 
         private void txtSecutityCode_PasswordChanged(object sender, RoutedEventArgs e)
@@ -81,10 +87,6 @@ namespace OlibKey.Views
                 txtSecutityCodeCollapsed.Text = txtSecutityCode.Password;
         }
 
-        private void txtSecutityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
-        }
 
         private void cbHide_Checked(object sender, RoutedEventArgs e)
         {

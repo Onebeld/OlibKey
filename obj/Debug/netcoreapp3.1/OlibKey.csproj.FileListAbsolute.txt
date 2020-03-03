@@ -80,3 +80,7 @@ F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.uk-UA.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\Localization\lang.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\PasswordGeneratorWindow.g.cs
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\PasswordGeneratorWindow.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\AboutWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\AboutWindow.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\SettingsWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\SettingsWindow.baml

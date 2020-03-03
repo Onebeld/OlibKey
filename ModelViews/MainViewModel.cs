@@ -25,7 +25,8 @@ namespace OlibKey.ModelViews
         private ObservableCollection<AccountListItem> list = new ObservableCollection<AccountListItem>();
         private int _selectedIndex;
         private string _nameStorage;
-        private bool _isNoBlockedStorage;
+        private bool _isUnlockStorage;
+        private bool _isLockStorage;
 
         #region Pages
         public PasswordInformationPage PasswordInformationPage { get; set; }
@@ -34,6 +35,8 @@ namespace OlibKey.ModelViews
         public static StartPage StartPage { get; set; }
         #endregion
         #region Commands
+        public ICommand SettingsWindowCommand { get; set; }
+        public ICommand AboutWindowCommand { get; set; }
         public ICommand NewPasswordStorage { get; set; }
         public ICommand PasswordGenerator { get; set; }
         public ICommand NewCreatePassword { get; set; }
@@ -67,10 +70,17 @@ namespace OlibKey.ModelViews
             get => _nameStorage;
             set => RaisePropertyChanged(ref _nameStorage, value);
         }
-        public bool IsNoBlockedStorage
+
+        public bool IsUnlockStorage
         {
-            get => _isNoBlockedStorage;
-            set => RaisePropertyChanged(ref _isNoBlockedStorage, value);
+            get => _isUnlockStorage;
+            set => RaisePropertyChanged(ref _isUnlockStorage, value);
+        }
+
+        public bool IsLockStorage
+        {
+            get => _isLockStorage;
+            set => RaisePropertyChanged(ref _isLockStorage, value);
         }
 
         public static string PathStorage { get; set; }
@@ -92,6 +102,45 @@ namespace OlibKey.ModelViews
                 SelectedAccountStructure = SelectedAccountItem.DataContext as AccountModel;
         }
 
+        private  void AboutWindowVoid()
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.ShowDialog();
+        }
+
+        //public void MoveUp()
+        //{
+        //    MoveItem(-1);
+        //}
+
+        //public void MoveDown()
+        //{
+        //    MoveItem(1);
+        //}
+
+        //private void MoveItem(int direction)
+        //{
+        //    // Checking selected item
+        //    if (SelectedAccountItem == null)
+        //        return; // No selected item - nothing to do
+
+        //    // Calculate new index using move direction
+        //    int newIndex = SelectedIndex + direction;
+
+        //    // Checking bounds of the range
+        //    if (newIndex < 0 || newIndex >= AccountsList.Count)
+        //        return; // Index out of range - nothing to do
+
+        //    AccountListItem selected = SelectedAccountItem;
+
+        //    // Removing removable element
+        //    AccountsList.Remove(selected);
+        //    // Insert it in new position
+        //    AccountsList.Insert(newIndex, selected);
+        //    // Restore selection
+        //    SelectedIndex = newIndex;
+        //}
+
         private void SetupCommandBindings()
         {
             NewPasswordStorage = new Command(NewPasswordStorageVoid);
@@ -103,6 +152,14 @@ namespace OlibKey.ModelViews
             UnblockingStorage = new Command(RequireMasterPasswordVoid);
             CheckUpdate = new Command(CheckUpdateVoid);
             PasswordGenerator = new Command(PasswordGeneratorVoid);
+            AboutWindowCommand = new Command(AboutWindowVoid);
+            SettingsWindowCommand = new Command(SettingsWindowVoid);
+        }
+
+        private void SettingsWindowVoid()
+        {
+            SettingsWindow settingsWindow = new SettingsWindow();
+            settingsWindow.ShowDialog();
         }
 
         public void ExitProgramVoid()
@@ -119,7 +176,7 @@ namespace OlibKey.ModelViews
             CreatePasswordStorageWindow = new CreatePasswordStorageWindow();
             if (!(bool) CreatePasswordStorageWindow.ShowDialog()) return;
             NameStorage = Path.GetFileName(CreatePasswordStorageWindow.TxtPathSelection.Text);
-            IsNoBlockedStorage = true;
+            IsUnlockStorage = true;
         }
 
         public void NewCreatePasswordVoid()
@@ -165,7 +222,11 @@ namespace OlibKey.ModelViews
 
         public void BlockingStorageVoid()
         {
-
+            SaveAccount();
+            ClearAccountsList();
+            App.MainWindow.frame.NavigationService.Navigate(CreatePasswordPage);
+            IsLockStorage = true;
+            IsUnlockStorage = false;
         }
 
         public void CheckUpdateVoid() => App.MainWindow.CheckUpdate(true);
@@ -211,6 +272,8 @@ namespace OlibKey.ModelViews
             List<AccountModel> accountModels = SaveAndLoadAccount.LoadFiles(PathStorage, MasterPassword);
             ClearAccountsList();
             foreach (AccountModel accounts in accountModels) AddAccount(accounts);
+            IsUnlockStorage = true;
+            IsLockStorage = false;
         }
 
         public void SaveAccount()

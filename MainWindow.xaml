@@ -98,7 +98,7 @@
             <Border Grid.Column="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 0 1 1" Background="#931d60" />
             <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" Source="/Views/StartPage.xaml"
                    NavigationUIVisibility="Hidden" Grid.RowSpan="2" />
-            <ListBox x:Name="lBox" BorderThickness="0 0 1 0" HorizontalContentAlignment="Stretch"
+            <ListBox x:Name="lBox" VirtualizingPanel.ScrollUnit="Pixel" BorderThickness="0 0 1 0" HorizontalContentAlignment="Stretch"
                      ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}"
                      Background="{DynamicResource BackgroundWindow}"
                      SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"

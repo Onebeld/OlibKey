@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0.0] - 2020-03-04
+### Added
+- Added buttons for moving items.
+- Added icons for items in the list.
+- Now the name of the storage is displayed in the program itself.
+- Cancel button added in some windows
+
+### Changed
+- Completely rewritten application.
+- Start page changed.
+- Changed the program logo and name.
+- Encryption logic changed.
+- Montserrat font removed.
+- The change in the item is displayed in real time.
+- Changed links in About window.
+- Changed interface in Password Generator.
+
+### Fixed
+- Fixed autorun program.
+- The color of the pointer in the text input field is fixed, now it depends on the theme (dark and white).
+
 ## [1.3.0.295] - 2020-02-15
 ### Added
 - Added notification of changes, item additions, and storage creation.

@@ -99,6 +99,7 @@ namespace OlibKey.Views
                 Clipboard.Clear();
                 switch (int.Parse(((Button)e.Source).Uid))
                 {
+                    case 0: Clipboard.SetText(AccountModel.Username); break;
                     case 1: Clipboard.SetText(AccountModel.Password); break;
                     case 2: Clipboard.SetText(AccountModel.WebSite); break;
                     case 3: Clipboard.SetText(AccountModel.Username); break;

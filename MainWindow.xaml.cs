@@ -86,7 +86,7 @@ namespace OlibKey
                 {
                     case Key.N:
                         if (Model.IsUnlockStorage)
-                            Model.AddAccount();
+                            Model.NewCreatePasswordVoid();
                         break;
                     case Key.G:
                         Model.PasswordGeneratorVoid();
@@ -133,8 +133,8 @@ namespace OlibKey
             {
                 if (b)
                 {
-                    MessageBox.Show((string)Application.Current.FindResource("MB5"),
-                        (string)Application.Current.FindResource("Error"), MessageBoxButton.OK,
+                    MessageBox.Show((string)FindResource("MB5"),
+                        (string)FindResource("Error"), MessageBoxButton.OK,
                         MessageBoxImage.Error);
                 }
             }

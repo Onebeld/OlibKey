@@ -24,14 +24,14 @@ namespace OlibKey.Views
         {
             try
             {
-                MainViewModel.MasterPassword = tbMasterPassword.Text;
+                MainViewModel.MasterPassword = tbMasterPassword.Password;
                 LoadStorageCallback?.Invoke();
                 Close();
             }
             catch
             {
                 MainViewModel.MasterPassword = null;
-                MessageBox.Show("Неверный мастер-пароль.", "Ошибка");
+                MessageBox.Show((string)FindResource("MB3"), (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

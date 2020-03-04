@@ -16,10 +16,7 @@ namespace OlibKey.Controls
         public Action<AccountModel> EditContentCallback { get; set; }
         public Action FocusCallback { get; set; }
         private AccountModel AccountContext { get => DataContext as AccountModel; }
-        public AccountListItem()
-        {
-            InitializeComponent();
-        }
+        public AccountListItem() => InitializeComponent();
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

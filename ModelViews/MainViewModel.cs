@@ -179,6 +179,7 @@ namespace OlibKey.ModelViews
             if (!(bool) CreatePasswordStorageWindow.ShowDialog()) return;
             NameStorage = Path.GetFileName(CreatePasswordStorageWindow.TxtPathSelection.Text);
             IsUnlockStorage = true;
+            ClearAccountsList();
             App.MainWindow.Notification((string)Application.Current.FindResource("Not3"));
         }
 
@@ -213,10 +214,11 @@ namespace OlibKey.ModelViews
 
             if (!(bool) openFileDialog.ShowDialog()) return;
 
+            BlockingStorageVoid();
+
             PathStorage = openFileDialog.FileName;
             NameStorage = Path.GetFileName(openFileDialog.FileName);
 
-            BlockingStorageVoid();
 
             RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow
             {

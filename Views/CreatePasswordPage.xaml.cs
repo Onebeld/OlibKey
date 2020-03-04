@@ -23,9 +23,7 @@ namespace OlibKey.Views
         private void AddAccountClick(object sender, RoutedEventArgs e)
         {
             if (AccountModel.WebSite != null)
-            {
                 AccountModel.IconWebSite = "http://www.google.com/s2/favicons?domain=" + AccountModel.WebSite;
-            }
             AccountModel.TimeCreate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
             AddAccountCallbackFunc();
             App.MainWindow.Notification((string)Application.Current.FindResource("Not1"));
@@ -122,6 +120,7 @@ namespace OlibKey.Views
             if ((bool)generatorWindow.ShowDialog())
             {
                 txtPassword.Password = generatorWindow.TxtPassword.Text;
+                txtPasswordCollapsed.Text = generatorWindow.TxtPassword.Text;
             }
         }
     }

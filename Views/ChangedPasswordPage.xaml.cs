@@ -62,7 +62,7 @@ namespace OlibKey.Views
 
         private void DeletePassword(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Вы точно хотите удалить элемент?", "Сообщение", MessageBoxButton.YesNo,
+            if (MessageBox.Show((string)FindResource("MB2"), (string)FindResource("Message"), MessageBoxButton.YesNo,
                     MessageBoxImage.Question) != MessageBoxResult.Yes) return;
             DeleteAccountCallbackFunc();
             StartPage startPage = new StartPage();
@@ -124,10 +124,9 @@ namespace OlibKey.Views
             {
                 SaveButton = { Visibility = Visibility.Visible }
             };
-            if ((bool)generatorWindow.ShowDialog())
-            {
-                txtPassword.Password = generatorWindow.TxtPassword.Text;
-            }
+            if (!(bool) generatorWindow.ShowDialog()) return;
+            txtPassword.Password = generatorWindow.TxtPassword.Text;
+            txtPasswordCollapsed.Text = generatorWindow.TxtPassword.Text;
         }
 
         private void ChangedPasswordPage_OnLoaded(object sender, RoutedEventArgs e)

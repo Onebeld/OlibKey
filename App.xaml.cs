@@ -60,24 +60,16 @@ namespace OlibKey
             MainWindow = new MainWindow();
             bool startHide = false;
             if (Setting.AutorunApplication)
-            {
                 foreach (var i in e.Args)
-                {
                     if (i == "/StartupHide")
-                    {
                         startHide = true;
-                    }
-                }
-            }
             if (startHide)
             {
                 MainWindow.Show();
                 MainWindow.Hide();
             }
             else
-            {
                 MainWindow.Show();
-            }
 
             System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
 
@@ -161,10 +153,7 @@ namespace OlibKey
                 Directory.CreateDirectory(pathToLog);
             string filename = Path.Combine(pathToLog, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
             string fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] [{e.Exception.TargetSite.DeclaringType}.{e.Exception.TargetSite.Name}()]\n{e.Exception}\r\n";
-            lock (sync)
-            {
-                File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
-            }
+            lock (sync) File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
 
             MessageBox.Show((string)FindResource("MB9") + $"\n{e.Exception.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
         }

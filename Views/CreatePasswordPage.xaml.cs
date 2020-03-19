@@ -26,7 +26,7 @@ namespace OlibKey.Views
                 AccountModel.IconWebSite = "http://www.google.com/s2/favicons?domain=" + AccountModel.WebSite;
             AccountModel.TimeCreate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
             AddAccountCallbackFunc();
-            App.MainWindow.Notification((string)Application.Current.FindResource("Not1"));
+            App.MainWindow.Notification((string)FindResource("Not1"));
         }
 
         private void PbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(pbHard);
@@ -45,16 +45,26 @@ namespace OlibKey.Views
                     PasswordSection.Visibility = Visibility.Visible;
                     BankCartSection.Visibility = Visibility.Collapsed;
                     PasportSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
                     PasswordSection.Visibility = Visibility.Collapsed;
                     BankCartSection.Visibility = Visibility.Visible;
                     PasportSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
                     break;
                 case 2:
                     PasswordSection.Visibility = Visibility.Collapsed;
                     BankCartSection.Visibility = Visibility.Collapsed;
                     PasportSection.Visibility = Visibility.Visible;
+                    ReminderSection.Visibility = Visibility.Collapsed;
+                    break;
+                case 3:
+                    PasswordSection.Visibility = Visibility.Collapsed;
+                    BankCartSection.Visibility = Visibility.Collapsed;
+                    PasportSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Visible;
+                    tbStartTime.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
                     break;
             }
         }

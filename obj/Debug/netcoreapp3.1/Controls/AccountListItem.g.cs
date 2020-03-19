@@ -61,7 +61,7 @@ namespace OlibKey.Controls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibKey;component/controls/accountlistitem.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibKey;V2.1.0.0;component/controls/accountlistitem.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Controls\AccountListItem.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

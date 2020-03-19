@@ -82,7 +82,7 @@
     "C:\\Users\\dmitr\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "2.0.0",
+    "version": "2.1.0",
     "restore": {
       "projectUniqueName": "F:\\OlibKey\\OlibKey.csproj",
       "projectName": "OlibKey",
@@ -146,7 +146,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200-preview-014977\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

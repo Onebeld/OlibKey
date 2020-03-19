@@ -87,3 +87,5 @@ F:\OlibKey\obj\Debug\netcoreapp3.1\Views\SettingsWindow.baml
 F:\OlibKey\bin\Debug\netcoreapp3.1\Hardcodet.Wpf.TaskbarNotification.dll
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\ChangeMasterPasswordWindow.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\ChangeMasterPasswordWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Controls\DateTimeControl.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Controls\DateTimeControl.baml

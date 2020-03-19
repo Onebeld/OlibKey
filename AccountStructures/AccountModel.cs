@@ -24,6 +24,10 @@
         public string PassportNumber { get; set; }
         public string PassportPlaceOfIssue { get; set; }
         #endregion
+
+        #region Reminder
+        public string StartTime { get; set; }
+        #endregion
         public string Note { get; set; }
     }
 }

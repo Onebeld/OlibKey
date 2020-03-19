@@ -157,7 +157,7 @@ namespace OlibKey.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/OlibKey;component/views/changedpasswordpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/OlibKey;V2.1.0.0;component/views/changedpasswordpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\ChangedPasswordPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -18,6 +18,7 @@ namespace OlibKey.Views
         {
             InitializeComponent();
             DataContext = AccountModel;
+            
         }
 
         private void AddAccountClick(object sender, RoutedEventArgs e)
@@ -64,6 +65,7 @@ namespace OlibKey.Views
                     BankCartSection.Visibility = Visibility.Collapsed;
                     PasportSection.Visibility = Visibility.Collapsed;
                     ReminderSection.Visibility = Visibility.Visible;
+                    cbIsStartRemember.IsChecked = true;
                     tbStartTime.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
                     break;
             }
@@ -133,5 +135,7 @@ namespace OlibKey.Views
                 txtPasswordCollapsed.Text = generatorWindow.TxtPassword.Text;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) => tbStartTime.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
     }
 }

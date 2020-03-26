@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>OlibKey.App</StartupObject>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
@@ -10,10 +10,13 @@
     <Version>2.1.0</Version>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
     <FileVersion>2.1.0.0</FileVersion>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="favicon.ico" />
+    <None Remove="Music\notification.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +26,7 @@
 
   <ItemGroup>
     <Resource Include="favicon.ico" />
+    <Resource Include="Music\notification.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +35,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Lang.settings</DependentUpon>
     </Compile>
+    <Compile Update="Resource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

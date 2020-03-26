@@ -31,14 +31,22 @@ namespace OlibKey.Views
                 case 0:
                     BankCartSection.Visibility = Visibility.Collapsed;
                     PasportSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
                     PasswordSection.Visibility = Visibility.Collapsed;
                     PasportSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
                     break;
                 case 2:
                     PasswordSection.Visibility = Visibility.Collapsed;
                     BankCartSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
+                    break;
+                case 3:
+                    PasswordSection.Visibility = Visibility.Collapsed;
+                    BankCartSection.Visibility = Visibility.Collapsed;
+                    PasportSection.Visibility = Visibility.Collapsed;
                     break;
             }
         }
@@ -54,6 +62,7 @@ namespace OlibKey.Views
 
             txtDateChanged.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
             ChangedAccountCallbackFunc();
+            App.MainWindow.Model.SelectedAccountItem.timer.Start();
             NavigationService?.GoBack();
             App.MainWindow.Notification((string)Application.Current.FindResource("Not2"));
         }
@@ -64,6 +73,8 @@ namespace OlibKey.Views
         {
             if (MessageBox.Show((string)FindResource("MB2"), (string)FindResource("Message"), MessageBoxButton.YesNo,
                     MessageBoxImage.Question) != MessageBoxResult.Yes) return;
+
+            App.MainWindow.Model.SelectedAccountItem.timer.Stop();
             DeleteAccountCallbackFunc();
             StartPage startPage = new StartPage();
             NavigationService?.Navigate(startPage);
@@ -134,5 +145,7 @@ namespace OlibKey.Views
             txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
             txtPassword.Password = txtPasswordCollapsed.Text;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) => tbStartTime.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
     }
 }

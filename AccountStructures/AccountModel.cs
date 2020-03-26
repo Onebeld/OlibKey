@@ -26,7 +26,7 @@
         #endregion
 
         #region Reminder
-        public string StartTime { get; set; }
+        public bool IsReminderActive { get; set; }
         #endregion
         public string Note { get; set; }
     }

@@ -31,14 +31,22 @@ namespace OlibKey.Views
                 case 0:
                     BankCartSection.Visibility = Visibility.Collapsed;
                     PasportSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
                     break;
                 case 1:
                     PasswordSection.Visibility = Visibility.Collapsed;
                     PasportSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
                     break;
                 case 2:
                     PasswordSection.Visibility = Visibility.Collapsed;
                     BankCartSection.Visibility = Visibility.Collapsed;
+                    ReminderSection.Visibility = Visibility.Collapsed;
+                    break;
+                case 3:
+                    PasswordSection.Visibility = Visibility.Collapsed;
+                    BankCartSection.Visibility = Visibility.Collapsed;
+                    PasportSection.Visibility = Visibility.Collapsed;
                     break;
             }
             if (model.TimeChanged == null)

@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "tSgJm/I6lZAMgWnAEz91ci4GWgWQ8RWRnoRhgPP3xNX8TdIGEWsY8CXWZBQkxc4s5+iGzU21pZ53zAKiZKs1+Q==",
+  "success": true,
+  "projectFilePath": "F:\\OlibKey\\OlibKey.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dmitr\\.nuget\\packages\\hardcodet.notifyicon.wpf.netcore\\1.0.10\\hardcodet.notifyicon.wpf.netcore.1.0.10.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\5.0.0-preview.1.20120.5\\microsoft.netcore.app.runtime.win-x86.5.0.0-preview.1.20120.5.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\5.0.0-preview.1.20120.5\\microsoft.netcore.app.runtime.win-x64.5.0.0-preview.1.20120.5.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\5.0.0-preview.1.20127.5\\microsoft.windowsdesktop.app.runtime.win-x86.5.0.0-preview.1.20127.5.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\5.0.0-preview.1.20127.5\\microsoft.windowsdesktop.app.runtime.win-x64.5.0.0-preview.1.20127.5.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\5.0.0-preview.1.20124.5\\microsoft.aspnetcore.app.runtime.win-x86.5.0.0-preview.1.20124.5.nupkg.sha512",
+    "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\5.0.0-preview.1.20124.5\\microsoft.aspnetcore.app.runtime.win-x64.5.0.0-preview.1.20124.5.nupkg.sha512"
+  ],
+  "logs": []
+}

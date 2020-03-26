@@ -1,15 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>F:\OlibKey\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Controls\DateTimeControl.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Views\AboutWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +30,9 @@
     <Compile Update="Views\PasswordInformationPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ReminderWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\RequireMasterPasswordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -43,9 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\AccountListItem.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Controls\DateTimeControl.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="IconsAndImages\Icons.xaml">
@@ -91,6 +90,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\PasswordInformationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ReminderWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RequireMasterPasswordWindow.xaml">

@@ -89,7 +89,6 @@ namespace OlibKey
                 };
                 passwordWindow.ShowDialog();
             }
-
             MainWindow.CheckUpdate(false);
 
             base.OnStartup(e);

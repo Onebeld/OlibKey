@@ -106,6 +106,18 @@
     <!--#endregion-->
     <!--#endregion-->
 
+    <!--#region Reminder -->
+    <v:String x:Key="Reminder">Հիշեցում</v:String>
+    <v:String x:Key="Pause">Դադար</v:String>
+    <v:String x:Key="Disable">Անջատել</v:String>
+    <v:String x:Key="ZeroOut">Զրոյական դուրս</v:String>
+    <v:String x:Key="ReminderStarted">Հիշեցումը սկսվեց</v:String>
+    <v:String x:Key="StartTime">Սկսելու ժամանակը</v:String>
+
+    <v:String x:Key="ErrorElement1">Սխալ տարրում.</v:String>
+    <v:String x:Key="ErrorElement2">Ժամանակը սխալ է տարրի մեջ, այնպես որ հիշեցումն անջատված է: Փորձեք փոխել ծրագրի լեզուն կամ փոխեք ճիշտ ժամանակի ձևաչափին `սեղմելով« Վերականգնել »կոճակը:</v:String>
+    <!--#endregion-->
+
     <!--#region Pages-->
     <v:String x:Key="Name">Անունը</v:String>
     <v:String x:Key="Username">Օգտագործողի անունը</v:String>

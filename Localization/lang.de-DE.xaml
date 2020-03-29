@@ -106,6 +106,18 @@
     <!--#endregion-->
     <!--#endregion-->
 
+    <!--#region Reminder -->
+    <v:String x:Key="Reminder">Erinnerung</v:String>
+    <v:String x:Key="Pause">Pause</v:String>
+    <v:String x:Key="Disable">Deaktivieren</v:String>
+    <v:String x:Key="ZeroOut">Null raus</v:String>
+    <v:String x:Key="ReminderStarted">Erinnerung gestartet</v:String>
+    <v:String x:Key="StartTime">Startzeit</v:String>
+
+    <v:String x:Key="ErrorElement1">Fehler im Artikel:</v:String>
+    <v:String x:Key="ErrorElement2">Die Zeit ist im Element falsch, daher ist die Erinnerung deaktiviert. Versuchen Sie, die Programmiersprache zu ändern, oder wechseln Sie zum richtigen Zeitformat, indem Sie auf die Schaltfläche "Zurücksetzen" klicken.</v:String>
+    <!--#endregion-->
+
     <!--#region Pages-->
     <v:String x:Key="Name">Titel</v:String>
     <v:String x:Key="Username">Benutzername</v:String>

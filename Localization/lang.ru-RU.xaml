@@ -105,6 +105,18 @@
     <v:String x:Key="Dark">Темная</v:String>
     <!--#endregion-->
     <!--#endregion-->
+
+    <!--#region Reminder -->
+    <v:String x:Key="Reminder">Напоминание</v:String>
+    <v:String x:Key="Pause">Пауза</v:String>
+    <v:String x:Key="Disable">Отключить</v:String>
+    <v:String x:Key="ZeroOut">Обнулить</v:String>
+    <v:String x:Key="ReminderStarted">Напоминание запущено</v:String>
+    <v:String x:Key="StartTime">Время начала</v:String>
+
+    <v:String x:Key="ErrorElement1">Ошибка в элементе:</v:String>
+    <v:String x:Key="ErrorElement2">В элементе стоит неправильно время, поэтому напоминание отключено. Попробуйте изменить язык программы, или измените на правильный формат времени, нажимая на кнопку "Обнулить".</v:String>
+    <!--#endregion-->
     
     <!--#region Pages-->
     <v:String x:Key="Name">Название</v:String>

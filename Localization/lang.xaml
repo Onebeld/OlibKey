@@ -106,6 +106,19 @@
     <!--#endregion-->
     <!--#endregion-->
 
+    <!--#region Reminder -->
+    <v:String x:Key="Reminder">Reminder</v:String>
+    <v:String x:Key="Pause">Pause</v:String>
+    <v:String x:Key="Disable">Disable</v:String>
+    <v:String x:Key="ZeroOut">Reset</v:String>
+    <v:String x:Key="ReminderStarted">Reminder started</v:String>
+    <v:String x:Key="StartTime">Start time</v:String>
+
+    <v:String x:Key="ErrorElement1">Error in item:</v:String>
+    <v:String x:Key="ErrorElement2">The time is incorrect in the element, so the reminder is disabled. Try changing the program language, or change to the correct time format by clicking on the "Reset" button.</v:String>
+    <!--#endregion-->
+
+
     <!--#region Pages-->
     <v:String x:Key="Name">Name</v:String>
     <v:String x:Key="Username">Username</v:String>

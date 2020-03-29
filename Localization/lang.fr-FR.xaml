@@ -106,6 +106,18 @@
     <!--#endregion-->
     <!--#endregion-->
 
+    <!--#region Reminder -->
+    <v:String x:Key="Reminder">Rappel</v:String>
+    <v:String x:Key="Pause">Pause</v:String>
+    <v:String x:Key="Disable">Désactiver</v:String>
+    <v:String x:Key="ZeroOut">Zero out</v:String>
+    <v:String x:Key="ReminderStarted">Le rappel a commencé</v:String>
+    <v:String x:Key="StartTime">Heure de début</v:String>
+
+    <v:String x:Key="ErrorElement1">Erreur dans l'article:</v:String>
+    <v:String x:Key="ErrorElement2">L'heure est incorrecte dans l'élément, donc le rappel est désactivé. Essayez de changer la langue du programme, ou passez au format d'heure correct en cliquant sur le bouton "Réinitialiser".</v:String>
+    <!--#endregion-->
+
     <!--#region Pages-->
     <v:String x:Key="Name">Le titre</v:String>
     <v:String x:Key="Username">Identifiant</v:String>

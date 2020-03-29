@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace OlibKey.Controls
 {
@@ -19,7 +20,7 @@ namespace OlibKey.Controls
         public AccountModel AccountContext { get => DataContext as AccountModel; }
         public AccountListItem() => InitializeComponent();
 
-        public System.Windows.Threading.DispatcherTimer timer;
+        public DispatcherTimer timer;
 
         private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -40,7 +41,7 @@ namespace OlibKey.Controls
                 case 3:
                     imageIcon.Source = (ImageSource)FindResource("reminderDrawingImage");
 
-                    timer = new System.Windows.Threading.DispatcherTimer
+                    timer = new DispatcherTimer
                     {
                         Interval = new TimeSpan(0, 0, 3)
                     };
@@ -57,19 +58,29 @@ namespace OlibKey.Controls
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (DateTime.Parse(AccountContext.Username) <= DateTime.Now && AccountContext.IsReminderActive)
+            try
+            {
+                if (DateTime.Parse(AccountContext.Username, System.Threading.Thread.CurrentThread.CurrentUICulture) <=
+                    DateTime.Now && AccountContext.IsReminderActive)
+                {
+                    timer.Stop();
+
+                    ReminderWindow reminderWindow = new ReminderWindow
+                    {
+                        accountListItem = this,
+                        lNameElement = {Content = AccountContext.AccountName},
+                        lTimeStart = {Content = AccountContext.Username}
+                    };
+                    reminderWindow.Show();
+                }
+                else if (!AccountContext.IsReminderActive) timer.Stop();
+            }
+            catch
             {
                 timer.Stop();
-
-                ReminderWindow reminderWindow = new ReminderWindow
-                {
-                    accountListItem = this
-                };
-                reminderWindow.lNameElement.Content = AccountContext.AccountName;
-                reminderWindow.lTimeStart.Content = AccountContext.Username;
-                reminderWindow.Show();
+                AccountContext.IsReminderActive = false;
+                MessageBox.Show($"{(string)FindResource("ErrorElement1")} {AccountContext.AccountName}\n\n{(string)FindResource("ErrorElement2")}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            else if (!AccountContext.IsReminderActive) timer.Stop();
         }
     }
 }

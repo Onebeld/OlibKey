@@ -106,6 +106,18 @@
     <!--#endregion-->
     <!--#endregion-->
 
+    <!--#region Reminder -->
+    <v:String x:Key="Reminder">Нагадування</v:String>
+    <v:String x:Key="Pause">Пауза</v:String>
+    <v:String x:Key="Disable">Відключити</v:String>
+    <v:String x:Key="ZeroOut">Обнулити</v:String>
+    <v:String x:Key="ReminderStarted">Нагадування запущено</v:String>
+    <v:String x:Key="StartTime">Час початку</v:String>
+
+    <v:String x:Key="ErrorElement1">Помилка в елементі:</v:String>
+    <v:String x:Key="ErrorElement2">В елементі варто неправильно час, тому нагадування відключено. Спробуйте змінити мову програми, або змініть на правильний формат часу, натискаючи на кнопку "Обнулити".</v:String>
+    <!--#endregion-->
+
     <!--#region Pages-->
     <v:String x:Key="Name">Назва</v:String>
     <v:String x:Key="Username">Ім'я користувача</v:String>

@@ -3,11 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OlibKey.Views"
         mc:Ignorable="d"
         Topmost="True"
         Title="ReminderWindow" Height="150" Width="450" WindowStyle="None" AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False">
-    <Border BorderThickness="1" CornerRadius="5" BorderBrush="{DynamicResource PageBordersColor}" Background="{DynamicResource BackgroundWindow}">
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard TargetProperty="Angle" TargetName="rotateGradient" Timeline.DesiredFrameRate="60">
+                        <DoubleAnimation From="-37" To="323"
+                                         RepeatBehavior="Forever"
+                                         Duration="0:0:3" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>
+    <Border BorderThickness="1" CornerRadius="5" Background="{DynamicResource BackgroundWindow}">
+        <Border.BorderBrush>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <LinearGradientBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                        <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform x:Name="rotateGradient" Angle="-37" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </LinearGradientBrush.RelativeTransform>
+                <GradientStop Color="#FF400042" />
+                <GradientStop Color="#FF931D60" Offset="0.5"/>
+                <GradientStop Color="#FF5A0F26" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -37,11 +64,11 @@
                     </DrawingImage>
                 </Image.Source>
             </Image>
-            <Label x:Name="lNameElement" Grid.Column="1" VerticalAlignment="Bottom" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource ForegroundWindow}"/>
+            <Label x:Name="lNameElement" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource ForegroundWindow}"/>
             <Label x:Name="lTimeStart" Grid.Column="1" Grid.Row="1" Foreground="{DynamicResource ForegroundOpacity}"/>
             <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="0,25,0,0">
-                <Button Content="Отключить" Click="ButtonShutdown"/>
-                <Button Content="Пауза" Margin="5,0" Click="ButtonPause"/>
+                <Button Content="{DynamicResource Disable}" Click="ButtonShutdown"/>
+                <Button Content="{DynamicResource Pause}" Margin="5,0" Click="ButtonPause"/>
             </StackPanel>
         </Grid>
     </Border>

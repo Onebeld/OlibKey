@@ -32,7 +32,7 @@ namespace OlibKey.Views
             Top = desktopWorkingArea.Bottom - Height - 10;
 
             soundPlayer = new SoundPlayer(Resource.notification);
-            soundPlayer.PlayLooping(); // can also use soundPlayer.PlaySync()
+            soundPlayer.PlayLooping();
         }
 
         private void ButtonPause(object sender, RoutedEventArgs e)

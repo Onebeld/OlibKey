@@ -141,7 +141,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp5.0"
+        "net5.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -149,7 +149,7 @@
         "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {}
       },
       "frameworks": {
-        "netcoreapp5.0": {
+        "net5.0": {
           "projectReferences": {}
         }
       },
@@ -160,7 +160,7 @@
       }
     },
     "frameworks": {
-      "netcoreapp5.0": {
+      "net5.0": {
         "dependencies": {
           "Hardcodet.NotifyIcon.Wpf.NetCore": {
             "target": "Package",

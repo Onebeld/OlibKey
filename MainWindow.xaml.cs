@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace OlibKey
@@ -16,6 +17,47 @@ namespace OlibKey
     {
         public MainWindow() => InitializeComponent();
         private string _strResult;
+        private bool _mRestoreForDragMove;
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                if (ResizeMode != ResizeMode.CanResize && ResizeMode != ResizeMode.CanResizeWithGrip) return;
+
+                WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            }
+            else
+            {
+                MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+                MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+                _mRestoreForDragMove = WindowState == WindowState.Maximized;
+                DragMove();
+            }
+        }
+
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e) => _mRestoreForDragMove = false;
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_mRestoreForDragMove) return;
+            _mRestoreForDragMove = false;
+
+            Point point = PointToScreen(e.MouseDevice.GetPosition(this));
+
+            Left = point.X * 0.5;
+            Top = point.Y - 15;
+
+            WindowState = WindowState.Normal;
+            try
+            {
+                DragMove();
+            }
+            catch
+            {
+                // ignored
+            }
+        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -80,25 +122,23 @@ namespace OlibKey
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            if ((Keyboard.Modifiers & ModifierKeys.Control) != ModifierKeys.Control) return;
+            switch (e.Key)
             {
-                switch (e.Key)
-                {
-                    case Key.N:
-                        if (Model.IsUnlockStorage)
-                            Model.NewCreatePasswordVoid();
-                        break;
-                    case Key.G:
-                        Model.PasswordGeneratorVoid();
-                        break;
-                    case Key.O:
-                        Model.OpenStorageVoid();
-                        break;
-                    case Key.S:
-                        if (Model.IsUnlockStorage)
-                            Model.SaveAccount();
-                        break;
-                }
+                case Key.N:
+                    if (Model.IsUnlockStorage)
+                        Model.NewCreatePasswordVoid();
+                    break;
+                case Key.G:
+                    Model.PasswordGeneratorVoid();
+                    break;
+                case Key.O:
+                    Model.OpenStorageVoid();
+                    break;
+                case Key.S:
+                    if (Model.IsUnlockStorage)
+                        Model.SaveAccount();
+                    break;
             }
         }
 
@@ -149,5 +189,38 @@ namespace OlibKey
         private void MoveUpButton(object sender, RoutedEventArgs e) => Model.MoveUp();
 
         private void MoveDownButton(object sender, RoutedEventArgs e) => Model.MoveDown();
+
+        private void Full(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
+            else
+            {
+                MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+                MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
+                WindowState = WindowState.Maximized;
+            }
+        }
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DoubleAnimation anim = new DoubleAnimation { Duration = TimeSpan.FromSeconds(0.2), From = 1, To = 0, };
+            DoubleAnimation anim1 = new DoubleAnimation
+            {
+                Duration = TimeSpan.FromSeconds(0.2),
+                DecelerationRatio = 1,
+                From = 1,
+                To = 0.8,
+            };
+            anim1.Completed += (s,d) => Model.ExitProgramVoid();
+            Timeline.SetDesiredFrameRate(anim, 60);
+            Timeline.SetDesiredFrameRate(anim1, 60);
+            BeginAnimation(OpacityProperty, anim);
+            ScaleWindow.BeginAnimation(ScaleTransform.ScaleXProperty, anim1);
+            ScaleWindow.BeginAnimation(ScaleTransform.ScaleYProperty, anim1);
+        }
+
+        private void Timeline_OnCompleted(object sender, EventArgs e) => Model.ExitProgramVoid();
+
+        private void Collapse(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
     }
 }

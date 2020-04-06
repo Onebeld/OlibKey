@@ -17,7 +17,7 @@
         <Border Background="White" CornerRadius="999" Grid.RowSpan="2" Height="25" Width="25" Margin="5,0">
             <Image x:Name="imageIcon" Source="{Binding IconWebSite, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
         </Border>
-        <TextBlock Text="{Binding AccountName}" FontSize="16" Grid.Column="1" Foreground="{DynamicResource ForegroundWindow}"/>
+        <TextBlock Text="{Binding AccountName}" FontWeight="Bold" FontSize="16" Grid.Column="1" Foreground="{DynamicResource ForegroundWindow}"/>
         <TextBlock Text="{Binding Username}" FontSize="12" Grid.Column="1" Grid.Row="1" Foreground="{DynamicResource ForegroundOpacity}"/>
     </Grid>
 </UserControl>

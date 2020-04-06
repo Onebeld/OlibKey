@@ -59,10 +59,12 @@ namespace OlibKey.Views
             else if (_accountModelChange.TypeAccount == 0)
                 App.MainWindow.Model.SelectedAccountItem.imageIcon.Source =
                     (ImageSource) FindResource("globeDrawingImage");
-
-            txtDateChanged.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
-            ChangedAccountCallbackFunc();
-            App.MainWindow.Model.SelectedAccountItem.timer.Start();
+            if (_accountModelChange.TypeAccount == 3)
+            {
+                txtDateChanged.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
+                ChangedAccountCallbackFunc();
+                App.MainWindow.Model.SelectedAccountItem.timer.Start();
+            }
             NavigationService?.GoBack();
             App.MainWindow.Notification((string)Application.Current.FindResource("Not2"));
         }
@@ -92,12 +94,12 @@ namespace OlibKey.Views
             if (txtPassword.IsSelectionActive)
                 txtPasswordCollapsed.Text = txtPassword.Password;
         }
-        private void txtSecutityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtSecurityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(txtSecutityCodeCollapsed.IsSelectionActive)
                 txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
         }
-        private void txtSecutityCode_PasswordChanged(object sender, RoutedEventArgs e)
+        private void txtSecurityCode_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (txtSecutityCode.IsSelectionActive)
                 txtSecutityCodeCollapsed.Text = txtSecutityCode.Password;
@@ -105,7 +107,7 @@ namespace OlibKey.Views
 
         private void cbHide_Checked(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHide.IsChecked)
+            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Collapsed;
                 txtPasswordCollapsed.Visibility = Visibility.Visible;
@@ -118,7 +120,7 @@ namespace OlibKey.Views
         }
         private void cbHideSecurityCode_Checked(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHideSecurityCode.IsChecked)
+            if (cbHideSecurityCode.IsChecked != null && (bool)cbHideSecurityCode.IsChecked)
             {
                 txtSecutityCode.Visibility = Visibility.Collapsed;
                 txtSecutityCodeCollapsed.Visibility = Visibility.Visible;

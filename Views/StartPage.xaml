@@ -76,7 +76,7 @@
         </EventTrigger>
     </Page.Triggers>
     <Grid>
-        <Border Panel.ZIndex="-5">
+        <Border Panel.ZIndex="-5" CornerRadius="0,0,4.5,0">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <LinearGradientBrush.RelativeTransform>

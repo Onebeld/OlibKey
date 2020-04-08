@@ -147,14 +147,18 @@ namespace OlibKey
 
         private void WriteLog(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
-            if (!Directory.Exists(pathToLog))
+            try
+            {
+                string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+                if (!Directory.Exists(pathToLog))
                 Directory.CreateDirectory(pathToLog);
-            string filename = Path.Combine(pathToLog, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
-            string fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] [{e.Exception.TargetSite.DeclaringType}.{e.Exception.TargetSite.Name}()]\n{e.Exception}\r\n";
-            lock (sync) File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
+                string filename = Path.Combine(pathToLog, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
+                string fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] [{e.Exception.TargetSite.DeclaringType}.{e.Exception.TargetSite.Name}()]\n{e.Exception}\r\n";
+                lock (sync) File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
 
-            MessageBox.Show((string)FindResource("MB9") + $"\n{e.Exception.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)FindResource("MB9") + $"\n{e.Exception.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch { }
         }
     }
 }

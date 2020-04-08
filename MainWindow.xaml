@@ -178,8 +178,7 @@
                                 </Image>
                             </StackPanel>
                         </Grid>
-                        <Menu Grid.Column="1" VerticalAlignment="Center" Background="Transparent"
-                              Foreground="{DynamicResource ForegroundWindow}" HorizontalAlignment="Left">
+                        <Menu Grid.Column="1" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Left">
                             <MenuItem Header="{DynamicResource File}">
                                 <MenuItem Header="{DynamicResource CreateBase}" Command="{Binding NewPasswordStorage}" />
                                 <MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenStorage}"

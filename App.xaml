@@ -11,11 +11,61 @@
                 <ResourceDictionary Source="/Themes/Light.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <ContextMenu x:Key="TextBoxContextMenu">
+                <MenuItem Command="ApplicationCommands.Cut" />
+                <MenuItem Command="ApplicationCommands.Copy" />
+                <MenuItem Command="ApplicationCommands.Paste" />
+            </ContextMenu>
+
             <Style x:Key="ElementsBorderStyle" TargetType="{x:Type Border}">
                 <Setter Property="Background" Value="{DynamicResource BackgroundWindow}"/>
                 <Setter Property="CornerRadius" Value="5"/>
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="BorderBrush" Value="{DynamicResource PageBordersColor}"/>
+            </Style>
+
+            <Style
+                   TargetType="{x:Type ProgressBar}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ProgressBar}">
+                            <Grid MinHeight="14"
+                                  MinWidth="200"
+                                  Background="Transparent">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Determinate" />
+                                        <VisualState x:Name="Indeterminate">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Duration="00:01:00"
+                                                                               Storyboard.TargetName="PART_Indicator"
+                                                                               Storyboard.TargetProperty="Background">
+                                                    <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                        <DiscreteObjectKeyFrame.Value>
+                                                            <SolidColorBrush>Transparent</SolidColorBrush>
+                                                        </DiscreteObjectKeyFrame.Value>
+                                                    </DiscreteObjectKeyFrame>
+                                                </ObjectAnimationUsingKeyFrames>
+
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="PART_Track"
+                                        CornerRadius="5"
+                                        BorderThickness="1"
+                                        BorderBrush="{DynamicResource BorderColorWindow}">
+                                </Border>
+                                <Border x:Name="PART_Indicator"
+                                        CornerRadius="5"
+                                        BorderThickness="1"
+                                        HorizontalAlignment="Left"
+                                        Background="{TemplateBinding Foreground}"
+                                        />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <Style x:Key="FocusVisual">
@@ -116,6 +166,7 @@
 
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
+                <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
                 <Setter Property="CaretBrush" Value="{DynamicResource ForegroundWindow}"/>
                 <Setter Property="Template">
                     <Setter.Value>
@@ -150,6 +201,7 @@
             </Style>
             <Style TargetType="{x:Type PasswordBox}">
                 <Setter Property="CaretBrush" Value="{DynamicResource ForegroundWindow}"/>
+                <Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                 <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
                 <Setter Property="Template">

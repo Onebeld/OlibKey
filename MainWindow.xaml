@@ -42,8 +42,8 @@
         <DrawingImage x:Key="ImageExpand">
             <DrawingImage.Drawing>
                 <DrawingGroup ClipGeometry="M0,0 V156.73 H156.73 V0 H0 Z">
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1">
+                    <DrawingGroup>
+                        <DrawingGroup>
                             <GeometryDrawing>
                                 <GeometryDrawing.Pen>
                                     <Pen
@@ -64,8 +64,8 @@
         <DrawingImage x:Key="ImageClose">
             <DrawingImage.Drawing>
                 <DrawingGroup ClipGeometry="M0,0 V152.34 H152.34 V0 H0 Z">
-                    <DrawingGroup Opacity="1">
-                        <DrawingGroup Opacity="1">
+                    <DrawingGroup>
+                        <DrawingGroup>
                             <GeometryDrawing>
                                 <GeometryDrawing.Pen>
                                     <Pen Brush="{DynamicResource ForegroundWindow}"
@@ -97,7 +97,7 @@
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>
-                <Storyboard>
+                <Storyboard Timeline.DesiredFrameRate="60" FillBehavior="Stop">
                     <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleX" From="0.8" To="1" DecelerationRatio="1" Duration="0:0:0.3"/>
                     <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleY" From="0.8" To="1" DecelerationRatio="1"  Duration="0:0:0.3"/>
                     <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.3" />
@@ -110,7 +110,7 @@
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="5" />
     </WindowChrome.WindowChrome>
 
-    <Grid x:Name="WindowGrid" RenderTransformOrigin="0.5,0.5" Background="#01000000">
+    <Grid RenderTransformOrigin="0.5,0.5" Background="#01000000">
         <Grid.RenderTransform>
             <TransformGroup>
                 <ScaleTransform x:Name="ScaleWindow" ScaleY="1" ScaleX="1"/>
@@ -128,11 +128,12 @@
                         CornerRadius="4.5,4.5,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <StackPanel Orientation="Horizontal">
@@ -218,18 +219,29 @@
                                 MouseLeftButtonUp="OnMouseLeftButtonUp" Background="Transparent">
                             <Border.ContextMenu>
                                 <ContextMenu Foreground="{DynamicResource ForegroundWindow}">
-                                    <MenuItem Header="Скрыть" Click="Collapse">
+                                    <MenuItem Header="{DynamicResource Collapse}" Click="Collapse">
                                         <MenuItem.Icon>
                                             <Image Source="{DynamicResource ImageHide}" Width="12"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                    <MenuItem x:Name="FullMenu" Header="Развернуть" Click="Full">
+                                    <MenuItem x:Name="FullMenu" Header="{DynamicResource Expand}" Click="Full">
                                         <MenuItem.Icon>
                                             <Image Source="{StaticResource ImageExpand}" Width="12"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <Separator/>
-                                    <MenuItem Header="Закрыть" Click="MenuItem_Click" InputGestureText="Alt+F4">
+                                    <MenuItem Header="{DynamicResource Close}" InputGestureText="Alt+F4">
+                                        <MenuItem.Triggers>
+                                            <EventTrigger RoutedEvent="MenuItem.Click">
+                                                <BeginStoryboard>
+                                                    <Storyboard Completed="Timeline_OnCompleted" Timeline.DesiredFrameRate="60" FillBehavior="Stop">
+                                                        <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleX" From="1" To="0.8" AccelerationRatio="1" Duration="0:0:0.2"/>
+                                                        <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleY" From="1" To="0.8" AccelerationRatio="1" Duration="0:0:0.2"/>
+                                                        <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </MenuItem.Triggers>
                                         <MenuItem.Icon>
                                             <Image Source="{StaticResource ImageClose}" Width="12"/>
                                         </MenuItem.Icon>
@@ -237,18 +249,34 @@
                                 </ContextMenu>
                             </Border.ContextMenu>
                         </Border>
-
-                        <Button Grid.Column="2" Padding="13" Style="{DynamicResource ButtonHeight}" Click="Collapse">
+                        <Button Grid.Column="2" Padding="7" Click="ButtonBase_OnClick" Style="{DynamicResource ButtonHeight}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}">
+                            <Image>
+                                <Image.Source>
+                                    <DrawingImage>
+                                        <DrawingImage.Drawing>
+                                            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                                                <DrawingGroup>
+                                                    <DrawingGroup>
+                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}" Geometry="F1 M512,512z M0,0z M304.7,10.9C196.2,10.9 108.3,98.8 108.3,207.3 108.3,254.2 124.7,297.2 152.1,331L17.1,466C9.09999999999997,474 9.09999999999997,486.9 17.1,494.9 25.1,502.9 38,502.9 46,494.9L181,359.9C214.8,387.3 257.8,403.7 304.7,403.7 413.2,403.7 501.1,315.8 501.1,207.3 501.1,98.8 413.1,10.9 304.7,10.9z M304.7,362.9C218.8,362.9 149.1,293.2 149.1,207.3 149.1,121.4 218.8,51.7 304.7,51.7 390.6,51.7 460.3,121.4 460.3,207.3 460.3,293.2 390.6,362.9 304.7,362.9z" />
+                                                    </DrawingGroup>
+                                                </DrawingGroup>
+                                            </DrawingGroup>
+                                        </DrawingImage.Drawing>
+                                    </DrawingImage>
+                                </Image.Source>
+                            </Image>
+                        </Button>
+                        <Button Grid.Column="3" Padding="13" Style="{DynamicResource ButtonHeight}" Click="Collapse">
                             <Image Source="{DynamicResource ImageHide}"/>
                         </Button>
-                        <Button Grid.Column="3" Padding="8" Style="{DynamicResource ButtonHeight}" Click="Full">
+                        <Button Grid.Column="4" Padding="8" Style="{DynamicResource ButtonHeight}" Click="Full">
                             <Image Source="{DynamicResource ImageExpand}"/>
                         </Button>
-                        <Button Grid.Column="4" Padding="8" Style="{DynamicResource ButtonHeight}">
+                        <Button Grid.Column="5" Padding="8" Style="{DynamicResource ButtonHeight}">
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
                                     <BeginStoryboard>
-                                        <Storyboard Completed="Timeline_OnCompleted">
+                                        <Storyboard Completed="Timeline_OnCompleted" Timeline.DesiredFrameRate="60" FillBehavior="Stop">
                                             <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleX" From="1" To="0.8" AccelerationRatio="1" Duration="0:0:0.2"/>
                                             <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleY" From="1" To="0.8" AccelerationRatio="1" Duration="0:0:0.2"/>
                                             <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>

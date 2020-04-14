@@ -36,6 +36,9 @@
     <Compile Update="Views\RequireMasterPasswordWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\SearchWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\SettingsWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -96,6 +99,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\RequireMasterPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SearchWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\SettingsWindow.xaml">

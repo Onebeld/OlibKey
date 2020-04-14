@@ -14,10 +14,10 @@ namespace OlibKey.Controls
     /// </summary>
     public partial class AccountListItem : UserControl
     {
-        public Action<AccountModel> ShowContentCallback { get; set; }
-        public Action<AccountModel> EditContentCallback { get; set; }
+        public Action<Account> ShowContentCallback { get; set; }
+        public Action<Account> EditContentCallback { get; set; }
         public Action FocusCallback { get; set; }
-        public AccountModel AccountContext { get => DataContext as AccountModel; }
+        public Account AccountContext { get => DataContext as Account; }
         public AccountListItem() => InitializeComponent();
 
         public DispatcherTimer timer;

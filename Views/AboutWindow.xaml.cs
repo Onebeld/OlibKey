@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Input;
 
 namespace OlibKey.Views
 {
@@ -9,6 +11,11 @@ namespace OlibKey.Views
     public partial class AboutWindow : Window
     {
         public AboutWindow() => InitializeComponent();
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) => Version.Content =
             " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -40,5 +47,7 @@ namespace OlibKey.Views
             };
             Process.Start(psi);
         }
+
+        private void Timeline_OnCompleted(object? sender, EventArgs e) => Close();
     }
 }

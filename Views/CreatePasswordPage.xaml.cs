@@ -11,7 +11,7 @@ namespace OlibKey.Views
     /// </summary>
     public partial class CreatePasswordPage : Page
     {
-        public AccountModel AccountModel = new AccountModel();
+        public Account AccountModel = new Account();
         public Action AddAccountCallback { get; set; }
         private void AddAccountCallbackFunc() => AddAccountCallback?.Invoke();
         public CreatePasswordPage()

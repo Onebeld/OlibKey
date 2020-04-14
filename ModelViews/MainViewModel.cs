@@ -1,23 +1,23 @@
-﻿using Newtonsoft.Json;
-using OlibKey.AccountStructures;
+﻿using OlibKey.AccountStructures;
 using OlibKey.Controls;
 using OlibKey.Core;
 using OlibKey.Utilities;
 using OlibKey.Views;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 
 namespace OlibKey.ModelViews
 {
     public class MainViewModel : BaseViewModel
     {
         private ObservableCollection<AccountListItem> list = new ObservableCollection<AccountListItem>();
+        public Database DatabaseApplication;
         private int _selectedIndex;
         private string _nameStorage;
         private bool _isUnlockStorage;
@@ -86,8 +86,8 @@ namespace OlibKey.ModelViews
 
         public AccountListItem SelectedAccountItem { get { try { return AccountsList[SelectedIndex]; } catch { return null; } } }
 
-        private AccountModel _selectedAccStr = new AccountModel();
-        public AccountModel SelectedAccountStructure
+        private Account _selectedAccStr = new Account();
+        public Account SelectedAccountStructure
         {
             get => _selectedAccStr;
             set => RaisePropertyChanged(ref _selectedAccStr, value);
@@ -96,7 +96,7 @@ namespace OlibKey.ModelViews
         private void UpdateSelectedItem()
         {
             if (SelectedAccountItem?.DataContext != null)
-                SelectedAccountStructure = SelectedAccountItem.DataContext as AccountModel;
+                SelectedAccountStructure = SelectedAccountItem.DataContext as Account;
         }
 
         private void AboutWindowVoid()
@@ -171,12 +171,16 @@ namespace OlibKey.ModelViews
             Application.Current.MainWindow.WindowState = WindowState.Normal;
             Application.Current.MainWindow.Topmost = true;
             Application.Current.MainWindow.Topmost = false;
+            App.MainWindow.mainWindow.Opacity = 1;
+            App.MainWindow.ScaleWindow.ScaleX = 1;
+            App.MainWindow.ScaleWindow.CenterY = 1;
         }
 
         public void NewPasswordStorageVoid()
         {
             CreatePasswordStorageWindow = new CreatePasswordStorageWindow();
             if (!(bool) CreatePasswordStorageWindow.ShowDialog()) return;
+            DatabaseApplication = new Database();
             NameStorage = Path.GetFileName(CreatePasswordStorageWindow.TxtPathSelection.Text);
             IsUnlockStorage = true;
             ClearAccountsList();
@@ -240,7 +244,7 @@ namespace OlibKey.ModelViews
         public void CheckUpdateVoid() => App.MainWindow.CheckUpdate(true);
 
         public void AddAccount() { AddAccount(CreatePasswordPage.AccountModel); }
-        public void AddAccount(AccountModel accountContent)
+        public void AddAccount(Account accountContent)
         {
             AccountListItem ali = new AccountListItem
             {
@@ -256,14 +260,14 @@ namespace OlibKey.ModelViews
 
         public void DeleteAccount() => AccountsList.Remove(SelectedAccountItem);
 
-        public void ShowEditAccountWindow(AccountModel account)
+        public void ShowEditAccountWindow(Account account)
         {
             if (account != null) SelectedAccountStructure = account;
         }
 
         public void ShowEditAccountWindow() => UpdateSelectedItem();
 
-        public void ShowAccountContent(AccountModel account)
+        public void ShowAccountContent(Account account)
         {
             if (account == null) return;
             PasswordInformationPage = new PasswordInformationPage(account)
@@ -277,9 +281,9 @@ namespace OlibKey.ModelViews
 
         public void LoadAccounts()
         {
-            List<AccountModel> accountModels = SaveAndLoadAccount.LoadFiles(PathStorage, MasterPassword);
+            DatabaseApplication = SaveAndLoadAccount.LoadFiles(PathStorage, MasterPassword);
             ClearAccountsList();
-            foreach (AccountModel accounts in accountModels) AddAccount(accounts);
+            foreach (Account accounts in DatabaseApplication.Accounts) AddAccount(accounts);
             IsUnlockStorage = true;
             IsLockStorage = false;
         }
@@ -289,9 +293,9 @@ namespace OlibKey.ModelViews
             if (!IsUnlockStorage) return;
             if (PathStorage != null)
             {
-                List<AccountModel> oeoe = AccountsList.Select(item => item.DataContext as AccountModel).ToList();
+                DatabaseApplication.Accounts = AccountsList.Select(item => item.DataContext as Account).ToList();
 
-                SaveAndLoadAccount.SaveFiles(oeoe, PathStorage, false);
+                SaveAndLoadAccount.SaveFiles(DatabaseApplication, PathStorage);
 
                 App.Setting.PathStorage = PathStorage;
             }

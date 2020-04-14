@@ -17,6 +17,10 @@
     <v:String x:Key="AboutPrograms">О программе...</v:String>
     <v:String x:Key="CheckUpdates">Проверить наличие обновлении</v:String>
 
+    <v:String x:Key="Collapse">Свернуть</v:String>
+    <v:String x:Key="Expand">Развернуть</v:String>
+    <v:String x:Key="Reestablish">Восстановить</v:String>
+
     <v:String x:Key="Password">Пароль:</v:String>
     <v:String x:Key="Password+">Пароль</v:String>
     <v:String x:Key="Show">Показать</v:String>

@@ -12,11 +12,11 @@ namespace OlibKey.Views
     /// </summary>
     public partial class PasswordInformationPage : Page
     {
-        private readonly AccountModel AccountModel;
+        private readonly Account AccountModel;
         public Action DeletedAccount { get; set; }
         public Action ChangedAccount { get; set; }
         private ChangedPasswordPage ChangedPasswordPage;
-        public PasswordInformationPage(AccountModel model)
+        public PasswordInformationPage(Account model)
         {
             InitializeComponent();
 

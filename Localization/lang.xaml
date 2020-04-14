@@ -17,6 +17,10 @@
     <v:String x:Key="AboutPrograms">About the program</v:String>
     <v:String x:Key="CheckUpdates">Check for Updates</v:String>
 
+    <v:String x:Key="Collapse">Collapse</v:String>
+    <v:String x:Key="Expand">Expand</v:String>
+    <v:String x:Key="Reestablish">Reestablish</v:String>
+
     <v:String x:Key="Password">Password:</v:String>
     <v:String x:Key="Password+">Password</v:String>
     <v:String x:Key="Show">Schow</v:String>

@@ -4,33 +4,32 @@ using OlibKey.ModelViews;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Xml.Serialization;
 
 namespace OlibKey.Core
 {
     public class SaveAndLoadAccount
     {
-        public static List<AccountModel> LoadFiles(string directoryLocation, string masterPassword)
+        public static Database LoadFiles(string directoryLocation, string masterPassword)
         {
             var s = File.ReadAllText(directoryLocation);
 
-            List<AccountModel> accounts = JsonConvert.DeserializeObject<List<AccountModel>>(Encryptor.DecryptString(s, masterPassword));
+            XmlSerializer x = new XmlSerializer(typeof(Database));
 
-            return accounts;
+            using TextReader reader = new StringReader(Encryptor.DecryptString(s, masterPassword));
+            Database database = (Database)x.Deserialize(reader);
+
+            return database;
         }
-        public static void SaveFiles(List<AccountModel> accounts, string directoryLocation, bool b)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(accounts);
 
-                File.WriteAllText(directoryLocation, Encryptor.EncryptString(json, MainViewModel.MasterPassword));
-            }
-            catch
-            {
-                if (b)
-                    MessageBox.Show("Не удалось сохранить.",
-                        "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+        public static void SaveFiles(Database database, string directoryLocation)
+        {
+            var writer = new StringWriter();
+            new XmlSerializer(typeof(Database)).Serialize(writer, database);
+
+            string s = writer.ToString();
+
+            File.WriteAllText(directoryLocation, Encryptor.EncryptString(s, MainViewModel.MasterPassword));
         }
     }
 }

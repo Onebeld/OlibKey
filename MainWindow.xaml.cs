@@ -4,9 +4,11 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using OlibKey.Views;
 
 namespace OlibKey
 {
@@ -193,34 +195,31 @@ namespace OlibKey
         private void Full(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Maximized)
+            {
+                FullMenu.SetResourceReference(HeaderedItemsControl.HeaderProperty, "Expand");
                 WindowState = WindowState.Normal;
+            }
             else
             {
+                FullMenu.SetResourceReference(HeaderedItemsControl.HeaderProperty, "Reestablish");
                 MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
                 MaxWidth = SystemParameters.MaximizedPrimaryScreenWidth;
                 WindowState = WindowState.Maximized;
             }
         }
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+
+        private void Timeline_OnCompleted(object sender, EventArgs e)
         {
-            DoubleAnimation anim = new DoubleAnimation { Duration = TimeSpan.FromSeconds(0.2), From = 1, To = 0, };
-            DoubleAnimation anim1 = new DoubleAnimation
-            {
-                Duration = TimeSpan.FromSeconds(0.2),
-                DecelerationRatio = 1,
-                From = 1,
-                To = 0.8,
-            };
-            anim1.Completed += (s,d) => Model.ExitProgramVoid();
-            Timeline.SetDesiredFrameRate(anim, 60);
-            Timeline.SetDesiredFrameRate(anim1, 60);
-            BeginAnimation(OpacityProperty, anim);
-            ScaleWindow.BeginAnimation(ScaleTransform.ScaleXProperty, anim1);
-            ScaleWindow.BeginAnimation(ScaleTransform.ScaleYProperty, anim1);
+            Opacity = 1;
+            Model.ExitProgramVoid();
         }
 
-        private void Timeline_OnCompleted(object sender, EventArgs e) => Model.ExitProgramVoid();
-
         private void Collapse(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            SearchWindow sw = new SearchWindow();
+            sw.ShowDialog();
+        }
     }
 }

@@ -12,12 +12,12 @@ namespace OlibKey.Views
     /// </summary>
     public partial class ChangedPasswordPage : Page
     {
-        private readonly AccountModel _accountModelChange;
+        private readonly Account _accountModelChange;
         public Action ChangedAccountCallback { get; set; }
         public Action DeleteAccountCallback { get; set; }
         private void ChangedAccountCallbackFunc() => ChangedAccountCallback?.Invoke();
         private void DeleteAccountCallbackFunc() => DeleteAccountCallback?.Invoke();
-        public ChangedPasswordPage(AccountModel accountModel)
+        public ChangedPasswordPage(Account accountModel)
         {
             InitializeComponent();
 

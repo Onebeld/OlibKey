@@ -333,10 +333,8 @@
                         <Image x:Name="saveIcon" Grid.Column="2" Opacity="0" Visibility="Collapsed" Panel.ZIndex="10"
                                Source="{StaticResource saveDrawingImage}" Margin="5" HorizontalAlignment="Right" />
 
-
-                        <Border Grid.Column="1" BorderBrush="{DynamicResource BorderColorWindow}"
-                                BorderThickness="0 0 1 1" Panel.ZIndex="-5"
-                                Background="#931d60" />
+                        
+                        
                         <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" Source="/Views/StartPage.xaml"
                                NavigationUIVisibility="Hidden" Grid.RowSpan="2" />
                         <ListBox x:Name="lBox" VirtualizingPanel.ScrollUnit="Pixel" BorderThickness="0 0 1 0"

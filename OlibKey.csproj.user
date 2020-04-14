@@ -9,6 +9,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Controls\FolderListItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AboutWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -48,6 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\AccountListItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\FolderListItem.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="IconsAndImages\Icons.xaml">

@@ -5,11 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodels="clr-namespace:OlibKey.ModelViews"
-        xmlns:local="clr-namespace:OlibKey.Views"
         mc:Ignorable="d"
+        Loaded="mainWindow_Loaded"
+        WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None"
-        Title="SearchWindow" Height="350" Width="450">
+        Title="SearchWindow" Height="400" Width="500">
     <Window.DataContext>
         <viewmodels:SearchViewModel x:Name="SearchModel"/>
     </Window.DataContext>
@@ -177,7 +178,7 @@
                                 </ContextMenu>
                             </Border.ContextMenu>
                         </Border>
-                        <Button Grid.Column="2" Padding="8" Style="{DynamicResource ButtonHeight}">
+                        <Button Grid.Column="2" Padding="8" Style="{DynamicResource ButtonHeight}" Click="Full">
                             <Image Source="{DynamicResource ImageExpand}" />
                         </Button>
                         <Button Grid.Column="3" Padding="8" Style="{DynamicResource ButtonHeight}">
@@ -219,10 +220,82 @@
                             </DrawingImage>
                         </Image.Source>
                     </Image>
-                    <TextBox />
+                    <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
                 </DockPanel>
 
-                <ListBox Grid.Column="1" Grid.Row="2" Background="Transparent" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource BorderColorWindow}"/>
+                <ListBox Grid.Column="1" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="ListBox_SelectionChanged" Grid.Row="2" Background="Transparent" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource BorderColorWindow}"/>
+                
+                <Border Grid.Column="0" Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderColorWindow}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <RadioButton x:Name="rAll" Checked="rLogin_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0 0 0 10" GroupName="TypeGroup">
+                                <RadioButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
+                                            <Image
+                                                Source="{DynamicResource globeDrawingImage}" Margin="5"/>
+                                        </Border>
+                                        <TextBlock Text="Все элементы" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton.Content>
+                            </RadioButton>
+
+                            <RadioButton x:Name="rLogin" Checked="rLogin_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" GroupName="TypeGroup">
+                                <RadioButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
+                                            <Image Source="{DynamicResource globeDrawingImage}" Margin="5"/>
+                                        </Border>
+                                        <TextBlock Text="{DynamicResource Login}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton x:Name="rBankCard" Checked="rLogin_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" GroupName="TypeGroup">
+                                <RadioButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
+                                            <Image Source="{DynamicResource debit_cardDrawingImage}" Margin="5"/>
+                                        </Border>
+                                        <TextBlock Text="{DynamicResource BankCard}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton x:Name="rPassport" Checked="rLogin_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" GroupName="TypeGroup">
+                                <RadioButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
+                                            <Image Source="{DynamicResource contactDrawingImage}" Margin="5"/>
+                                        </Border>
+                                        <TextBlock Text="{DynamicResource Passport}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton.Content>
+                            </RadioButton>
+                            <RadioButton x:Name="rReminder" Checked="rLogin_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" GroupName="TypeGroup">
+                                <RadioButton.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
+                                            <Image Source="{DynamicResource reminderDrawingImage}" Margin="5"/>
+                                        </Border>
+                                        <TextBlock Text="{DynamicResource Reminder}" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton.Content>
+                            </RadioButton>
+
+                        </StackPanel>
+                        <ListBox ItemsSource="{Binding FolderList, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="Transparent"/>
+                        <Border Grid.Row="2" BorderThickness="0 1 0 0" CornerRadius="0,0,0,4.5"
+                                BorderBrush="{DynamicResource BorderColorWindow}"
+                                Background="{DynamicResource GlobalBorderColor}">
+                            <Button Command="{Binding NewCreatePassword}" Content="{DynamicResource Add}" Margin="10"
+                                    IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                        </Border>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
     </Grid>

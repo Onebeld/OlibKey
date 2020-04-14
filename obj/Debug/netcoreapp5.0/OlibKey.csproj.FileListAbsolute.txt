@@ -59,3 +59,5 @@ F:\OlibKey\obj\Debug\netcoreapp5.0\OlibKey.Resource.resources
 F:\OlibKey\obj\Debug\netcoreapp5.0\OlibKey.csproj.GenerateResource.cache
 F:\OlibKey\obj\Debug\netcoreapp5.0\Views\SearchWindow.g.cs
 F:\OlibKey\obj\Debug\netcoreapp5.0\Views\SearchWindow.baml
+F:\OlibKey\obj\Debug\netcoreapp5.0\Controls\FolderListItem.baml
+F:\OlibKey\obj\Debug\netcoreapp5.0\Controls\FolderListItem.g.cs

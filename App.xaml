@@ -238,42 +238,6 @@
                 </Style.Triggers>
             </Style>
 
-            <Style TargetType="{x:Type ToggleButton}">
-                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-                <Setter Property="Foreground" Value="{DynamicResource ForegroundWindow}"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Padding" Value="1"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <Border x:Name="border" Background="Transparent" BorderThickness="0" SnapsToDevicePixels="true">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border x:Name="Bd2" Background="Transparent"/>
-                                    <ContentPresenter Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Grid>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="Button.IsDefaulted" Value="true">
-                                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-                                </Trigger>
-                                <Trigger Property="IsMouseOver" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="{StaticResource HoverBackground}"/>
-                                </Trigger>
-                                <Trigger Property="IsChecked" Value="true">
-                                    <Setter Property="Background" TargetName="border" Value="{DynamicResource HoverBackground}"/>
-                                    <Setter Property="Background" TargetName="Bd2" Value="#931d60"/>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
             <Style x:Key="OptionMarkFocusVisual">
                 <Setter Property="Control.Template">
                     <Setter.Value>
@@ -290,7 +254,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type RadioButton}">
-                            <Border x:Name="radioButtonBorder" Background="Transparent" Padding="0,1" BorderThickness="0" SnapsToDevicePixels="true" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Border x:Name="radioButtonBorder" Background="Transparent" Padding="0,2" BorderThickness="0" SnapsToDevicePixels="true" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="5"/>

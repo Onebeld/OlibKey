@@ -1,6 +1,7 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Core;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -75,8 +76,11 @@ namespace OlibKey.Views
         {
             if (MessageBox.Show((string)FindResource("MB2"), (string)FindResource("Message"), MessageBoxButton.YesNo,
                     MessageBoxImage.Question) != MessageBoxResult.Yes) return;
-
-            App.MainWindow.Model.SelectedAccountItem.timer.Stop();
+            try
+            {
+                App.MainWindow.Model.SelectedAccountItem.timer.Stop();
+            }
+            catch { }
             DeleteAccountCallbackFunc();
             StartPage startPage = new StartPage();
             NavigationService?.Navigate(startPage);
@@ -146,6 +150,13 @@ namespace OlibKey.Views
         {
             txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
             txtPassword.Password = txtPasswordCollapsed.Text;
+
+            cbCustomFolder.SelectedValuePath = "Value";
+            cbCustomFolder.DisplayMemberPath = "Key";
+            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            foreach (var i in App.MainWindow.Model.DatabaseApplication.CustomFolders) pairs.Add(i.Name, i.ID);
+            cbCustomFolder.Items.Add(new KeyValuePair<string, string>("Не выбрано", null));
+            foreach (KeyValuePair<string, string> i in pairs) cbCustomFolder.Items.Add(i);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => tbStartTime.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);

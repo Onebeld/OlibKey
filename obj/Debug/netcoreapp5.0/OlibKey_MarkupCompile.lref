@@ -2,6 +2,7 @@
 FF:\OlibKey\App.xaml;;
 FF:\OlibKey\MainWindow.xaml;;
 FF:\OlibKey\Views\AboutWindow.xaml;;
+FF:\OlibKey\Views\CreateFolderWindow.xaml;;
 FF:\OlibKey\Views\CreatePasswordPage.xaml;;
 FF:\OlibKey\Views\RequireMasterPasswordWindow.xaml;;
 FF:\OlibKey\Views\SearchWindow.xaml;;

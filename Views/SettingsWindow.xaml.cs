@@ -85,6 +85,20 @@ namespace OlibKey.Views
                     Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
                 }
                 else Application.Current.Resources.MergedDictionaries.Add(dict);
+
+
+
+                var dict1 = new ResourceDictionary
+                {
+                    Source = new Uri($"/IconsAndImages/Icons.xaml", UriKind.Relative)
+                };
+                var oldDict1 = (from d in Application.Current.Resources.MergedDictionaries
+                               where d.Source != null && d.Source.OriginalString.StartsWith("/IconsAndImages/Icons.xaml")
+                               select d).FirstOrDefault();
+                int ind1 = Application.Current.Resources.MergedDictionaries.IndexOf(oldDict1);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDict1);
+                Application.Current.Resources.MergedDictionaries.Insert(ind1, dict1);
+
             }
             _isFirstTheme = false;
         }

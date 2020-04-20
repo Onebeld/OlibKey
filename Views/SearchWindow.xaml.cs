@@ -1,20 +1,10 @@
-﻿using Newtonsoft.Json.Bson;
-using OlibKey.AccountStructures;
+﻿using OlibKey.AccountStructures;
 using OlibKey.Controls;
 using OlibKey.ModelViews;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OlibKey.Views
 {
@@ -38,72 +28,157 @@ namespace OlibKey.Views
                 Account account = i.DataContext as Account;
                 if ((bool)rLogin.IsChecked && account.TypeAccount == 0)
                 {
-                    if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                    if (SearchContext.SelectedFolderItem == null)
                     {
-                        if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
                         {
                             Add(account);
                         }
                     }
-                    else
+                    else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
                     {
-                        Add(account);
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
+                        {
+                            Add(account);
+                        }
                     }
                 }
                 else if ((bool)rBankCard.IsChecked && account.TypeAccount == 1)
                 {
-                    if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                    if (SearchContext.SelectedFolderItem == null)
                     {
-                        if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
                         {
                             Add(account);
                         }
                     }
-                    else
+                    else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
                     {
-                        Add(account);
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
+                        {
+                            Add(account);
+                        }
                     }
                 }
                 else if ((bool)rPassport.IsChecked && account.TypeAccount == 2)
                 {
-                    if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                    if (SearchContext.SelectedFolderItem == null)
                     {
-                        if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
                         {
                             Add(account);
                         }
                     }
-                    else
+                    else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
                     {
-                        Add(account);
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
+                        {
+                            Add(account);
+                        }
                     }
                 }
                 else if ((bool)rReminder.IsChecked && account.TypeAccount == 3)
                 {
-                    if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                    if (SearchContext.SelectedFolderItem == null)
                     {
-                        if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
                         {
                             Add(account);
                         }
                     }
-                    else
+                    else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
                     {
-                        Add(account);
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
+                        {
+                            Add(account);
+                        }
                     }
                 }
                 else if ((bool)rAll.IsChecked)
                 {
-                    if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                    if (SearchContext.SelectedFolderItem == null)
                     {
-                        if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
                         {
                             Add(account);
                         }
                     }
-                    else
+                    else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
                     {
-                        Add(account);
+                        if (!string.IsNullOrEmpty(SearchContext.SearchText))
+                        {
+                            if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
+                            {
+                                Add(account);
+                            }
+                        }
+                        else
+                        {
+                            Add(account);
+                        }
                     }
                 }
                 index++;
@@ -183,14 +258,27 @@ namespace OlibKey.Views
             }
         }
 
-        private void Timeline_OnCompleted(object? sender, EventArgs e) => Close();
+        private void Timeline_OnCompleted(object sender, EventArgs e) => SearchContext.CloseSearch();
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e) => SearchAccount();
 
         private void rLogin_Click(object sender, RoutedEventArgs e) => SearchAccount();
 
-        private void mainWindow_Loaded(object sender, RoutedEventArgs e) => rAll.IsChecked = true;
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            lbFolders.SelectedIndex = -1;
+            rAll.IsChecked = true;
+        }
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => Close();
+        private void MenuItem_Click(object sender, RoutedEventArgs e) => lbFolders.UnselectAll();
+
+        private void lbFolders_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchAccount();
+
+        private void lbFolders_MouseDown(object sender, MouseButtonEventArgs e) => lbFolders.UnselectAll();
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SearchContext.CloseSearch();
+        }
     }
 }

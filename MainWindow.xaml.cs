@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using OlibKey.Views;
 
 namespace OlibKey
 {
@@ -215,11 +213,5 @@ namespace OlibKey
         }
 
         private void Collapse(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            SearchWindow sw = new SearchWindow();
-            sw.ShowDialog();
-        }
     }
 }

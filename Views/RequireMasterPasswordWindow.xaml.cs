@@ -39,7 +39,10 @@ namespace OlibKey.Views
 
         private void TbMasterPassword_OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) LoadStorage();
+            if (e.Key == Key.Enter)
+            {
+
+            }
         }
     }
 }

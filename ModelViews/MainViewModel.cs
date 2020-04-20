@@ -29,6 +29,9 @@ namespace OlibKey.ModelViews
         public CreatePasswordStorageWindow CreatePasswordStorageWindow { get; set; }
         public static StartPage StartPage { get; set; }
         #endregion
+        #region Windows
+        public SearchWindow SearchWindow { get; set; }
+        #endregion
         #region Commands
         public ICommand ChangeMasterPassword { get; set; }
         public ICommand SettingsWindowCommand { get; set; }
@@ -43,6 +46,7 @@ namespace OlibKey.ModelViews
         public ICommand BlockingStorage { get; set; }
         public ICommand UnblockingStorage { get; set; }
         public ICommand CheckUpdate { get; set; }
+        public ICommand ShowSearchWindow { get; set; }
         #endregion
 
         public MainViewModel()
@@ -147,6 +151,7 @@ namespace OlibKey.ModelViews
             SettingsWindowCommand = new Command(SettingsWindowVoid);
             ShowWindow = new Command(ShowWindowVoid);
             ChangeMasterPassword = new Command(ChangeMasterPasswordVoid);
+            ShowSearchWindow = new Command(ShowSearcWindowVoid);
         }
 
         private void SettingsWindowVoid()
@@ -311,6 +316,13 @@ namespace OlibKey.ModelViews
         {
             SelectedIndex = 0;
             AccountsList.Clear();
+        }
+
+        public void ShowSearcWindowVoid()
+        {
+            SearchWindow = new SearchWindow();
+            foreach (CustomFolder folder in DatabaseApplication.CustomFolders) SearchWindow.SearchModel.AddFolder(folder);
+            SearchWindow.ShowDialog();
         }
     }
 }

@@ -1,18 +1,5 @@
 ﻿using OlibKey.AccountStructures;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace OlibKey.Controls
 {
@@ -22,9 +9,6 @@ namespace OlibKey.Controls
     public partial class FolderListItem : UserControl
     {
         public CustomFolder FolderContext { get => DataContext as CustomFolder; }
-        public FolderListItem()
-        {
-            InitializeComponent();
-        }
+        public FolderListItem() => InitializeComponent();
     }
 }

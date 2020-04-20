@@ -5,12 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
              mc:Ignorable="d" >
-    <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Border Background="White" CornerRadius="999" Grid.RowSpan="2" Height="25" Width="25" Margin="5,0">
-                <Image x:Name="imageIcon" Source="{DynamicResource GitHubDrawingImage}" Margin="5"/>
-            </Border>
-            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundWindow}"/>
-        </StackPanel>
-    </Grid>
+    <Border Padding="0,2">
+        <Grid>
+            <StackPanel Orientation="Horizontal">
+                <Border Background="White" CornerRadius="999" Grid.RowSpan="2" Height="25" Width="25" Margin="5,0">
+                    <Image x:Name="imageIcon" Source="{DynamicResource folderDrawingImage}" Margin="5"/>
+                </Border>
+                <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundWindow}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>

@@ -1,6 +1,7 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Core;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -134,6 +135,13 @@ namespace OlibKey.Views
         {
             txtPassword.Password = txtPasswordCollapsed.Text;
             txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
+
+            cbCustomFolder.SelectedValuePath = "Value";
+            cbCustomFolder.DisplayMemberPath = "Key";
+            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            foreach (var i in App.MainWindow.Model.DatabaseApplication.CustomFolders) pairs.Add(i.Name, i.ID);
+            cbCustomFolder.Items.Add(new KeyValuePair<string, string>("Не выбрано", null));
+            foreach (KeyValuePair<string, string> i in pairs) cbCustomFolder.Items.Add(i);
         }
     }
 }

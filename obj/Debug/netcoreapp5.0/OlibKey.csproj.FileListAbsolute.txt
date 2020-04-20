@@ -61,3 +61,5 @@ F:\OlibKey\obj\Debug\netcoreapp5.0\Views\SearchWindow.g.cs
 F:\OlibKey\obj\Debug\netcoreapp5.0\Views\SearchWindow.baml
 F:\OlibKey\obj\Debug\netcoreapp5.0\Controls\FolderListItem.baml
 F:\OlibKey\obj\Debug\netcoreapp5.0\Controls\FolderListItem.g.cs
+F:\OlibKey\obj\Debug\netcoreapp5.0\Views\CreateFolderWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp5.0\Views\CreateFolderWindow.baml

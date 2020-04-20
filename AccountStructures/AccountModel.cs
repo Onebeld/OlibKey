@@ -10,7 +10,7 @@ namespace OlibKey.AccountStructures
         public string TimeCreate { get; set; }
         public string TimeChanged { get; set; }
 
-        public uint IDFolder { get; set; }
+        public string IDFolder { get; set; }
 
         #region Login
         public string Password { get; set; }
@@ -37,7 +37,7 @@ namespace OlibKey.AccountStructures
     public class CustomFolder
     {
         public string Name { get; set; }
-        public uint ID { get; set; }
+        public string ID { get; set; }
     }
 
     public class Database

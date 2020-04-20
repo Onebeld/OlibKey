@@ -21,5 +21,5 @@ To run OlibKey, **you must** have .NET Core version 3.1 and higher.
 With OlibKey, you can store passwords on your computer **using AES encryption**.
 
 ## Where can I download preview versions?
-To view the preliminary version and find out future functions, just go to the repository directory: _bin/Debug/netcoreapp3.1_
+To view the preliminary version and find out future functions, just go to the repository directory: _bin/Debug/netcoreapp5.1_ and _bin/Debug/netcoreapp3.1_
 > **Note.** Pre-builds can contain many errors, I have no responsibility for the builds.

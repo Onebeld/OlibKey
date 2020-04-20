@@ -98,7 +98,6 @@
                                 </Trigger>
                                 <Trigger Property="IsPressed" Value="true">
                                     <Setter Property="Background" TargetName="border" Value="#931d60" />
-                                    <Setter Property="BorderBrush" TargetName="border" Value="#931d60" />
                                     <Setter Property="TextElement.Foreground" Value="White"/>
                                 </Trigger>
                             </ControlTemplate.Triggers>

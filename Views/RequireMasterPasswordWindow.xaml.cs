@@ -1,4 +1,5 @@
-﻿using OlibKey.ModelViews;
+﻿using OlibKey.Core;
+using OlibKey.ModelViews;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -12,6 +13,14 @@ namespace OlibKey.Views
     {
         public Action LoadStorageCallback { get; set; }
 
+        private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
+        private void Drag(object sender, MouseButtonEventArgs e) => DragMove();
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
+        }
+
         public RequireMasterPasswordWindow()
         {
             InitializeComponent();
@@ -20,12 +29,13 @@ namespace OlibKey.Views
 
         private void CancelButton(object sender, RoutedEventArgs e) => Close();
 
-        private  void LoadStorage()
+        private async void LoadStorage()
         {
             try
             {
                 MainViewModel.MasterPassword = tbMasterPassword.Password;
                 LoadStorageCallback?.Invoke();
+                await Animations.ClosingWindowAnimation(this, ScaleWindow);
                 Close();
             }
             catch
@@ -41,7 +51,7 @@ namespace OlibKey.Views
         {
             if (e.Key == Key.Enter)
             {
-
+                LoadStorage();
             }
         }
     }

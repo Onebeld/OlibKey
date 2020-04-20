@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OlibKey.Core;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
@@ -46,5 +47,11 @@ namespace OlibKey.Views
         }
 
         private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
+
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
+        }
     }
 }

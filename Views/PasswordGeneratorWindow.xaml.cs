@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Input;
 using OlibKey.Core;
 
 namespace OlibKey.Views
@@ -46,7 +48,6 @@ namespace OlibKey.Views
                 return TxtPassword.Text;
             }
         }
-        private string RandomChar(string str) => str.Substring(Crypto.RandomInteger(0, str.Length - 1), 1);
         private string RandomizeString(string str)
         {
             string result = "";
@@ -62,10 +63,11 @@ namespace OlibKey.Views
 
         private void ClickGeneratePassword(object sender, RoutedEventArgs e) => TxtPassword.Text = RandomPassword();
 
-        private void SavePassword(object sender, RoutedEventArgs e)
+        private async void SavePassword(object sender, RoutedEventArgs e)
         {
             if (TxtPassword.Text.Length < 1) TxtPassword.Text = RandomPassword();
 
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
             DialogResult = true;
         }
 
@@ -80,11 +82,10 @@ namespace OlibKey.Views
             TxtOther.Text = App.Setting.GeneratorTextOther;
             TxtMinLenght.Text = App.Setting.GenerationCount;
         }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void ClosingWindow()
         {
             App.Setting.GenerationCount = TxtMinLenght.Text;
-            App.Setting.GeneratorAllowLowercase = (bool) ChkAllowLowercase.IsChecked;
+            App.Setting.GeneratorAllowLowercase = (bool)ChkAllowLowercase.IsChecked;
             App.Setting.GeneratorAllowNumber = (bool)ChkAllowNumber.IsChecked;
             App.Setting.GeneratorAllowOther = (bool)ChkAllowOther.IsChecked;
             App.Setting.GeneratorAllowSpecial = (bool)ChkAllowSpecial.IsChecked;
@@ -92,6 +93,9 @@ namespace OlibKey.Views
             App.Setting.GeneratorAllowUppercase = (bool)ChkAllowUppercase.IsChecked;
             App.Setting.GeneratorTextOther = TxtOther.Text;
         }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => ClosingWindow();
+
+        private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
 
         private void CopyGeneratedPassword(object sender, RoutedEventArgs e)
         {
@@ -102,5 +106,13 @@ namespace OlibKey.Views
             }
             catch { }
         }
+
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e) => DragMove();
     }
 }

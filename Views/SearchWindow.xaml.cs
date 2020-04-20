@@ -1,5 +1,6 @@
 ﻿using OlibKey.AccountStructures;
 using OlibKey.Controls;
+using OlibKey.Core;
 using OlibKey.ModelViews;
 using System;
 using System.Windows;
@@ -276,9 +277,16 @@ namespace OlibKey.Views
 
         private void lbFolders_MouseDown(object sender, MouseButtonEventArgs e) => lbFolders.UnselectAll();
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
             SearchContext.CloseSearch();
+        }
+
+        private async void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
         }
     }
 }

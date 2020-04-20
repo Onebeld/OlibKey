@@ -16,6 +16,16 @@
     <v:String x:Key="ChangeMasterPassword">Փոխել վարպետության-գաղտաբառը</v:String>
     <v:String x:Key="AboutPrograms">Ծրագրի մասին...</v:String>
     <v:String x:Key="CheckUpdates">Ստուգել թարմացումները</v:String>
+    <v:String x:Key="Search">Որոնել</v:String>
+    <v:String x:Key="CreateFolder">Ստեղծեք թղթապանակ</v:String>
+    <v:String x:Key="AllItems">Բոլոր իրերը</v:String>
+    <v:String x:Key="CustomFolder">Օգտագործողի պանակ</v:String>
+    <v:String x:Key="NotChosen">Ընտրված չէ</v:String>
+    <v:String x:Key="RemoveSelection">Elնջել</v:String>
+
+    <v:String x:Key="Collapse">Փլուզվել</v:String>
+    <v:String x:Key="Expand">Ընդլայնել</v:String>
+    <v:String x:Key="Reestablish">Վերականգնել</v:String>
 
     <v:String x:Key="Password">Գաղտնաբառ:</v:String>
     <v:String x:Key="Password+">Գաղտնաբառ</v:String>
@@ -67,7 +77,6 @@
     <v:String x:Key="Underscore">Ստորին գիծ (_)</v:String>
     <v:String x:Key="Generate">Արտադրել</v:String>
     <v:String x:Key="PasswordSave">Պահպանել</v:String>
-    <v:String x:Key="Allow">Թույլ տալ</v:String>
     <v:String x:Key="Require">Պահանջել</v:String>
     <!--#endregion-->
 

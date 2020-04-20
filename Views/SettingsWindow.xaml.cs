@@ -7,8 +7,10 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using OlibKey.Core;
 
 namespace OlibKey.Views
 {
@@ -21,6 +23,13 @@ namespace OlibKey.Views
         private bool _isFirstTheme = true;
 
         public SettingsWindow() => InitializeComponent();
+        private void Drag(object sender, MouseButtonEventArgs e) => DragMove();
+        private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -63,7 +72,6 @@ namespace OlibKey.Views
             Lang.Default.Save();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => Close();
         private void CbTheme_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!_isFirstTheme)

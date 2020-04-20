@@ -115,18 +115,7 @@
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <Separator/>
-                                    <MenuItem Header="{DynamicResource Close}" InputGestureText="Alt+F4">
-                                        <MenuItem.Triggers>
-                                            <EventTrigger RoutedEvent="MenuItem.Click">
-                                                <BeginStoryboard>
-                                                    <Storyboard Completed="Timeline_OnCompleted" Timeline.DesiredFrameRate="60" FillBehavior="Stop">
-                                                        <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleX" From="1" To="0.8" AccelerationRatio="1" Duration="0:0:0.2"/>
-                                                        <DoubleAnimation Storyboard.TargetName="ScaleWindow" Storyboard.TargetProperty="ScaleY" From="1" To="0.8" AccelerationRatio="1" Duration="0:0:0.2"/>
-                                                        <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:0.2"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </MenuItem.Triggers>
+                                    <MenuItem Header="{DynamicResource Close}" InputGestureText="Alt+F4" Click="MenuItem_Click">
                                         <MenuItem.Icon>
                                             <Image Source="{DynamicResource ImageClose}" Width="12"/>
                                         </MenuItem.Icon>

@@ -80,7 +80,7 @@ namespace OlibKey
             if (!string.IsNullOrEmpty(Setting.PathStorage))
             {
                 MainViewModel.PathStorage = Setting.PathStorage;
-                MainWindow.Model.NameStorage = Path.GetFileName(App.Setting.PathStorage);
+                MainWindow.Model.NameStorage = Path.GetFileNameWithoutExtension(Setting.PathStorage);
                 MainWindow.Model.IsLockStorage = true;
 
                 RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow

@@ -19,6 +19,9 @@
     <v:String x:Key="Search">Search</v:String>
     <v:String x:Key="CreateFolder">Create folder</v:String>
     <v:String x:Key="AllItems">All items</v:String>
+    <v:String x:Key="CustomFolder">Custom folder</v:String>
+    <v:String x:Key="NotChosen">Not chosen</v:String>
+    <v:String x:Key="RemoveSelection">Remove selection</v:String>
 
     <v:String x:Key="Collapse">Collapse</v:String>
     <v:String x:Key="Expand">Expand</v:String>
@@ -75,7 +78,6 @@
     <v:String x:Key="Space">Space ( )</v:String>
     <v:String x:Key="Generate">Generate</v:String>
     <v:String x:Key="PasswordSave">Save</v:String>
-    <v:String x:Key="Allow">Allow</v:String>
     <!--#endregion-->
     
     <!--#region ChangeMasterPassword-->

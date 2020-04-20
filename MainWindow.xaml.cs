@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OlibKey.Core;
+using System;
 using System.Diagnostics;
 using System.Net;
 using System.Reflection;
@@ -213,5 +214,12 @@ namespace OlibKey
         }
 
         private void Collapse(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Opacity = 1;
+            Model.ExitProgramVoid();
+        }
     }
 }

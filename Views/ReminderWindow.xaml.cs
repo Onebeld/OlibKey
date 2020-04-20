@@ -1,18 +1,8 @@
 ﻿using OlibKey.Controls;
+using OlibKey.Core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OlibKey.Views
 {
@@ -35,18 +25,20 @@ namespace OlibKey.Views
             soundPlayer.PlayLooping();
         }
 
-        private void ButtonPause(object sender, RoutedEventArgs e)
+        private async void ButtonPause(object sender, RoutedEventArgs e)
         {
-            accountListItem.timer.Interval = new TimeSpan(0, 0, 10);
+            accountListItem.timer.Interval = new TimeSpan(0, 5, 0);
             accountListItem.timer.Start();
             soundPlayer.Stop();
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
             Close();
         }
 
-        private void ButtonShutdown(object sender, RoutedEventArgs e)
+        private async void ButtonShutdown(object sender, RoutedEventArgs e)
         {
             accountListItem.AccountContext.IsReminderActive = false;
             soundPlayer.Stop();
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
             Close();
         }
     }

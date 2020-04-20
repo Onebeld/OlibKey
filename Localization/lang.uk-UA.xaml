@@ -16,6 +16,16 @@
     <v:String x:Key="ChangeMasterPassword">Змінити майстер-пароль</v:String>
     <v:String x:Key="AboutPrograms">Про програму...</v:String>
     <v:String x:Key="CheckUpdates">Перевірити наявність оновленні</v:String>
+    <v:String x:Key="Search">Пошук</v:String>
+    <v:String x:Key="CreateFolder">Створити папку</v:String>
+    <v:String x:Key="AllItems">Всі елементи</v:String>
+    <v:String x:Key="CustomFolder">Призначена для користувача папка</v:String>
+    <v:String x:Key="NotChosen">Не вибрано</v:String>
+    <v:String x:Key="RemoveSelection">Зняти виділення</v:String>
+
+    <v:String x:Key="Collapse">Згорнути</v:String>
+    <v:String x:Key="Expand">Розгорнути</v:String>
+    <v:String x:Key="Reestablish">Відновити</v:String>
 
     <v:String x:Key="Password">Пароль:</v:String>
     <v:String x:Key="Password+">Пароль</v:String>
@@ -67,7 +77,6 @@
     <v:String x:Key="Underscore">Нижня межа (_)</v:String>
     <v:String x:Key="Generate">Генерувати</v:String>
     <v:String x:Key="PasswordSave">Зберегти</v:String>
-    <v:String x:Key="Allow">Допускати</v:String>
     <v:String x:Key="Require">Вимагати</v:String>
     <!--#endregion-->
 

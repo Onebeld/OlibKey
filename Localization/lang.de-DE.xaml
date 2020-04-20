@@ -16,6 +16,16 @@
     <v:String x:Key="ChangeMasterPassword">Ändern Sie das Master-Passwort</v:String>
     <v:String x:Key="AboutPrograms">Über das Programm...</v:String>
     <v:String x:Key="CheckUpdates">Auf Update prüfen</v:String>
+    <v:String x:Key="Search">Suche</v:String>
+    <v:String x:Key="CreateFolder">Ordner erstellen</v:String>
+    <v:String x:Key="AllItems">Alle Artikel</v:String>
+    <v:String x:Key="CustomFolder">Benutzerordner</v:String>
+    <v:String x:Key="NotChosen">Nicht ausgewählt</v:String>
+    <v:String x:Key="RemoveSelection">Deaktivieren Sie</v:String>
+
+    <v:String x:Key="Collapse">Zusammenbruch</v:String>
+    <v:String x:Key="Expand">Erweitern</v:String>
+    <v:String x:Key="Reestablish">Wiederherstellen</v:String>
 
     <v:String x:Key="Password">Passwort:</v:String>
     <v:String x:Key="Password+">Passwort</v:String>
@@ -67,7 +77,6 @@
     <v:String x:Key="Underscore">Fazit (_)</v:String>
     <v:String x:Key="Generate">Generieren</v:String>
     <v:String x:Key="PasswordSave">Speichern</v:String>
-    <v:String x:Key="Allow">Zugeben</v:String>
     <v:String x:Key="Require">Zu fordern</v:String>
     <!--#endregion-->
 

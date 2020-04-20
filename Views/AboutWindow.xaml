@@ -4,14 +4,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OlibKey.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None"
-        MinHeight="300"
-        MinWidth="350"
         Title="{DynamicResource AboutPrograms}" Height="300" Width="350">
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -25,7 +22,7 @@
         </EventTrigger>
     </Window.Triggers>
 
-    <Grid RenderTransformOrigin="0.5,0.5" Background="Transparent">
+    <Grid RenderTransformOrigin="0.5,0.5">
         <Grid.RenderTransform>
             <TransformGroup>
                 <ScaleTransform x:Name="ScaleWindow" ScaleY="1" ScaleX="1" />
@@ -55,11 +52,11 @@
                                 <Image Margin="0,5,5,2" Width="50" Source="{DynamicResource OlibKeyTextImage}"/>
                             </StackPanel>
                         </Grid>
-                        <TextBlock Grid.Column="1" Panel.ZIndex="-1" Text="{DynamicResource AboutPrograms}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Panel.ZIndex="-1" Text="{DynamicResource AboutPrograms}" Foreground="{DynamicResource ForegroundWindow}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <Border Grid.Column="1" MouseLeftButtonDown="Drag" Background="Transparent">
                             <Border.ContextMenu>
                                 <ContextMenu Foreground="{DynamicResource ForegroundWindow}">
-                                    <MenuItem Header="Закрыть" InputGestureText="Alt+F4">
+                                    <MenuItem Header="Закрыть" InputGestureText="Alt+F4" Click="MenuItem_Click">
                                         <MenuItem.Icon>
                                             <Image Source="{StaticResource ImageClose}" Width="12"/>
                                         </MenuItem.Icon>

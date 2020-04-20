@@ -10,6 +10,8 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None"
+        MinHeight="400"
+        MinWidth="500"
         Title="{DynamicResource Search}" Height="400" Width="500">
     <Window.DataContext>
         <viewmodels:SearchViewModel x:Name="SearchModel"/>
@@ -76,7 +78,7 @@
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <Separator />
-                                    <MenuItem Header="{DynamicResource Close}" InputGestureText="Alt+F4">
+                                    <MenuItem Header="{DynamicResource Close}" InputGestureText="Alt+F4" Click="MenuItem_Click_1">
                                         <MenuItem.Icon>
                                             <Image Source="{DynamicResource ImageClose}" Width="12" />
                                         </MenuItem.Icon>
@@ -182,7 +184,7 @@
                         <ListBox x:Name="lbFolders" ItemsSource="{Binding FolderList, UpdateSourceTrigger=PropertyChanged}" MouseDown="lbFolders_MouseDown" SelectionChanged="lbFolders_SelectionChanged" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="Transparent">
                             <ListBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Отменить выделение" Click="MenuItem_Click"/>
+                                    <MenuItem Header="{DynamicResource RemoveSelection}" Click="MenuItem_Click"/>
                                     <MenuItem Header="{DynamicResource ChangeP}" Command="{Binding EditFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
                                     <MenuItem Header="{DynamicResource Delete}" Command="{Binding DeleteFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
                                 </ContextMenu>

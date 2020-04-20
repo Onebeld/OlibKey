@@ -1,8 +1,10 @@
 ﻿using Microsoft.Win32;
 using OlibKey.Core;
 using OlibKey.ModelViews;
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace OlibKey.Views
 {
@@ -13,12 +15,18 @@ namespace OlibKey.Views
     {
         public CreatePasswordStorageWindow() => InitializeComponent();
 
-        private void CancelButton(object sender, RoutedEventArgs e) => Close();
+        private async void CancelButton(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
+        }
 
-        private void CreateStorageButton(object sender, RoutedEventArgs e)
+        private void Drag(object sender, MouseButtonEventArgs e) => DragMove();
+        private async void CreateStorageButton(object sender, RoutedEventArgs e)
         {
             MainViewModel.MasterPassword = TxtPasswordCollapsed.Text;
             MainViewModel.PathStorage = TxtPathSelection.Text;
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
             DialogResult = true;
         }
 
@@ -58,5 +66,6 @@ namespace OlibKey.Views
                 TxtPasswordCollapsed.Visibility = Visibility.Collapsed;
             }
         }
+        private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
     }
 }

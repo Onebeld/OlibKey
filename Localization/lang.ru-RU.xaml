@@ -19,6 +19,9 @@
     <v:String x:Key="Search">Поиск</v:String>
     <v:String x:Key="CreateFolder">Создать папку</v:String>
     <v:String x:Key="AllItems">Все элементы</v:String>
+    <v:String x:Key="CustomFolder">Пользовательская папка</v:String>
+    <v:String x:Key="NotChosen">Не выбрано</v:String>
+    <v:String x:Key="RemoveSelection">Снять выделение</v:String>
 
     <v:String x:Key="Collapse">Свернуть</v:String>
     <v:String x:Key="Expand">Развернуть</v:String>
@@ -74,7 +77,6 @@
     <v:String x:Key="Underscore">Нижняя черта (_)</v:String>
     <v:String x:Key="Generate">Генерировать</v:String>
     <v:String x:Key="PasswordSave">Сохранить</v:String>
-    <v:String x:Key="Allow">Допускать</v:String>
     <v:String x:Key="Require">Требовать</v:String>
     <!--#endregion-->
     

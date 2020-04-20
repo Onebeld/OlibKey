@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using OlibKey.Core;
 using OlibKey.ModelViews;
 
@@ -12,7 +14,9 @@ namespace OlibKey.Views
     {
         public ChangeMasterPasswordWindow() => InitializeComponent();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Drag(object sender, MouseButtonEventArgs e) => DragMove();
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -22,6 +26,7 @@ namespace OlibKey.Views
                 App.MainWindow.Model.SaveAccount();
 
                 MessageBox.Show((string)Application.Current.Resources["Successfully"], (string)Application.Current.Resources["Message"], MessageBoxButton.OK, MessageBoxImage.Information);
+                await Animations.ClosingWindowAnimation(this, ScaleWindow);
                 Close();
             }
             catch
@@ -74,5 +79,13 @@ namespace OlibKey.Views
 
         private void txtPassword_PasswordChanged(object sender, RoutedEventArgs e) => PbHard.Value = PasswordUtils.CheckPasswordStrength(TxtPassword.Password);
         private void pbHard_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => ItemControls.ColorProgressBar(PbHard);
+
+        private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
+
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
+        }
     }
 }

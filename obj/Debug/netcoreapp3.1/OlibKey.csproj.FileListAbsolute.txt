@@ -60,7 +60,6 @@ F:\OlibKey\bin\Debug\netcoreapp3.1\OlibKey.runtimeconfig.json
 F:\OlibKey\bin\Debug\netcoreapp3.1\OlibKey.runtimeconfig.dev.json
 F:\OlibKey\bin\Debug\netcoreapp3.1\OlibKey.dll
 F:\OlibKey\bin\Debug\netcoreapp3.1\OlibKey.pdb
-F:\OlibKey\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 F:\OlibKey\obj\Debug\netcoreapp3.1\MainWindow.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\ChangedPasswordPage.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\CreatePasswordPage.baml
@@ -87,5 +86,13 @@ F:\OlibKey\obj\Debug\netcoreapp3.1\Views\SettingsWindow.baml
 F:\OlibKey\bin\Debug\netcoreapp3.1\Hardcodet.Wpf.TaskbarNotification.dll
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\ChangeMasterPasswordWindow.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\ChangeMasterPasswordWindow.g.cs
-F:\OlibKey\obj\Debug\netcoreapp3.1\Controls\DateTimeControl.g.cs
-F:\OlibKey\obj\Debug\netcoreapp3.1\Controls\DateTimeControl.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Controls\FolderListItem.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\ReminderWindow.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Controls\FolderListItem.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\CreateFolderWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\ReminderWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\SearchWindow.g.cs
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\CreateFolderWindow.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\Views\SearchWindow.baml
+F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.Resource.resources
+F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.csproj.GenerateResource.cache

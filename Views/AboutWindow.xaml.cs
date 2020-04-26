@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace OlibKey.Views
 {
@@ -15,8 +16,16 @@ namespace OlibKey.Views
 
         private void Drag(object sender, MouseButtonEventArgs e) => DragMove();
 
-        private void Window_Loaded(object sender, RoutedEventArgs e) => Version.Content =
-            " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+            }
+            Version.Content =
+" " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        }
 
         private void Button_Click(object sender, RoutedEventArgs e) => Close();
 

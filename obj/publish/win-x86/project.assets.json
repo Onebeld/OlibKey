@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v5.0": {
+    ".NETCoreApp,Version=v3.1": {
       "Hardcodet.NotifyIcon.Wpf.NetCore/1.0.10": {
         "type": "package",
         "compile": {
@@ -24,7 +24,7 @@
         }
       }
     },
-    ".NETCoreApp,Version=v5.0/win-x64": {
+    ".NETCoreApp,Version=v3.1/win-x64": {
       "Hardcodet.NotifyIcon.Wpf.NetCore/1.0.10": {
         "type": "package",
         "compile": {
@@ -47,7 +47,7 @@
         }
       }
     },
-    ".NETCoreApp,Version=v5.0/win-x86": {
+    ".NETCoreApp,Version=v3.1/win-x86": {
       "Hardcodet.NotifyIcon.Wpf.NetCore/1.0.10": {
         "type": "package",
         "compile": {
@@ -119,7 +119,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v5.0": [
+    ".NETCoreApp,Version=v3.1": [
       "Hardcodet.NotifyIcon.Wpf.NetCore >= 1.0.10",
       "Newtonsoft.Json >= 12.0.3"
     ]
@@ -141,7 +141,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp5.0"
+        "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -149,7 +149,7 @@
         "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {}
       },
       "frameworks": {
-        "netcoreapp5.0": {
+        "netcoreapp3.1": {
           "projectReferences": {}
         }
       },
@@ -160,7 +160,7 @@
       }
     },
     "frameworks": {
-      "netcoreapp5.0": {
+      "netcoreapp3.1": {
         "dependencies": {
           "Hardcodet.NotifyIcon.Wpf.NetCore": {
             "target": "Package",
@@ -183,28 +183,48 @@
         "warn": true,
         "downloadDependencies": [
           {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          },
+          {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-            "version": "[5.0.0-preview.1.20124.5, 5.0.0-preview.1.20124.5]"
+            "version": "[3.1.2, 3.1.2]"
           },
           {
             "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
-            "version": "[5.0.0-preview.1.20124.5, 5.0.0-preview.1.20124.5]"
+            "version": "[3.1.2, 3.1.2]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.2, 3.1.2]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x86",
+            "version": "[3.1.2, 3.1.2]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x64",
-            "version": "[5.0.0-preview.1.20120.5, 5.0.0-preview.1.20120.5]"
+            "version": "[3.1.2, 3.1.2]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.win-x86",
-            "version": "[5.0.0-preview.1.20120.5, 5.0.0-preview.1.20120.5]"
+            "version": "[3.1.2, 3.1.2]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[3.1.0, 3.1.0]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-            "version": "[5.0.0-preview.1.20127.5, 5.0.0-preview.1.20127.5]"
+            "version": "[3.1.2, 3.1.2]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
-            "version": "[5.0.0-preview.1.20127.5, 5.0.0-preview.1.20127.5]"
+            "version": "[3.1.2, 3.1.2]"
           }
         ],
         "frameworkReferences": {

@@ -3,6 +3,7 @@ using OlibKey.ModelViews;
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace OlibKey.Views
 {
@@ -27,7 +28,11 @@ namespace OlibKey.Views
             tbMasterPassword.Focus();
         }
 
-        private void CancelButton(object sender, RoutedEventArgs e) => Close();
+        private async void CancelButton(object sender, RoutedEventArgs e)
+        {
+            await Animations.ClosingWindowAnimation(this, ScaleWindow);
+            Close();
+        }
 
         private async void LoadStorage()
         {
@@ -52,6 +57,15 @@ namespace OlibKey.Views
             if (e.Key == Key.Enter)
             {
                 LoadStorage();
+            }
+        }
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
             }
         }
     }

@@ -10,9 +10,12 @@
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None"
+        TextOptions.TextFormattingMode="Display"
+        RenderOptions.ClearTypeHint="Enabled"
+        VirtualizingPanel.VirtualizationMode="Recycling"
         MinHeight="400"
         MinWidth="500"
-        Title="{DynamicResource Search}" Height="400" Width="500">
+        Title="{StaticResource Search}" Height="400" Width="500">
     <Window.DataContext>
         <viewmodels:SearchViewModel x:Name="SearchModel"/>
     </Window.DataContext>
@@ -37,7 +40,7 @@
                 <ScaleTransform x:Name="ScaleWindow" ScaleY="1" ScaleX="1"/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <Border Background="{DynamicResource BackgroundWindow}" CornerRadius="5" BorderBrush="{DynamicResource BorderColorWindow}"
+        <Border Background="{StaticResource BackgroundWindow}" CornerRadius="5" BorderBrush="{StaticResource BorderColorWindow}"
                 BorderThickness="1" Margin="4">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -49,8 +52,8 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Grid.ColumnSpan="2" Background="{DynamicResource BackgroundWindow}"
-                        BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0,0,0,1"
+                <Border Grid.Row="0" Grid.ColumnSpan="2" Background="{StaticResource BackgroundWindow}"
+                        BorderBrush="{StaticResource BorderColorWindow}" BorderThickness="0,0,0,1"
                         CornerRadius="4.5,4.5,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -61,35 +64,35 @@
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="{DynamicResource OlibKeyLogoHeightDrawingImage}" Height="16"
+                                <Image Source="{StaticResource OlibKeyLogoHeightDrawingImage}" Height="16"
                                        Margin="10,5,2,5" />
-                                <Image Margin="0,5,5,2" Width="50" Source="{DynamicResource OlibKeyTextImage}"/>
+                                <Image Margin="0,5,5,2" Width="50" Source="{StaticResource OlibKeyTextImage}"/>
                             </StackPanel>
                         </Grid>
-                        <TextBlock Foreground="{DynamicResource ForegroundWindow}" Grid.Column="1" Panel.ZIndex="-1" Text="{DynamicResource Search}" VerticalAlignment="Center"
+                        <TextBlock Foreground="{StaticResource ForegroundWindow}" Grid.Column="1" Panel.ZIndex="-1" Text="{StaticResource Search}" VerticalAlignment="Center"
                                    HorizontalAlignment="Center" />
                         <Border Grid.Column="1" MouseLeftButtonDown="Drag" MouseMove="OnMouseMove"
                                 MouseLeftButtonUp="OnMouseLeftButtonUp" Background="Transparent">
                             <Border.ContextMenu>
-                                <ContextMenu Foreground="{DynamicResource ForegroundWindow}">
-                                    <MenuItem x:Name="FullMenu" Header="{DynamicResource Expand}" Click="Full">
+                                <ContextMenu Foreground="{StaticResource ForegroundWindow}">
+                                    <MenuItem x:Name="FullMenu" Header="{StaticResource Expand}" Click="Full">
                                         <MenuItem.Icon>
-                                            <Image Source="{DynamicResource ImageExpand}" Width="12"/>
+                                            <Image Source="{StaticResource ImageExpand}" Width="12"/>
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <Separator />
-                                    <MenuItem Header="{DynamicResource Close}" InputGestureText="Alt+F4" Click="MenuItem_Click_1">
+                                    <MenuItem Header="{StaticResource Close}" InputGestureText="Alt+F4" Click="MenuItem_Click_1">
                                         <MenuItem.Icon>
-                                            <Image Source="{DynamicResource ImageClose}" Width="12" />
+                                            <Image Source="{StaticResource ImageClose}" Width="12" />
                                         </MenuItem.Icon>
                                     </MenuItem>
                                 </ContextMenu>
                             </Border.ContextMenu>
                         </Border>
-                        <Button Grid.Column="2" Padding="8" Style="{DynamicResource ButtonHeight}" Click="Full">
-                            <Image Source="{DynamicResource ImageExpand}" />
+                        <Button Grid.Column="2" Padding="8" Style="{StaticResource ButtonHeight}" Click="Full">
+                            <Image Source="{StaticResource ImageExpand}" />
                         </Button>
-                        <Button Grid.Column="3" Padding="8" Style="{DynamicResource ButtonHeight}">
+                        <Button Grid.Column="3" Padding="8" Style="{StaticResource ButtonHeight}">
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
                                     <BeginStoryboard>
@@ -107,19 +110,19 @@
                                     </BeginStoryboard>
                                 </EventTrigger>
                             </Button.Triggers>
-                            <Image Source="{DynamicResource ImageClose}" />
+                            <Image Source="{StaticResource ImageClose}" />
                         </Button>
                     </Grid>
                 </Border>
 
                 <DockPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Margin="50,5">
-                    <Image Margin="0,0,5,0" Source="{DynamicResource SearchImage}"/>
+                    <Image Margin="0,0,5,0" Source="{StaticResource SearchImage}"/>
                     <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
                 </DockPanel>
 
-                <ListBox Grid.Column="1" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" SelectionChanged="ListBox_SelectionChanged" Grid.Row="2" Background="Transparent" BorderThickness="1,1,0,0" BorderBrush="{DynamicResource BorderColorWindow}"/>
+                <ListBox Grid.Column="1" ItemsSource="{Binding AccountsList, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" SelectionChanged="ListBox_SelectionChanged" Grid.Row="2" Background="Transparent" BorderThickness="1,1,0,0" BorderBrush="{StaticResource BorderColorWindow}"/>
                 
-                <Border Grid.Column="0" Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource BorderColorWindow}">
+                <Border Grid.Column="0" Grid.Row="2" BorderThickness="0,1,0,0" BorderBrush="{StaticResource BorderColorWindow}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -132,9 +135,9 @@
                                     <StackPanel Orientation="Horizontal">
                                         <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
                                             <Image
-                                                Source="{DynamicResource infinityDrawingImage}" Margin="5"/>
+                                                Source="{StaticResource infinityDrawingImage}" Margin="5"/>
                                         </Border>
-                                        <TextBlock Text="{DynamicResource AllItems}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{StaticResource AllItems}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </RadioButton.Content>
                             </RadioButton>
@@ -143,9 +146,9 @@
                                 <RadioButton.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
-                                            <Image Source="{DynamicResource globeDrawingImage}" Margin="5"/>
+                                            <Image Source="{StaticResource globeDrawingImage}" Margin="5"/>
                                         </Border>
-                                        <TextBlock Text="{DynamicResource Login}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{StaticResource Login}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </RadioButton.Content>
                             </RadioButton>
@@ -153,9 +156,9 @@
                                 <RadioButton.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
-                                            <Image Source="{DynamicResource debit_cardDrawingImage}" Margin="5"/>
+                                            <Image Source="{StaticResource debit_cardDrawingImage}" Margin="5"/>
                                         </Border>
-                                        <TextBlock Text="{DynamicResource BankCard}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{StaticResource BankCard}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </RadioButton.Content>
                             </RadioButton>
@@ -163,9 +166,9 @@
                                 <RadioButton.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
-                                            <Image Source="{DynamicResource contactDrawingImage}" Margin="5"/>
+                                            <Image Source="{StaticResource contactDrawingImage}" Margin="5"/>
                                         </Border>
-                                        <TextBlock Text="{DynamicResource Passport}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{StaticResource Passport}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </RadioButton.Content>
                             </RadioButton>
@@ -173,27 +176,27 @@
                                 <RadioButton.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
-                                            <Image Source="{DynamicResource reminderDrawingImage}" Margin="5"/>
+                                            <Image Source="{StaticResource reminderDrawingImage}" Margin="5"/>
                                         </Border>
-                                        <TextBlock Text="{DynamicResource Reminder}" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{StaticResource Reminder}" VerticalAlignment="Center"/>
                                     </StackPanel>
                                 </RadioButton.Content>
                             </RadioButton>
 
                         </StackPanel>
-                        <ListBox x:Name="lbFolders" ItemsSource="{Binding FolderList, UpdateSourceTrigger=PropertyChanged}" MouseDown="lbFolders_MouseDown" SelectionChanged="lbFolders_SelectionChanged" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="Transparent">
+                        <ListBox x:Name="lbFolders" ItemsSource="{Binding FolderList, UpdateSourceTrigger=PropertyChanged}" MouseDown="lbFolders_MouseDown" SelectionChanged="lbFolders_SelectionChanged" SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" BorderBrush="{StaticResource BorderColorWindow}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="Transparent">
                             <ListBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="{DynamicResource RemoveSelection}" Click="MenuItem_Click"/>
-                                    <MenuItem Header="{DynamicResource ChangeP}" Command="{Binding EditFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <MenuItem Header="{DynamicResource Delete}" Command="{Binding DeleteFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <MenuItem Header="{StaticResource RemoveSelection}" Click="MenuItem_Click"/>
+                                    <MenuItem Header="{StaticResource ChangeP}" Command="{Binding EditFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <MenuItem Header="{StaticResource Delete}" Command="{Binding DeleteFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
                                 </ContextMenu>
                             </ListBox.ContextMenu>
                         </ListBox>
                         <Border Grid.Row="2" BorderThickness="0 1 0 0" CornerRadius="0,0,0,4.5"
-                                BorderBrush="{DynamicResource BorderColorWindow}"
-                                Background="{DynamicResource GlobalBorderColor}">
-                            <Button Command="{Binding CreateFolderCommand}" Content="{DynamicResource Add}" Margin="10"
+                                BorderBrush="{StaticResource BorderColorWindow}"
+                                Background="{StaticResource GlobalBorderColor}">
+                            <Button Command="{Binding CreateFolderCommand}" Content="{StaticResource Add}" Margin="10"
                                     IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
                     </Grid>

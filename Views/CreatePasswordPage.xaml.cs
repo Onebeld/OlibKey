@@ -144,7 +144,8 @@ namespace OlibKey.Views
             cbCustomFolder.SelectedValuePath = "Value";
             cbCustomFolder.DisplayMemberPath = "Key";
             Dictionary<string, string> pairs = new Dictionary<string, string>();
-            foreach (var i in App.MainWindow.Model.DatabaseApplication.CustomFolders) pairs.Add(i.Name, i.ID);
+            if (App.MainWindow.Model.DatabaseApplication.CustomFolders != null)
+                foreach (var i in App.MainWindow.Model.DatabaseApplication.CustomFolders) pairs.Add(i.Name, i.ID);
             cbCustomFolder.Items.Add(new KeyValuePair<string,string>((string)FindResource("NotChosen"), null));
             foreach (KeyValuePair<string, string> i in pairs) cbCustomFolder.Items.Add(i);
             cbCustomFolder.SelectedIndex = 0;

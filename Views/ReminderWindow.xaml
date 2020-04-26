@@ -6,6 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Topmost="True"
+        TextOptions.TextFormattingMode="Display"
+        RenderOptions.ClearTypeHint="Enabled"
+        VirtualizingPanel.VirtualizationMode="Recycling"
+        Loaded="mainWindow_Loaded"
         Title="ReminderWindow" Height="150" Width="450" WindowStyle="None" AllowsTransparency="True" Background="Transparent" ShowInTaskbar="False">
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">

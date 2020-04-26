@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using OlibKey.Core;
 using OlibKey.ModelViews;
 
@@ -86,6 +87,15 @@ namespace OlibKey.Views
         {
             await Animations.ClosingWindowAnimation(this, ScaleWindow);
             Close();
+        }
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+            }
         }
     }
 }

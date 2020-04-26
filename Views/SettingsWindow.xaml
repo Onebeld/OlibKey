@@ -9,7 +9,10 @@
         Closing="Settings_OnClosing"
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
+        TextOptions.TextFormattingMode="Display"
+        RenderOptions.ClearTypeHint="Enabled"
         WindowStyle="None"
+        VirtualizingPanel.VirtualizationMode="Recycling"
         Title="{DynamicResource Settings}" Height="350" Width="450">
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
@@ -87,12 +90,15 @@
                         <CheckBox x:Name="cbCollapsedWindow" Content="{DynamicResource CBHideProgram}" Foreground="White"
                           Margin="10,0" />
                         <CheckBox x:Name="cbAutorun" Content="{DynamicResource CBAutorunApplication}" Foreground="White" Margin="10,5" Checked="CBAutorun" Unchecked="CBAutorun"/>
+                        <CheckBox x:Name="cbFastRendering" Content="{DynamicResource FastRendering}" Foreground="White" Margin="10,0" Checked="CBFastRender" Unchecked="CBFastRender"/>
                         <DockPanel Margin="0,10,0,0">
-                            <Label Content="{DynamicResource Language}" Width="80" Foreground="White" />
+                            <Label Content="{DynamicResource Language}" Width="80" Foreground="White" TextOptions.TextFormattingMode="Display"
+                                RenderOptions.ClearTypeHint="Enabled"/>
                             <ComboBox x:Name="CbLang" Margin="10,0" SelectionChanged="cbLang_SelectionChanged" />
                         </DockPanel>
                         <DockPanel Margin="0,5">
-                            <Label Content="{DynamicResource Theme}" Width="80" Foreground="White" />
+                            <Label Content="{DynamicResource Theme}" Width="80" Foreground="White" TextOptions.TextFormattingMode="Display"
+                                RenderOptions.ClearTypeHint="Enabled"/>
                             <ComboBox x:Name="CbTheme" Margin="10,0" SelectionChanged="CbTheme_OnSelectionChanged" />
                         </DockPanel>
                         <AccessText Text="{DynamicResource WarningSettings}" Foreground="Red" TextWrapping="Wrap" TextAlignment="Center"/>

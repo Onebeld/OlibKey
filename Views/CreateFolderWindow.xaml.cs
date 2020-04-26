@@ -1,17 +1,8 @@
 ﻿using OlibKey.AccountStructures;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace OlibKey.Views
 {
@@ -51,5 +42,14 @@ namespace OlibKey.Views
         }
 
         private void Storyboard_Completed(object sender, EventArgs e) => Close();
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+            }
+        }
     }
 }

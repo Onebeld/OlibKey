@@ -8,8 +8,10 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Win32;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using OlibKey.Core;
 
 namespace OlibKey.Views
@@ -33,6 +35,10 @@ namespace OlibKey.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+            }
             CbTheme.SelectedValuePath = "Key";
             CbTheme.DisplayMemberPath = "Value";
             KeyValuePair<string, string>[] valuePair = {
@@ -57,6 +63,7 @@ namespace OlibKey.Views
             foreach (var i in valuePair1) CbLang.Items.Add(i);
             cbCollapsedWindow.IsChecked = App.Setting.CollapseWhenClosing;
             cbAutorun.IsChecked = App.Setting.AutorunApplication;
+            cbFastRendering.IsChecked = App.Setting.EnableFastRendering;
             CbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == Lang.Default.DefaultLanguage.Name);
         }
 
@@ -116,7 +123,7 @@ namespace OlibKey.Views
             if (cbCollapsedWindow.IsChecked != null)
                 App.Setting.CollapseWhenClosing = (bool)cbCollapsedWindow.IsChecked;
             File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                              "\\OlibKey\\settings.json", JsonConvert.SerializeObject(App.Setting));
+                              "\\OlibKey\\settings.json", JsonSerializer.Serialize(App.Setting));
         }
 
         private void CBAutorun(object sender, RoutedEventArgs e)
@@ -135,6 +142,25 @@ namespace OlibKey.Views
             {
                 App.Setting.AutorunApplication = (bool) cbAutorun.IsChecked;
                 rkApp.DeleteValue("OlibKey", false);
+            }
+        }
+
+        private void CBFastRender(object sender, RoutedEventArgs e)
+        {
+            App.Setting.EnableFastRendering = (bool)cbFastRendering.IsChecked;
+            if ((bool)cbFastRendering.IsChecked)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetEdgeMode(Application.Current.MainWindow, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+                RenderOptions.SetBitmapScalingMode(Application.Current.MainWindow, BitmapScalingMode.LowQuality);
+            }
+            else
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Unspecified);
+                RenderOptions.SetEdgeMode(Application.Current.MainWindow, EdgeMode.Unspecified);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.Unspecified);
+                RenderOptions.SetBitmapScalingMode(Application.Current.MainWindow, BitmapScalingMode.Unspecified);
             }
         }
     }

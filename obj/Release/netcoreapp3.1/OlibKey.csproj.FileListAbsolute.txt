@@ -53,3 +53,13 @@ F:\OlibKey\obj\Release\netcoreapp3.1\OlibKey.csproj.CopyComplete
 F:\OlibKey\obj\Release\netcoreapp3.1\OlibKey.dll
 F:\OlibKey\obj\Release\netcoreapp3.1\OlibKey.pdb
 F:\OlibKey\obj\Release\netcoreapp3.1\OlibKey.genruntimeconfig.cache
+F:\OlibKey\obj\Release\netcoreapp3.1\Controls\FolderListItem.baml
+F:\OlibKey\obj\Release\netcoreapp3.1\Views\ReminderWindow.baml
+F:\OlibKey\obj\Release\netcoreapp3.1\Controls\FolderListItem.g.cs
+F:\OlibKey\obj\Release\netcoreapp3.1\Views\CreateFolderWindow.g.cs
+F:\OlibKey\obj\Release\netcoreapp3.1\Views\ReminderWindow.g.cs
+F:\OlibKey\obj\Release\netcoreapp3.1\Views\SearchWindow.g.cs
+F:\OlibKey\obj\Release\netcoreapp3.1\Views\CreateFolderWindow.baml
+F:\OlibKey\obj\Release\netcoreapp3.1\Views\SearchWindow.baml
+F:\OlibKey\obj\Release\netcoreapp3.1\OlibKey.Resource.resources
+F:\OlibKey\obj\Release\netcoreapp3.1\OlibKey.csproj.GenerateResource.cache

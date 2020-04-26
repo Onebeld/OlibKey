@@ -1,9 +1,6 @@
-﻿using Newtonsoft.Json;
-using OlibKey.AccountStructures;
+﻿using OlibKey.AccountStructures;
 using OlibKey.ModelViews;
-using System.Collections.Generic;
 using System.IO;
-using System.Windows;
 using System.Xml.Serialization;
 
 namespace OlibKey.Core

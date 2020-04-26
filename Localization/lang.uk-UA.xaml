@@ -101,7 +101,8 @@
     <v:String x:Key="Version">Версія:</v:String>
     <v:String x:Key="Author">©2020 Дмитро Жутков</v:String>
     <v:String x:Key="Close">Закрити</v:String>
-    <v:String x:Key="AccessText1">Дозволяє зберігати паролі, замітки, паспорти та інші особисті дані в зашифрованому вигляді.</v:String>
+    <v:String x:Key="AccessText1">Дозволяє зберігати паролі, замітки, особисті дані та інші особисті дані в зашифрованому вигляді.</v:String>
+    <v:String x:Key="AccessText2">Програма публікується під ліцензією GPLv3.</v:String>
     <!--#endregion-->
 
     <!--#region Settings-->
@@ -109,6 +110,7 @@
     <v:String x:Key="Theme">Тема:</v:String>
     <v:String x:Key="CBHideProgram">Приховати програму при закритті</v:String>
     <v:String x:Key="CBAutorunApplication">Запускати разом з Windows</v:String>
+    <v:String x:Key="FastRendering">Включити швидкий рендеринг (підвищує продуктивність)</v:String>
 
     <v:String x:Key="Light">Світла</v:String>
     <v:String x:Key="Dark">Темна</v:String>
@@ -150,9 +152,9 @@
     <v:String x:Key="YearOfService">Рік обслуговування</v:String>
     <v:String x:Key="SecurityCodeCard">Код безпеки</v:String>
 
-    <v:String x:Key="Passport">Паспорт</v:String>
+    <v:String x:Key="Passport">Особисті дані</v:String>
     <v:String x:Key="FullName">ФИО</v:String>
-    <v:String x:Key="PassportSeriesAndNumber">Серія та номер паспорта</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Серія та номер</v:String>
     <v:String x:Key="PlaceOfIssue">Місце видачі</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Застосувати</v:String>

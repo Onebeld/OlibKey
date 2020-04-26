@@ -101,7 +101,8 @@
     <v:String x:Key="Version">Տարբերակ:</v:String>
     <v:String x:Key="Author">©2020 Դմիտրի Ժուտկով</v:String>
     <v:String x:Key="Close">Փակել</v:String>
-    <v:String x:Key="AccessText1">Թույլ է տալիս պահել գաղտնաբառերը, նշումները, անձնագրերը եւ այլ անձնական տվյալները կոդավորված ձեւով.</v:String>
+    <v:String x:Key="AccessText1">Թույլ է տալիս պահպանել գաղտնաբառերը, գրառումները, անձնական տվյալները և այլ անձնական տվյալները կոդավորված ձևով:</v:String>
+    <v:String x:Key="AccessText2">Ծրագիրը հրապարակվում է GPLv3 լիցենզիայի ներքո:</v:String>
     <!--#endregion-->
 
     <!--#region Settings-->
@@ -109,6 +110,7 @@
     <v:String x:Key="Theme">Թեման:</v:String>
     <v:String x:Key="CBHideProgram">Թաքցնել ծրագիրը փակելիս</v:String>
     <v:String x:Key="CBAutorunApplication">Գործարկել Windows- ի հետ</v:String>
+    <v:String x:Key="FastRendering">Միացնել արագ տրամադրումը (բարելավում է կատարումը)</v:String>
 
     <v:String x:Key="Light">Պայծառ</v:String>
     <v:String x:Key="Dark">Մութ</v:String>
@@ -150,9 +152,9 @@
     <v:String x:Key="YearOfService">Ծառայության տարեթիվը</v:String>
     <v:String x:Key="SecurityCodeCard">Անվտանգության ծածկագիր</v:String>
 
-    <v:String x:Key="Passport">Անձնագիր</v:String>
+    <v:String x:Key="Passport">Անձնական տվյալներ</v:String>
     <v:String x:Key="FullName">Ամբողջական անուն</v:String>
-    <v:String x:Key="PassportSeriesAndNumber">Անձնագրերի շարքը և համարը</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Սերիան և համարը</v:String>
     <v:String x:Key="PlaceOfIssue">Թողարկման վայրը</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Գործադրել</v:String>

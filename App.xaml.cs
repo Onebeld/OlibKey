@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using OlibKey.Structures;
+﻿using OlibKey.Structures;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,6 +8,7 @@ using System.Text;
 using System.Windows;
 using OlibKey.ModelViews;
 using OlibKey.Views;
+using System.Text.Json;
 
 namespace OlibKey
 {
@@ -46,7 +46,7 @@ namespace OlibKey
         protected override void OnStartup(StartupEventArgs e) 
         {
             Setting = File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey\\settings.json")
-                ? JsonConvert.DeserializeObject<Setting>(File.ReadAllText(
+                ? JsonSerializer.Deserialize<Setting>(File.ReadAllText(
                     Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                     "\\OlibKey\\settings.json"))
                 : new Setting();

@@ -12,6 +12,10 @@
         KeyDown="Window_KeyDown"
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None"
+        RenderOptions.ClearTypeHint="Enabled"
+        RenderOptions.BitmapScalingMode="LowQuality"
+        VirtualizingPanel.VirtualizationMode="Recycling"
+        Loaded="mainWindow_Loaded"
         Title="OlibKey" Height="450" Width="800" MinWidth="600" MinHeight="350" >
     <Window.DataContext>
         <viewmodels:MainViewModel x:Name="Model"/>
@@ -214,7 +218,8 @@
                             <Button Command="{Binding NewCreatePassword}" Content="{DynamicResource Add}" Margin="10"
                                     IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
                         </Border>
-                        <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}"
+                        <Label Grid.Column="2" Content="{Binding NameStorage, UpdateSourceTrigger=PropertyChanged}" TextOptions.TextFormattingMode="Display"
+                               RenderOptions.ClearTypeHint="Enabled"
                                Foreground="{DynamicResource ForegroundWindow}"
                                FontWeight="Bold"
                                BorderBrush="{DynamicResource BorderColorWindow}"

@@ -1,0 +1,7 @@
+F:\OlibKey\bin\Release\netcoreapp5.0\publish\OlibKey.exe
+F:\OlibKey\bin\Release\netcoreapp5.0\publish\OlibKey.dll
+F:\OlibKey\bin\Release\netcoreapp5.0\publish\OlibKey.deps.json
+F:\OlibKey\bin\Release\netcoreapp5.0\publish\OlibKey.runtimeconfig.json
+F:\OlibKey\bin\Release\netcoreapp5.0\publish\OlibKey.pdb
+F:\OlibKey\bin\Release\netcoreapp5.0\publish\Hardcodet.Wpf.TaskbarNotification.dll
+F:\OlibKey\bin\Release\netcoreapp5.0\publish\Newtonsoft.Json.dll

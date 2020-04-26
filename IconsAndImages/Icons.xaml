@@ -87,17 +87,6 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
-    <DrawingImage x:Key="loupeDrawingImage">
-        <DrawingImage.Drawing>
-            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
-                <DrawingGroup Opacity="1">
-                    <DrawingGroup Opacity="1">
-                        <GeometryDrawing Brush="White" Geometry="F1 M512,512z M0,0z M304.7,10.9C196.2,10.9 108.3,98.8 108.3,207.3 108.3,254.2 124.7,297.2 152.1,331L17.1,466C9.09999999999997,474 9.09999999999997,486.9 17.1,494.9 25.1,502.9 38,502.9 46,494.9L181,359.9C214.8,387.3 257.8,403.7 304.7,403.7 413.2,403.7 501.1,315.8 501.1,207.3 501.1,98.8 413.1,10.9 304.7,10.9z M304.7,362.9C218.8,362.9 149.1,293.2 149.1,207.3 149.1,121.4 218.8,51.7 304.7,51.7 390.6,51.7 460.3,121.4 460.3,207.3 460.3,293.2 390.6,362.9 304.7,362.9z" />
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingGroup>
-        </DrawingImage.Drawing>
-    </DrawingImage>
     <DrawingImage x:Key="FacebookDrawingImage">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V257.7 H257.7 V0 H0 Z">

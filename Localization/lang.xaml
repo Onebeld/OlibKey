@@ -101,7 +101,8 @@
     <v:String x:Key="Version">Version:</v:String>
     <v:String x:Key="Author">©2020 Dmitry Zhutkov</v:String>
     <v:String x:Key="Close">Close</v:String>
-    <v:String x:Key="AccessText1">Allows you to store passwords, notes, passports and other personal data in encrypted form.</v:String>
+    <v:String x:Key="AccessText1">Allows you to store passwords, notes, personal data and other personal data in encrypted form.</v:String>
+    <v:String x:Key="AccessText2">The program is published under the GPLv3 license.</v:String>
     <!--#endregion-->
 
     <!--#region Settings-->
@@ -109,6 +110,7 @@
     <v:String x:Key="Theme">Theme:</v:String>
     <v:String x:Key="CBHideProgram">Hide program when closing</v:String>
     <v:String x:Key="CBAutorunApplication">Run with Windows</v:String>
+    <v:String x:Key="FastRendering">Enable fast rendering (improves performance)</v:String>
 
     <v:String x:Key="Light">Light</v:String>
     <v:String x:Key="Dark">Dark</v:String>
@@ -150,9 +152,9 @@
     <v:String x:Key="YearOfService">Year of service</v:String>
     <v:String x:Key="SecurityCodeCard">Security code</v:String>
 
-    <v:String x:Key="Passport">Passport</v:String>
+    <v:String x:Key="Passport">Personal data</v:String>
     <v:String x:Key="FullName">Full name</v:String>
-    <v:String x:Key="PassportSeriesAndNumber">Passport Series and Number</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Series and Number</v:String>
     <v:String x:Key="PlaceOfIssue">Place of issue</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">To apply</v:String>

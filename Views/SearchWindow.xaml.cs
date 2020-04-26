@@ -6,6 +6,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace OlibKey.Views
 {
@@ -22,7 +23,6 @@ namespace OlibKey.Views
         public void SearchAccount()
         {
             SearchContext.ClearAccountsList();
-            int index = 0;
 
             foreach (var i in App.MainWindow.Model.AccountsList)
             {
@@ -30,114 +30,73 @@ namespace OlibKey.Views
                 if ((bool)rLogin.IsChecked && account.TypeAccount == 0)
                 {
                     if (SearchContext.SelectedFolderItem == null)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
-                        {
                             Add(account);
-                        }
-                    }
                     else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
-                        {
                             Add(account);
-                        }
-                    }
                 }
                 else if ((bool)rBankCard.IsChecked && account.TypeAccount == 1)
                 {
                     if (SearchContext.SelectedFolderItem == null)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
-                        {
                             Add(account);
-                        }
-                    }
                     else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
-                        {
                             Add(account);
-                        }
-                    }
                 }
                 else if ((bool)rPassport.IsChecked && account.TypeAccount == 2)
                 {
                     if (SearchContext.SelectedFolderItem == null)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
-                        {
                             Add(account);
-                        }
-                    }
                     else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
-                        {
                             Add(account);
-                        }
-                    }
                 }
                 else if ((bool)rReminder.IsChecked && account.TypeAccount == 3)
                 {
                     if (SearchContext.SelectedFolderItem == null)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
                         {
                             Add(account);
                         }
-                    }
                     else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
@@ -149,40 +108,28 @@ namespace OlibKey.Views
                         {
                             Add(account);
                         }
-                    }
                 }
                 else if ((bool)rAll.IsChecked)
                 {
                     if (SearchContext.SelectedFolderItem == null)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
-                        {
                             Add(account);
-                        }
-                    }
                     else if (account.IDFolder == ((CustomFolder)SearchContext.SelectedFolderItem.DataContext).ID)
-                    {
                         if (!string.IsNullOrEmpty(SearchContext.SearchText))
                         {
                             if (account.AccountName.ToLower().Contains(SearchContext.SearchText.ToLower()))
-                            {
                                 Add(account);
-                            }
                         }
                         else
                         {
                             Add(account);
                         }
-                    }
                 }
-                index++;
             }
         }
 
@@ -198,10 +145,7 @@ namespace OlibKey.Views
             AddAccount(ali);
         }
 
-        public void AddAccount(AccountListItem account)
-        {
-            SearchContext.AddAccount(account);
-        }
+        public void AddAccount(AccountListItem account) => SearchContext.AddAccount(account);
 
         private void Drag(object sender, MouseButtonEventArgs e)
         {
@@ -267,6 +211,11 @@ namespace OlibKey.Views
 
         private void mainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+            }
             lbFolders.SelectedIndex = -1;
             rAll.IsChecked = true;
         }

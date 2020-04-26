@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace OlibKey.Views
 {
@@ -67,5 +68,14 @@ namespace OlibKey.Views
             }
         }
         private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+            }
+        }
     }
 }

@@ -9,7 +9,10 @@
         Loaded="Window_Loaded"
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None"
-        Title="{DynamicResource AboutPrograms}" Height="300" Width="350">
+        TextOptions.TextFormattingMode="Display"
+        VirtualizingPanel.VirtualizationMode="Recycling"
+        RenderOptions.ClearTypeHint="Enabled"
+        Title="{StaticResource AboutPrograms}" Height="300" Width="350">
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>
@@ -28,7 +31,7 @@
                 <ScaleTransform x:Name="ScaleWindow" ScaleY="1" ScaleX="1" />
             </TransformGroup>
         </Grid.RenderTransform>
-        <Border Background="#FF5A0F26" CornerRadius="5" BorderBrush="{DynamicResource BorderColorWindow}"
+        <Border Background="#FF5A0F26" CornerRadius="5" BorderBrush="{StaticResource BorderColorWindow}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -36,8 +39,8 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Background="{DynamicResource BackgroundWindow}"
-                        BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0,0,0,1"
+                <Border Grid.Row="0" Background="{StaticResource BackgroundWindow}"
+                        BorderBrush="{StaticResource BorderColorWindow}" BorderThickness="0,0,0,1"
                         CornerRadius="4.5,4.5,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -47,15 +50,15 @@
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="{DynamicResource OlibKeyLogoHeightDrawingImage}" Height="16"
+                                <Image Source="{StaticResource OlibKeyLogoHeightDrawingImage}" Height="16"
                                        Margin="10,5,2,5" />
-                                <Image Margin="0,5,5,2" Width="50" Source="{DynamicResource OlibKeyTextImage}"/>
+                                <Image Margin="0,5,5,2" Width="50" Source="{StaticResource OlibKeyTextImage}"/>
                             </StackPanel>
                         </Grid>
-                        <TextBlock Grid.Column="1" Panel.ZIndex="-1" Text="{DynamicResource AboutPrograms}" Foreground="{DynamicResource ForegroundWindow}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Panel.ZIndex="-1" Text="{StaticResource AboutPrograms}" Foreground="{StaticResource ForegroundWindow}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <Border Grid.Column="1" MouseLeftButtonDown="Drag" Background="Transparent">
                             <Border.ContextMenu>
-                                <ContextMenu Foreground="{DynamicResource ForegroundWindow}">
+                                <ContextMenu Foreground="{StaticResource ForegroundWindow}">
                                     <MenuItem Header="Закрыть" InputGestureText="Alt+F4" Click="MenuItem_Click">
                                         <MenuItem.Icon>
                                             <Image Source="{StaticResource ImageClose}" Width="12"/>
@@ -65,7 +68,7 @@
                             </Border.ContextMenu>
                         </Border>
 
-                        <Button Grid.Column="4" Padding="8" Style="{DynamicResource ButtonHeight}">
+                        <Button Grid.Column="4" Padding="8" Style="{StaticResource ButtonHeight}">
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
                                     <BeginStoryboard>
@@ -77,7 +80,7 @@
                                     </BeginStoryboard>
                                 </EventTrigger>
                             </Button.Triggers>
-                            <Image Source="{DynamicResource ImageClose}"/>
+                            <Image Source="{StaticResource ImageClose}"/>
                         </Button>
                     </Grid>
                 </Border>
@@ -85,26 +88,22 @@
 
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
-                        <Image Source="{StaticResource OlibKeyLogoDrawingImage}" Height="100">
-                            <Image.Effect>
-                                <DropShadowEffect Color="White" BlurRadius="5" Direction="0" ShadowDepth="0"
-                                                  Opacity="0.5" />
-                            </Image.Effect>
-                        </Image>
+                        <Image Source="{StaticResource OlibKeyLogoDrawingImage}" Height="100"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="{DynamicResource Author}" FontSize="14" Padding="0" Foreground="White" />
-                        <Label FontSize="14" Padding="0" Foreground="White" />
+                        <Label Content="{StaticResource Author}" FontSize="14" Padding="0" Foreground="White"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Label Content="{DynamicResource Version}" FontSize="14" Padding="0" Foreground="White" />
-                        <Label x:Name="Version" FontSize="14" Padding="0" Foreground="White" />
+                        <Label Content="{StaticResource Version}" FontSize="14" Padding="0" Foreground="White" TextOptions.TextRenderingMode="ClearType"/>
+                        <Label x:Name="Version" FontSize="14" Padding="0" Foreground="White"/>
                     </StackPanel>
-                    <AccessText Text="{DynamicResource AccessText1}" TextWrapping="Wrap" TextAlignment="Center"
+                    <AccessText Text="{StaticResource AccessText1}" TextWrapping="Wrap" TextAlignment="Center"
+                                Foreground="White" />
+                    <AccessText Text="{StaticResource AccessText2}" TextWrapping="Wrap" TextAlignment="Center"
                                 Foreground="White" />
                 </StackPanel>
-                <Border Grid.Row="2" Background="{DynamicResource GlobalBorderColor}" CornerRadius="0,0,4.5,4.5"
-                        BorderBrush="{DynamicResource PageBordersColor}" BorderThickness="0,1,0,0">
+                <Border Grid.Row="2" Background="{StaticResource GlobalBorderColor}" CornerRadius="0,0,4.5,4.5"
+                        BorderBrush="{StaticResource PageBordersColor}" BorderThickness="0,1,0,0">
                     <Grid>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                             <Button Margin="5,10" Padding="5" Click="Button_Click_1">
@@ -123,7 +122,7 @@
                                 </Button.Content>
                             </Button>
                         </StackPanel>
-                        <Button Content="{DynamicResource Close}" HorizontalAlignment="Right"
+                        <Button Content="{StaticResource Close}" HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Padding="10,5" Margin="10">
                             <Button.Triggers>

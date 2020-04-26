@@ -10,7 +10,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
-using Newtonsoft.Json;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace OlibKey.ModelViews
 {
@@ -188,6 +189,7 @@ namespace OlibKey.ModelViews
             DatabaseApplication = new Database();
             NameStorage = Path.GetFileNameWithoutExtension(CreatePasswordStorageWindow.TxtPathSelection.Text);
             IsUnlockStorage = true;
+            IsLockStorage = false;
             ClearAccountsList();
             App.MainWindow.Notification((string)Application.Current.FindResource("Not3"));
         }
@@ -308,7 +310,7 @@ namespace OlibKey.ModelViews
             if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey"))
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey");
 
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey\\settings.json", JsonConvert.SerializeObject(App.Setting));
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey\\settings.json", JsonSerializer.Serialize(App.Setting));
 
             App.MainWindow.IconSave();
         }

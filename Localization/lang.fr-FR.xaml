@@ -101,7 +101,8 @@
     <v:String x:Key="Version">Version:</v:String>
     <v:String x:Key="Author">©2020 Dmitry Zhutkov</v:String>
     <v:String x:Key="Close">Fermer</v:String>
-    <v:String x:Key="AccessText1">Vous permet de stocker des mots de passe, des notes, des passeports et d'autres données personnelles sous forme cryptée.</v:String>
+    <v:String x:Key="AccessText1">Vous permet de stocker des mots de passe, des notes, des données personnelles et d'autres données personnelles sous forme cryptée.</v:String>
+    <v:String x:Key="AccessText2">Le programme est publié sous la licence GPLv3.</v:String>
     <!--#endregion-->
 
     <!--#region Settings-->
@@ -109,6 +110,7 @@
     <v:String x:Key="Theme">Thème:</v:String>
     <v:String x:Key="CBHideProgram">Masquer le programme à la fermeture</v:String>
     <v:String x:Key="CBAutorunApplication">Exécuter avec Windows</v:String>
+    <v:String x:Key="FastRendering">Activer le rendu rapide (améliore les performances)</v:String>
 
     <v:String x:Key="Light">Lumineux</v:String>
     <v:String x:Key="Dark">Sombre</v:String>
@@ -149,9 +151,9 @@
     <v:String x:Key="YearOfService">Année de service</v:String>
     <v:String x:Key="SecurityCodeCard">Code de sécurité</v:String>
 
-    <v:String x:Key="Passport">Passeport</v:String>
+    <v:String x:Key="Passport">Données personnelles</v:String>
     <v:String x:Key="FullName">Nom complet</v:String>
-    <v:String x:Key="PassportSeriesAndNumber">Série et numéro de passeport</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Série et numéro</v:String>
     <v:String x:Key="PlaceOfIssue">Lieu d'émission</v:String>
     <!--#region ChangePassword-->
     <v:String x:Key="ToApply">Pour postuler</v:String>

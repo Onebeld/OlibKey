@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using OlibKey.Core;
 
 namespace OlibKey.Views
@@ -73,6 +74,11 @@ namespace OlibKey.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+            }
             ChkAllowLowercase.IsChecked = App.Setting.GeneratorAllowLowercase;
             ChkAllowNumber.IsChecked = App.Setting.GeneratorAllowNumber;
             ChkAllowOther.IsChecked = App.Setting.GeneratorAllowOther;

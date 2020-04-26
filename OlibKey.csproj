@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>OlibKey.App</StartupObject>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
@@ -12,6 +12,7 @@
     <FileVersion>2.1.0.0</FileVersion>
     <PublishReadyToRun>true</PublishReadyToRun>
     <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,7 +22,6 @@
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore" Version="1.0.10" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>

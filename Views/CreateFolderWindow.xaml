@@ -4,12 +4,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:OlibKey.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
         WindowStyle="None"
-        Title="{DynamicResource CreateFolder}" Height="100" Width="300">
+        Loaded="mainWindow_Loaded"
+        Title="{StaticResource CreateFolder}" Height="100" Width="300">
     <Window.Resources>
         <DrawingImage x:Key="ImageClose">
             <DrawingImage.Drawing>
@@ -18,7 +18,7 @@
                         <DrawingGroup Opacity="1">
                             <GeometryDrawing>
                                 <GeometryDrawing.Pen>
-                                    <Pen Brush="{DynamicResource ForegroundWindow}"
+                                    <Pen Brush="{StaticResource ForegroundWindow}"
                                                                          Thickness="15" StartLineCap="Flat"
                                                                          EndLineCap="Flat" LineJoin="Miter" />
                                 </GeometryDrawing.Pen>
@@ -29,7 +29,7 @@
                             </GeometryDrawing>
                             <GeometryDrawing>
                                 <GeometryDrawing.Pen>
-                                    <Pen Brush="{DynamicResource ForegroundWindow}"
+                                    <Pen Brush="{StaticResource ForegroundWindow}"
                                                                          Thickness="15" StartLineCap="Flat"
                                                                          EndLineCap="Flat" LineJoin="Miter" />
                                 </GeometryDrawing.Pen>
@@ -62,15 +62,15 @@
                 <ScaleTransform x:Name="ScaleWindow" ScaleY="1" ScaleX="1" />
             </TransformGroup>
         </Grid.RenderTransform>
-        <Border Background="{DynamicResource BackgroundWindow}" CornerRadius="5" BorderBrush="{DynamicResource BorderColorWindow}"
+        <Border Background="{StaticResource BackgroundWindow}" CornerRadius="5" BorderBrush="{StaticResource BorderColorWindow}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" Background="{DynamicResource BackgroundWindow}"
-                        BorderBrush="{DynamicResource BorderColorWindow}" BorderThickness="0,0,0,1"
+                <Border Grid.Row="0" Background="{StaticResource BackgroundWindow}"
+                        BorderBrush="{StaticResource BorderColorWindow}" BorderThickness="0,0,0,1"
                         CornerRadius="4.5,4.5,0,0">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -80,7 +80,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Image Source="{DynamicResource OlibKeyLogoHeightDrawingImage}" Height="16"
+                                <Image Source="{StaticResource OlibKeyLogoHeightDrawingImage}" Height="16"
                                        Margin="10,5,2,5" />
                                 <Image Margin="0,5,5,2" Width="50">
                                     <Image.Source>
@@ -88,31 +88,31 @@
                                             <DrawingImage.Drawing>
                                                 <DrawingGroup ClipGeometry="M0,0 V67.32 H309.45 V0 H0 Z">
                                                     <DrawingGroup Transform="1,0,0,1,-140.72,-351.54">
-                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}"
+                                                        <GeometryDrawing Brush="{StaticResource ForegroundWindow}"
                                                                          Geometry="F1 M309.45,67.32z M0,0z M201.68,369.61Q201.68,382.61 191.45,392.25 181.54,401.56 169.16,401.56 160.06,401.56 154.78,396.64 149.5,391.72 149.51,383.14A25.15,25.15,0,0,1,151.58,373.65A33.18,33.18,0,0,1,156.79,364.93L172.25,364.93A27.46,27.46,0,0,0,165.68,373.93A25.39,25.39,0,0,0,163,384.72A13.88,13.88,0,0,0,164.76,391.93A6.71,6.71,0,0,0,170.84,395.45Q177.46,395.45 182.84,386.9 187.58,379.24 187.58,372.21 187.58,366.62 184.35,363.51 181.12,360.4 175.42,360.39L140.72,360.39 146.1,351.54 178.44,351.54Q188.28,351.54 194.44,355.54 201.69,360.29 201.68,369.61z" />
                                                     </DrawingGroup>
                                                     <DrawingGroup Transform="1,0,0,1,-140.72,-351.54">
-                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}"
+                                                        <GeometryDrawing Brush="{StaticResource ForegroundWindow}"
                                                                          Geometry="F1 M309.45,67.32z M0,0z M232,395.38A7.06,7.06,0,0,1,228,399.95A11,11,0,0,1,223.25,401L209.7,401Q204.5,401,204.49,397.45A6.56,6.56,0,0,1,204.88,395.38L217.88,358.6 230.33,358.6 217.21,395.38z" />
                                                     </DrawingGroup>
                                                     <DrawingGroup Transform="1,0,0,1,-140.72,-351.54">
-                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}"
+                                                        <GeometryDrawing Brush="{StaticResource ForegroundWindow}"
                                                                          Geometry="F1 M309.45,67.32z M0,0z M258.53,395.38A7.28,7.28,0,0,1,254.73,399.95A9.8,9.8,0,0,1,250.23,401L236.34,401Q231.34,401,231.34,396.78A7.6,7.6,0,0,1,231.83,394.21L237.95,377.09 250.71,377.09 244.2,395.38z M256,362.68A7.76,7.76,0,0,1,253.27,368.68A10.06,10.06,0,0,1,240.09,368.68A7.87,7.87,0,0,1,240.09,356.76A10.06,10.06,0,0,1,253.27,356.76A7.71,7.71,0,0,1,256,362.68z" />
                                                     </DrawingGroup>
                                                     <DrawingGroup Transform="1,0,0,1,-140.72,-351.54">
-                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}"
+                                                        <GeometryDrawing Brush="{StaticResource ForegroundWindow}"
                                                                          Geometry="F1 M309.45,67.32z M0,0z M322.16,377.09Q319.84,382.72,314.39,382.72L295.39,382.72A18.76,18.76,0,0,1,285,397.52A32.71,32.71,0,0,1,269.6,401L263.2,401A5.44,5.44,0,0,1,260.2,400.16A3.79,3.79,0,0,1,258.48,396.75A9.21,9.21,0,0,1,259.04,393.75L271.59,358.56 284.25,358.56 271.13,395.26Q278.69,395.44,281.89,389.26A6.27,6.27,0,0,1,278.62,383.7A6.09,6.09,0,0,1,280.75,379.03A7.3,7.3,0,0,1,285.83,377.09z" />
                                                     </DrawingGroup>
                                                     <DrawingGroup Transform="1,0,0,1,-140.72,-351.54">
-                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}"
+                                                        <GeometryDrawing Brush="{StaticResource ForegroundWindow}"
                                                                          Geometry="F1 M309.45,67.32z M0,0z M370.5,351.54L341.74,377.09 344.41,377.09C347.7,377.09,349.34,378.54,349.34,381.42A10.07,10.07,0,0,1,348.67,384.72L344.94,395.38 359.53,395.38Q357.91,401,349.3,401L337,401Q331.93,401,331.93,397.24A6.06,6.06,0,0,1,332.25,395.38L336.93,381.38 318.57,397.7A12.54,12.54,0,0,1,310,401L304.09,401 318.43,360.39 298.78,360.39 304.16,351.54 326.06,351.54Q332.06,351.54,332.06,356.07A11.2,11.2,0,0,1,331.36,359.66L322.83,385 359.53,351.54z" />
                                                     </DrawingGroup>
                                                     <DrawingGroup Transform="1,0,0,1,-140.72,-351.54">
-                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}"
+                                                        <GeometryDrawing Brush="{StaticResource ForegroundWindow}"
                                                                          Geometry="F1 M309.45,67.32z M0,0z M403.58,395.38A7,7,0,0,1,400.21,399.63A10.55,10.55,0,0,1,394.83,401L375.25,401Q358.17,401,358.16,390.7A11.73,11.73,0,0,1,364,380.33A21.56,21.56,0,0,1,376,377.09L381.1,377.09A20.83,20.83,0,0,1,388.94,378.46C391.94,379.68 393.51,381.54 393.65,384.02 393.79,386.5 392.56,388.61 390.03,390.28L378.34,390.28 382.14,382.72 374.72,382.72 371.84,391.19A4.12,4.12,0,0,0,371.59,392.53Q371.59,395.38,376.16,395.38z" />
                                                     </DrawingGroup>
                                                     <DrawingGroup Transform="1,0,0,1,-140.72,-351.54">
-                                                        <GeometryDrawing Brush="{DynamicResource ForegroundWindow}"
+                                                        <GeometryDrawing Brush="{StaticResource ForegroundWindow}"
                                                                          Geometry="F1 M309.45,67.32z M0,0z M450.16,395.38Q448.09,401.01,442.39,401L433.82,401Q430.76,409.29,427.38,413.3A14.72,14.72,0,0,1,415.68,418.86A8.83,8.83,0,0,1,408.89,416.29A8.22,8.22,0,0,1,406.82,410.49A12.91,12.91,0,0,1,408,405A10,10,0,0,1,411.18,401L408.51,401A5.42,5.42,0,0,1,404.66,399.58A4.67,4.67,0,0,1,403.13,396.01A6.26,6.26,0,0,1,403.48,394.01L409.6,377.1 422.36,377.1 415.79,395.39 423,395.39 429.47,377.1 442.16,377.1 435.69,395.39z M420.74,402C419.19,402,417.74,402.87,416.43,404.62A8.62,8.62,0,0,0,414.43,409.84A4.34,4.34,0,0,0,416.43,413.57z" />
                                                     </DrawingGroup>
                                                 </DrawingGroup>
@@ -122,10 +122,11 @@
                                 </Image>
                             </StackPanel>
                         </Grid>
-                        <TextBlock Grid.Column="1" Panel.ZIndex="-1" Text="{DynamicResource CreateFolder}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Panel.ZIndex="-1" Text="{StaticResource CreateFolder}" TextOptions.TextFormattingMode="Display"
+                                RenderOptions.ClearTypeHint="Enabled" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         <Border Grid.Column="1" MouseLeftButtonDown="Drag" Background="Transparent">
                             <Border.ContextMenu>
-                                <ContextMenu Foreground="{DynamicResource ForegroundWindow}">
+                                <ContextMenu Foreground="{StaticResource ForegroundWindow}">
                                     <MenuItem Header="Закрыть" InputGestureText="Alt+F4" Click="Button_Click">
                                         <MenuItem.Icon>
                                             <Image Source="{StaticResource ImageClose}" Width="12"/>
@@ -135,7 +136,7 @@
                             </Border.ContextMenu>
                         </Border>
 
-                        <Button Grid.Column="4" Padding="8" Style="{DynamicResource ButtonHeight}">
+                        <Button Grid.Column="4" Padding="8" Style="{StaticResource ButtonHeight}">
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
                                     <BeginStoryboard>
@@ -147,12 +148,12 @@
                                     </BeginStoryboard>
                                 </EventTrigger>
                             </Button.Triggers>
-                            <Image Source="{DynamicResource ImageClose}"/>
+                            <Image Source="{StaticResource ImageClose}"/>
                         </Button>
                     </Grid>
                 </Border>
                 <DockPanel Margin="25" Grid.Row="1">
-                    <Button Content="{DynamicResource PasswordSave}" Margin="0 0 5 0" Click="Button_Click"/>
+                    <Button Content="{StaticResource PasswordSave}" Margin="0 0 5 0" Click="Button_Click"/>
                     <TextBox x:Name="tbNameFolder" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" KeyDown="TbMasterPassword_OnKeyDown"/>
                 </DockPanel>
             </Grid>

@@ -3,6 +3,7 @@ using OlibKey.Core;
 using System;
 using System.Media;
 using System.Windows;
+using System.Windows.Media;
 
 namespace OlibKey.Views
 {
@@ -40,6 +41,15 @@ namespace OlibKey.Views
             soundPlayer.Stop();
             await Animations.ClosingWindowAnimation(this, ScaleWindow);
             Close();
+        }
+
+        private void mainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (App.Setting.EnableFastRendering)
+            {
+                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
+            }
         }
     }
 }

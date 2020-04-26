@@ -9,6 +9,7 @@
         public bool CollapseOnClose { get; set; }
         public bool AutorunApplication { get; set; }
         public bool CollapseWhenClosing { get; set; }
+        public bool EnableFastRendering { get; set; }
 
         public bool GeneratorAllowLowercase { get; set; }
         public bool GeneratorAllowNumber { get; set; }

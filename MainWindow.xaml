@@ -70,25 +70,45 @@
                         </Grid>
                         <Menu Grid.Column="1" VerticalAlignment="Center" Background="Transparent" HorizontalAlignment="Left">
                             <MenuItem Header="{DynamicResource File}">
-                                <MenuItem Header="{DynamicResource CreateBase}" Command="{Binding NewPasswordStorage}" />
+                                <MenuItem Header="{DynamicResource CreateBase}" Command="{Binding NewPasswordStorage}"/>
                                 <MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenStorage}"
                                           InputGestureText="Ctrl + O" />
                                 <MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveStorage}"
                                           InputGestureText="Ctrl + S"
                                           IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
                                 <MenuItem Header="{DynamicResource LockStorage}" Command="{Binding BlockingStorage}"
-                                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}">
+                                    <MenuItem.Icon>
+                                        <Image Width="16" Source="{DynamicResource lockDrawingImage}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="{DynamicResource UnlockStorage}"
                                           Command="{Binding UnblockingStorage}"
-                                          IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                                          IsEnabled="{Binding IsLockStorage, UpdateSourceTrigger=PropertyChanged}" >
+                                    <MenuItem.Icon>
+                                        <Image Width="16" Source="{DynamicResource lock_openDrawingImage}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <Separator />
                                 <MenuItem Header="{DynamicResource AddLogin}" InputGestureText="Ctrl + N"
                                           Command="{Binding NewCreatePassword}"
-                                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
+                                          IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}">
+                                    <MenuItem.Icon>
+                                        <Image Width="20" Source="{DynamicResource plusDrawingImage}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <Separator />
-                                <MenuItem Header="{DynamicResource Settings}" Command="{Binding SettingsWindowCommand}" />
+                                <MenuItem Header="{DynamicResource Settings}" Command="{Binding SettingsWindowCommand}">
+                                    <MenuItem.Icon>
+                                        <Image Width="16" Source="{DynamicResource gearDrawingImage}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgram}"
-                                          InputGestureText="Alt + F4" />
+                                          InputGestureText="Alt + F4" >
+                                    <MenuItem.Icon>
+                                        <Image Width="16" Source="{DynamicResource exitDrawingImage}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </MenuItem>
                             <MenuItem Header="{DynamicResource Tools}">
                                 <MenuItem Header="{DynamicResource PasswordGenerator}" InputGestureText="Ctrl + G"
@@ -98,9 +118,17 @@
                                           IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}" />
                             </MenuItem>
                             <MenuItem Header="{DynamicResource Reference}">
-                                <MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdate}" />
+                                <MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdate}">
+                                    <MenuItem.Icon>
+                                        <Image Width="16" Source="{DynamicResource downloadDrawingImage}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                                 <MenuItem Header="{DynamicResource AboutPrograms}"
-                                          Command="{Binding AboutWindowCommand}" />
+                                          Command="{Binding AboutWindowCommand}" >
+                                    <MenuItem.Icon>
+                                        <Image Width="16" Source="{DynamicResource informationDrawingImage}"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
                             </MenuItem>
                         </Menu>
 
@@ -127,7 +155,7 @@
                                 </ContextMenu>
                             </Border.ContextMenu>
                         </Border>
-                        <Button Grid.Column="2" Padding="7" Command="{Binding ShowSearchWindow}" Style="{DynamicResource ButtonHeight}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}">
+                        <Button Grid.Column="2" Padding="6" Command="{Binding ShowSearchWindow}" Style="{DynamicResource ButtonHeight}" IsEnabled="{Binding IsUnlockStorage, UpdateSourceTrigger=PropertyChanged}">
                             <Image Source="{DynamicResource SearchImage}"/>
                         </Button>
                         <Button Grid.Column="3" Padding="13" Style="{DynamicResource ButtonHeight}" Click="Collapse">
@@ -189,7 +217,7 @@
                                 Panel.ZIndex="10" Margin="5" Width="Auto" CornerRadius="5" Background="Green"
                                 HorizontalAlignment="Right">
                             <DockPanel Margin="5">
-                                <Image Source="{StaticResource TickMarkDrawingImage}" Margin="0,0,15,0" />
+                                <Image Source="{StaticResource checkmarkDrawingImage}" Margin="0,0,15,0" />
                                 <AccessText x:Name="NotText" VerticalAlignment="Center" TextWrapping="Wrap"
                                             Foreground="White" />
                             </DockPanel>
@@ -207,11 +235,21 @@
                                  Background="{DynamicResource BackgroundWindow}"
                                  SelectedIndex="{Binding SelectedIndex, UpdateSourceTrigger=PropertyChanged}"
                                  BorderBrush="{DynamicResource BorderColorWindow}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" />
-                        <Button Grid.Row="1" Click="MoveUpButton" Grid.Column="1" Content="↑" Margin="5"
+                        <Button Grid.Row="1" Click="MoveUpButton" Grid.Column="1" Margin="5"
+                                Padding="5"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom" />
-                        <Button Grid.Row="1" Click="MoveDownButton" Grid.Column="1" Content="↓" Margin="5"
-                                HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+                                VerticalAlignment="Bottom">
+                            <Button.Content>
+                                <Image Height="12" Source="{DynamicResource arrow_thin_upDrawingImage}"/>
+                            </Button.Content>
+                        </Button>
+                        <Button Grid.Row="1" Click="MoveDownButton" Grid.Column="1" Margin="5"
+                                Padding="5"
+                                HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                            <Button.Content>
+                                <Image Height="12" Source="{DynamicResource arrow_thin_downDrawingImage}"/>
+                            </Button.Content>
+                        </Button>
                         <Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0" CornerRadius="0,0,0,4.5"
                                 BorderBrush="{DynamicResource BorderColorWindow}"
                                 Background="{DynamicResource GlobalBorderColor}">

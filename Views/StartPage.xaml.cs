@@ -1,6 +1,4 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 namespace OlibKey.Views
 {
@@ -9,9 +7,6 @@ namespace OlibKey.Views
     /// </summary>
     public partial class StartPage : Page
     {
-        public StartPage()
-        {
-            InitializeComponent();
-        }
+        public StartPage() => InitializeComponent();
     }
 }

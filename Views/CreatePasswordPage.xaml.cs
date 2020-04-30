@@ -19,7 +19,6 @@ namespace OlibKey.Views
         {
             InitializeComponent();
             DataContext = AccountModel;
-            
         }
 
         private void AddAccountClick(object sender, RoutedEventArgs e)
@@ -35,7 +34,7 @@ namespace OlibKey.Views
 
         private void ExitAddPassword(object sender, RoutedEventArgs e)
         {
-            StartPage startPage = new StartPage();
+            var startPage = new StartPage();
             NavigationService?.Navigate(startPage);
         }
 
@@ -84,13 +83,13 @@ namespace OlibKey.Views
             if (txtPassword.IsSelectionActive)
                 txtPasswordCollapsed.Text = txtPassword.Password;
         }
-        private void txtSecutityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtSecurityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtSecutityCodeCollapsed.IsSelectionActive)
                 txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
         }
 
-        private void txtSecutityCode_PasswordChanged(object sender, RoutedEventArgs e)
+        private void txtSecurityCode_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (txtSecutityCode.IsSelectionActive)
                 txtSecutityCodeCollapsed.Text = txtSecutityCode.Password;
@@ -126,7 +125,7 @@ namespace OlibKey.Views
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow
+            var generatorWindow = new PasswordGeneratorWindow
             {
                 SaveButton = {Visibility = Visibility.Visible}
             };
@@ -143,9 +142,10 @@ namespace OlibKey.Views
         {
             cbCustomFolder.SelectedValuePath = "Value";
             cbCustomFolder.DisplayMemberPath = "Key";
-            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            var pairs = new Dictionary<string, string>();
             if (App.MainWindow.Model.DatabaseApplication.CustomFolders != null)
                 foreach (var i in App.MainWindow.Model.DatabaseApplication.CustomFolders) pairs.Add(i.Name, i.ID);
+
             cbCustomFolder.Items.Add(new KeyValuePair<string,string>((string)FindResource("NotChosen"), null));
             foreach (KeyValuePair<string, string> i in pairs) cbCustomFolder.Items.Add(i);
             cbCustomFolder.SelectedIndex = 0;

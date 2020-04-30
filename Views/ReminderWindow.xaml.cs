@@ -12,8 +12,8 @@ namespace OlibKey.Views
     /// </summary>
     public partial class ReminderWindow : Window
     {
-        public AccountListItem accountListItem;
-        public SoundPlayer soundPlayer;
+        public AccountListItem AccountListItem;
+        public SoundPlayer SoundPlayer;
 
         public ReminderWindow()
         {
@@ -22,23 +22,23 @@ namespace OlibKey.Views
             Left = desktopWorkingArea.Right - Width - 10;
             Top = desktopWorkingArea.Bottom - Height - 10;
 
-            soundPlayer = new SoundPlayer(Resource.notification);
-            soundPlayer.PlayLooping();
+            SoundPlayer = new SoundPlayer(Resource.notification);
+            SoundPlayer.PlayLooping();
         }
 
         private async void ButtonPause(object sender, RoutedEventArgs e)
         {
-            accountListItem.timer.Interval = new TimeSpan(0, 5, 0);
-            accountListItem.timer.Start();
-            soundPlayer.Stop();
+            AccountListItem.timer.Interval = new TimeSpan(0, 5, 0);
+            AccountListItem.timer.Start();
+            SoundPlayer.Stop();
             await Animations.ClosingWindowAnimation(this, ScaleWindow);
             Close();
         }
 
         private async void ButtonShutdown(object sender, RoutedEventArgs e)
         {
-            accountListItem.AccountContext.IsReminderActive = false;
-            soundPlayer.Stop();
+            AccountListItem.AccountContext.IsReminderActive = false;
+            SoundPlayer.Stop();
             await Animations.ClosingWindowAnimation(this, ScaleWindow);
             Close();
         }

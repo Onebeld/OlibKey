@@ -96,3 +96,9 @@ F:\OlibKey\obj\Debug\netcoreapp3.1\Views\CreateFolderWindow.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\Views\SearchWindow.baml
 F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.Resource.resources
 F:\OlibKey\obj\Debug\netcoreapp3.1\OlibKey.csproj.GenerateResource.cache
+C:\OlibKey\netcoreapp3.1\OlibKey.exe
+C:\OlibKey\netcoreapp3.1\OlibKey.deps.json
+C:\OlibKey\netcoreapp3.1\OlibKey.runtimeconfig.json
+C:\OlibKey\netcoreapp3.1\OlibKey.runtimeconfig.dev.json
+C:\OlibKey\netcoreapp3.1\OlibKey.dll
+C:\OlibKey\netcoreapp3.1\OlibKey.pdb

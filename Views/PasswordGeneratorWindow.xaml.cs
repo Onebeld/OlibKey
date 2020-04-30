@@ -21,10 +21,10 @@ namespace OlibKey.Views
                 const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const string number = "0123456789";
                 const string special = @"~!@#$%^&*():;[]{}<>,.?/\|";
-                string other = TxtOther.Text;
+                var other = TxtOther.Text;
 
-                string allowed = "";
-                string password = "";
+                var allowed = "";
+                var password = "";
                 if (ChkAllowLowercase.IsChecked != null && (bool)ChkAllowLowercase.IsChecked) allowed += lower;
                 if (ChkAllowUppercase.IsChecked != null && (bool)ChkAllowUppercase.IsChecked) allowed += upper;
                 if (ChkAllowNumber.IsChecked != null && (bool)ChkAllowNumber.IsChecked) allowed += number;
@@ -35,9 +35,9 @@ namespace OlibKey.Views
                     password += "_";
                 }
                 if (ChkAllowOther.IsChecked != null && (bool)ChkAllowOther.IsChecked) allowed += other;
-                int min_chars = int.Parse(TxtMinLenght.Text);
-                int num_chars = Crypto.RandomInteger(min_chars, min_chars);
-                while (password.Length < num_chars)
+                var minChars = int.Parse(TxtMinLenght.Text);
+                var numChars = Crypto.RandomInteger(minChars, minChars);
+                while (password.Length < numChars)
                     password += allowed.Substring(Crypto.RandomInteger(0, allowed.Length - 1), 1);
                 password = RandomizeString(password);
                 return password;
@@ -49,9 +49,9 @@ namespace OlibKey.Views
                 return TxtPassword.Text;
             }
         }
-        private string RandomizeString(string str)
+        private static string RandomizeString(string str)
         {
-            string result = "";
+            var result = "";
             while (str.Length > 0)
             {
                 int i = Crypto.RandomInteger(0, str.Length - 1);
@@ -79,27 +79,9 @@ namespace OlibKey.Views
                 RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
                 RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.LowQuality);
             }
-            ChkAllowLowercase.IsChecked = App.Setting.GeneratorAllowLowercase;
-            ChkAllowNumber.IsChecked = App.Setting.GeneratorAllowNumber;
-            ChkAllowOther.IsChecked = App.Setting.GeneratorAllowOther;
-            ChkAllowSpecial.IsChecked = App.Setting.GeneratorAllowSpecial;
-            ChkAllowUnderscore.IsChecked = App.Setting.GeneratorAllowUnderscore;
-            ChkAllowUppercase.IsChecked = App.Setting.GeneratorAllowUppercase;
-            TxtOther.Text = App.Setting.GeneratorTextOther;
-            TxtMinLenght.Text = App.Setting.GenerationCount;
+
+            DataContext = App.Setting;
         }
-        private void ClosingWindow()
-        {
-            App.Setting.GenerationCount = TxtMinLenght.Text;
-            App.Setting.GeneratorAllowLowercase = (bool)ChkAllowLowercase.IsChecked;
-            App.Setting.GeneratorAllowNumber = (bool)ChkAllowNumber.IsChecked;
-            App.Setting.GeneratorAllowOther = (bool)ChkAllowOther.IsChecked;
-            App.Setting.GeneratorAllowSpecial = (bool)ChkAllowSpecial.IsChecked;
-            App.Setting.GeneratorAllowUnderscore = (bool)ChkAllowUnderscore.IsChecked;
-            App.Setting.GeneratorAllowUppercase = (bool)ChkAllowUppercase.IsChecked;
-            App.Setting.GeneratorTextOther = TxtOther.Text;
-        }
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) => ClosingWindow();
 
         private void Timeline_OnCompleted(object sender, EventArgs e) => Close();
 
@@ -110,7 +92,10 @@ namespace OlibKey.Views
                 Clipboard.Clear();
                 Clipboard.SetText(TxtPassword.Text);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
 
         private async void MenuItem_Click(object sender, RoutedEventArgs e)

@@ -42,8 +42,6 @@ namespace OlibKey.ModelViews
 
         public void AddAccount(AccountListItem account) => AccountsList.Add(account);
 
-        public void RemoveSelectedAccount() => AccountsList.RemoveAt(SelectedIndex);
-
         public void ClearAccountsList() => AccountsList.Clear();
         public FolderListItem SelectedFolderItem { get { try { return FolderList[SelectedIndex]; } catch { return null; } } }
 
@@ -53,14 +51,14 @@ namespace OlibKey.ModelViews
 
         private void SetupCommandBindings()
         {
-            CreateFolderCommand = new Command(CreateFolder);
-            DeleteFolderCommand = new Command(DeleteFolder);
-            EditFolderCommand = new Command(EditFolder);
+            CreateFolderCommand = new RelayCommand(CreateFolder);
+            DeleteFolderCommand = new RelayCommand(DeleteFolder);
+            EditFolderCommand = new RelayCommand(EditFolder);
         }
 
         private void CreateFolder()
         {
-            CreateFolderWindow window = new CreateFolderWindow();
+            var window = new CreateFolderWindow();
             if ((bool)window.ShowDialog())
             {
                 CustomFolder folder = new CustomFolder
@@ -79,7 +77,7 @@ namespace OlibKey.ModelViews
 
         public void AddFolder(CustomFolder accountContent)
         {
-            FolderListItem ali = new FolderListItem
+            var ali = new FolderListItem
             {
                 DataContext = accountContent
             };
@@ -93,8 +91,10 @@ namespace OlibKey.ModelViews
         {
             if (SelectedFolderItem != null)
             {
-                CreateFolderWindow window = new CreateFolderWindow((CustomFolder)SelectedFolderItem.DataContext);
-                window.tbNameFolder.Text = SelectedFolderItem.FolderContext.Name;
+                CreateFolderWindow window = new CreateFolderWindow((CustomFolder) SelectedFolderItem.DataContext)
+                {
+                    tbNameFolder = {Text = SelectedFolderItem.FolderContext.Name}
+                };
                 window.ShowDialog();
             }
         }

@@ -18,7 +18,11 @@
 
             <ContextMenu x:Key="TextBoxContextMenu">
                 <MenuItem Command="ApplicationCommands.Cut" />
-                <MenuItem Command="ApplicationCommands.Copy" />
+                <MenuItem Command="ApplicationCommands.Copy">
+                    <MenuItem.Icon>
+                        <Image Width="16" Source="{DynamicResource copyDrawingImage}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Command="ApplicationCommands.Paste" />
             </ContextMenu>
 

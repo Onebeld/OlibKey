@@ -33,7 +33,7 @@ namespace OlibKey.Views
 
         private void SelectDirectory(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog
+            var saveFileDialog = new SaveFileDialog
             {
                 Filter = "Olib-files (*.olib)|*.olib"
             };

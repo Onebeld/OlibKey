@@ -6,7 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.0.0.0] - 2020-03-04
+## [2.1.0] - 2020-04-30
+### Added
+- New item Reminder added.
+- New option for quick rendering in the settings.
+- Added ability to create custom folders.
+- Search added.
+- New icons added.
+
+### Changed
+- Updated user interface.
+- Base storage method changed.
+- Animations on the start page are simplified.
+- Now, when changing the theme, the resource with icons is reloaded.
+- The name of the database now does not contain an extension.
+- Minor changes in the logical component.
+
+### Fixed
+- Partially fixed display of text (blur).
+- If you lock the store, and then create a new one, the unlock button will become active.
+
+## [2.0.0] - 2020-03-04
 ### Added
 - Added buttons for moving items.
 - Added icons for items in the list.

@@ -45,7 +45,7 @@ namespace OlibKey
             if (!_mRestoreForDragMove) return;
             _mRestoreForDragMove = false;
 
-            Point point = PointToScreen(e.MouseDevice.GetPosition(this));
+            var point = PointToScreen(e.MouseDevice.GetPosition(this));
 
             Left = point.X * 0.5;
             Top = point.Y - 15;
@@ -67,11 +67,10 @@ namespace OlibKey
             e.Cancel = true;
         }
 
-        public async void Notification(string s)
+        public async void AppearanceAnimation(FrameworkElement element)
         {
-            bNotification.Visibility = Visibility.Visible;
-            NotText.Text = s;
-            DoubleAnimation anim = new DoubleAnimation
+            element.Visibility = Visibility.Visible;
+            var anim = new DoubleAnimation
             {
                 Duration = TimeSpan.FromSeconds(0.5),
                 DecelerationRatio = 0.5,
@@ -80,47 +79,28 @@ namespace OlibKey
                 To = 1,
             };
             Timeline.SetDesiredFrameRate(anim, 60);
-            bNotification.BeginAnimation(OpacityProperty, anim);
-            await Task.Delay(3000);
-            DoubleAnimation anim1 = new DoubleAnimation
+            element.BeginAnimation(OpacityProperty, anim);
+            await Task.Delay(2000);
+            var anim1 = new DoubleAnimation
             {
                 Duration = TimeSpan.FromSeconds(0.5),
                 DecelerationRatio = 0.5,
                 AccelerationRatio = 0.5,
-                From = bNotification.Opacity,
+                From = element.Opacity,
                 To = 0
             };
-            anim1.Completed += (s, r) => bNotification.Visibility = Visibility.Collapsed;
+            anim1.Completed += (s, r) => element.Visibility = Visibility.Collapsed;
             Timeline.SetDesiredFrameRate(anim1, 60);
-            bNotification.BeginAnimation(OpacityProperty, anim1);
+            element.BeginAnimation(OpacityProperty, anim1);
         }
 
-        public async void IconSave()
+        public void Notification(string s)
         {
-            saveIcon.Visibility = Visibility.Visible;
-            DoubleAnimation anim = new DoubleAnimation
-            {
-                Duration = TimeSpan.FromSeconds(0.5),
-                DecelerationRatio = 0.5,
-                AccelerationRatio = 0.5,
-                From = 0,
-                To = 1,
-            };
-            Timeline.SetDesiredFrameRate(anim, 60);
-            saveIcon.BeginAnimation(OpacityProperty, anim);
-            await Task.Delay(2000);
-            DoubleAnimation anim1 = new DoubleAnimation
-            {
-                Duration = TimeSpan.FromSeconds(0.5),
-                DecelerationRatio = 0.5,
-                AccelerationRatio = 0.5,
-                From = saveIcon.Opacity,
-                To = 0
-            };
-            anim1.Completed += (s, r) => saveIcon.Visibility = Visibility.Collapsed;
-            Timeline.SetDesiredFrameRate(anim1, 60);
-            saveIcon.BeginAnimation(OpacityProperty, anim1);
+            NotText.Text = s;
+            AppearanceAnimation(bNotification);
         }
+
+        public void IconSave() => AppearanceAnimation(saveIcon);
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {

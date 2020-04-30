@@ -17,7 +17,7 @@ namespace OlibKey.Controls
         public Action<Account> ShowContentCallback { get; set; }
         public Action<Account> EditContentCallback { get; set; }
         public Action FocusCallback { get; set; }
-        public Account AccountContext { get => DataContext as Account; }
+        public Account AccountContext => DataContext as Account;
         public AccountListItem() => InitializeComponent();
 
         public DispatcherTimer timer;
@@ -65,9 +65,9 @@ namespace OlibKey.Controls
                 {
                     timer.Stop();
 
-                    ReminderWindow reminderWindow = new ReminderWindow
+                    var reminderWindow = new ReminderWindow
                     {
-                        accountListItem = this,
+                        AccountListItem = this,
                         lNameElement = {Content = AccountContext.AccountName},
                         lTimeStart = {Content = AccountContext.Username}
                     };

@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Win32;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using OlibKey.Core;
 
 namespace OlibKey.Views
@@ -35,10 +34,9 @@ namespace OlibKey.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (App.Setting.EnableFastRendering)
-            {
-                RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
-            }
+            DataContext = App.Setting;
+
+            if (App.Setting.EnableFastRendering) RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);
             CbTheme.SelectedValuePath = "Key";
             CbTheme.DisplayMemberPath = "Value";
             KeyValuePair<string, string>[] valuePair = {
@@ -46,9 +44,7 @@ namespace OlibKey.Views
                 new KeyValuePair<string, string>("Dark", (string)FindResource("Dark"))
             };
             foreach (var i in valuePair) CbTheme.Items.Add(i);
-            CbTheme.SelectedIndex = App.Setting.ApplyTheme != null
-                    ? valuePair.ToList().FindIndex(i => i.Key == App.Setting.ApplyTheme)
-                    : 0;
+
             CbLang.SelectedValuePath = "Key";
             CbLang.DisplayMemberPath = "Value";
             var valuePair1 = new[]
@@ -61,9 +57,7 @@ namespace OlibKey.Views
                 new KeyValuePair<string, string>("hy-AM", "Հայերեն")
             };
             foreach (var i in valuePair1) CbLang.Items.Add(i);
-            cbCollapsedWindow.IsChecked = App.Setting.CollapseWhenClosing;
-            cbAutorun.IsChecked = App.Setting.AutorunApplication;
-            cbFastRendering.IsChecked = App.Setting.EnableFastRendering;
+
             CbLang.SelectedIndex = valuePair1.ToList().FindIndex(i => i.Key == Lang.Default.DefaultLanguage.Name);
         }
 
@@ -73,18 +67,10 @@ namespace OlibKey.Views
             _isFirst = false;
         }
 
-        private void LanguageChanged(object sender, EventArgs e)
-        {
-            Lang.Default.DefaultLanguage = App.Language;
-            Lang.Default.Save();
-        }
-
         private void CbTheme_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!_isFirstTheme)
             {
-                App.Setting.ApplyTheme = CbTheme.SelectedValue.ToString();
-
                 var dict = new ResourceDictionary
                 {
                     Source = new Uri($"/Themes/{App.Setting.ApplyTheme}.xaml", UriKind.Relative)
@@ -100,8 +86,6 @@ namespace OlibKey.Views
                     Application.Current.Resources.MergedDictionaries.Insert(ind, dict);
                 }
                 else Application.Current.Resources.MergedDictionaries.Add(dict);
-
-
 
                 var dict1 = new ResourceDictionary
                 {
@@ -126,28 +110,25 @@ namespace OlibKey.Views
                               "\\OlibKey\\settings.json", JsonSerializer.Serialize(App.Setting));
         }
 
-        private void CBAutorun(object sender, RoutedEventArgs e)
+        private void CbAutorun(object sender, RoutedEventArgs e)
         {
-            RegistryKey rkApp =
+            var rkApp =
                 Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
-            if ((bool) cbAutorun.IsChecked)
+            if (cbAutorun.IsChecked != null && (bool) cbAutorun.IsChecked)
             {
-                App.Setting.AutorunApplication = (bool) cbAutorun.IsChecked;
-                string s = Assembly.GetExecutingAssembly().Location;
-                int x1 = s.Length - 4;
+                var s = Assembly.GetExecutingAssembly().Location;
+                var x1 = s.Length - 4;
                 s = "\"" + s.Remove(x1) + ".exe" + "\"";
                 rkApp.SetValue("OlibKey", s + " /StartupHide");
             }
             else
             {
-                App.Setting.AutorunApplication = (bool) cbAutorun.IsChecked;
-                rkApp.DeleteValue("OlibKey", false);
+                rkApp?.DeleteValue("OlibKey", false);
             }
         }
 
         private void CBFastRender(object sender, RoutedEventArgs e)
         {
-            App.Setting.EnableFastRendering = (bool)cbFastRendering.IsChecked;
             if ((bool)cbFastRendering.IsChecked)
             {
                 RenderOptions.SetEdgeMode(this, EdgeMode.Aliased);

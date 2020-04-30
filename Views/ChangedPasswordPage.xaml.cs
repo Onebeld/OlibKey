@@ -2,6 +2,7 @@
 using OlibKey.Core;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,7 +22,6 @@ namespace OlibKey.Views
         public ChangedPasswordPage(Account accountModel)
         {
             InitializeComponent();
-
             _accountModelChange = accountModel;
 
             DataContext = _accountModelChange;
@@ -59,13 +59,10 @@ namespace OlibKey.Views
                     "http://www.google.com/s2/favicons?domain=" + _accountModelChange.WebSite;
             else if (_accountModelChange.TypeAccount == 0)
                 App.MainWindow.Model.SelectedAccountItem.imageIcon.Source =
-                    (ImageSource) FindResource("globeDrawingImage");
-            if (_accountModelChange.TypeAccount == 3)
-            {
-                txtDateChanged.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
-                ChangedAccountCallbackFunc();
-                App.MainWindow.Model.SelectedAccountItem.timer.Start();
-            }
+                    (ImageSource)FindResource("globeDrawingImage");
+            txtDateChanged.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
+            ChangedAccountCallbackFunc();
+            if (_accountModelChange.TypeAccount == 3) App.MainWindow.Model.SelectedAccountItem.timer.Start();
             NavigationService?.GoBack();
             App.MainWindow.Notification((string)Application.Current.FindResource("Not2"));
         }
@@ -82,7 +79,7 @@ namespace OlibKey.Views
             }
             catch { }
             DeleteAccountCallbackFunc();
-            StartPage startPage = new StartPage();
+            var startPage = new StartPage();
             NavigationService?.Navigate(startPage);
         }
 
@@ -137,7 +134,7 @@ namespace OlibKey.Views
         }
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow
+            var generatorWindow = new PasswordGeneratorWindow
             {
                 SaveButton = { Visibility = Visibility.Visible }
             };
@@ -153,10 +150,9 @@ namespace OlibKey.Views
 
             cbCustomFolder.SelectedValuePath = "Value";
             cbCustomFolder.DisplayMemberPath = "Key";
-            Dictionary<string, string> pairs = new Dictionary<string, string>();
-            foreach (var i in App.MainWindow.Model.DatabaseApplication.CustomFolders) pairs.Add(i.Name, i.ID);
+            var pairs = App.MainWindow.Model.DatabaseApplication.CustomFolders.ToDictionary(i => i.Name, i => i.ID);
             cbCustomFolder.Items.Add(new KeyValuePair<string, string>((string)FindResource("NotChosen"), null));
-            foreach (KeyValuePair<string, string> i in pairs) cbCustomFolder.Items.Add(i);
+            foreach (var i in pairs) cbCustomFolder.Items.Add(i);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) => tbStartTime.Text = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);

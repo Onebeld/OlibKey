@@ -59,7 +59,7 @@
                         <Border Grid.Column="1" MouseLeftButtonDown="Drag" Background="Transparent">
                             <Border.ContextMenu>
                                 <ContextMenu Foreground="{StaticResource ForegroundWindow}">
-                                    <MenuItem Header="Закрыть" InputGestureText="Alt+F4" Click="MenuItem_Click">
+                                    <MenuItem Header="{StaticResource Close}" InputGestureText="Alt+F4" Click="MenuItem_Click">
                                         <MenuItem.Icon>
                                             <Image Source="{StaticResource ImageClose}" Width="12"/>
                                         </MenuItem.Icon>
@@ -68,7 +68,7 @@
                             </Border.ContextMenu>
                         </Border>
 
-                        <Button Grid.Column="4" Padding="8" Style="{StaticResource ButtonHeight}">
+                        <Button Grid.Column="2" Padding="8" Style="{StaticResource ButtonHeight}">
                             <Button.Triggers>
                                 <EventTrigger RoutedEvent="Button.Click">
                                     <BeginStoryboard>

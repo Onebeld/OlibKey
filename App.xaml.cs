@@ -18,10 +18,10 @@ namespace OlibKey
     public partial class App
     {
         public new static MainWindow MainWindow;
-        private static ResourceDictionary ResourceTheme;
+        private static ResourceDictionary _resourceTheme;
         public static Setting Setting;
 
-        private static object sync = new object();
+        public static object Sync = new object();
 
         private static List<CultureInfo> Languages => new List<CultureInfo>();
 
@@ -53,12 +53,12 @@ namespace OlibKey
 
             Language = Lang.Default.IsFirstLanguage ? CultureInfo.CurrentCulture : Lang.Default.DefaultLanguage;
 
-            ResourceTheme = Resources.MergedDictionaries[2];
+            _resourceTheme = Resources.MergedDictionaries[2];
             if (Setting.ApplyTheme != null)
-                ResourceTheme.Source = new Uri($"/Themes/{Setting.ApplyTheme}.xaml", UriKind.Relative);
+                _resourceTheme.Source = new Uri($"/Themes/{Setting.ApplyTheme}.xaml", UriKind.Relative);
 
             MainWindow = new MainWindow();
-            bool startHide = false;
+            var startHide = false;
             if (Setting.AutorunApplication)
                 foreach (var i in e.Args)
                     if (i == "/StartupHide")
@@ -149,16 +149,19 @@ namespace OlibKey
         {
             try
             {
-                string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+                var pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
                 if (!Directory.Exists(pathToLog))
-                Directory.CreateDirectory(pathToLog);
-                string filename = Path.Combine(pathToLog, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
-                string fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] [{e.Exception.TargetSite.DeclaringType}.{e.Exception.TargetSite.Name}()]\n{e.Exception}\r\n";
-                lock (sync) File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
+                    Directory.CreateDirectory(pathToLog);
+                var filename = Path.Combine(pathToLog, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
+                var fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] [{e.Exception.TargetSite.DeclaringType}.{e.Exception.TargetSite.Name}()]\n{e.Exception}\r\n";
+                lock (Sync) File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
 
                 MessageBox.Show((string)FindResource("MB9") + $"\n{e.Exception.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
     }
 }

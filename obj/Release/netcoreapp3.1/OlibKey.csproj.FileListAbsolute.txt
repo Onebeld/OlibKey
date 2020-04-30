@@ -5,7 +5,6 @@ F:\OlibKey\bin\Release\netcoreapp3.1\OlibKey.runtimeconfig.dev.json
 F:\OlibKey\bin\Release\netcoreapp3.1\OlibKey.dll
 F:\OlibKey\bin\Release\netcoreapp3.1\OlibKey.pdb
 F:\OlibKey\bin\Release\netcoreapp3.1\Hardcodet.Wpf.TaskbarNotification.dll
-F:\OlibKey\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
 F:\OlibKey\obj\Release\netcoreapp3.1\OlibKey.csprojAssemblyReference.cache
 F:\OlibKey\obj\Release\netcoreapp3.1\Controls\AccountListItem.baml
 F:\OlibKey\obj\Release\netcoreapp3.1\IconsAndImages\Icons.baml

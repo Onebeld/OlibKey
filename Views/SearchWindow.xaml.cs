@@ -15,7 +15,7 @@ namespace OlibKey.Views
     /// </summary>
     public partial class SearchWindow : Window
     {
-        public SearchViewModel SearchContext { get => DataContext as SearchViewModel; }
+        public SearchViewModel SearchContext => DataContext as SearchViewModel;
 
         public SearchWindow() => InitializeComponent();
         private bool _mRestoreForDragMove;
@@ -26,7 +26,7 @@ namespace OlibKey.Views
 
             foreach (var i in App.MainWindow.Model.AccountsList)
             {
-                Account account = i.DataContext as Account;
+                var account = i.DataContext as Account;
                 if ((bool)rLogin.IsChecked && account.TypeAccount == 0)
                 {
                     if (SearchContext.SelectedFolderItem == null)
@@ -135,7 +135,7 @@ namespace OlibKey.Views
 
         private void Add(Account a)
         {
-            AccountListItem ali = new AccountListItem
+            var ali = new AccountListItem
             {
                 DataContext = a,
                 ShowContentCallback = App.MainWindow.Model.ShowAccountContent,
@@ -171,7 +171,7 @@ namespace OlibKey.Views
             if (!_mRestoreForDragMove) return;
             _mRestoreForDragMove = false;
 
-            Point point = PointToScreen(e.MouseDevice.GetPosition(this));
+            var point = PointToScreen(e.MouseDevice.GetPosition(this));
 
             Left = point.X * 0.5;
             Top = point.Y - 15;

@@ -11,18 +11,13 @@ namespace OlibKey.Views
     /// </summary>
     public partial class CreateFolderWindow : Window
     {
-        public CreateFolderWindow()
-        {
-            InitializeComponent();
-        }
+        public CreateFolderWindow() => InitializeComponent();
+
         public CreateFolderWindow(CustomFolder custom)
         {
             InitializeComponent();
-            customFolder = custom;
             DataContext = custom;
         }
-
-        private CustomFolder customFolder;
 
         private void Drag(object sender, MouseButtonEventArgs e) => DragMove();
 

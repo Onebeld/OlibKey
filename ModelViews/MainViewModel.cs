@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Win32;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace OlibKey.ModelViews
 {
@@ -104,15 +103,11 @@ namespace OlibKey.ModelViews
                 SelectedAccountStructure = SelectedAccountItem.DataContext as Account;
         }
 
-        private void AboutWindowVoid()
-        {
-            AboutWindow aboutWindow = new AboutWindow();
-            aboutWindow.ShowDialog();
-        }
+        private void AboutWindowVoid() => new AboutWindow().ShowDialog();
 
         private void ChangeMasterPasswordVoid()
         {
-            ChangeMasterPasswordWindow passwordWindow = new ChangeMasterPasswordWindow();
+            var passwordWindow = new ChangeMasterPasswordWindow();
             passwordWindow.ShowDialog();
         }
 
@@ -125,12 +120,12 @@ namespace OlibKey.ModelViews
             if (SelectedAccountItem == null)
                 return;
 
-            int newIndex = SelectedIndex + direction;
+            var newIndex = SelectedIndex + direction;
 
             if (newIndex < 0 || newIndex >= AccountsList.Count)
                 return;
 
-            AccountListItem selected = SelectedAccountItem;
+            var selected = SelectedAccountItem;
 
             AccountsList.Remove(selected);
             AccountsList.Insert(newIndex, selected);
@@ -139,25 +134,25 @@ namespace OlibKey.ModelViews
 
         private void SetupCommandBindings()
         {
-            NewPasswordStorage = new Command(NewPasswordStorageVoid);
-            NewCreatePassword = new Command(NewCreatePasswordVoid);
-            ExitProgram = new Command(ExitProgramVoid);
-            OpenStorage = new Command(OpenStorageVoid);
-            SaveStorage = new Command(SaveAccount);
-            BlockingStorage = new Command(BlockingStorageVoid);
-            UnblockingStorage = new Command(RequireMasterPasswordVoid);
-            CheckUpdate = new Command(CheckUpdateVoid);
-            PasswordGenerator = new Command(PasswordGeneratorVoid);
-            AboutWindowCommand = new Command(AboutWindowVoid);
-            SettingsWindowCommand = new Command(SettingsWindowVoid);
-            ShowWindow = new Command(ShowWindowVoid);
-            ChangeMasterPassword = new Command(ChangeMasterPasswordVoid);
-            ShowSearchWindow = new Command(ShowSearcWindowVoid);
+            NewPasswordStorage = new RelayCommand(NewPasswordStorageVoid);
+            NewCreatePassword = new RelayCommand(NewCreatePasswordVoid);
+            ExitProgram = new RelayCommand(ExitProgramVoid);
+            OpenStorage = new RelayCommand(OpenStorageVoid);
+            SaveStorage = new RelayCommand(SaveAccount);
+            BlockingStorage = new RelayCommand(BlockingStorageVoid);
+            UnblockingStorage = new RelayCommand(RequireMasterPasswordVoid);
+            CheckUpdate = new RelayCommand(CheckUpdateVoid);
+            PasswordGenerator = new RelayCommand(PasswordGeneratorVoid);
+            AboutWindowCommand = new RelayCommand(AboutWindowVoid);
+            SettingsWindowCommand = new RelayCommand(SettingsWindowVoid);
+            ShowWindow = new RelayCommand(ShowWindowVoid);
+            ChangeMasterPassword = new RelayCommand(ChangeMasterPasswordVoid);
+            ShowSearchWindow = new RelayCommand(ShowSearchWindowVoid);
         }
 
         private void SettingsWindowVoid()
         {
-            SettingsWindow settingsWindow = new SettingsWindow();
+            var settingsWindow = new SettingsWindow();
             settingsWindow.ShowDialog();
         }
 
@@ -204,21 +199,18 @@ namespace OlibKey.ModelViews
         }
         public void RequireMasterPasswordVoid()
         {
-            RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow
+            var requireMaster = new RequireMasterPasswordWindow
             {
                 LoadStorageCallback = LoadAccounts
             };
             requireMaster.ShowDialog();
         }
 
-        public void PasswordGeneratorVoid()
-        {
-            PasswordGeneratorWindow generatorWindow = new PasswordGeneratorWindow();
-            generatorWindow.ShowDialog();
-        }
+        public void PasswordGeneratorVoid() => new PasswordGeneratorWindow().ShowDialog();
+
         public void OpenStorageVoid()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
+            var openFileDialog = new OpenFileDialog
             {
                 Filter = "Olib-files (*.olib)|*.olib"
             };
@@ -231,7 +223,7 @@ namespace OlibKey.ModelViews
             NameStorage = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
 
 
-            RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow
+            var requireMaster = new RequireMasterPasswordWindow
             {
                 LoadStorageCallback = LoadAccounts
             };
@@ -242,8 +234,7 @@ namespace OlibKey.ModelViews
         {
             SaveAccount();
             ClearAccountsList();
-            StartPage page = new StartPage();
-            App.MainWindow.frame.NavigationService.Navigate(page);
+            App.MainWindow.frame.NavigationService.Navigate(new StartPage());
             IsLockStorage = true;
             IsUnlockStorage = false;
         }
@@ -253,14 +244,13 @@ namespace OlibKey.ModelViews
         public void AddAccount() { AddAccount(CreatePasswordPage.AccountModel); }
         public void AddAccount(Account accountContent)
         {
-            AccountListItem ali = new AccountListItem
+            var ali = new AccountListItem
             {
                 DataContext = accountContent,
                 ShowContentCallback = ShowAccountContent,
                 EditContentCallback = ShowEditAccountWindow
             };
-            StartPage startPage = new StartPage();
-            App.MainWindow.frame.Navigate(startPage);
+            App.MainWindow.frame.Navigate(new StartPage());
 
             AccountsList.Add(ali);
         }
@@ -290,7 +280,7 @@ namespace OlibKey.ModelViews
         {
             DatabaseApplication = SaveAndLoadAccount.LoadFiles(PathStorage, MasterPassword);
             ClearAccountsList();
-            foreach (Account accounts in DatabaseApplication.Accounts) AddAccount(accounts);
+            foreach (var accounts in DatabaseApplication.Accounts) AddAccount(accounts);
             IsUnlockStorage = true;
             IsLockStorage = false;
         }
@@ -320,10 +310,10 @@ namespace OlibKey.ModelViews
             AccountsList.Clear();
         }
 
-        public void ShowSearcWindowVoid()
+        public void ShowSearchWindowVoid()
         {
             SearchWindow = new SearchWindow();
-            foreach (CustomFolder folder in DatabaseApplication.CustomFolders) SearchWindow.SearchModel.AddFolder(folder);
+            foreach (var folder in DatabaseApplication.CustomFolders) SearchWindow.SearchModel.AddFolder(folder);
             SearchWindow.ShowDialog();
         }
     }

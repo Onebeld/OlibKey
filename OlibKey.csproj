@@ -15,6 +15,10 @@
     <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>C:\OlibKey\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="favicon.ico" />
     <None Remove="Music\notification.wav" />

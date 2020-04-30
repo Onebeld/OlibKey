@@ -188,8 +188,16 @@
                             <ListBox.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="{StaticResource RemoveSelection}" Click="MenuItem_Click"/>
-                                    <MenuItem Header="{StaticResource ChangeP}" Command="{Binding EditFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <MenuItem Header="{StaticResource Delete}" Command="{Binding DeleteFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <MenuItem Header="{StaticResource ChangeP}" Command="{Binding EditFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                                        <MenuItem.Icon>
+                                            <Image Width="16" Source="{DynamicResource pencilDrawingImage}"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="{StaticResource Delete}" Command="{Binding DeleteFolderCommand}" IsEnabled="{Binding IsSelectedItem, UpdateSourceTrigger=PropertyChanged}">
+                                        <MenuItem.Icon>
+                                            <Image Width="16" Source="{DynamicResource trashDrawingImage}"/>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
                                 </ContextMenu>
                             </ListBox.ContextMenu>
                         </ListBox>

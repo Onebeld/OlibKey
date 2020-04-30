@@ -3,6 +3,7 @@ using OlibKey.Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -13,17 +14,17 @@ namespace OlibKey.Views
     /// </summary>
     public partial class PasswordInformationPage : Page
     {
-        private readonly Account AccountModel;
+        private readonly Account _accountModel;
         public Action DeletedAccount { get; set; }
         public Action ChangedAccount { get; set; }
-        private ChangedPasswordPage ChangedPasswordPage;
+        public ChangedPasswordPage ChangedPasswordPage;
         public PasswordInformationPage(Account model)
         {
             InitializeComponent();
 
-            AccountModel = model;
+            _accountModel = model;
 
-            DataContext = AccountModel;
+            DataContext = _accountModel;
 
             txtPassword.Password = model.Password;
 
@@ -62,11 +63,11 @@ namespace OlibKey.Views
             txtPassword.Password = txtPasswordCollapsed.Text;
         }
 
-        private void txtSecutityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e) => txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
+        private void txtSecurityCodeCollapsed_TextChanged(object sender, TextChangedEventArgs e) => txtSecutityCode.Password = txtSecutityCodeCollapsed.Text;
 
         private void cbHide_Checked(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHide.IsChecked)
+            if (cbHide.IsChecked != null && (bool)cbHide.IsChecked)
             {
                 txtPassword.Visibility = Visibility.Collapsed;
                 txtPasswordCollapsed.Visibility = Visibility.Visible;
@@ -79,7 +80,7 @@ namespace OlibKey.Views
         }
         private void cbHideSecurityCode_Checked(object sender, RoutedEventArgs e)
         {
-            if ((bool)cbHideSecurityCode.IsChecked)
+            if (cbHideSecurityCode.IsChecked != null && (bool)cbHideSecurityCode.IsChecked)
             {
                 txtSecutityCode.Visibility = Visibility.Collapsed;
                 txtSecutityCodeCollapsed.Visibility = Visibility.Visible;
@@ -95,7 +96,7 @@ namespace OlibKey.Views
         {
             var psi = new ProcessStartInfo
             {
-                FileName = "http://" + AccountModel.WebSite,
+                FileName = "http://" + _accountModel.WebSite,
                 UseShellExecute = true
             };
             Process.Start(psi);
@@ -108,14 +109,14 @@ namespace OlibKey.Views
                 Clipboard.Clear();
                 switch (int.Parse(((Button)e.Source).Uid))
                 {
-                    case 0: Clipboard.SetText(AccountModel.Username); break;
-                    case 1: Clipboard.SetText(AccountModel.Password); break;
-                    case 2: Clipboard.SetText(AccountModel.WebSite); break;
-                    case 3: Clipboard.SetText(AccountModel.Username); break;
-                    case 4: Clipboard.SetText(AccountModel.SecurityCode); break;
-                    case 5: Clipboard.SetText(AccountModel.Username); break;
-                    case 6: Clipboard.SetText(AccountModel.PassportNumber); break;
-                    case 7: Clipboard.SetText(AccountModel.PassportPlaceOfIssue); break;
+                    case 0: Clipboard.SetText(_accountModel.Username); break;
+                    case 1: Clipboard.SetText(_accountModel.Password); break;
+                    case 2: Clipboard.SetText(_accountModel.WebSite); break;
+                    case 3: Clipboard.SetText(_accountModel.Username); break;
+                    case 4: Clipboard.SetText(_accountModel.SecurityCode); break;
+                    case 5: Clipboard.SetText(_accountModel.Username); break;
+                    case 6: Clipboard.SetText(_accountModel.PassportNumber); break;
+                    case 7: Clipboard.SetText(_accountModel.PassportPlaceOfIssue); break;
                 }
             }
             catch { }
@@ -123,7 +124,7 @@ namespace OlibKey.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ChangedPasswordPage = new ChangedPasswordPage(AccountModel)
+            ChangedPasswordPage = new ChangedPasswordPage(_accountModel)
             {
                 DeleteAccountCallback = DeletedAccount,
                 ChangedAccountCallback = ChangedAccount,
@@ -138,10 +139,9 @@ namespace OlibKey.Views
 
             cbCustomFolder.SelectedValuePath = "Value";
             cbCustomFolder.DisplayMemberPath = "Key";
-            Dictionary<string, string> pairs = new Dictionary<string, string>();
-            foreach (var i in App.MainWindow.Model.DatabaseApplication.CustomFolders) pairs.Add(i.Name, i.ID);
+            var pairs = App.MainWindow.Model.DatabaseApplication.CustomFolders.ToDictionary(i => i.Name, i => i.ID);
             cbCustomFolder.Items.Add(new KeyValuePair<string, string>((string)FindResource("NotChosen"), null));
-            foreach (KeyValuePair<string, string> i in pairs) cbCustomFolder.Items.Add(i);
+            foreach (var i in pairs) cbCustomFolder.Items.Add(i);
         }
     }
 }

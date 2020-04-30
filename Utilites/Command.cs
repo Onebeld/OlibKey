@@ -3,11 +3,11 @@ using System.Windows.Input;
 
 namespace OlibKey.Utilities
 {
-    public class Command : ICommand
+    public class RelayCommand : ICommand
     {
         private readonly Action _action;
 
-        public Command(Action action)
+        public RelayCommand(Action action)
         {
             _action = action;
         }

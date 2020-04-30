@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OlibKey": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "remoteDebugMachine": "Андрей-ПК",
+      "authenticationMode": "None"
+    }
+  }
+}

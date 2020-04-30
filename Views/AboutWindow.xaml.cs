@@ -27,8 +27,6 @@ namespace OlibKey.Views
 " " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) => Close();
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var psi = new ProcessStartInfo { FileName = "https://vk.com/olibkey", UseShellExecute = true };

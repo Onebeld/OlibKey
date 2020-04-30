@@ -8,10 +8,10 @@ namespace OlibKey.Core
 {
     public static class Animations
     {
-        public async static Task ClosingWindowAnimation(Window w, ScaleTransform transform)
+        public static async Task ClosingWindowAnimation(Window w, ScaleTransform transform)
         {
-            DoubleAnimation anim = new DoubleAnimation { Duration = TimeSpan.FromSeconds(0.2), From = 1, To = 0, AccelerationRatio = 1};
-            DoubleAnimation anim1 = new DoubleAnimation
+            var anim = new DoubleAnimation { Duration = TimeSpan.FromSeconds(0.2), From = 1, To = 0, AccelerationRatio = 1};
+            var anim1 = new DoubleAnimation
             {
                 Duration = TimeSpan.FromSeconds(0.2),
                 AccelerationRatio = 1,

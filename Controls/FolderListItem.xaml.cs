@@ -8,7 +8,7 @@ namespace OlibKey.Controls
     /// </summary>
     public partial class FolderListItem : UserControl
     {
-        public CustomFolder FolderContext { get => DataContext as CustomFolder; }
+        public CustomFolder FolderContext => DataContext as CustomFolder;
         public FolderListItem() => InitializeComponent();
     }
 }

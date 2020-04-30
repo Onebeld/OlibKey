@@ -1,11 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "jtlcToBl+xeu0Yf2zMZ4UWmmCfbSpoDyFaahvFiJnAkvhHz/XYwO3HHe7uA1+4PqN5DooHVwVaT6A6qzGYOiAA==",
+  "dgSpecHash": "eywPwjUPbKOL6NxGuUknsIKDyO9k0p2qE2RxFL63viH3Ej1x56EGrYVrpAo2UiHVB7ueOIo9Jvv0VHLxfKoPiA==",
   "success": true,
   "projectFilePath": "F:\\OlibKey\\OlibKey.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dmitr\\.nuget\\packages\\hardcodet.notifyicon.wpf.netcore\\1.0.10\\hardcodet.notifyicon.wpf.netcore.1.0.10.nupkg.sha512",
-    "C:\\Users\\dmitr\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512",
     "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
     "C:\\Users\\dmitr\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\3.1.2\\microsoft.netcore.app.runtime.win-x86.3.1.2.nupkg.sha512",

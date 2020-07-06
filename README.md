@@ -1,10 +1,10 @@
-![](https://github.com/MagnificentEagle/OlibPasswordManager/blob/master/forRepository/Logo.png)
+![](https://github.com/MagnificentEagle/OlibKey/blob/master/ForRepository/OlibKeyLogo.png)
 # OlibKey
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/MagnificentEagle/OlibPasswordManager) ![GitHub](https://img.shields.io/github/license/MagnificentEagle/OlibPasswordManager)
 
 ![](https://github.com/MagnificentEagle/OlibPasswordManager/blob/master/forRepository/programscreenshot.png)
 
-OlibKey is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET Core 3.1 WPF.
+OlibKey is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET 5 Prewiev 6 using  Avalonia UI. With OlibKey, you can store passwords on your computer **using AES encryption**.
 
 For feedback and the latest news, use the links below:
 
@@ -15,12 +15,15 @@ For feedback and the latest news, use the links below:
 ## Why this project?
 There are many different password managers. One is free, the other is paid, the third has the most functionality, and the fourth has less. **My goal of this project** is to combine the best of other managers and implement it together.
 
-## Requirements
-To run OlibKey, **you must** have .NET Core version 3.1 and higher.
+## OlibKey Versions
+OlibKey has several versions: New and Legacy
+### OlibKey code name Noyon
+This version is compiled using AOT CoreRT, which allows you to run applications without dependence and the speed is equal to C/C++, supports only x64 and is recommended for use. Additional testing on real machines is required.
+#### Requirements:
+* All platforms except x86 and ARM ([see here](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md)) (For some reason, it only works on the Windows version 10 family)
 
-## Functional
-With OlibKey, you can store passwords on your computer **using AES encryption**.
-
-## Where can I download preview versions?
-To view the preliminary version and find out future functions, just go to the repository directory: _bin/Debug/netcoreapp5.1_ and _bin/Debug/netcoreapp3.1_
-> **Note.** Pre-builds can contain many errors, I have no responsibility for the builds.
+### OlibKey Legacy
+This version supports other platforms (x86, ARM), .NET Runtime is required to run. macOS and Linux does not support x86
+#### Requirements:
+* Almost all platforms ([see here](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
+* .NET Runtime 5 Preview 6;

@@ -16,7 +16,7 @@ For feedback and the latest news, use the links below:
 There are many different password managers. One is free, the other is paid, the third has the most functionality, and the fourth has less. **My goal of this project** is to combine the best of other managers and implement it together.
 
 ## OlibKey Versions
-OlibKey has several versions: New and Legacy
+OlibKey has several versions: Noyon and Legacy
 ### OlibKey code name Noyon
 This version is compiled using AOT CoreRT, which allows you to run applications without dependence and the speed is equal to C/C++, supports only x64 and is recommended for use. Additional testing on real machines is required.
 #### Requirements:

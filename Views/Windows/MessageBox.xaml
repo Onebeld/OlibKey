@@ -18,7 +18,7 @@
 				<TextBlock VerticalAlignment="Center" Name="Text" TextWrapping="Wrap" Margin="0 0 10 0"/>
 			</ScrollViewer>
 		</Grid>
-		<TextBox Name="ErrorText" Height="150" Grid.Row="1" Margin="10" AcceptsReturn="True" TextWrapping="Wrap"/>
+		<TextBox Name="ErrorText" Height="100" Grid.Row="1" Margin="10" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
 		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
 			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Name="Buttons">
 				<StackPanel.Styles>

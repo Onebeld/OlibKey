@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TvEDTJ1vorVH7r/EwuVljWvCPoLtFSr1LOwVTCXLux2QypcWjPn6M//hLeI9npYJy1iYz2fT4l/RNm2Op1yxZg==",
+  "dgSpecHash": "uMAz9eJyUr2BvkVtEk/l71d65z9pVZvipaxJ/XZWfio4r8cDgf17zyb2g5syCr0JkTHfnqbek3mv92WdBtKd1w==",
   "success": true,
-  "projectFilePath": "E:\\ProjectsVS\\OlibKeyOnAvalonia\\OlibKey.csproj",
+  "projectFilePath": "E:\\OlibKey\\OlibKey.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dmitry\\.nuget\\packages\\avalonia\\0.9.999-cibuild0008974-beta\\avalonia.0.9.999-cibuild0008974-beta.nupkg.sha512",
     "C:\\Users\\Dmitry\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.0.2019013001\\avalonia.angle.windows.natives.2.1.0.2019013001.nupkg.sha512",

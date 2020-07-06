@@ -45,6 +45,7 @@ namespace OlibKey.Views.Windows
 			msgbox.FindControl<TextBlock>("Text").Text = text;
 			var buttonPanel = msgbox.FindControl<StackPanel>("Buttons");
 			var iconControl = msgbox.FindControl<Image>("Icon");
+			var errorText = msgbox.FindControl<TextBox>("ErrorText");
 
 			var res = MessageBoxResult.Ok;
 
@@ -94,7 +95,11 @@ namespace OlibKey.Views.Windows
 					break;
 			}
 
-			if (textException == null) msgbox.FindControl<TextBox>("ErrorText").IsVisible = false;
+			if (textException != null)
+			{
+				errorText.Text = textException;
+			}
+			else errorText.IsVisible = false;
 
 			var tcs = new TaskCompletionSource<MessageBoxResult>();
 			msgbox.Closed += delegate { tcs.TrySetResult(res); };

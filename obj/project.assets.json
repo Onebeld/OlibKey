@@ -8889,14 +8889,14 @@
   "project": {
     "version": "3.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ProjectsVS\\OlibKeyOnAvalonia\\OlibKey.csproj",
+      "projectUniqueName": "E:\\OlibKey\\OlibKey.csproj",
       "projectName": "OlibKey",
-      "projectPath": "E:\\ProjectsVS\\OlibKeyOnAvalonia\\OlibKey.csproj",
+      "projectPath": "E:\\OlibKey\\OlibKey.csproj",
       "packagesPath": "C:\\Users\\Dmitry\\.nuget\\packages\\",
-      "outputPath": "E:\\ProjectsVS\\OlibKeyOnAvalonia\\obj\\",
+      "outputPath": "E:\\OlibKey\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "E:\\ProjectsVS\\OlibKeyOnAvalonia\\NuGet.Config",
+        "E:\\OlibKey\\NuGet.Config",
         "C:\\Users\\Dmitry\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

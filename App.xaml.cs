@@ -22,6 +22,7 @@ namespace OlibKey
 		public static DispatcherTimer Autosave { get; set; }
 
 		private static string ResultCheckUpdate;
+		private static string ErrorResult;
 
 		public static MainWindow MainWindow { get; set; }
 		public static MainWindowViewModel MainWindowViewModel { get; set; }
@@ -80,9 +81,17 @@ namespace OlibKey
 			try
 			{
 				using var wb = new WebClient();
-				wb.DownloadStringCompleted += (s, args) => ResultCheckUpdate = args.Result;
+				wb.DownloadStringCompleted += (s, args) =>
+				{
+					if (args.Error != null)
+					{
+						ErrorResult = args.Error.ToString();
+						return;
+					}
+					ResultCheckUpdate = args.Result;
+				};
 				await wb.DownloadStringTaskAsync(new Uri(
-					"https://raw.githubusercontent.com/MagnificentEagle/OlibKey/master/forRepository/version.txt"));
+					"https://raw.githubusercontent.com/MagnificentEagle/OlibKey/master/ForRepository/version.txt"));
 				var latest = float.Parse(ResultCheckUpdate.Replace(".", ""));
 				var current =
 					float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
@@ -107,11 +116,15 @@ namespace OlibKey
 					Process.Start(psi);
 				}
 			}
-			catch
+			catch (Exception ex)
 			{
 				if (b)
 				{
-					await MessageBox.Show(MainWindow, null,
+					if(ErrorResult != null)
+					await MessageBox.Show(MainWindow, ErrorResult,
+						(string)Current.FindResource("MB5"), (string)Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok,
+						MessageBox.MessageBoxIcon.Error);
+					else await MessageBox.Show(MainWindow, ex.ToString(),
 						(string)Current.FindResource("MB5"), (string)Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok,
 						MessageBox.MessageBoxIcon.Error);
 				}

@@ -1,0 +1,42 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="250"
+		Height="250" Width="350"
+		MinWidth="350" MinHeight="250"
+        x:Class="OlibKey.Views.Windows.SettingsWindow"
+		WindowStartupLocation="CenterScreen"
+		Icon="avares://OlibKey/app.ico"
+		Background="{DynamicResource ThemeWindowBackgroundBrush}"
+        Title="{DynamicResource Settings}">
+	<Grid RowDefinitions="*,50">
+		<ScrollViewer>
+			<StackPanel Margin="5">
+				<DockPanel>
+					<TextBlock Text="{DynamicResource Language}" Margin="0 0 5 0" VerticalAlignment="Center" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+					<ComboBox x:Name="cbLanguage" SelectedIndex="0">
+						<ComboBoxItem Content="English"/>
+						<ComboBoxItem Content="Русский"/>
+						<ComboBoxItem Content="Український"/>
+						<ComboBoxItem Content="Deutsch"/>
+						<ComboBoxItem Content="Français"/>
+						<ComboBoxItem Content="Հայերեն"/>
+					</ComboBox>
+				</DockPanel>
+				<DockPanel Margin="0 5">
+					<TextBlock Text="{DynamicResource Theme}" Margin="0 0 5 0" VerticalAlignment="Center" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+					<ComboBox x:Name="cbTheme" SelectedIndex="0">
+						<ComboBoxItem Content="{DynamicResource Light}"/>
+						<ComboBoxItem Content="{DynamicResource Dark}"/>
+					</ComboBox>
+				</DockPanel>
+			</StackPanel>
+		</ScrollViewer>
+		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
+			<Grid>
+				<Button x:Name="bClose" Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+			</Grid>
+		</Border>
+	</Grid>
+</Window>

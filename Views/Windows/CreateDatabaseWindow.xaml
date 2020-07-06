@@ -1,0 +1,41 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
+        x:Class="OlibKey.Views.Windows.CreateDatabaseWindow"
+		WindowStartupLocation="CenterScreen"
+		Icon="avares://OlibKey/app.ico"
+		Height="250" Width="400"
+		Background="{StaticResource ThemeWindowBackgroundBrush}"
+        Title="{StaticResource CreateBase}"
+		CanResize="False">
+	<Grid RowDefinitions="*,50">
+		<ScrollViewer>
+			<StackPanel Margin="5">
+				<Border Classes="BorderStyle" Padding="0 5">
+					<StackPanel>
+						<TextBlock Text="{StaticResource Directory}" Classes="Heading"/>
+						<TextBox x:Name="tbPathDatabase" Margin="5" IsReadOnly="True"/>
+						<StackPanel Orientation="Horizontal" Margin="5 0">
+							<Button x:Name="bSelectPath" Content="{DynamicResource Select}" Padding="5 2"/>
+						</StackPanel>
+						<Separator Margin="15,5"/>
+						<TextBlock Text="{StaticResource MasterPassword}" Classes="Heading"/>
+						<TextBox x:Name="tbPassword" Margin="5" PasswordChar="•"/>
+						<CheckBox Margin="5" Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
+						<DockPanel Margin="5 0">
+							<TextBlock Text="{StaticResource Complexity}" VerticalAlignment="Center"/>
+							<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>
+						</DockPanel>
+					</StackPanel>
+				</Border>
+			</StackPanel>
+		</ScrollViewer>
+		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
+			<Grid>
+				<Button x:Name="bSave" Content="{StaticResource PasswordSave}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+			</Grid>
+		</Border>
+	</Grid>
+</Window>

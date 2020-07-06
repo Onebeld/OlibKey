@@ -1,0 +1,142 @@
+﻿<Style xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=netstandard">
+	<Style.Resources>
+    <v:String x:Key="File">Файл</v:String>
+    <v:String x:Key="Tools">Інструменти</v:String>
+    <v:String x:Key="Reference">Довідка</v:String>
+    <v:String x:Key="Add">Додати</v:String>
+    <v:String x:Key="CreateBase">Створити сховище</v:String>
+    <v:String x:Key="OpenBase">Відкрити сховище</v:String>
+    <v:String x:Key="SaveBase">Зберегти сховище</v:String>
+    <v:String x:Key="AddLogin">Додати логін</v:String>
+    <v:String x:Key="Settings">Налаштування</v:String>
+    <v:String x:Key="ExitFrom">Вийти з OlibKey</v:String>
+    <v:String x:Key="PasswordGenerator">Генератор паролей</v:String>
+    <v:String x:Key="ChangeMasterPassword">Змінити майстер-пароль</v:String>
+    <v:String x:Key="AboutPrograms">Про програму...</v:String>
+    <v:String x:Key="CheckUpdates">Перевірити наявність оновленні</v:String>
+    <v:String x:Key="Search">Пошук</v:String>
+    <v:String x:Key="CreateFolder">Створити папку</v:String>
+    <v:String x:Key="AllItems">Всі елементи</v:String>
+    <v:String x:Key="CustomFolder">Призначена для користувача папка</v:String>
+    <v:String x:Key="NotChosen">Не вибрано</v:String>
+    <v:String x:Key="RemoveSelection">Зняти виділення</v:String>
+
+    <v:String x:Key="Collapse">Згорнути</v:String>
+    <v:String x:Key="Expand">Розгорнути</v:String>
+    <v:String x:Key="Reestablish">Відновити</v:String>
+
+    <v:String x:Key="Password">Пароль:</v:String>
+    <v:String x:Key="Password+">Пароль</v:String>
+    <v:String x:Key="Show">Показати</v:String>
+    <v:String x:Key="Complexity">Складність:</v:String>
+    <v:String x:Key="ChangeP">Змінити</v:String>
+    <v:String x:Key="Back">Назад</v:String>
+    <v:String x:Key="Done">Готово</v:String>
+
+		<v:String x:Key="Yes">Так</v:String>
+		<v:String x:Key="No">Немає</v:String>
+		<v:String x:Key="Ok">Ок</v:String>
+
+    <v:String x:Key="ListOfItems">Список елементів</v:String>
+    <v:String x:Key="LockStorage">Заблокувати сховище</v:String>
+    <v:String x:Key="UnlockStorage">Розблокувати сховище</v:String>
+    <v:String x:Key="ShowOPM">Показати OlibKey</v:String>
+
+    <v:String x:Key="MB1">Спочатку ви повинні завантажити або створити сховище!</v:String>
+    <v:String x:Key="Error">Помилка</v:String>
+    <v:String x:Key="Message">Повідомлення</v:String>
+    <v:String x:Key="MB2">Ви точно хочете видалити елемент?</v:String>
+    <v:String x:Key="MB3">Неправильний майстер пароль!</v:String>
+    <v:String x:Key="MB4">Доступно оновлення! Хочете перейти на сайт для скачування?</v:String>
+    <v:String x:Key="MB5">Чи не вдалося перевірити на наявність оновленні</v:String>
+    <v:String x:Key="MB6">Ви не можете вимагати символи з порожнього рядка!</v:String>
+    <v:String x:Key="MB7">Не вибрано жодної галочки або не зазначена довжина пароля!</v:String>
+    <v:String x:Key="MB8">На даний момент немає нових оновлень</v:String>
+
+    <v:String x:Key="Successfully">Успішно!</v:String>
+
+    <v:String x:Key="Not1">Елемент збережений успішно!</v:String>
+    <v:String x:Key="Not2">Елемент успішно змінено!</v:String>
+    <v:String x:Key="Not3">Сховище успішно створено!</v:String>
+
+	
+    <v:String x:Key="Specifications">Характеристики</v:String>
+    <v:String x:Key="Lowercase">Рядкові (abc)</v:String>
+    <v:String x:Key="Uppercase">Заголовні (ABC)</v:String>
+    <v:String x:Key="Lenght">Довжина:</v:String>
+    <v:String x:Key="Numbers">Цифри (123)</v:String>
+    <v:String x:Key="Special">Спеціальні ($%#)</v:String>
+    <v:String x:Key="Underscore">Нижня межа (_)</v:String>
+    <v:String x:Key="Generate">Генерувати</v:String>
+    <v:String x:Key="PasswordSave">Зберегти</v:String>
+    <v:String x:Key="Require">Вимагати</v:String>
+
+    <v:String x:Key="OldMasterPassword">Старий майстер-пароль</v:String>
+    <v:String x:Key="NewMasterPassword">Новий майстер-пароль</v:String>
+
+    <v:String x:Key="AccessText">Зверніть увагу! Якщо ви забудете майстер-пароль, ви не зможете відновити сховище!</v:String>
+    <v:String x:Key="MasterPassword">Майстер-пароль</v:String>
+    <v:String x:Key="Directory">Шлях зберігання</v:String>
+    <v:String x:Key="Select">Вибрати</v:String>
+
+    <v:String x:Key="Open">Відкрити</v:String>
+    <v:String x:Key="EnterMP">Введіть майстер-пароль</v:String>
+
+    <v:String x:Key="Version">Версія:</v:String>
+    <v:String x:Key="Close">Закрити</v:String>
+    <v:String x:Key="AccessText1">Дозволяє зберігати паролі, замітки і інші особисті дані в зашифрованому вигляді.</v:String>
+    <v:String x:Key="AccessText2">Програма публікується під ліцензією GPLv3.</v:String>
+
+    <v:String x:Key="Language">Мова:</v:String>
+    <v:String x:Key="Theme">Тема:</v:String>
+    <v:String x:Key="CBHideProgram">Приховати програму при закритті</v:String>
+    <v:String x:Key="CBAutorunApplication">Запускати разом з Windows</v:String>
+
+    <v:String x:Key="Light">Світла</v:String>
+    <v:String x:Key="Dark">Темна</v:String>
+
+	
+    <v:String x:Key="Reminder">Нагадування</v:String>
+    <v:String x:Key="Pause">Пауза</v:String>
+    <v:String x:Key="Disable">Відключити</v:String>
+    <v:String x:Key="ZeroOut">Обнулити</v:String>
+    <v:String x:Key="ReminderStarted">Нагадування запущено</v:String>
+    <v:String x:Key="StartTime">Час початку</v:String>
+
+    <v:String x:Key="ErrorElement1">Помилка в елементі:</v:String>
+    <v:String x:Key="ErrorElement2">В елементі варто неправильно час, тому нагадування відключено. Спробуйте змінити мову програми, або змініть на правильний формат часу, натискаючи на кнопку "Обнулити".</v:String>
+
+    <v:String x:Key="Name">Назва</v:String>
+    <v:String x:Key="Username">Ім'я користувача</v:String>
+    <v:String x:Key="WebSite">Веб-сайт</v:String>
+    <v:String x:Key="Notes">Нотатки</v:String>
+    <v:String x:Key="ChangeElement">Змінити елемент</v:String>
+    <v:String x:Key="AddElement">Додати елемент</v:String>
+    <v:String x:Key="Copy">Копіювати</v:String>
+    <v:String x:Key="GoTo">Перейти</v:String>
+    <v:String x:Key="ItemInformation">Інформація про елемент</v:String>
+    <v:String x:Key="Create">Створено:</v:String>
+    <v:String x:Key="Update">Оновлений:</v:String>
+
+    <v:String x:Key="Type">Тип</v:String>
+    <v:String x:Key="Login">Логін</v:String>
+    <v:String x:Key="BankCard">Банківська картка</v:String>
+
+    <v:String x:Key="CardName">Ім'я власника карти</v:String>
+    <v:String x:Key="CartType">Тип карти</v:String>
+    <v:String x:Key="CardNumber">Номер</v:String>
+    <v:String x:Key="YearOfService">Рік обслуговування</v:String>
+    <v:String x:Key="SecurityCodeCard">Код безпеки</v:String>
+
+    <v:String x:Key="Passport">Особисті дані</v:String>
+    <v:String x:Key="FullName">ФИО</v:String>
+    <v:String x:Key="PassportSeriesAndNumber">Серія та номер</v:String>
+    <v:String x:Key="PlaceOfIssue">Місце видачі</v:String>
+
+    <v:String x:Key="ToApply">Застосувати</v:String>
+    <v:String x:Key="Cancel">Скасувати</v:String>
+    <v:String x:Key="Delete">Вилучити</v:String>
+		</Style.Resources>
+</Style>

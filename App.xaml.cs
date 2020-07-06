@@ -1,167 +1,121 @@
-﻿using OlibKey.Structures;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using OlibKey.ModelViews;
-using OlibKey.Views;
+using System.Net;
+using System.Reflection;
 using System.Text.Json;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Styling;
+using Avalonia.Threading;
+using OlibKey.Structures;
+using OlibKey.Views.Windows;
 
 namespace OlibKey
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App
+    public class App : Application
     {
-        public new static MainWindow MainWindow;
-        private static ResourceDictionary _resourceTheme;
-        public static Setting Setting;
+	    public static Settings Settings { get; set; }
+		public static Database Database { get; set; }
+		public static DispatcherTimer Autosave { get; set; }
 
-        public static object Sync = new object();
+		private static string ResultCheckUpdate;
 
-        private static List<CultureInfo> Languages => new List<CultureInfo>();
+		public static MainWindow MainWindow { get; set; }
+		public static MainWindowViewModel MainWindowViewModel { get; set; }
+		public static SearchWindow SearchWindow { get; set; }
 
-        private void App_LanguageChanged(object sender, EventArgs e)
+		public override void Initialize()
         {
-            Lang.Default.DefaultLanguage = Language;
-            Lang.Default.Save();
+            AvaloniaXamlLoader.Load(this);
+			Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.json")
+				? JsonSerializer.Deserialize<Settings>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json"))
+				: new Settings();
+
+			Current.Styles[2] = !string.IsNullOrEmpty(Settings.ApplyTheme)
+				? new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
+				{
+					Source = new Uri($"avares://OlibKey/Assets/Themes/{Settings.ApplyTheme}.xaml")
+				}
+				: new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
+				{
+					Source = new Uri("avares://OlibKey/Assets/Themes/Light.xaml")
+				};
+
+			Autosave = new DispatcherTimer();
+
+			Autosave.Tick += (s, d) => MainWindowViewModel.SaveDatabase();
+			Autosave.Interval = new TimeSpan(0, 2, 0);
+
+
+			if (Settings.FirstRun)
+			{
+				Settings.Language = $"{CultureInfo.CurrentCulture}";
+				Settings.FirstRun = false;
+			}
+
+			try
+			{
+				Current.Styles[4] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
+				{
+					Source = new Uri($"avares://OlibKey/Assets/Local/lang.{Settings.Language}.xaml")
+				};
+			}
+			catch
+			{
+				Settings.Language = null;
+				Current.Styles[4] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
+				{
+					Source = new Uri($"avares://OlibKey/Assets/Local/lang.en-US.xaml")
+				};
+			}
+
+			CheckUpdate(false);
         }
 
-        public App()
-        {
-            LanguageChanged += App_LanguageChanged;
+		public static  async void CheckUpdate(bool b)
+		{
+			try
+			{
+				using var wb = new WebClient();
+				wb.DownloadStringCompleted += (s, args) => ResultCheckUpdate = args.Result;
+				await wb.DownloadStringTaskAsync(new Uri(
+					"https://raw.githubusercontent.com/MagnificentEagle/OlibKey/master/forRepository/version.txt"));
+				var latest = float.Parse(ResultCheckUpdate.Replace(".", ""));
+				var current =
+					float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
+				if (!(latest > current) && b)
+				{
+					await MessageBox.Show(null,
+						null, (string)Current.FindResource("MB8"), (string)Current.FindResource("Message"),
+						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
+					return;
+				}
 
-            Languages.Clear();
-            Languages.Add(new CultureInfo("en-US")); //Neutral
-            Languages.Add(new CultureInfo("ru-RU"));
-            Languages.Add(new CultureInfo("uk-UA"));
-            Languages.Add(new CultureInfo("de-DE"));
-            Languages.Add(new CultureInfo("hy-AM"));
-        }
-
-        protected override void OnStartup(StartupEventArgs e) 
-        {
-            Setting = File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\OlibKey\\settings.json")
-                ? JsonSerializer.Deserialize<Setting>(File.ReadAllText(
-                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-                    "\\OlibKey\\settings.json"))
-                : new Setting();
-
-            Language = Lang.Default.IsFirstLanguage ? CultureInfo.CurrentCulture : Lang.Default.DefaultLanguage;
-
-            _resourceTheme = Resources.MergedDictionaries[2];
-            if (Setting.ApplyTheme != null)
-                _resourceTheme.Source = new Uri($"/Themes/{Setting.ApplyTheme}.xaml", UriKind.Relative);
-
-            MainWindow = new MainWindow();
-            var startHide = false;
-            if (Setting.AutorunApplication)
-                foreach (var i in e.Args)
-                    if (i == "/StartupHide")
-                        startHide = true;
-            if (startHide)
-            {
-                MainWindow.Show();
-                MainWindow.Hide();
-            }
-            else
-                MainWindow.Show();
-
-            System.Windows.Threading.DispatcherTimer timer = new System.Windows.Threading.DispatcherTimer();
-
-            timer.Tick += (s, d) => MainWindow.Model.SaveAccount();
-            timer.Interval = new TimeSpan(0, 2, 0);
-            timer.Start();
-
-            if (!string.IsNullOrEmpty(Setting.PathStorage))
-            {
-                MainViewModel.PathStorage = Setting.PathStorage;
-                MainWindow.Model.NameStorage = Path.GetFileNameWithoutExtension(Setting.PathStorage);
-                MainWindow.Model.IsLockStorage = true;
-
-                RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
-                {
-                    LoadStorageCallback = MainWindow.Model.LoadAccounts
-                };
-                passwordWindow.ShowDialog();
-            }
-            MainWindow.CheckUpdate(false);
-
-            base.OnStartup(e);
-        }
-
-        public static event EventHandler LanguageChanged;
-        public static CultureInfo Language
-        {
-            get => System.Threading.Thread.CurrentThread.CurrentUICulture;
-            set
-            {
-                if (value == null) throw new ArgumentNullException(nameof(value));
-                if (ReferenceEquals(value, System.Threading.Thread.CurrentThread.CurrentUICulture)) return;
-                System.Threading.Thread.CurrentThread.CurrentUICulture = value;
-                var dict = new ResourceDictionary();
-                if (Lang.Default.IsFirstLanguage)
-                {
-                    try
-                    {
-                        dict.Source = new Uri($"/Localization/lang.{CultureInfo.CurrentCulture}.xaml",
-                            UriKind.Relative);
-                    }
-                    catch
-                    {
-                        dict.Source = new Uri("/Localization/lang.xaml", UriKind.Relative);
-                    }
-
-                    Lang.Default.IsFirstLanguage = false;
-                }
-                else
-                {
-                    try
-                    {
-                        dict.Source = new Uri($"/Localization/lang.{value.Name}.xaml", UriKind.Relative);
-                    }
-                    catch
-                    {
-                        dict.Source = new Uri("/Localization/lang.xaml", UriKind.Relative);
-                    }
-                }
-
-                var oldDict = (from d in Current.Resources.MergedDictionaries
-                               where d.Source != null && d.Source.OriginalString.StartsWith("/Localization/lang.")
-                               select d).FirstOrDefault();
-                if (oldDict != null)
-                {
-                    int ind = Current.Resources.MergedDictionaries.IndexOf(oldDict);
-                    Current.Resources.MergedDictionaries.Remove(oldDict);
-                    Current.Resources.MergedDictionaries.Insert(ind, dict);
-                }
-                else Current.Resources.MergedDictionaries.Add(dict);
-
-                LanguageChanged?.Invoke(Current, new EventArgs());
-            }
-        }
-
-        private void WriteLog(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            try
-            {
-                var pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
-                if (!Directory.Exists(pathToLog))
-                    Directory.CreateDirectory(pathToLog);
-                var filename = Path.Combine(pathToLog, $"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log");
-                var fullText = $"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] [{e.Exception.TargetSite.DeclaringType}.{e.Exception.TargetSite.Name}()]\n{e.Exception}\r\n";
-                lock (Sync) File.AppendAllText(filename, fullText, Encoding.GetEncoding("UTF-8"));
-
-                MessageBox.Show((string)FindResource("MB9") + $"\n{e.Exception.Message}", (string)FindResource("Error"), MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            catch
-            {
-                // ignored
-            }
-        }
-    }
+				if (!(latest > current)) return;
+				if (await MessageBox.Show(MainWindow,
+					null, (string)Current.FindResource("MB4"), (string)Current.FindResource("Message"),
+					MessageBox.MessageBoxButtons.YesNo,
+					MessageBox.MessageBoxIcon.Question) == MessageBox.MessageBoxResult.Yes)
+				{
+					var psi = new ProcessStartInfo
+					{
+						FileName = "https://github.com/MagnificentEagle/OlibKey/releases", UseShellExecute = true
+					};
+					Process.Start(psi);
+				}
+			}
+			catch
+			{
+				if (b)
+				{
+					await MessageBox.Show(MainWindow, null,
+						(string)Current.FindResource("MB5"), (string)Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok,
+						MessageBox.MessageBoxIcon.Error);
+				}
+			}
+		}
+	}
 }

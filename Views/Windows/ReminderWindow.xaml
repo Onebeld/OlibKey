@@ -1,0 +1,22 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="350"
+        x:Class="OlibKey.Views.Windows.ReminderWindow"
+		Topmost="True"
+		WindowStartupLocation="CenterScreen"
+		CanResize="False"
+        Title="ReminderWindow" Height="350" Width="350" ShowInTaskbar="False" UseLayoutRounding="True">
+	<Grid RowDefinitions="150,*,50">
+		<Image Source="{DynamicResource ReminderImage}" Margin="10"/>
+		<StackPanel Grid.Row="1">
+			
+		</StackPanel>
+		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
+			<Grid>
+				<Button x:Name="bSave" Content="{DynamicResource PasswordSave}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+			</Grid>
+		</Border>
+	</Grid>
+</Window>

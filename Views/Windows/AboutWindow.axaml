@@ -1,0 +1,28 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
+        x:Class="OlibKey.Views.Windows.AboutWindow"
+		WindowStartupLocation="CenterScreen"
+		Icon="avares://OlibKey/app.ico"
+		Background="{StaticResource ThemeWindowBackgroundBrush}"
+        Title="{StaticResource AboutPrograms}" Height="400" Width="450" CanResize="False">
+	<Grid RowDefinitions="*,50">
+		<StackPanel>
+			<Image Source="{StaticResource OlibKeyLogo}" Margin="50 10 50 5" Width="250"/>
+			<TextBlock Text="©2020 M-Eagle Studio" HorizontalAlignment="Center" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<TextBlock Text="{StaticResource Version}" Margin="0 0 5 0" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
+				<TextBlock Text="3.0.0"/>
+			</StackPanel>
+			<TextBox x:Name="tbInformation" Margin="10" Height="150" IsReadOnly="True" TextAlignment="Center" HorizontalContentAlignment="Center" AcceptsReturn="True" TextWrapping="Wrap"/>
+		</StackPanel>
+		<Image Source="{StaticResource MEagleImage}" Width="40" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
+			<Grid>
+				<Button x:Name="bClose" Content="{StaticResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+			</Grid>
+		</Border>
+	</Grid>
+</Window>

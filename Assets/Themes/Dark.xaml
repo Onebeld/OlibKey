@@ -1,0 +1,27 @@
+﻿<Style xmlns="https://github.com/avaloniaui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:sys="clr-namespace:System;assembly=netstandard">
+    <Style.Resources>
+		<Color x:Key="ThemeWindowBackgroundColor">#FF5A0F26</Color>
+        <Color x:Key="ThemeBackgroundColor">#FF000000</Color>
+		<Color x:Key="ThemeForegroundColor">#FFFFFFFF</Color>
+		<Color x:Key="ThemeForegroundOpacityColor">#FF777777</Color>
+		<Color x:Key="ThemeGlobalBorderColor">#FFA5A5A5</Color>
+		<Color x:Key="ThemeHoverBackgroundColor">#FF2B2B2B</Color>
+		<Color x:Key="ThemeWindowForegroundColor">#FFFFFFFF</Color>
+		<Color x:Key="ThemePanelBackgroundColor">#FF1C1C1C</Color>
+		<Color x:Key="ThemeSelectedControlColor">#FF931D60</Color>
+		<Color x:Key="ThemeIconButtonColor">#FFFFFFFF</Color>
+
+		<SolidColorBrush x:Key="ThemeWindowBackgroundBrush" Color="{DynamicResource ThemeWindowBackgroundColor}"/>
+        <SolidColorBrush x:Key="ThemeBackgroundBrush" Color="{DynamicResource ThemeBackgroundColor}"/>
+        <SolidColorBrush x:Key="ThemeForegroundBrush" Color="{DynamicResource ThemeForegroundColor}"/>
+        <SolidColorBrush x:Key="ThemeForegroundOpacityBrush" Color="{DynamicResource ThemeForegroundOpacityColor}"/>
+		<SolidColorBrush x:Key="ThemeGlobalBorderBrush" Color="{DynamicResource ThemeGlobalBorderColor}"/>
+		<SolidColorBrush x:Key="ThemeHoverBackgroundBrush" Color="{DynamicResource ThemeHoverBackgroundColor}"/>
+		<SolidColorBrush x:Key="ThemeWindowForegroundBrush" Color="{DynamicResource ThemeWindowForegroundColor}"/>
+		<SolidColorBrush x:Key="ThemePanelBackgroundBrush" Color="{DynamicResource ThemePanelBackgroundColor}"/>
+		<SolidColorBrush x:Key="ThemeSelectedControlBrush" Color="{DynamicResource ThemeSelectedControlColor}"/>
+		<SolidColorBrush x:Key="ThemeIconButtonBrush" Color="{DynamicResource ThemeIconButtonColor}"/>
+    </Style.Resources>
+</Style>

@@ -1,0 +1,20 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
+             x:Class="OlibKey.Views.Pages.StartPage">
+	<Border>
+		<Border.Background>
+			<LinearGradientBrush>
+				<GradientStop Color="#400042" Offset="0" />
+				<GradientStop Color="#931d60" Offset="0.5" />
+				<GradientStop Color="#5a0f26" Offset="1" />
+			</LinearGradientBrush>
+		</Border.Background>
+		<Grid>
+			<Image Source="{DynamicResource OlibKeyBone}" Margin="60"/>
+			<Image Source="{DynamicResource OlibKeyText}" Margin="50,10" VerticalAlignment="Bottom" MaxHeight="30"/>
+		</Grid>
+	</Border>
+</UserControl>

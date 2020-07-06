@@ -1,0 +1,120 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:reactiveUi="http://reactiveui.net"
+		xmlns:l="clr-namespace:OlibKey.Views.Pages;assembly=OlibKey"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="OlibKey.MainWindow"
+        Width="800" Height="450"
+        Title="OlibKey"
+        WindowStartupLocation="CenterScreen"
+		Icon="avares://OlibKey/app.ico"
+		Background="{DynamicResource ThemeWindowBackgroundBrush}"
+        MinWidth="500" MinHeight="350">
+	<Window.KeyBindings>
+		<KeyBinding Command="{Binding OpenDatabaseCommand}" Gesture="Ctrl+O"/>
+		<KeyBinding Command="{Binding SaveDatabaseCommand}" Gesture="Ctrl+S"/>
+		<KeyBinding Command="{Binding AddLoginCommand}" Gesture="Ctrl+N"/>
+		<KeyBinding Command="{Binding OpenPasswordGeneratorWindowCommand}" Gesture="Ctrl+G"/>
+	</Window.KeyBindings>
+	<NativeMenu.Menu>
+		<NativeMenu>
+			<NativeMenuItem Header="{DynamicResource File}">
+				<NativeMenuItem.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
+						<NativeMenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" Gesture="CMD+O"/>
+						<NativeMenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+S"/>
+						<NativeMenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}"/>
+						<NativeMenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+						<NativeMenuItemSeperator/>
+						<NativeMenuItem Header="{DynamicResource AddLogin}" Command="{Binding AddLoginCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+N"/>
+						<NativeMenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+						<NativeMenuItemSeperator/>
+						<NativeMenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}"/>
+						<NativeMenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}" Gesture="CMD+Q"/>
+					</NativeMenu>
+				</NativeMenuItem.Menu>
+			</NativeMenuItem>
+			<NativeMenuItem Header="{DynamicResource Tools}">
+				<NativeMenuItem.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="{DynamicResource PasswordGenerator}" Gesture="CMD+G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
+						<NativeMenuItem Header="{DynamicResource ChangeMasterPassword}"/>
+					</NativeMenu>
+				</NativeMenuItem.Menu>
+			</NativeMenuItem>
+			<NativeMenuItem Header="{DynamicResource Reference}">
+				<NativeMenuItem.Menu>
+					<NativeMenu>
+						<NativeMenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdateCommand}"/>
+						<NativeMenuItem Header="{DynamicResource AboutPrograms}" Command="{Binding OpenAboutWindowCommand}"/>
+					</NativeMenu>
+				</NativeMenuItem.Menu>
+			</NativeMenuItem>
+		</NativeMenu>
+	</NativeMenu.Menu>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" IsVisible="{Binding $parent[TopLevel].(NativeMenu.IsNativeMenuExported), Converter={StaticResource AvaloniaThemesDefaultNativeMenuBarInverseBooleanValueConverter}}" Background="{DynamicResource ThemeBackgroundBrush}" BorderThickness="0 0 0 1" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
+            <MenuItem Header="{DynamicResource File}">
+				<MenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
+				<MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" InputGesture="Ctrl + O"/>
+				<MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" Icon="{DynamicResource SaveIcon}" InputGesture="Ctrl + S" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" Icon="{DynamicResource LockOpenIcon}" IsEnabled="{Binding IsLockDatabase}"/>
+				<MenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" Icon="{DynamicResource LockIcon}" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<Separator Classes="MenuItemSeparators"/>
+				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding AddLoginCommand}" Icon="{DynamicResource PlusIcon}" InputGesture="Ctrl + N" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<MenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Icon="{DynamicResource SearchIcon}"/>
+				<Separator Classes="MenuItemSeparators"/>
+				<MenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}" Icon="{DynamicResource GearIcon}"/>
+                <MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}" Icon="{DynamicResource ExitIcon}"/>
+            </MenuItem>
+			<MenuItem Header="{DynamicResource Tools}">
+				<MenuItem Header="{DynamicResource PasswordGenerator}" InputGesture="Ctrl + G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
+				<MenuItem Header="{DynamicResource ChangeMasterPassword}"/>
+			</MenuItem>
+            <MenuItem Header="{DynamicResource Reference}">
+				<MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdateCommand}" Icon="{DynamicResource DownloadIcon}"/>
+				<MenuItem Header="{DynamicResource AboutPrograms}" Command="{Binding OpenAboutWindowCommand}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource QuestionIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid ColumnDefinitions="0,1*,2*" RowDefinitions="40,*,50">
+			<reactiveUi:RoutedViewHost Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" PageTransition="{x:Null}" Router="{Binding Router}">
+				<reactiveUi:RoutedViewHost.DefaultContent>
+					<l:StartPage/>
+				</reactiveUi:RoutedViewHost.DefaultContent>
+			</reactiveUi:RoutedViewHost>
+			<Border Grid.Column="2" BorderThickness="0 0 0 1" Classes="ButtonsMenu">
+				<TextBlock Text="{Binding NameStorage}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+			</Border>
+			<ListBox x:Name="listBox" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding AccountsList}" SelectedIndex="{Binding SelectedIndex}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
+			<Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0" Classes="ButtonsMenu">
+				<Grid ColumnDefinitions="*,40">
+					<Button Command="{Binding AddLoginCommand}" Content="{DynamicResource Add}" Margin="10" IsEnabled="{Binding IsUnlockDatabase}"/>
+					<Button Grid.Column="1" Margin="0 10 10 10" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Padding="5">
+						<Button.Content>
+							<Image>
+								<Image.Source>
+									<DrawingImage>
+										<DrawingImage.Drawing>
+											<DrawingGroup>
+												<GeometryDrawing Brush="{DynamicResource ThemeIconButtonBrush}"
+																Geometry="F1 M92,92z M0,0z M57.8,2.2C40.7,2.2 26.8,16.3 26.8,33.5 26.8,40.8 29.3,47.4 33.4,52.8L4,82.6C2.3,84.4 2.3,87.2 4,88.9 4.9,89.8 6,90.2 7.1,90.2 8.3,90.2 9.4,89.8 10.3,88.9L39.7,59.1C44.8,62.8 51,64.9 57.7,64.9 74.8,64.9 88.7,50.8 88.7,33.6 88.7,16.4 74.9,2.2 57.8,2.2z M57.8,57C45.1,57 34.8,46.5 34.8,33.6 34.8,20.7 45.1,10.2 57.8,10.2 70.5,10.2 80.8,20.7 80.8,33.6 80.8,46.5 70.5,57 57.8,57z M73.3,34C73.1,35.7 71.6,37 69.9,37 69.7,37 69.6,37 69.4,37 67.5,36.7 66.2,35 66.4,33.1 67.1,27.9 61.3,25.2 61,25.1 59.3,24.3 58.5,22.2 59.3,20.5 60.1,18.8 62.1,18 63.9,18.7 64.3,18.8 74.7,23.6 73.3,34z M66,41.6C66.7,42.3 67.2,43.4 67.2,44.4 67.2,45.5 66.8,46.5 66,47.2 65.3,47.9 64.2,48.4 63.2,48.4 62.2,48.4 61.1,48 60.4,47.2 59.7,46.5 59.2,45.4 59.2,44.4 59.2,43.4 59.6,42.3 60.4,41.6 61.1,40.9 62.2,40.4 63.2,40.4 64.2,40.4 65.2,40.8 66,41.6z" />
+											</DrawingGroup>
+										</DrawingImage.Drawing>
+									</DrawingImage>
+								</Image.Source>
+							</Image>
+						</Button.Content>
+					</Button>
+				</Grid>
+			</Border>
+        </Grid>
+    </DockPanel>
+  
+</Window>

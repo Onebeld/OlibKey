@@ -1,63 +1,63 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<PublishTrimmed>true</PublishTrimmed>
+    	<PublishReadyToRun>true</PublishReadyToRun>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <StartupObject>OlibKey.App</StartupObject>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Authors>Dmitry Zhutkov</Authors>
-    <Version>2.1.0</Version>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-    <FileVersion>2.1.0.0</FileVersion>
-    <PublishReadyToRun>true</PublishReadyToRun>
-    <RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>
-    <Platforms>AnyCPU;x86</Platforms>
-  </PropertyGroup>
+	<PropertyGroup>
+		<RootAllApplicationAssemblies>false</RootAllApplicationAssemblies>
+		<IlcGenerateCompleteTypeMetadata>false</IlcGenerateCompleteTypeMetadata>
+		<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+		<IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
+		<ApplicationIcon>app.ico</ApplicationIcon>
+		<Version>3.0.0</Version>
+		<Authors>M-Eagle Studio</Authors>
+		<Copyright>© M-Eagle Studio 2020</Copyright>
+		<Description>OlibKey - an open source password manager.</Description>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+		<RepositoryType>Publish</RepositoryType>
+		<RepositoryUrl>https://github.com/MagnificentEagle/OlibKey</RepositoryUrl>
+		<PackageTags>olib,password-manager,opensource,program,modern,olibkey,avalonia</PackageTags>
+		<PackageProjectUrl>https://magnificenteagle.github.io/OlibSite</PackageProjectUrl>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>C:\OlibKey\</OutputPath>
-  </PropertyGroup>
+	<ItemGroup Condition="$(RuntimeIdentifier.StartsWith('win'))">
+		<NativeLibrary Include="WindowsApp.lib" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="favicon.ico" />
-    <None Remove="Music\notification.wav" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Hardcodet.NotifyIcon.Wpf.NetCore" Version="1.0.10" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="favicon.ico" />
-    <Resource Include="Music\notification.wav" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Lang.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Lang.settings</DependentUpon>
-    </Compile>
-    <Compile Update="Resource.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Lang.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-
+	<ItemGroup>
+		<Compile Update="**\*.xaml.cs">
+			<DependentUpon>%(Filename)</DependentUpon>
+		</Compile>
+		<AvaloniaResource Include="**\*.xaml">
+			<SubType>Designer</SubType>
+		</AvaloniaResource>
+		<AvaloniaResource Include="Assets\*" />
+		<AvaloniaResource Include="app.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="0.9.999-cibuild0008974-beta" />
+		<PackageReference Include="Avalonia.Desktop" Version="0.9.999-cibuild0008974-beta" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="0.9.999-cibuild0008974-beta" />
+		<PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-29104-01" />
+		<PackageReference Include="NAudio" Version="1.10.0" />
+		<PackageReference Include="System.Reactive" Version="4.4.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<!-- Avalonia relies heavily on reflection. Describe types reflected upon here. -->
+		<RdXmlFile Include="rd.xml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="LICENSE.md">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="ViewModels\Controls\" />
+	</ItemGroup>
 </Project>

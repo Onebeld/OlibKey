@@ -1,0 +1,32 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:OlibKey.Core;assembly=OlibKey"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
+		MinWidth="200"
+		MinHeight="100"
+		MaxWidth="400"
+		Icon="avares://OlibKey/app.ico"
+		WindowStartupLocation="CenterScreen"
+        x:Class="OlibKey.Views.Windows.MessageBox"
+        SizeToContent="WidthAndHeight" CanResize="False">
+	<Grid Name="ContentC" RowDefinitions="*,Auto,40" Width="{Binding $parent.Width}" Height="{Binding $parent.Height}">
+		<Grid Name="Content" ColumnDefinitions="70,*">
+			<Image Name="Icon" Width="40" Margin="10"/>
+			<ScrollViewer Grid.Column="1">
+				<TextBlock VerticalAlignment="Center" Name="Text" TextWrapping="Wrap" Margin="0 0 10 0"/>
+			</ScrollViewer>
+		</Grid>
+		<TextBox Name="ErrorText" Height="150" Grid.Row="1" Margin="10" AcceptsReturn="True" TextWrapping="Wrap"/>
+		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Name="Buttons">
+				<StackPanel.Styles>
+					<Style Selector="Button">
+						<Setter Property="Margin" Value="5"/>
+					</Style>
+				</StackPanel.Styles>
+			</StackPanel>
+		</Border>
+	</Grid>
+</Window>

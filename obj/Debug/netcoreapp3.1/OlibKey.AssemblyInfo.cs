@@ -11,13 +11,16 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Dmitry Zhutkov")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("M-Eagle Studio")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("2.1.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.1.0")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("© M-Eagle Studio 2020")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("OlibKey - an open source password manager.")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("3.0.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("3.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("OlibKey")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OlibKey")]
-[assembly: System.Reflection.AssemblyVersionAttribute("2.1.0.0")]
+[assembly: System.Reflection.AssemblyVersionAttribute("3.0.0.0")]
+[assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/MagnificentEagle/OlibKey")]
 
 // Создано классом WriteCodeFragment MSBuild.
 

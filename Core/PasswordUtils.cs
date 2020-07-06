@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -38,6 +39,7 @@ namespace OlibKey.Core
 
         public static int CheckPasswordStrength(string password)
         {
+			if (password == null) return 0;
             double multi0 = 1.0;
             double multi1 = 1.0;
             double multi2 = 1.0;
@@ -79,5 +81,12 @@ namespace OlibKey.Core
         }
 
         private static double Map(double value, double fromLower, double fromUpper, double toLower, double toUpper) => toLower + (value - fromLower) / (fromUpper - fromLower) * (toUpper - toLower);
-    }
+
+		public static void DeterminingPasswordComplexity(ProgressBar progressBar, TextBox textBox)
+		{
+			int i = CheckPasswordStrength(textBox.Text);
+			progressBar.Value = i > 300 ? 300 : i;
+			ItemControls.ColorProgressBar(progressBar);
+		}
+	}
 }

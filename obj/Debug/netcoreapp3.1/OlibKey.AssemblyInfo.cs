@@ -21,6 +21,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyTitleAttribute("OlibKey")]
 [assembly: System.Reflection.AssemblyVersionAttribute("3.0.0.0")]
 [assembly: System.Reflection.AssemblyMetadataAttribute("RepositoryUrl", "https://github.com/MagnificentEagle/OlibKey")]
+[assembly: System.Resources.NeutralResourcesLanguageAttribute("en-US")]
 
 // Создано классом WriteCodeFragment MSBuild.
 

@@ -8,6 +8,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using OlibKey.Core;
 using OlibKey.ViewModels.Pages;
+using OlibKey.Views.Windows;
 using ReactiveUI;
 
 namespace OlibKey.Views.Pages
@@ -99,5 +100,16 @@ namespace OlibKey.Views.Pages
         {
 	        _txtStartTime.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
         }
+
+		private async void GeneratePassword(object sender, RoutedEventArgs e)
+		{
+			var a = new PasswordGeneratorWindow();
+			a._saveButton.IsVisible = true;
+			bool b = await a.ShowDialog<bool>(App.MainWindow);
+			if (b == true)
+			{
+				_txtPassword.Text = a._tbPassword.Text;
+			}
+		}
 	}
 }

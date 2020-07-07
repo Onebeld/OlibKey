@@ -35,10 +35,10 @@ namespace OlibKey
 				? JsonSerializer.Deserialize<Settings>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json"))
 				: new Settings();
 
-			Current.Styles[2] = !string.IsNullOrEmpty(Settings.ApplyTheme)
+			Current.Styles[2] = !string.IsNullOrEmpty(Settings.Theme)
 				? new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 				{
-					Source = new Uri($"avares://OlibKey/Assets/Themes/{Settings.ApplyTheme}.xaml")
+					Source = new Uri($"avares://OlibKey/Assets/Themes/{Settings.Theme}.xaml")
 				}
 				: new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 				{
@@ -97,7 +97,7 @@ namespace OlibKey
 					float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
 				if (!(latest > current) && b)
 				{
-					await MessageBox.Show(null,
+					await MessageBox.Show(MainWindow,
 						null, (string)Current.FindResource("MB8"), (string)Current.FindResource("Message"),
 						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
 					return;

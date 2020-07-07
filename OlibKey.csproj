@@ -21,8 +21,10 @@
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<RepositoryType>Publish</RepositoryType>
 		<RepositoryUrl>https://github.com/MagnificentEagle/OlibKey</RepositoryUrl>
-		<PackageTags>olib,password-manager,opensource,program,modern,olibkey,avalonia</PackageTags>
+		<PackageTags>olib,password-manager,opensource,program,modern,olibkey,avalonia,dotnet,avaloniaui,cross-platform</PackageTags>
 		<PackageProjectUrl>https://magnificenteagle.github.io/OlibSite</PackageProjectUrl>
+		<PackageIcon>app.png</PackageIcon>
+		<NeutralLanguage>en-US</NeutralLanguage>
 	</PropertyGroup>
 
 	<ItemGroup Condition="$(RuntimeIdentifier.StartsWith('win'))">
@@ -52,6 +54,10 @@
 		<RdXmlFile Include="rd.xml" />
 	</ItemGroup>
 	<ItemGroup>
+	  <None Include="app.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
 	  <None Include="LICENSE.md">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>

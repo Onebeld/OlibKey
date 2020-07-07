@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Reactive;
 using Avalonia;
 using Avalonia.Controls;
 using OlibKey.Structures;
+using OlibKey.Views.Windows;
 using ReactiveUI;
 using Splat;
 

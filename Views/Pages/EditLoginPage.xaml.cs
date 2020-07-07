@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia;
 using OlibKey.Core;
+using OlibKey.Views.Windows;
 
 namespace OlibKey.Views.Pages
 {
@@ -40,6 +41,17 @@ namespace OlibKey.Views.Pages
 		{
 			CheckBox cb = (CheckBox) sender;
 			_txtSecurityCode.PasswordChar = cb.IsChecked == true ? '\0' : '•';
+		}
+
+		private async void GeneratePassword(object sender, RoutedEventArgs e)
+		{
+			var a = new PasswordGeneratorWindow();
+			a._saveButton.IsVisible = true;
+			bool b = await a.ShowDialog<bool>(App.MainWindow);
+			if (b == true)
+			{
+				_txtPassword.Text = a._tbPassword.Text;
+			}
 		}
 	}
 }

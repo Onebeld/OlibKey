@@ -25,7 +25,7 @@ namespace OlibKey.Views.Windows
 				_ => 0
 			};
 
-			_cbTheme.SelectedIndex = App.Settings.ApplyTheme == "Dark" ? 1 : 0;
+			_cbTheme.SelectedIndex = App.Settings.Theme == "Dark" ? 1 : 0;
 
 			_cbTheme.SelectionChanged += ThemeChange;
 			_cbLanguage.SelectionChanged += LanguageChange;
@@ -60,7 +60,7 @@ namespace OlibKey.Views.Windows
 
 		private void ThemeChange(object sender, SelectionChangedEventArgs e)
 		{
-			App.Settings.ApplyTheme = _cbTheme.SelectedIndex switch
+			App.Settings.Theme = _cbTheme.SelectedIndex switch
 			{
 				0 => "Light",
 				1 => "Dark",
@@ -69,7 +69,7 @@ namespace OlibKey.Views.Windows
 
 			Application.Current.Styles[2] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 			{
-				Source = new Uri($"avares://OlibKey/Assets/Themes/{App.Settings.ApplyTheme}.xaml")
+				Source = new Uri($"avares://OlibKey/Assets/Themes/{App.Settings.Theme}.xaml")
 			};
 		}
 	}

@@ -40,7 +40,7 @@
 							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
 							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding NewAccount.Password}" PasswordChar="•"/>
 							<StackPanel Orientation="Horizontal">
-								<Button Content="{DynamicResource Generate}" Margin="5" Padding="5 2"/>
+								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5" Padding="5 2"/>
 								<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword" VerticalAlignment="Center"/>
 							</StackPanel>
 							<DockPanel Margin="5 0">

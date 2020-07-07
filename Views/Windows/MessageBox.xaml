@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
 		MinWidth="200"
 		MinHeight="100"
-		MaxWidth="400"
+		MaxWidth="450"
 		Icon="avares://OlibKey/app.ico"
 		WindowStartupLocation="CenterScreen"
         x:Class="OlibKey.Views.Windows.MessageBox"

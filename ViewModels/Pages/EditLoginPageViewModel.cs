@@ -162,6 +162,15 @@ namespace OlibKey.ViewModels.Pages
 			AccountListI.AccountItem.SecurityCode = SecurityCode;
 			AccountListI.AccountItem.WebSite = WebSite;
 			AccountListI.AccountItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+			if (IsReminderActive)
+			{
+				AccountListI.timer.Interval = new TimeSpan(0, 0, 3);
+				AccountListI.timer.Start();
+			}
+			else
+			{
+				AccountListI.timer.Stop();
+			}
 			AccountListI.EditedAccount();
 
 			EditCompleteCallback?.Invoke(AccountListI);

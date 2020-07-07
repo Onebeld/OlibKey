@@ -21,6 +21,23 @@
 		<Image Source="{StaticResource MEagleImage}" Width="40" Margin="10" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
 			<Grid>
+				<StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
+					<Button Padding="5" x:Name="bGitHub">
+						<Button.Content>
+							<Image Source="{StaticResource GitHubIcon}"/>
+						</Button.Content>
+					</Button>
+					<Button Padding="5" x:Name="bVK" Margin="5 0">
+						<Button.Content>
+							<Image Source="{StaticResource VKIcon}"/>
+						</Button.Content>
+					</Button>
+					<Button x:Name="bFacebook" Padding="5">
+						<Button.Content>
+							<Image Source="{StaticResource FacebookIcon}"/>
+						</Button.Content>
+					</Button>
+				</StackPanel>
 				<Button x:Name="bClose" Content="{StaticResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
 			</Grid>
 		</Border>

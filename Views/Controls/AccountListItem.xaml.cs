@@ -93,12 +93,14 @@ namespace OlibKey.Views.Controls
 				    var reminderWindow = new ReminderWindow
 				    {
 					    AccountListItem = this,
+						_tbName = { Text = AccountItem.AccountName},
+						_tbTime = { Text = AccountItem.Username}
 				    };
 				    reminderWindow.ShowDialog(App.MainWindow);
 			    }
 			    else if (!AccountItem.IsReminderActive) timer.Stop();
 		    }
-		    catch
+		    catch (Exception ex)
 		    {
 			    timer.Stop();
 			    AccountItem.IsReminderActive = false;

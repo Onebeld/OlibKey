@@ -45,7 +45,7 @@
 							<TextBlock Text="{DynamicResource StartTime}" Classes="Heading"/>
 							<TextBox x:Name="tbStartTime" Margin="5" Text="{Binding Username}"/>
 							<StackPanel Orientation="Horizontal">
-								<Button Content="{DynamicResource ZeroOut}" Margin="5" Padding="5 2"/>
+								<Button Content="{DynamicResource ZeroOut}" Margin="5 0 5 5" Padding="5 2"/>
 								<CheckBox Content="{DynamicResource ReminderStarted}" IsChecked="{Binding IsReminderActive}" VerticalAlignment="Center"/>
 							</StackPanel>
 						</StackPanel>

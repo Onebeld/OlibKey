@@ -56,7 +56,7 @@
 							<TextBox x:Name="tbStartTime" Margin="5" Text="{Binding InfAccount.Username}"/>
 							<StackPanel Orientation="Horizontal" Margin="5 0 0 5">
 								<Button Content="{DynamicResource Copy}" Command="{Binding CopyUsernameCommand}" Padding="5 2" Margin="0 0 5 0"/>
-								<CheckBox x:Name="cbIsStartRemember" IsChecked="{Binding InfAccount.IsReminderActive}" Content="{DynamicResource ReminderStarted}" VerticalAlignment="Center"/>
+								<CheckBox x:Name="cbIsStartRemember" IsEnabled="False" IsChecked="{Binding InfAccount.IsReminderActive}" Content="{DynamicResource ReminderStarted}" VerticalAlignment="Center"/>
 							</StackPanel>
 						</StackPanel>
 						<StackPanel IsVisible="{Binding VisibleBankCardSection}">

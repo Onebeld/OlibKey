@@ -2,20 +2,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="350"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="300"
         x:Class="OlibKey.Views.Windows.ReminderWindow"
 		Topmost="True"
 		WindowStartupLocation="CenterScreen"
 		CanResize="False"
-        Title="ReminderWindow" Height="350" Width="350" ShowInTaskbar="False" UseLayoutRounding="True">
+        Title="ReminderWindow" Height="300" Width="350" ShowInTaskbar="False" UseLayoutRounding="True">
 	<Grid RowDefinitions="150,*,50">
 		<Image Source="{DynamicResource ReminderImage}" Margin="10"/>
 		<StackPanel Grid.Row="1">
-			
+			<TextBlock x:Name="tbName" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+			<TextBlock x:Name="tbTime" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeForegroundOpacityBrush}"/>
 		</StackPanel>
 		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
 			<Grid>
-				<Button x:Name="bSave" Content="{DynamicResource PasswordSave}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+				<Button Content="{DynamicResource Disable}" Click="ButtonShutdown" HorizontalAlignment="Left" MinWidth="100"  Margin="10"/>
+                <Button Content="{DynamicResource Pause}" Click="ButtonPause" HorizontalAlignment="Right" MinWidth="100" Margin="10"/>
 			</Grid>
 		</Border>
 	</Grid>

@@ -24,6 +24,8 @@
     <v:String x:Key="NotChosen">Nicht ausgewählt</v:String>
     <v:String x:Key="RemoveSelection">Deaktivieren Sie</v:String>
 
+    <v:String x:Key="Ready">Bereit</v:String>
+
     <v:String x:Key="Collapse">Zusammenbruch</v:String>
     <v:String x:Key="Expand">Erweitern</v:String>
     <v:String x:Key="Reestablish">Wiederherstellen</v:String>

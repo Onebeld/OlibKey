@@ -417,6 +417,28 @@
 				</DrawingImage>
 			</Image.Source>
 		</Image>
+		<Image x:Key="PencilIcon">
+			<Image.Source>
+				<DrawingImage>
+					<DrawingImage.Drawing>
+						<DrawingGroup>
+							<GeometryDrawing Brush="{DynamicResource ThemeForegroundBrush}" Geometry="F1 M92,92z M0,0z M89.1,6.1L85.9,2.9C84,1 81.6,0 78.9,0 78.9,0 78.9,0 78.9,0 76.2,0 73.8,1 71.9,2.9L8.7,66.2C8.3,66.6,8,67,7.8,67.6L0.3,86.5C-0.3,88 0,89.7 1.2,90.8 1.9,91.6 3,92 4,92 4.5,92 5,91.9 5.5,91.7L24.5,84.3C25,84.1,25.5,83.8,25.9,83.4L89.2,20.1C93,16.3,93,10,89.1,6.1z M14.8,71.7L20.4,77.3 11.1,80.9 14.8,71.7z M83.4,14.5L28.2,69.7 22.4,63.9 77.5,8.6C78,8.1 78.6,8 78.9,8 79.2,8 79.8,8.1 80.3,8.6L83.5,11.8C84.2,12.5,84.2,13.7,83.4,14.5z" />
+						</DrawingGroup>
+					</DrawingImage.Drawing>
+				</DrawingImage>
+			</Image.Source>
+		</Image>
+		<Image x:Key="TrashIcon">
+			<Image.Source>
+				<DrawingImage>
+					<DrawingImage.Drawing>
+						<DrawingGroup>
+							<GeometryDrawing Brush="{DynamicResource ThemeForegroundBrush}" Geometry="F1 M92,92z M0,0z M78.4,30.4L75.3,88.2C75.2,90.3,73.4,92,71.3,92L20.7,92C18.6,92,16.8,90.3,16.7,88.2L13.6,30.4C13.5,28.2 15.2,26.3 17.4,26.2 19.6,26.1 21.5,27.8 21.6,30L24.5,84 67.6,84 70.5,30C70.6,27.8 72.5,26.1 74.7,26.2 76.8,26.3 78.5,28.2 78.4,30.4z M89,17C89,19.2,87.2,21,85,21L7,21C4.8,21 3,19.2 3,17 3,14.8 4.8,13 7,13L29,13 29,4C29,2.1,30.3,1,32.2,1L59.8,1C61.7,1,63,2.1,63,4L63,13 85,13C87.2,13,89,14.8,89,17z M36,13L56,13 56,8 36,8 36,13z M37.7,78C37.7,78 37.7,78 37.7,78 39.7,78 41.2,76.1 41.2,74.2L40.2,31C40.2,29.1 38.6,27.5 36.6,27.5 34.7,27.5 33.1,29.1 33.2,31.1L34.2,74.4C34.2,76.3,35.8,78,37.7,78z M54.2,78C56.1,78,57.7,76.4,57.7,74.5L58.7,31.3C58.7,29.4 57.2,27.7 55.3,27.7 53.3,27.7 51.8,29.2 51.7,31.1L50.7,74.3C50.6,76.3 52.2,78 54.2,78 54.1,78 54.1,78 54.2,78z" />
+						</DrawingGroup>
+					</DrawingImage.Drawing>
+				</DrawingImage>
+			</Image.Source>
+		</Image>
 
 		<DrawingImage x:Key="MEagleImage">
 			<DrawingImage.Drawing>

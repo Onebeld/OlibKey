@@ -23,6 +23,8 @@
     <v:String x:Key="NotChosen">Не вибрано</v:String>
     <v:String x:Key="RemoveSelection">Зняти виділення</v:String>
 
+		<v:String x:Key="Ready">Готовий</v:String>
+
     <v:String x:Key="Collapse">Згорнути</v:String>
     <v:String x:Key="Expand">Розгорнути</v:String>
     <v:String x:Key="Reestablish">Відновити</v:String>

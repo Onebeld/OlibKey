@@ -31,6 +31,7 @@ namespace OlibKey
 		public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
 			Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.json")
 				? JsonSerializer.Deserialize<Settings>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json"))
 				: new Settings();

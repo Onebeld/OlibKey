@@ -63,6 +63,7 @@ namespace OlibKey.ViewModels.Pages
         {
 	        NewAccount.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
             AddAccountCallback?.Invoke(NewAccount);
+			App.MainWindow.MessageStatusBar("Not1");
         }
         #endregion
     }

@@ -165,6 +165,7 @@ namespace OlibKey.ViewModels.Pages
 			AccountListI.EditedAccount();
 
 			EditCompleteCallback?.Invoke(AccountListI);
+			App.MainWindow.MessageStatusBar("Not2");
 		}
 		private void BackVoid() => CancelCallback?.Invoke();
 

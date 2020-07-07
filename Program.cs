@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Avalonia;
 using Avalonia.Controls;
@@ -34,6 +35,12 @@ namespace OlibKey
 	    {
 		    try
 		    {
+				string file = args.FirstOrDefault();
+				if (!string.IsNullOrWhiteSpace(file))
+				{
+					App.Settings.PathStorage = file;
+				}
+
 			    App.MainWindowViewModel = new MainWindowViewModel();
 			    Locator.CurrentMutable.RegisterConstant<IScreen>(App.MainWindowViewModel);
 			    Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());

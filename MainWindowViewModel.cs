@@ -14,8 +14,6 @@ using Avalonia.Controls;
 using OlibKey.Core;
 using Path = System.IO.Path;
 using System;
-using DynamicData;
-using System.Reflection.Metadata.Ecma335;
 
 namespace OlibKey
 {
@@ -293,6 +291,8 @@ namespace OlibKey
 
 				ClearAccountsList();
 				SaveDatabase();
+				App.Autosave.Start();
+				App.MainWindow.MessageStatusBar("Not3");
 			}
 		}
 
@@ -306,6 +306,7 @@ namespace OlibKey
 				App.Database.Accounts = AccountsList.Select(item => item.AccountItem).ToList();
 
 				SaveAndLoadAccount.SaveFiles(App.Database, App.Settings.PathStorage, MasterPassword);
+				App.MainWindow.MessageStatusBar("Not4");
 			}
 		}
 		public void ShowSearchWindow()

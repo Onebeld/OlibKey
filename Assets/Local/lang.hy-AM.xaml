@@ -23,6 +23,8 @@
     <v:String x:Key="NotChosen">Ընտրված չէ</v:String>
     <v:String x:Key="RemoveSelection">Elնջել</v:String>
 
+		<v:String x:Key="Ready">Պատրաստ է</v:String>
+
     <v:String x:Key="Collapse">Փլուզվել</v:String>
     <v:String x:Key="Expand">Ընդլայնել</v:String>
     <v:String x:Key="Reestablish">Վերականգնել</v:String>

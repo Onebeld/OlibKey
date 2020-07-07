@@ -24,6 +24,8 @@
     <v:String x:Key="NotChosen">Not chosen</v:String>
     <v:String x:Key="RemoveSelection">Remove selection</v:String>
 
+		<v:String x:Key="Ready">Ready</v:String>
+
     <v:String x:Key="Collapse">Collapse</v:String>
     <v:String x:Key="Expand">Expand</v:String>
     <v:String x:Key="Reestablish">Reestablish</v:String>

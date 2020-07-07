@@ -23,7 +23,7 @@ namespace OlibKey.Core
 
             using var ms = new MemoryStream();
 
-            var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 2000);
+            var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 50000);
             using var aes = new RijndaelManaged {KeySize = 256, BlockSize = 128, Mode = CipherMode.CBC};
             aes.Key = key.GetBytes(aes.KeySize / 8);
             aes.IV = key.GetBytes(aes.BlockSize / 8);
@@ -42,7 +42,7 @@ namespace OlibKey.Core
 
             using var ms = new MemoryStream();
 
-            var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 2000);
+            var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 50000);
             using var aes = new RijndaelManaged {KeySize = 256, BlockSize = 128, Mode = CipherMode.CBC};
             aes.Key = key.GetBytes(aes.KeySize / 8);
             aes.IV = key.GetBytes(aes.BlockSize / 8);

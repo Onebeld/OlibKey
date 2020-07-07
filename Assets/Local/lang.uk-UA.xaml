@@ -62,9 +62,8 @@
     <v:String x:Key="Not1">Елемент збережений успішно!</v:String>
     <v:String x:Key="Not2">Елемент успішно змінено!</v:String>
     <v:String x:Key="Not3">Сховище успішно створено!</v:String>
-
+		<v:String x:Key="Not4">Сховище успішно збережено!</v:String>
 	
-    <v:String x:Key="Specifications">Характеристики</v:String>
     <v:String x:Key="Lowercase">Рядкові (abc)</v:String>
     <v:String x:Key="Uppercase">Заголовні (ABC)</v:String>
     <v:String x:Key="Lenght">Довжина:</v:String>

@@ -63,9 +63,8 @@
     <v:String x:Key="Not1">Item saved successfully!</v:String>
     <v:String x:Key="Not2">Item successfully modified!</v:String>
     <v:String x:Key="Not3">Storage successfully created!</v:String>
-
+		<v:String x:Key="Not4">Storage successfully saved!</v:String>
 		
-    <v:String x:Key="Specifications">Specifications</v:String>
     <v:String x:Key="Lowercase">Lowercase (abc)</v:String>
     <v:String x:Key="Uppercase">Uppercase (ABC)</v:String>
     <v:String x:Key="Lenght">Lenght:</v:String>

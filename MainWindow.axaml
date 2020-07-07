@@ -41,7 +41,7 @@
 				<NativeMenuItem.Menu>
 					<NativeMenu>
 						<NativeMenuItem Header="{DynamicResource PasswordGenerator}" Gesture="CMD+G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
-						<NativeMenuItem Header="{DynamicResource ChangeMasterPassword}"/>
+						<NativeMenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}"/>
 					</NativeMenu>
 				</NativeMenuItem.Menu>
 			</NativeMenuItem>
@@ -72,7 +72,7 @@
             </MenuItem>
 			<MenuItem Header="{DynamicResource Tools}">
 				<MenuItem Header="{DynamicResource PasswordGenerator}" InputGesture="Ctrl + G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
-				<MenuItem Header="{DynamicResource ChangeMasterPassword}"/>
+				<MenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
 			</MenuItem>
             <MenuItem Header="{DynamicResource Reference}">
 				<MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdateCommand}" Icon="{DynamicResource DownloadIcon}"/>

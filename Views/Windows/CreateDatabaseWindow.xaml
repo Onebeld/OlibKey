@@ -18,12 +18,12 @@
 						<TextBlock Text="{StaticResource Directory}" Classes="Heading"/>
 						<TextBox x:Name="tbPathDatabase" Margin="5" IsReadOnly="True"/>
 						<StackPanel Orientation="Horizontal" Margin="5 0">
-							<Button x:Name="bSelectPath" Content="{DynamicResource Select}" Padding="5 2"/>
+							<Button x:Name="bSelectPath" Content="{StaticResource Select}" Padding="5 2"/>
 						</StackPanel>
 						<Separator Margin="15,5"/>
 						<TextBlock Text="{StaticResource MasterPassword}" Classes="Heading"/>
 						<TextBox x:Name="tbPassword" Margin="5" PasswordChar="•"/>
-						<CheckBox Margin="5" Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
+						<CheckBox Margin="5" Content="{StaticResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
 						<DockPanel Margin="5 0">
 							<TextBlock Text="{StaticResource Complexity}" VerticalAlignment="Center"/>
 							<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>

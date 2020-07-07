@@ -40,7 +40,7 @@ namespace OlibKey
 		public ReactiveCommand<Unit, Unit> LockDatabaseCommand { get; }
 		public ReactiveCommand<Unit, Unit> OpenDatabaseCommand { get; }
 		public ReactiveCommand<Unit, Unit> ShowSearchWindowCommand { get; }
-
+		public ReactiveCommand<Unit, Unit> ChangeMasterPasswordCommand { get; }
 		public ReactiveCommand<Unit, Unit> OpenPasswordGeneratorWindowCommand { get; }
 		public ReactiveCommand<Unit, Unit> OpenAboutWindowCommand { get; }
 		public ReactiveCommand<Unit, Unit> OpenSettingsWindowCommand { get; }
@@ -111,6 +111,7 @@ namespace OlibKey
 			ShowSearchWindowCommand = ReactiveCommand.Create(ShowSearchWindow);
 			OpenPasswordGeneratorWindowCommand = ReactiveCommand.Create(() => { new PasswordGeneratorWindow().ShowDialog(App.MainWindow); });
 			OpenAboutWindowCommand = ReactiveCommand.Create(() => { new AboutWindow().ShowDialog(App.MainWindow); });
+			ChangeMasterPasswordCommand = ReactiveCommand.Create(ChangeMasterPassword);
 
 
 			if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) IsOSX = true;
@@ -142,7 +143,9 @@ namespace OlibKey
 	        passwordWindow.ShowDialog(App.MainWindow);
 		}
 
-        public void LockDatabase()
+		public void ChangeMasterPassword() => new ChangeMasterPasswordWindow().ShowDialog(App.MainWindow);
+
+		public void LockDatabase()
         {
 			App.Autosave.Stop();
 			SaveDatabase();
@@ -291,6 +294,7 @@ namespace OlibKey
 
 				ClearAccountsList();
 				SaveDatabase();
+				Router.Navigate.Execute(new StartPageViewModel());
 				App.Autosave.Start();
 				App.MainWindow.MessageStatusBar("Not3");
 			}

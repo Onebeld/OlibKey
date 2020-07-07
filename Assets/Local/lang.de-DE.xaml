@@ -63,9 +63,9 @@
     <v:String x:Key="Not1">Artikel erfolgreich gespeichert!</v:String>
     <v:String x:Key="Not2">Artikel erfolgreich geändert!</v:String>
     <v:String x:Key="Not3">Speicher erfolgreich erstellt!</v:String>
+	<v:String x:Key="Not4">Speicher erfolgreich gespeichert!</v:String>
 
 		
-    <v:String x:Key="Specifications">Eigenschaften</v:String>
     <v:String x:Key="Lowercase">Kleinbuchstaben (abc)</v:String>
     <v:String x:Key="Uppercase">Großbuchstaben (ABC)</v:String>
     <v:String x:Key="Lenght">Länge:</v:String>

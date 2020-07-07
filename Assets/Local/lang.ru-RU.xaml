@@ -64,7 +64,6 @@
     <v:String x:Key="Not3">Хранилище успешно создано!</v:String>
 	<v:String x:Key="Not4">Хранилище успешно сохранено!</v:String>
 	
-    <v:String x:Key="Specifications">Характеристики</v:String>
     <v:String x:Key="Lowercase">Строчные (abc)</v:String>
     <v:String x:Key="Uppercase">Заглавные (ABC)</v:String>
     <v:String x:Key="Lenght">Длина:</v:String>

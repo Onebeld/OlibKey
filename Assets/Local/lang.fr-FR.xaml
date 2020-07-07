@@ -63,9 +63,8 @@
     <v:String x:Key="Not1">L'élément a bien été enregistré!</v:String>
     <v:String x:Key="Not2">Élément modifié avec succès!</v:String>
     <v:String x:Key="Not3">Le stockage a été créé avec succès!</v:String>
+		<v:String x:Key="Not4">Stockage enregistré avec succès!</v:String>
 
-
-    <v:String x:Key="Specifications">Caractéristiques</v:String>
     <v:String x:Key="Lowercase">Minuscules (abc)</v:String>
     <v:String x:Key="Uppercase">Majuscules (ABC)</v:String>
     <v:String x:Key="Lenght">Longueur:</v:String>

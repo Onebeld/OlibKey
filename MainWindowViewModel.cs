@@ -213,7 +213,8 @@ namespace OlibKey
             Router.Navigate.Execute(new StartPageViewModel());
         }
         public void StartPageVoid() => Router.Navigate.Execute(new StartPageViewModel());
-        public void BackPageVoid() => Router.NavigateBack.Execute();
+		public void BackPageVoid(AccountListItem a) => Router.Navigate.Execute(new LoginInformationPageViewModel(a) { EditContentCallback = EditAccount });
+
 		public void EditCompleteVoid(AccountListItem a)
 		{
 			a.EditedAccount();

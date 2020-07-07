@@ -25,7 +25,7 @@
 						</ComboBox>
 					</StackPanel>
 				</Border>
-				<Border Classes="BorderStyle" Margin="0,5" Padding="0 5">
+				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
 					<StackPanel>
 						<TextBlock Text="{DynamicResource Name}" Classes="Heading"/>
 						<c:TextBoxPlus Margin="5" Text="{Binding NewAccount.AccountName}"/>
@@ -112,10 +112,28 @@
 						</ComboBox>
 					</StackPanel>
 				</Border>
-				<Border Classes="BorderStyle">
-					<StackPanel Margin="5">
-						<TextBlock Text="{DynamicResource Notes}" FontWeight="Bold"/>
-						<TextBox Margin="0 5 0 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewAccount.Note}"/>
+				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
+					<StackPanel>
+						<TextBlock Text="{DynamicResource Notes}" Classes="Heading"/>
+						<TextBox Margin="5 5 5 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewAccount.Note}"/>
+					</StackPanel>
+				</Border>
+				<TextBlock Text="Пользовательские элементы" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
+				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
+					<StackPanel>
+						<ScrollViewer>
+							<ItemsRepeater Items="{Binding CustomElements}"/>
+						</ScrollViewer>
+						<TextBlock Text="Добавить элемент" Classes="Heading"/>
+							<DockPanel Margin="5">
+								<TextBlock Text="Тип:" VerticalAlignment="Center" Margin="0 0 5 0"/>
+								<ComboBox x:Name="TypeCustomElement" SelectedIndex="{Binding Type}">
+									<ComboBoxItem Content="Текстовое"/>
+									<ComboBoxItem Content="Скрытое"/>
+									<ComboBoxItem Content="Логическое"/>
+								</ComboBox>
+							</DockPanel>
+						<Button Content="{DynamicResource Add}" Command="{Binding AddCustomElementCommand}" Margin="5 0 5 0"/>
 					</StackPanel>
 				</Border>
 			</StackPanel>

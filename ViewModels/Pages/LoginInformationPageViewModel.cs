@@ -29,11 +29,19 @@ namespace OlibKey.ViewModels.Pages
 		public ReactiveCommand<Unit, Unit> OpenWebSiteCommand { get; }
 
 		private int _selectionFolderIndex;
+		private bool IsVisible { get; set; } = true;
 
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
 			set => this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
+		}
+
+		private ObservableCollection<CustomElementListItem> customElements;
+		public ObservableCollection<CustomElementListItem> CustomElements
+		{
+			get => customElements;
+			set => this.RaiseAndSetIfChanged(ref customElements, value);
 		}
 
 		public IScreen HostScreen { get; }
@@ -58,6 +66,7 @@ namespace OlibKey.ViewModels.Pages
 
 			InfAccount = acc.AccountItem;
 			AccountItem = acc;
+			CustomElements = new ObservableCollection<CustomElementListItem>();
 
 			switch (InfAccount.TypeAccount)
 			{
@@ -124,6 +133,19 @@ namespace OlibKey.ViewModels.Pages
 					SelectionFolderIndex = Folders.IndexOf(i);
 					break;
 				}
+			}
+
+			foreach (var i in InfAccount.CustomElements)
+			{
+				CustomElements.Add(new CustomElementListItem(new Housing
+				{
+					CustomElement = i,
+					IsEnabled = false
+				}));
+			}
+			if (CustomElements.Count == 0)
+			{
+				IsVisible = false;
 			}
 		}
 	}

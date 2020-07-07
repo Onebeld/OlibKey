@@ -63,7 +63,4 @@
 	    <PackagePath></PackagePath>
 	  </None>
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="ViewModels\Controls\" />
-	</ItemGroup>
 </Project>

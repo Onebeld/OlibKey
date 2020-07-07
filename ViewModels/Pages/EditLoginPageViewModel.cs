@@ -24,6 +24,16 @@ namespace OlibKey.ViewModels.Pages
 		private ReactiveCommand<Unit,Unit> SaveAccountCommand { get; }
 		private ReactiveCommand<Unit,Unit> DeleteAccountCommand { get; }
 		private ReactiveCommand<Unit, Unit> CancelCommand { get; }
+		public ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
+
+		private ObservableCollection<CustomElementListItem> customElements;
+		public ObservableCollection<CustomElementListItem> CustomElements
+		{
+			get => customElements;
+			set => this.RaiseAndSetIfChanged(ref customElements, value);
+		}
+
+		public int Type { get; set; }
 
 		#region AccountInfo
 		public string AccountName { get; set; }
@@ -52,8 +62,6 @@ namespace OlibKey.ViewModels.Pages
 		#endregion
 		public string Note { get; set; }
 
-		public List<CustomElement> CustomElements;
-
 		#endregion
 
 		private int _selectionFolderIndex;
@@ -67,7 +75,7 @@ namespace OlibKey.ViewModels.Pages
 		private ObservableCollection<CustomFolder> Folders { get; set; }
 
 		public Action<AccountListItem> EditCompleteCallback;
-		public Action CancelCallback;
+		public Action<AccountListItem> CancelCallback;
 		public Action DeleteAccountCallback;
 
 		public AccountListItem AccountListI;
@@ -80,12 +88,13 @@ namespace OlibKey.ViewModels.Pages
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
+			CustomElements = new ObservableCollection<CustomElementListItem>();
+
 			AccountListI = acc;
 
 			AccountName = acc.AccountItem.AccountName;
 			Username = acc.AccountItem.Username;
 			Note = acc.AccountItem.Note;
-			CustomElements = acc.AccountItem.CustomElements;
 
 			switch (acc.AccountItem.TypeAccount)
 			{
@@ -130,6 +139,7 @@ namespace OlibKey.ViewModels.Pages
 			SaveAccountCommand = ReactiveCommand.Create(SaveAccountVoid);
 			CancelCommand = ReactiveCommand.Create(BackVoid);
 			DeleteAccountCommand = ReactiveCommand.Create(DeleteAccountVoid);
+			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
 
 			Folders = new ObservableCollection<CustomFolder>();
 			Folders.Add(new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") });
@@ -146,6 +156,18 @@ namespace OlibKey.ViewModels.Pages
 					break;
 				}
 			}
+
+			foreach (var i in acc.AccountItem.CustomElements)
+			{
+				CustomElements.Add(new CustomElementListItem(new Housing
+				{
+					CustomElement = i,
+					IsEnabled = true
+				}){
+					ID = Guid.NewGuid().ToString("N"),
+					DeleteCustomElement = DeleteCustomElement
+				});
+			}
 		}
 
 		private void SaveAccountVoid()
@@ -161,6 +183,13 @@ namespace OlibKey.ViewModels.Pages
 			AccountListI.AccountItem.Password = Password;
 			AccountListI.AccountItem.SecurityCode = SecurityCode;
 			AccountListI.AccountItem.WebSite = WebSite;
+
+			AccountListI.AccountItem.CustomElements = new List<CustomElement>();
+
+			foreach (var item in CustomElements)
+			{
+				AccountListI.AccountItem.CustomElements.Add(item.HousingElement.CustomElement);
+			}
 			AccountListI.AccountItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 			if (IsReminderActive)
 			{
@@ -169,14 +198,15 @@ namespace OlibKey.ViewModels.Pages
 			}
 			else
 			{
-				AccountListI.timer.Stop();
+				if (AccountListI.timer != null)
+					AccountListI.timer.Stop();
 			}
 			AccountListI.EditedAccount();
 
 			EditCompleteCallback?.Invoke(AccountListI);
 			App.MainWindow.MessageStatusBar("Not2");
 		}
-		private void BackVoid() => CancelCallback?.Invoke();
+		private void BackVoid() => CancelCallback?.Invoke(AccountListI);
 
 		private async void DeleteAccountVoid()
 		{
@@ -186,6 +216,31 @@ namespace OlibKey.ViewModels.Pages
 			if (r == MessageBox.MessageBoxResult.Yes)
 			{
 				DeleteAccountCallback?.Invoke();
+			}
+		}
+
+		private void AddCustomElement()
+		{
+			CustomElements.Add(new CustomElementListItem(new Housing
+			{
+				CustomElement = new CustomElement { Type = Type },
+				IsEnabled = true
+			})
+			{
+				ID = Guid.NewGuid().ToString("N"),
+				DeleteCustomElement = DeleteCustomElement
+			});
+		}
+
+		private void DeleteCustomElement(string id)
+		{
+			foreach (var item in CustomElements)
+			{
+				if (item.ID == id)
+				{
+					CustomElements.Remove(item);
+					break;
+				}
 			}
 		}
 	}

@@ -1,0 +1,152 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Views.Pages.LoginInformationPage">
+	<UserControl.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="IsReadOnly" Value="True"/>
+		</Style>
+	</UserControl.Styles>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="50"/>
+		</Grid.RowDefinitions>
+
+		<ScrollViewer VerticalScrollBarVisibility="Auto">
+			<StackPanel Margin="10">
+				<TextBlock Text="{DynamicResource ItemInformation}" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontSize="18" FontWeight="Bold" Margin="0 0 0 5"/>
+				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
+					<StackPanel>
+						<TextBlock Text="{DynamicResource Name}" Classes="Heading"/>
+						<TextBox Margin="5" Text="{Binding LoginInformation.Name}"/>
+
+						<StackPanel IsVisible="{Binding VisiblePasswordSection}">
+							<Separator Margin="15,5"/>
+							<TextBlock Text="{DynamicResource Username}" Classes="Heading"/>
+							<TextBox  Margin="5" Text="{Binding LoginInformation.Username}"/>
+							<Button Margin="5 0 0 5" Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyUsernameCommand}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
+							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding LoginInformation.Password}" PasswordChar="•"/>
+							<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+								<Button Content="{DynamicResource Copy}" Command="{Binding CopyPasswordCommand}" Padding="5 2" Margin="0 0 5 0"/>
+								<CheckBox x:Name="cbHide" Content="{DynamicResource Show}" VerticalAlignment="Center" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
+							</StackPanel>
+							<DockPanel Margin="5 0">
+								<TextBlock Text="{DynamicResource Complexity}" VerticalAlignment="Center"/>
+								<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>
+							</DockPanel>
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource WebSite}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding LoginInformation.WebSite}"/>
+							<StackPanel Orientation="Horizontal" Margin="5 0 0 5">
+								<Button Content="{DynamicResource GoTo}" Command="{Binding OpenWebSiteCommand}" Padding="5 2" Margin="0 0 5 0"/>
+								<Button Content="{DynamicResource Copy}" Command="{Binding CopyWebSiteCommand}" Padding="5 2"/>
+							</StackPanel>
+						</StackPanel>
+						<StackPanel IsVisible="{Binding VisibleReminderSection}">
+							<Separator/>
+							<TextBlock Text="{DynamicResource StartTime}" Classes="Heading"/>
+							<TextBox x:Name="tbStartTime" Margin="5" Text="{Binding LoginInformation.Username}"/>
+							<StackPanel Orientation="Horizontal" Margin="5 0 0 5">
+								<Button Content="{DynamicResource Copy}" Command="{Binding CopyUsernameCommand}" Padding="5 2" Margin="0 0 5 0"/>
+								<CheckBox x:Name="cbIsStartRemember" IsEnabled="False" IsChecked="{Binding LoginInformation.IsReminderActive}" Content="{DynamicResource ReminderStarted}" VerticalAlignment="Center"/>
+							</StackPanel>
+						</StackPanel>
+						<StackPanel IsVisible="{Binding VisibleBankCardSection}">
+							<Separator/>
+							<TextBlock Text="{DynamicResource CartType}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding LoginInformation.TypeBankCard}"/>
+
+							<Separator/>
+							<TextBlock Text="{DynamicResource CardNumber}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding LoginInformation.Username}"/>
+							<Button Margin="5 0 0 5" Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyUsernameCommand}" Padding="5 2"/>
+
+							<Separator/>
+							<TextBlock Text="{DynamicResource YearOfService}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding LoginInformation.DateCard}"/>
+							<Button Margin="5 0 0 5" Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyDateCardCommand}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource SecurityCodeCard}" Classes="Heading"/>
+							<TextBox x:Name="txtSecurityCode" Margin="5" Text="{Binding LoginInformation.SecurityCode}" PasswordChar="•"/>
+							<StackPanel Orientation="Horizontal" Margin="5 0 0 5">
+								<Button Content="{DynamicResource Copy}" Command="{Binding CopySecurityCodeCommand}" Padding="5 2" Margin="0 0 5 0"/>
+								<CheckBox Content="{DynamicResource Show}" Checked="CheckedSecurityCode" Unchecked="CheckedSecurityCode" VerticalAlignment="Center"/>
+							</StackPanel>
+						</StackPanel>
+
+						<StackPanel IsVisible="{Binding VisiblePersonalDataSection}">
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource FullName}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding LoginInformation.Username}"/>
+							<Button Margin="5 0 0 5" HorizontalAlignment="Left" Content="{DynamicResource Copy}" Command="{Binding CopyUsernameCommand}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource PassportSeriesAndNumber}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding LoginInformation.PersonalDataNumber}"/>
+							<Button Margin="5 0 0 5" HorizontalAlignment="Left" Content="{DynamicResource Copy}" Command="{Binding CopyPersonalDataNumberCommand}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource PlaceOfIssue}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding LoginInformation.PersonalDataPlaceOfIssue}"/>
+							<Button Margin="5 0 0 5" HorizontalAlignment="Left" Content="{DynamicResource Copy}" Command="{Binding CopyPersonalDataPlaceOfIssueCommand}" Padding="5 2"/>
+						</StackPanel>
+
+						<Separator/>
+
+						<TextBlock Text="{DynamicResource CustomFolder}" Classes="Heading"/>
+						<ComboBox Margin="5" Items="{Binding Folders}" SelectedIndex="{Binding SelectionFolderIndex}" IsEnabled="False">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding Name}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+				<Border Classes="BorderStyle">
+					<StackPanel Margin="5">
+						<TextBlock Text="{DynamicResource Notes}" FontWeight="Bold"/>
+						<TextBox Margin="0 5 0 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding LoginInformation.Note}"/>
+					</StackPanel>
+				</Border>
+				<StackPanel IsVisible="{Binding IsVisible}">
+					<TextBlock Text="Пользовательские элементы" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
+					<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
+						<StackPanel>
+							<ScrollViewer>
+								<ItemsRepeater Items="{Binding CustomElements}"/>
+							</ScrollViewer>
+						</StackPanel>
+					</Border>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+					<TextBlock Text="{DynamicResource Create}" Margin="0 0 5 5" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+					<TextBlock Text="{Binding LoginInformation.TimeCreate}" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+				</StackPanel>
+				<StackPanel IsVisible="{Binding VisibleDateChanged}" Orientation="Horizontal">
+					<TextBlock Text="{DynamicResource Update}" Margin="0 0 5 5" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+					<TextBlock Text="{Binding LoginInformation.TimeChanged}" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+
+		<Border BorderThickness="0 1 0 0" Grid.Row="1" Classes="ButtonsMenu">
+			<StackPanel Orientation="Horizontal" Margin="10">
+				<Button Content="{DynamicResource ChangeP}" Command="{Binding EditContentCommand}"/>
+			</StackPanel>
+		</Border>
+	</Grid>
+</UserControl>

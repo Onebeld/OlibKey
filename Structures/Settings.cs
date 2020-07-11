@@ -2,7 +2,7 @@
 {
     public class Settings
     {
-	    public string PathStorage { get; set; }
+	    public string PathDatabase { get; set; }
 		public string Theme { get; set; } = "Dark";
 		public string Language { get; set; }
 		public bool FirstRun { get; set; } = true;

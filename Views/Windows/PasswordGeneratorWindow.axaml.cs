@@ -11,10 +11,7 @@ namespace OlibKey.Views.Windows
 		public TextBox _tbPassword;
 		public Button _saveButton;
 
-		public PasswordGeneratorWindow()
-		{
-			InitializeComponent();
-		}
+		public PasswordGeneratorWindow() => InitializeComponent();
 
 		private void InitializeComponent()
 		{
@@ -33,10 +30,10 @@ namespace OlibKey.Views.Windows
 				const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 				const string number = "0123456789";
 				const string special = @"~!@#$%^&*():;[]{}<>,.?/\|";
-				var other = App.Settings.GeneratorTextOther;
+				string other = App.Settings.GeneratorTextOther;
 
-				var allowed = "";
-				var password = "";
+				string allowed = "";
+				string password = "";
 				if (App.Settings.GeneratorAllowLowercase) allowed += lower;
 				if (App.Settings.GeneratorAllowUppercase) allowed += upper;
 				if (App.Settings.GeneratorAllowNumber) allowed += number;
@@ -47,8 +44,8 @@ namespace OlibKey.Views.Windows
 					password += "_";
 				}
 				if (App.Settings.GeneratorAllowOther) allowed += other;
-				var minChars = int.Parse(App.Settings.GenerationCount);
-				var numChars = Crypto.RandomInteger(minChars, minChars);
+				int minChars = int.Parse(App.Settings.GenerationCount);
+				int numChars = Crypto.RandomInteger(minChars, minChars);
 				while (password.Length < numChars)
 					password += allowed.Substring(Crypto.RandomInteger(0, allowed.Length - 1), 1);
 				password = RandomizeString(password);
@@ -56,7 +53,7 @@ namespace OlibKey.Views.Windows
 			}
 			catch
 			{
-				MessageBox.Show(this, null,(string)Application.Current.FindResource("MB7"), (string)Application.Current.FindResource("Error"),
+				_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("MB7"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 				return _tbPassword.Text;
 			}
@@ -64,7 +61,7 @@ namespace OlibKey.Views.Windows
 		private void ClickGeneratePassword(object sender, RoutedEventArgs e) => _tbPassword.Text = RandomPassword();
 		private static string RandomizeString(string str)
 		{
-			var result = "";
+			string result = "";
 			while (str.Length > 0)
 			{
 				int i = Crypto.RandomInteger(0, str.Length - 1);
@@ -80,9 +77,6 @@ namespace OlibKey.Views.Windows
 
 			Close(true);
 		}
-		private void CopyGeneratedPassword(object sender, RoutedEventArgs e)
-		{
-			Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
-		}
+		private void CopyGeneratedPassword(object sender, RoutedEventArgs e) => Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
 	}
 }

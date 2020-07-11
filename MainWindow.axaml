@@ -15,7 +15,7 @@
 	<Window.KeyBindings>
 		<KeyBinding Command="{Binding OpenDatabaseCommand}" Gesture="Ctrl+O"/>
 		<KeyBinding Command="{Binding SaveDatabaseCommand}" Gesture="Ctrl+S"/>
-		<KeyBinding Command="{Binding AddLoginCommand}" Gesture="Ctrl+N"/>
+		<KeyBinding Command="{Binding CreateLoginCommand}" Gesture="Ctrl+N"/>
 		<KeyBinding Command="{Binding OpenPasswordGeneratorWindowCommand}" Gesture="Ctrl+G"/>
 	</Window.KeyBindings>
 	<NativeMenu.Menu>
@@ -29,7 +29,7 @@
 						<NativeMenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}"/>
 						<NativeMenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
 						<NativeMenuItemSeperator/>
-						<NativeMenuItem Header="{DynamicResource AddLogin}" Command="{Binding AddLoginCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+N"/>
+						<NativeMenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+N"/>
 						<NativeMenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
 						<NativeMenuItemSeperator/>
 						<NativeMenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}"/>
@@ -64,7 +64,7 @@
 				<MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" Icon="{DynamicResource LockOpenIcon}" IsEnabled="{Binding IsLockDatabase}"/>
 				<MenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" Icon="{DynamicResource LockIcon}" IsEnabled="{Binding IsUnlockDatabase}"/>
 				<Separator Classes="MenuItemSeparators"/>
-				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding AddLoginCommand}" Icon="{DynamicResource PlusIcon}" InputGesture="Ctrl + N" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" Icon="{DynamicResource PlusIcon}" InputGesture="Ctrl + N" IsEnabled="{Binding IsUnlockDatabase}"/>
 				<MenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Icon="{DynamicResource SearchIcon}"/>
 				<Separator Classes="MenuItemSeparators"/>
 				<MenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}" Icon="{DynamicResource GearIcon}"/>
@@ -92,10 +92,10 @@
 			<Border Grid.Column="2" BorderThickness="0 0 0 1" Classes="ButtonsMenu">
 				<TextBlock Text="{Binding NameStorage}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
 			</Border>
-			<ListBox x:Name="listBox" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding AccountsList}" SelectedIndex="{Binding SelectedIndex}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
+			<ListBox x:Name="listBox" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding LoginList}" SelectedIndex="{Binding SelectedIndex}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
 			<Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0" Classes="ButtonsMenu">
 				<Grid ColumnDefinitions="*,40">
-					<Button Command="{Binding AddLoginCommand}" Content="{DynamicResource Add}" Margin="10" IsEnabled="{Binding IsUnlockDatabase}"/>
+					<Button Command="{Binding CreateLoginCommand}" Content="{DynamicResource Add}" Margin="10" IsEnabled="{Binding IsUnlockDatabase}"/>
 					<Button Grid.Column="1" Margin="0 10 10 10" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Padding="5">
 						<Button.Content>
 							<Image>

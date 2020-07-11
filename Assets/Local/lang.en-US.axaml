@@ -1,0 +1,149 @@
+﻿<Style xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=netstandard">
+	<Style.Resources>
+		<v:String x:Key="File">File</v:String>
+		<v:String x:Key="Tools">Tools</v:String>
+		<v:String x:Key="Reference">Reference</v:String>
+		<v:String x:Key="Add">Add</v:String>
+		<v:String x:Key="CreateBase">Create storage</v:String>
+		<v:String x:Key="OpenBase">Open storage</v:String>
+		<v:String x:Key="SaveBase">Save storage</v:String>
+		<v:String x:Key="AddLogin">Add log in</v:String>
+		<v:String x:Key="Settings">Settings</v:String>
+		<v:String x:Key="ExitFrom">Exit from OlibKey</v:String>
+		<v:String x:Key="PasswordGenerator">Password generator</v:String>
+		<v:String x:Key="ChangeMasterPassword">Change Master Password</v:String>
+		<v:String x:Key="AboutPrograms">About the program</v:String>
+		<v:String x:Key="CheckUpdates">Check for Updates</v:String>
+		<v:String x:Key="Search">Search</v:String>
+		<v:String x:Key="CreateFolder">Create folder</v:String>
+		<v:String x:Key="AllItems">All items</v:String>
+		<v:String x:Key="CustomFolder">Custom folder</v:String>
+		<v:String x:Key="NotChosen">Not chosen</v:String>
+		<v:String x:Key="RemoveSelection">Remove selection</v:String>
+
+		<v:String x:Key="Ready">Ready</v:String>
+
+		<v:String x:Key="Collapse">Collapse</v:String>
+		<v:String x:Key="Expand">Expand</v:String>
+		<v:String x:Key="Reestablish">Reestablish</v:String>
+
+		<v:String x:Key="Password">Password:</v:String>
+		<v:String x:Key="Password+">Password</v:String>
+		<v:String x:Key="Show">Schow</v:String>
+		<v:String x:Key="Complexity">Complexity:</v:String>
+		<v:String x:Key="ChangeP">Change</v:String>
+		<v:String x:Key="Back">Back</v:String>
+		<v:String x:Key="Done">Done</v:String>
+
+		<v:String x:Key="Yes">Yes</v:String>
+		<v:String x:Key="No">No</v:String>
+		<v:String x:Key="Ok">Ok</v:String>
+
+		<v:String x:Key="ListOfItems">List of items</v:String>
+		<v:String x:Key="LockStorage">Lock storage</v:String>
+		<v:String x:Key="UnlockStorage">Unlock storage</v:String>
+		<v:String x:Key="ShowOPM">Show OlibKey</v:String>
+
+		<v:String x:Key="MB1">You must first upload or create storage!</v:String>
+		<v:String x:Key="Error">Error</v:String>
+		<v:String x:Key="Message">Message</v:String>
+		<v:String x:Key="MB2">Are you sure you want to delete the item?</v:String>
+		<v:String x:Key="MB3">Wrong password master!</v:String>
+		<v:String x:Key="MB4">Update Available! Want to go to the download site?</v:String>
+		<v:String x:Key="MB5">Failed to check for update</v:String>
+		<v:String x:Key="MB6">You cannot require characters from an empty string!</v:String>
+		<v:String x:Key="MB7">No checkmarks selected or password length specified!</v:String>
+		<v:String x:Key="MB8">There are no new updates at this time.</v:String>
+
+		<v:String x:Key="Successfully">Successfully!</v:String>
+
+		<v:String x:Key="Not1">Item saved successfully!</v:String>
+		<v:String x:Key="Not2">Item successfully modified!</v:String>
+		<v:String x:Key="Not3">Storage successfully created!</v:String>
+		<v:String x:Key="Not4">Storage successfully saved!</v:String>
+
+		<v:String x:Key="Lowercase">Lowercase (abc)</v:String>
+		<v:String x:Key="Uppercase">Uppercase (ABC)</v:String>
+		<v:String x:Key="Lenght">Lenght:</v:String>
+		<v:String x:Key="Numbers">Numbers (123)</v:String>
+		<v:String x:Key="Special">Special ($%#)</v:String>
+		<v:String x:Key="Underscore">Underscore (_)</v:String>
+		<v:String x:Key="Space">Space ( )</v:String>
+		<v:String x:Key="Generate">Generate</v:String>
+		<v:String x:Key="PasswordSave">Save</v:String>
+
+		<v:String x:Key="OldMasterPassword">Old master password</v:String>
+		<v:String x:Key="NewMasterPassword">New master password</v:String>
+
+		<v:String x:Key="AccessText">Note! If you forget the master password, you cannot restore the storage!</v:String>
+		<v:String x:Key="MasterPassword">Master password</v:String>
+		<v:String x:Key="Directory">Storage path</v:String>
+		<v:String x:Key="Select">Select</v:String>
+
+		<v:String x:Key="Open">Open</v:String>
+		<v:String x:Key="EnterMP">Enter Master Password</v:String>
+
+		<v:String x:Key="Version">Version:</v:String>
+		<v:String x:Key="Close">Close</v:String>
+		<v:String x:Key="AccessText1">Allows you to store passwords, notes and other personal data in encrypted form.</v:String>
+		<v:String x:Key="AccessText2">The program is published under the GPLv3 license.</v:String>
+
+		<v:String x:Key="Language">Language:</v:String>
+		<v:String x:Key="Theme">Theme:</v:String>
+		<v:String x:Key="CBHideProgram">Hide program when closing</v:String>
+		<v:String x:Key="CBAutorunApplication">Run with Windows</v:String>
+
+		<v:String x:Key="Light">Light</v:String>
+		<v:String x:Key="Dark">Dark</v:String>
+
+		<v:String x:Key="Reminder">Reminder</v:String>
+		<v:String x:Key="Pause">Pause</v:String>
+		<v:String x:Key="Disable">Disable</v:String>
+		<v:String x:Key="ZeroOut">Reset</v:String>
+		<v:String x:Key="ReminderStarted">Reminder started</v:String>
+		<v:String x:Key="StartTime">Start time</v:String>
+
+		<v:String x:Key="ErrorElement1">Error in item:</v:String>
+		<v:String x:Key="ErrorElement2">The time is incorrect in the element, so the reminder is disabled. Try changing the program language, or change to the correct time format by clicking on the "Reset" button.</v:String>
+
+
+		<v:String x:Key="Name">Name</v:String>
+		<v:String x:Key="Username">Username</v:String>
+		<v:String x:Key="WebSite">Web-site</v:String>
+		<v:String x:Key="Notes">Notes</v:String>
+		<v:String x:Key="ChangeElement">Change element</v:String>
+		<v:String x:Key="AddElement">Add element</v:String>
+		<v:String x:Key="Copy">Copy</v:String>
+		<v:String x:Key="GoTo">Go to</v:String>
+		<v:String x:Key="ItemInformation">Item Information</v:String>
+		<v:String x:Key="Create">Create:</v:String>
+		<v:String x:Key="Update">Update:</v:String>
+		<v:String x:Key="Type">Type</v:String>
+		<v:String x:Key="Login">Login</v:String>
+
+		<v:String x:Key="BankCard">Bank card</v:String>
+		<v:String x:Key="CardName">Cardholder Name</v:String>
+		<v:String x:Key="CartType">Card type</v:String>
+		<v:String x:Key="CardNumber">Number</v:String>
+		<v:String x:Key="YearOfService">Year of service</v:String>
+		<v:String x:Key="SecurityCodeCard">Security code</v:String>
+
+		<v:String x:Key="Passport">Personal data</v:String>
+		<v:String x:Key="FullName">Full name</v:String>
+		<v:String x:Key="PassportSeriesAndNumber">Series and Number</v:String>
+		<v:String x:Key="PlaceOfIssue">Place of issue</v:String>
+
+		<v:String x:Key="CustomItems">Custom items</v:String>
+		<v:String x:Key="Text">Text</v:String>
+		<v:String x:Key="Hidden">Hidden</v:String>
+		<v:String x:Key="Logical">Logical</v:String>
+		<v:String x:Key="Data">Data</v:String>
+		<v:String x:Key="TypeColon">Type:</v:String>
+
+		<v:String x:Key="ToApply">To apply</v:String>
+		<v:String x:Key="Cancel">Cancel</v:String>
+		<v:String x:Key="Delete">Delete</v:String>
+	</Style.Resources>
+</Style>

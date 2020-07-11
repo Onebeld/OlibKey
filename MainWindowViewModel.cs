@@ -1,8 +1,4 @@
-﻿using OlibKey.Views.Controls;
-using OlibKey.Structures;
-using OlibKey.ViewModels.Pages;
-using OlibKey.Views.Windows;
-using ReactiveUI;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -11,9 +7,13 @@ using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using ReactiveUI;
 using OlibKey.Core;
+using OlibKey.Views.Controls;
+using OlibKey.Structures;
+using OlibKey.ViewModels.Pages;
+using OlibKey.Views.Windows;
 using Path = System.IO.Path;
-using System;
 
 namespace OlibKey
 {
@@ -27,87 +27,85 @@ namespace OlibKey
 
         private int _selectedIndex;
 
-        private ObservableCollection<AccountListItem> list = new ObservableCollection<AccountListItem>();
+        private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
 
         public RoutingState _router = new RoutingState();
 
-        #region ReactiveCommands                               
-        public ReactiveCommand<Unit, Unit> ExitProgramCommand { get; }
-        public ReactiveCommand<Unit, Unit> AddLoginCommand { get; }
-		public ReactiveCommand<Unit, Unit> CreateDatabaseCommand { get; }
-		public ReactiveCommand<Unit, Unit> SaveDatabaseCommand { get; }
-		public ReactiveCommand<Unit, Unit> UnlockDatabaseCommand { get; }
-		public ReactiveCommand<Unit, Unit> LockDatabaseCommand { get; }
-		public ReactiveCommand<Unit, Unit> OpenDatabaseCommand { get; }
-		public ReactiveCommand<Unit, Unit> ShowSearchWindowCommand { get; }
-		public ReactiveCommand<Unit, Unit> ChangeMasterPasswordCommand { get; }
-		public ReactiveCommand<Unit, Unit> OpenPasswordGeneratorWindowCommand { get; }
-		public ReactiveCommand<Unit, Unit> OpenAboutWindowCommand { get; }
-		public ReactiveCommand<Unit, Unit> OpenSettingsWindowCommand { get; }
-		public ReactiveCommand<Unit, Unit> CheckUpdateCommand { get; }
+        #region ReactiveCommands   
+		
+        private ReactiveCommand<Unit, Unit> ExitProgramCommand { get; }
+        private ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
+		private ReactiveCommand<Unit, Unit> CreateDatabaseCommand { get; }
+		private ReactiveCommand<Unit, Unit> SaveDatabaseCommand { get; }
+		private ReactiveCommand<Unit, Unit> UnlockDatabaseCommand { get; }
+		private ReactiveCommand<Unit, Unit> LockDatabaseCommand { get; }
+		private ReactiveCommand<Unit, Unit> OpenDatabaseCommand { get; }
+		private ReactiveCommand<Unit, Unit> ShowSearchWindowCommand { get; }
+		private ReactiveCommand<Unit, Unit> ChangeMasterPasswordCommand { get; }
+		private ReactiveCommand<Unit, Unit> OpenPasswordGeneratorWindowCommand { get; }
+		private ReactiveCommand<Unit, Unit> OpenAboutWindowCommand { get; }
+		private ReactiveCommand<Unit, Unit> OpenSettingsWindowCommand { get; }
+		private ReactiveCommand<Unit, Unit> CheckUpdateCommand { get; }
+
         #endregion
 
-        #region PublicProperties
-        public ObservableCollection<AccountListItem> AccountsList
-        {
-            get => list;
-            set => this.RaiseAndSetIfChanged(ref list, value);
-        }
+        #region Propertie's
 
+        public ObservableCollection<LoginListItem> LoginList
+        {
+            get => _loginList;
+            set => this.RaiseAndSetIfChanged(ref _loginList, value);
+        }
         public RoutingState Router
         {
             get => _router;
             set => this.RaiseAndSetIfChanged(ref _router, value);
         }
-
-        public bool IsLockDatabase
+        private bool IsLockDatabase
         {
             get => _isLockDatabase;
             set => this.RaiseAndSetIfChanged(ref _isLockDatabase, value);
         }
-        public bool IsUnlockDatabase
+        private bool IsUnlockDatabase
         {
             get => _isUnlockDatabase;
             set => this.RaiseAndSetIfChanged(ref _isUnlockDatabase, value);
         }
-        public bool IsOSX
+        private bool IsOSX
         {
 	        get => _isOSX;
 	        set => this.RaiseAndSetIfChanged(ref _isOSX, value);
         }
-
-        public string NameStorage
+        private string NameStorage
         {
             get => _nameDatabase;
             set => this.RaiseAndSetIfChanged(ref _nameDatabase, value);
         }
-
-        public int SelectedIndex
+        private int SelectedIndex
 		{
 			get => _selectedIndex;
 			set
 			{
 				this.RaiseAndSetIfChanged(ref _selectedIndex, value);
-				InformationAccountVoid(SelectedAccountItem);
+				InformationLogin(SelectedLoginItem);
 			}
 		}
-
 		public string MasterPassword { get; set; }
-
-        public AccountListItem SelectedAccountItem { get { try { return AccountsList[SelectedIndex]; } catch { return null; } } }
-        #endregion
+        private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedIndex]; } catch { return null; } } }
+        
+		#endregion
 
         public MainWindowViewModel()
         {
 	        ExitProgramCommand = ReactiveCommand.Create(ExitApplication);
-            AddLoginCommand = ReactiveCommand.Create(AddLoginVoid);
+            CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
             OpenSettingsWindowCommand = ReactiveCommand.Create(OpenSettingsWindow);
             CreateDatabaseCommand = ReactiveCommand.Create(CreateDatabase);
             SaveDatabaseCommand = ReactiveCommand.Create(SaveDatabase);
             UnlockDatabaseCommand = ReactiveCommand.Create(UnlockDatabase);
             LockDatabaseCommand = ReactiveCommand.Create(LockDatabase);
             OpenDatabaseCommand = ReactiveCommand.Create(OpenDatabase);
-            CheckUpdateCommand = ReactiveCommand.Create(CheckUpdateForCommad);
+            CheckUpdateCommand = ReactiveCommand.Create(CheckUpdate);
 			ShowSearchWindowCommand = ReactiveCommand.Create(ShowSearchWindow);
 			OpenPasswordGeneratorWindowCommand = ReactiveCommand.Create(() => { new PasswordGeneratorWindow().ShowDialog(App.MainWindow); });
 			OpenAboutWindowCommand = ReactiveCommand.Create(() => { new AboutWindow().ShowDialog(App.MainWindow); });
@@ -119,9 +117,9 @@ namespace OlibKey
 
         public async void Loading(MainWindow mainWindow)
         {
-	        if (!string.IsNullOrEmpty(App.Settings.PathStorage) && File.Exists(App.Settings.PathStorage))
+	        if (!string.IsNullOrEmpty(App.Settings.PathDatabase) && File.Exists(App.Settings.PathDatabase))
 	        {
-		        NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathStorage);
+		        NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase);
 		        IsLockDatabase = true;
 		        await Task.Delay(300);
 		        RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
@@ -131,10 +129,40 @@ namespace OlibKey
 		        await passwordWindow.ShowDialog(mainWindow);
 	        }
 		}
+		public void ProgramClosing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			App.Autosave.Stop();
+			SaveSettings();
+			SaveDatabase();
+		}
+		public void SaveDatabase()
+		{
+			if (IsLockDatabase || !IsUnlockDatabase) return;
+			if (App.Settings.PathDatabase != null)
+			{
+				App.Database.Logins = LoginList.Select(item => item.LoginItem).ToList();
 
-        private void CheckUpdateForCommad() => App.CheckUpdate(true);
-
-        public void UnlockDatabase()
+				SaveAndLoadDatabase.SaveFiles(App.Database, App.Settings.PathDatabase, MasterPassword);
+				App.MainWindow.MessageStatusBar("Not4");
+			}
+			for (int i = 0; i < Router.NavigationStack.Count - 1; i++)
+			{
+				IRoutableViewModel item = Router.NavigationStack[i];
+				Router.NavigationStack.Remove(item);
+			}
+		}
+		public void SearchSelectLogin(LoginListItem i)
+		{
+			foreach (var item in LoginList)
+			{
+				if (item.LoginID == i.LoginID)
+				{
+					SelectedIndex = LoginList.IndexOf(item);
+					break;
+				}
+			}
+		}
+		private void UnlockDatabase()
         {
 	        RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
 	        {
@@ -142,20 +170,16 @@ namespace OlibKey
 	        };
 	        passwordWindow.ShowDialog(App.MainWindow);
 		}
-
-		public void ChangeMasterPassword() => new ChangeMasterPasswordWindow().ShowDialog(App.MainWindow);
-
-		public void LockDatabase()
+		private void LockDatabase()
         {
 			App.Autosave.Stop();
 			SaveDatabase();
-			ClearAccountsList();
+			ClearLoginsList();
 			IsUnlockDatabase = false;
 			IsLockDatabase = true;
 			Router.Navigate.Execute(new StartPageViewModel());
 		}
-
-        public async void OpenDatabase()
+        private async void OpenDatabase()
         {
 	        var dialog = new OpenFileDialog();
 	        dialog.Filters.Add(new FileDialogFilter {Name = "Olib-Files", Extensions = {"olib"}});
@@ -166,8 +190,8 @@ namespace OlibKey
 		        {
 			        LockDatabase();
 
-			        App.Settings.PathStorage = res[0];
-			        NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathStorage);
+			        App.Settings.PathDatabase = res[0];
+			        NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase);
 
 			        var requireMaster = new RequireMasterPasswordWindow {LoadStorageCallback = LoadDatabase};
 			        await requireMaster.ShowDialog(App.MainWindow);
@@ -175,67 +199,108 @@ namespace OlibKey
 	        }
 	        catch { }
         }
-
-		public void ProgramClosing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			App.Autosave.Stop();
-			SaveSettings();
-			SaveDatabase();
-		}
-		private void AddLoginVoid()
+		private void CreateLogin()
         {
 			SelectedIndex = -1;
 			CreateLoginPageViewModel page = new CreateLoginPageViewModel
             {
-                BackPageCallback = StartPageVoid,
-                AddAccountCallback = AddAccount
+                BackPageCallback = StartPage,
+                CreateLoginCallback = AddLogin
             };
             Router.Navigate.Execute(page);
         }
-		private void ExitApplication() => App.MainWindow.Close();
-
-		public void EditAccount(AccountListItem acc)
+		private void EditLogin(LoginListItem login)
         {
-	        Router.Navigate.Execute(new EditLoginPageViewModel(acc)
+	        Router.Navigate.Execute(new EditLoginPageViewModel(login)
 	        {
-                CancelCallback = BackPageVoid,
-                EditCompleteCallback = EditCompleteVoid,
-                DeleteAccountCallback = DeleteAccountVoid
+                CancelCallback = BackPage,
+                EditCompleteCallback = EditComplete,
+                DeleteLoginCallback = DeleteLogin
 	        });
         }
-        public void AddAccount(Account accountContent)
+		private void AddLogin(Login loginContent)
         {
-			var ali = new AccountListItem(accountContent);
-			ali.IDElement = Guid.NewGuid().ToString("N");
+			LoginListItem ali = new LoginListItem(loginContent)
+			{
+				LoginID = Guid.NewGuid().ToString("N")
+			};
 
-			AccountsList.Add(ali);
+			LoginList.Add(ali);
 			ali.GetIconElement();
             Router.Navigate.Execute(new StartPageViewModel());
         }
-        public void StartPageVoid() => Router.Navigate.Execute(new StartPageViewModel());
-		public void BackPageVoid(AccountListItem a) => Router.Navigate.Execute(new LoginInformationPageViewModel(a) { EditContentCallback = EditAccount });
-
-		public void EditCompleteVoid(AccountListItem a)
-		{
-			a.EditedAccount();
-			a.GetIconElement();
-			Router.Navigate.Execute(new LoginInformationPageViewModel(a) { EditContentCallback = EditAccount });
-		}
-
-		public void DeleteAccountVoid()
+		private void DeleteLogin()
         {
-	        var i = SelectedIndex;
-	        AccountsList.RemoveAt(SelectedIndex);
-	        SelectedIndex = i;
-	        SelectedIndex = -1;
+			int i = SelectedIndex;
+			LoginList.RemoveAt(SelectedIndex);
+			SelectedIndex = i;
+			SelectedIndex = -1;
 	        Router.Navigate.Execute(new StartPageViewModel());
         }
-
-		public void InformationAccountVoid(AccountListItem i)
+		private void EditComplete(LoginListItem a)
+		{
+			a.EditedLogin();
+			a.GetIconElement();
+			Router.Navigate.Execute(new LoginInformationPageViewModel(a) { EditContentCallback = EditLogin });
+		}
+		private void InformationLogin(LoginListItem i)
 		{
 			if (i == null) return;
-			Router.Navigate.Execute(new LoginInformationPageViewModel(i) { EditContentCallback = EditAccount });
+			Router.Navigate.Execute(new LoginInformationPageViewModel(i) { EditContentCallback = EditLogin });
 		}
+		private void LoadDatabase()
+		{
+			App.Database = SaveAndLoadDatabase.LoadFiles(App.Settings.PathDatabase, MasterPassword);
+			ClearLoginsList();
+			foreach (Login logins in App.Database.Logins) AddLogin(logins);
+			IsUnlockDatabase = true;
+			IsLockDatabase = false;
+
+			App.Autosave.Start();
+		}
+		private async void CreateDatabase()
+		{
+			CreateDatabaseWindow window = new CreateDatabaseWindow();
+			bool res = await window.ShowDialog<bool>(App.MainWindow);
+			if (res)
+			{
+				App.Database = new Database();
+
+				App.Settings.PathDatabase = window._tbPathDatabase.Text;
+				MasterPassword = window._tbPassword.Text;
+				NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase);
+				IsUnlockDatabase = true;
+				IsLockDatabase = false;
+
+				ClearLoginsList();
+				SaveDatabase();
+				Router.Navigate.Execute(new StartPageViewModel());
+				App.Autosave.Start();
+				App.MainWindow.MessageStatusBar("Not3");
+			}
+		}
+		private void OpenSettingsWindow()
+		{
+			SettingsWindow window = new SettingsWindow();
+			window.ShowDialog(App.MainWindow);
+		}
+		private void ClearLoginsList()
+		{
+			SelectedIndex = -1;
+			LoginList.Clear();
+		}
+		private void ShowSearchWindow()
+		{
+			App.SearchWindow = new SearchWindow();
+			foreach (CustomFolder folder in App.Database.CustomFolders) App.SearchWindow.SearchViewModel.AddFolder(folder);
+			_ = App.SearchWindow.ShowDialog(App.MainWindow);
+		}
+        private void CheckUpdate() => App.CheckUpdate(true);
+		private void ChangeMasterPassword() => new ChangeMasterPasswordWindow().ShowDialog(App.MainWindow);
+		private void ExitApplication() => App.MainWindow.Close();
+        private void StartPage() => Router.Navigate.Execute(new StartPageViewModel());
+		private void BackPage(LoginListItem a) => Router.Navigate.Execute(new LoginInformationPageViewModel(a) { EditContentCallback = EditLogin });
+		private void SaveSettings() => File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json", JsonSerializer.Serialize(App.Settings));
 
 		//// Problem with ListBox ////
 
@@ -256,80 +321,5 @@ namespace OlibKey
 		//	AccountsList.Move(SelectedIndex, newIndex);
 		//	SelectedIndex = newIndex;
 		//}
-
-		public void OpenSettingsWindow()
-		{
-			SettingsWindow window = new SettingsWindow();
-			window.ShowDialog(App.MainWindow);
-		}
-
-		public void LoadDatabase()
-		{
-			App.Database = SaveAndLoadAccount.LoadFiles(App.Settings.PathStorage, MasterPassword);
-			ClearAccountsList();
-			foreach (var accounts in App.Database.Accounts) AddAccount(accounts);
-			IsUnlockDatabase = true;
-			IsLockDatabase = false;
-			App.Autosave.Start();
-		}
-
-		public void ClearAccountsList()
-		{
-			SelectedIndex = -1;
-			AccountsList.Clear();
-		}
-
-		public async void CreateDatabase()
-		{
-			CreateDatabaseWindow window = new CreateDatabaseWindow();
-			bool res = await window.ShowDialog<bool>(App.MainWindow);
-			if (res)
-			{
-				App.Database = new Database();
-
-				App.Settings.PathStorage = window._tbPathDatabase.Text;
-				MasterPassword = window._tbPassword.Text;
-				NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathStorage);
-				IsUnlockDatabase = true;
-				IsLockDatabase = false;
-
-				ClearAccountsList();
-				SaveDatabase();
-				Router.Navigate.Execute(new StartPageViewModel());
-				App.Autosave.Start();
-				App.MainWindow.MessageStatusBar("Not3");
-			}
-		}
-
-		public void SaveSettings() => File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json", JsonSerializer.Serialize(App.Settings));
-
-		public void SaveDatabase()
-		{
-			if (IsLockDatabase || !IsUnlockDatabase) return;
-			if (App.Settings.PathStorage != null)
-			{
-				App.Database.Accounts = AccountsList.Select(item => item.AccountItem).ToList();
-
-				SaveAndLoadAccount.SaveFiles(App.Database, App.Settings.PathStorage, MasterPassword);
-				App.MainWindow.MessageStatusBar("Not4");
-			}
-		}
-		public void ShowSearchWindow()
-		{
-			App.SearchWindow = new SearchWindow();
-			foreach (var folder in App.Database.CustomFolders) App.SearchWindow.SearchViewModel.AddFolder(folder);
-			App.SearchWindow.ShowDialog(App.MainWindow);
-		}
-		public void SearchSelectAccount(AccountListItem i)
-		{
-			foreach (var item in AccountsList)
-			{
-				if (item.IDElement == i.IDElement)
-				{
-					SelectedIndex = AccountsList.IndexOf(item);
-					break;
-				}
-			}
-		}
 	}
 }

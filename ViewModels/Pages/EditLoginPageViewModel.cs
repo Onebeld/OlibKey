@@ -1,42 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Reactive;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using ReactiveUI;
+using Splat;
 using OlibKey.Views.Controls;
 using OlibKey.Structures;
 using OlibKey.Views.Windows;
-using ReactiveUI;
-using Splat;
-using System.Collections.ObjectModel;
 
 namespace OlibKey.ViewModels.Pages
 {
 	public class EditLoginPageViewModel : ReactiveObject, IRoutableViewModel
 	{
+		private ObservableCollection<CustomElementListItem> _customElements;
+
+		private int _selectionFolderIndex;
+
+		#region Section's
+
 		private bool VisiblePasswordSection { get; set; }
 		private bool VisibleBankCardSection { get; set; }
 		private bool VisiblePersonalDataSection { get; set; }
 		private bool VisibleReminderSection { get; set; }
 		private bool VisibleDateChanged { get; set; }
 
-		private ReactiveCommand<Unit,Unit> SaveAccountCommand { get; }
-		private ReactiveCommand<Unit,Unit> DeleteAccountCommand { get; }
+		#endregion
+
+		#region ReactiveCommand's
+
+		private ReactiveCommand<Unit,Unit> SaveLoginCommand { get; }
+		private ReactiveCommand<Unit,Unit> DeleteLoginCommand { get; }
 		private ReactiveCommand<Unit, Unit> CancelCommand { get; }
-		public ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
+		private ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
 
-		private ObservableCollection<CustomElementListItem> customElements;
-		public ObservableCollection<CustomElementListItem> CustomElements
-		{
-			get => customElements;
-			set => this.RaiseAndSetIfChanged(ref customElements, value);
-		}
-
-		public int Type { get; set; }
+		#endregion
 
 		#region AccountInfo
-		public string AccountName { get; set; }
+
+		public string Name { get; set; }
 		public string Username { get; set; }
 		public string TimeCreate { get; set; }
 		public string TimeChanged { get; set; }
@@ -64,39 +68,49 @@ namespace OlibKey.ViewModels.Pages
 
 		#endregion
 
-		private int _selectionFolderIndex;
+		#region Property's
 
+		public int Type { get; set; }
+		public ObservableCollection<CustomElementListItem> CustomElements
+		{
+			get => _customElements;
+			set => this.RaiseAndSetIfChanged(ref _customElements, value);
+		}
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
 			set => this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
 		}
+
 		private CustomFolder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
 		private ObservableCollection<CustomFolder> Folders { get; set; }
+		
+		public LoginListItem LoginList;
 
-		public Action<AccountListItem> EditCompleteCallback;
-		public Action<AccountListItem> CancelCallback;
-		public Action DeleteAccountCallback;
+		#endregion
 
-		public AccountListItem AccountListI;
+		public Action<LoginListItem> EditCompleteCallback;
+		public Action<LoginListItem> CancelCallback;
+		public Action DeleteLoginCallback;
 
+		// routing
 		public string UrlPathSegment => "/editLogin";
 
 		public IScreen HostScreen { get; }
 
-		public EditLoginPageViewModel(AccountListItem acc, IScreen screen = null)
+		public EditLoginPageViewModel(LoginListItem acc, IScreen screen = null)
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
 			CustomElements = new ObservableCollection<CustomElementListItem>();
 
-			AccountListI = acc;
+			LoginList = acc;
 
-			AccountName = acc.AccountItem.AccountName;
-			Username = acc.AccountItem.Username;
-			Note = acc.AccountItem.Note;
+			Name = acc.LoginItem.Name;
+			Username = acc.LoginItem.Username;
+			Note = acc.LoginItem.Note;
 
-			switch (acc.AccountItem.TypeAccount)
+			switch (acc.LoginItem.Type)
 			{
 				case 0:
 					VisiblePasswordSection = true;
@@ -104,8 +118,8 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = false;
 					VisibleReminderSection = false;
 
-					Password = acc.AccountItem.Password;
-					WebSite = acc.AccountItem.WebSite;
+					Password = acc.LoginItem.Password;
+					WebSite = acc.LoginItem.WebSite;
 					break;
 				case 1:
 					VisiblePasswordSection = false;
@@ -113,9 +127,9 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = false;
 					VisibleReminderSection = false;
 
-					TypeBankCard = acc.AccountItem.TypeBankCard;
-					DateCard = acc.AccountItem.DateCard;
-					SecurityCode = acc.AccountItem.SecurityCode;
+					TypeBankCard = acc.LoginItem.TypeBankCard;
+					DateCard = acc.LoginItem.DateCard;
+					SecurityCode = acc.LoginItem.SecurityCode;
 					break;
 				case 2:
 					VisiblePasswordSection = false;
@@ -123,8 +137,8 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = true;
 					VisibleReminderSection = false;
 
-					PersonalDataNumber = acc.AccountItem.PersonalDataNumber;
-					PersonalDataPlaceOfIssue = acc.AccountItem.PersonalDataPlaceOfIssue;
+					PersonalDataNumber = acc.LoginItem.PersonalDataNumber;
+					PersonalDataPlaceOfIssue = acc.LoginItem.PersonalDataPlaceOfIssue;
 					break;
 				case 3:
 					VisiblePasswordSection = false;
@@ -132,32 +146,30 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = false;
 					VisibleReminderSection = true;
 
-					IsReminderActive = acc.AccountItem.IsReminderActive;
+					IsReminderActive = acc.LoginItem.IsReminderActive;
 					break;
 			}
 
-			SaveAccountCommand = ReactiveCommand.Create(SaveAccountVoid);
+			SaveLoginCommand = ReactiveCommand.Create(SaveLogin);
 			CancelCommand = ReactiveCommand.Create(BackVoid);
-			DeleteAccountCommand = ReactiveCommand.Create(DeleteAccountVoid);
+			DeleteLoginCommand = ReactiveCommand.Create(DeleteLogin);
 			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
 
-			Folders = new ObservableCollection<CustomFolder>();
-			Folders.Add(new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") });
+			Folders = new ObservableCollection<CustomFolder>
+			{
+				new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
+			};
 			if (App.Database.CustomFolders != null)
-				foreach (var i in App.Database.CustomFolders) Folders.Add(i);
+				foreach (CustomFolder i in App.Database.CustomFolders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
-
-			foreach (var i in Folders)
+			foreach (CustomFolder i in Folders.Where(i => i.ID == LoginList.LoginItem.FolderID))
 			{
-				if (i.ID == AccountListI.AccountItem.IDFolder)
-				{
-					SelectionFolderIndex = Folders.IndexOf(i);
-					break;
-				}
+				SelectionFolderIndex = Folders.IndexOf(i);
+				break;
 			}
 
-			foreach (var i in acc.AccountItem.CustomElements)
+			foreach (CustomElement i in acc.LoginItem.CustomElements)
 			{
 				CustomElements.Add(new CustomElementListItem(new Housing
 				{
@@ -170,55 +182,45 @@ namespace OlibKey.ViewModels.Pages
 			}
 		}
 
-		private void SaveAccountVoid()
+		private void SaveLogin()
 		{
-			AccountListI.AccountItem.AccountName = AccountName;
-			AccountListI.AccountItem.Username = Username;
-			AccountListI.AccountItem.DateCard = DateCard;
-			AccountListI.AccountItem.IDFolder = SelectionFolderItem.ID;
-			AccountListI.AccountItem.IsReminderActive = IsReminderActive;
-			AccountListI.AccountItem.Note = Note;
-			AccountListI.AccountItem.PersonalDataNumber = PersonalDataNumber;
-			AccountListI.AccountItem.PersonalDataPlaceOfIssue = PersonalDataPlaceOfIssue;
-			AccountListI.AccountItem.Password = Password;
-			AccountListI.AccountItem.SecurityCode = SecurityCode;
-			AccountListI.AccountItem.WebSite = WebSite;
+			LoginList.LoginItem.Name = Name;
+			LoginList.LoginItem.Username = Username;
+			LoginList.LoginItem.DateCard = DateCard;
+			LoginList.LoginItem.FolderID = SelectionFolderItem.ID;
+			LoginList.LoginItem.IsReminderActive = IsReminderActive;
+			LoginList.LoginItem.Note = Note;
+			LoginList.LoginItem.PersonalDataNumber = PersonalDataNumber;
+			LoginList.LoginItem.PersonalDataPlaceOfIssue = PersonalDataPlaceOfIssue;
+			LoginList.LoginItem.Password = Password;
+			LoginList.LoginItem.SecurityCode = SecurityCode;
+			LoginList.LoginItem.WebSite = WebSite;
 
-			AccountListI.AccountItem.CustomElements = new List<CustomElement>();
-
-			foreach (var item in CustomElements)
-			{
-				AccountListI.AccountItem.CustomElements.Add(item.HousingElement.CustomElement);
-			}
-			AccountListI.AccountItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+			LoginList.LoginItem.CustomElements = CustomElements.Select(item => item.HousingElement.CustomElement).ToList();
+			LoginList.LoginItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 			if (IsReminderActive)
 			{
-				AccountListI.timer.Interval = new TimeSpan(0, 0, 3);
-				AccountListI.timer.Start();
+				LoginList.ReminderTimer.Interval = new TimeSpan(0, 0, 3);
+				LoginList.ReminderTimer.Start();
 			}
 			else
 			{
-				if (AccountListI.timer != null)
-					AccountListI.timer.Stop();
+				if (LoginList.ReminderTimer != null)
+					LoginList.ReminderTimer.Stop();
 			}
-			AccountListI.EditedAccount();
+			LoginList.EditedLogin();
 
-			EditCompleteCallback?.Invoke(AccountListI);
+			EditCompleteCallback?.Invoke(LoginList);
 			App.MainWindow.MessageStatusBar("Not2");
 		}
-		private void BackVoid() => CancelCallback?.Invoke(AccountListI);
-
-		private async void DeleteAccountVoid()
+		private async void DeleteLogin()
 		{
-			var r = await MessageBox.Show(App.MainWindow, null,
+			MessageBox.MessageBoxResult r = await MessageBox.Show(App.MainWindow, null,
 				(string)Application.Current.FindResource("MB2"), (string)Application.Current.FindResource("Message"),
 				MessageBox.MessageBoxButtons.YesNo, MessageBox.MessageBoxIcon.Question);
 			if (r == MessageBox.MessageBoxResult.Yes)
-			{
-				DeleteAccountCallback?.Invoke();
-			}
+				DeleteLoginCallback?.Invoke();
 		}
-
 		private void AddCustomElement()
 		{
 			CustomElements.Add(new CustomElementListItem(new Housing
@@ -231,17 +233,14 @@ namespace OlibKey.ViewModels.Pages
 				DeleteCustomElement = DeleteCustomElement
 			});
 		}
-
 		private void DeleteCustomElement(string id)
 		{
-			foreach (var item in CustomElements)
+			foreach (CustomElementListItem item in CustomElements.Where(item => item.ID == id))
 			{
-				if (item.ID == id)
-				{
-					CustomElements.Remove(item);
-					break;
-				}
+				CustomElements.Remove(item);
+				break;
 			}
 		}
+		private void BackVoid() => CancelCallback?.Invoke(LoginList);
 	}
 }

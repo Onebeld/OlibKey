@@ -1,0 +1,161 @@
+﻿using System;
+using System.Threading.Tasks;
+using System.Linq;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using OlibKey.Structures;
+using OlibKey.ViewModels.Windows;
+using OlibKey.Views.Controls;
+
+namespace OlibKey.Views.Windows
+{
+	public class SearchWindow : ReactiveWindow<SearchWindowViewModel>
+	{
+		public SearchWindowViewModel SearchViewModel { get; set; }
+
+		private TextBox _tbSearchText;
+
+		private RadioButton _rLogin;
+		private RadioButton _rBankCard;
+		private RadioButton _rPassport;
+		private RadioButton _rReminder;
+		private RadioButton _rAll;
+
+		private ListBox _lbFolders;
+
+		public SearchWindow()
+		{
+			AvaloniaXamlLoader.Load(this);
+			InitializeComponent();
+		}
+
+		private async void InitializeComponent()
+		{
+
+			_rLogin = this.FindControl<RadioButton>("rLogin");
+			_rBankCard = this.FindControl<RadioButton>("rBankCard");
+			_rPassport = this.FindControl<RadioButton>("rPassport");
+			_rReminder = this.FindControl<RadioButton>("rReminder");
+			_rAll = this.FindControl<RadioButton>("rAll");
+			_tbSearchText = this.FindControl<TextBox>("tbSearchText");
+			_lbFolders = this.FindControl<ListBox>("lbFolders");
+
+
+			DataContext = SearchViewModel = new SearchWindowViewModel();
+			_rAll.IsChecked = true;
+			Closed += SearchWindow_Closed;
+			_lbFolders.PointerPressed += (s, e) =>
+			{
+				SearchViewModel.SelectedFolderIndex = -1;
+			};
+			await Task.Delay(50);
+			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchAccount());
+		}
+
+		private void SearchWindow_Closed(object sender, EventArgs e) => App.Database.CustomFolders = SearchViewModel.FolderList.Select(item => item.DataContext as CustomFolder).ToList();
+
+		private async void SearchAccount()
+		{
+			SearchViewModel.ClearAccountsList();
+			await Task.Delay(10);
+
+			foreach (LoginListItem i in App.MainWindowViewModel.LoginList)
+			{
+				Login account = i.LoginItem;
+				if ((bool)_rLogin.IsChecked && account.Type == 0)
+				{
+					if (SearchViewModel.SelectedFolderItem == null)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+					else if (account.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+				}
+				else if ((bool)_rBankCard.IsChecked && account.Type == 1)
+				{
+					if (SearchViewModel.SelectedFolderItem == null)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+					else if (account.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+				}
+				else if ((bool)_rPassport.IsChecked && account.Type == 2)
+				{
+					if (SearchViewModel.SelectedFolderItem == null)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+					else if (account.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+				}
+				else if ((bool)_rReminder.IsChecked && account.Type == 3)
+				{
+					if (SearchViewModel.SelectedFolderItem == null)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+					else if (account.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+				}
+				else if ((bool)_rAll.IsChecked)
+				{
+					if (SearchViewModel.SelectedFolderItem == null)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+					else if (account.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+						{
+							if (account.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(account, i.IconLogin, i.LoginID);
+						}
+						else Add(account, i.IconLogin, i.LoginID);
+				}
+			}
+		}
+
+		private void Add(Login a, Image i, string id)
+		{
+			LoginListItem ali = new LoginListItem(a)
+			{
+				LoginID = id,
+				IconLogin = { Source = i.Source }
+			};
+			AddAccount(ali);
+		}
+
+		private void lbFolders_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchAccount();
+		private void rLogin_Click(object sender, RoutedEventArgs e) => SearchAccount();
+
+		private void AddAccount(LoginListItem account) => SearchViewModel.AddAccount(account);
+	}
+}

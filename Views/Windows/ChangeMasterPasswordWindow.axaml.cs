@@ -42,17 +42,17 @@ namespace OlibKey.Views.Windows
 		{
 			try
 			{
-				SaveAndLoadAccount.LoadFiles(App.Settings.PathStorage, _tbOldPassword.Text);
+				SaveAndLoadDatabase.LoadFiles(App.Settings.PathDatabase, _tbOldPassword.Text);
 				App.MainWindowViewModel.MasterPassword = _tbNewPassword.Text;
 
 				App.MainWindowViewModel.SaveDatabase();
 
-				await MessageBox.Show(this, null, (string)Application.Current.FindResource("Successfully"), (string)Application.Current.FindResource("Message"), MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
+				_ = await MessageBox.Show(this, null, (string)Application.Current.FindResource("Successfully"), (string)Application.Current.FindResource("Message"), MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
 				Close();
 			}
 			catch
 			{
-				await MessageBox.Show(this, null, (string)Application.Current.FindResource("MB3"), (string)Application.Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+				_ = await MessageBox.Show(this, null, (string)Application.Current.FindResource("MB3"), (string)Application.Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 			}
 		}
 	}

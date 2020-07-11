@@ -1,9 +1,9 @@
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
-using System.Threading.Tasks;
 
 namespace OlibKey
 {
@@ -27,10 +27,7 @@ namespace OlibKey
 			Opened += MainWindow_Initialized;
 	    }
 
-		private void MainWindow_Initialized(object sender, System.EventArgs e)
-		{
-			App.MainWindowViewModel.Loading(this);
-		}
+		private void MainWindow_Initialized(object sender, System.EventArgs e) => App.MainWindowViewModel.Loading(this);
 
 		public async void MessageStatusBar(string message)
 		{

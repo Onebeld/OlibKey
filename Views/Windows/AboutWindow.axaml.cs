@@ -15,10 +15,7 @@ namespace OlibKey.Views.Windows
 		private Button _bVK;
 		private Button _bFacebook;
 
-		public AboutWindow()
-		{
-			InitializeComponent();
-		}
+		public AboutWindow() => InitializeComponent();
 
 		private void InitializeComponent()
 		{
@@ -33,7 +30,7 @@ namespace OlibKey.Views.Windows
 			_bClose.Click += (s, e) => Close();
 			_bGitHub.Click += (s, e) =>
 			{
-				var psi = new ProcessStartInfo
+				ProcessStartInfo psi = new ProcessStartInfo
 				{
 					FileName = "https://github.com/MagnificentEagle/OlibKey",
 					UseShellExecute = true
@@ -42,7 +39,7 @@ namespace OlibKey.Views.Windows
 			};
 			_bVK.Click += (s, e) =>
 			{
-				var psi = new ProcessStartInfo
+				ProcessStartInfo psi = new ProcessStartInfo
 				{
 					FileName = "https://vk.com/olibkey",
 					UseShellExecute = true
@@ -51,7 +48,7 @@ namespace OlibKey.Views.Windows
 			};
 			_bFacebook.Click += (s, e) =>
 			{
-				var psi = new ProcessStartInfo
+				ProcessStartInfo psi = new ProcessStartInfo
 				{
 					FileName = "https://www.facebook.com/olibkey",
 					UseShellExecute = true

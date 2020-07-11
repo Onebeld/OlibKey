@@ -12,7 +12,7 @@ namespace OlibKey.Core
 			using WebClient client = new WebClient();
 			byte[] imageBytes = await client.DownloadDataTaskAsync("https://www.google.com/s2/favicons?domain=" + url);
 
-			await using var ms = new MemoryStream(imageBytes);
+			await using MemoryStream ms = new MemoryStream(imageBytes);
 			return new Bitmap(ms);
 		}
 	}

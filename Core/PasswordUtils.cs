@@ -9,7 +9,7 @@ namespace OlibKey.Core
     class PasswordUtils
     {
         private static readonly string[] BadPasswords =
-        {
+		{
             "123456", "123456789", "qwerty", "111111", "1234567", "666666", "12345678", "7777777", "123321", "0",
             "654321", "1234567890", "123123", "555555", "vkontakte", "gfhjkm", "159753", "777777", "TempPassWord",
             "qazwsx", "1q2w3e", "1234", "112233", "121212", "qwertyuiop", "qq18ww899", "987654321", "12345",
@@ -40,52 +40,51 @@ namespace OlibKey.Core
         public static int CheckPasswordStrength(string password)
         {
 			if (password == null) return 0;
-            double multi0 = 1.0;
-            double multi1 = 1.0;
-            double multi2 = 1.0;
-            double multi3 = 0;
-            int score = 0;
-            foreach (var bp in BadPasswords)
-                if (password.ToLower().Contains(bp.ToLower())) multi0 = 0.75;
-                else if (string.Equals(bp, password, StringComparison.CurrentCultureIgnoreCase)) multi0 = 0.125;
+			double multi0 = 1.0;
+			double multi1 = 1.0;
+			double multi2 = 1.0;
+			double multi3 = 0;
+			int score = 0;
+            foreach (string bp in BadPasswords)
+				if (password.ToLower().Contains(bp.ToLower())) multi0 = 0.75;
+				else if (string.Equals(bp, password, StringComparison.CurrentCultureIgnoreCase)) multi0 = 0.125;
 
-            var usedChars = new List<char>();
-            foreach (var chr in password.Where(chr => !usedChars.Contains(chr))) usedChars.Add(chr);
+			List<char> usedChars = new List<char>();
+			foreach (char chr in password.Where(chr => !usedChars.Contains(chr))) usedChars.Add(chr);
 
-            multi1 = FrequencyFactor(password.ToLower());
-            score += password.Length * 15;
-            var patterns = new Dictionary<string, double>
-            {
+			multi1 = FrequencyFactor(password.ToLower());
+			score += password.Length * 15;
+			Dictionary<string, double> patterns = new Dictionary<string, double>
+			{
                 {@"1234567890", 0.0},
-                {@"[a-z]", 0.1},
-                {@"[ёа-я]", 0.2},
-                {@"[A-Z]", 0.2},
-                {@"[ЁА-Я]", 0.3},
-                {"[!,@#\\$%\\^&\\*?_~=;:'\"<>[]()~`\\\\|/]", 0.4},
-                {@"[¶©]", 0.5}
+				{@"[a-z]", 0.1},
+				{@"[ёа-я]", 0.2},
+				{@"[A-Z]", 0.2},
+				{@"[ЁА-Я]", 0.3},
+				{"[!,@#\\$%\\^&\\*?_~=;:'\"<>[]()~`\\\\|/]", 0.4},
+				{@"[¶©]", 0.5}
             };
-            foreach (var (key, value) in patterns)
-                if (Regex.Matches(password, key).Count > 0)
-                    multi2 += value;
-            if (password.Length > 2) multi3 += 0;
-            if (password.Length > 4) multi3 += 0.25;
-            if (password.Length > 6) multi3 += 0.75;
-            if (password.Length > 8) multi3 += 1.0;
-            return (int) (score * multi0 * multi1 * multi2);
+			foreach ((string key, double value) in patterns)
+				if (Regex.Matches(password, key).Count > 0)
+					multi2 += value;
+			if (password.Length > 2) multi3 += 0;
+			if (password.Length > 4) multi3 += 0.25;
+			if (password.Length > 6) multi3 += 0.75;
+			if (password.Length > 8) multi3 += 1.0;
+			return (int)(score * multi0 * multi1 * multi2);
         }
 
         private static double FrequencyFactor(string password)
         {
-            var differentSymbols = new HashSet<char>(password.ToCharArray());
-            return Map(differentSymbols.Count, 1.0, password.Length, 0.1, 1);
+			HashSet<char> differentSymbols = new HashSet<char>(password.ToCharArray());
+			return Map(differentSymbols.Count, 1.0, password.Length, 0.1, 1);
         }
 
-        private static double Map(double value, double fromLower, double fromUpper, double toLower, double toUpper) => toLower + (value - fromLower) / (fromUpper - fromLower) * (toUpper - toLower);
+		private static double Map(double value, double fromLower, double fromUpper, double toLower, double toUpper) => toLower + ((value - fromLower) / (fromUpper - fromLower) * (toUpper - toLower));
 
 		public static void DeterminingPasswordComplexity(ProgressBar progressBar, TextBox textBox)
 		{
-			int i = CheckPasswordStrength(textBox.Text);
-			progressBar.Value = i > 300 ? 300 : i;
+			progressBar.Value = CheckPasswordStrength(textBox.Text);
 			ItemControls.ColorProgressBar(progressBar);
 		}
 	}

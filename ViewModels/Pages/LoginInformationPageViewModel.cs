@@ -8,15 +8,27 @@ using ReactiveUI;
 using Splat;
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
+using System.Linq;
 
 namespace OlibKey.ViewModels.Pages
 {
 	public class LoginInformationPageViewModel : ReactiveObject, IRoutableViewModel
 	{
-		public string UrlPathSegment => "/informationLogin";
+		private int _selectionFolderIndex;
+		private ObservableCollection<CustomElementListItem> _customElements;
+
+		#region Section's
+
+		private bool VisiblePasswordSection { get; set; }
+		private bool VisibleBankCardSection { get; set; }
+		private bool VisiblePersonalDataSection { get; set; }
+		private bool VisibleReminderSection { get; set; }
+
+		#endregion
+
+		#region ReactiveCommand's
 
 		public ReactiveCommand<Unit, Unit> EditContentCommand { get; }
-
 		public ReactiveCommand<Unit, Unit> CopyUsernameCommand { get; }
 		public ReactiveCommand<Unit, Unit> CopyPasswordCommand { get; }
 		public ReactiveCommand<Unit, Unit> CopyWebSiteCommand { get; }
@@ -24,51 +36,46 @@ namespace OlibKey.ViewModels.Pages
 		public ReactiveCommand<Unit, Unit> CopyDateCardCommand { get; }
 		public ReactiveCommand<Unit, Unit> CopySecurityCodeCommand { get; }
 		public ReactiveCommand<Unit, Unit> CopyPersonalDataNumberCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyPersonalDataPlaceOfIssue { get; }
-
+		public ReactiveCommand<Unit, Unit> CopyPersonalDataPlaceOfIssueCommand { get; }
 		public ReactiveCommand<Unit, Unit> OpenWebSiteCommand { get; }
 
-		private int _selectionFolderIndex;
-		private bool IsVisible { get; set; } = true;
+		#endregion
+
+		#region Properties
 
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
 			set => this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
 		}
-
-		private ObservableCollection<CustomElementListItem> customElements;
-		public ObservableCollection<CustomElementListItem> CustomElements
+		private ObservableCollection<CustomElementListItem> CustomElements
 		{
-			get => customElements;
-			set => this.RaiseAndSetIfChanged(ref customElements, value);
+			get => _customElements;
+			set => this.RaiseAndSetIfChanged(ref _customElements, value);
 		}
+		private LoginListItem LoginItem { get; set; }
+		private bool VisibleDateChanged { get; set; }
+		private bool IsVisible { get; set; } = true;
+		private ObservableCollection<CustomFolder> Folders { get; set; }
+		public Login LoginInformation { get; set; }
 
+		#endregion
+
+		// routing
+		public string UrlPathSegment => "/informationLogin";
 		public IScreen HostScreen { get; }
 
-		public Account InfAccount { get; set; }
+		public Action<LoginListItem> EditContentCallback { get; set; }
 
-		public AccountListItem AccountItem { get; set; }
-
-		public Action<AccountListItem> EditContentCallback;
-
-		private bool VisiblePasswordSection { get; set; }
-		private bool VisibleBankCardSection { get; set; }
-		private bool VisiblePersonalDataSection { get; set; }
-		private bool VisibleReminderSection { get; set; }
-		private bool VisibleDateChanged { get; set; }
-
-		private ObservableCollection<CustomFolder> Folders { get; set; }
-
-		public LoginInformationPageViewModel(AccountListItem acc, IScreen screen = null)
+		public LoginInformationPageViewModel(LoginListItem acc, IScreen screen = null)
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-			InfAccount = acc.AccountItem;
-			AccountItem = acc;
+			LoginInformation = acc.LoginItem;
+			LoginItem = acc;
 			CustomElements = new ObservableCollection<CustomElementListItem>();
 
-			switch (InfAccount.TypeAccount)
+			switch (LoginInformation.Type)
 			{
 				case 0:
 					VisiblePasswordSection = true;
@@ -96,46 +103,44 @@ namespace OlibKey.ViewModels.Pages
 					break;
 			}
 
-			if (!string.IsNullOrEmpty(InfAccount.TimeChanged)) VisibleDateChanged = true;
+			if (!string.IsNullOrEmpty(LoginInformation.TimeChanged)) VisibleDateChanged = true;
 
-			EditContentCommand = ReactiveCommand.Create(() => EditContentCallback?.Invoke(AccountItem));
+			EditContentCommand = ReactiveCommand.Create(() => EditContentCallback?.Invoke(LoginItem));
 
-			CopyUsernameCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.Username); });
-			CopyPasswordCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.Password); });
-			CopyWebSiteCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.WebSite); });
-			CopyTypeBankCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.TypeBankCard); });
-			CopyDateCardCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.DateCard); });
-			CopySecurityCodeCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.SecurityCode); });
-			CopyPersonalDataNumberCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.PersonalDataPlaceOfIssue); });
-			CopyPersonalDataPlaceOfIssue = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(InfAccount.PersonalDataPlaceOfIssue); });
+			CopyUsernameCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Username); });
+			CopyPasswordCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Password); });
+			CopyWebSiteCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.WebSite); });
+			CopyTypeBankCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.TypeBankCard); });
+			CopyDateCardCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.DateCard); });
+			CopySecurityCodeCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.SecurityCode); });
+			CopyPersonalDataNumberCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.PersonalDataNumber); });
+			CopyPersonalDataPlaceOfIssueCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.PersonalDataPlaceOfIssue); });
 
 			OpenWebSiteCommand = ReactiveCommand.Create(() =>
 			{
-				var psi = new ProcessStartInfo
+				ProcessStartInfo psi = new ProcessStartInfo
 				{
-					FileName = "http://" + InfAccount.WebSite,
+					FileName = "http://" + LoginInformation.WebSite,
 					UseShellExecute = true
 				};
 				Process.Start(psi);
 			});
 
-			Folders = new ObservableCollection<CustomFolder>();
-			Folders.Add(new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") });
+			Folders = new ObservableCollection<CustomFolder>
+			{
+				new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
+			};
 			if (App.Database.CustomFolders != null)
-				foreach (var i in App.Database.CustomFolders) Folders.Add(i);
+				foreach (CustomFolder i in App.Database.CustomFolders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
-
-			foreach (var i in Folders)
+			foreach (CustomFolder i in Folders.Where(i => i.ID == LoginInformation.FolderID))
 			{
-				if (i.ID == InfAccount.IDFolder)
-				{
-					SelectionFolderIndex = Folders.IndexOf(i);
-					break;
-				}
+				SelectionFolderIndex = Folders.IndexOf(i);
+				break;
 			}
 
-			foreach (var i in InfAccount.CustomElements)
+			foreach (CustomElement i in LoginInformation.CustomElements)
 			{
 				CustomElements.Add(new CustomElementListItem(new Housing
 				{
@@ -143,6 +148,7 @@ namespace OlibKey.ViewModels.Pages
 					IsEnabled = false
 				}));
 			}
+
 			if (CustomElements.Count == 0)
 			{
 				IsVisible = false;

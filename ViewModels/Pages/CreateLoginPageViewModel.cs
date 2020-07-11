@@ -8,6 +8,7 @@ using OlibKey.Structures;
 using OlibKey.Views.Controls;
 using ReactiveUI;
 using Splat;
+using System.Linq;
 
 namespace OlibKey.ViewModels.Pages
 {
@@ -15,79 +16,80 @@ namespace OlibKey.ViewModels.Pages
     {
         #region ReactiveCommands
         public ReactiveCommand<Unit, Unit> BackCommand { get; }
-        public ReactiveCommand<Unit, Unit> CreateAccountCommand { get; }
+        public ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
+		public ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
 		#endregion
-		private int _selectionFolderIndex;
 
+		private int _selectionFolderIndex;
+		private ObservableCollection<CustomElementListItem> _customElements;
+
+		#region Property's
+
+		public int Type { get; set; }
+        public Login NewLogin { get; set; }
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
 			set
 			{
 				this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
-				NewAccount.IDFolder = SelectionFolderItem.ID;
+				NewLogin.FolderID = SelectionFolderItem.ID;
 			}
 		}
 		private CustomFolder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
 		private ObservableCollection<CustomFolder> Folders { get; set; }
-
-		private ObservableCollection<CustomElementListItem> customElements;
 		public ObservableCollection<CustomElementListItem> CustomElements
 		{
-			get => customElements;
-			set => this.RaiseAndSetIfChanged(ref customElements, value);
+			get => _customElements;
+			set => this.RaiseAndSetIfChanged(ref _customElements, value);
 		}
 
+		#endregion
+
 		public Action BackPageCallback { get; set; }
-        public Action<Account> AddAccountCallback { get; set; }
+        public Action<Login> CreateLoginCallback { get; set; }
 
-		public ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
-
-		public int Type { get; set; }
-
+		// routing
 		public string UrlPathSegment => "/addLogin";
         public IScreen HostScreen { get; }
 
-        public Account NewAccount { get; set; }
 
         public CreateLoginPageViewModel(IScreen screen = null)
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-            NewAccount = new Account();
-			NewAccount.CustomElements = new System.Collections.Generic.List<CustomElement>();
+			NewLogin = new Login
+			{
+				CustomElements = new System.Collections.Generic.List<CustomElement>()
+			};
 			CustomElements = new ObservableCollection<CustomElementListItem>();
 
             BackCommand = ReactiveCommand.Create(BackVoid);
-            CreateAccountCommand = ReactiveCommand.Create(CreateAccountVoid);
+            CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
 			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
 
-			Folders = new ObservableCollection<CustomFolder>();
-			Folders.Add(new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") });
+			Folders = new ObservableCollection<CustomFolder>
+			{
+				new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
+			};
 			if (App.Database.CustomFolders != null)
-				foreach (var i in App.Database.CustomFolders) Folders.Add(i);
+				foreach (CustomFolder i in App.Database.CustomFolders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			Type = 0;
         }
 
-        #region Voids
-        private void BackVoid() => BackPageCallback?.Invoke();
-        private void CreateAccountVoid()
+        private void CreateLogin()
         {
-			foreach (var item in CustomElements)
-			{
-				NewAccount.CustomElements.Add(item.HousingElement.CustomElement);
-			}
-	        NewAccount.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-            AddAccountCallback?.Invoke(NewAccount);
+			NewLogin.CustomElements.AddRange(CustomElements.Select(item => item.HousingElement.CustomElement));
+			NewLogin.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+			CreateLoginCallback?.Invoke(NewLogin);
 			App.MainWindow.MessageStatusBar("Not1");
         }
-
 		private void AddCustomElement()
 		{
-			CustomElements.Add(new CustomElementListItem (new Housing 
-			{ 
+			CustomElements.Add(new CustomElementListItem(new Housing
+			{
 				CustomElement = new CustomElement { Type = Type },
 				IsEnabled = true
 			})
@@ -96,18 +98,14 @@ namespace OlibKey.ViewModels.Pages
 				DeleteCustomElement = DeleteCustomElement
 			});
 		}
-
 		private void DeleteCustomElement(string id)
 		{
-			foreach (var item in CustomElements)
+			foreach (CustomElementListItem item in CustomElements.Where(item => item.ID == id))
 			{
-				if (item.ID == id)
-				{
-					CustomElements.Remove(item);
-					break;
-				}
+				_ = CustomElements.Remove(item);
+				break;
 			}
 		}
-		#endregion
+		private void BackVoid() => BackPageCallback?.Invoke();
 	}
 }

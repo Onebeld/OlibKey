@@ -1,0 +1,151 @@
+﻿<Style xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=netstandard">
+	<Style.Resources>
+		<v:String x:Key="File">Datei</v:String>
+		<v:String x:Key="Tools">Die Werkzeuge</v:String>
+		<v:String x:Key="Reference">Hilfe</v:String>
+		<v:String x:Key="Add">Hinzufügen</v:String>
+		<v:String x:Key="CreateBase">Speicher erstellen</v:String>
+		<v:String x:Key="OpenBase">Öffnen Sie das Repository</v:String>
+		<v:String x:Key="SaveBase">Speichern Sie den Speicher</v:String>
+		<v:String x:Key="AddLogin">Login hinzufügen</v:String>
+		<v:String x:Key="Settings">Einstellungen</v:String>
+		<v:String x:Key="ExitFrom">Melden Sie sich von OlibKey ab</v:String>
+		<v:String x:Key="PasswordGenerator">Passwortgenerator</v:String>
+		<v:String x:Key="ChangeMasterPassword">Ändern Sie das Master-Passwort</v:String>
+		<v:String x:Key="AboutPrograms">Über das Programm...</v:String>
+		<v:String x:Key="CheckUpdates">Auf Update prüfen</v:String>
+		<v:String x:Key="Search">Suche</v:String>
+		<v:String x:Key="CreateFolder">Ordner erstellen</v:String>
+		<v:String x:Key="AllItems">Alle Artikel</v:String>
+		<v:String x:Key="CustomFolder">Benutzerordner</v:String>
+		<v:String x:Key="NotChosen">Nicht ausgewählt</v:String>
+		<v:String x:Key="RemoveSelection">Deaktivieren Sie</v:String>
+
+		<v:String x:Key="Ready">Bereit</v:String>
+
+		<v:String x:Key="Collapse">Zusammenbruch</v:String>
+		<v:String x:Key="Expand">Erweitern</v:String>
+		<v:String x:Key="Reestablish">Wiederherstellen</v:String>
+
+		<v:String x:Key="Password">Passwort:</v:String>
+		<v:String x:Key="Password+">Passwort</v:String>
+		<v:String x:Key="Show">Zeigen</v:String>
+		<v:String x:Key="Complexity">Schwierigkeit:</v:String>
+		<v:String x:Key="ChangeP">Bearbeiten</v:String>
+		<v:String x:Key="Back">Zurück</v:String>
+		<v:String x:Key="Done">Fertig</v:String>
+
+		<v:String x:Key="Yes">Ja</v:String>
+		<v:String x:Key="No">Nein</v:String>
+		<v:String x:Key="Ok">OK</v:String>
+
+		<v:String x:Key="ListOfItems">Liste der Artikel</v:String>
+		<v:String x:Key="LockStorage">Tresor verriegeln</v:String>
+		<v:String x:Key="UnlockStorage">Speicher entsperren</v:String>
+		<v:String x:Key="ShowOPM">Zeigen OlibKey</v:String>
+
+		<v:String x:Key="MB1">Sie müssen zuerst Speicher hochladen oder erstellen!</v:String>
+		<v:String x:Key="Error">Fehler</v:String>
+		<v:String x:Key="Message">Nachricht</v:String>
+		<v:String x:Key="MB2">Möchten Sie den Artikel wirklich löschen?</v:String>
+		<v:String x:Key="MB3">Falscher Passwort-Master!</v:String>
+		<v:String x:Key="MB4">Update verfügbar! Möchten Sie zur Download-Site gehen?</v:String>
+		<v:String x:Key="MB5">Fehler beim Suchen nach Updates</v:String>
+		<v:String x:Key="MB6">Sie können keine Zeichen aus einer leeren Zeichenfolge verlangen!</v:String>
+		<v:String x:Key="MB7">Keine Häkchen ausgewählt oder Passwortlänge angegeben!</v:String>
+		<v:String x:Key="MB8">Derzeit gibt es keine neuen Updates.</v:String>
+
+		<v:String x:Key="Successfully">Erfolgreich!</v:String>
+
+		<v:String x:Key="Not1">Artikel erfolgreich gespeichert!</v:String>
+		<v:String x:Key="Not2">Artikel erfolgreich geändert!</v:String>
+		<v:String x:Key="Not3">Speicher erfolgreich erstellt!</v:String>
+		<v:String x:Key="Not4">Speicher erfolgreich gespeichert!</v:String>
+
+
+		<v:String x:Key="Lowercase">Kleinbuchstaben (abc)</v:String>
+		<v:String x:Key="Uppercase">Großbuchstaben (ABC)</v:String>
+		<v:String x:Key="Lenght">Länge:</v:String>
+		<v:String x:Key="Numbers">Figuren (123)</v:String>
+		<v:String x:Key="Special">Besonderes ($%#)</v:String>
+		<v:String x:Key="Underscore">Fazit (_)</v:String>
+		<v:String x:Key="Generate">Generieren</v:String>
+		<v:String x:Key="PasswordSave">Speichern</v:String>
+		<v:String x:Key="Require">Zu fordern</v:String>
+
+
+		<v:String x:Key="OldMasterPassword">Altes Master-Passwort</v:String>
+		<v:String x:Key="NewMasterPassword">Neues Master-Passwort</v:String>
+
+		<v:String x:Key="AccessText">Beachten Sie! Wenn Sie das Master-Passwort vergessen, können Sie den Speicher nicht wiederherstellen!</v:String>
+		<v:String x:Key="MasterPassword">Master-Passwort</v:String>
+		<v:String x:Key="Directory">Speicherpfad</v:String>
+		<v:String x:Key="Select">Auswählen</v:String>
+
+		<v:String x:Key="Open">Öffnen</v:String>
+		<v:String x:Key="EnterMP">Geben Sie das Master-Passwort ein</v:String>
+
+		<v:String x:Key="Version">Version:</v:String>
+		<v:String x:Key="Close">Schliessen</v:String>
+		<v:String x:Key="AccessText1">Ermöglicht das Speichern von Passwörtern, Notizen und anderen persönlichen Daten in verschlüsselter Form.</v:String>
+		<v:String x:Key="AccessText2">Das Programm wird unter der GPLv3-Lizenz veröffentlicht.</v:String>
+
+		<v:String x:Key="Language">Sprache:</v:String>
+		<v:String x:Key="Theme">Theme:</v:String>
+		<v:String x:Key="CBHideProgram">Programm beim Schließen ausblenden</v:String>
+		<v:String x:Key="CBAutorunApplication">Führen Sie mit Windows aus</v:String>
+
+		<v:String x:Key="Light">Hell</v:String>
+		<v:String x:Key="Dark">Dunkel</v:String>
+
+		<v:String x:Key="Reminder">Erinnerung</v:String>
+		<v:String x:Key="Pause">Pause</v:String>
+		<v:String x:Key="Disable">Deaktivieren</v:String>
+		<v:String x:Key="ZeroOut">Null raus</v:String>
+		<v:String x:Key="ReminderStarted">Erinnerung gestartet</v:String>
+		<v:String x:Key="StartTime">Startzeit</v:String>
+
+		<v:String x:Key="ErrorElement1">Fehler im Artikel:</v:String>
+		<v:String x:Key="ErrorElement2">Die Zeit ist im Element falsch, daher ist die Erinnerung deaktiviert. Versuchen Sie, die Programmiersprache zu ändern, oder wechseln Sie zum richtigen Zeitformat, indem Sie auf die Schaltfläche "Zurücksetzen" klicken.</v:String>
+
+
+		<v:String x:Key="Name">Titel</v:String>
+		<v:String x:Key="Username">Benutzername</v:String>
+		<v:String x:Key="WebSite">Website</v:String>
+		<v:String x:Key="Notes">Hinweise</v:String>
+		<v:String x:Key="ChangeElement">Element bearbeiten</v:String>
+		<v:String x:Key="AddElement">Artikel hinzufügen</v:String>
+		<v:String x:Key="Copy">Kopieren</v:String>
+		<v:String x:Key="GoTo">Gehe zu</v:String>
+		<v:String x:Key="ItemInformation">Artikelinformationen</v:String>
+		<v:String x:Key="Create">Erstellt von:</v:String>
+		<v:String x:Key="Update">Aktualisiert:</v:String>
+		<v:String x:Key="Type">Typ</v:String>
+		<v:String x:Key="Login">Benutzername</v:String>
+		<v:String x:Key="BankCard">EC Karte</v:String>
+
+		<v:String x:Key="CardName">Name des Karteninhabers</v:String>
+		<v:String x:Key="CartType">Kartentyp</v:String>
+		<v:String x:Key="CardNumber">Nummer</v:String>
+		<v:String x:Key="YearOfService">Dienstjahr</v:String>
+		<v:String x:Key="SecurityCodeCard">Sicherheitscode</v:String>
+
+		<v:String x:Key="Passport">Persönliche Daten</v:String>
+		<v:String x:Key="FullName">Vollständiger Name</v:String>
+		<v:String x:Key="PassportSeriesAndNumber">Serie und Nummer</v:String>
+		<v:String x:Key="PlaceOfIssue">Ausstellungsort</v:String>
+
+		<v:String x:Key="CustomItems">Пользовательские элементы</v:String>
+		<v:String x:Key="Text">Текстовое</v:String>
+		<v:String x:Key="Hidden">Скрытое</v:String>
+		<v:String x:Key="Logical">Логическое</v:String>
+		<v:String x:Key="Data">Данные</v:String>
+		<v:String x:Key="TypeColon">Eine Art:</v:String>
+
+		<v:String x:Key="ToApply">Bewerben</v:String>
+		<v:String x:Key="Cancel">Abbrechen</v:String>
+		<v:String x:Key="Delete">Löschen</v:String>
+	</Style.Resources>
+</Style>

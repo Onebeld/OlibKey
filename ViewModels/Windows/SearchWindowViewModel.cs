@@ -1,48 +1,53 @@
-﻿using OlibKey.Structures;
-using OlibKey.Views.Controls;
-using ReactiveUI;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Reactive;
+using ReactiveUI;
+using OlibKey.Structures;
+using OlibKey.Views.Controls;
 
 namespace OlibKey.ViewModels.Windows
 {
 	public class SearchWindowViewModel : ReactiveObject
 	{
-		private ObservableCollection<AccountListItem> list = new ObservableCollection<AccountListItem>();
-		private ObservableCollection<CustomFolderListItem> folderList = new ObservableCollection<CustomFolderListItem>();
+		private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
+		private ObservableCollection<CustomFolderListItem> _folderList = new ObservableCollection<CustomFolderListItem>();
 
-		public string _searchText;
+		private string _searchText;
+
 		private int _selectedAccountIndex;
 		private int _selectedFolderIndex;
+
+		#region ReactiveCommand's
 
 		public ReactiveCommand<Unit, Unit> CreateFolderCommand { get; }
 		public ReactiveCommand<Unit, Unit> DeleteFolderCommand { get; }
 		public ReactiveCommand<Unit, Unit> EditFolderCommand { get; }
 		public ReactiveCommand<Unit, Unit> UnselectFolderItemCommand { get; }
 
-		#region PublicProperty
-		public ObservableCollection<AccountListItem> AccountsList
+		#endregion
+
+		#region Property's
+
+		private ObservableCollection<LoginListItem> LoginList
 		{
-			get => list; set => this.RaiseAndSetIfChanged(ref list, value);
+			get => _loginList; set => this.RaiseAndSetIfChanged(ref _loginList, value);
 		}
 		public ObservableCollection<CustomFolderListItem> FolderList
 		{
-			get => folderList; set => this.RaiseAndSetIfChanged(ref folderList, value);
+			get => _folderList; set => this.RaiseAndSetIfChanged(ref _folderList, value);
 		}
 		public int SelectedFolderIndex
 		{
 			get => _selectedFolderIndex; set => this.RaiseAndSetIfChanged(ref _selectedFolderIndex, value);
 		}
-		public int SelectedAccountIndex
+		private int SelectedLoginIndex
 		{
 			get => _selectedAccountIndex; 
 			set
 			{
 				this.RaiseAndSetIfChanged(ref _selectedAccountIndex, value);
-				if (SelectedAccountIndex == -1) return;
-				App.MainWindowViewModel.SearchSelectAccount(SelectedAccountItem);
+				if (SelectedLoginIndex == -1) return;
+				App.MainWindowViewModel.SearchSelectLogin(SelectedAccountItem);
 				App.SearchWindow.Close();
 			}
 		}
@@ -50,6 +55,9 @@ namespace OlibKey.ViewModels.Windows
 		{
 			get => _searchText; set => this.RaiseAndSetIfChanged(ref _searchText, value);
 		}
+
+		#endregion
+
 		public SearchWindowViewModel()
 		{
 			CreateFolderCommand = ReactiveCommand.Create(CreateFolder);
@@ -57,16 +65,15 @@ namespace OlibKey.ViewModels.Windows
 			EditFolderCommand = ReactiveCommand.Create(() => SelectedFolderItem.Focusing());
 			UnselectFolderItemCommand = ReactiveCommand.Create(() => { SelectedFolderIndex = -1; });
 
-			SelectedAccountIndex = -1;
+			SelectedLoginIndex = -1;
 			SelectedFolderIndex = -1;
 		}
-		public void AddAccount(AccountListItem account) => AccountsList.Add(account);
+		public void AddAccount(LoginListItem account) => LoginList.Add(account);
 
-		public void ClearAccountsList() => AccountsList.Clear();
+		public void ClearAccountsList() => LoginList.Clear();
 		public CustomFolderListItem SelectedFolderItem { get { try { return FolderList[SelectedFolderIndex]; } catch { return null; } } }
-		public AccountListItem SelectedAccountItem { get { try { return AccountsList[SelectedAccountIndex]; } catch { return null; } } }
-		#endregion
-		public void CreateFolder()
+		public LoginListItem SelectedAccountItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
+		private void CreateFolder()
 		{
 			var a = new CustomFolderListItem
 			{

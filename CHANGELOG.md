@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - ???
+### Added
+- Custom Elements Added
+- Added status bar
+
+### Changed
+- Upgrade to .NET 5 Preview 6
+- Rewritten application on Avalonia UI
+- Updated AboutWindow
+- Now the search button is next to the Add button
+- No animation in StartPage
+
 ## [2.1.0] - 2020-04-30
 ### Added
 - New item Reminder added.

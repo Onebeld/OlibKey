@@ -98,9 +98,9 @@
 		<v:String x:Key="CBHideProgram">Թաքցնել ծրագիրը փակելիս</v:String>
 		<v:String x:Key="CBAutorunApplication">Գործարկել Windows- ի հետ</v:String>
 
-		<v:String x:Key="Light">Պայծառ</v:String>
-		<v:String x:Key="Dark">Մութ</v:String>
-
+		<v:String x:Key="Dazzling">Զարմանալի</v:String>
+		<v:String x:Key="Gloomy">Մռայլ</v:String>
+		<v:String x:Key="Mysterious">Առեղծվածային</v:String>
 
 		<v:String x:Key="Reminder">Հիշեցում</v:String>
 		<v:String x:Key="Pause">Դադար</v:String>

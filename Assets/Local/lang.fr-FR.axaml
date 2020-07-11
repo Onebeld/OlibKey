@@ -97,9 +97,9 @@
 		<v:String x:Key="CBHideProgram">Masquer le programme à la fermeture</v:String>
 		<v:String x:Key="CBAutorunApplication">Exécuter avec Windows</v:String>
 
-		<v:String x:Key="Light">Lumineux</v:String>
-		<v:String x:Key="Dark">Sombre</v:String>
-
+		<v:String x:Key="Dazzling">Éblouissant</v:String>
+		<v:String x:Key="Gloomy">Sombre</v:String>
+		<v:String x:Key="Mysterious">Mystérieux</v:String>
 
 		<v:String x:Key="Reminder">Rappel</v:String>
 		<v:String x:Key="Pause">Pause</v:String>

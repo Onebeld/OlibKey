@@ -95,9 +95,9 @@
 		<v:String x:Key="CBHideProgram">Приховати програму при закритті</v:String>
 		<v:String x:Key="CBAutorunApplication">Запускати разом з Windows</v:String>
 
-		<v:String x:Key="Light">Світла</v:String>
-		<v:String x:Key="Dark">Темна</v:String>
-
+		<v:String x:Key="Dazzling">Сліпуча</v:String>
+		<v:String x:Key="Gloomy">Похмура</v:String>
+		<v:String x:Key="Mysterious">Загадкова</v:String>
 
 		<v:String x:Key="Reminder">Нагадування</v:String>
 		<v:String x:Key="Pause">Пауза</v:String>

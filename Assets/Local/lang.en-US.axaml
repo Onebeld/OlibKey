@@ -95,8 +95,9 @@
 		<v:String x:Key="CBHideProgram">Hide program when closing</v:String>
 		<v:String x:Key="CBAutorunApplication">Run with Windows</v:String>
 
-		<v:String x:Key="Light">Light</v:String>
-		<v:String x:Key="Dark">Dark</v:String>
+		<v:String x:Key="Dazzling">Dazzling</v:String>
+		<v:String x:Key="Gloomy">Gloomy</v:String>
+		<v:String x:Key="Mysterious">Mysterious</v:String>
 
 		<v:String x:Key="Reminder">Reminder</v:String>
 		<v:String x:Key="Pause">Pause</v:String>

@@ -43,7 +43,7 @@ namespace OlibKey
 				}
 				: new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 				{
-					Source = new Uri("avares://OlibKey/Assets/Themes/Light.axaml")
+					Source = new Uri("avares://OlibKey/Assets/Themes/Dazzling.axaml")
 				};
 
 			Autosave = new DispatcherTimer();

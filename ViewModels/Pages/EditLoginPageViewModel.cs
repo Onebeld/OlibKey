@@ -38,7 +38,7 @@ namespace OlibKey.ViewModels.Pages
 
 		#endregion
 
-		#region AccountInfo
+		#region LoginInfo
 
 		public string Name { get; set; }
 		public string Username { get; set; }

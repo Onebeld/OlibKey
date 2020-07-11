@@ -310,15 +310,15 @@ namespace OlibKey
 
 		//private void MoveItem(int direction)
 		//{
-		//	if (SelectedAccountItem == null)
+		//	if (SelectedLoginItem == null)
 		//		return;
 
 		//	var newIndex = SelectedIndex + direction;
 
-		//	if (newIndex < 0 || newIndex >= AccountsList.Count)
+		//	if (newIndex < 0 || newIndex >= LoginsList.Count)
 		//		return;
 
-		//	AccountsList.Move(SelectedIndex, newIndex);
+		//	LoginsList.Move(SelectedIndex, newIndex);
 		//	SelectedIndex = newIndex;
 		//}
 	}

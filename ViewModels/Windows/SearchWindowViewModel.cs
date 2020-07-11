@@ -14,7 +14,7 @@ namespace OlibKey.ViewModels.Windows
 
 		private string _searchText;
 
-		private int _selectedAccountIndex;
+		private int _selectedLoginIndex;
 		private int _selectedFolderIndex;
 
 		#region ReactiveCommand's
@@ -42,12 +42,12 @@ namespace OlibKey.ViewModels.Windows
 		}
 		private int SelectedLoginIndex
 		{
-			get => _selectedAccountIndex; 
+			get => _selectedLoginIndex; 
 			set
 			{
-				this.RaiseAndSetIfChanged(ref _selectedAccountIndex, value);
+				this.RaiseAndSetIfChanged(ref _selectedLoginIndex, value);
 				if (SelectedLoginIndex == -1) return;
-				App.MainWindowViewModel.SearchSelectLogin(SelectedAccountItem);
+				App.MainWindowViewModel.SearchSelectLogin(SelectedLoginItem);
 				App.SearchWindow.Close();
 			}
 		}
@@ -68,11 +68,11 @@ namespace OlibKey.ViewModels.Windows
 			SelectedLoginIndex = -1;
 			SelectedFolderIndex = -1;
 		}
-		public void AddAccount(LoginListItem account) => LoginList.Add(account);
+		public void AddLogin(LoginListItem Login) => LoginList.Add(Login);
 
-		public void ClearAccountsList() => LoginList.Clear();
+		public void ClearLoginsList() => LoginList.Clear();
 		public CustomFolderListItem SelectedFolderItem { get { try { return FolderList[SelectedFolderIndex]; } catch { return null; } } }
-		public LoginListItem SelectedAccountItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
+		public LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
 		private void CreateFolder()
 		{
 			var a = new CustomFolderListItem
@@ -82,11 +82,11 @@ namespace OlibKey.ViewModels.Windows
 			a.FolderContext.ID = Guid.NewGuid().ToString("N");
 			FolderList.Add(a);
 		}
-		public void AddFolder(CustomFolder accountContent)
+		public void AddFolder(CustomFolder LoginContent)
 		{
 			var ali = new CustomFolderListItem
 			{
-				DataContext = accountContent,
+				DataContext = LoginContent,
 			};
 			ali._tbName.IsVisible = false;
 

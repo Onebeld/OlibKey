@@ -27,7 +27,7 @@
 			<TextBox x:Name="tbSearchText" Text="{Binding SearchText}"/>
 		</DockPanel>
 
-		<ListBox x:Name="lbAccountList" Padding="0" Grid.Column="1" SelectedIndex="{Binding SelectedLoginIndex}" Items="{Binding LoginList}" VirtualizationMode="None" Grid.Row="1" Background="Transparent" BorderThickness="1,1,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}"/>
+		<ListBox x:Name="lbLoginList" Padding="0" Grid.Column="1" SelectedIndex="{Binding SelectedLoginIndex}" Items="{Binding LoginList}" VirtualizationMode="None" Grid.Row="1" Background="Transparent" BorderThickness="1,1,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}"/>
 
 		<Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}">
 			<Grid>

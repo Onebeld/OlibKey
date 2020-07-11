@@ -8,7 +8,7 @@ namespace OlibKey.Views.Windows
 {
 	public class ReminderWindow : Window
 	{
-		public LoginListItem AccountListItem;
+		public LoginListItem LoginListItem;
 		public TextBlock _tbName;
 		public TextBlock _tbTime;
 
@@ -23,14 +23,14 @@ namespace OlibKey.Views.Windows
 
 		private void ButtonPause(object sender, RoutedEventArgs e)
 		{
-			AccountListItem.ReminderTimer.Interval = new TimeSpan(0, 5, 0);
-			AccountListItem.ReminderTimer.Start();
+			LoginListItem.ReminderTimer.Interval = new TimeSpan(0, 5, 0);
+			LoginListItem.ReminderTimer.Start();
 			Close();
 		}
 
 		private void ButtonShutdown(object sender, RoutedEventArgs e)
 		{
-			AccountListItem.LoginItem.IsReminderActive = false;
+			LoginListItem.LoginItem.IsReminderActive = false;
 			Close();
 		}
 	}

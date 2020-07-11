@@ -12,7 +12,7 @@ namespace OlibKey.Views.Controls
     public class LoginListItem : UserControl
     {
 		public Image IconLogin;
-	    private readonly TextBlock _tbAccountName;
+	    private readonly TextBlock _tbLoginName;
 	    private readonly TextBlock _tbUsername;
 
 		public string LoginID { get; set; }
@@ -23,15 +23,15 @@ namespace OlibKey.Views.Controls
 
 	    public LoginListItem() => InitializeComponent();
 
-	    public LoginListItem(Login account)
+	    public LoginListItem(Login Login)
 	    {
 		    InitializeComponent();
 
 		    IconLogin = this.FindControl<Image>("imageIconWebSite");
-		    _tbAccountName = this.FindControl<TextBlock>("tbAccountName");
+		    _tbLoginName = this.FindControl<TextBlock>("tbLoginName");
 		    _tbUsername = this.FindControl<TextBlock>("tbUsername");
 
-		    LoginItem = account;
+		    LoginItem = Login;
 
 			EditedLogin();
 
@@ -55,7 +55,7 @@ namespace OlibKey.Views.Controls
 	    public void EditedLogin()
 	    {
 		    if (LoginItem == null) return;
-		    _tbAccountName.Text = LoginItem.Name;
+		    _tbLoginName.Text = LoginItem.Name;
 		    _tbUsername.Text = LoginItem.Username;
 	    }
 
@@ -92,7 +92,7 @@ namespace OlibKey.Views.Controls
 
 				    var reminderWindow = new ReminderWindow
 				    {
-					    AccountListItem = this,
+					    LoginListItem = this,
 						Title = LoginItem.Name,
 						_tbName = { Text = LoginItem.Name},
 						_tbTime = { Text = LoginItem.Username}

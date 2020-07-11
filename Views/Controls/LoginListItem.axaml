@@ -19,7 +19,7 @@
 		<Border Background="White" CornerRadius="999" Grid.RowSpan="2" Height="25" Width="25" Margin="5,0">
 			<Image x:Name="imageIconWebSite" Margin="5"/>
 		</Border>
-		<TextBlock x:Name="tbAccountName" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+		<TextBlock x:Name="tbLoginName" FontWeight="Bold" FontSize="16" Grid.Row="0" Grid.Column="1" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 		<TextBlock x:Name="tbUsername" FontSize="12" Grid.Column="1" Grid.Row="1" Foreground="{DynamicResource ThemeForegroundOpacityBrush}"/>
 	</Grid>
 </UserControl>

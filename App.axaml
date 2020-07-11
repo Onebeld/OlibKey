@@ -1,15 +1,16 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:c="clr-namespace:OlibKey.Core;assembly=OlibKey"
+			 xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="OlibKey.App">
-    <Application.Styles>
+	<Application.Styles>
 		<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
 		<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
 
-		<StyleInclude Source="/Assets/Themes/Light.axaml"/>
+		<StyleInclude Source="/Assets/Themes/Dazzling.axaml"/>
 		<StyleInclude Source="/Assets/Images/Icons.axaml"/>
 		<StyleInclude Source="/Assets/Local/lang.en-US.axaml"/>
-		
+
 		<Style Selector="TextBlock.Heading">
 			<Setter Property="FontWeight" Value="Bold"/>
 			<Setter Property="Padding" Value="5 0 0 0"/>
@@ -32,7 +33,7 @@
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
 		</Style>
 
-		
+
 		<Style Selector="Button">
 			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
 			<Setter Property="BorderThickness" Value="1"/>
@@ -60,9 +61,9 @@
 			<Setter Property="CaretBrush" Value="{DynamicResource ThemeForegroundBrush}"/>
 			<Setter Property="SelectionBrush" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="SelectionForegroundBrush" Value="{DynamicResource ThemeForegroundBrush}"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
 		</Style>
 		<Style Selector="TextBox /template/ Border#border">
-			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
 			<Setter Property="CornerRadius" Value="5"/>
 		</Style>
 		<Style Selector="TextBox:pointerover /template/ Border#border">
@@ -71,7 +72,7 @@
 		<Style Selector="TextBox:focus /template/ Border#border">
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeSelectedControlColor}"/>
 		</Style>
-		
+
 		<Style Selector="ProgressBar">
 			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
@@ -83,6 +84,7 @@
 		</Style>
 
 		<Style Selector="CheckBox">
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Grid ColumnDefinitions="Auto,*">
@@ -137,6 +139,54 @@
 			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
 			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border Name="border"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+						<Grid ColumnDefinitions="*,Auto">
+							<ContentControl Content="{TemplateBinding SelectionBoxItem}"
+											ContentTemplate="{TemplateBinding ItemTemplate}"
+											Margin="{TemplateBinding Padding}"
+											VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+											HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+							<ToggleButton Name="toggle"
+										  BorderThickness="0"
+										  Background="Transparent"
+										  ClickMode="Press"
+										  Focusable="False"
+										  IsChecked="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
+										  Grid.Column="1">
+								<Path Fill="{DynamicResource ThemeForegroundBrush}"
+									  Width="8"
+									  Height="4"
+									  Stretch="Uniform"
+									  HorizontalAlignment="Center"
+									  VerticalAlignment="Center"
+									  Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z" />
+							</ToggleButton>
+							<Popup Name="PART_Popup"
+								   IsOpen="{TemplateBinding IsDropDownOpen, Mode=TwoWay}"
+								   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+								   MaxHeight="{TemplateBinding MaxDropDownHeight}"
+								   PlacementTarget="{TemplateBinding}"
+								   StaysOpen="False">
+								<Border BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
+										BorderThickness="1">
+									<ScrollViewer>
+										<ItemsPresenter Name="PART_ItemsPresenter"
+														Items="{TemplateBinding Items}"
+														ItemsPanel="{TemplateBinding ItemsPanel}"
+														ItemTemplate="{TemplateBinding ItemTemplate}"
+														VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+									</ScrollViewer>
+								</Border>
+							</Popup>
+						</Grid>
+					</Border>
+				</ControlTemplate>
+			</Setter>
 		</Style>
 		<Style Selector="ComboBox /template/ Border#border">
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
@@ -168,7 +218,7 @@
 										HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										Padding="{TemplateBinding Padding}"/>
-						
+
 					</Grid>
 				</ControlTemplate>
 			</Setter>
@@ -188,7 +238,7 @@
 		<Style Selector="ComboBoxItem:selected /template/ Border#border">
 			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlColor}"/>
 		</Style>
-	
+
 		<Style Selector="ListBoxItem">
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="Template">
@@ -204,7 +254,7 @@
 										HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										Padding="{TemplateBinding Padding}"/>
-						
+
 					</Grid>
 				</ControlTemplate>
 			</Setter>
@@ -229,6 +279,45 @@
 			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="CornerRadius" Value="5"/>
+		</Style>
+		<Style Selector="Menu > MenuItem">
+			<Setter Property="Padding" Value="6 0"/>
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border Name="root"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+						<Panel>
+							<ContentPresenter Name="PART_HeaderPresenter"
+											  Content="{TemplateBinding Header}"
+											  Margin="{TemplateBinding Padding}">
+								<ContentPresenter.DataTemplates>
+									<DataTemplate DataType="sys:String">
+										<AccessText Text="{Binding}"/>
+									</DataTemplate>
+								</ContentPresenter.DataTemplates>
+							</ContentPresenter>
+							<Popup Name="PART_Popup"
+								   IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}"
+								   StaysOpen="True">
+								<Border Background="{TemplateBinding Background}"
+										CornerRadius="5"
+										BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
+										BorderThickness="{TemplateBinding BorderThickness}">
+									<ScrollViewer Classes="menuscroller">
+										<ItemsPresenter Name="PART_ItemsPresenter"
+														Items="{TemplateBinding Items}"
+														ItemsPanel="{TemplateBinding ItemsPanel}"
+														ItemTemplate="{TemplateBinding ItemTemplate}"
+														Grid.IsSharedSizeScope="True"/>
+									</ScrollViewer>
+								</Border>
+							</Popup>
+						</Panel>
+					</Border>
+				</ControlTemplate>
+			</Setter>
 		</Style>
 
 		<Style Selector="RadioButton">
@@ -266,5 +355,5 @@
 		<Style Selector="RadioButton:checked /template/ Border#radioButtonBorder">
 			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 		</Style>
-    </Application.Styles>
+	</Application.Styles>
 </Application>

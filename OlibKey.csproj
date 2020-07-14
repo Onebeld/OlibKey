@@ -14,8 +14,8 @@
     	<IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
 		<ApplicationIcon>app.ico</ApplicationIcon>
 		<Version>3.0.0</Version>
-		<Authors>M-Eagle</Authors>
-		<Copyright>© M-Eagle 2020</Copyright>
+		<Authors>Dmitry Zhutkov</Authors>
+		<Copyright>© Dmitry Zhutkov 2020</Copyright>
 		<Description>OlibKey - an open source password manager.</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
@@ -46,11 +46,10 @@
 		<PackageReference Include="Avalonia" Version="0.10.0-preview1" />
 		<PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview1" />
 		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview1" />
-		<PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-29111-01" />
+		<PackageReference Include="Microsoft.DotNet.ILCompiler" Version="1.0.0-alpha-29114-01" />
 		<PackageReference Include="System.Reactive" Version="4.4.1" />
 	</ItemGroup>
 	<ItemGroup>
-		<!-- Avalonia relies heavily on reflection. Describe types reflected upon here. -->
 		<RdXmlFile Include="rd.xml" />
 	</ItemGroup>
 	<ItemGroup>
@@ -62,5 +61,8 @@
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
 	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="ViewModels\Controls\" />
 	</ItemGroup>
 </Project>

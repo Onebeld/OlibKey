@@ -15,8 +15,6 @@ namespace OlibKey.ViewModels.Pages
 {
 	public class EditLoginPageViewModel : ReactiveObject, IRoutableViewModel
 	{
-		private ObservableCollection<CustomElementListItem> _customElements;
-
 		private int _selectionFolderIndex;
 
 		#region Section's
@@ -38,44 +36,10 @@ namespace OlibKey.ViewModels.Pages
 
 		#endregion
 
-		#region LoginInfo
-
-		public string Name { get; set; }
-		public string Username { get; set; }
-		public string TimeCreate { get; set; }
-		public string TimeChanged { get; set; }
-
-		#region Login
-		public string Password { get; set; }
-		public string WebSite { get; set; }
-		#endregion
-
-		#region BankCart
-		public string TypeBankCard { get; set; }
-		public string DateCard { get; set; }
-		public string SecurityCode { get; set; }
-		#endregion
-
-		#region Pasport
-		public string PersonalDataNumber { get; set; }
-		public string PersonalDataPlaceOfIssue { get; set; }
-		#endregion
-
-		#region Reminder
-		public bool IsReminderActive { get; set; }
-		#endregion
-		public string Note { get; set; }
-
-		#endregion
-
 		#region Property's
 
 		public int Type { get; set; }
-		public ObservableCollection<CustomElementListItem> CustomElements
-		{
-			get => _customElements;
-			set => this.RaiseAndSetIfChanged(ref _customElements, value);
-		}
+		public ObservableCollection<CustomElementListItem> CustomElements { get; set; }
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
@@ -93,6 +57,8 @@ namespace OlibKey.ViewModels.Pages
 		public Action<LoginListItem> CancelCallback;
 		public Action DeleteLoginCallback;
 
+		private Login NewLogin { get; set; }
+
 		// routing
 		public string UrlPathSegment => "/editLogin";
 
@@ -102,13 +68,19 @@ namespace OlibKey.ViewModels.Pages
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
+
 			CustomElements = new ObservableCollection<CustomElementListItem>();
 
 			LoginList = acc;
 
-			Name = acc.LoginItem.Name;
-			Username = acc.LoginItem.Username;
-			Note = acc.LoginItem.Note;
+			NewLogin = new Login
+			{
+				Name = acc.LoginItem.Name,
+				Username = acc.LoginItem.Username,
+				Note = acc.LoginItem.Note,
+				Type = acc.LoginItem.Type,
+				TimeCreate = acc.LoginItem.TimeCreate
+			};
 
 			switch (acc.LoginItem.Type)
 			{
@@ -118,8 +90,8 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = false;
 					VisibleReminderSection = false;
 
-					Password = acc.LoginItem.Password;
-					WebSite = acc.LoginItem.WebSite;
+					NewLogin.Password = acc.LoginItem.Password;
+					NewLogin.WebSite = acc.LoginItem.WebSite;
 					break;
 				case 1:
 					VisiblePasswordSection = false;
@@ -127,9 +99,9 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = false;
 					VisibleReminderSection = false;
 
-					TypeBankCard = acc.LoginItem.TypeBankCard;
-					DateCard = acc.LoginItem.DateCard;
-					SecurityCode = acc.LoginItem.SecurityCode;
+					NewLogin.TypeBankCard = acc.LoginItem.TypeBankCard;
+					NewLogin.DateCard = acc.LoginItem.DateCard;
+					NewLogin.SecurityCode = acc.LoginItem.SecurityCode;
 					break;
 				case 2:
 					VisiblePasswordSection = false;
@@ -137,8 +109,8 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = true;
 					VisibleReminderSection = false;
 
-					PersonalDataNumber = acc.LoginItem.PersonalDataNumber;
-					PersonalDataPlaceOfIssue = acc.LoginItem.PersonalDataPlaceOfIssue;
+					NewLogin.PersonalDataNumber = acc.LoginItem.PersonalDataNumber;
+					NewLogin.PersonalDataPlaceOfIssue = acc.LoginItem.PersonalDataPlaceOfIssue;
 					break;
 				case 3:
 					VisiblePasswordSection = false;
@@ -146,7 +118,7 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = false;
 					VisibleReminderSection = true;
 
-					IsReminderActive = acc.LoginItem.IsReminderActive;
+					NewLogin.IsReminderActive = acc.LoginItem.IsReminderActive;
 					break;
 			}
 
@@ -184,21 +156,12 @@ namespace OlibKey.ViewModels.Pages
 
 		private void SaveLogin()
 		{
-			LoginList.LoginItem.Name = Name;
-			LoginList.LoginItem.Username = Username;
-			LoginList.LoginItem.DateCard = DateCard;
+			LoginList.LoginItem = NewLogin;
 			LoginList.LoginItem.FolderID = SelectionFolderItem.ID;
-			LoginList.LoginItem.IsReminderActive = IsReminderActive;
-			LoginList.LoginItem.Note = Note;
-			LoginList.LoginItem.PersonalDataNumber = PersonalDataNumber;
-			LoginList.LoginItem.PersonalDataPlaceOfIssue = PersonalDataPlaceOfIssue;
-			LoginList.LoginItem.Password = Password;
-			LoginList.LoginItem.SecurityCode = SecurityCode;
-			LoginList.LoginItem.WebSite = WebSite;
 
 			LoginList.LoginItem.CustomElements = CustomElements.Select(item => item.HousingElement.CustomElement).ToList();
 			LoginList.LoginItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-			if (IsReminderActive)
+			if (NewLogin.IsReminderActive)
 			{
 				LoginList.ReminderTimer.Interval = new TimeSpan(0, 0, 3);
 				LoginList.ReminderTimer.Start();

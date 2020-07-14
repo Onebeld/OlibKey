@@ -149,10 +149,11 @@ namespace OlibKey.ViewModels.Pages
 				}));
 			}
 
+			if (CustomElements.Count != 0)
+				CustomElements[^1].SLine.IsVisible = false;
+
 			if (CustomElements.Count == 0)
-			{
 				IsVisible = false;
-			}
 		}
 	}
 }

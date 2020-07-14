@@ -18,7 +18,7 @@
 		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
 			<Grid>
 				<Button Content="{DynamicResource Disable}" Click="ButtonShutdown" HorizontalAlignment="Left" MinWidth="100"  Margin="10"/>
-                <Button Content="{DynamicResource Pause}" Click="ButtonPause" HorizontalAlignment="Right" MinWidth="100" Margin="10"/>
+				<Button Content="{DynamicResource Pause}" Click="ButtonPause" HorizontalAlignment="Right" MinWidth="100" Margin="10"/>
 			</Grid>
 		</Border>
 	</Grid>

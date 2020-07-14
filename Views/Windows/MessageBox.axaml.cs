@@ -32,7 +32,7 @@ namespace OlibKey.Views.Windows
 
 		public MessageBox() => AvaloniaXamlLoader.Load(this);
 
-		public static Task<MessageBoxResult> Show(Window parent, string textException , string text, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
+		public static Task<MessageBoxResult> Show(Window parent, string textException, string text, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
 		{
 			MessageBox msgbox = new MessageBox()
 			{

@@ -9,55 +9,55 @@ using OlibKey.Views.Windows;
 
 namespace OlibKey.Views.Controls
 {
-    public class LoginListItem : UserControl
-    {
+	public class LoginListItem : UserControl
+	{
 		public Image IconLogin;
-	    private readonly TextBlock _tbLoginName;
-	    private readonly TextBlock _tbUsername;
+		private readonly TextBlock _tbLoginName;
+		private readonly TextBlock _tbUsername;
 
 		public string LoginID { get; set; }
 
 		public DispatcherTimer ReminderTimer;
 
-	    public Login LoginItem { get; set; }
+		public Login LoginItem { get; set; }
 
-	    public LoginListItem() => InitializeComponent();
+		public LoginListItem() => InitializeComponent();
 
-	    public LoginListItem(Login Login)
-	    {
-		    InitializeComponent();
+		public LoginListItem(Login Login)
+		{
+			InitializeComponent();
 
-		    IconLogin = this.FindControl<Image>("imageIconWebSite");
-		    _tbLoginName = this.FindControl<TextBlock>("tbLoginName");
-		    _tbUsername = this.FindControl<TextBlock>("tbUsername");
+			IconLogin = this.FindControl<Image>("imageIconWebSite");
+			_tbLoginName = this.FindControl<TextBlock>("tbLoginName");
+			_tbUsername = this.FindControl<TextBlock>("tbUsername");
 
-		    LoginItem = Login;
+			LoginItem = Login;
 
 			EditedLogin();
 
-		    switch (LoginItem.Type)
-		    {
-			    case 3:
+			switch (LoginItem.Type)
+			{
+				case 3:
 
-				    ReminderTimer = new DispatcherTimer
-				    {
-					    Interval = new TimeSpan(0, 0, 3)
-				    };
-				    ReminderTimer.Tick += ReminderTimer_Tick;
+					ReminderTimer = new DispatcherTimer
+					{
+						Interval = new TimeSpan(0, 0, 3)
+					};
+					ReminderTimer.Tick += ReminderTimer_Tick;
 
-				    ReminderTimer.Start();
-				    break;
-		    }
+					ReminderTimer.Start();
+					break;
+			}
 		}
 
 		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 
-	    public void EditedLogin()
-	    {
-		    if (LoginItem == null) return;
-		    _tbLoginName.Text = LoginItem.Name;
-		    _tbUsername.Text = LoginItem.Username;
-	    }
+		public void EditedLogin()
+		{
+			if (LoginItem == null) return;
+			_tbLoginName.Text = LoginItem.Name;
+			_tbUsername.Text = LoginItem.Username;
+		}
 
 		public async void GetIconElement()
 		{
@@ -81,31 +81,31 @@ namespace OlibKey.Views.Controls
 			}
 		}
 
-	    private void ReminderTimer_Tick(object sender, EventArgs e)
-	    {
-		    try
-		    {
-			    if (DateTime.Parse(LoginItem.Username, System.Threading.Thread.CurrentThread.CurrentUICulture) <=
-				    DateTime.Now && LoginItem.IsReminderActive)
-			    {
-				    ReminderTimer.Stop();
+		private void ReminderTimer_Tick(object sender, EventArgs e)
+		{
+			try
+			{
+				if (DateTime.Parse(LoginItem.Username, System.Threading.Thread.CurrentThread.CurrentUICulture) <=
+					DateTime.Now && LoginItem.IsReminderActive)
+				{
+					ReminderTimer.Stop();
 
-				    var reminderWindow = new ReminderWindow
-				    {
-					    LoginListItem = this,
+					var reminderWindow = new ReminderWindow
+					{
+						LoginListItem = this,
 						Title = LoginItem.Name,
-						_tbName = { Text = LoginItem.Name},
-						_tbTime = { Text = LoginItem.Username}
-				    };
-				    reminderWindow.ShowDialog(App.MainWindow);
-			    }
-			    else if (!LoginItem.IsReminderActive) ReminderTimer.Stop();
-		    }
-		    catch
-		    {
-			    ReminderTimer.Stop();
-			    LoginItem.IsReminderActive = false;
-		    }
-	    }
+						_tbName = { Text = LoginItem.Name },
+						_tbTime = { Text = LoginItem.Username }
+					};
+					reminderWindow.ShowDialog(App.MainWindow);
+				}
+				else if (!LoginItem.IsReminderActive) ReminderTimer.Stop();
+			}
+			catch
+			{
+				ReminderTimer.Stop();
+				LoginItem.IsReminderActive = false;
+			}
+		}
 	}
 }

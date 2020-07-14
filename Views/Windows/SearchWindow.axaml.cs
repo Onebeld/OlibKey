@@ -34,7 +34,6 @@ namespace OlibKey.Views.Windows
 
 		private async void InitializeComponent()
 		{
-
 			_rLogin = this.FindControl<RadioButton>("rLogin");
 			_rBankCard = this.FindControl<RadioButton>("rBankCard");
 			_rPassport = this.FindControl<RadioButton>("rPassport");
@@ -42,7 +41,6 @@ namespace OlibKey.Views.Windows
 			_rAll = this.FindControl<RadioButton>("rAll");
 			_tbSearchText = this.FindControl<TextBox>("tbSearchText");
 			_lbFolders = this.FindControl<ListBox>("lbFolders");
-
 
 			DataContext = SearchViewModel = new SearchWindowViewModel();
 			_rAll.IsChecked = true;

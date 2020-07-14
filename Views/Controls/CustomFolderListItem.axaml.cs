@@ -2,7 +2,6 @@
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using OlibKey.Structures;
-using System;
 
 namespace OlibKey.Views.Controls
 {

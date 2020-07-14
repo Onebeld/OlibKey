@@ -16,17 +16,17 @@
 				<Border Classes="BorderStyle" Margin="0,5" Padding="0 5">
 					<StackPanel>
 						<TextBlock Text="{DynamicResource Name}" Classes="Heading"/>
-						<TextBox Margin="5" Text="{Binding Name}"/>
+						<TextBox Margin="5" Text="{Binding NewLogin.Name}"/>
 
 						<StackPanel IsVisible="{Binding VisiblePasswordSection}">
 							<Separator Margin="15,5"/>
 							<TextBlock Text="{DynamicResource Username}" Classes="Heading"/>
-							<TextBox  Margin="5" Text="{Binding Username}"/>
+							<TextBox  Margin="5" Text="{Binding NewLogin.Username}"/>
 
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
-							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding Password}" PasswordChar="•"/>
+							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding NewLogin.Password}" PasswordChar="•"/>
 							<StackPanel Orientation="Horizontal">
 								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5" Padding="5 2"/>
 								<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword" VerticalAlignment="Center"/>
@@ -38,34 +38,34 @@
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource WebSite}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding WebSite}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.WebSite}"/>
 						</StackPanel>
 						<StackPanel IsVisible="{Binding VisibleReminderSection}">
 							<Separator/>
 							<TextBlock Text="{DynamicResource StartTime}" Classes="Heading"/>
-							<TextBox x:Name="tbStartTime" Margin="5" Text="{Binding Username}"/>
+							<TextBox x:Name="tbStartTime" Margin="5" Text="{Binding NewLogin.Username}"/>
 							<StackPanel Orientation="Horizontal" Margin="5 0 0 5">
 								<Button Content="{DynamicResource ZeroOut}" Padding="5 2" Margin="0 0 5 0"/>
-								<CheckBox Content="{DynamicResource ReminderStarted}" IsChecked="{Binding IsReminderActive}" VerticalAlignment="Center"/>
+								<CheckBox Content="{DynamicResource ReminderStarted}" IsChecked="{Binding NewLogin.IsReminderActive}" VerticalAlignment="Center"/>
 							</StackPanel>
 						</StackPanel>
 						<StackPanel IsVisible="{Binding VisibleBankCardSection}">
 							<Separator/>
 							<TextBlock Text="{DynamicResource CartType}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding TypeBankCard}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.TypeBankCard}"/>
 
 							<Separator/>
 							<TextBlock Text="{DynamicResource CardNumber}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding Username}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Username}"/>
 
 							<Separator/>
 							<TextBlock Text="{DynamicResource YearOfService}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding DateCard}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.DateCard}"/>
 
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource SecurityCodeCard}" Classes="Heading"/>
-							<TextBox x:Name="txtSecurityCode" Margin="5" Text="{Binding SecurityCode}" PasswordChar="•"/>
+							<TextBox x:Name="txtSecurityCode" Margin="5" Text="{Binding NewLogin.SecurityCode}" PasswordChar="•"/>
 							<CheckBox Content="{DynamicResource Show}" Checked="CheckedSecurityCode" Unchecked="CheckedSecurityCode" VerticalAlignment="Center" Margin="5"/>
 						</StackPanel>
 
@@ -73,17 +73,17 @@
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource FullName}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding Username}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Username}"/>
 
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource PassportSeriesAndNumber}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding PersonalDataNumber}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.PersonalDataNumber}"/>
 
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource PlaceOfIssue}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding PersonalDataPlaceOfIssue}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.PersonalDataPlaceOfIssue}"/>
 						</StackPanel>
 
 						<Separator/>
@@ -101,7 +101,7 @@
 				<Border Classes="BorderStyle">
 					<StackPanel Margin="5">
 						<TextBlock Text="{DynamicResource Notes}" FontWeight="Bold"/>
-						<TextBox Margin="0 5 0 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding Note}"/>
+						<TextBox Margin="0 5 0 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewLogin.Note}"/>
 					</StackPanel>
 				</Border>
 				<TextBlock Text="{DynamicResource CustomItems}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>

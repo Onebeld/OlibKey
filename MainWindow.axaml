@@ -60,22 +60,54 @@
             <MenuItem Header="{DynamicResource File}">
 				<MenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
 				<MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" InputGesture="Ctrl + O"/>
-				<MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" Icon="{DynamicResource SaveIcon}" InputGesture="Ctrl + S" IsEnabled="{Binding IsUnlockDatabase}"/>
-				<MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" Icon="{DynamicResource LockOpenIcon}" IsEnabled="{Binding IsLockDatabase}"/>
-				<MenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" Icon="{DynamicResource LockIcon}" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" InputGesture="Ctrl + S" IsEnabled="{Binding IsUnlockDatabase}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource SaveIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource LockOpenIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource LockIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
 				<Separator Classes="MenuItemSeparators"/>
-				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" Icon="{DynamicResource PlusIcon}" InputGesture="Ctrl + N" IsEnabled="{Binding IsUnlockDatabase}"/>
-				<MenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Icon="{DynamicResource SearchIcon}"/>
+				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" InputGesture="Ctrl + N" IsEnabled="{Binding IsUnlockDatabase}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource PlusIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Icon="{DynamicResource }">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource SearchIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
 				<Separator Classes="MenuItemSeparators"/>
-				<MenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}" Icon="{DynamicResource GearIcon}"/>
-                <MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}" Icon="{DynamicResource ExitIcon}"/>
+				<MenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource GearIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
+				<MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource ExitIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
             </MenuItem>
 			<MenuItem Header="{DynamicResource Tools}">
 				<MenuItem Header="{DynamicResource PasswordGenerator}" InputGesture="Ctrl + G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
 				<MenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
 			</MenuItem>
             <MenuItem Header="{DynamicResource Reference}">
-				<MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdateCommand}" Icon="{DynamicResource DownloadIcon}"/>
+				<MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdateCommand}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource DownloadIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
 				<MenuItem Header="{DynamicResource AboutPrograms}" Command="{Binding OpenAboutWindowCommand}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource QuestionIcon}"/>

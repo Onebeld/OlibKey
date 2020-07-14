@@ -42,7 +42,7 @@ namespace OlibKey.ViewModels.Windows
 		}
 		private int SelectedLoginIndex
 		{
-			get => _selectedLoginIndex; 
+			get => _selectedLoginIndex;
 			set
 			{
 				this.RaiseAndSetIfChanged(ref _selectedLoginIndex, value);
@@ -75,7 +75,7 @@ namespace OlibKey.ViewModels.Windows
 		public LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
 		private void CreateFolder()
 		{
-			var a = new CustomFolderListItem
+			CustomFolderListItem a = new CustomFolderListItem
 			{
 				DataContext = new CustomFolder()
 			};
@@ -84,7 +84,7 @@ namespace OlibKey.ViewModels.Windows
 		}
 		public void AddFolder(CustomFolder LoginContent)
 		{
-			var ali = new CustomFolderListItem
+			CustomFolderListItem ali = new CustomFolderListItem
 			{
 				DataContext = LoginContent,
 			};

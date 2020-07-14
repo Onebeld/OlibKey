@@ -123,7 +123,7 @@
 					</StackPanel>
 				</Border>
 				<StackPanel IsVisible="{Binding IsVisible}">
-					<TextBlock Text="Пользовательские элементы" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
+					<TextBlock Text="{DynamicResource CustomItems}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
 					<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
 						<StackPanel>
 							<ScrollViewer>

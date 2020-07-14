@@ -33,13 +33,13 @@ namespace OlibKey.Views.Pages
 
 		private void CheckedPassword(object sender, RoutedEventArgs e)
 		{
-			CheckBox cb = (CheckBox) sender;
+			CheckBox cb = (CheckBox)sender;
 			_txtPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
 		}
 
 		private void CheckedSecurityCode(object sender, RoutedEventArgs e)
 		{
-			CheckBox cb = (CheckBox) sender;
+			CheckBox cb = (CheckBox)sender;
 			_txtSecurityCode.PasswordChar = cb.IsChecked == true ? '\0' : '•';
 		}
 

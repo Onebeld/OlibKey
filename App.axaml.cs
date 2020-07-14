@@ -19,6 +19,7 @@ namespace OlibKey
     {
 	    public static Settings Settings { get; set; }
 		public static Database Database { get; set; }
+
 		public static DispatcherTimer Autosave { get; set; }
 
 		private static string ResultCheckUpdate;
@@ -33,7 +34,7 @@ namespace OlibKey
             AvaloniaXamlLoader.Load(this);
 
 			Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.json")
-				? JsonSerializer.Deserialize<Settings>(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json"))
+				? Core.SaveAndLoadSettings.LoadSettings()
 				: new Settings();
 
 			Current.Styles[2] = !string.IsNullOrEmpty(Settings.Theme)

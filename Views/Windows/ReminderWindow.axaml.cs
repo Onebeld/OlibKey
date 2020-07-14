@@ -12,6 +12,8 @@ namespace OlibKey.Views.Windows
 		public TextBlock _tbName;
 		public TextBlock _tbTime;
 
+		private bool _dialogResult = false;
+
 		public ReminderWindow() => InitializeComponent();
 
 		private void InitializeComponent()
@@ -19,18 +21,28 @@ namespace OlibKey.Views.Windows
 			AvaloniaXamlLoader.Load(this);
 			_tbName = this.FindControl<TextBlock>("tbName");
 			_tbTime = this.FindControl<TextBlock>("tbTime");
+			Closing += ReminderWindow_Closing;
+		}
+
+		private void ReminderWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (_dialogResult)
+			{
+				LoginListItem.ReminderTimer.Interval = new TimeSpan(0, 5, 0);
+				LoginListItem.ReminderTimer.Start();
+			}
+			else LoginListItem.LoginItem.IsReminderActive = false;
 		}
 
 		private void ButtonPause(object sender, RoutedEventArgs e)
 		{
-			LoginListItem.ReminderTimer.Interval = new TimeSpan(0, 5, 0);
-			LoginListItem.ReminderTimer.Start();
+			_dialogResult = true;
 			Close();
 		}
 
 		private void ButtonShutdown(object sender, RoutedEventArgs e)
 		{
-			LoginListItem.LoginItem.IsReminderActive = false;
+			_dialogResult = false;
 			Close();
 		}
 	}

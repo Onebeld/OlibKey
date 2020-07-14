@@ -11,6 +11,26 @@
 		<StyleInclude Source="/Assets/Images/Icons.axaml"/>
 		<StyleInclude Source="/Assets/Local/lang.en-US.axaml"/>
 
+		<Style Selector="ContextMenu">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border Background="{DynamicResource ThemeBackgroundBrush}"
+							BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
+							BorderThickness="1"
+							CornerRadius="5"
+							Padding="4,2">
+						<ScrollViewer Classes="menuscroller">
+							<ItemsPresenter Name="PART_ItemsPresenter"
+											Items="{TemplateBinding Items}"
+											ItemsPanel="{TemplateBinding ItemsPanel}"
+											ItemTemplate="{TemplateBinding ItemTemplate}"
+											KeyboardNavigation.TabNavigation="Continue"/>
+						</ScrollViewer>
+					</Border>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+
 		<Style Selector="TextBlock.Heading">
 			<Setter Property="FontWeight" Value="Bold"/>
 			<Setter Property="Padding" Value="5 0 0 0"/>

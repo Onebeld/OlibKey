@@ -6,6 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
 			 Background="Transparent"
+			 Height="40"
 			 x:Class="OlibKey.Views.Controls.LoginListItem">
 	<Grid>
 		<Grid.ColumnDefinitions>

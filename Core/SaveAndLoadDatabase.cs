@@ -1,6 +1,6 @@
-﻿using System.IO;
+﻿using OlibKey.Structures;
+using System.IO;
 using System.Xml.Serialization;
-using OlibKey.Structures;
 
 namespace OlibKey.Core
 {

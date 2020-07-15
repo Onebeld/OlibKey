@@ -1,10 +1,3 @@
-using System;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Net;
-using System.Reflection;
-using System.Text.Json;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
@@ -12,12 +5,18 @@ using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Threading;
 using OlibKey.Structures;
 using OlibKey.Views.Windows;
+using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Reflection;
 
 namespace OlibKey
 {
-    public class App : Application
-    {
-	    public static Settings Settings { get; set; }
+	public class App : Application
+	{
+		public static Settings Settings { get; set; }
 		public static Database Database { get; set; }
 
 		public static DispatcherTimer Autosave { get; set; }
@@ -30,8 +29,8 @@ namespace OlibKey
 		public static SearchWindow SearchWindow { get; set; }
 
 		public override void Initialize()
-        {
-            AvaloniaXamlLoader.Load(this);
+		{
+			AvaloniaXamlLoader.Load(this);
 
 			Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.json")
 				? Core.SaveAndLoadSettings.LoadSettings()
@@ -76,9 +75,9 @@ namespace OlibKey
 			}
 
 			CheckUpdate(false);
-        }
+		}
 
-		public static  async void CheckUpdate(bool b)
+		public static async void CheckUpdate(bool b)
 		{
 			try
 			{
@@ -113,7 +112,8 @@ namespace OlibKey
 				{
 					ProcessStartInfo psi = new ProcessStartInfo
 					{
-						FileName = "https://github.com/MagnificentEagle/OlibKey/releases", UseShellExecute = true
+						FileName = "https://github.com/MagnificentEagle/OlibKey/releases",
+						UseShellExecute = true
 					};
 					Process.Start(psi);
 				}
@@ -122,7 +122,7 @@ namespace OlibKey
 			{
 				if (b)
 				{
-					if(ErrorResult != null)
+					if (ErrorResult != null)
 						_ = await MessageBox.Show(MainWindow, ErrorResult,
 							(string)Current.FindResource("MB5"), (string)Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok,
 							MessageBox.MessageBoxIcon.Error);

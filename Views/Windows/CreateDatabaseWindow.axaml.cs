@@ -1,9 +1,9 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using OlibKey.Core;
+using System;
 
 namespace OlibKey.Views.Windows
 {
@@ -19,10 +19,7 @@ namespace OlibKey.Views.Windows
 		{
 			InitializeComponent();
 			_bSelectPath.Click += SelectPath;
-			_bSave.Click += (s, e) =>
-			{
-				Close(true);
-			};
+			_bSave.Click += (s, e) => Close(true);
 		}
 
 		private async void SelectPath(object sender, RoutedEventArgs e)

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Reactive.Disposables;
-using Avalonia;
-using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using OlibKey.ViewModels.Pages;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
 using OlibKey.Core;
+using OlibKey.ViewModels.Pages;
 using ReactiveUI;
+using System;
+using System.Reactive.Disposables;
 
 namespace OlibKey.Views.Pages
 {

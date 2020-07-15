@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Reactive.Disposables;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -10,6 +7,9 @@ using OlibKey.Core;
 using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Windows;
 using ReactiveUI;
+using System;
+using System.Globalization;
+using System.Reactive.Disposables;
 
 namespace OlibKey.Views.Pages
 {

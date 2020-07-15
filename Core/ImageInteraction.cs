@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace OlibKey.Core
 {
-    public static class ImageInteraction
-    {
+	public static class ImageInteraction
+	{
 		public static async Task<Bitmap> DownloadImage(string url)
 		{
 			using WebClient client = new WebClient();

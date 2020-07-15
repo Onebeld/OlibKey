@@ -9,5 +9,4 @@ namespace OlibKey.Views.Pages
 		public StartPage() => InitializeComponent();
 		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 	}
-
 }

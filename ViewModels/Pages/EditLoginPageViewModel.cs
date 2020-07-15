@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Reactive;
-using System.Linq;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
+using OlibKey.Structures;
+using OlibKey.Views.Controls;
+using OlibKey.Views.Windows;
 using ReactiveUI;
 using Splat;
-using OlibKey.Views.Controls;
-using OlibKey.Structures;
-using OlibKey.Views.Windows;
+using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.Linq;
+using System.Reactive;
 
 namespace OlibKey.ViewModels.Pages
 {
@@ -29,8 +29,8 @@ namespace OlibKey.ViewModels.Pages
 
 		#region ReactiveCommand's
 
-		private ReactiveCommand<Unit,Unit> SaveLoginCommand { get; }
-		private ReactiveCommand<Unit,Unit> DeleteLoginCommand { get; }
+		private ReactiveCommand<Unit, Unit> SaveLoginCommand { get; }
+		private ReactiveCommand<Unit, Unit> DeleteLoginCommand { get; }
 		private ReactiveCommand<Unit, Unit> CancelCommand { get; }
 		private ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
 
@@ -48,7 +48,7 @@ namespace OlibKey.ViewModels.Pages
 
 		private CustomFolder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
 		private ObservableCollection<CustomFolder> Folders { get; set; }
-		
+
 		public LoginListItem LoginList;
 
 		#endregion
@@ -147,7 +147,8 @@ namespace OlibKey.ViewModels.Pages
 				{
 					CustomElement = i,
 					IsEnabled = true
-				}){
+				})
+				{
 					ID = Guid.NewGuid().ToString("N"),
 					DeleteCustomElement = DeleteCustomElement
 				});

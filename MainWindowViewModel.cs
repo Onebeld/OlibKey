@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Runtime.InteropServices;
-using System.Text.Json;
-using System.Threading.Tasks;
 using Avalonia.Controls;
 using ReactiveUI;
 using OlibKey.Core;

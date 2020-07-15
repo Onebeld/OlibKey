@@ -5,14 +5,14 @@ using System.Text;
 
 namespace OlibKey.Core
 {
-    public static class Encryptor
-    {
+	public static class Encryptor
+	{
 		private static byte[] GetRandomBytes()
 		{
 			byte[] ba = new byte[SaltLength];
 			RandomNumberGenerator.Create().GetBytes(ba);
 			return ba;
-        }
+		}
 
 		private static int SaltLength => 8;
 
@@ -59,7 +59,7 @@ namespace OlibKey.Core
 		}
 
 		public static string EncryptString(string text, string password)
-        {
+		{
 			byte[] baPwd = Encoding.UTF8.GetBytes(password);
 			byte[] baPwdHash = SHA256.Create().ComputeHash(baPwd);
 			byte[] baText = Encoding.UTF8.GetBytes(text);
@@ -70,10 +70,10 @@ namespace OlibKey.Core
 			baEncrypted = AES_Encrypt(baEncrypted, baPwdHash);
 
 			return Convert.ToBase64String(baEncrypted);
-        }
+		}
 
-        public static string DecryptString(string text, string password)
-        {
+		public static string DecryptString(string text, string password)
+		{
 			byte[] baPwd = Encoding.UTF8.GetBytes(password);
 			byte[] baPwdHash = SHA256.Create().ComputeHash(baPwd);
 			byte[] baText = Convert.FromBase64String(text);
@@ -83,6 +83,6 @@ namespace OlibKey.Core
 			for (int i = 0; i < baResult.Length; i++) baResult[i] = baDecrypted[i + saltLength];
 
 			return Encoding.UTF8.GetString(baResult);
-        }
-    }
+		}
+	}
 }

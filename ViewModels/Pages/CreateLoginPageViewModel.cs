@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Reactive;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using OlibKey.Structures;
 using OlibKey.Views.Controls;
 using ReactiveUI;
 using Splat;
+using System;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
+using System.Reactive;
 
 namespace OlibKey.ViewModels.Pages
 {
-    public class CreateLoginPageViewModel : ReactiveObject, IRoutableViewModel
-    {
-        #region ReactiveCommands
-        public ReactiveCommand<Unit, Unit> BackCommand { get; }
-        public ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
+	public class CreateLoginPageViewModel : ReactiveObject, IRoutableViewModel
+	{
+		#region ReactiveCommands
+		public ReactiveCommand<Unit, Unit> BackCommand { get; }
+		public ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
 		public ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
 		#endregion
 
@@ -26,7 +26,7 @@ namespace OlibKey.ViewModels.Pages
 		#region Property's
 
 		public int Type { get; set; }
-        public Login NewLogin { get; set; }
+		public Login NewLogin { get; set; }
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
@@ -47,16 +47,16 @@ namespace OlibKey.ViewModels.Pages
 		#endregion
 
 		public Action BackPageCallback { get; set; }
-        public Action<Login> CreateLoginCallback { get; set; }
+		public Action<Login> CreateLoginCallback { get; set; }
 
 		// routing
 		public string UrlPathSegment => "/addLogin";
-        public IScreen HostScreen { get; }
+		public IScreen HostScreen { get; }
 
 
-        public CreateLoginPageViewModel(IScreen screen = null)
-        {
-            HostScreen = screen ?? Locator.Current.GetService<IScreen>();
+		public CreateLoginPageViewModel(IScreen screen = null)
+		{
+			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
 			NewLogin = new Login
 			{
@@ -64,8 +64,8 @@ namespace OlibKey.ViewModels.Pages
 			};
 			CustomElements = new ObservableCollection<CustomElementListItem>();
 
-            BackCommand = ReactiveCommand.Create(BackVoid);
-            CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
+			BackCommand = ReactiveCommand.Create(BackVoid);
+			CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
 			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
 
 			Folders = new ObservableCollection<CustomFolder>
@@ -77,15 +77,15 @@ namespace OlibKey.ViewModels.Pages
 
 			SelectionFolderIndex = 0;
 			Type = 0;
-        }
+		}
 
-        private void CreateLogin()
-        {
+		private void CreateLogin()
+		{
 			NewLogin.CustomElements.AddRange(CustomElements.Select(item => item.HousingElement.CustomElement));
 			NewLogin.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 			CreateLoginCallback?.Invoke(NewLogin);
 			App.MainWindow.MessageStatusBar("Not1");
-        }
+		}
 		private void AddCustomElement()
 		{
 			CustomElements.Add(new CustomElementListItem(new Housing

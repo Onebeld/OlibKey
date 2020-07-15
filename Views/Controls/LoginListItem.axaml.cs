@@ -1,11 +1,11 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
 using OlibKey.Structures;
 using OlibKey.Views.Windows;
+using System;
 
 namespace OlibKey.Views.Controls
 {

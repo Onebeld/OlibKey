@@ -1,9 +1,9 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
+using System;
 
 namespace OlibKey.Views.Windows
 {

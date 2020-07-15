@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Linq;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -9,6 +6,9 @@ using Avalonia.ReactiveUI;
 using OlibKey.Structures;
 using OlibKey.ViewModels.Windows;
 using OlibKey.Views.Controls;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OlibKey.Views.Windows
 {

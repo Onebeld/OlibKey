@@ -1,9 +1,9 @@
-﻿using System;
+﻿using OlibKey.Structures;
+using OlibKey.Views.Controls;
+using ReactiveUI;
+using System;
 using System.Collections.ObjectModel;
 using System.Reactive;
-using ReactiveUI;
-using OlibKey.Structures;
-using OlibKey.Views.Controls;
 
 namespace OlibKey.ViewModels.Windows
 {

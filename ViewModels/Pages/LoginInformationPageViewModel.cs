@@ -1,14 +1,14 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reactive;
-using Avalonia;
-using OlibKey.Views.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using OlibKey.Structures;
+using OlibKey.Views.Controls;
 using ReactiveUI;
 using Splat;
+using System;
 using System.Collections.ObjectModel;
-using Avalonia.Controls;
+using System.Diagnostics;
 using System.Linq;
+using System.Reactive;
 
 namespace OlibKey.ViewModels.Pages
 {

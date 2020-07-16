@@ -32,7 +32,7 @@ namespace OlibKey
 		{
 			AvaloniaXamlLoader.Load(this);
 
-			Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.json")
+			Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.xml")
 				? Core.SaveAndLoadSettings.LoadSettings()
 				: new Settings();
 

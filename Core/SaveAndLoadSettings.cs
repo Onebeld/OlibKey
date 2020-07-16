@@ -11,7 +11,7 @@ namespace OlibKey.Core
 		{
 			try
 			{
-				return (Settings)new XmlSerializer(typeof(Settings)).Deserialize(new StringReader(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json")));
+				return (Settings)new XmlSerializer(typeof(Settings)).Deserialize(new StringReader(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.xml")));
 			}
 			catch
 			{
@@ -24,7 +24,7 @@ namespace OlibKey.Core
 			using StringWriter writer = new StringWriter();
 			new XmlSerializer(typeof(Settings)).Serialize(writer, App.Settings);
 
-			File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.json", writer.ToString());
+			File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.xml", writer.ToString());
 		}
 	}
 }

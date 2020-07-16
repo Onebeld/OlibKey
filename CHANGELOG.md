@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.0.0] - ???
+## [3.0.0] - 2020-07-16
 ### Added
 - Custom Elements Added
 - Added status bar
+- Added new theme "Mysterious"
 
 ### Changed
 - Upgrade to .NET 5 Preview 6
@@ -17,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated AboutWindow
 - Now the search button is next to the Add button
 - No animation in StartPage
+- Now opens .olib files by default
 
 ## [2.1.0] - 2020-04-30
 ### Added

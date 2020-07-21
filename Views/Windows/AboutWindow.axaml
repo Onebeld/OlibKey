@@ -14,7 +14,7 @@
 			<TextBlock Text="©2020 Dmitry Zhutkov" HorizontalAlignment="Center" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<TextBlock Text="{StaticResource Version}" Margin="0 0 5 0" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
-				<TextBlock Text="3.0.0" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
+				<TextBlock Text="3.1.0" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
 			</StackPanel>
 			<TextBox x:Name="tbInformation" Margin="10" Height="150" IsReadOnly="True" TextAlignment="Center" HorizontalContentAlignment="Center" AcceptsReturn="True" TextWrapping="Wrap"/>
 		</StackPanel>
@@ -22,20 +22,14 @@
 		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
 			<Grid>
 				<StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
-					<Button Padding="5" x:Name="bGitHub">
-						<Button.Content>
-							<Image Source="{StaticResource GitHubIcon}"/>
-						</Button.Content>
+					<Button Padding="0" x:Name="bGitHub">
+						<Path Name="GitHubIcon" Margin="5 0" Data="M9 0A9.12 9.12 0 0 0 0 9.23 9.2 9.2 0 0 0 6.16 18c.45.09.61-.2.61-.44s0-.8 0-1.57c-2.51.56-3-1.24-3-1.24a2.46 2.46 0 0 0-1-1.35c-.82-.57.06-.56.06-.56a1.92 1.92 0 0 1 1.38.95 1.89 1.89 0 0 0 2.62.77 1.94 1.94 0 0 1 .57-1.23c-2-.24-4.1-1-4.1-4.56a3.64 3.64 0 0 1 .92-2.48 3.41 3.41 0 0 1 .09-2.44s.76-.25 2.48.94A8.91 8.91 0 0 1 9 4.46a8.91 8.91 0 0 1 2.25.31c1.72-1.19 2.48-.94 2.48-.94a3.41 3.41 0 0 1 .09 2.44 3.64 3.64 0 0 1 .92 2.48c0 3.54-2.1 4.32-4.11 4.55A2.24 2.24 0 0 1 11.24 15c0 1.23 0 2.23 0 2.53s.16.53.62.44A9.21 9.21 0 0 0 18 9.23 9.12 9.12 0 0 0 9 0Z"/>
 					</Button>
 					<Button Padding="5" x:Name="bVK" Margin="5 0">
-						<Button.Content>
-							<Image Source="{StaticResource VKIcon}"/>
-						</Button.Content>
+						<Image Source="{StaticResource VKIcon}"/>
 					</Button>
 					<Button x:Name="bFacebook" Padding="5">
-						<Button.Content>
-							<Image Source="{StaticResource FacebookIcon}"/>
-						</Button.Content>
+						<Image Source="{StaticResource FacebookIcon}"/>
 					</Button>
 				</StackPanel>
 				<Button x:Name="bClose" Content="{StaticResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>

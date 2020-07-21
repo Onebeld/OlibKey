@@ -112,7 +112,7 @@
 						</ComboBox>
 					</StackPanel>
 				</Border>
-				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
+				<Border Classes="BorderStyle" Margin="0 0 0 5" Padding="0 5">
 					<StackPanel>
 						<TextBlock Text="{DynamicResource Notes}" Classes="Heading"/>
 						<TextBox Margin="5 5 5 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewLogin.Note}"/>

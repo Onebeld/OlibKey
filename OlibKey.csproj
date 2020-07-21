@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Platforms>AnyCPU;x64</Platforms>
 	</PropertyGroup>
 
@@ -13,7 +13,7 @@
     	<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
     	<IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
 		<ApplicationIcon>app.ico</ApplicationIcon>
-		<Version>3.0.0</Version>
+		<Version>3.1.0</Version>
 		<Authors>Dmitry Zhutkov</Authors>
 		<Copyright>© Dmitry Zhutkov 2020</Copyright>
 		<Description>OlibKey - an open source password manager.</Description>
@@ -46,6 +46,7 @@
 		<PackageReference Include="Avalonia" Version="0.10.0-preview1" />
 		<PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview1" />
 		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview1" />
+		<PackageReference Include="Google.Apis.Drive.v3" Version="1.48.0.2013" />
 	</ItemGroup>
 	<ItemGroup>
 		<RdXmlFile Include="rd.xml" />

@@ -16,12 +16,17 @@
 		<v:String x:Key="ChangeMasterPassword">Изменить мастер-пароль</v:String>
 		<v:String x:Key="AboutPrograms">О программе...</v:String>
 		<v:String x:Key="CheckUpdates">Проверить наличие обновлении</v:String>
+		
 		<v:String x:Key="Search">Поиск</v:String>
-		<v:String x:Key="CreateFolder">Создать папку</v:String>
 		<v:String x:Key="AllItems">Все элементы</v:String>
 		<v:String x:Key="CustomFolder">Пользовательская папка</v:String>
 		<v:String x:Key="NotChosen">Не выбрано</v:String>
 		<v:String x:Key="RemoveSelection">Снять выделение</v:String>
+		<v:String x:Key="NameElement">Название элемента</v:String>
+
+		<v:String x:Key="GitHub">OlibKey на GitHub</v:String>
+		<v:String x:Key="VKontakte">OlibKey во ВКонтакте</v:String>
+		<v:String x:Key="Facebook">OlibKey в Facebook</v:String>
 
 		<v:String x:Key="Ready">Готов</v:String>
 
@@ -135,7 +140,8 @@
 		<v:String x:Key="PassportSeriesAndNumber">Серия и номер</v:String>
 		<v:String x:Key="PlaceOfIssue">Место выдачи</v:String>
 
-		<v:String x:Key="CustomItems">Пользовательские элементы</v:String>
+		<v:String x:Key="CustomFields">Пользовательские поля</v:String>
+		<v:String x:Key="AddField">Добавить поле</v:String>
 		<v:String x:Key="Text">Текстовое</v:String>
 		<v:String x:Key="Hidden">Скрытое</v:String>
 		<v:String x:Key="Logical">Логическое</v:String>

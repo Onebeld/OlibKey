@@ -16,12 +16,17 @@
 		<v:String x:Key="ChangeMasterPassword">Changer le mot de passe principal</v:String>
 		<v:String x:Key="AboutPrograms">À propos du programme...</v:String>
 		<v:String x:Key="CheckUpdates">Vérifier les mises à jour</v:String>
+		
 		<v:String x:Key="Search">Chercher</v:String>
-		<v:String x:Key="CreateFolder">Créer un dossier</v:String>
 		<v:String x:Key="AllItems">Tous les articles</v:String>
 		<v:String x:Key="CustomFolder">Dossier utilisateur</v:String>
 		<v:String x:Key="NotChosen">Non sélectionné</v:String>
 		<v:String x:Key="RemoveSelection">Désélectionner</v:String>
+		<v:String x:Key="NameElement">Nom de l'article</v:String>
+
+		<v:String x:Key="GitHub">OlibKey sur GitHub</v:String>
+		<v:String x:Key="VKontakte">OlibKey sur VK</v:String>
+		<v:String x:Key="Facebook">OlibKey sur Facebook</v:String>
 
 		<v:String x:Key="Ready">Prêt</v:String>
 
@@ -138,7 +143,8 @@
 		<v:String x:Key="PassportSeriesAndNumber">Série et numéro</v:String>
 		<v:String x:Key="PlaceOfIssue">Lieu d'émission</v:String>
 
-		<v:String x:Key="CustomItems">Articles personnalisés</v:String>
+		<v:String x:Key="CustomFields">Les champs personnalisés</v:String>
+		<v:String x:Key="AddField">Ajouter le champ</v:String>
 		<v:String x:Key="Text">Texte</v:String>
 		<v:String x:Key="Hidden">Caché</v:String>
 		<v:String x:Key="Logical">Logique</v:String>

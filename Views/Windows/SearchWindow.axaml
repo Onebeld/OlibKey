@@ -14,7 +14,7 @@
 		<Border Classes="ButtonsMenu" Grid.ColumnSpan="2">
 			<DockPanel Margin="50,5">
 				<Image Margin="0,0,5,0" Source="{StaticResource SearchIcon}"/>
-				<TextBox x:Name="tbSearchText" Text="{Binding SearchText}"/>
+				<TextBox x:Name="tbSearchText" Text="{Binding SearchText}" Watermark="{StaticResource NameElement}"/>
 			</DockPanel>
 		</Border>
 

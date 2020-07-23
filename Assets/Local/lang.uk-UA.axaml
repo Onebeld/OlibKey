@@ -16,12 +16,17 @@
 		<v:String x:Key="ChangeMasterPassword">Змінити майстер-пароль</v:String>
 		<v:String x:Key="AboutPrograms">Про програму...</v:String>
 		<v:String x:Key="CheckUpdates">Перевірити наявність оновленні</v:String>
+		
 		<v:String x:Key="Search">Пошук</v:String>
-		<v:String x:Key="CreateFolder">Створити папку</v:String>
 		<v:String x:Key="AllItems">Всі елементи</v:String>
 		<v:String x:Key="CustomFolder">Призначена для користувача папка</v:String>
 		<v:String x:Key="NotChosen">Не вибрано</v:String>
 		<v:String x:Key="RemoveSelection">Зняти виділення</v:String>
+		<v:String x:Key="NameElement">Назва елемента</v:String>
+
+		<v:String x:Key="GitHub">OlibKey на GitHub</v:String>
+		<v:String x:Key="VKontakte">OlibKey у ВКонтакте</v:String>
+		<v:String x:Key="Facebook">OlibKey в Facebook</v:String>
 
 		<v:String x:Key="Ready">Готовий</v:String>
 
@@ -136,7 +141,8 @@
 		<v:String x:Key="PassportSeriesAndNumber">Серія та номер</v:String>
 		<v:String x:Key="PlaceOfIssue">Місце видачі</v:String>
 
-		<v:String x:Key="CustomItems">Призначені для користувача елементи</v:String>
+		<v:String x:Key="CustomFields">Призначені для користувача поля</v:String>
+		<v:String x:Key="AddField">Додати поле</v:String>
 		<v:String x:Key="Text">Текстове</v:String>
 		<v:String x:Key="Hidden">Приховане</v:String>
 		<v:String x:Key="Logical">Логічне</v:String>

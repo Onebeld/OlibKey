@@ -118,13 +118,13 @@
 						<TextBox Margin="5 5 5 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewLogin.Note}"/>
 					</StackPanel>
 				</Border>
-				<TextBlock Text="{DynamicResource CustomItems}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
+				<TextBlock Text="{DynamicResource CustomFields}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
 				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
 					<StackPanel>
 						<ScrollViewer>
 							<ItemsRepeater Items="{Binding CustomElements}"/>
 						</ScrollViewer>
-						<TextBlock Text="{DynamicResource AddElement}" Classes="Heading"/>
+						<TextBlock Text="{DynamicResource AddField}" Classes="Heading"/>
 						<DockPanel Margin="5">
 							<TextBlock Text="{DynamicResource TypeColon}" VerticalAlignment="Center" Margin="0 0 5 0"/>
 							<ComboBox x:Name="TypeCustomElement" SelectedIndex="{Binding Type}">

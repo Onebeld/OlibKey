@@ -16,12 +16,17 @@
 		<v:String x:Key="ChangeMasterPassword">Փոխել վարպետության-գաղտաբառը</v:String>
 		<v:String x:Key="AboutPrograms">Ծրագրի մասին...</v:String>
 		<v:String x:Key="CheckUpdates">Ստուգել թարմացումները</v:String>
+		
 		<v:String x:Key="Search">Որոնել</v:String>
-		<v:String x:Key="CreateFolder">Ստեղծեք թղթապանակ</v:String>
 		<v:String x:Key="AllItems">Բոլոր իրերը</v:String>
 		<v:String x:Key="CustomFolder">Օգտագործողի պանակ</v:String>
 		<v:String x:Key="NotChosen">Ընտրված չէ</v:String>
 		<v:String x:Key="RemoveSelection">Elնջել</v:String>
+		<v:String x:Key="NameElement">Նյութի անվանումը</v:String>
+
+		<v:String x:Key="GitHub">OlibKey- ը GitHub- ում</v:String>
+		<v:String x:Key="VKontakte">OlibKey- ը VK- ում</v:String>
+		<v:String x:Key="Facebook">OlibKey- ը Ֆեյսբուքում</v:String>
 
 		<v:String x:Key="Ready">Պատրաստ է</v:String>
 
@@ -140,7 +145,8 @@
 		<v:String x:Key="PassportSeriesAndNumber">Սերիան և համարը</v:String>
 		<v:String x:Key="PlaceOfIssue">Թողարկման վայրը</v:String>
 
-		<v:String x:Key="CustomItems">Պատվերով իրեր</v:String>
+		<v:String x:Key="CustomFields">Հատուկ դաշտեր</v:String>
+		<v:String x:Key="AddField">Ավելացնել դաշտ</v:String>
 		<v:String x:Key="Text">Տեքստ</v:String>
 		<v:String x:Key="Hidden">Թաքնված</v:String>
 		<v:String x:Key="Logical">Տրամաբանական</v:String>

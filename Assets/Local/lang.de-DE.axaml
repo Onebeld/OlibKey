@@ -16,12 +16,17 @@
 		<v:String x:Key="ChangeMasterPassword">Ändern Sie das Master-Passwort</v:String>
 		<v:String x:Key="AboutPrograms">Über das Programm...</v:String>
 		<v:String x:Key="CheckUpdates">Auf Update prüfen</v:String>
+		
 		<v:String x:Key="Search">Suche</v:String>
-		<v:String x:Key="CreateFolder">Ordner erstellen</v:String>
 		<v:String x:Key="AllItems">Alle Artikel</v:String>
 		<v:String x:Key="CustomFolder">Benutzerordner</v:String>
 		<v:String x:Key="NotChosen">Nicht ausgewählt</v:String>
 		<v:String x:Key="RemoveSelection">Deaktivieren Sie</v:String>
+		<v:String x:Key="NameElement">Artikelname</v:String>
+
+		<v:String x:Key="GitHub">OlibKey auf GitHub</v:String>
+		<v:String x:Key="VKontakte">OlibKey auf VK</v:String>
+		<v:String x:Key="Facebook">OlibKey auf Facebook</v:String>
 
 		<v:String x:Key="Ready">Bereit</v:String>
 
@@ -138,11 +143,12 @@
 		<v:String x:Key="PassportSeriesAndNumber">Serie und Nummer</v:String>
 		<v:String x:Key="PlaceOfIssue">Ausstellungsort</v:String>
 
-		<v:String x:Key="CustomItems">Пользовательские элементы</v:String>
-		<v:String x:Key="Text">Текстовое</v:String>
-		<v:String x:Key="Hidden">Скрытое</v:String>
-		<v:String x:Key="Logical">Логическое</v:String>
-		<v:String x:Key="Data">Данные</v:String>
+		<v:String x:Key="CustomFields">Benutzerdefinierte Felder</v:String>
+		<v:String x:Key="AddField">Feld hinzufügen</v:String>
+		<v:String x:Key="Text">Text</v:String>
+		<v:String x:Key="Hidden">Versteckt</v:String>
+		<v:String x:Key="Logical">Logisch</v:String>
+		<v:String x:Key="Data">Daten</v:String>
 		<v:String x:Key="TypeColon">Eine Art:</v:String>
 
 		<v:String x:Key="ToApply">Bewerben</v:String>

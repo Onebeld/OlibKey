@@ -6,7 +6,7 @@
         x:Class="OlibKey.Views.Windows.CreateDatabaseWindow"
 		WindowStartupLocation="CenterScreen"
 		Icon="avares://OlibKey/app.ico"
-		Height="250" Width="400"
+		Height="350" Width="400"
 		Background="{StaticResource ThemeWindowBackgroundBrush}"
         Title="{StaticResource CreateBase}"
 		CanResize="False">
@@ -27,6 +27,15 @@
 						<DockPanel Margin="5 0">
 							<TextBlock Text="{StaticResource Complexity}" VerticalAlignment="Center"/>
 							<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>
+						</DockPanel>
+						<Separator Margin="15,5"/>
+						<DockPanel Margin="5">
+							<TextBlock Text="Сколько раз подряд будет шифровать:"/>
+							<TextBox x:Name="tbNumberOfEncryptionProcedures" Text="1" Margin="5 0 0 0"/>
+						</DockPanel>
+						<DockPanel Margin="5 0 5 5">
+							<TextBlock Text="Количество итерации:"/>
+							<TextBox x:Name="tbIteration" Text="100000" Margin="5 0 0 0"/>
 						</DockPanel>
 					</StackPanel>
 				</Border>

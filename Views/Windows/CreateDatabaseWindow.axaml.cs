@@ -9,8 +9,10 @@ namespace OlibKey.Views.Windows
 {
 	public class CreateDatabaseWindow : Window
 	{
-		public TextBox _tbPassword;
-		public TextBox _tbPathDatabase;
+		public TextBox TbPassword;
+		public TextBox TbPathDatabase;
+		public TextBox TbIteration;
+		public TextBox TbNumberOfEncryptionProcedures;
 		private Button _bSelectPath;
 		private Button _bSave;
 		private ProgressBar _pbHard;
@@ -27,25 +29,27 @@ namespace OlibKey.Views.Windows
 			SaveFileDialog dialog = new SaveFileDialog();
 			dialog.Filters.Add(new FileDialogFilter { Name = "Olib-Files", Extensions = { "olib" } });
 			string res = await dialog.ShowAsync(this);
-			if (res != null) _tbPathDatabase.Text = res;
+			if (res != null) TbPathDatabase.Text = res;
 		}
 
 		private void InitializeComponent()
 		{
 			AvaloniaXamlLoader.Load(this);
-			_tbPassword = this.FindControl<TextBox>("tbPassword");
+			TbPassword = this.FindControl<TextBox>("tbPassword");
+			TbPathDatabase = this.FindControl<TextBox>("tbPathDatabase");
+			TbIteration = this.FindControl<TextBox>("tbIteration");
+			TbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
 			_bSelectPath = this.FindControl<Button>("bSelectPath");
 			_pbHard = this.FindControl<ProgressBar>("pbHard");
-			_tbPathDatabase = this.FindControl<TextBox>("tbPathDatabase");
 			_bSave = this.FindControl<Button>("bSave");
 
-			_ = _tbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _tbPassword));
+			_ = TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, TbPassword));
 		}
 
 		private void CheckedPassword(object sender, RoutedEventArgs e)
 		{
 			CheckBox cb = (CheckBox)sender;
-			_tbPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
+			TbPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
 		}
 	}
 }

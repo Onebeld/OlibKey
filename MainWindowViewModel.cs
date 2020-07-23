@@ -17,6 +17,9 @@ namespace OlibKey
 {
 	public class MainWindowViewModel : ReactiveObject, IScreen
 	{
+		public int Iterations { get; set; }
+		public int NumberOfEncryptionProcedures { get; set; }
+
 		private string _nameDatabase;
 
 		private bool _isUnlockDatabase;
@@ -263,8 +266,10 @@ namespace OlibKey
 			{
 				App.Database = new Database();
 
-				App.Settings.PathDatabase = window._tbPathDatabase.Text;
-				MasterPassword = window._tbPassword.Text;
+				App.Settings.PathDatabase = window.TbPathDatabase.Text;
+				MasterPassword = window.TbPassword.Text;
+				Iterations = int.Parse(window.TbIteration.Text);
+				NumberOfEncryptionProcedures = int.Parse(window.TbNumberOfEncryptionProcedures.Text);
 				NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase);
 				IsUnlockDatabase = true;
 				IsLockDatabase = false;

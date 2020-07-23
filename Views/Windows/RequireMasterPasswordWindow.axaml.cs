@@ -40,19 +40,10 @@ namespace OlibKey.Views.Windows
 
 		private void LoadStorage()
 		{
-			try
-			{
 				App.MainWindowViewModel.MasterPassword = _tbPassword.Text;
 				LoadStorageCallback?.Invoke();
 				App.Autosave.Start();
 				Close();
-			}
-			catch
-			{
-				App.MainWindowViewModel.MasterPassword = null;
-				_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("MB3"), (string)Application.Current.FindResource("Error"),
-					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
-			}
 		}
 	}
 }

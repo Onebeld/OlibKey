@@ -15,7 +15,7 @@ namespace OlibKey.ViewModels.Pages
 	public class LoginInformationPageViewModel : ReactiveObject, IRoutableViewModel
 	{
 		private int _selectionFolderIndex;
-		private ObservableCollection<CustomElementListItem> _customElements;
+		private ObservableCollection<CustomFieldListItem> _CustomFields;
 
 		#region Section's
 
@@ -35,9 +35,19 @@ namespace OlibKey.ViewModels.Pages
 		public ReactiveCommand<Unit, Unit> CopyTypeBankCommand { get; }
 		public ReactiveCommand<Unit, Unit> CopyDateCardCommand { get; }
 		public ReactiveCommand<Unit, Unit> CopySecurityCodeCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyPersonalDataNumberCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyPersonalDataPlaceOfIssueCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyNumberCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyPlaceOfIssueCommand { get; }
 		public ReactiveCommand<Unit, Unit> OpenWebSiteCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopySocialSecurityNumberCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyTINCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyTelephoneCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyCompanyCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyPostcodeCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyCountryCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyRegionCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyCityCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyAddressCommand { get; }
+		public ReactiveCommand<Unit, Unit> CopyEmailCommand { get; }
 
 		#endregion
 
@@ -48,10 +58,10 @@ namespace OlibKey.ViewModels.Pages
 			get => _selectionFolderIndex;
 			set => this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
 		}
-		private ObservableCollection<CustomElementListItem> CustomElements
+		private ObservableCollection<CustomFieldListItem> CustomFields
 		{
-			get => _customElements;
-			set => this.RaiseAndSetIfChanged(ref _customElements, value);
+			get => _CustomFields;
+			set => this.RaiseAndSetIfChanged(ref _CustomFields, value);
 		}
 		private LoginListItem LoginItem { get; set; }
 		private bool VisibleDateChanged { get; set; }
@@ -73,7 +83,7 @@ namespace OlibKey.ViewModels.Pages
 
 			LoginInformation = acc.LoginItem;
 			LoginItem = acc;
-			CustomElements = new ObservableCollection<CustomElementListItem>();
+			CustomFields = new ObservableCollection<CustomFieldListItem>();
 
 			switch (LoginInformation.Type)
 			{
@@ -113,8 +123,18 @@ namespace OlibKey.ViewModels.Pages
 			CopyTypeBankCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.TypeBankCard); });
 			CopyDateCardCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.DateCard); });
 			CopySecurityCodeCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.SecurityCode); });
-			CopyPersonalDataNumberCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.PersonalDataNumber); });
-			CopyPersonalDataPlaceOfIssueCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.PersonalDataPlaceOfIssue); });
+			CopyNumberCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Number); });
+			CopyPlaceOfIssueCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.PlaceOfIssue); });
+			CopySocialSecurityNumberCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.SocialSecurityNumber); });
+			CopyTINCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.TIN); });
+			CopyTelephoneCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Telephone); });
+			CopyCompanyCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Company); });
+			CopyPostcodeCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Postcode); });
+			CopyCountryCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Country); });
+			CopyRegionCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Region); });
+			CopyCityCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.City); });
+			CopyAddressCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Address); });
+			CopyEmailCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Email); });
 
 			OpenWebSiteCommand = ReactiveCommand.Create(() =>
 			{
@@ -140,19 +160,19 @@ namespace OlibKey.ViewModels.Pages
 				break;
 			}
 
-			foreach (CustomElement i in LoginInformation.CustomElements)
+			foreach (CustomField i in LoginInformation.CustomFields)
 			{
-				CustomElements.Add(new CustomElementListItem(new Housing
+				CustomFields.Add(new CustomFieldListItem(new Housing
 				{
-					CustomElement = i,
+					CustomField = i,
 					IsEnabled = false
 				}));
 			}
 
-			if (CustomElements.Count != 0)
-				CustomElements[^1].SLine.IsVisible = false;
+			if (CustomFields.Count != 0)
+				CustomFields[^1].SLine.IsVisible = false;
 
-			if (CustomElements.Count == 0)
+			if (CustomFields.Count == 0)
 				IsVisible = false;
 		}
 	}

@@ -121,6 +121,7 @@
 
 		<v:String x:Key="Name">Название</v:String>
 		<v:String x:Key="Username">Имя пользователя</v:String>
+		<v:String x:Key="Email">Электронная почта</v:String>
 		<v:String x:Key="WebSite">Веб-сайт</v:String>
 		<v:String x:Key="Notes">Заметки</v:String>
 		<v:String x:Key="ChangeElement">Изменить элемент</v:String>
@@ -142,8 +143,17 @@
 
 		<v:String x:Key="Passport">Личные данные</v:String>
 		<v:String x:Key="FullName">ФИО</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Серия и номер</v:String>
+		<v:String x:Key="SeriesAndNumber">Серия и номер</v:String>
 		<v:String x:Key="PlaceOfIssue">Место выдачи</v:String>
+		<v:String x:Key="SocialSecurityNumber">Номер социального страхования</v:String>
+		<v:String x:Key="TIN">ИНН</v:String>
+		<v:String x:Key="Telephone">Телефон</v:String>
+		<v:String x:Key="Company">Компания</v:String>
+		<v:String x:Key="Postcode">Почтовый индекс</v:String>
+		<v:String x:Key="Country">Страна</v:String>
+		<v:String x:Key="Region">Регион</v:String>
+		<v:String x:Key="City">Город</v:String>
+		<v:String x:Key="Address">Адрес</v:String>
 
 		<v:String x:Key="CustomFields">Пользовательские поля</v:String>
 		<v:String x:Key="AddField">Добавить поле</v:String>

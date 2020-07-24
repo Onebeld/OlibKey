@@ -6,11 +6,11 @@ using System;
 
 namespace OlibKey.Views.Controls
 {
-	public class CustomElementListItem : UserControl
+	public class CustomFieldListItem : UserControl
 	{
 		public string ID;
 
-		public Action<string> DeleteCustomElement;
+		public Action<string> DeleteCustomField;
 
 		private StackPanel _sectionOne;
 		private StackPanel _sectionTwo;
@@ -19,8 +19,8 @@ namespace OlibKey.Views.Controls
 		public Separator SLine;
 		public Housing HousingElement { get; set; }
 
-		public CustomElementListItem() => InitializeComponent();
-		public CustomElementListItem(Housing element)
+		public CustomFieldListItem() => InitializeComponent();
+		public CustomFieldListItem(Housing element)
 		{
 			InitializeComponent();
 			DataContext = HousingElement = element;
@@ -30,7 +30,7 @@ namespace OlibKey.Views.Controls
 			_tbPassword = this.FindControl<TextBox>("tbPassword");
 			SLine = this.FindControl<Separator>("sLine");
 
-			switch (HousingElement.CustomElement.Type)
+			switch (HousingElement.CustomField.Type)
 			{
 				case 0:
 					_sectionTwo.IsVisible = false;
@@ -49,7 +49,7 @@ namespace OlibKey.Views.Controls
 
 		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 
-		private void Delete(object sender, RoutedEventArgs e) => DeleteCustomElement?.Invoke(ID);
+		private void Delete(object sender, RoutedEventArgs e) => DeleteCustomField?.Invoke(ID);
 
 		private void CheckedPassword(object sender, RoutedEventArgs e)
 		{
@@ -59,7 +59,7 @@ namespace OlibKey.Views.Controls
 	}
 	public class Housing
 	{
-		public CustomElement CustomElement { get; set; }
+		public CustomField CustomField { get; set; }
 		public bool IsEnabled { get; set; }
 		public bool IsVisibleLine { get; set; } = true;
 	}

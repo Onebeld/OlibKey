@@ -109,18 +109,19 @@
 		<v:String x:Key="Gloomy">Düster</v:String>
 		<v:String x:Key="Mysterious">Geheimnisvoll</v:String>
 
-		<v:String x:Key="Reminder">Erinnerung</v:String>
+		<v:String x:Key="Reminder">ErTINerung</v:String>
 		<v:String x:Key="Pause">Pause</v:String>
 		<v:String x:Key="Disable">Deaktivieren</v:String>
 		<v:String x:Key="ZeroOut">Null raus</v:String>
-		<v:String x:Key="ReminderStarted">Erinnerung gestartet</v:String>
+		<v:String x:Key="ReminderStarted">ErTINerung gestartet</v:String>
 		<v:String x:Key="StartTime">Startzeit</v:String>
 
 		<v:String x:Key="ErrorElement1">Fehler im Artikel:</v:String>
-		<v:String x:Key="ErrorElement2">Die Zeit ist im Element falsch, daher ist die Erinnerung deaktiviert. Versuchen Sie, die Programmiersprache zu ändern, oder wechseln Sie zum richtigen Zeitformat, indem Sie auf die Schaltfläche "Zurücksetzen" klicken.</v:String>
+		<v:String x:Key="ErrorElement2">Die Zeit ist im Element falsch, daher ist die ErTINerung deaktiviert. Versuchen Sie, die Programmiersprache zu ändern, oder wechseln Sie zum richtigen Zeitformat, indem Sie auf die Schaltfläche "Zurücksetzen" klicken.</v:String>
 
 		<v:String x:Key="Name">Titel</v:String>
 		<v:String x:Key="Username">Benutzername</v:String>
+		<v:String x:Key="Email">E-Mail</v:String>
 		<v:String x:Key="WebSite">Website</v:String>
 		<v:String x:Key="Notes">Hinweise</v:String>
 		<v:String x:Key="ChangeElement">Element bearbeiten</v:String>
@@ -142,8 +143,17 @@
 
 		<v:String x:Key="Passport">Persönliche Daten</v:String>
 		<v:String x:Key="FullName">Vollständiger Name</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Serie und Nummer</v:String>
+		<v:String x:Key="SeriesAndNumber">Serie und Nummer</v:String>
 		<v:String x:Key="PlaceOfIssue">Ausstellungsort</v:String>
+		<v:String x:Key="SocialSecurityNumber">Sozialversicherungsnummer</v:String>
+		<v:String x:Key="TIN">Steueridentifikationsnummer</v:String>
+		<v:String x:Key="Telephone">Telefon</v:String>
+		<v:String x:Key="Company">Unternehmen</v:String>
+		<v:String x:Key="Postcode">PLZ</v:String>
+		<v:String x:Key="Country">Land</v:String>
+		<v:String x:Key="Region">Region</v:String>
+		<v:String x:Key="City">Die Stadt</v:String>
+		<v:String x:Key="Address">Adresse</v:String>
 
 		<v:String x:Key="CustomFields">Benutzerdefinierte Felder</v:String>
 		<v:String x:Key="AddField">Feld hinzufügen</v:String>

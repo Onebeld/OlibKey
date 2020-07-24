@@ -17,11 +17,11 @@ namespace OlibKey.ViewModels.Pages
 		#region ReactiveCommands
 		public ReactiveCommand<Unit, Unit> BackCommand { get; }
 		public ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
-		public ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
+		public ReactiveCommand<Unit, Unit> AddCustomFieldCommand { get; }
 		#endregion
 
 		private int _selectionFolderIndex;
-		private ObservableCollection<CustomElementListItem> _customElements;
+		private ObservableCollection<CustomFieldListItem> _CustomFields;
 
 		#region Property's
 
@@ -38,10 +38,10 @@ namespace OlibKey.ViewModels.Pages
 		}
 		private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
 		private ObservableCollection<Folder> Folders { get; set; }
-		public ObservableCollection<CustomElementListItem> CustomElements
+		public ObservableCollection<CustomFieldListItem> CustomFields
 		{
-			get => _customElements;
-			set => this.RaiseAndSetIfChanged(ref _customElements, value);
+			get => _CustomFields;
+			set => this.RaiseAndSetIfChanged(ref _CustomFields, value);
 		}
 
 		#endregion
@@ -60,13 +60,13 @@ namespace OlibKey.ViewModels.Pages
 
 			NewLogin = new Login
 			{
-				CustomElements = new System.Collections.Generic.List<CustomElement>()
+				CustomFields = new System.Collections.Generic.List<CustomField>()
 			};
-			CustomElements = new ObservableCollection<CustomElementListItem>();
+			CustomFields = new ObservableCollection<CustomFieldListItem>();
 
 			BackCommand = ReactiveCommand.Create(BackVoid);
 			CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
-			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
+			AddCustomFieldCommand = ReactiveCommand.Create(AddCustomField);
 
 			Folders = new ObservableCollection<Folder>
 			{
@@ -81,28 +81,28 @@ namespace OlibKey.ViewModels.Pages
 
 		private void CreateLogin()
 		{
-			NewLogin.CustomElements.AddRange(CustomElements.Select(item => item.HousingElement.CustomElement));
+			NewLogin.CustomFields.AddRange(CustomFields.Select(item => item.HousingElement.CustomField));
 			NewLogin.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 			CreateLoginCallback?.Invoke(NewLogin);
 			App.MainWindow.MessageStatusBar("Not1");
 		}
-		private void AddCustomElement()
+		private void AddCustomField()
 		{
-			CustomElements.Add(new CustomElementListItem(new Housing
+			CustomFields.Add(new CustomFieldListItem(new Housing
 			{
-				CustomElement = new CustomElement { Type = Type },
+				CustomField = new CustomField { Type = Type },
 				IsEnabled = true
 			})
 			{
 				ID = Guid.NewGuid().ToString("N"),
-				DeleteCustomElement = DeleteCustomElement
+				DeleteCustomField = DeleteCustomField
 			});
 		}
-		private void DeleteCustomElement(string id)
+		private void DeleteCustomField(string id)
 		{
-			foreach (CustomElementListItem item in CustomElements.Where(item => item.ID == id))
+			foreach (CustomFieldListItem item in CustomFields.Where(item => item.ID == id))
 			{
-				_ = CustomElements.Remove(item);
+				_ = CustomFields.Remove(item);
 				break;
 			}
 		}

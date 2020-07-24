@@ -121,6 +121,7 @@
 
 		<v:String x:Key="Name">Name</v:String>
 		<v:String x:Key="Username">Username</v:String>
+		<v:String x:Key="Email">Email</v:String>
 		<v:String x:Key="WebSite">Web-site</v:String>
 		<v:String x:Key="Notes">Notes</v:String>
 		<v:String x:Key="ChangeElement">Change element</v:String>
@@ -142,8 +143,17 @@
 
 		<v:String x:Key="Passport">Personal data</v:String>
 		<v:String x:Key="FullName">Full name</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Series and Number</v:String>
+		<v:String x:Key="SeriesAndNumber">Series and Number</v:String>
 		<v:String x:Key="PlaceOfIssue">Place of issue</v:String>
+		<v:String x:Key="SocialSecurityNumber">Social Security number</v:String>
+		<v:String x:Key="TIN">Taxpayer identification number</v:String>
+		<v:String x:Key="Telephone">Telephone</v:String>
+		<v:String x:Key="Company">Company</v:String>
+		<v:String x:Key="Postcode">Postcode</v:String>
+		<v:String x:Key="Country">Country</v:String>
+		<v:String x:Key="Region">Region</v:String>
+		<v:String x:Key="City">City</v:String>
+		<v:String x:Key="Address">Address</v:String>
 
 		<v:String x:Key="CustomFields">Custom fields</v:String>
 		<v:String x:Key="AddField">Add field</v:String>

@@ -121,6 +121,7 @@
 
 		<v:String x:Key="Name">Назва</v:String>
 		<v:String x:Key="Username">Ім'я користувача</v:String>
+		<v:String x:Key="Email">Електронна пошта</v:String>
 		<v:String x:Key="WebSite">Веб-сайт</v:String>
 		<v:String x:Key="Notes">Нотатки</v:String>
 		<v:String x:Key="ChangeElement">Змінити елемент</v:String>
@@ -143,8 +144,17 @@
 
 		<v:String x:Key="Passport">Особисті дані</v:String>
 		<v:String x:Key="FullName">ФИО</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Серія та номер</v:String>
+		<v:String x:Key="SeriesAndNumber">Серія та номер</v:String>
 		<v:String x:Key="PlaceOfIssue">Місце видачі</v:String>
+		<v:String x:Key="SocialSecurityNumber">Номер соціального страхування</v:String>
+		<v:String x:Key="TIN">ІПН</v:String>
+		<v:String x:Key="Telephone">Телефон</v:String>
+		<v:String x:Key="Company">Компанія</v:String>
+		<v:String x:Key="Postcode">Поштовий індекс</v:String>
+		<v:String x:Key="Country">Країна</v:String>
+		<v:String x:Key="Region">Регіон</v:String>
+		<v:String x:Key="City">Місто</v:String>
+		<v:String x:Key="Address">Адреса</v:String>
 
 		<v:String x:Key="CustomFields">Призначені для користувача поля</v:String>
 		<v:String x:Key="AddField">Додати поле</v:String>

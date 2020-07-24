@@ -11,8 +11,6 @@ namespace OlibKey
 {
 	class Program
 	{
-		public static object Sync = new object();
-
 		public static void Main(string[] args) => BuildAvaloniaApp().Start(AppMain, args);
 
 		public static AppBuilder BuildAvaloniaApp() =>

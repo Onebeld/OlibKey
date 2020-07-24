@@ -122,6 +122,7 @@
 
 		<v:String x:Key="Name">Անունը</v:String>
 		<v:String x:Key="Username">Օգտագործողի անունը</v:String>
+		<v:String x:Key="Email">Էլ</v:String>
 		<v:String x:Key="WebSite">Վեբ-կայք</v:String>
 		<v:String x:Key="Notes">Նշումներ</v:String>
 		<v:String x:Key="ChangeElement">Փոխել տարրը</v:String>
@@ -144,8 +145,17 @@
 
 		<v:String x:Key="Passport">Անձնական տվյալներ</v:String>
 		<v:String x:Key="FullName">Ամբողջական անուն</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Սերիան և համարը</v:String>
+		<v:String x:Key="SeriesAndNumber">Սերիան և համարը</v:String>
 		<v:String x:Key="PlaceOfIssue">Թողարկման վայրը</v:String>
+		<v:String x:Key="SocialSecurityNumber">Սոցիալական քարտի համար</v:String>
+		<v:String x:Key="TIN">ՊԱՆԴՈԿ</v:String>
+		<v:String x:Key="Telephone">Հեռախոս</v:String>
+		<v:String x:Key="Company">Ընկերություն</v:String>
+		<v:String x:Key="Postcode">Փոստային ինդեքս</v:String>
+		<v:String x:Key="Country">Երկիր</v:String>
+		<v:String x:Key="Region">Մարզ</v:String>
+		<v:String x:Key="City">Քաղաք</v:String>
+		<v:String x:Key="Address">Հասցե</v:String>
 
 		<v:String x:Key="CustomFields">Հատուկ դաշտեր</v:String>
 		<v:String x:Key="AddField">Ավելացնել դաշտ</v:String>

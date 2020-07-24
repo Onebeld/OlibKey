@@ -121,6 +121,7 @@
 
 		<v:String x:Key="Name">Le titre</v:String>
 		<v:String x:Key="Username">Identifiant</v:String>
+		<v:String x:Key="Email">Email</v:String>
 		<v:String x:Key="WebSite">Site Internet</v:String>
 		<v:String x:Key="Notes">Remarques</v:String>
 		<v:String x:Key="ChangeElement">Modifier l'élément</v:String>
@@ -142,8 +143,17 @@
 
 		<v:String x:Key="Passport">Données personnelles</v:String>
 		<v:String x:Key="FullName">Nom complet</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Série et numéro</v:String>
+		<v:String x:Key="SeriesAndNumber">Série et numéro</v:String>
 		<v:String x:Key="PlaceOfIssue">Lieu d'émission</v:String>
+		<v:String x:Key="SocialSecurityNumber">Numéro de sécurité sociale</v:String>
+		<v:String x:Key="TIN">Numéro d'identification fiscale</v:String>
+		<v:String x:Key="Telephone">Téléphone</v:String>
+		<v:String x:Key="Company">Compagnie</v:String>
+		<v:String x:Key="Postcode">Code postal</v:String>
+		<v:String x:Key="Country">Pays</v:String>
+		<v:String x:Key="Region">Région</v:String>
+		<v:String x:Key="City">Ville</v:String>
+		<v:String x:Key="Address">Adresse</v:String>
 
 		<v:String x:Key="CustomFields">Les champs personnalisés</v:String>
 		<v:String x:Key="AddField">Ajouter le champ</v:String>

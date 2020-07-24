@@ -46,8 +46,8 @@ namespace OlibKey.ViewModels.Pages
 			set => this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
 		}
 
-		private CustomFolder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
-		private ObservableCollection<CustomFolder> Folders { get; set; }
+		private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
+		private ObservableCollection<Folder> Folders { get; set; }
 
 		public LoginListItem LoginList;
 
@@ -127,15 +127,15 @@ namespace OlibKey.ViewModels.Pages
 			DeleteLoginCommand = ReactiveCommand.Create(DeleteLogin);
 			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
 
-			Folders = new ObservableCollection<CustomFolder>
+			Folders = new ObservableCollection<Folder>
 			{
-				new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
+				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (App.Database.CustomFolders != null)
-				foreach (CustomFolder i in App.Database.CustomFolders) Folders.Add(i);
+			if (App.Database.Folders != null)
+				foreach (Folder i in App.Database.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
-			foreach (CustomFolder i in Folders.Where(i => i.ID == LoginList.LoginItem.FolderID))
+			foreach (Folder i in Folders.Where(i => i.ID == LoginList.LoginItem.FolderID))
 			{
 				SelectionFolderIndex = Folders.IndexOf(i);
 				break;

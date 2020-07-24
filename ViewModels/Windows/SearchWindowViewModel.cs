@@ -10,7 +10,7 @@ namespace OlibKey.ViewModels.Windows
 	public class SearchWindowViewModel : ReactiveObject
 	{
 		private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
-		private ObservableCollection<CustomFolderListItem> _folderList = new ObservableCollection<CustomFolderListItem>();
+		private ObservableCollection<FolderListItem> _folderList = new ObservableCollection<FolderListItem>();
 
 		private string _searchText;
 
@@ -32,7 +32,7 @@ namespace OlibKey.ViewModels.Windows
 		{
 			get => _loginList; set => this.RaiseAndSetIfChanged(ref _loginList, value);
 		}
-		public ObservableCollection<CustomFolderListItem> FolderList
+		public ObservableCollection<FolderListItem> FolderList
 		{
 			get => _folderList; set => this.RaiseAndSetIfChanged(ref _folderList, value);
 		}
@@ -71,20 +71,20 @@ namespace OlibKey.ViewModels.Windows
 		public void AddLogin(LoginListItem Login) => LoginList.Add(Login);
 
 		public void ClearLoginsList() => LoginList.Clear();
-		public CustomFolderListItem SelectedFolderItem { get { try { return FolderList[SelectedFolderIndex]; } catch { return null; } } }
+		public FolderListItem SelectedFolderItem { get { try { return FolderList[SelectedFolderIndex]; } catch { return null; } } }
 		public LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
 		private void CreateFolder()
 		{
-			CustomFolderListItem a = new CustomFolderListItem
+			FolderListItem a = new FolderListItem
 			{
-				DataContext = new CustomFolder()
+				DataContext = new Folder()
 			};
 			a.FolderContext.ID = Guid.NewGuid().ToString("N");
 			FolderList.Add(a);
 		}
-		public void AddFolder(CustomFolder LoginContent)
+		public void AddFolder(Folder LoginContent)
 		{
-			CustomFolderListItem ali = new CustomFolderListItem
+			FolderListItem ali = new FolderListItem
 			{
 				DataContext = LoginContent,
 			};

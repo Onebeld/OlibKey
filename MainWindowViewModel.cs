@@ -22,7 +22,7 @@ namespace OlibKey
 
 		private string _nameDatabase;
 
-		private bool _isUnlockDatabase;
+		public bool _isUnlockDatabase;
 		private bool _isLockDatabase;
 		private bool _isOSX;
 
@@ -67,7 +67,7 @@ namespace OlibKey
 			get => _isLockDatabase;
 			set => this.RaiseAndSetIfChanged(ref _isLockDatabase, value);
 		}
-		private bool IsUnlockDatabase
+		public bool IsUnlockDatabase
 		{
 			get => _isUnlockDatabase;
 			set => this.RaiseAndSetIfChanged(ref _isUnlockDatabase, value);
@@ -294,7 +294,7 @@ namespace OlibKey
 		private void ShowSearchWindow()
 		{
 			App.SearchWindow = new SearchWindow();
-			foreach (CustomFolder folder in App.Database.CustomFolders) App.SearchWindow.SearchViewModel.AddFolder(folder);
+			foreach (Folder folder in App.Database.Folders) App.SearchWindow.SearchViewModel.AddFolder(folder);
 			App.SearchWindow.ShowDialog(App.MainWindow);
 		}
 		private void CheckUpdate() => App.CheckUpdate(true);

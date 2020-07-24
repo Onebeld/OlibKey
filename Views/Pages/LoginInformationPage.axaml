@@ -106,7 +106,7 @@
 
 						<Separator/>
 
-						<TextBlock Text="{DynamicResource CustomFolder}" Classes="Heading"/>
+						<TextBlock Text="{DynamicResource Folder}" Classes="Heading"/>
 						<ComboBox Margin="5" Items="{Binding Folders}" SelectedIndex="{Binding SelectionFolderIndex}" IsEnabled="False">
 							<ComboBox.ItemTemplate>
 								<DataTemplate>

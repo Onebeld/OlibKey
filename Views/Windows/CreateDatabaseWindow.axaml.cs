@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using OlibKey.Core;
 using System;
+using System.Text.RegularExpressions;
 
 namespace OlibKey.Views.Windows
 {
@@ -21,7 +22,24 @@ namespace OlibKey.Views.Windows
 		{
 			InitializeComponent();
 			_bSelectPath.Click += SelectPath;
-			_bSave.Click += (s, e) => Close(true);
+			_bSave.Click += (s, e) => {
+				Regex reg = new Regex(@"^\d+$");
+				if (TbIteration.Text == "" || !reg.IsMatch(TbIteration.Text) || TbIteration.Text == "0"
+					|| TbNumberOfEncryptionProcedures.Text == "" || !reg.IsMatch(TbNumberOfEncryptionProcedures.Text) ||
+					TbNumberOfEncryptionProcedures.Text == "0")
+				{
+					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
+					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+					return;
+				}
+				if (TbPassword.Text == "" || TbPassword.Text == null || TbPathDatabase.Text == null)
+				{
+					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError2"), (string)Application.Current.FindResource("Error"),
+					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+					return;
+				}
+				Close(true); 
+			};
 		}
 
 		private async void SelectPath(object sender, RoutedEventArgs e)

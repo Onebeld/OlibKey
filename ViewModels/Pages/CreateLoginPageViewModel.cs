@@ -36,8 +36,8 @@ namespace OlibKey.ViewModels.Pages
 				NewLogin.FolderID = SelectionFolderItem.ID;
 			}
 		}
-		private CustomFolder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
-		private ObservableCollection<CustomFolder> Folders { get; set; }
+		private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
+		private ObservableCollection<Folder> Folders { get; set; }
 		public ObservableCollection<CustomElementListItem> CustomElements
 		{
 			get => _customElements;
@@ -68,12 +68,12 @@ namespace OlibKey.ViewModels.Pages
 			CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
 			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
 
-			Folders = new ObservableCollection<CustomFolder>
+			Folders = new ObservableCollection<Folder>
 			{
-				new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
+				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (App.Database.CustomFolders != null)
-				foreach (CustomFolder i in App.Database.CustomFolders) Folders.Add(i);
+			if (App.Database.Folders != null)
+				foreach (Folder i in App.Database.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			Type = 0;

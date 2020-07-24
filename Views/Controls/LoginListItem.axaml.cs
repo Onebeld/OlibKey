@@ -85,19 +85,18 @@ namespace OlibKey.Views.Controls
 		{
 			try
 			{
-				if (DateTime.Parse(LoginItem.Username, System.Threading.Thread.CurrentThread.CurrentUICulture) <=
-					DateTime.Now && LoginItem.IsReminderActive)
+				if (LoginItem.IsReminderActive && DateTime.Parse(LoginItem.Username, System.Threading.Thread.CurrentThread.CurrentUICulture) <=
+					DateTime.Now)
 				{
 					ReminderTimer.Stop();
 
-					var reminderWindow = new ReminderWindow
+					_ = new ReminderWindow
 					{
 						LoginListItem = this,
 						Title = LoginItem.Name,
 						_tbName = { Text = LoginItem.Name },
 						_tbTime = { Text = LoginItem.Username }
-					};
-					reminderWindow.ShowDialog(App.MainWindow);
+					}.ShowDialog(App.MainWindow);
 				}
 				else if (!LoginItem.IsReminderActive) ReminderTimer.Stop();
 			}
@@ -105,6 +104,10 @@ namespace OlibKey.Views.Controls
 			{
 				ReminderTimer.Stop();
 				LoginItem.IsReminderActive = false;
+
+				_ = MessageBox.Show(App.MainWindow, null, $"" +
+					$"{(string)Application.Current.FindResource("ErrorElement1")} {LoginItem.Name}. {(string)Application.Current.FindResource("ErrorElement2")}", (string)Application.Current.FindResource("Error"),
+					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 			}
 		}
 	}

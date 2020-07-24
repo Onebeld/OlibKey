@@ -13,6 +13,7 @@
 		<Color x:Key="ThemeSelectedControlColor">#FF931D60</Color>
 		<Color x:Key="ThemeGitHubColor">#FFFFFFFF</Color>
 		<Color x:Key="ThemeScrollBoxHoverColor">#FFC8C8C8</Color>
+		<Color x:Key="ThemeBackgroundContentTabItemColor">#FF171717</Color>
 
 		<SolidColorBrush x:Key="ThemeWindowBackgroundBrush" Color="{DynamicResource ThemeWindowBackgroundColor}"/>
         <SolidColorBrush x:Key="ThemeBackgroundBrush" Color="{DynamicResource ThemeBackgroundColor}"/>
@@ -25,5 +26,6 @@
 		<SolidColorBrush x:Key="ThemeSelectedControlBrush" Color="{DynamicResource ThemeSelectedControlColor}"/>
 		<SolidColorBrush x:Key="ThemeGitHubBrush" Color="{DynamicResource ThemeGitHubColor}"/>
 		<SolidColorBrush x:Key="ThemeScrollBoxHoverBrush" Color="{DynamicResource ThemeScrollBoxHoverColor}"/>
+		<SolidColorBrush x:Key="ThemeBackgroundContentTabItemBrush" Color="{DynamicResource ThemeBackgroundContentTabItemColor}"/>
     </Style.Resources>
 </Style>

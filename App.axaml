@@ -10,6 +10,10 @@
 		<StyleInclude Source="/Assets/Themes/Dazzling.axaml"/>
 		<StyleInclude Source="/Assets/Images/Icons.axaml"/>
 		<StyleInclude Source="/Assets/Local/lang.en-US.axaml"/>
+		
+		<Style Selector="Window">
+			<Setter Property="FontFamily" Value="/Assets/Font#Noto Sans"/>
+		</Style>
 
 		<Style Selector="ContextMenu">
 			<Setter Property="Template">
@@ -652,6 +656,73 @@
 					</Panel>
 				</ControlTemplate>
 			</Setter>
+		</Style>
+
+		<Style Selector="TabControl">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border
+						Margin="{TemplateBinding Margin}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						Background="{TemplateBinding Background}"
+						HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+						VerticalAlignment="{TemplateBinding VerticalAlignment}">
+						<DockPanel>
+							<ScrollViewer Background="{DynamicResource ThemeBackgroundBrush}" DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto">
+								<ItemsPresenter
+									Name="PART_ItemsPresenter"
+									Items="{TemplateBinding Items}"
+									ItemsPanel="{TemplateBinding ItemsPanel}"
+									ItemTemplate="{TemplateBinding ItemTemplate}"/>
+							</ScrollViewer>
+							<Border Background="{DynamicResource ThemeBackgroundContentTabItemBrush}">
+								<ContentPresenter
+									Name="PART_SelectedContentHost"
+									Margin="{TemplateBinding Padding}"
+									HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+									Content="{TemplateBinding SelectedContent}"
+									ContentTemplate="{TemplateBinding SelectedContentTemplate}"/>
+							</Border>
+						</DockPanel>
+					</Border>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+		<Style Selector="TabItem">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="Padding" Value="10 5 10 5"/>
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Grid Background="{TemplateBinding Background}" RowDefinitions="5,*">
+						<Border Name="indicator"/>
+						<ContentPresenter Grid.Row="1"
+							Name="PART_ContentPresenter"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							ContentTemplate="{TemplateBinding HeaderTemplate}"
+							Content="{TemplateBinding Header}"
+							HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+							Margin="{TemplateBinding Margin}"
+							Padding="{TemplateBinding Padding}"/>
+					</Grid>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+		<Style Selector="TabItem:pointerover">
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundContentTabItemBrush}"/>
+		</Style>
+		<Style Selector="TabItem:selected">
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundContentTabItemBrush}"/>
+		</Style>
+		<Style Selector="TabItem:selected /template/ Border#indicator">
+			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
 		</Style>
 	</Application.Styles>
 </Application>

@@ -19,7 +19,7 @@
 		
 		<v:String x:Key="Search">Suche</v:String>
 		<v:String x:Key="AllItems">Alle Artikel</v:String>
-		<v:String x:Key="CustomFolder">Benutzerordner</v:String>
+		<v:String x:Key="Folder">Ordner</v:String>
 		<v:String x:Key="NotChosen">Nicht ausgewählt</v:String>
 		<v:String x:Key="RemoveSelection">Deaktivieren Sie</v:String>
 		<v:String x:Key="NameElement">Artikelname</v:String>
@@ -29,6 +29,7 @@
 		<v:String x:Key="Facebook">OlibKey auf Facebook</v:String>
 
 		<v:String x:Key="Ready">Bereit</v:String>
+		<v:String x:Key="Elements">Artikel:</v:String>
 
 		<v:String x:Key="Collapse">Zusammenbruch</v:String>
 		<v:String x:Key="Expand">Erweitern</v:String>
@@ -69,7 +70,6 @@
 		<v:String x:Key="Not3">Speicher erfolgreich erstellt!</v:String>
 		<v:String x:Key="Not4">Speicher erfolgreich gespeichert!</v:String>
 
-
 		<v:String x:Key="Lowercase">Kleinbuchstaben (abc)</v:String>
 		<v:String x:Key="Uppercase">Großbuchstaben (ABC)</v:String>
 		<v:String x:Key="Lenght">Länge:</v:String>
@@ -80,7 +80,6 @@
 		<v:String x:Key="PasswordSave">Speichern</v:String>
 		<v:String x:Key="Require">Zu fordern</v:String>
 
-
 		<v:String x:Key="OldMasterPassword">Altes Master-Passwort</v:String>
 		<v:String x:Key="NewMasterPassword">Neues Master-Passwort</v:String>
 
@@ -88,6 +87,10 @@
 		<v:String x:Key="MasterPassword">Master-Passwort</v:String>
 		<v:String x:Key="Directory">Speicherpfad</v:String>
 		<v:String x:Key="Select">Auswählen</v:String>
+		<v:String x:Key="Iteration">Anzahl der Iterationen:</v:String>
+		<v:String x:Key="NumberOfEncryptionProcedures">Anzahl der Verschlüsselungsverfahren:</v:String>
+		<v:String x:Key="CDBError1">Die Anzahl der Iterationen und die Anzahl der Verschlüsselungsvorgänge müssen Zahlen enthalten und dürfen nicht Null sein!</v:String>
+		<v:String x:Key="CDBError2">Sie haben keinen Repository-Pfad ausgewählt oder kein Hauptkennwort angegeben!</v:String>
 
 		<v:String x:Key="Open">Öffnen</v:String>
 		<v:String x:Key="EnterMP">Geben Sie das Master-Passwort ein</v:String>
@@ -99,8 +102,8 @@
 
 		<v:String x:Key="Language">Sprache:</v:String>
 		<v:String x:Key="Theme">Theme:</v:String>
-		<v:String x:Key="CBHideProgram">Programm beim Schließen ausblenden</v:String>
-		<v:String x:Key="CBAutorunApplication">Führen Sie mit Windows aus</v:String>
+		<v:String x:Key="General">Allgemeines</v:String>
+		<v:String x:Key="Storage">Gewölbe</v:String>
 
 		<v:String x:Key="Dazzling">Blendend</v:String>
 		<v:String x:Key="Gloomy">Düster</v:String>
@@ -115,7 +118,6 @@
 
 		<v:String x:Key="ErrorElement1">Fehler im Artikel:</v:String>
 		<v:String x:Key="ErrorElement2">Die Zeit ist im Element falsch, daher ist die Erinnerung deaktiviert. Versuchen Sie, die Programmiersprache zu ändern, oder wechseln Sie zum richtigen Zeitformat, indem Sie auf die Schaltfläche "Zurücksetzen" klicken.</v:String>
-
 
 		<v:String x:Key="Name">Titel</v:String>
 		<v:String x:Key="Username">Benutzername</v:String>

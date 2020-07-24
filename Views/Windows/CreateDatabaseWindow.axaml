@@ -30,11 +30,11 @@
 						</DockPanel>
 						<Separator Margin="15,5"/>
 						<DockPanel Margin="5">
-							<TextBlock Text="Сколько раз подряд будет шифровать:"/>
+							<TextBlock Text="{StaticResource NumberOfEncryptionProcedures}"/>
 							<TextBox x:Name="tbNumberOfEncryptionProcedures" Text="1" Margin="5 0 0 0"/>
 						</DockPanel>
 						<DockPanel Margin="5 0 5 5">
-							<TextBlock Text="Количество итерации:"/>
+							<TextBlock Text="{StaticResource Iteration}"/>
 							<TextBox x:Name="tbIteration" Text="100000" Margin="5 0 0 0"/>
 						</DockPanel>
 					</StackPanel>

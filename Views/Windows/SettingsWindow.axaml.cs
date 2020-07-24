@@ -3,11 +3,15 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using System;
+using System.Text.RegularExpressions;
 
 namespace OlibKey.Views.Windows
 {
 	public class SettingsWindow : Window
 	{
+		private TabItem _tiStorage;
+		private TextBox _tbIteration;
+		private TextBox _tbNumberOfEncryptionProcedures;
 		private ComboBox _cbTheme;
 		private ComboBox _cbLanguage;
 		private Button _bClose;
@@ -35,6 +39,28 @@ namespace OlibKey.Views.Windows
 			_cbTheme.SelectionChanged += ThemeChange;
 			_cbLanguage.SelectionChanged += LanguageChange;
 			_bClose.Click += (s, e) => Close();
+			Closing += (s, e) =>
+			{
+				if (App.MainWindowViewModel.IsUnlockDatabase)
+				{
+					Regex reg = new Regex(@"^\d+$");
+					if (_tbIteration.Text == "" || !reg.IsMatch(_tbIteration.Text) || _tbIteration.Text == "0"
+						|| _tbNumberOfEncryptionProcedures.Text == "" || !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text) ||
+						_tbNumberOfEncryptionProcedures.Text == "0")
+					{
+						_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
+						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+						return;
+					}
+
+					App.MainWindowViewModel.Iterations = int.Parse(_tbIteration.Text);
+					App.MainWindowViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+				}
+			};
+
+			_tbIteration.Text = App.MainWindowViewModel.Iterations.ToString();
+			_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.NumberOfEncryptionProcedures.ToString();
+			_tiStorage.IsEnabled = App.MainWindowViewModel.IsUnlockDatabase;
 		}
 
 
@@ -44,6 +70,9 @@ namespace OlibKey.Views.Windows
 			_cbTheme = this.FindControl<ComboBox>("cbTheme");
 			_cbLanguage = this.FindControl<ComboBox>("cbLanguage");
 			_bClose = this.FindControl<Button>("bClose");
+			_tbIteration = this.FindControl<TextBox>("tbIteration");
+			_tbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
+			_tiStorage = this.FindControl<TabItem>("tiStorage");
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)

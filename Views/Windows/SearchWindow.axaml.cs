@@ -53,7 +53,7 @@ namespace OlibKey.Views.Windows
 			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchLogin());
 		}
 
-		private void SearchWindow_Closed(object sender, EventArgs e) => App.Database.CustomFolders = SearchViewModel.FolderList.Select(item => item.DataContext as CustomFolder).ToList();
+		private void SearchWindow_Closed(object sender, EventArgs e) => App.Database.Folders = SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
 
 		private async void SearchLogin()
 		{
@@ -73,7 +73,7 @@ namespace OlibKey.Views.Windows
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
 							}
 							else Add(Login, i.IconLogin, i.LoginID);
-						else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						else if (Login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext).ID)
 							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
 							{
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
@@ -88,7 +88,7 @@ namespace OlibKey.Views.Windows
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
 							}
 							else Add(Login, i.IconLogin, i.LoginID);
-						else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						else if (Login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext).ID)
 							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
 							{
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
@@ -103,7 +103,7 @@ namespace OlibKey.Views.Windows
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
 							}
 							else Add(Login, i.IconLogin, i.LoginID);
-						else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						else if (Login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext).ID)
 							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
 							{
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
@@ -118,7 +118,7 @@ namespace OlibKey.Views.Windows
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
 							}
 							else Add(Login, i.IconLogin, i.LoginID);
-						else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						else if (Login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext).ID)
 							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
 							{
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
@@ -133,7 +133,7 @@ namespace OlibKey.Views.Windows
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
 							}
 							else Add(Login, i.IconLogin, i.LoginID);
-						else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+						else if (Login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext).ID)
 							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
 							{
 								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);

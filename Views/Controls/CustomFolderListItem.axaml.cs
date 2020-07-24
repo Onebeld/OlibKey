@@ -5,13 +5,13 @@ using OlibKey.Structures;
 
 namespace OlibKey.Views.Controls
 {
-	public class CustomFolderListItem : UserControl
+	public class FolderListItem : UserControl
 	{
 		public TextBox _tbName;
 		private TextBlock _textName;
 
-		public CustomFolder FolderContext => DataContext as CustomFolder;
-		public CustomFolderListItem() => InitializeComponent();
+		public Folder FolderContext => DataContext as Folder;
+		public FolderListItem() => InitializeComponent();
 
 		private void InitializeComponent()
 		{

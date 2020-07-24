@@ -7,12 +7,13 @@
 		<Color x:Key="ThemeForegroundColor">#FF000000</Color>
 		<Color x:Key="ThemeForegroundOpacityColor">#FF777777</Color>
 		<Color x:Key="ThemeGlobalBorderColor">#FFA5A5A5</Color>
-		<Color x:Key="ThemeHoverBackgroundColor">#FFE0E0E0</Color>
+		<Color x:Key="ThemeHoverBackgroundColor">#FFE3E3E3</Color>
 		<Color x:Key="ThemeWindowForegroundColor">#FFFFFFFF</Color>
-		<Color x:Key="ThemePanelBackgroundColor">#FFF3F3F3</Color>
+		<Color x:Key="ThemePanelBackgroundColor">#FFEAEAEA</Color>
 		<Color x:Key="ThemeSelectedControlColor">#FF931D60</Color>
 		<Color x:Key="ThemeGitHubColor">#FF231E1B</Color>
 		<Color x:Key="ThemeScrollBoxHoverColor">#FF333333</Color>
+		<Color x:Key="ThemeBackgroundContentTabItemColor">#FFF3F3F3</Color>
 
 		<SolidColorBrush x:Key="ThemeWindowBackgroundBrush" Color="{DynamicResource ThemeWindowBackgroundColor}"/>
         <SolidColorBrush x:Key="ThemeBackgroundBrush" Color="{DynamicResource ThemeBackgroundColor}"/>
@@ -25,5 +26,6 @@
 		<SolidColorBrush x:Key="ThemeSelectedControlBrush" Color="{DynamicResource ThemeSelectedControlColor}"/>
 		<SolidColorBrush x:Key="ThemeGitHubBrush" Color="{DynamicResource ThemeGitHubColor}"/>
 		<SolidColorBrush x:Key="ThemeScrollBoxHoverBrush" Color="{DynamicResource ThemeScrollBoxHoverColor}"/>
+		<SolidColorBrush x:Key="ThemeBackgroundContentTabItemBrush" Color="{DynamicResource ThemeBackgroundContentTabItemColor}"/>
     </Style.Resources>
 </Style>

@@ -41,6 +41,8 @@
 		<AvaloniaResource Include="Assets\*" />
 		<None Remove="ForRepository\**" />
 		<AvaloniaResource Include="app.ico" />
+		<AvaloniaResource Include="Assets\Font\NotoSans-Bold.ttf"/>
+		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf"/>
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="0.10.0-preview1" />

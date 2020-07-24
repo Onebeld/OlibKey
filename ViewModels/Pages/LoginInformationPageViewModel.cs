@@ -56,7 +56,7 @@ namespace OlibKey.ViewModels.Pages
 		private LoginListItem LoginItem { get; set; }
 		private bool VisibleDateChanged { get; set; }
 		private bool IsVisible { get; set; } = true;
-		private ObservableCollection<CustomFolder> Folders { get; set; }
+		private ObservableCollection<Folder> Folders { get; set; }
 		public Login LoginInformation { get; set; }
 
 		#endregion
@@ -126,15 +126,15 @@ namespace OlibKey.ViewModels.Pages
 				Process.Start(psi);
 			});
 
-			Folders = new ObservableCollection<CustomFolder>
+			Folders = new ObservableCollection<Folder>
 			{
-				new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
+				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (App.Database.CustomFolders != null)
-				foreach (CustomFolder i in App.Database.CustomFolders) Folders.Add(i);
+			if (App.Database.Folders != null)
+				foreach (Folder i in App.Database.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
-			foreach (CustomFolder i in Folders.Where(i => i.ID == LoginInformation.FolderID))
+			foreach (Folder i in Folders.Where(i => i.ID == LoginInformation.FolderID))
 			{
 				SelectionFolderIndex = Folders.IndexOf(i);
 				break;

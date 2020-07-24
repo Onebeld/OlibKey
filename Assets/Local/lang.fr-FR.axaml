@@ -19,7 +19,7 @@
 		
 		<v:String x:Key="Search">Chercher</v:String>
 		<v:String x:Key="AllItems">Tous les articles</v:String>
-		<v:String x:Key="CustomFolder">Dossier utilisateur</v:String>
+		<v:String x:Key="Folder">Dossier</v:String>
 		<v:String x:Key="NotChosen">Non sélectionné</v:String>
 		<v:String x:Key="RemoveSelection">Désélectionner</v:String>
 		<v:String x:Key="NameElement">Nom de l'article</v:String>
@@ -29,6 +29,7 @@
 		<v:String x:Key="Facebook">OlibKey sur Facebook</v:String>
 
 		<v:String x:Key="Ready">Prêt</v:String>
+		<v:String x:Key="Elements">Articles:</v:String>
 
 		<v:String x:Key="Collapse">Réduire</v:String>
 		<v:String x:Key="Expand">Développer</v:String>
@@ -79,15 +80,17 @@
 		<v:String x:Key="PasswordSave">Enregistrer</v:String>
 		<v:String x:Key="Require">Exiger</v:String>
 
-
 		<v:String x:Key="OldMasterPassword">Ancien mot de passe principal</v:String>
 		<v:String x:Key="NewMasterPassword">Nouveau mot de passe principal</v:String>
-
 
 		<v:String x:Key="AccessText">Faites attention! Si vous oubliez le mot de passe principal, vous ne pouvez pas restaurer le stockage!</v:String>
 		<v:String x:Key="MasterPassword">Mot de passe principal</v:String>
 		<v:String x:Key="Directory">Chemin de stockage</v:String>
 		<v:String x:Key="Select">Sélectionnez</v:String>
+		<v:String x:Key="Iteration">Nombre d'itérations:</v:String>
+		<v:String x:Key="NumberOfEncryptionProcedures">Nombre de procédures de cryptage:</v:String>
+		<v:String x:Key="CDBError1">Le nombre d'itérations et le nombre de procédures de chiffrement doivent contenir des nombres et ne peuvent pas être zéro!</v:String>
+		<v:String x:Key="CDBError2">Vous n'avez pas sélectionné de chemin de référentiel ou n'avez pas fourni de mot de passe principal!</v:String>
 
 		<v:String x:Key="Open">Ouverte</v:String>
 		<v:String x:Key="EnterMP">Entrez le mot de passe principal</v:String>
@@ -99,8 +102,8 @@
 
 		<v:String x:Key="Language">Langue:</v:String>
 		<v:String x:Key="Theme">Thème:</v:String>
-		<v:String x:Key="CBHideProgram">Masquer le programme à la fermeture</v:String>
-		<v:String x:Key="CBAutorunApplication">Exécuter avec Windows</v:String>
+		<v:String x:Key="General">Général</v:String>
+		<v:String x:Key="Storage">Voûte</v:String>
 
 		<v:String x:Key="Dazzling">Éblouissant</v:String>
 		<v:String x:Key="Gloomy">Sombre</v:String>
@@ -115,7 +118,6 @@
 
 		<v:String x:Key="ErrorElement1">Erreur dans l'article:</v:String>
 		<v:String x:Key="ErrorElement2">L'heure est incorrecte dans l'élément, donc le rappel est désactivé. Essayez de changer la langue du programme, ou passez au format d'heure correct en cliquant sur le bouton "Réinitialiser".</v:String>
-
 
 		<v:String x:Key="Name">Le titre</v:String>
 		<v:String x:Key="Username">Identifiant</v:String>

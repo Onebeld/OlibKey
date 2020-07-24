@@ -19,7 +19,7 @@
 		
 		<v:String x:Key="Search">Поиск</v:String>
 		<v:String x:Key="AllItems">Все элементы</v:String>
-		<v:String x:Key="CustomFolder">Пользовательская папка</v:String>
+		<v:String x:Key="Folder">Папка</v:String>
 		<v:String x:Key="NotChosen">Не выбрано</v:String>
 		<v:String x:Key="RemoveSelection">Снять выделение</v:String>
 		<v:String x:Key="NameElement">Название элемента</v:String>
@@ -29,6 +29,7 @@
 		<v:String x:Key="Facebook">OlibKey в Facebook</v:String>
 
 		<v:String x:Key="Ready">Готов</v:String>
+		<v:String x:Key="Elements">Элементов:</v:String>
 
 		<v:String x:Key="Collapse">Свернуть</v:String>
 		<v:String x:Key="Expand">Развернуть</v:String>
@@ -86,6 +87,10 @@
 		<v:String x:Key="MasterPassword">Мастер-пароль</v:String>
 		<v:String x:Key="Directory">Путь хранения</v:String>
 		<v:String x:Key="Select">Выбрать</v:String>
+		<v:String x:Key="Iteration">Количество итерации:</v:String>
+		<v:String x:Key="NumberOfEncryptionProcedures">Количество процедур шифрования:</v:String>
+		<v:String x:Key="CDBError1">Количество итерации и количество процедур шифрования должно содержать цифры и не может быть равен нулю!</v:String>
+		<v:String x:Key="CDBError2">Вы не выбрали путь хранилища или не указали мастер-пароль!</v:String>
 
 		<v:String x:Key="Open">Открыть</v:String>
 		<v:String x:Key="EnterMP">Введите мастер-пароль</v:String>
@@ -97,8 +102,8 @@
 
 		<v:String x:Key="Language">Язык:</v:String>
 		<v:String x:Key="Theme">Тема:</v:String>
-		<v:String x:Key="CBHideProgram">Скрыть программу при закрытии</v:String>
-		<v:String x:Key="CBAutorunApplication">Запускать вместе с Windows</v:String>
+		<v:String x:Key="General">Общее</v:String>
+		<v:String x:Key="Storage">Хранилище</v:String>
 
 		<v:String x:Key="Dazzling">Ослепительная</v:String>
 		<v:String x:Key="Gloomy">Мрачная</v:String>

@@ -77,6 +77,10 @@ namespace OlibKey.Views.Windows
 
 			Close(true);
 		}
-		private void CopyGeneratedPassword(object sender, RoutedEventArgs e) => Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
+		private void CopyGeneratedPassword(object sender, RoutedEventArgs e)
+		{
+			if (_tbPassword.Text == null || _tbPassword.Text.Length < 1) _tbPassword.Text = RandomPassword();
+			Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
+		}
 	}
 }

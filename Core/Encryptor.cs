@@ -29,11 +29,13 @@ namespace OlibKey.Core
 			return ba;
 		}
 
-		private static int SaltLength => 24;
+		private static readonly int SaltLength = 50;
 
 		private static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
 		{
-			byte[] saltBytes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
+			byte[] saltBytes = new byte[SaltLength];
+			for (int i = 0; i < SaltLength; i++)
+				saltBytes[i] = (byte)(i + 1);
 
 			using MemoryStream ms = new MemoryStream();
 
@@ -54,7 +56,9 @@ namespace OlibKey.Core
 
 		private static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes, int iteration)
 		{
-			byte[] saltBytes = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 };
+			byte[] saltBytes = new byte[SaltLength];
+			for (int i = 0; i < SaltLength; i++)
+				saltBytes[i] = (byte)(i + 1);
 
 			using MemoryStream ms = new MemoryStream();
 

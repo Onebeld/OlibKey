@@ -5,7 +5,7 @@ namespace OlibKey.Structures
 	public class Login
 	{
 		public int Type { get; set; }
-		public string Name { get; set; }
+		public string Name { get; set; } = "";
 		public string Username { get; set; }
 		public string TimeCreate { get; set; }
 		public string TimeChanged { get; set; }
@@ -44,7 +44,7 @@ namespace OlibKey.Structures
 
 		public List<CustomElement> CustomElements;
 	}
-	public class CustomFolder
+	public class Folder
 	{
 		public string Name { get; set; }
 		public string ID { get; set; }
@@ -61,6 +61,6 @@ namespace OlibKey.Structures
 	public class Database
 	{
 		public List<Login> Logins;
-		public List<CustomFolder> CustomFolders;
+		public List<Folder> Folders;
 	}
 }

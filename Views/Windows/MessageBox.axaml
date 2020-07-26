@@ -8,6 +8,8 @@
 		MinHeight="120"
 		Icon="avares://OlibKey/app.ico"
 		WindowStartupLocation="CenterScreen"
+		Background="{StaticResource ThemeBackgroundBrush}"
+		Foreground="{StaticResource ThemeForegroundBrush}"
         x:Class="OlibKey.Views.Windows.MessageBox"
         SizeToContent="WidthAndHeight" CanResize="False">
 	<Grid Name="ContentC" RowDefinitions="*,Auto,40" Width="{Binding $parent.Width}" Height="{Binding $parent.Height}">

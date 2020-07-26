@@ -56,7 +56,7 @@
 		</NativeMenu>
 	</NativeMenu.Menu>
 	<DockPanel>
-		<Menu DockPanel.Dock="Top" IsVisible="{Binding $parent[TopLevel].(NativeMenu.IsNativeMenuExported), Converter={StaticResource AvaloniaThemesDefaultNativeMenuBarInverseBooleanValueConverter}}" Background="{DynamicResource ThemeBackgroundBrush}" BorderThickness="0 0 0 1" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
+		<Menu DockPanel.Dock="Top" Foreground="{DynamicResource ThemeForegroundBrush}" IsVisible="{Binding $parent[TopLevel].(NativeMenu.IsNativeMenuExported), Converter={StaticResource AvaloniaThemesDefaultNativeMenuBarInverseBooleanValueConverter}}" Background="{DynamicResource ThemeBackgroundBrush}" BorderThickness="0 0 0 1" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 			<MenuItem Header="{DynamicResource File}">
 				<MenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
 				<MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" InputGesture="Ctrl + O"/>
@@ -122,7 +122,7 @@
 				</reactiveUi:RoutedViewHost.DefaultContent>
 			</reactiveUi:RoutedViewHost>
 			<Border Grid.Column="2" BorderThickness="0 0 0 1" Classes="ButtonsMenu">
-				<TextBlock Text="{Binding NameStorage}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
+				<TextBlock Text="{Binding NameStorage}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
 			</Border>
 			<ListBox x:Name="listBox" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding LoginList}" SelectedIndex="{Binding SelectedIndex}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
 			<Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0" Classes="ButtonsMenu">
@@ -136,12 +136,12 @@
 			<Border Grid.ColumnSpan="3" Grid.Row="3" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
 				<Grid ColumnDefinitions="Auto,*,Auto">
 					<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-						<TextBlock Text="{DynamicResource Ready}" x:Name="tbReady"/>
-						<TextBlock x:Name="tbMessageStatusBar" IsVisible="False"/>
+						<TextBlock Text="{DynamicResource Ready}" x:Name="tbReady" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+						<TextBlock x:Name="tbMessageStatusBar" IsVisible="False" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					</StackPanel>
 					<StackPanel IsVisible="{Binding IsUnlockDatabase}" Grid.Column="2" Orientation="Horizontal" Margin="0 0 5 0">
-						<TextBlock Text="{DynamicResource Elements}" Margin="0 0 5 0"/>
-						<TextBlock Text="{Binding #listBox.ItemCount}"/>
+						<TextBlock Text="{DynamicResource Elements}" Margin="0 0 5 0" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+						<TextBlock Text="{Binding #listBox.ItemCount}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					</StackPanel>
 				</Grid>
 			</Border>

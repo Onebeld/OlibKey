@@ -39,12 +39,12 @@
 
 							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
 							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding LoginInformation.Password}" PasswordChar="•"/>
-							<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-								<Button Content="{DynamicResource Copy}" Command="{Binding CopyPasswordCommand}" Padding="5 2" Margin="0 0 5 0"/>
+							<StackPanel Orientation="Horizontal">
+								<Button Content="{DynamicResource Copy}" Command="{Binding CopyPasswordCommand}" Padding="5 2" Margin="5 0 5 0"/>
 								<CheckBox x:Name="cbHide" Content="{DynamicResource Show}" VerticalAlignment="Center" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
 							</StackPanel>
 							<DockPanel Margin="5 0">
-								<TextBlock Text="{DynamicResource Complexity}" VerticalAlignment="Center"/>
+								<TextBlock Text="{DynamicResource Complexity}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center"/>
 								<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>
 							</DockPanel>
 							<Separator/>
@@ -182,10 +182,10 @@
 						</ComboBox>
 					</StackPanel>
 				</Border>
-				<Border Classes="BorderStyle">
-					<StackPanel Margin="5">
-						<TextBlock Text="{DynamicResource Notes}" FontWeight="Bold"/>
-						<TextBox Margin="0 5 0 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding LoginInformation.Note}"/>
+				<Border Classes="BorderStyle" Padding="0 5">
+					<StackPanel>
+						<TextBlock Text="{DynamicResource Notes}" Classes="Heading"/>
+						<TextBox Margin="5 5 5 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding LoginInformation.Note}"/>
 					</StackPanel>
 				</Border>
 				<StackPanel IsVisible="{Binding IsVisible}">

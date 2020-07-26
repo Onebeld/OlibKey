@@ -45,7 +45,7 @@
 							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
 							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding NewLogin.Password}" PasswordChar="•"/>
 							<StackPanel Orientation="Horizontal">
-								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5" Padding="5 2"/>
+								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5 0 5 0" Padding="5 2"/>
 								<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword" VerticalAlignment="Center"/>
 							</StackPanel>
 							<DockPanel Margin="5 0">
@@ -179,7 +179,7 @@
 						</ScrollViewer>
 						<TextBlock Text="{DynamicResource AddField}" Classes="Heading"/>
 						<DockPanel Margin="5">
-							<TextBlock Text="{DynamicResource TypeColon}" VerticalAlignment="Center" Margin="0 0 5 0"/>
+							<TextBlock Text="{DynamicResource TypeColon}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
 							<ComboBox x:Name="TypeCustomField" SelectedIndex="{Binding Type}">
 								<ComboBoxItem Content="{StaticResource Text}"/>
 								<ComboBoxItem Content="{DynamicResource Hidden}"/>

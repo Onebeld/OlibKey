@@ -6,6 +6,7 @@
         x:Class="OlibKey.Views.Windows.ReminderWindow"
 		Topmost="True"
 		WindowStartupLocation="CenterScreen"
+		Background="{DynamicResource ThemeBackgroundBrush}"
 		CanResize="False"
 		Icon="avares://OlibKey/app.ico"
         Title="ReminderWindow" Height="300" Width="350" ShowInTaskbar="False" UseLayoutRounding="True">

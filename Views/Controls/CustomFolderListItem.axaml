@@ -11,7 +11,7 @@
 				<Image x:Name="imageIcon" Source="{StaticResource FolderIcon}" Margin="5"/>
 			</Border>
 			
-			<TextBlock x:Name="textName" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundWindow}"/>
+			<TextBlock x:Name="textName" Foreground="{StaticResource ThemeForegroundBrush}" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
 			<TextBox x:Name="tbName" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
 		</Grid>
 	</Border>

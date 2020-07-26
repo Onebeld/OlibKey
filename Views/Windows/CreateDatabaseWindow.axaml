@@ -17,24 +17,24 @@
 					<StackPanel>
 						<TextBlock Text="{StaticResource Directory}" Classes="Heading"/>
 						<TextBox x:Name="tbPathDatabase" Margin="5" IsReadOnly="True"/>
-						<StackPanel Orientation="Horizontal" Margin="5 0">
+						<StackPanel Orientation="Horizontal" Margin="5 0 5 0">
 							<Button x:Name="bSelectPath" Content="{StaticResource Select}" Padding="5 2"/>
 						</StackPanel>
 						<Separator Margin="15,5"/>
 						<TextBlock Text="{StaticResource MasterPassword}" Classes="Heading"/>
 						<TextBox x:Name="tbPassword" Margin="5" PasswordChar="•"/>
-						<CheckBox Margin="5" Content="{StaticResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
+						<CheckBox Margin="5 0 5 0" Content="{StaticResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
 						<DockPanel Margin="5 0">
-							<TextBlock Text="{StaticResource Complexity}" VerticalAlignment="Center"/>
+							<TextBlock Text="{StaticResource Complexity}" Foreground="{StaticResource ThemeForegroundBrush}" VerticalAlignment="Center"/>
 							<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>
 						</DockPanel>
 						<Separator Margin="15,5"/>
 						<DockPanel Margin="5">
-							<TextBlock Text="{StaticResource NumberOfEncryptionProcedures}"/>
+							<TextBlock Text="{StaticResource NumberOfEncryptionProcedures}" Foreground="{StaticResource ThemeForegroundBrush}"/>
 							<TextBox x:Name="tbNumberOfEncryptionProcedures" Text="1" Margin="5 0 0 0"/>
 						</DockPanel>
 						<DockPanel Margin="5 0 5 5">
-							<TextBlock Text="{StaticResource Iteration}"/>
+							<TextBlock Text="{StaticResource Iteration}" Foreground="{StaticResource ThemeForegroundBrush}"/>
 							<TextBox x:Name="tbIteration" Text="100000" Margin="5 0 0 0"/>
 						</DockPanel>
 					</StackPanel>

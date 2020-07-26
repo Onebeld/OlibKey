@@ -26,4 +26,4 @@ This version is compiled using AOT CoreRT, which allows you to run applications 
 This version supports other platforms (x86, ARM), .NET Runtime is required to run. macOS and Linux does not support x86
 #### Requirements:
 * Almost all platforms ([see here](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
-* .NET Runtime 5 Preview 6;
+* .NET Runtime 5 Preview 7;

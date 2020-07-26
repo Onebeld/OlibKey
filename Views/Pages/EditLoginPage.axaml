@@ -33,11 +33,11 @@
 							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
 							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding NewLogin.Password}" PasswordChar="•"/>
 							<StackPanel Orientation="Horizontal">
-								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5" Padding="5 2"/>
+								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5 0 5 0" Padding="5 2"/>
 								<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword" VerticalAlignment="Center"/>
 							</StackPanel>
 							<DockPanel Margin="5 0">
-								<TextBlock Text="{DynamicResource Complexity}" VerticalAlignment="Center"/>
+								<TextBlock Text="{DynamicResource Complexity}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center"/>
 								<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>
 							</DockPanel>
 							<Separator/>
@@ -153,10 +153,10 @@
 						</ComboBox>
 					</StackPanel>
 				</Border>
-				<Border Classes="BorderStyle">
-					<StackPanel Margin="5">
-						<TextBlock Text="{DynamicResource Notes}" FontWeight="Bold"/>
-						<TextBox Margin="0 5 0 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewLogin.Note}"/>
+				<Border Classes="BorderStyle" Margin="0 0 0 5" Padding="0 5">
+					<StackPanel>
+						<TextBlock Text="{DynamicResource Notes}" Classes="Heading"/>
+						<TextBox Margin="5 5 5 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewLogin.Note}"/>
 					</StackPanel>
 				</Border>
 				<TextBlock Text="{DynamicResource CustomFields}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
@@ -167,7 +167,7 @@
 						</ScrollViewer>
 						<TextBlock Text="{DynamicResource AddField}" Classes="Heading"/>
 						<DockPanel Margin="5">
-							<TextBlock Text="{DynamicResource TypeColon}" VerticalAlignment="Center" Margin="0 0 5 0"/>
+							<TextBlock Text="{DynamicResource TypeColon}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
 							<ComboBox x:Name="TypeCustomField" SelectedIndex="{Binding Type}">
 								<ComboBoxItem Content="{StaticResource Text}"/>
 								<ComboBoxItem Content="{DynamicResource Hidden}"/>

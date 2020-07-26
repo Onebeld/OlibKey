@@ -2,6 +2,7 @@
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using OlibKey.Structures;
+using System.Threading.Tasks;
 
 namespace OlibKey.Views.Controls
 {
@@ -32,9 +33,11 @@ namespace OlibKey.Views.Controls
 				}
 			};
 		}
-		public void Focusing()
+		public async void Focusing()
 		{
 			_tbName.IsVisible = true;
+			await Task.Delay(50);
+			_tbName.Focus();
 		}
 	}
 }

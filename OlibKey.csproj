@@ -41,13 +41,13 @@
 		<AvaloniaResource Include="Assets\*" />
 		<None Remove="ForRepository\**" />
 		<AvaloniaResource Include="app.ico" />
-		<AvaloniaResource Include="Assets\Font\NotoSans-Bold.ttf"/>
-		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf"/>
+		<AvaloniaResource Include="Assets\Font\NotoSans-Bold.ttf" />
+		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.0-preview1" />
-		<PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview1" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview1" />
+		<PackageReference Include="Avalonia" Version="0.10.0-preview2" />
+		<PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview2" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview2" />
 		<PackageReference Include="Google.Apis.Drive.v3" Version="1.48.0.2013" />
 	</ItemGroup>
 	<ItemGroup>

@@ -16,6 +16,7 @@
 		</Style>
 
 		<Style Selector="ContextMenu">
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Border Background="{DynamicResource ThemeBackgroundBrush}"
@@ -33,6 +34,17 @@
 					</Border>
 				</ControlTemplate>
 			</Setter>
+		</Style>
+		<Style Selector="ContextMenu > MenuItem">
+			<Setter Property="RenderTransform" Value="none"/>
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+				</Transitions>
+			</Setter>
+		</Style>
+		<Style Selector="ContextMenu > MenuItem:pressed">
+			<Setter Property="RenderTransform" Value="scale(0.98)" />
 		</Style>
 
 		<Style Selector="TextBlock.Heading">
@@ -385,6 +397,7 @@
 		</Style>
 
 		<Style Selector="RadioButton">
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
 			<Setter Property="RenderTransform" Value="none"/>
 			<Setter Property="Transitions">
 				<Transitions>
@@ -659,6 +672,7 @@
 		</Style>
 
 		<Style Selector="TabControl">
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Border
@@ -676,10 +690,9 @@
 									ItemsPanel="{TemplateBinding ItemsPanel}"
 									ItemTemplate="{TemplateBinding ItemTemplate}"/>
 							</ScrollViewer>
-							<Border Background="{DynamicResource ThemeBackgroundContentTabItemBrush}">
+							<Border Background="{DynamicResource ThemeBackgroundContentTabItemBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
 								<ContentPresenter
 									Name="PART_SelectedContentHost"
-									Margin="{TemplateBinding Padding}"
 									HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 									Content="{TemplateBinding SelectedContent}"
@@ -716,10 +729,10 @@
 			</Setter>
 		</Style>
 		<Style Selector="TabItem:pointerover">
-			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundContentTabItemBrush}"/>
+			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 		</Style>
 		<Style Selector="TabItem:selected">
-			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundContentTabItemBrush}"/>
+			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 		</Style>
 		<Style Selector="TabItem:selected /template/ Border#indicator">
 			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>

@@ -52,7 +52,6 @@ namespace OlibKey.ViewModels.Pages
 		#endregion
 
 		#region Properties
-
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
@@ -77,7 +76,7 @@ namespace OlibKey.ViewModels.Pages
 
 		public Action<LoginListItem> EditContentCallback { get; set; }
 
-		public LoginInformationPageViewModel(LoginListItem acc, IScreen screen = null)
+		public LoginInformationPageViewModel(LoginListItem acc, Database db, IScreen screen = null)
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
@@ -150,8 +149,8 @@ namespace OlibKey.ViewModels.Pages
 			{
 				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (App.Database.Folders != null)
-				foreach (Folder i in App.Database.Folders) Folders.Add(i);
+			if (db.Folders != null)
+				foreach (Folder i in db.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			foreach (Folder i in Folders.Where(i => i.ID == LoginInformation.FolderID))

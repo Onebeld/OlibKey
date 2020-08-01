@@ -9,6 +9,7 @@
 		<v:String x:Key="CreateBase">Create storage</v:String>
 		<v:String x:Key="OpenBase">Open storage</v:String>
 		<v:String x:Key="SaveBase">Save storage</v:String>
+		<v:String x:Key="SaveAllBases">Save all storages</v:String>
 		<v:String x:Key="AddLogin">Add log in</v:String>
 		<v:String x:Key="Settings">Settings</v:String>
 		<v:String x:Key="ExitFrom">Exit from OlibKey</v:String>
@@ -30,6 +31,7 @@
 
 		<v:String x:Key="Ready">Ready</v:String>
 		<v:String x:Key="Elements">Elements:</v:String>
+		<v:String x:Key="OpenedBases">Opened bases:</v:String>
 
 		<v:String x:Key="Collapse">Collapse</v:String>
 		<v:String x:Key="Expand">Expand</v:String>
@@ -49,6 +51,7 @@
 
 		<v:String x:Key="ListOfItems">List of items</v:String>
 		<v:String x:Key="LockStorage">Lock storage</v:String>
+		<v:String x:Key="LockAllStorages">Lock all vaults</v:String>
 		<v:String x:Key="UnlockStorage">Unlock storage</v:String>
 		<v:String x:Key="ShowOPM">Show OlibKey</v:String>
 

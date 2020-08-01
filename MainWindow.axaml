@@ -26,8 +26,10 @@
 						<NativeMenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
 						<NativeMenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" Gesture="CMD+O"/>
 						<NativeMenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+S"/>
+						<NativeMenuItem Header="{DynamicResource SaveAllBases}" Command="{Binding SaveAllDatabasesCommand}"/>
 						<NativeMenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}"/>
 						<NativeMenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+						<NativeMenuItem Header="{DynamicResource LockAllStorages}" Command="{Binding LockAllDatabasesCommand}"/>
 						<NativeMenuItemSeperator/>
 						<NativeMenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+N"/>
 						<NativeMenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
@@ -65,6 +67,7 @@
 						<Image Source="{DynamicResource SaveIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
+				<MenuItem Header="{DynamicResource SaveAllBases}" Command="{Binding SaveAllDatabasesCommand}"/>
 				<MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource LockOpenIcon}"/>
@@ -75,7 +78,10 @@
 						<Image Source="{DynamicResource LockIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
+				<MenuItem Header="{DynamicResource LockAllStorages}" Command="{Binding LockAllDatabasesCommand}"/>
+				
 				<Separator Classes="MenuItemSeparators"/>
+					
 				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" InputGesture="Ctrl + N" IsEnabled="{Binding IsUnlockDatabase}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource PlusIcon}"/>
@@ -86,7 +92,9 @@
 						<Image Source="{DynamicResource SearchIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
+				
 				<Separator Classes="MenuItemSeparators"/>
+				
 				<MenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource GearIcon}"/>
@@ -115,33 +123,24 @@
 				</MenuItem>
 			</MenuItem>
 		</Menu>
-		<Grid ColumnDefinitions="0,1*,2*" RowDefinitions="40,*,50,20">
-			<reactiveUi:RoutedViewHost Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" PageTransition="{x:Null}" Router="{Binding Router}">
-				<reactiveUi:RoutedViewHost.DefaultContent>
-					<l:StartPage/>
-				</reactiveUi:RoutedViewHost.DefaultContent>
-			</reactiveUi:RoutedViewHost>
-			<Border Grid.Column="2" BorderThickness="0 0 0 1" Classes="ButtonsMenu">
-				<TextBlock Text="{Binding NameStorage}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"/>
-			</Border>
-			<ListBox x:Name="listBox" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding LoginList}" SelectedIndex="{Binding SelectedIndex}" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
-			<Border Grid.Column="1" Grid.Row="2" BorderThickness="0 1 1 0" Classes="ButtonsMenu">
-				<Grid ColumnDefinitions="*,40">
-					<Button Command="{Binding CreateLoginCommand}" Content="{DynamicResource Add}" Margin="10" IsEnabled="{Binding IsUnlockDatabase}"/>
-					<Button Grid.Column="1" Margin="0 10 10 10" ToolTip.Tip="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Padding="5">
-						<Path Data="M 10.24949 0 C 7.0671703 0 4.4803723 2.5636361 4.4803723 5.6909091 c 0 1.327272 0.465251 2.527273 1.228264 3.509091 L 0.23727825 14.618182 c -0.316371 0.327273 -0.316371 0.836363 0 1.145454 C 0.40476825 15.927273 0.60947925 16 0.81419029 16 1.0375103 16 1.2422213 15.92727 1.4097123 15.763636 l 5.471357 -5.418181 C 7.8301823 11.018182 8.9840063 11.4 10.23088 11.4 13.4132 11.4 15.999999 8.8363641 15.999999 5.7090901 15.999999 2.5818181 13.431811 0 10.24949 0 Z m 0 9.9636363 c -2.3634777 0 -4.2803137 -1.9090912 -4.2803137 -4.2545462 0 -2.345454 1.916836 -4.254545 4.2803137 -4.254545 2.363478 0 4.280314 1.909091 4.280314 4.254545 0 2.345455 -1.916836 4.2545462 -4.280314 4.2545462 z m 2.88456 -4.1818182 c -0.03722 0.309091 -0.316371 0.545454 -0.632743 0.545454 -0.03722 0 -0.05583 0 -0.09305 0 -0.353591 -0.05454 -0.595522 -0.363636 -0.558302 -0.709091 0.130271 -0.945454 -0.949113 -1.436363 -1.004943 -1.454545 -0.316371 -0.145455 -0.465252 -0.527273 -0.316371 -0.836364 0.14888 -0.309091 0.521081 -0.454545 0.856063 -0.327272 0.07444 0.01818 2.009886 0.890909 1.749346 2.781818 z m -1.358535 1.381818 c 0.13027 0.127273 0.223321 0.327273 0.223321 0.509091 0 0.2 -0.07444 0.381818 -0.223321 0.509091 -0.13027 0.127273 -0.334981 0.218182 -0.521081 0.218182 -0.186102 0 -0.390812 -0.07273 -0.521083 -0.218182 -0.130269 -0.127273 -0.22332 -0.327273 -0.22332 -0.509091 0 -0.181818 0.07444 -0.381818 0.22332 -0.509091 0.130271 -0.127273 0.334981 -0.218182 0.521083 -0.218182 0.1861 0 0.372201 0.07273 0.521081 0.218182 z"/>
-					</Button>
-				</Grid>
-			</Border>
-			<Border Grid.ColumnSpan="3" Grid.Row="3" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
-				<Grid ColumnDefinitions="Auto,*,Auto">
+		<Grid ColumnDefinitions="1*,2*" RowDefinitions="Auto,*,20">
+			<TabControl x:Name="tabItems" Grid.ColumnSpan="2" Grid.RowSpan="2" ZIndex="5" SelectedIndex="{Binding SelectedTabIndex}" Items="{Binding TabItems}"/>
+			<l:StartPage Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+			<Border Grid.ColumnSpan="2" Grid.Row="2" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
+				<Grid ColumnDefinitions="Auto,*,Auto,Auto">
 					<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 						<TextBlock Text="{DynamicResource Ready}" x:Name="tbReady" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 						<TextBlock x:Name="tbMessageStatusBar" IsVisible="False" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					</StackPanel>
-					<StackPanel IsVisible="{Binding IsUnlockDatabase}" Grid.Column="2" Orientation="Horizontal" Margin="0 0 5 0">
+					<StackPanel IsVisible="{Binding IsUnlockDatabase}" Grid.Column="2" Orientation="Horizontal">
 						<TextBlock Text="{DynamicResource Elements}" Margin="0 0 5 0" Foreground="{DynamicResource ThemeForegroundBrush}"/>
-						<TextBlock Text="{Binding #listBox.ItemCount}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+						<TextBlock Text="{Binding CountLogins}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+						
+						<TextBlock Text="|" Margin="5 0 5 0" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+					</StackPanel>
+					<StackPanel Grid.Column="3" Orientation="Horizontal" Margin="0 0 5 0">
+						<TextBlock Text="{DynamicResource OpenedBases}" Margin="0 0 5 0" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+						<TextBlock Text="{Binding TabItems.Count}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					</StackPanel>
 				</Grid>
 			</Border>

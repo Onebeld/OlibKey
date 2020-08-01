@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Threading;
 using OlibKey.Structures;
+using OlibKey.Views.Controls;
 using OlibKey.Views.Windows;
 using System;
 using System.Diagnostics;
@@ -17,7 +18,6 @@ namespace OlibKey
 	public class App : Application
 	{
 		public static Settings Settings { get; set; }
-		public static Database Database { get; set; }
 
 		public static DispatcherTimer Autosave { get; set; }
 
@@ -48,7 +48,10 @@ namespace OlibKey
 
 			Autosave = new DispatcherTimer();
 
-			Autosave.Tick += (s, d) => MainWindowViewModel.SaveDatabase();
+			Autosave.Tick += (s, d) =>
+			{
+				foreach (TabItem item in MainWindowViewModel.TabItems) MainWindowViewModel.SaveDatabase((DatabaseControl)item.Content);
+			};
 			Autosave.Interval = new TimeSpan(0, 2, 0);
 
 

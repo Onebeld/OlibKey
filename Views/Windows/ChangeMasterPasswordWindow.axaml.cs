@@ -25,16 +25,8 @@ namespace OlibKey.Views.Windows
 			_tbNewPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _tbNewPassword));
 		}
 
-		private void CheckedOldPassword(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			_tbOldPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
-		private void CheckedNewPassword(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			_tbNewPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
+		private void CheckedOldPassword(object sender, RoutedEventArgs e) => _tbOldPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
+		private void CheckedNewPassword(object sender, RoutedEventArgs e) => _tbNewPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
 
 		private void CloseWindow(object sender, RoutedEventArgs e) => Close();
 
@@ -42,10 +34,10 @@ namespace OlibKey.Views.Windows
 		{
 			try
 			{
-				SaveAndLoadDatabase.LoadFiles(App.Settings.PathDatabase, _tbOldPassword.Text);
-				App.MainWindowViewModel.MasterPassword = _tbNewPassword.Text;
+				SaveAndLoadDatabase.LoadFiles(App.MainWindowViewModel.SelectedTabItem);
+				App.MainWindowViewModel.SelectedTabItem.ViewModel.MasterPassword = _tbNewPassword.Text;
 
-				App.MainWindowViewModel.SaveDatabase();
+				App.MainWindowViewModel.SaveDatabase(App.MainWindowViewModel.SelectedTabItem);
 
 				_ = await MessageBox.Show(this, null, (string)Application.Current.FindResource("Successfully"), (string)Application.Current.FindResource("Message"), MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
 				Close();

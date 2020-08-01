@@ -53,14 +53,14 @@ namespace OlibKey.Views.Windows
 			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchLogin());
 		}
 
-		private void SearchWindow_Closed(object sender, EventArgs e) => App.Database.Folders = SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
+		private void SearchWindow_Closed(object sender, EventArgs e) => App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Folders = SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
 
 		private async void SearchLogin()
 		{
 			SearchViewModel.ClearLoginsList();
 			await Task.Delay(10);
 
-			foreach (LoginListItem i in App.MainWindowViewModel.LoginList)
+			foreach (LoginListItem i in App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList)
 			{
 				Login Login = i.LoginItem;
 				if (Login.Name != null)

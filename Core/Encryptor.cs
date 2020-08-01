@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OlibKey.Views.Controls;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -31,7 +32,7 @@ namespace OlibKey.Core
 
 		private static readonly int SaltLength = 50;
 
-		private static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+		private static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes, int iterations)
 		{
 			byte[] saltBytes = new byte[SaltLength];
 			for (int i = 0; i < SaltLength; i++)
@@ -39,7 +40,7 @@ namespace OlibKey.Core
 
 			using MemoryStream ms = new MemoryStream();
 
-			using (Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, App.MainWindowViewModel.Iterations))
+			using (Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, iterations))
 			{
 				using RijndaelManaged aes = new RijndaelManaged { KeySize = 256, BlockSize = 128, Mode = CipherMode.CBC };
 				aes.Key = key.GetBytes(aes.KeySize / 8);
@@ -54,7 +55,7 @@ namespace OlibKey.Core
 			return ms.ToArray();
 		}
 
-		private static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes, int iteration)
+		private static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes, int iterations)
 		{
 			byte[] saltBytes = new byte[SaltLength];
 			for (int i = 0; i < SaltLength; i++)
@@ -62,7 +63,7 @@ namespace OlibKey.Core
 
 			using MemoryStream ms = new MemoryStream();
 
-			using (Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, iteration))
+			using (Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, iterations))
 			{
 				using RijndaelManaged aes = new RijndaelManaged { KeySize = 256, BlockSize = 128, Mode = CipherMode.CBC };
 				aes.Key = key.GetBytes(aes.KeySize / 8);
@@ -77,28 +78,28 @@ namespace OlibKey.Core
 			return ms.ToArray();
 		}
 
-		public static string EncryptString(string text, string password)
+		public static string EncryptString(string text, DatabaseControl db)
 		{
 			string encryptString = text;
-			byte[] baPwd = Encoding.UTF8.GetBytes(password);
+			byte[] baPwd = Encoding.UTF8.GetBytes(db.ViewModel.MasterPassword);
 			byte[] baPwdHash = SHA256.Create().ComputeHash(baPwd);
 
-			for (int d = 0; d < App.MainWindowViewModel.NumberOfEncryptionProcedures; d++)
+			for (int d = 0; d < db.ViewModel.NumberOfEncryptionProcedures; d++)
 			{
 				byte[] baText = Encoding.UTF8.GetBytes(encryptString);
 				byte[] baSalt = GetRandomBytes();
 				byte[] baEncrypted = new byte[baSalt.Length + baText.Length];
 				for (int i = 0; i < baSalt.Length; i++) baEncrypted[i] = baSalt[i];
 				for (int i = 0; i < baText.Length; i++) baEncrypted[i + baSalt.Length] = baText[i];
-				baEncrypted = AES_Encrypt(baEncrypted, baPwdHash);
+				baEncrypted = AES_Encrypt(baEncrypted, baPwdHash, db.ViewModel.Iterations);
 
 				encryptString = Convert.ToBase64String(baEncrypted);
 			}
 
-			return App.MainWindowViewModel.Iterations + ":" + App.MainWindowViewModel.NumberOfEncryptionProcedures + ":" + encryptString;
+			return db.ViewModel.Iterations + ":" + db.ViewModel.NumberOfEncryptionProcedures + ":" + encryptString;
 		}
 
-		public static string DecryptString(string text, string password)
+		public static string DecryptString(string text, DatabaseControl db)
 		{
 
 			string[] split = text.Split(':');
@@ -106,7 +107,7 @@ namespace OlibKey.Core
 			int numberOfEncryptionProcedures = int.Parse(split[1]);
 			string result = split[2];
 
-			byte[] baPwdHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(password));
+			byte[] baPwdHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(db.ViewModel.MasterPassword));
 
 			for (int d = 0; d < numberOfEncryptionProcedures; d++)
 			{
@@ -118,8 +119,8 @@ namespace OlibKey.Core
 				result = Encoding.UTF8.GetString(baResult);
 			}
 
-			App.MainWindowViewModel.Iterations = iterations;
-			App.MainWindowViewModel.NumberOfEncryptionProcedures = numberOfEncryptionProcedures;
+			db.ViewModel.Iterations = iterations;
+			db.ViewModel.NumberOfEncryptionProcedures = numberOfEncryptionProcedures;
 
 			return result;
 		}

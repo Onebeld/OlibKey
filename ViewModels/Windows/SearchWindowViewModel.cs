@@ -47,7 +47,7 @@ namespace OlibKey.ViewModels.Windows
 			{
 				this.RaiseAndSetIfChanged(ref _selectedLoginIndex, value);
 				if (SelectedLoginIndex == -1) return;
-				App.MainWindowViewModel.SearchSelectLogin(SelectedLoginItem);
+				App.MainWindowViewModel.SelectedTabItem.ViewModel.SearchSelectLogin(SelectedLoginItem);
 				App.SearchWindow.Close();
 			}
 		}

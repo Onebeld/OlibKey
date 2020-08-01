@@ -690,7 +690,7 @@
 									ItemsPanel="{TemplateBinding ItemsPanel}"
 									ItemTemplate="{TemplateBinding ItemTemplate}"/>
 							</ScrollViewer>
-							<Border Background="{DynamicResource ThemeBackgroundContentTabItemBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
+							<Border Background="{TemplateBinding Background}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
 								<ContentPresenter
 									Name="PART_SelectedContentHost"
 									HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"

@@ -9,6 +9,7 @@
 		<v:String x:Key="CreateBase">Создать хранилище</v:String>
 		<v:String x:Key="OpenBase">Открыть хранилище</v:String>
 		<v:String x:Key="SaveBase">Сохранить хранилище</v:String>
+		<v:String x:Key="SaveAllBases">Сохранить все хранилища</v:String>
 		<v:String x:Key="AddLogin">Добавить логин</v:String>
 		<v:String x:Key="Settings">Настройки</v:String>
 		<v:String x:Key="ExitFrom">Выйти из OlibKey</v:String>
@@ -30,6 +31,7 @@
 
 		<v:String x:Key="Ready">Готов</v:String>
 		<v:String x:Key="Elements">Элементов:</v:String>
+		<v:String x:Key="OpenedBases">Открыто баз:</v:String>
 
 		<v:String x:Key="Collapse">Свернуть</v:String>
 		<v:String x:Key="Expand">Развернуть</v:String>
@@ -49,6 +51,7 @@
 
 		<v:String x:Key="ListOfItems">Список элементов</v:String>
 		<v:String x:Key="LockStorage">Заблокировать хранилище</v:String>
+		<v:String x:Key="LockAllStorages">Заблокировать все хранилища</v:String>
 		<v:String x:Key="UnlockStorage">Разблокировать хранилище</v:String>
 		<v:String x:Key="ShowOPM">Показать OlibKey</v:String>
 

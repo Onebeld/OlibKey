@@ -9,6 +9,7 @@
 		<v:String x:Key="CreateBase">Créer du stockage</v:String>
 		<v:String x:Key="OpenBase">Référentiel ouvert</v:String>
 		<v:String x:Key="SaveBase">Enregistrer le stockage</v:String>
+		<v:String x:Key="SaveAllBases">Enregistrer tous les coffres</v:String>
 		<v:String x:Key="AddLogin">Ajouter une connexion</v:String>
 		<v:String x:Key="Settings">Paramètres</v:String>
 		<v:String x:Key="ExitFrom">Déconnectez-vous d'OlibKey</v:String>
@@ -30,6 +31,7 @@
 
 		<v:String x:Key="Ready">Prêt</v:String>
 		<v:String x:Key="Elements">Articles:</v:String>
+		<v:String x:Key="OpenedBases">Bases ouvertes:</v:String>
 
 		<v:String x:Key="Collapse">Réduire</v:String>
 		<v:String x:Key="Expand">Développer</v:String>
@@ -49,6 +51,7 @@
 
 		<v:String x:Key="ListOfItems">Liste d'articles</v:String>
 		<v:String x:Key="LockStorage">Verrouiller le coffre-fort</v:String>
+		<v:String x:Key="LockAllStorages">Verrouiller tous les coffres</v:String>
 		<v:String x:Key="UnlockStorage">Déverrouillez le stockage</v:String>
 		<v:String x:Key="ShowOPM">Afficher OlibKey</v:String>
 

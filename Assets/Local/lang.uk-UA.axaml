@@ -9,6 +9,7 @@
 		<v:String x:Key="CreateBase">Створити сховище</v:String>
 		<v:String x:Key="OpenBase">Відкрити сховище</v:String>
 		<v:String x:Key="SaveBase">Зберегти сховище</v:String>
+		<v:String x:Key="SaveAllBases">Зберегти всі сховища</v:String>
 		<v:String x:Key="AddLogin">Додати логін</v:String>
 		<v:String x:Key="Settings">Налаштування</v:String>
 		<v:String x:Key="ExitFrom">Вийти з OlibKey</v:String>
@@ -30,6 +31,7 @@
 
 		<v:String x:Key="Ready">Готовий</v:String>
 		<v:String x:Key="Elements">Елементів:</v:String>
+		<v:String x:Key="OpenedBases">Відкрито баз:</v:String>
 
 		<v:String x:Key="Collapse">Згорнути</v:String>
 		<v:String x:Key="Expand">Розгорнути</v:String>
@@ -49,6 +51,7 @@
 
 		<v:String x:Key="ListOfItems">Список елементів</v:String>
 		<v:String x:Key="LockStorage">Заблокувати сховище</v:String>
+		<v:String x:Key="LockAllStorages">Заблокувати всі сховища</v:String>
 		<v:String x:Key="UnlockStorage">Розблокувати сховище</v:String>
 		<v:String x:Key="ShowOPM">Показати OlibKey</v:String>
 

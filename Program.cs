@@ -29,14 +29,12 @@ namespace OlibKey
 			if (!string.IsNullOrWhiteSpace(file)) App.Settings.PathDatabase = file;
 
 			App.MainWindowViewModel = new MainWindowViewModel();
-			Locator.CurrentMutable.RegisterConstant<IScreen>(App.MainWindowViewModel);
 			Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
 			Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());
-			Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() =>
-				new LoginInformationPage());
+			Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() => new LoginInformationPage());
 			Locator.CurrentMutable.Register<IViewFor<EditLoginPageViewModel>>(() => new EditLoginPage());
 
-			App.MainWindow = new MainWindow { DataContext = Locator.Current.GetService<IScreen>() };
+			App.MainWindow = new MainWindow { DataContext = App.MainWindowViewModel };
 
 			app.Run(App.MainWindow);
 		}

@@ -53,14 +53,21 @@ namespace OlibKey.Views.Windows
 						return;
 					}
 
-					App.MainWindowViewModel.Iterations = int.Parse(_tbIteration.Text);
-					App.MainWindowViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+					if (App.MainWindowViewModel.SelectedTabItem != null)
+					{
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations = int.Parse(_tbIteration.Text);
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+					}
 				}
 			};
 
-			_tbIteration.Text = App.MainWindowViewModel.Iterations.ToString();
-			_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.NumberOfEncryptionProcedures.ToString();
-			_tiStorage.IsEnabled = App.MainWindowViewModel.IsUnlockDatabase;
+			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem.ViewModel.IsUnlockDatabase;
+
+			if (App.MainWindowViewModel.SelectedTabItem != null)
+			{
+				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations.ToString();
+				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures.ToString();
+			}
 		}
 
 

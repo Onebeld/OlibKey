@@ -64,7 +64,7 @@ namespace OlibKey.ViewModels.Pages
 
 		public IScreen HostScreen { get; }
 
-		public EditLoginPageViewModel(LoginListItem acc, IScreen screen = null)
+		public EditLoginPageViewModel(LoginListItem acc, Database db, IScreen screen = null)
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
@@ -141,8 +141,8 @@ namespace OlibKey.ViewModels.Pages
 			{
 				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (App.Database.Folders != null)
-				foreach (Folder i in App.Database.Folders) Folders.Add(i);
+			if (db.Folders != null)
+				foreach (Folder i in db.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			foreach (Folder i in Folders.Where(i => i.ID == LoginList.LoginItem.FolderID))

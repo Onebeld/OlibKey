@@ -9,6 +9,7 @@
 		<v:String x:Key="CreateBase">Ստեղծել պահեստ</v:String>
 		<v:String x:Key="OpenBase">Բացել պահեստ</v:String>
 		<v:String x:Key="SaveBase">Պահպանել պահեստ</v:String>
+		<v:String x:Key="SaveAllBases">Պահպանեք բոլոր պահոցները</v:String>
 		<v:String x:Key="AddLogin">Ավելացնել լոգին</v:String>
 		<v:String x:Key="Settings">Կարգավորումներ</v:String>
 		<v:String x:Key="ExitFrom">Դուրս գալ OlibKey-ից</v:String>
@@ -30,6 +31,7 @@
 
 		<v:String x:Key="Ready">Պատրաստ է</v:String>
 		<v:String x:Key="Elements">Նյութեր:</v:String>
+		<v:String x:Key="OpenedBases">Բացված հիմքերը:</v:String>
 
 		<v:String x:Key="Collapse">Փլուզվել</v:String>
 		<v:String x:Key="Expand">Ընդլայնել</v:String>
@@ -49,6 +51,7 @@
 
 		<v:String x:Key="ListOfItems">Նյութերի ցուցակ</v:String>
 		<v:String x:Key="LockStorage">Կողպեք պահոցը</v:String>
+		<v:String x:Key="LockAllStorages">Կողպեք բոլոր պահոցները</v:String>
 		<v:String x:Key="UnlockStorage">Բացել պահեստը</v:String>
 		<v:String x:Key="ShowOPM">Ուցադրել OlibKey</v:String>
 

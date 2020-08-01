@@ -1,4 +1,5 @@
 ﻿using OlibKey.Structures;
+using OlibKey.Views.Controls;
 using System.IO;
 using System.Xml.Serialization;
 
@@ -6,14 +7,14 @@ namespace OlibKey.Core
 {
 	public class SaveAndLoadDatabase
 	{
-		public static Database LoadFiles(string directoryLocation, string masterPassword) => (Database)new XmlSerializer(typeof(Database)).Deserialize(new StringReader(Encryptor.DecryptString(File.ReadAllText(directoryLocation), masterPassword)));
+		public static Database LoadFiles(DatabaseControl db) => (Database)new XmlSerializer(typeof(Database)).Deserialize(new StringReader(Encryptor.DecryptString(File.ReadAllText(db.ViewModel.PathDatabase), db)));
 
-		public static void SaveFiles(Database database, string directoryLocation, string masterPassword)
+		public static void SaveFiles(DatabaseControl db)
 		{
 			using StringWriter writer = new StringWriter();
-			new XmlSerializer(typeof(Database)).Serialize(writer, database);
+			new XmlSerializer(typeof(Database)).Serialize(writer, db.ViewModel.Database);
 
-			File.WriteAllText(directoryLocation, Encryptor.EncryptString(writer.ToString(), masterPassword));
+			File.WriteAllText(db.ViewModel.PathDatabase, Encryptor.EncryptString(writer.ToString(), db));
 		}
 	}
 }

@@ -12,8 +12,9 @@ namespace OlibKey
 	    public ListBox MainWindowListBox;
 		private TextBlock _tbMessageStatusBar;
 		private TextBlock _tbReady;
+		private TabControl _tabItems;
 
-	    public MainWindow() => InitializeComponent();
+		public MainWindow() => InitializeComponent();
 
 	    private void InitializeComponent()
 	    {
@@ -22,12 +23,14 @@ namespace OlibKey
 
 		    MainWindowListBox = this.FindControl<ListBox>("listBox");
 			_tbMessageStatusBar = this.FindControl<TextBlock>("tbMessageStatusBar");
+			_tabItems = this.FindControl<TabControl>("tabItems");
 			_tbReady = this.FindControl<TextBlock>("tbReady");
-			Closing += App.MainWindowViewModel.ProgramClosing;
-			Opened += MainWindow_Initialized;
-	    }
 
-		private void MainWindow_Initialized(object sender, System.EventArgs e) => App.MainWindowViewModel.Loading(this);
+			Closing += App.MainWindowViewModel.ProgramClosing;
+			Opened += (s, e) => App.MainWindowViewModel.Loading(this);
+
+			_tabItems.SelectionChanged += App.MainWindowViewModel.TabItemsSelectionChanged;
+		}
 
 		public async void MessageStatusBar(string message)
 		{

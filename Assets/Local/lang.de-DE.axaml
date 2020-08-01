@@ -8,7 +8,8 @@
 		<v:String x:Key="Add">Hinzufügen</v:String>
 		<v:String x:Key="CreateBase">Speicher erstellen</v:String>
 		<v:String x:Key="OpenBase">Öffnen Sie das Repository</v:String>
-		<v:String x:Key="SaveBase">Speichern Sie den Speicher</v:String>
+		<v:String x:Key="SaveBase">Sicher speichern</v:String>
+		<v:String x:Key="SaveAllBases">Speichern Sie alle Tresore</v:String>
 		<v:String x:Key="AddLogin">Login hinzufügen</v:String>
 		<v:String x:Key="Settings">Einstellungen</v:String>
 		<v:String x:Key="ExitFrom">Melden Sie sich von OlibKey ab</v:String>
@@ -30,6 +31,7 @@
 
 		<v:String x:Key="Ready">Bereit</v:String>
 		<v:String x:Key="Elements">Artikel:</v:String>
+		<v:String x:Key="OpenedBases">Geöffnete Basen:</v:String>
 
 		<v:String x:Key="Collapse">Zusammenbruch</v:String>
 		<v:String x:Key="Expand">Erweitern</v:String>
@@ -49,6 +51,7 @@
 
 		<v:String x:Key="ListOfItems">Liste der Artikel</v:String>
 		<v:String x:Key="LockStorage">Tresor verriegeln</v:String>
+		<v:String x:Key="LockAllStorages">Verschließen Sie alle Tresore</v:String>
 		<v:String x:Key="UnlockStorage">Speicher entsperren</v:String>
 		<v:String x:Key="ShowOPM">Zeigen OlibKey</v:String>
 

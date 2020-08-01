@@ -24,7 +24,6 @@ namespace OlibKey.ViewModels.Pages
 		private ObservableCollection<CustomFieldListItem> _CustomFields;
 
 		#region Property's
-
 		public int Type { get; set; }
 		public Login NewLogin { get; set; }
 		private int SelectionFolderIndex
@@ -54,7 +53,7 @@ namespace OlibKey.ViewModels.Pages
 		public IScreen HostScreen { get; }
 
 
-		public CreateLoginPageViewModel(IScreen screen = null)
+		public CreateLoginPageViewModel(Database db, IScreen screen = null)
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
@@ -72,8 +71,8 @@ namespace OlibKey.ViewModels.Pages
 			{
 				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (App.Database.Folders != null)
-				foreach (Folder i in App.Database.Folders) Folders.Add(i);
+			if (db.Folders != null)
+				foreach (Folder i in db.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			Type = 0;

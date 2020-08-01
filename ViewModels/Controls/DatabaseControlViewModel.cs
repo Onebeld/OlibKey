@@ -18,6 +18,7 @@ namespace OlibKey.ViewModels.Controls
 		public Database Database { get; set; }
 
 		public string PathDatabase { get; set; }
+		public string TabID { get; set; }
 
 		public int Iterations { get; set; }
 		public int NumberOfEncryptionProcedures { get; set; }

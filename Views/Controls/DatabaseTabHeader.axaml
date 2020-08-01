@@ -1,0 +1,15 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Views.Controls.DatabaseTabHeader">
+	<Grid ColumnDefinitions="Auto,Auto,Auto">
+		<Image x:Name="iLock" Source="{DynamicResource LockIcon}" Width="16" Margin="0 0 5 0"/>
+		<Image x:Name="iUnlock" Source="{DynamicResource LockOpenIcon}" Width="16" IsVisible="False" Margin="0 0 5 0"/>
+		<TextBlock x:Name="tbNameDatabase" Grid.Column="1" VerticalAlignment="Center"/>
+		<Button x:Name="bCloseTab" FontSize="12" Grid.Column="2" Margin="5 0 0 0" Padding="2" VerticalAlignment="Center">
+			<Path Data="m 11.68906 10.224783 c 0.414587 0.414986 0.414587 1.060519 0 1.475505 C 11.481766 11.907781 11.228407 12 10.952015 12 10.675624 12 10.422265 11.90778 10.214972 11.700288 L 6.0000002 7.4812683 1.7850287 11.700288 C 1.5777355 11.907781 1.3243764 12 1.0479849 12 0.77159347 12 0.51823443 11.907781 0.31094044 11.700288 c -0.41458725 -0.414986 -0.41458725 -1.060519 0 -1.475505 L 4.525912 6.0057639 0.31094044 1.7867439 c -0.41458725 -0.4149854 -0.41458725 -1.06051871 0 -1.47550421 0.41458725 -0.41498626 1.05950106 -0.41498626 1.47408826 0 L 6.0000003 4.5302597 10.214972 0.31123969 c 0.414587 -0.41498626 1.0595 -0.41498626 1.474088 0 0.414587 0.4149855 0.414587 1.06051881 0 1.47550421 l -4.2149715 4.21902 z"/>
+		</Button>
+	</Grid>
+</UserControl>

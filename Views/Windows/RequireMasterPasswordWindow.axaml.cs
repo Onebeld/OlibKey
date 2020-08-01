@@ -10,13 +10,14 @@ namespace OlibKey.Views.Windows
 {
 	public class RequireMasterPasswordWindow : Window
 	{
-		public Action<DatabaseControl> LoadStorageCallback { get; set; }
+		public Action<DatabaseControl, DatabaseTabHeader> LoadStorageCallback { get; set; }
 
 		private TextBox _tbPassword;
 		private Button _bOpen;
 		private Button _bCancel;
 
 		public DatabaseControl databaseControl;
+		public DatabaseTabHeader databaseTabHeader;
 
 		public RequireMasterPasswordWindow()
 		{
@@ -46,7 +47,7 @@ namespace OlibKey.Views.Windows
 			try
 			{
 				databaseControl.ViewModel.MasterPassword = _tbPassword.Text;
-				LoadStorageCallback?.Invoke(databaseControl);
+				LoadStorageCallback?.Invoke(databaseControl, databaseTabHeader);
 				Close();
 			}
 			catch

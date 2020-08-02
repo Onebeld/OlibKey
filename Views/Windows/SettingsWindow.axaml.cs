@@ -33,6 +33,7 @@ namespace OlibKey.Views.Windows
 			{
 				"Gloomy" => 1,
 				"Mysterious" => 2,
+				"Turquoise" => 3,
 				_ => 0
 			};
 
@@ -61,7 +62,7 @@ namespace OlibKey.Views.Windows
 				}
 			};
 
-			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem.ViewModel.IsUnlockDatabase;
+			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem != null && App.MainWindowViewModel.SelectedTabItem.ViewModel.IsUnlockDatabase;
 
 			if (App.MainWindowViewModel.SelectedTabItem != null)
 			{
@@ -105,6 +106,7 @@ namespace OlibKey.Views.Windows
 			{
 				1 => "Gloomy",
 				2 => "Mysterious",
+				3 => "Turquoise",
 				_ => "Dazzling"
 			};
 

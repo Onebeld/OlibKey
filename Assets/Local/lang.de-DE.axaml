@@ -111,6 +111,7 @@
 		<v:String x:Key="Dazzling">Blendend</v:String>
 		<v:String x:Key="Gloomy">Düster</v:String>
 		<v:String x:Key="Mysterious">Geheimnisvoll</v:String>
+		<v:String x:Key="Turquoise">Türkis</v:String>
 
 		<v:String x:Key="Reminder">ErTINerung</v:String>
 		<v:String x:Key="Pause">Pause</v:String>

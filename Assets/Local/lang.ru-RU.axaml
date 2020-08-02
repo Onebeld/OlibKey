@@ -111,6 +111,7 @@
 		<v:String x:Key="Dazzling">Ослепительная</v:String>
 		<v:String x:Key="Gloomy">Мрачная</v:String>
 		<v:String x:Key="Mysterious">Загадочная</v:String>
+		<v:String x:Key="Turquoise">Бирюза</v:String>
 
 		<v:String x:Key="Reminder">Напоминание</v:String>
 		<v:String x:Key="Pause">Пауза</v:String>

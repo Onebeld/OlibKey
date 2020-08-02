@@ -32,6 +32,7 @@
 								<ComboBoxItem Content="{DynamicResource Dazzling}"/>
 								<ComboBoxItem Content="{DynamicResource Gloomy}"/>
 								<ComboBoxItem Content="{DynamicResource Mysterious}"/>
+								<ComboBoxItem Content="{DynamicResource Turquoise}"/>
 							</ComboBox>
 						</DockPanel>
 					</StackPanel>

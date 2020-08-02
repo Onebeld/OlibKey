@@ -1,0 +1,31 @@
+﻿<Style xmlns="https://github.com/avaloniaui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:sys="clr-namespace:System;assembly=netstandard">
+    <Style.Resources>
+		<Color x:Key="ThemeWindowBackgroundColor">#FF5A0F26</Color>
+        <Color x:Key="ThemeBackgroundColor">#FFD2FEFF</Color>
+		<Color x:Key="ThemeForegroundColor">#FF000000</Color>
+		<Color x:Key="ThemeForegroundOpacityColor">#FF5E3B82</Color>
+		<Color x:Key="ThemeGlobalBorderColor">#FF679593</Color>
+		<Color x:Key="ThemeHoverBackgroundColor">#FFC1E9EA</Color>
+		<Color x:Key="ThemeWindowForegroundColor">#FFFFFFFF</Color>
+		<Color x:Key="ThemePanelBackgroundColor">#FF9AE2DE</Color>
+		<Color x:Key="ThemeSelectedControlColor">#FFB30101</Color>
+		<Color x:Key="ThemeGitHubColor">#FF231E1B</Color>
+		<Color x:Key="ThemeScrollBoxHoverColor">#FF333333</Color>
+		<Color x:Key="ThemeBackgroundContentTabItemColor">#FFC2EAEB</Color>
+
+		<SolidColorBrush x:Key="ThemeWindowBackgroundBrush" Color="{DynamicResource ThemeWindowBackgroundColor}"/>
+        <SolidColorBrush x:Key="ThemeBackgroundBrush" Color="{DynamicResource ThemeBackgroundColor}"/>
+        <SolidColorBrush x:Key="ThemeForegroundBrush" Color="{DynamicResource ThemeForegroundColor}"/>
+        <SolidColorBrush x:Key="ThemeForegroundOpacityBrush" Color="{DynamicResource ThemeForegroundOpacityColor}"/>
+		<SolidColorBrush x:Key="ThemeGlobalBorderBrush" Color="{DynamicResource ThemeGlobalBorderColor}"/>
+		<SolidColorBrush x:Key="ThemeHoverBackgroundBrush" Color="{DynamicResource ThemeHoverBackgroundColor}"/>
+		<SolidColorBrush x:Key="ThemeWindowForegroundBrush" Color="{DynamicResource ThemeWindowForegroundColor}"/>
+		<SolidColorBrush x:Key="ThemePanelBackgroundBrush" Color="{DynamicResource ThemePanelBackgroundColor}"/>
+		<SolidColorBrush x:Key="ThemeSelectedControlBrush" Color="{DynamicResource ThemeSelectedControlColor}"/>
+		<SolidColorBrush x:Key="ThemeGitHubBrush" Color="{DynamicResource ThemeGitHubColor}"/>
+		<SolidColorBrush x:Key="ThemeScrollBoxHoverBrush" Color="{DynamicResource ThemeScrollBoxHoverColor}"/>
+		<SolidColorBrush x:Key="ThemeBackgroundContentTabItemBrush" Color="{DynamicResource ThemeBackgroundContentTabItemColor}"/>
+    </Style.Resources>
+</Style>

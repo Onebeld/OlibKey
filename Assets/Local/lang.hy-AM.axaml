@@ -112,6 +112,7 @@
 		<v:String x:Key="Dazzling">Զարմանալի</v:String>
 		<v:String x:Key="Gloomy">Մռայլ</v:String>
 		<v:String x:Key="Mysterious">Առեղծվածային</v:String>
+		<v:String x:Key="Turquoise">Փիրուզագույն</v:String>
 
 		<v:String x:Key="Reminder">Հիշեցում</v:String>
 		<v:String x:Key="Pause">Դադար</v:String>

@@ -111,6 +111,7 @@
 		<v:String x:Key="Dazzling">Éblouissant</v:String>
 		<v:String x:Key="Gloomy">Sombre</v:String>
 		<v:String x:Key="Mysterious">Mystérieux</v:String>
+		<v:String x:Key="Turquoise">Turquoise</v:String>
 
 		<v:String x:Key="Reminder">Rappel</v:String>
 		<v:String x:Key="Pause">Pause</v:String>

@@ -21,6 +21,7 @@ namespace OlibKey
 		private bool _isUnlockDatabase;
 		private bool _isLockDatabase;
 		private bool _isOSX;
+		private bool _isActivateDnD = true;
 
 		private int _selectedTabIndex;
 		private int _countLogins;
@@ -78,6 +79,11 @@ namespace OlibKey
 		{
 			get => _countLogins;
 			set => this.RaiseAndSetIfChanged(ref _countLogins, value);
+		}
+		public bool IsActivateDnD
+		{
+			get => _isActivateDnD;
+			set => this.RaiseAndSetIfChanged(ref _isActivateDnD, value);
 		}
 		public DatabaseControl SelectedTabItem { get { try { return (DatabaseControl)TabItems[SelectedTabIndex].Content; } catch { return null; } } }
 		public DatabaseTabHeader SelectedTabItemHeader { get { try { return (DatabaseTabHeader)TabItems[SelectedTabIndex].Header; } catch { return null; } } }
@@ -138,7 +144,9 @@ namespace OlibKey
 					databaseTabHeader = tabHeader,
 					tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
 				};
+				IsActivateDnD = false;
 				await passwordWindow.ShowDialog(mainWindow);
+				IsActivateDnD = true;
 			}
 		}
 		public async void OpenStorageDnD(List<string> files)
@@ -183,7 +191,9 @@ namespace OlibKey
 						databaseTabHeader = tabHeader,
 						tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
 					};
+					IsActivateDnD = false;
 					await passwordWindow.ShowDialog(App.MainWindow);
+					IsActivateDnD = true;
 				}
 			}
 		}
@@ -234,15 +244,18 @@ namespace OlibKey
 				break;
 			}
 		}
-		private void UnlockDatabase()
+		private async void UnlockDatabase()
 		{
 			RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
 			{
 				LoadStorageCallback = LoadDatabase,
 				databaseControl = SelectedTabItem,
-				databaseTabHeader = SelectedTabItemHeader
+				databaseTabHeader = SelectedTabItemHeader,
+				tbNameStorage = { Text = Path.GetFileNameWithoutExtension(SelectedTabItem.ViewModel.PathDatabase) }
 			};
-			passwordWindow.ShowDialog(App.MainWindow);
+			IsActivateDnD = false;
+			await passwordWindow.ShowDialog(App.MainWindow);
+			IsActivateDnD = true;
 		}
 		private void LockDatabase()
 		{
@@ -304,7 +317,9 @@ namespace OlibKey
 					TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
 					RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow { LoadStorageCallback = LoadDatabase, databaseControl = db, databaseTabHeader = tabHeader, tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) } };
+					IsActivateDnD = false;
 					await requireMaster.ShowDialog(App.MainWindow);
+					IsActivateDnD = true;
 				}
 			}
 			catch { }

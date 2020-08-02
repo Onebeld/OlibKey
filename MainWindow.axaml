@@ -10,7 +10,7 @@
         Title="OlibKey"
         WindowStartupLocation="CenterScreen"
 		Icon="avares://OlibKey/app.ico"
-		DragDrop.AllowDrop="True"
+		DragDrop.AllowDrop="{Binding IsActivateDnD}"
 		Background="{DynamicResource ThemeWindowBackgroundBrush}"
         MinWidth="500" MinHeight="350">
 	<Window.KeyBindings>

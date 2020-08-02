@@ -1,6 +1,9 @@
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
@@ -30,6 +33,25 @@ namespace OlibKey
 			Opened += (s, e) => App.MainWindowViewModel.Loading(this);
 
 			_tabItems.SelectionChanged += App.MainWindowViewModel.TabItemsSelectionChanged;
+
+			SetupDnd();
+		}
+
+		private void SetupDnd()
+		{
+			void DragOver(object sender, DragEventArgs e)
+			{
+				e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Link);
+
+				if (!e.Data.Contains(DataFormats.FileNames)) e.DragEffects = DragDropEffects.None;
+			}
+			void Drop(object sender, DragEventArgs e)
+			{
+				if (e.Data.Contains(DataFormats.FileNames)) App.MainWindowViewModel.OpenStorageDnD(e.Data.GetFileNames().ToList());
+			}
+
+			AddHandler(DragDrop.DropEvent, Drop);
+			AddHandler(DragDrop.DragOverEvent, DragOver);
 		}
 
 		public async void MessageStatusBar(string message)

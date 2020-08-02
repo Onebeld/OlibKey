@@ -16,6 +16,7 @@ namespace OlibKey.Views.Windows
 		private Button _bOpen;
 		private Button _bCancel;
 
+		public TextBlock tbNameStorage;
 		public DatabaseControl databaseControl;
 		public DatabaseTabHeader databaseTabHeader;
 
@@ -25,6 +26,8 @@ namespace OlibKey.Views.Windows
 			_bCancel.Click += (s, e) => Close();
 			_bOpen.Click += ButtonLoadStorage;
 			_tbPassword.KeyDown += KeyEnterLoadStorage;
+
+			_tbPassword.Focus();
 		}
 
 		private void KeyEnterLoadStorage(object sender, KeyEventArgs e)
@@ -38,6 +41,7 @@ namespace OlibKey.Views.Windows
 			_tbPassword = this.FindControl<TextBox>("tbPassword");
 			_bOpen = this.FindControl<Button>("bOpen");
 			_bCancel = this.FindControl<Button>("bCancel");
+			tbNameStorage = this.FindControl<TextBlock>("tbNameStorage");
 		}
 
 		private void ButtonLoadStorage(object sender, RoutedEventArgs e) => LoadStorage();

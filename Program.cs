@@ -5,12 +5,14 @@ using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Pages;
 using ReactiveUI;
 using Splat;
+using System;
 using System.Linq;
 
 namespace OlibKey
 {
 	class Program
 	{
+		[STAThread]
 		public static void Main(string[] args) => BuildAvaloniaApp().Start(AppMain, args);
 
 		public static AppBuilder BuildAvaloniaApp() =>

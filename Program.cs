@@ -6,6 +6,7 @@ using OlibKey.Views.Pages;
 using ReactiveUI;
 using Splat;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OlibKey
@@ -27,10 +28,10 @@ namespace OlibKey
 
 		private static void AppMain(Application app, string[] args)
 		{
-			string file = args.FirstOrDefault();
-			if (!string.IsNullOrWhiteSpace(file)) App.Settings.PathDatabase = file;
+			List<string> files = args.ToList();
 
-			App.MainWindowViewModel = new MainWindowViewModel();
+			App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = files };
+
 			Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
 			Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());
 			Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() => new LoginInformationPage());

@@ -77,6 +77,8 @@ namespace OlibKey
 				};
 			}
 
+			Autosave.Start();
+
 			CheckUpdate(false);
 		}
 

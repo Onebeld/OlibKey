@@ -87,6 +87,7 @@ namespace OlibKey
 		}
 		public DatabaseControl SelectedTabItem { get { try { return (DatabaseControl)TabItems[SelectedTabIndex].Content; } catch { return null; } } }
 		public DatabaseTabHeader SelectedTabItemHeader { get { try { return (DatabaseTabHeader)TabItems[SelectedTabIndex].Header; } catch { return null; } } }
+		public List<string> OpenStorages { get; set; }
 
 		#endregion
 
@@ -113,6 +114,49 @@ namespace OlibKey
 
 		public async void Loading(MainWindow mainWindow)
 		{
+			foreach (string item in OpenStorages)
+			{
+				if (Path.GetExtension(item) == ".olib")
+				{
+					App.Settings.PathDatabase = item;
+
+					string id = Guid.NewGuid().ToString("N");
+
+					DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+					{
+						CloseTab = CloseTab,
+						iLock = { IsVisible = true },
+						iUnlock = { IsVisible = false }
+					};
+
+					DatabaseControl db = new DatabaseControl
+					{
+						ViewModel =
+					{
+						IsLockDatabase = true,
+						IsUnlockDatabase = false,
+						PathDatabase = App.Settings.PathDatabase,
+						TabID = id
+					}
+					};
+
+					TabItems.Add(new TabItem { Header = tabHeader, Content = db });
+
+					RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
+					{
+						LoadStorageCallback = LoadDatabase,
+						databaseControl = db,
+						databaseTabHeader = tabHeader,
+						tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
+					};
+					IsActivateDnD = false;
+					await passwordWindow.ShowDialog(App.MainWindow);
+					IsActivateDnD = true;
+				}
+			}
+
+			if (OpenStorages.Count > 0) return;
+
 			if (!string.IsNullOrEmpty(App.Settings.PathDatabase) && File.Exists(App.Settings.PathDatabase))
 			{
 				string id = Guid.NewGuid().ToString("N");

@@ -26,7 +26,7 @@ namespace OlibKey.Views.Windows
 			_bCancel.Click += (s, e) => Close();
 			_bOpen.Click += ButtonLoadStorage;
 			_tbPassword.KeyDown += KeyEnterLoadStorage;
-
+			Focus();
 			_tbPassword.Focus();
 		}
 

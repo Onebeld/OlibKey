@@ -24,7 +24,7 @@
 		<KeyBinding Command="{Binding LockAllDatabasesCommand}" Gesture="Ctrl+Shift+L"/>
 		<KeyBinding Command="{Binding UnlockDatabaseCommand}" Gesture="Ctrl+U"/>
 		<KeyBinding Command="{Binding UnlockAllDatabasesCommand}" Gesture="Ctrl+Shift+U"/>
-		<KeyBinding Command="{Binding ShowSearchWindowCommand}" Gesture="Ctrl+F" />
+		<KeyBinding Command="{Binding ShowSearchWindowCommand}" Gesture="Ctrl+F"/>
 	</Window.KeyBindings>
 	<NativeMenu.Menu>
 		<NativeMenu>

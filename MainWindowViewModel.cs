@@ -278,7 +278,7 @@ namespace OlibKey
 		}
 		public void SaveDatabase(DatabaseControl db)
 		{
-			if (db.ViewModel.IsLockDatabase || !db.ViewModel.IsUnlockDatabase) return;
+			if (db == null || db.ViewModel.IsLockDatabase || !db.ViewModel.IsUnlockDatabase) return;
 			if (db.ViewModel.PathDatabase != null)
 			{
 				db.ViewModel.Database.Logins = db.ViewModel.LoginList.Select(item => item.LoginItem).ToList();
@@ -319,6 +319,8 @@ namespace OlibKey
 		}
 		private async void UnlockDatabase()
 		{
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsUnlockDatabase) return;
+
 			RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
 			{
 				LoadStorageCallback = LoadDatabase,
@@ -351,6 +353,8 @@ namespace OlibKey
 		}
 		private void LockDatabase()
 		{
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsLockDatabase) return;
+
 			SaveDatabase(SelectedTabItem);
 			SelectedTabItem.ViewModel.ClearLoginsList();
 			IsUnlockDatabase = SelectedTabItem.ViewModel.IsUnlockDatabase = false;
@@ -423,6 +427,8 @@ namespace OlibKey
 		}
 		private void CreateLogin()
 		{
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsLockDatabase) return;
+
 			SelectedTabItem.ViewModel.SelectedIndex = -1;
 
 			SelectedTabItem.ViewModel.Router.Navigate.Execute(new CreateLoginPageViewModel(SelectedTabItem.ViewModel.Database, SelectedTabItem.ViewModel)
@@ -487,6 +493,7 @@ namespace OlibKey
 		}
 		private void ShowSearchWindow()
 		{
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsLockDatabase) return;
 			App.SearchWindow = new SearchWindow();
 			foreach (Folder folder in SelectedTabItem.ViewModel.Database.Folders) App.SearchWindow.SearchViewModel.AddFolder(folder);
 			App.SearchWindow.ShowDialog(App.MainWindow);

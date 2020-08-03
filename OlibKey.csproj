@@ -48,7 +48,6 @@
 		<PackageReference Include="Avalonia" Version="0.10.0-preview2" />
 		<PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview2" />
 		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview2" />
-		<PackageReference Include="Google.Apis.Drive.v3" Version="1.48.0.2021" />
 	</ItemGroup>
 	<ItemGroup>
 		<RdXmlFile Include="rd.xml" />

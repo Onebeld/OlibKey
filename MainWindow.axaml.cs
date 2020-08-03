@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -33,6 +32,9 @@ namespace OlibKey
 
 			_tabItems.SelectionChanged += App.MainWindowViewModel.TabItemsSelectionChanged;
 
+			Activated += (s, e) => { App.Autoblock.Stop(); };
+			Deactivated += (s, e) => { if (App.Settings.AutoblockEnabled) App.Autoblock.Start(); };
+
 			SetupDnd();
 		}
 
@@ -58,7 +60,7 @@ namespace OlibKey
 			_tbMessageStatusBar.IsVisible = true;
 			_tbReady.IsVisible = false;
 			_tbMessageStatusBar.Text = message;
-			await Task.Delay(3000);
+			await Task.Delay(App.Settings.MessageDuration * 1000);
 			_tbMessageStatusBar.IsVisible = false;
 			_tbReady.IsVisible = true;
 		}

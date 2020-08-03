@@ -20,6 +20,7 @@ namespace OlibKey
 		public static Settings Settings { get; set; }
 
 		public static DispatcherTimer Autosave { get; set; }
+		public static DispatcherTimer Autoblock { get; set; }
 
 		private static string ResultCheckUpdate;
 		private static string ErrorResult;
@@ -47,12 +48,15 @@ namespace OlibKey
 				};
 
 			Autosave = new DispatcherTimer();
+			Autoblock = new DispatcherTimer();
 
 			Autosave.Tick += (s, d) =>
 			{
 				foreach (TabItem item in MainWindowViewModel.TabItems) MainWindowViewModel.SaveDatabase((DatabaseControl)item.Content);
 			};
-			Autosave.Interval = new TimeSpan(0, 2, 0);
+
+			Autosave.Interval = new TimeSpan(0, Settings.AutosaveDuration, 0);
+			Autoblock.Interval = new TimeSpan(0, Settings.BlockDuration, 0);
 
 
 			if (Settings.FirstRun)

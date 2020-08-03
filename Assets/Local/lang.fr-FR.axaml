@@ -98,7 +98,7 @@
 		<v:String x:Key="Select">Sélectionnez</v:String>
 		<v:String x:Key="Iteration">Nombre d'itérations:</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Nombre de procédures de cryptage:</v:String>
-		<v:String x:Key="CDBError1">Le nombre d'itérations et le nombre de procédures de chiffrement doivent contenir des nombres et ne peuvent pas être zéro!</v:String>
+		<v:String x:Key="CDBError1">Dans les champs avec une entrée numérique, les valeurs doivent contenir des nombres et ne peuvent pas être zéro!</v:String>
 		<v:String x:Key="CDBError2">Vous n'avez pas sélectionné de chemin de référentiel ou n'avez pas fourni de mot de passe principal!</v:String>
 
 		<v:String x:Key="Open">Ouverte</v:String>
@@ -113,6 +113,11 @@
 		<v:String x:Key="Theme">Thème:</v:String>
 		<v:String x:Key="General">Général</v:String>
 		<v:String x:Key="Storage">Voûte</v:String>
+		<v:String x:Key="Autosave">Sauvegarde automatique via:</v:String>
+		<v:String x:Key="Block">Bloquez toutes les bases de données (sauf avec un rappel) via:</v:String>
+		<v:String x:Key="MessageDuration">Durée d'affichage des messages:</v:String>
+		<v:String x:Key="Sec">secondes</v:String>
+		<v:String x:Key="Min">minutes</v:String>
 
 		<v:String x:Key="Dazzling">Éblouissant</v:String>
 		<v:String x:Key="Gloomy">Sombre</v:String>

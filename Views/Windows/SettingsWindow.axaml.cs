@@ -12,6 +12,9 @@ namespace OlibKey.Views.Windows
 		private TabItem _tiStorage;
 		private TextBox _tbIteration;
 		private TextBox _tbNumberOfEncryptionProcedures;
+		private TextBox _tbAutosave;
+		private TextBox _tbBlock;
+		private TextBox _tbMessage;
 		private ComboBox _cbTheme;
 		private ComboBox _cbLanguage;
 		private Button _bClose;
@@ -19,6 +22,8 @@ namespace OlibKey.Views.Windows
 		public SettingsWindow()
 		{
 			InitializeComponent();
+			DataContext = App.Settings;
+
 			_cbLanguage.SelectedIndex = App.Settings.Language switch
 			{
 				"ru-RU" => 1,
@@ -42,15 +47,30 @@ namespace OlibKey.Views.Windows
 			_bClose.Click += (s, e) => Close();
 			Closing += (s, e) =>
 			{
+				Regex reg = new Regex(@"^\d+$");
+				if (_tbAutosave.Text == "0"
+				|| !reg.IsMatch(_tbBlock.Text)
+				|| _tbBlock.Text == "0"
+				|| !reg.IsMatch(_tbMessage.Text)
+				|| _tbMessage.Text == "0")
+				{
+					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
+					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+					e.Cancel = true;
+					return;
+				}
+
 				if (App.MainWindowViewModel.IsUnlockDatabase)
 				{
-					Regex reg = new Regex(@"^\d+$");
-					if (_tbIteration.Text == "" || !reg.IsMatch(_tbIteration.Text) || _tbIteration.Text == "0"
-						|| _tbNumberOfEncryptionProcedures.Text == "" || !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text) ||
-						_tbNumberOfEncryptionProcedures.Text == "0")
+					if (!reg.IsMatch(_tbIteration.Text)
+						|| _tbIteration.Text == "0"
+						|| !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text)
+						|| _tbNumberOfEncryptionProcedures.Text == "0"
+						|| !reg.IsMatch(_tbAutosave.Text))
 					{
 						_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+						e.Cancel = true;
 						return;
 					}
 
@@ -60,6 +80,17 @@ namespace OlibKey.Views.Windows
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
 					}
 				}
+
+				App.Settings.AutosaveDuration = int.Parse(_tbAutosave.Text);
+				App.Settings.BlockDuration = int.Parse(_tbBlock.Text);
+				App.Settings.MessageDuration = int.Parse(_tbMessage.Text);
+
+				App.Autosave.Stop();
+
+				App.Autosave.Interval = new TimeSpan(0, App.Settings.AutosaveDuration, 0);
+				App.Autoblock.Interval = new TimeSpan(0, App.Settings.BlockDuration, 0);
+
+				App.Autosave.Start();
 			};
 
 			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem != null && App.MainWindowViewModel.SelectedTabItem.ViewModel.IsUnlockDatabase;
@@ -69,6 +100,10 @@ namespace OlibKey.Views.Windows
 				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations.ToString();
 				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures.ToString();
 			}
+
+			_tbAutosave.Text = App.Settings.AutosaveDuration.ToString();
+			_tbBlock.Text = App.Settings.BlockDuration.ToString();
+			_tbMessage.Text = App.Settings.MessageDuration.ToString();
 		}
 
 
@@ -81,6 +116,9 @@ namespace OlibKey.Views.Windows
 			_tbIteration = this.FindControl<TextBox>("tbIteration");
 			_tbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
 			_tiStorage = this.FindControl<TabItem>("tiStorage");
+			_tbAutosave = this.FindControl<TextBox>("tbAutosave");
+			_tbBlock = this.FindControl<TextBox>("tbBlock");
+			_tbMessage = this.FindControl<TextBox>("tbMessage");
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)

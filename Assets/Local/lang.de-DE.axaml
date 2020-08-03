@@ -98,7 +98,7 @@
 		<v:String x:Key="Select">Auswählen</v:String>
 		<v:String x:Key="Iteration">Anzahl der Iterationen:</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Anzahl der Verschlüsselungsverfahren:</v:String>
-		<v:String x:Key="CDBError1">Die Anzahl der Iterationen und die Anzahl der Verschlüsselungsvorgänge müssen Zahlen enthalten und dürfen nicht Null sein!</v:String>
+		<v:String x:Key="CDBError1">In Feldern mit einem numerischen Eintrag müssen Werte Zahlen enthalten und dürfen nicht Null sein!</v:String>
 		<v:String x:Key="CDBError2">Sie haben keinen Repository-Pfad ausgewählt oder kein Hauptkennwort angegeben!</v:String>
 
 		<v:String x:Key="Open">Öffnen</v:String>
@@ -113,6 +113,11 @@
 		<v:String x:Key="Theme">Theme:</v:String>
 		<v:String x:Key="General">Allgemeines</v:String>
 		<v:String x:Key="Storage">Gewölbe</v:String>
+		<v:String x:Key="Autosave">Automatisch speichern über:</v:String>
+		<v:String x:Key="Block">Blockieren Sie alle Datenbanken (außer mit einer Erinnerung) durch:</v:String>
+		<v:String x:Key="MessageDuration">Dauer der Nachrichtenanzeige:</v:String>
+		<v:String x:Key="Sec">Sekunden</v:String>
+		<v:String x:Key="Min">Protokoll</v:String>
 
 		<v:String x:Key="Dazzling">Blendend</v:String>
 		<v:String x:Key="Gloomy">Düster</v:String>

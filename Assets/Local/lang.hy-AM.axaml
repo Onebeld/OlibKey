@@ -98,7 +98,7 @@
 		<v:String x:Key="Select">Ընտրել</v:String>
 		<v:String x:Key="Iteration">Կրկնությունների քանակը.</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Գաղտնագրման ընթացակարգերի քանակը.</v:String>
-		<v:String x:Key="CDBError1">Կրկնվող պրոցեդուրաների քանակը և կոդագրման ընթացակարգերի քանակը պետք է պարունակեն թվեր և չեն կարող զրո լինել:</v:String>
+		<v:String x:Key="CDBError1">Թվային մուտքագրման դաշտերում արժեքները պետք է պարունակեն թվեր և չեն կարող զրո լինել:</v:String>
 		<v:String x:Key="CDBError2">Դուք չեք ընտրել պահեստային ուղի կամ չեք տրամադրել վարպետ գաղտնաբառ:</v:String>
 
 		<v:String x:Key="Open">Բացել</v:String>
@@ -113,6 +113,11 @@
 		<v:String x:Key="Theme">Թեման:</v:String>
 		<v:String x:Key="General">Գեներալ</v:String>
 		<v:String x:Key="Storage">Պահոց</v:String>
+		<v:String x:Key="Autosave">Ավտոմատ խնայողություն միջոցով ՝</v:String>
+		<v:String x:Key="Block">Արգելափակել բոլոր տվյալների բազաները (բացառությամբ հիշեցմամբ) ՝</v:String>
+		<v:String x:Key="MessageDuration">Հաղորդագրության ցուցադրման տևողությունը.</v:String>
+		<v:String x:Key="Sec">վայրկյան</v:String>
+		<v:String x:Key="Min">րոպեներ</v:String>
 
 		<v:String x:Key="Dazzling">Զարմանալի</v:String>
 		<v:String x:Key="Gloomy">Մռայլ</v:String>

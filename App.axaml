@@ -683,7 +683,7 @@
 						HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
 						VerticalAlignment="{TemplateBinding VerticalAlignment}">
 						<DockPanel>
-							<ScrollViewer Background="{DynamicResource ThemeBackgroundBrush}" BorderThickness="0 0 0 1" BorderBrush="{TemplateBinding BorderBrush}" DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto">
+							<ScrollViewer Background="{DynamicResource ThemeBackgroundBrush}" DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto">
 								<ItemsPresenter
 									Name="PART_ItemsPresenter"
 									Items="{TemplateBinding Items}"

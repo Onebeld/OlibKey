@@ -103,6 +103,8 @@ namespace OlibKey
 			LockAllDatabasesCommand = ReactiveCommand.Create(LockAllDatabases);
 			SaveAllDatabasesCommand = ReactiveCommand.Create(SaveAllDatabases);
 			UnlockAllDatabasesCommand = ReactiveCommand.Create(UnlockAllDatabases);
+
+			App.Autoblock.Tick += AutoblockStorage;
 		}
 
 		public async void Loading(MainWindow mainWindow)
@@ -239,6 +241,35 @@ namespace OlibKey
 			}
 			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not6"));
 		}
+		public void AutoblockStorage(object sender, EventArgs e)
+		{
+			foreach (TabItem item in TabItems)
+			{
+				DatabaseControl db = (DatabaseControl)item.Content;
+				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
+
+				if (db.ViewModel.IsUnlockDatabase)
+				{
+					bool flag = false;
+					foreach (LoginListItem login in db.ViewModel.LoginList)
+					{
+						if (login.LoginItem.IsReminderActive == true) 
+						{ 
+							flag = true;
+							break;
+						}
+					}
+					if (flag) continue;
+
+					SaveDatabase(db);
+					db.ViewModel.ClearLoginsList();
+					IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
+					IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
+					db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+				}
+			}
+			App.Autoblock.Stop();
+		}
 		public void ProgramClosing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			App.Autosave.Stop();
@@ -298,8 +329,6 @@ namespace OlibKey
 			IsActivateDnD = false;
 			await passwordWindow.ShowDialog(App.MainWindow);
 			IsActivateDnD = true;
-
-			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not9") + $" {Path.GetFileNameWithoutExtension(SelectedTabItem.ViewModel.PathDatabase)}");
 		}
 		private async void UnlockAllDatabases()
 		{
@@ -389,8 +418,6 @@ namespace OlibKey
 					await requireMaster.ShowDialog(App.MainWindow);
 					IsActivateDnD = true;
 				}
-
-				App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not6"));
 			}
 			catch { }
 		}
@@ -418,6 +445,8 @@ namespace OlibKey
 				IsLockDatabase = false;
 				IsUnlockDatabase = true;
 			}
+
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not9") + $" {Path.GetFileNameWithoutExtension(db.ViewModel.PathDatabase)}");
 		}
 		private async void CreateDatabase()
 		{

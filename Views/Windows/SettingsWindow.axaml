@@ -2,55 +2,78 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
-		Height="300" Width="400"
-		MinWidth="100" MinHeight="200"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
+		Height="300" Width="590"
+		MinWidth="590" MinHeight="400"
         x:Class="OlibKey.Views.Windows.SettingsWindow"
 		WindowStartupLocation="CenterScreen"
 		Icon="avares://OlibKey/app.ico"
 		Background="{DynamicResource ThemeWindowBackgroundBrush}"
         Title="{DynamicResource Settings}">
 	<Grid RowDefinitions="*,50">
-		<TabControl Background="{DynamicResource ThemeBackgroundContentTabItemBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
+		<TabControl Background="{DynamicResource ThemeBackgroundContentTabItemBrush}">
 			<TabItem Header="{DynamicResource General}">
-				<ScrollViewer>
-					<StackPanel Margin="5">
-						<DockPanel>
-							<TextBlock Text="{DynamicResource Language}" Margin="0 0 5 0" VerticalAlignment="Center"/>
-							<ComboBox x:Name="cbLanguage" SelectedIndex="0">
-								<ComboBoxItem Content="English"/>
-								<ComboBoxItem Content="Русский"/>
-								<ComboBoxItem Content="Український"/>
-								<ComboBoxItem Content="Deutsch"/>
-								<ComboBoxItem Content="Français"/>
-								<ComboBoxItem Content="Հայերեն"/>
-							</ComboBox>
-						</DockPanel>
-						<DockPanel Margin="0 5">
-							<TextBlock Text="{DynamicResource Theme}" Margin="0 0 5 0" VerticalAlignment="Center"/>
-							<ComboBox x:Name="cbTheme" SelectedIndex="0">
-								<ComboBoxItem Content="{DynamicResource Dazzling}"/>
-								<ComboBoxItem Content="{DynamicResource Gloomy}"/>
-								<ComboBoxItem Content="{DynamicResource Mysterious}"/>
-								<ComboBoxItem Content="{DynamicResource Turquoise}"/>
-							</ComboBox>
-						</DockPanel>
-					</StackPanel>
-				</ScrollViewer>
+				<Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
+					<ScrollViewer>
+						<StackPanel Margin="5">
+							<DockPanel>
+								<TextBlock Text="{DynamicResource Language}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+								<ComboBox x:Name="cbLanguage" SelectedIndex="0">
+									<ComboBoxItem Content="English"/>
+									<ComboBoxItem Content="Русский"/>
+									<ComboBoxItem Content="Український"/>
+									<ComboBoxItem Content="Deutsch"/>
+									<ComboBoxItem Content="Français"/>
+									<ComboBoxItem Content="Հայերեն"/>
+								</ComboBox>
+							</DockPanel>
+							<DockPanel Margin="0 5">
+								<TextBlock Text="{DynamicResource Theme}" Margin="0 0 5 0" VerticalAlignment="Center"/>
+								<ComboBox x:Name="cbTheme" SelectedIndex="0">
+									<ComboBoxItem Content="{DynamicResource Dazzling}"/>
+									<ComboBoxItem Content="{DynamicResource Gloomy}"/>
+									<ComboBoxItem Content="{DynamicResource Mysterious}"/>
+									<ComboBoxItem Content="{DynamicResource Turquoise}"/>
+								</ComboBox>
+							</DockPanel>
+							<StackPanel Orientation="Horizontal">
+								<CheckBox x:Name="cbBlock" IsChecked="{Binding AutoblockEnabled}">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="{DynamicResource Block}"/>
+										<TextBox x:Name="tbBlock" Margin="5 0" Width="50"/>
+										<TextBlock Text="{DynamicResource Min}"/>
+									</StackPanel>
+								</CheckBox>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal" Margin="0 5">
+								<TextBlock Text="{DynamicResource Autosave}"/>
+								<TextBox x:Name="tbAutosave" Margin="5 0" Width="50"/>
+								<TextBlock Text="{DynamicResource Min}"/>
+							</StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="{DynamicResource MessageDuration}"/>
+								<TextBox x:Name="tbMessage" Margin="5 0" Width="50"/>
+								<TextBlock Text="{DynamicResource Sec}"/>
+							</StackPanel>
+						</StackPanel>
+					</ScrollViewer>
+				</Border>
 			</TabItem>
 			<TabItem x:Name="tiStorage" Header="{DynamicResource Storage}">
-				<ScrollViewer>
-					<StackPanel Margin="5">
-						<DockPanel Margin="0 0 0 5">
-							<TextBlock Text="{DynamicResource NumberOfEncryptionProcedures}"/>
-							<TextBox x:Name="tbNumberOfEncryptionProcedures" Margin="5 0 0 0"/>
-						</DockPanel>
-						<DockPanel Margin="0 0 0 5">
-							<TextBlock Text="{DynamicResource Iteration}"/>
-							<TextBox x:Name="tbIteration" Margin="5 0 0 0"/>
-						</DockPanel>
-					</StackPanel>
-				</ScrollViewer>
+				<Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
+					<ScrollViewer>
+						<StackPanel Margin="5">
+							<DockPanel Margin="0 0 0 5">
+								<TextBlock Text="{DynamicResource NumberOfEncryptionProcedures}"/>
+								<TextBox x:Name="tbNumberOfEncryptionProcedures" Margin="5 0 0 0"/>
+							</DockPanel>
+							<DockPanel Margin="0 0 0 5">
+								<TextBlock Text="{DynamicResource Iteration}"/>
+								<TextBox x:Name="tbIteration" Margin="5 0 0 0"/>
+							</DockPanel>
+						</StackPanel>
+					</ScrollViewer>
+				</Border>
 			</TabItem>
 		</TabControl>
 		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">

@@ -98,7 +98,7 @@
 		<v:String x:Key="Select">Select</v:String>
 		<v:String x:Key="Iteration">Number of iterations:</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Number of encryption procedures:</v:String>
-		<v:String x:Key="CDBError1">The number of iterations and the number of encryption procedures must contain numbers and cannot be zero!</v:String>
+		<v:String x:Key="CDBError1">In fields with a numeric entry, values must contain numbers and cannot be zero!</v:String>
 		<v:String x:Key="CDBError2">You did not select a repository path or did not provide a master password!</v:String>
 
 		<v:String x:Key="Open">Open</v:String>
@@ -113,6 +113,11 @@
 		<v:String x:Key="Theme">Theme:</v:String>
 		<v:String x:Key="General">General</v:String>
 		<v:String x:Key="Storage">Storage</v:String>
+		<v:String x:Key="Autosave">Autosave via:</v:String>
+		<v:String x:Key="Block">Block all databases (except with a reminder) through:</v:String>
+		<v:String x:Key="MessageDuration">Message display duration:</v:String>
+		<v:String x:Key="Sec">seconds</v:String>
+		<v:String x:Key="Min">minutes</v:String>
 
 		<v:String x:Key="Dazzling">Dazzling</v:String>
 		<v:String x:Key="Gloomy">Gloomy</v:String>

@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using System.Threading.Tasks;
@@ -64,6 +65,14 @@ namespace OlibKey.Views.Windows
 			{
 				case MessageBoxButtons.Ok:
 				case MessageBoxButtons.OkCancel:
+					msgbox.KeyDown += (s, e) =>
+					{
+						if (e.Key == Key.Enter)
+						{
+							res = MessageBoxResult.Ok;
+							msgbox.Close();
+						}
+					};
 					AddButton((string)Application.Current.FindResource("Ok"), MessageBoxResult.Ok, true);
 					break;
 				case MessageBoxButtons.YesNo:

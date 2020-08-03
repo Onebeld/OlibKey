@@ -47,12 +47,13 @@
 
 		<v:String x:Key="Yes">Так</v:String>
 		<v:String x:Key="No">Немає</v:String>
-		<v:String x:Key="Ok">Ок</v:String>
+		<v:String x:Key="Ok">ОК</v:String>
 
 		<v:String x:Key="ListOfItems">Список елементів</v:String>
 		<v:String x:Key="LockStorage">Заблокувати сховище</v:String>
 		<v:String x:Key="LockAllStorages">Заблокувати всі сховища</v:String>
 		<v:String x:Key="UnlockStorage">Розблокувати сховище</v:String>
+		<v:String x:Key="UnlockAllStorages">Розблокувати все сховища</v:String>
 		<v:String x:Key="ShowOPM">Показати OlibKey</v:String>
 
 		<v:String x:Key="MB1">Спочатку ви повинні завантажити або створити сховище!</v:String>
@@ -70,8 +71,13 @@
 
 		<v:String x:Key="Not1">Елемент збережений успішно!</v:String>
 		<v:String x:Key="Not2">Елемент успішно змінено!</v:String>
-		<v:String x:Key="Not3">Сховище успішно створено!</v:String>
-		<v:String x:Key="Not4">Сховище успішно збережено!</v:String>
+		<v:String x:Key="Not3">Успішно створено сховище:</v:String>
+		<v:String x:Key="Not4">Успішно збережено сховище:</v:String>
+		<v:String x:Key="Not5">Всі сховища успішно збережені!</v:String>
+		<v:String x:Key="Not6">Всі сховища успішно відкриті!</v:String>
+		<v:String x:Key="Not7">Всі сховища успішно заблоковані!</v:String>
+		<v:String x:Key="Not8">Всі сховища успішно розблоковані!</v:String>
+		<v:String x:Key="Not9">Успішно розблоковано сховище:</v:String>
 
 		<v:String x:Key="Lowercase">Рядкові (abc)</v:String>
 		<v:String x:Key="Uppercase">Заголовні (ABC)</v:String>

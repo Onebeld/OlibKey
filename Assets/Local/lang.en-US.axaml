@@ -47,12 +47,13 @@
 
 		<v:String x:Key="Yes">Yes</v:String>
 		<v:String x:Key="No">No</v:String>
-		<v:String x:Key="Ok">Ok</v:String>
+		<v:String x:Key="Ok">OK</v:String>
 
 		<v:String x:Key="ListOfItems">List of items</v:String>
 		<v:String x:Key="LockStorage">Lock storage</v:String>
-		<v:String x:Key="LockAllStorages">Lock all vaults</v:String>
+		<v:String x:Key="LockAllStorages">Lock all storages</v:String>
 		<v:String x:Key="UnlockStorage">Unlock storage</v:String>
+		<v:String x:Key="UnlockAllStorages">Unlock all storages</v:String>
 		<v:String x:Key="ShowOPM">Show OlibKey</v:String>
 
 		<v:String x:Key="MB1">You must first upload or create storage!</v:String>
@@ -70,8 +71,13 @@
 
 		<v:String x:Key="Not1">Item saved successfully!</v:String>
 		<v:String x:Key="Not2">Item successfully modified!</v:String>
-		<v:String x:Key="Not3">Storage successfully created!</v:String>
-		<v:String x:Key="Not4">Storage successfully saved!</v:String>
+		<v:String x:Key="Not3">Repository created successfully:</v:String>
+		<v:String x:Key="Not4">Repository saved successfully:</v:String>
+		<v:String x:Key="Not5">All storages have been successfully saved!</v:String>
+		<v:String x:Key="Not6">All storages have been successfully opened!</v:String>
+		<v:String x:Key="Not7">All storages are locked successfully!</v:String>
+		<v:String x:Key="Not8">All storages have been successfully unlocked!</v:String>
+		<v:String x:Key="Not9">Storage locked successfully:</v:String>
 
 		<v:String x:Key="Lowercase">Lowercase (abc)</v:String>
 		<v:String x:Key="Uppercase">Uppercase (ABC)</v:String>

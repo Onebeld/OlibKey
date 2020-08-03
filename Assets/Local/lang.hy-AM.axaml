@@ -53,6 +53,7 @@
 		<v:String x:Key="LockStorage">Կողպեք պահոցը</v:String>
 		<v:String x:Key="LockAllStorages">Կողպեք բոլոր պահոցները</v:String>
 		<v:String x:Key="UnlockStorage">Բացել պահեստը</v:String>
+		<v:String x:Key="UnlockAllStorages">Բացել բոլոր պահոցները</v:String>
 		<v:String x:Key="ShowOPM">Ուցադրել OlibKey</v:String>
 
 		<v:String x:Key="MB1">Առաջինը, դուք պետք էք բեռնել կամ ստեղծել պահեստ</v:String>
@@ -70,9 +71,13 @@
 
 		<v:String x:Key="Not1">Ապրանքը հաջողությամբ պահպանվեց:</v:String>
 		<v:String x:Key="Not2">Նյութը հաջողությամբ փոփոխված է:</v:String>
-		<v:String x:Key="Not3">Պահպանումը հաջողությամբ ստեղծվեց:</v:String>
-		<v:String x:Key="Not4">Պահեստը հաջողությամբ պահպանվեց:</v:String>
-
+		<v:String x:Key="Not3">Ստեղծված պահեստը հաջողությամբ ստեղծվեց.</v:String>
+		<v:String x:Key="Not4">Հաջողությամբ պահպանված պահեստը.</v:String>
+		<v:String x:Key="Not5">Բոլոր պահեստարանները հաջողությամբ պահպանվել են:</v:String>
+		<v:String x:Key="Not6">Բոլոր պահեստները հաջողությամբ բացվել են:</v:String>
+		<v:String x:Key="Not7">Բոլոր պահոցները հաջողությամբ կողպվել են:</v:String>
+		<v:String x:Key="Not8">Բոլոր պահոցները հաջողությամբ բացվել են:</v:String>
+		<v:String x:Key="Not9">Հիմքը հաջողությամբ արգելափակված է.</v:String>
 
 		<v:String x:Key="Lowercase">Փոքրատառ (abc)</v:String>
 		<v:String x:Key="Uppercase">Մեծատառ (ABC)</v:String>

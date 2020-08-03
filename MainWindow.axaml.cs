@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia;
@@ -39,13 +38,13 @@ namespace OlibKey
 
 		private void SetupDnd()
 		{
-			void DragOver(object sender, DragEventArgs e)
+			static void DragOver(object sender, DragEventArgs e)
 			{
-				e.DragEffects = e.DragEffects & (DragDropEffects.Copy | DragDropEffects.Link);
+				e.DragEffects &= (DragDropEffects.Copy | DragDropEffects.Link);
 
 				if (!e.Data.Contains(DataFormats.FileNames)) e.DragEffects = DragDropEffects.None;
 			}
-			void Drop(object sender, DragEventArgs e)
+			static void Drop(object sender, DragEventArgs e)
 			{
 				if (e.Data.Contains(DataFormats.FileNames)) App.MainWindowViewModel.OpenStorageDnD(e.Data.GetFileNames().ToList());
 			}
@@ -58,7 +57,7 @@ namespace OlibKey
 		{
 			_tbMessageStatusBar.IsVisible = true;
 			_tbReady.IsVisible = false;
-			_tbMessageStatusBar.Text = (string)Application.Current.FindResource(message);
+			_tbMessageStatusBar.Text = message;
 			await Task.Delay(3000);
 			_tbMessageStatusBar.IsVisible = false;
 			_tbReady.IsVisible = true;

@@ -16,8 +16,15 @@
 	<Window.KeyBindings>
 		<KeyBinding Command="{Binding OpenDatabaseCommand}" Gesture="Ctrl+O"/>
 		<KeyBinding Command="{Binding SaveDatabaseCommand}" Gesture="Ctrl+S"/>
+		<KeyBinding Command="{Binding SaveAllDatabasesCommand}" Gesture="Ctrl+Shift+S"/>
 		<KeyBinding Command="{Binding CreateLoginCommand}" Gesture="Ctrl+N"/>
 		<KeyBinding Command="{Binding OpenPasswordGeneratorWindowCommand}" Gesture="Ctrl+G"/>
+		<KeyBinding Command="{Binding ExitProgramCommand}" Gesture="Ctrl+Q"/>
+		<KeyBinding Command="{Binding LockDatabaseCommand}" Gesture="Ctrl+L"/>
+		<KeyBinding Command="{Binding LockAllDatabasesCommand}" Gesture="Ctrl+Shift+L"/>
+		<KeyBinding Command="{Binding UnlockDatabaseCommand}" Gesture="Ctrl+U"/>
+		<KeyBinding Command="{Binding UnlockAllDatabasesCommand}" Gesture="Ctrl+Shift+U"/>
+		<KeyBinding Command="{Binding ShowSearchWindowCommand}" Gesture="Ctrl+F" />
 	</Window.KeyBindings>
 	<NativeMenu.Menu>
 		<NativeMenu>
@@ -25,18 +32,19 @@
 				<NativeMenuItem.Menu>
 					<NativeMenu>
 						<NativeMenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
-						<NativeMenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" Gesture="CMD+O"/>
-						<NativeMenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+S"/>
-						<NativeMenuItem Header="{DynamicResource SaveAllBases}" Command="{Binding SaveAllDatabasesCommand}"/>
-						<NativeMenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}"/>
-						<NativeMenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
-						<NativeMenuItem Header="{DynamicResource LockAllStorages}" Command="{Binding LockAllDatabasesCommand}"/>
+						<NativeMenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" Gesture="Ctrl+O"/>
+						<NativeMenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="Ctrl+S"/>
+						<NativeMenuItem Header="{DynamicResource SaveAllBases}" Command="{Binding SaveAllDatabasesCommand}" Gesture="Ctrl+Shift+S"/>
+						<NativeMenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}" Gesture="Ctrl+U"/>
+						<NativeMenuItem Header="{DynamicResource UnlockAllStorages}" Command="{Binding UnlockAllDatabasesCommand}" Gesture="Ctrl+Shift+U"/>
+						<NativeMenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="Ctrl+L"/>
+						<NativeMenuItem Header="{DynamicResource LockAllStorages}" Command="{Binding LockAllDatabasesCommand}" Gesture="Ctrl+Shift+L"/>
 						<NativeMenuItemSeperator/>
-						<NativeMenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="CMD+N"/>
-						<NativeMenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+						<NativeMenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="Ctrl+N"/>
+						<NativeMenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="Ctrl+F"/>
 						<NativeMenuItemSeperator/>
 						<NativeMenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}"/>
-						<NativeMenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}" Gesture="CMD+Q"/>
+						<NativeMenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}" Gesture="Ctrl+Q"/>
 					</NativeMenu>
 				</NativeMenuItem.Menu>
 			</NativeMenuItem>
@@ -62,33 +70,34 @@
 		<Menu DockPanel.Dock="Top" Foreground="{DynamicResource ThemeForegroundBrush}" IsVisible="{Binding $parent[TopLevel].(NativeMenu.IsNativeMenuExported), Converter={StaticResource AvaloniaThemesDefaultNativeMenuBarInverseBooleanValueConverter}}" Background="{DynamicResource ThemeBackgroundBrush}" BorderThickness="0 0 0 1" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 			<MenuItem Header="{DynamicResource File}">
 				<MenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
-				<MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" InputGesture="Ctrl + O"/>
-				<MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" InputGesture="Ctrl + S" IsEnabled="{Binding IsUnlockDatabase}">
+				<MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" InputGesture="Ctrl+O"/>
+				<MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" InputGesture="Ctrl+S" IsEnabled="{Binding IsUnlockDatabase}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource SaveIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Header="{DynamicResource SaveAllBases}" Command="{Binding SaveAllDatabasesCommand}"/>
-				<MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" IsEnabled="{Binding IsLockDatabase}">
+				<MenuItem Header="{DynamicResource SaveAllBases}" Command="{Binding SaveAllDatabasesCommand}" InputGesture="Ctrl+Shift+S"/>
+				<MenuItem Header="{DynamicResource UnlockStorage}" Command="{Binding UnlockDatabaseCommand}" InputGesture="Ctrl+U" IsEnabled="{Binding IsLockDatabase}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource LockOpenIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" IsEnabled="{Binding IsUnlockDatabase}">
+				<MenuItem Header="{DynamicResource UnlockAllStorages}" Command="{Binding UnlockAllDatabasesCommand}" InputGesture="Ctrl+Shift+U"/>
+				<MenuItem Header="{DynamicResource LockStorage}" Command="{Binding LockDatabaseCommand}" InputGesture="Ctrl+L" IsEnabled="{Binding IsUnlockDatabase}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource LockIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Header="{DynamicResource LockAllStorages}" Command="{Binding LockAllDatabasesCommand}"/>
+				<MenuItem Header="{DynamicResource LockAllStorages}" Command="{Binding LockAllDatabasesCommand}" InputGesture="Ctrl+Shift+L"/>
 				
 				<Separator Classes="MenuItemSeparators"/>
 					
-				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" InputGesture="Ctrl + N" IsEnabled="{Binding IsUnlockDatabase}">
+				<MenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" InputGesture="Ctrl+N" IsEnabled="{Binding IsUnlockDatabase}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource PlusIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Icon="{DynamicResource }">
+				<MenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" InputGesture="Ctrl+F" IsEnabled="{Binding IsUnlockDatabase}">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource SearchIcon}"/>
 					</MenuItem.Icon>
@@ -101,7 +110,7 @@
 						<Image Source="{DynamicResource GearIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
-				<MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}">
+				<MenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}" InputGesture="Ctrl+Q">
 					<MenuItem.Icon>
 						<Image Source="{DynamicResource ExitIcon}"/>
 					</MenuItem.Icon>

@@ -11,7 +11,7 @@
 		Background="{DynamicResource ThemeWindowBackgroundBrush}"
         Title="{DynamicResource Settings}">
 	<Grid RowDefinitions="*,50">
-		<TabControl Background="{DynamicResource ThemeBackgroundContentTabItemBrush}">
+		<TabControl Background="{DynamicResource ThemeBackgroundContentTabItemBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 			<TabItem Header="{DynamicResource General}">
 				<ScrollViewer>
 					<StackPanel Margin="5">

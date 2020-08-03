@@ -185,7 +185,7 @@ namespace OlibKey.ViewModels.Pages
 			LoginList.EditedLogin();
 
 			EditCompleteCallback?.Invoke(LoginList);
-			App.MainWindow.MessageStatusBar("Not2");
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not2"));
 		}
 		private async void DeleteLogin()
 		{

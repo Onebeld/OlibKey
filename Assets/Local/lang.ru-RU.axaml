@@ -47,12 +47,13 @@
 
 		<v:String x:Key="Yes">Да</v:String>
 		<v:String x:Key="No">Нет</v:String>
-		<v:String x:Key="Ok">Ок</v:String>
+		<v:String x:Key="Ok">ОК</v:String>
 
 		<v:String x:Key="ListOfItems">Список элементов</v:String>
 		<v:String x:Key="LockStorage">Заблокировать хранилище</v:String>
 		<v:String x:Key="LockAllStorages">Заблокировать все хранилища</v:String>
 		<v:String x:Key="UnlockStorage">Разблокировать хранилище</v:String>
+		<v:String x:Key="UnlockAllStorages">Разблокировать все хранилища</v:String>
 		<v:String x:Key="ShowOPM">Показать OlibKey</v:String>
 
 		<v:String x:Key="MB1">Сначала вы должны загрузить или создать хранилище!</v:String>
@@ -70,8 +71,13 @@
 
 		<v:String x:Key="Not1">Элемент сохранен успешно!</v:String>
 		<v:String x:Key="Not2">Элемент успешно изменен!</v:String>
-		<v:String x:Key="Not3">Хранилище успешно создано!</v:String>
-		<v:String x:Key="Not4">Хранилище успешно сохранено!</v:String>
+		<v:String x:Key="Not3">Успешно создано хранилище:</v:String>
+		<v:String x:Key="Not4">Успешно сохранено хранилище:</v:String>
+		<v:String x:Key="Not5">Все хранилища успешно сохранены!</v:String>
+		<v:String x:Key="Not6">Все хранилища успешно открыты!</v:String>
+		<v:String x:Key="Not7">Все хранилища успешно заблокированы!</v:String>
+		<v:String x:Key="Not8">Все хранилища успешно разблокированы!</v:String>
+		<v:String x:Key="Not9">Успешно разблокировано хранилище:</v:String>
 
 		<v:String x:Key="Lowercase">Строчные (abc)</v:String>
 		<v:String x:Key="Uppercase">Заглавные (ABC)</v:String>

@@ -51,8 +51,9 @@
 
 		<v:String x:Key="ListOfItems">Liste d'articles</v:String>
 		<v:String x:Key="LockStorage">Verrouiller le coffre-fort</v:String>
-		<v:String x:Key="LockAllStorages">Verrouiller tous les coffres</v:String>
+		<v:String x:Key="LockAllStorages">Verrouiller tous les stockages</v:String>
 		<v:String x:Key="UnlockStorage">Déverrouillez le stockage</v:String>
+		<v:String x:Key="UnlockAllStorages">Déverrouiller tous les stockages</v:String>
 		<v:String x:Key="ShowOPM">Afficher OlibKey</v:String>
 
 		<v:String x:Key="MB1">Vous devez d'abord télécharger ou créer du stockage!</v:String>
@@ -70,8 +71,13 @@
 
 		<v:String x:Key="Not1">L'élément a bien été enregistré!</v:String>
 		<v:String x:Key="Not2">Élément modifié avec succès!</v:String>
-		<v:String x:Key="Not3">Le stockage a été créé avec succès!</v:String>
-		<v:String x:Key="Not4">Stockage enregistré avec succès!</v:String>
+		<v:String x:Key="Not3">Référentiel créé avec succès:</v:String>
+		<v:String x:Key="Not4">Référentiel enregistré avec succès:</v:String>
+		<v:String x:Key="Not5">Tous les stockage ont été enregistrés avec succès!</v:String>
+		<v:String x:Key="Not6">Tous les stockages ont été ouverts avec succès!</v:String>
+		<v:String x:Key="Not7">Tous les stockage ont été verrouillés avec succès!</v:String>
+		<v:String x:Key="Not8">Tous les stockage ont été déverrouillés avec succès!</v:String>
+		<v:String x:Key="Not9">Stockage verrouillé avec succès:</v:String>
 
 		<v:String x:Key="Lowercase">Minuscules (abc)</v:String>
 		<v:String x:Key="Uppercase">Majuscules (ABC)</v:String>

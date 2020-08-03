@@ -53,6 +53,7 @@
 		<v:String x:Key="LockStorage">Tresor verriegeln</v:String>
 		<v:String x:Key="LockAllStorages">Verschließen Sie alle Tresore</v:String>
 		<v:String x:Key="UnlockStorage">Speicher entsperren</v:String>
+		<v:String x:Key="UnlockAllStorages">Schalte alle Tresore frei</v:String>
 		<v:String x:Key="ShowOPM">Zeigen OlibKey</v:String>
 
 		<v:String x:Key="MB1">Sie müssen zuerst Speicher hochladen oder erstellen!</v:String>
@@ -70,8 +71,13 @@
 
 		<v:String x:Key="Not1">Artikel erfolgreich gespeichert!</v:String>
 		<v:String x:Key="Not2">Artikel erfolgreich geändert!</v:String>
-		<v:String x:Key="Not3">Speicher erfolgreich erstellt!</v:String>
-		<v:String x:Key="Not4">Speicher erfolgreich gespeichert!</v:String>
+		<v:String x:Key="Not3">Repository erfolgreich erstellt:</v:String>
+		<v:String x:Key="Not4">Repository erfolgreich gespeichert:</v:String>
+		<v:String x:Key="Not5">Alle Repositorys wurden erfolgreich gespeichert!</v:String>
+		<v:String x:Key="Not6">Alle Speicher wurden erfolgreich geöffnet!</v:String>
+		<v:String x:Key="Not7">Alle Tresore wurden erfolgreich gesperrt!</v:String>
+		<v:String x:Key="Not8">Alle Tresore wurden erfolgreich entsperrt!</v:String>
+		<v:String x:Key="Not9">Tresor erfolgreich gesperrt:</v:String>
 
 		<v:String x:Key="Lowercase">Kleinbuchstaben (abc)</v:String>
 		<v:String x:Key="Uppercase">Großbuchstaben (ABC)</v:String>

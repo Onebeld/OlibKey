@@ -83,7 +83,7 @@ namespace OlibKey.ViewModels.Pages
 			NewLogin.CustomFields.AddRange(CustomFields.Select(item => item.HousingElement.CustomField));
 			NewLogin.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 			CreateLoginCallback?.Invoke(NewLogin);
-			App.MainWindow.MessageStatusBar("Not1");
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not1"));
 		}
 		private void AddCustomField()
 		{

@@ -5,6 +5,8 @@
 			 xmlns:reactiveUi="http://reactiveui.net"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:l="clr-namespace:OlibKey.Views.Pages;assembly=OlibKey"
+			 BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
+			 BorderThickness="0 1 0 0"
              x:Class="OlibKey.Views.Controls.DatabaseControl">
 	<Grid ColumnDefinitions="1*,2*" RowDefinitions="*,50">
 		<reactiveUi:RoutedViewHost Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" PageTransition="{x:Null}" Router="{Binding Router}">

@@ -75,7 +75,16 @@
 							</StackPanel>
 						</RadioButton.Content>
 					</RadioButton>
-
+					<RadioButton x:Name="rNotes" Checked="rLogin_Click" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" GroupName="TypeGroup">
+						<RadioButton.Content>
+							<StackPanel Orientation="Horizontal">
+								<Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
+									<Image Source="{StaticResource NoteIcon}" Margin="5"/>
+								</Border>
+								<TextBlock Text="{StaticResource Notes}" VerticalAlignment="Center"/>
+							</StackPanel>
+						</RadioButton.Content>
+					</RadioButton>
 				</StackPanel>
 				<ListBox x:Name="lbFolders" Padding="0" Items="{Binding FolderList}" SelectionChanged="lbFolders_SelectionChanged" SelectedIndex="{Binding SelectedFolderIndex}" Grid.Row="1" BorderBrush="{StaticResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="{StaticResource ThemeBackgroundBrush}">
 					<ListBox.ContextMenu>

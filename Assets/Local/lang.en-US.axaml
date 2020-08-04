@@ -100,6 +100,7 @@
 		<v:String x:Key="NumberOfEncryptionProcedures">Number of encryption procedures:</v:String>
 		<v:String x:Key="CDBError1">In fields with a numeric entry, values must contain numbers and cannot be zero!</v:String>
 		<v:String x:Key="CDBError2">You did not select a repository path or did not provide a master password!</v:String>
+		<v:String x:Key="CDBError3">You cannot create a vault if this vault is already open!</v:String>
 
 		<v:String x:Key="Open">Open</v:String>
 		<v:String x:Key="EnterMP">Enter Master Password</v:String>

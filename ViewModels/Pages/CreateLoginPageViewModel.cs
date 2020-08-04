@@ -71,8 +71,8 @@ namespace OlibKey.ViewModels.Pages
 			{
 				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (db.Folders != null)
-				foreach (Folder i in db.Folders) Folders.Add(i);
+
+			if (db.Folders != null) foreach (Folder i in db.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			Type = 0;

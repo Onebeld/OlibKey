@@ -130,6 +130,12 @@ namespace OlibKey.ViewModels.Pages
 
 					NewLogin.IsReminderActive = acc.LoginItem.IsReminderActive;
 					break;
+				case 4:
+					VisiblePasswordSection = false;
+					VisibleBankCardSection = false;
+					VisiblePersonalDataSection = false;
+					VisibleReminderSection = false;
+					break;
 			}
 
 			SaveLoginCommand = ReactiveCommand.Create(SaveLogin);
@@ -141,8 +147,8 @@ namespace OlibKey.ViewModels.Pages
 			{
 				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (db.Folders != null)
-				foreach (Folder i in db.Folders) Folders.Add(i);
+
+			if (db.Folders != null) foreach (Folder i in db.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			foreach (Folder i in Folders.Where(i => i.ID == LoginList.LoginItem.FolderID))

@@ -100,6 +100,7 @@
 		<v:String x:Key="NumberOfEncryptionProcedures">Anzahl der Verschlüsselungsverfahren:</v:String>
 		<v:String x:Key="CDBError1">In Feldern mit einem numerischen Eintrag müssen Werte Zahlen enthalten und dürfen nicht Null sein!</v:String>
 		<v:String x:Key="CDBError2">Sie haben keinen Repository-Pfad ausgewählt oder kein Hauptkennwort angegeben!</v:String>
+		<v:String x:Key="CDBError3">Sie können keinen Tresor erstellen, wenn dieser Tresor bereits geöffnet ist!</v:String>
 
 		<v:String x:Key="Open">Öffnen</v:String>
 		<v:String x:Key="EnterMP">Geben Sie das Master-Passwort ein</v:String>

@@ -15,6 +15,20 @@ For feedback and the latest news, use the links below:
 ## Why this project?
 There are many different password managers. One is free, the other is paid, the third has the most functionality, and the fourth has less. **My goal of this project** is to combine the best of other managers and implement it together.
 
+## Features:
+* Tabs and interaction with multiple bases;
+* Supports x86, x64 and ARM architectures;
+* Localization support (6 languages supported):
+   * English;
+   * French;
+   * German;
+   * Russian;
+   * Armenian;
+   * Ukrainian.
+* Cross-platform;
+* Modern (built on the latest technology);
+* Simple
+
 ## OlibKey Versions
 OlibKey has several versions: Noyon and Legacy
 ### OlibKey code name Noyon

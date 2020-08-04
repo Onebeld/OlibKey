@@ -110,6 +110,12 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = false;
 					VisibleReminderSection = true;
 					break;
+				case 4:
+					VisiblePasswordSection = false;
+					VisibleBankCardSection = false;
+					VisiblePersonalDataSection = false;
+					VisibleReminderSection = false;
+					break;
 			}
 
 			if (!string.IsNullOrEmpty(LoginInformation.TimeChanged)) VisibleDateChanged = true;
@@ -149,8 +155,8 @@ namespace OlibKey.ViewModels.Pages
 			{
 				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (db.Folders != null)
-				foreach (Folder i in db.Folders) Folders.Add(i);
+
+			if (db.Folders != null) foreach (Folder i in db.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
 			foreach (Folder i in Folders.Where(i => i.ID == LoginInformation.FolderID))
@@ -168,11 +174,9 @@ namespace OlibKey.ViewModels.Pages
 				}));
 			}
 
-			if (CustomFields.Count != 0)
-				CustomFields[^1].SLine.IsVisible = false;
+			if (CustomFields.Count != 0) CustomFields[^1].SLine.IsVisible = false;
 
-			if (CustomFields.Count == 0)
-				IsVisible = false;
+			if (CustomFields.Count == 0) IsVisible = false;
 		}
 	}
 }

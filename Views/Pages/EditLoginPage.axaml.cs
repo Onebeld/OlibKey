@@ -23,7 +23,9 @@ namespace OlibKey.Views.Pages
 		private void InitializeComponent()
 		{
 			this.WhenActivated((CompositeDisposable disposable) => { });
+
 			AvaloniaXamlLoader.Load(this);
+
 			_txtPassword = this.FindControl<TextBox>("txtPassword");
 			_txtSecurityCode = this.FindControl<TextBox>("txtSecurityCode");
 			_pbHard = this.FindControl<ProgressBar>("pbHard");
@@ -31,22 +33,13 @@ namespace OlibKey.Views.Pages
 			_txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _txtPassword));
 		}
 
-		private void CheckedPassword(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			_txtPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
+		private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
 
-		private void CheckedSecurityCode(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			_txtSecurityCode.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
+		private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
 
 		private async void GeneratePassword(object sender, RoutedEventArgs e)
 		{
-			var a = new PasswordGeneratorWindow();
-			a._saveButton.IsVisible = true;
+			PasswordGeneratorWindow a = new PasswordGeneratorWindow { _saveButton = { IsVisible = true } };
 			bool b = await a.ShowDialog<bool>(App.MainWindow);
 			if (b == true)
 			{

@@ -48,6 +48,10 @@ namespace OlibKey.Views.Controls
 					ReminderTimer.Start();
 					break;
 			}
+
+			if (LoginItem.Type == 0 && string.IsNullOrEmpty(Login.Username)) _tbUsername.Text = Login.Email;
+
+			if (LoginItem.Type == 4) _tbUsername.Text = LoginItem.TimeCreate;
 		}
 
 		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
@@ -57,6 +61,10 @@ namespace OlibKey.Views.Controls
 			if (LoginItem == null) return;
 			_tbLoginName.Text = LoginItem.Name;
 			_tbUsername.Text = LoginItem.Username;
+
+			if (LoginItem.Type == 0 && string.IsNullOrEmpty(LoginItem.Username)) _tbUsername.Text = LoginItem.Email;
+
+			if (LoginItem.Type == 4) _tbUsername.Text = LoginItem.TimeCreate;
 		}
 
 		public async void GetIconElement()
@@ -76,11 +84,11 @@ namespace OlibKey.Views.Controls
 					1 => (DrawingImage)Application.Current.FindResource("CardIcon"),
 					2 => (DrawingImage)Application.Current.FindResource("PersonalDataIcon"),
 					3 => (DrawingImage)Application.Current.FindResource("ReminderIcon"),
+					4 => (DrawingImage)Application.Current.FindResource("NoteIcon"),
 					_ => IconLogin.Source
 				};
 			}
 		}
-
 		private void ReminderTimer_Tick(object sender, EventArgs e)
 		{
 			try

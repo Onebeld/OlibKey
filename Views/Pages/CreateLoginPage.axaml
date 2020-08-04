@@ -23,6 +23,7 @@
 							<ComboBoxItem Content="{DynamicResource BankCard}"/>
 							<ComboBoxItem Content="{DynamicResource Passport}"/>
 							<ComboBoxItem Content="{DynamicResource Reminder}"/>
+							<ComboBoxItem Content="{DynamicResource Notes}"/>
 						</ComboBox>
 					</StackPanel>
 				</Border>

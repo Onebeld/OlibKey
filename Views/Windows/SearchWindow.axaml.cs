@@ -22,6 +22,7 @@ namespace OlibKey.Views.Windows
 		private RadioButton _rBankCard;
 		private RadioButton _rPassport;
 		private RadioButton _rReminder;
+		private RadioButton _rNotes;
 		private RadioButton _rAll;
 
 		private ListBox _lbFolders;
@@ -38,6 +39,7 @@ namespace OlibKey.Views.Windows
 			_rBankCard = this.FindControl<RadioButton>("rBankCard");
 			_rPassport = this.FindControl<RadioButton>("rPassport");
 			_rReminder = this.FindControl<RadioButton>("rReminder");
+			_rNotes = this.FindControl<RadioButton>("rNotes");
 			_rAll = this.FindControl<RadioButton>("rAll");
 			_tbSearchText = this.FindControl<TextBox>("tbSearchText");
 			_lbFolders = this.FindControl<ListBox>("lbFolders");
@@ -111,6 +113,21 @@ namespace OlibKey.Views.Windows
 							else Add(Login, i.IconLogin, i.LoginID);
 					}
 					else if ((bool)_rReminder.IsChecked && Login.Type == 3)
+					{
+						if (SearchViewModel.SelectedFolderItem == null)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
+							}
+							else Add(Login, i.IconLogin, i.LoginID);
+						else if (Login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext).ID)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
+							}
+							else Add(Login, i.IconLogin, i.LoginID);
+					}
+					else if ((bool)_rNotes.IsChecked && Login.Type == 4)
 					{
 						if (SearchViewModel.SelectedFolderItem == null)
 							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))

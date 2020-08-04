@@ -100,6 +100,7 @@
 		<v:String x:Key="NumberOfEncryptionProcedures">Nombre de procédures de cryptage:</v:String>
 		<v:String x:Key="CDBError1">Dans les champs avec une entrée numérique, les valeurs doivent contenir des nombres et ne peuvent pas être zéro!</v:String>
 		<v:String x:Key="CDBError2">Vous n'avez pas sélectionné de chemin de référentiel ou n'avez pas fourni de mot de passe principal!</v:String>
+		<v:String x:Key="CDBError3">Vous ne pouvez pas créer de coffre-fort si ce coffre-fort est déjà ouvert!</v:String>
 
 		<v:String x:Key="Open">Ouverte</v:String>
 		<v:String x:Key="EnterMP">Entrez le mot de passe principal</v:String>

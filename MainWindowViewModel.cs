@@ -474,7 +474,7 @@ namespace OlibKey
 				{
 					ViewModel =
 					{
-						Database = new Database(),
+						Database = new Database { Folders = new List<Folder>(), Logins = new List<Login>() },
 						MasterPassword = window.TbPassword.Text,
 						Iterations = int.Parse(window.TbIteration.Text),
 						NumberOfEncryptionProcedures = int.Parse(window.TbNumberOfEncryptionProcedures.Text),

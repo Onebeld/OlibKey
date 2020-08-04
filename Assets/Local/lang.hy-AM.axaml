@@ -100,6 +100,7 @@
 		<v:String x:Key="NumberOfEncryptionProcedures">Գաղտնագրման ընթացակարգերի քանակը.</v:String>
 		<v:String x:Key="CDBError1">Թվային մուտքագրման դաշտերում արժեքները պետք է պարունակեն թվեր և չեն կարող զրո լինել:</v:String>
 		<v:String x:Key="CDBError2">Դուք չեք ընտրել պահեստային ուղի կամ չեք տրամադրել վարպետ գաղտնաբառ:</v:String>
+		<v:String x:Key="CDBError3">Դուք չեք կարող ստեղծել պահոց, եթե այս կամարն արդեն բաց է:</v:String>
 
 		<v:String x:Key="Open">Բացել</v:String>
 		<v:String x:Key="EnterMP">Գրեք վարպետության գաղտնաբառը</v:String>

@@ -15,6 +15,20 @@ For feedback and the latest news, use the links below:
 ## Why this project?
 There are many different password managers. One is free, the other is paid, the third has the most functionality, and the fourth has less. **My goal of this project** is to combine the best of other managers and implement it together.
 
+## Features:
+* Tabs and interaction with multiple bases;
+* Supports x86, x64 and ARM architectures;
+* Localization support (6 languages supported):
+   * English;
+   * French;
+   * German;
+   * Russian;
+   * Armenian;
+   * Ukrainian.
+* Cross-platform;
+* Modern (built on the latest technology);
+* Simple
+
 ## OlibKey Versions
 OlibKey has several versions: Noyon and Legacy
 ### OlibKey code name Noyon
@@ -26,7 +40,8 @@ This version is compiled using AOT CoreRT, which allows you to run applications 
 This version supports other platforms (x86, ARM), .NET Runtime is required to run. macOS and Linux does not support x86
 #### Requirements:
 * Almost all platforms ([see here](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
-* .NET Runtime 5 Preview 6;
+* .NET Runtime 5 Preview 7;
+
 ## Where can I watch previews?
 You can watch the previews in the "dev-channel", where all the latest changes are posted. When the release is ready, a request is made to merge this branch into "master".
 > **Attention:** these releases may be unstable and may even damage your base. Use only if you know what you are doing. It is recommended to make a backup copy of the database.

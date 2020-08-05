@@ -4,7 +4,7 @@
 
 ![](https://github.com/MagnificentEagle/OlibPasswordManager/blob/master/ForRepository/ScreenProgram.png)
 
-OlibKey is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET 5 Prewiev 6 using  Avalonia UI. With OlibKey, you can store passwords on your computer **using AES encryption**.
+OlibKey is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET 5 Prewiev 7 using  Avalonia UI. With OlibKey, you can store passwords on your computer **using AES encryption**.
 
 For feedback and the latest news, use the links below:
 

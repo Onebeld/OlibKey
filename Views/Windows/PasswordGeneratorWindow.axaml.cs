@@ -73,13 +73,13 @@ namespace OlibKey.Views.Windows
 		}
 		private void SavePassword(object sender, RoutedEventArgs e)
 		{
-			if (_tbPassword.Text == null || _tbPassword.Text.Length < 1) _tbPassword.Text = RandomPassword();
+			if (string.IsNullOrEmpty(_tbPassword.Text)) _tbPassword.Text = RandomPassword();
 
 			Close(true);
 		}
 		private void CopyGeneratedPassword(object sender, RoutedEventArgs e)
 		{
-			if (_tbPassword.Text == null || _tbPassword.Text.Length < 1) _tbPassword.Text = RandomPassword();
+			if (string.IsNullOrEmpty(_tbPassword.Text)) _tbPassword.Text = RandomPassword();
 			Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
 		}
 	}

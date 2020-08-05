@@ -110,12 +110,11 @@ namespace OlibKey.ViewModels.Controls
 		public void CreateLogin()
 		{
 			SelectedIndex = -1;
-			CreateLoginPageViewModel page = new CreateLoginPageViewModel(Database, this)
+			Router.Navigate.Execute(new CreateLoginPageViewModel(Database, this)
 			{
 				BackPageCallback = StartPage,
 				CreateLoginCallback = AddLogin
-			};
-			Router.Navigate.Execute(page);
+			});
 		}
 		private void EditLogin(LoginListItem login)
 		{
@@ -139,8 +138,7 @@ namespace OlibKey.ViewModels.Controls
 		}
 		private void InformationLogin(LoginListItem i)
 		{
-			if (i == null) return;
-			Router.Navigate.Execute(new LoginInformationPageViewModel(i, Database, this) { EditContentCallback = EditLogin });
+			if (i != null) Router.Navigate.Execute(new LoginInformationPageViewModel(i, Database, this) { EditContentCallback = EditLogin });
 		}
 		public void ClearLoginsList()
 		{

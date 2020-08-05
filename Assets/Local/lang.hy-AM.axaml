@@ -17,6 +17,7 @@
 		<v:String x:Key="ChangeMasterPassword">Փոխել վարպետության-գաղտաբառը</v:String>
 		<v:String x:Key="AboutPrograms">Ծրագրի մասին...</v:String>
 		<v:String x:Key="CheckUpdates">Ստուգել թարմացումները</v:String>
+		<v:String x:Key="FileOlib">OlibKey տվյալների շտեմարան</v:String>
 		
 		<v:String x:Key="Search">Որոնել</v:String>
 		<v:String x:Key="AllItems">Բոլոր իրերը</v:String>

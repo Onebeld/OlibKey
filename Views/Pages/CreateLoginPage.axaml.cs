@@ -94,11 +94,7 @@ namespace OlibKey.Views.Pages
 		private async void GeneratePassword(object sender, RoutedEventArgs e)
 		{
 			PasswordGeneratorWindow a = new PasswordGeneratorWindow { _saveButton = { IsVisible = true } };
-			bool b = await a.ShowDialog<bool>(App.MainWindow);
-			if (b == true)
-			{
-				_txtPassword.Text = a._tbPassword.Text;
-			}
+			if (await a.ShowDialog<bool>(App.MainWindow)) _txtPassword.Text = a._tbPassword.Text;
 		}
 	}
 }

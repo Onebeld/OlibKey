@@ -166,13 +166,11 @@ namespace OlibKey.ViewModels.Pages
 			}
 
 			foreach (CustomField i in LoginInformation.CustomFields)
-			{
 				CustomFields.Add(new CustomFieldListItem(new Housing
 				{
 					CustomField = i,
 					IsEnabled = false
 				}));
-			}
 
 			if (CustomFields.Count != 0) CustomFields[^1].SLine.IsVisible = false;
 

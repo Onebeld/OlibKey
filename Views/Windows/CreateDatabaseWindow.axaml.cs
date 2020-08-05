@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 using OlibKey.Core;
 using OlibKey.Views.Controls;
 using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace OlibKey.Views.Windows
@@ -34,22 +35,17 @@ namespace OlibKey.Views.Windows
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 					return;
 				}
-				if (TbPassword.Text == "" || TbPassword.Text == null || TbPathDatabase.Text == null)
+				if (string.IsNullOrEmpty(TbPassword.Text) || TbPathDatabase.Text == null)
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError2"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 					return;
 				}
-				foreach (var item in App.MainWindowViewModel.TabItems)
+				if (App.MainWindowViewModel.TabItems.Select(item => (DatabaseControl)item.Content).Any(db => db.ViewModel.PathDatabase == TbPathDatabase.Text))
 				{
-					DatabaseControl db = (DatabaseControl)item.Content;
-
-					if (db.ViewModel.PathDatabase == TbPathDatabase.Text)
-					{
-						_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError3"), (string)Application.Current.FindResource("Error"),
+					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError3"), (string)Application.Current.FindResource("Error"),
 						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
-						return;
-					}
+					return;
 				}
 				Close(true); 
 			};
@@ -58,7 +54,7 @@ namespace OlibKey.Views.Windows
 		private async void SelectPath(object sender, RoutedEventArgs e)
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
-			dialog.Filters.Add(new FileDialogFilter { Name = "Olib-Files", Extensions = { "olib" } });
+			dialog.Filters.Add(new FileDialogFilter { Name = (string)Application.Current.FindResource("FileOlib"), Extensions = { "olib" } });
 			string res = await dialog.ShowAsync(this);
 			if (res != null) TbPathDatabase.Text = res;
 		}
@@ -77,10 +73,6 @@ namespace OlibKey.Views.Windows
 			_ = TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, TbPassword));
 		}
 
-		private void CheckedPassword(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			TbPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
+		private void CheckedPassword(object sender, RoutedEventArgs e) => TbPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
 	}
 }

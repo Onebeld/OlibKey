@@ -185,8 +185,7 @@ namespace OlibKey.ViewModels.Pages
 			}
 			else
 			{
-				if (LoginList.ReminderTimer != null)
-					LoginList.ReminderTimer.Stop();
+				LoginList.ReminderTimer?.Stop();
 			}
 			LoginList.EditedLogin();
 

@@ -17,6 +17,7 @@
 		<v:String x:Key="ChangeMasterPassword">Змінити майстер-пароль</v:String>
 		<v:String x:Key="AboutPrograms">Про програму...</v:String>
 		<v:String x:Key="CheckUpdates">Перевірити наявність оновленні</v:String>
+		<v:String x:Key="FileOlib">Файл бази даних OlibKey</v:String>
 		
 		<v:String x:Key="Search">Пошук</v:String>
 		<v:String x:Key="AllItems">Всі елементи</v:String>

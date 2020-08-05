@@ -109,45 +109,42 @@ namespace OlibKey
 
 		public async void Loading(MainWindow mainWindow)
 		{
-			foreach (string item in OpenStorages)
+			foreach (var item in OpenStorages.Where(item => Path.GetExtension(item) == ".olib"))
 			{
-				if (Path.GetExtension(item) == ".olib")
+				App.Settings.PathDatabase = item;
+
+				string id = Guid.NewGuid().ToString("N");
+
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
 				{
-					App.Settings.PathDatabase = item;
+					CloseTab = CloseTab,
+					iLock = { IsVisible = true },
+					iUnlock = { IsVisible = false }
+				};
 
-					string id = Guid.NewGuid().ToString("N");
-
-					DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				DatabaseControl db = new DatabaseControl
+				{
+					ViewModel =
 					{
-						CloseTab = CloseTab,
-						iLock = { IsVisible = true },
-						iUnlock = { IsVisible = false }
-					};
+						IsLockDatabase = true,
+						IsUnlockDatabase = false,
+						PathDatabase = App.Settings.PathDatabase,
+						TabID = id
+					}
+				};
 
-					DatabaseControl db = new DatabaseControl
-					{
-						ViewModel =
-						{
-							IsLockDatabase = true,
-							IsUnlockDatabase = false,
-							PathDatabase = App.Settings.PathDatabase,
-							TabID = id
-						}
-					};
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
-					TabItems.Add(new TabItem { Header = tabHeader, Content = db });
-
-					RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
-					{
-						LoadStorageCallback = LoadDatabase,
-						databaseControl = db,
-						databaseTabHeader = tabHeader,
-						tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
-					};
-					IsActivateDnD = false;
-					await passwordWindow.ShowDialog(App.MainWindow);
-					IsActivateDnD = true;
-				}
+				RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
+				{
+					LoadStorageCallback = LoadDatabase,
+					databaseControl = db,
+					databaseTabHeader = tabHeader,
+					tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
+				};
+				IsActivateDnD = false;
+				await passwordWindow.ShowDialog(App.MainWindow);
+				IsActivateDnD = true;
 			}
 
 			if (OpenStorages.Count > 0)
@@ -194,51 +191,44 @@ namespace OlibKey
 		}
 		public async void OpenStorageDnD(List<string> files)
 		{
-			foreach (string item in files)
+			foreach (var item in files.Where(item => Path.GetExtension(item) == ".olib").Where(item => TabItems.All(i => ((DatabaseControl)i.Content).ViewModel.PathDatabase != item)))
 			{
-				if (Path.GetExtension(item) == ".olib")
+				App.Settings.PathDatabase = item;
+
+				string id = Guid.NewGuid().ToString("N");
+
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
 				{
-					bool flag = false;
-					foreach (TabItem i in TabItems)
-						if (((DatabaseControl)i.Content).ViewModel.PathDatabase == item) { flag = true; break; }
-					if (flag) continue;
+					CloseTab = CloseTab,
+					iLock = { IsVisible = true },
+					iUnlock = { IsVisible = false }
+				};
 
-					App.Settings.PathDatabase = item;
-
-					string id = Guid.NewGuid().ToString("N");
-
-					DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				DatabaseControl db = new DatabaseControl
+				{
+					ViewModel =
 					{
-						CloseTab = CloseTab,
-						iLock = { IsVisible = true },
-						iUnlock = { IsVisible = false }
-					};
+						IsLockDatabase = true,
+						IsUnlockDatabase = false,
+						PathDatabase = App.Settings.PathDatabase,
+						TabID = id
+					}
+				};
 
-					DatabaseControl db = new DatabaseControl
-					{
-						ViewModel =
-						{
-							IsLockDatabase = true,
-							IsUnlockDatabase = false,
-							PathDatabase = App.Settings.PathDatabase,
-							TabID = id
-						}
-					};
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
-					TabItems.Add(new TabItem { Header = tabHeader, Content = db });
-
-					RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
-					{
-						LoadStorageCallback = LoadDatabase,
-						databaseControl = db,
-						databaseTabHeader = tabHeader,
-						tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
-					};
-					IsActivateDnD = false;
-					await passwordWindow.ShowDialog(App.MainWindow);
-					IsActivateDnD = true;
-				}
+				RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
+				{
+					LoadStorageCallback = LoadDatabase,
+					databaseControl = db,
+					databaseTabHeader = tabHeader,
+					tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
+				};
+				IsActivateDnD = false;
+				await passwordWindow.ShowDialog(App.MainWindow);
+				IsActivateDnD = true;
 			}
+
 			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not6"));
 		}
 		public void AutoblockStorage(object sender, EventArgs e)
@@ -250,16 +240,7 @@ namespace OlibKey
 
 				if (db.ViewModel.IsUnlockDatabase)
 				{
-					bool flag = false;
-					foreach (LoginListItem login in db.ViewModel.LoginList)
-					{
-						if (login.LoginItem.IsReminderActive == true) 
-						{ 
-							flag = true;
-							break;
-						}
-					}
-					if (flag) continue;
+					if (db.ViewModel.LoginList.Any(login => login.LoginItem.IsReminderActive)) continue;
 
 					SaveDatabase(db);
 					db.ViewModel.ClearLoginsList();
@@ -334,7 +315,7 @@ namespace OlibKey
 		}
 		private async void UnlockAllDatabases()
 		{
-			foreach (var item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.IsLockDatabase == true))
+			foreach (var item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.IsLockDatabase))
 			{
 				DatabaseControl db = (DatabaseControl)item.Content;
 				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
@@ -381,26 +362,20 @@ namespace OlibKey
 		private async void OpenDatabase()
 		{
 			OpenFileDialog dialog = new OpenFileDialog { AllowMultiple = true };
-			dialog.Filters.Add(new FileDialogFilter { Name = "Olib-Files", Extensions = { "olib" } });
+			dialog.Filters.Add(new FileDialogFilter { Name = (string)Application.Current.FindResource("FileOlib"), Extensions = { "olib" } });
 			List<string> files = (await dialog.ShowAsync(App.MainWindow)).ToList();
-			try
+
+			if (files.Count == 0) return;
+
+			foreach (var file in files.Where(file => TabItems.All(i => ((DatabaseControl)i.Content).ViewModel.PathDatabase != file)))
 			{
-				if (files.Count == 0) return;
+				App.Settings.PathDatabase = file;
 
-				foreach (string file in files)
+				string id = Guid.NewGuid().ToString("N");
+
+				DatabaseControl db = new DatabaseControl
 				{
-					bool flag = false;
-					foreach (TabItem i in TabItems)
-						if (((DatabaseControl)i.Content).ViewModel.PathDatabase == file) { flag = true; break; }
-					if (flag) continue;
-
-					App.Settings.PathDatabase = file;
-
-					string id = Guid.NewGuid().ToString("N");
-
-					DatabaseControl db = new DatabaseControl
-					{
-						ViewModel =
+					ViewModel =
 						{
 							Database = new Database(),
 							IsLockDatabase = true,
@@ -408,22 +383,20 @@ namespace OlibKey
 							PathDatabase = file,
 							TabID = id
 						}
-					};
-					DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
-					{
-						CloseTab = CloseTab,
-						iLock = { IsVisible = true },
-						iUnlock = { IsVisible = false }
-					};
-					TabItems.Add(new TabItem { Header = tabHeader, Content = db });
+				};
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				{
+					CloseTab = CloseTab,
+					iLock = { IsVisible = true },
+					iUnlock = { IsVisible = false }
+				};
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
-					RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow { LoadStorageCallback = LoadDatabase, databaseControl = db, databaseTabHeader = tabHeader, tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) } };
-					IsActivateDnD = false;
-					await requireMaster.ShowDialog(App.MainWindow);
-					IsActivateDnD = true;
-				}
+				RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow { LoadStorageCallback = LoadDatabase, databaseControl = db, databaseTabHeader = tabHeader, tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) } };
+				IsActivateDnD = false;
+				await requireMaster.ShowDialog(App.MainWindow);
+				IsActivateDnD = true;
 			}
-			catch { }
 		}
 		private void CreateLogin()
 		{
@@ -441,12 +414,10 @@ namespace OlibKey
 		{
 			db.ViewModel.Database = SaveAndLoadDatabase.LoadFiles(db);
 			foreach (Login logins in db.ViewModel.Database.Logins) db.ViewModel.AddLogin(logins);
-			db.ViewModel.IsLockDatabase = false;
-			db.ViewModel.IsUnlockDatabase = true;
-			dbHeader.iLock.IsVisible = false;
-			dbHeader.iUnlock.IsVisible = true;
+			db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = false;
+			db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = true;
 
-			if (SelectedTabItem == db)
+			if (Equals(SelectedTabItem, db))
 			{
 				IsLockDatabase = false;
 				IsUnlockDatabase = true;

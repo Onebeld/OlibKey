@@ -17,6 +17,7 @@
 		<v:String x:Key="ChangeMasterPassword">Changer le mot de passe principal</v:String>
 		<v:String x:Key="AboutPrograms">À propos du programme...</v:String>
 		<v:String x:Key="CheckUpdates">Vérifier les mises à jour</v:String>
+		<v:String x:Key="FileOlib">Fichier de base de données OlibKey</v:String>
 		
 		<v:String x:Key="Search">Chercher</v:String>
 		<v:String x:Key="AllItems">Tous les articles</v:String>

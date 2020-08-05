@@ -12,7 +12,7 @@ namespace OlibKey.Views.Windows
 		public TextBlock _tbName;
 		public TextBlock _tbTime;
 
-		private bool _dialogResult = false;
+		private bool _dialogResult;
 
 		public ReminderWindow() => InitializeComponent();
 

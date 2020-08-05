@@ -41,3 +41,7 @@ This version supports other platforms (x86, ARM), .NET Runtime is required to ru
 #### Requirements:
 * Almost all platforms ([see here](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
 * .NET Runtime 5 Preview 7;
+
+## Where can I watch previews?
+You can watch the previews in the "dev-channel", where all the latest changes are posted. When the release is ready, a request is made to merge this branch into "master".
+> **Attention:** these releases may be unstable and may even damage your base. Use only if you know what you are doing. It is recommended to make a backup copy of the database.

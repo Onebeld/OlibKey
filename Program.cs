@@ -5,14 +5,15 @@ using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Pages;
 using ReactiveUI;
 using Splat;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OlibKey
 {
 	class Program
 	{
-		public static object Sync = new object();
-
+		[STAThread]
 		public static void Main(string[] args) => BuildAvaloniaApp().Start(AppMain, args);
 
 		public static AppBuilder BuildAvaloniaApp() =>
@@ -27,18 +28,16 @@ namespace OlibKey
 
 		private static void AppMain(Application app, string[] args)
 		{
-			string file = args.FirstOrDefault();
-			if (!string.IsNullOrWhiteSpace(file)) App.Settings.PathDatabase = file;
+			List<string> files = args.ToList();
 
-			App.MainWindowViewModel = new MainWindowViewModel();
-			Locator.CurrentMutable.RegisterConstant<IScreen>(App.MainWindowViewModel);
+			App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = files };
+
 			Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
 			Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());
-			Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() =>
-				new LoginInformationPage());
+			Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() => new LoginInformationPage());
 			Locator.CurrentMutable.Register<IViewFor<EditLoginPageViewModel>>(() => new EditLoginPage());
 
-			App.MainWindow = new MainWindow { DataContext = Locator.Current.GetService<IScreen>() };
+			App.MainWindow = new MainWindow { DataContext = App.MainWindowViewModel };
 
 			app.Run(App.MainWindow);
 		}

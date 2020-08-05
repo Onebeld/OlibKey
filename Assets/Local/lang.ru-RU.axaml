@@ -9,6 +9,7 @@
 		<v:String x:Key="CreateBase">Создать хранилище</v:String>
 		<v:String x:Key="OpenBase">Открыть хранилище</v:String>
 		<v:String x:Key="SaveBase">Сохранить хранилище</v:String>
+		<v:String x:Key="SaveAllBases">Сохранить все хранилища</v:String>
 		<v:String x:Key="AddLogin">Добавить логин</v:String>
 		<v:String x:Key="Settings">Настройки</v:String>
 		<v:String x:Key="ExitFrom">Выйти из OlibKey</v:String>
@@ -16,14 +17,22 @@
 		<v:String x:Key="ChangeMasterPassword">Изменить мастер-пароль</v:String>
 		<v:String x:Key="AboutPrograms">О программе...</v:String>
 		<v:String x:Key="CheckUpdates">Проверить наличие обновлении</v:String>
+		<v:String x:Key="FileOlib">Файл базы данных OlibKey</v:String>
+		
 		<v:String x:Key="Search">Поиск</v:String>
-		<v:String x:Key="CreateFolder">Создать папку</v:String>
 		<v:String x:Key="AllItems">Все элементы</v:String>
-		<v:String x:Key="CustomFolder">Пользовательская папка</v:String>
+		<v:String x:Key="Folder">Папка</v:String>
 		<v:String x:Key="NotChosen">Не выбрано</v:String>
 		<v:String x:Key="RemoveSelection">Снять выделение</v:String>
+		<v:String x:Key="NameElement">Название элемента</v:String>
+
+		<v:String x:Key="GitHub">OlibKey на GitHub</v:String>
+		<v:String x:Key="VKontakte">OlibKey во ВКонтакте</v:String>
+		<v:String x:Key="Facebook">OlibKey в Facebook</v:String>
 
 		<v:String x:Key="Ready">Готов</v:String>
+		<v:String x:Key="Elements">Элементов:</v:String>
+		<v:String x:Key="OpenedBases">Открыто баз:</v:String>
 
 		<v:String x:Key="Collapse">Свернуть</v:String>
 		<v:String x:Key="Expand">Развернуть</v:String>
@@ -39,11 +48,13 @@
 
 		<v:String x:Key="Yes">Да</v:String>
 		<v:String x:Key="No">Нет</v:String>
-		<v:String x:Key="Ok">Ок</v:String>
+		<v:String x:Key="Ok">ОК</v:String>
 
 		<v:String x:Key="ListOfItems">Список элементов</v:String>
 		<v:String x:Key="LockStorage">Заблокировать хранилище</v:String>
+		<v:String x:Key="LockAllStorages">Заблокировать все хранилища</v:String>
 		<v:String x:Key="UnlockStorage">Разблокировать хранилище</v:String>
+		<v:String x:Key="UnlockAllStorages">Разблокировать все хранилища</v:String>
 		<v:String x:Key="ShowOPM">Показать OlibKey</v:String>
 
 		<v:String x:Key="MB1">Сначала вы должны загрузить или создать хранилище!</v:String>
@@ -61,8 +72,13 @@
 
 		<v:String x:Key="Not1">Элемент сохранен успешно!</v:String>
 		<v:String x:Key="Not2">Элемент успешно изменен!</v:String>
-		<v:String x:Key="Not3">Хранилище успешно создано!</v:String>
-		<v:String x:Key="Not4">Хранилище успешно сохранено!</v:String>
+		<v:String x:Key="Not3">Успешно создано хранилище:</v:String>
+		<v:String x:Key="Not4">Успешно сохранено хранилище:</v:String>
+		<v:String x:Key="Not5">Все хранилища успешно сохранены!</v:String>
+		<v:String x:Key="Not6">Все хранилища успешно открыты!</v:String>
+		<v:String x:Key="Not7">Все хранилища успешно заблокированы!</v:String>
+		<v:String x:Key="Not8">Все хранилища успешно разблокированы!</v:String>
+		<v:String x:Key="Not9">Успешно разблокировано хранилище:</v:String>
 
 		<v:String x:Key="Lowercase">Строчные (abc)</v:String>
 		<v:String x:Key="Uppercase">Заглавные (ABC)</v:String>
@@ -81,6 +97,11 @@
 		<v:String x:Key="MasterPassword">Мастер-пароль</v:String>
 		<v:String x:Key="Directory">Путь хранения</v:String>
 		<v:String x:Key="Select">Выбрать</v:String>
+		<v:String x:Key="Iteration">Количество итерации:</v:String>
+		<v:String x:Key="NumberOfEncryptionProcedures">Количество процедур шифрования:</v:String>
+		<v:String x:Key="CDBError1">В полях с вводом цифровых значении должны содержать числа и не могут быть равны нулю!</v:String>
+		<v:String x:Key="CDBError2">Вы не выбрали путь хранилища или не указали мастер-пароль!</v:String>
+		<v:String x:Key="CDBError3">Вы не сможете создать хранилище, оно уже открыто!</v:String>
 
 		<v:String x:Key="Open">Открыть</v:String>
 		<v:String x:Key="EnterMP">Введите мастер-пароль</v:String>
@@ -92,12 +113,18 @@
 
 		<v:String x:Key="Language">Язык:</v:String>
 		<v:String x:Key="Theme">Тема:</v:String>
-		<v:String x:Key="CBHideProgram">Скрыть программу при закрытии</v:String>
-		<v:String x:Key="CBAutorunApplication">Запускать вместе с Windows</v:String>
+		<v:String x:Key="General">Общее</v:String>
+		<v:String x:Key="Storage">Хранилище</v:String>
+		<v:String x:Key="Autosave">Автосохранение через:</v:String>
+		<v:String x:Key="Block">Заблокировать все базы (кроме с напоминанием) через:</v:String>
+		<v:String x:Key="MessageDuration">Длительность показа сообщения:</v:String>
+		<v:String x:Key="Sec">секунд</v:String>
+		<v:String x:Key="Min">минут</v:String>
 
 		<v:String x:Key="Dazzling">Ослепительная</v:String>
 		<v:String x:Key="Gloomy">Мрачная</v:String>
 		<v:String x:Key="Mysterious">Загадочная</v:String>
+		<v:String x:Key="Turquoise">Бирюза</v:String>
 
 		<v:String x:Key="Reminder">Напоминание</v:String>
 		<v:String x:Key="Pause">Пауза</v:String>
@@ -111,6 +138,7 @@
 
 		<v:String x:Key="Name">Название</v:String>
 		<v:String x:Key="Username">Имя пользователя</v:String>
+		<v:String x:Key="Email">Электронная почта</v:String>
 		<v:String x:Key="WebSite">Веб-сайт</v:String>
 		<v:String x:Key="Notes">Заметки</v:String>
 		<v:String x:Key="ChangeElement">Изменить элемент</v:String>
@@ -132,10 +160,20 @@
 
 		<v:String x:Key="Passport">Личные данные</v:String>
 		<v:String x:Key="FullName">ФИО</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Серия и номер</v:String>
+		<v:String x:Key="SeriesAndNumber">Серия и номер</v:String>
 		<v:String x:Key="PlaceOfIssue">Место выдачи</v:String>
+		<v:String x:Key="SocialSecurityNumber">Номер социального страхования</v:String>
+		<v:String x:Key="TIN">ИНН</v:String>
+		<v:String x:Key="Telephone">Телефон</v:String>
+		<v:String x:Key="Company">Компания</v:String>
+		<v:String x:Key="Postcode">Почтовый индекс</v:String>
+		<v:String x:Key="Country">Страна</v:String>
+		<v:String x:Key="Region">Регион</v:String>
+		<v:String x:Key="City">Город</v:String>
+		<v:String x:Key="Address">Адрес</v:String>
 
-		<v:String x:Key="CustomItems">Пользовательские элементы</v:String>
+		<v:String x:Key="CustomFields">Пользовательские поля</v:String>
+		<v:String x:Key="AddField">Добавить поле</v:String>
 		<v:String x:Key="Text">Текстовое</v:String>
 		<v:String x:Key="Hidden">Скрытое</v:String>
 		<v:String x:Key="Logical">Логическое</v:String>

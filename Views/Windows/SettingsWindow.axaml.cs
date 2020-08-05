@@ -3,11 +3,18 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using System;
+using System.Text.RegularExpressions;
 
 namespace OlibKey.Views.Windows
 {
 	public class SettingsWindow : Window
 	{
+		private TabItem _tiStorage;
+		private TextBox _tbIteration;
+		private TextBox _tbNumberOfEncryptionProcedures;
+		private TextBox _tbAutosave;
+		private TextBox _tbBlock;
+		private TextBox _tbMessage;
 		private ComboBox _cbTheme;
 		private ComboBox _cbLanguage;
 		private Button _bClose;
@@ -15,6 +22,8 @@ namespace OlibKey.Views.Windows
 		public SettingsWindow()
 		{
 			InitializeComponent();
+			DataContext = App.Settings;
+
 			_cbLanguage.SelectedIndex = App.Settings.Language switch
 			{
 				"ru-RU" => 1,
@@ -29,12 +38,72 @@ namespace OlibKey.Views.Windows
 			{
 				"Gloomy" => 1,
 				"Mysterious" => 2,
+				"Turquoise" => 3,
 				_ => 0
 			};
 
 			_cbTheme.SelectionChanged += ThemeChange;
 			_cbLanguage.SelectionChanged += LanguageChange;
 			_bClose.Click += (s, e) => Close();
+			Closing += (s, e) =>
+			{
+				Regex reg = new Regex(@"^\d+$");
+				if (_tbAutosave.Text == "0"
+				|| !reg.IsMatch(_tbBlock.Text)
+				|| _tbBlock.Text == "0"
+				|| !reg.IsMatch(_tbMessage.Text)
+				|| _tbMessage.Text == "0")
+				{
+					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
+					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+					e.Cancel = true;
+					return;
+				}
+
+				if (App.MainWindowViewModel.IsUnlockDatabase)
+				{
+					if (!reg.IsMatch(_tbIteration.Text)
+						|| _tbIteration.Text == "0"
+						|| !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text)
+						|| _tbNumberOfEncryptionProcedures.Text == "0"
+						|| !reg.IsMatch(_tbAutosave.Text))
+					{
+						_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
+						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+						e.Cancel = true;
+						return;
+					}
+
+					if (App.MainWindowViewModel.SelectedTabItem != null)
+					{
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations = int.Parse(_tbIteration.Text);
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+					}
+				}
+
+				App.Settings.AutosaveDuration = int.Parse(_tbAutosave.Text);
+				App.Settings.BlockDuration = int.Parse(_tbBlock.Text);
+				App.Settings.MessageDuration = int.Parse(_tbMessage.Text);
+
+				App.Autosave.Stop();
+
+				App.Autosave.Interval = new TimeSpan(0, App.Settings.AutosaveDuration, 0);
+				App.Autoblock.Interval = new TimeSpan(0, App.Settings.BlockDuration, 0);
+
+				App.Autosave.Start();
+			};
+
+			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem != null && App.MainWindowViewModel.SelectedTabItem.ViewModel.IsUnlockDatabase;
+
+			if (App.MainWindowViewModel.SelectedTabItem != null)
+			{
+				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations.ToString();
+				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures.ToString();
+			}
+
+			_tbAutosave.Text = App.Settings.AutosaveDuration.ToString();
+			_tbBlock.Text = App.Settings.BlockDuration.ToString();
+			_tbMessage.Text = App.Settings.MessageDuration.ToString();
 		}
 
 
@@ -44,6 +113,12 @@ namespace OlibKey.Views.Windows
 			_cbTheme = this.FindControl<ComboBox>("cbTheme");
 			_cbLanguage = this.FindControl<ComboBox>("cbLanguage");
 			_bClose = this.FindControl<Button>("bClose");
+			_tbIteration = this.FindControl<TextBox>("tbIteration");
+			_tbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
+			_tiStorage = this.FindControl<TabItem>("tiStorage");
+			_tbAutosave = this.FindControl<TextBox>("tbAutosave");
+			_tbBlock = this.FindControl<TextBox>("tbBlock");
+			_tbMessage = this.FindControl<TextBox>("tbMessage");
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)
@@ -69,6 +144,7 @@ namespace OlibKey.Views.Windows
 			{
 				1 => "Gloomy",
 				2 => "Mysterious",
+				3 => "Turquoise",
 				_ => "Dazzling"
 			};
 

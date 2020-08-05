@@ -8,7 +8,8 @@
 		<v:String x:Key="Add">Hinzufügen</v:String>
 		<v:String x:Key="CreateBase">Speicher erstellen</v:String>
 		<v:String x:Key="OpenBase">Öffnen Sie das Repository</v:String>
-		<v:String x:Key="SaveBase">Speichern Sie den Speicher</v:String>
+		<v:String x:Key="SaveBase">Sicher speichern</v:String>
+		<v:String x:Key="SaveAllBases">Speichern Sie alle Tresore</v:String>
 		<v:String x:Key="AddLogin">Login hinzufügen</v:String>
 		<v:String x:Key="Settings">Einstellungen</v:String>
 		<v:String x:Key="ExitFrom">Melden Sie sich von OlibKey ab</v:String>
@@ -16,14 +17,22 @@
 		<v:String x:Key="ChangeMasterPassword">Ändern Sie das Master-Passwort</v:String>
 		<v:String x:Key="AboutPrograms">Über das Programm...</v:String>
 		<v:String x:Key="CheckUpdates">Auf Update prüfen</v:String>
+		<v:String x:Key="FileOlib">OlibKey-Datenbankdatei</v:String>
+		
 		<v:String x:Key="Search">Suche</v:String>
-		<v:String x:Key="CreateFolder">Ordner erstellen</v:String>
 		<v:String x:Key="AllItems">Alle Artikel</v:String>
-		<v:String x:Key="CustomFolder">Benutzerordner</v:String>
+		<v:String x:Key="Folder">Ordner</v:String>
 		<v:String x:Key="NotChosen">Nicht ausgewählt</v:String>
 		<v:String x:Key="RemoveSelection">Deaktivieren Sie</v:String>
+		<v:String x:Key="NameElement">Artikelname</v:String>
+
+		<v:String x:Key="GitHub">OlibKey auf GitHub</v:String>
+		<v:String x:Key="VKontakte">OlibKey auf VK</v:String>
+		<v:String x:Key="Facebook">OlibKey auf Facebook</v:String>
 
 		<v:String x:Key="Ready">Bereit</v:String>
+		<v:String x:Key="Elements">Artikel:</v:String>
+		<v:String x:Key="OpenedBases">Geöffnete Basen:</v:String>
 
 		<v:String x:Key="Collapse">Zusammenbruch</v:String>
 		<v:String x:Key="Expand">Erweitern</v:String>
@@ -43,7 +52,9 @@
 
 		<v:String x:Key="ListOfItems">Liste der Artikel</v:String>
 		<v:String x:Key="LockStorage">Tresor verriegeln</v:String>
+		<v:String x:Key="LockAllStorages">Verschließen Sie alle Tresore</v:String>
 		<v:String x:Key="UnlockStorage">Speicher entsperren</v:String>
+		<v:String x:Key="UnlockAllStorages">Schalte alle Tresore frei</v:String>
 		<v:String x:Key="ShowOPM">Zeigen OlibKey</v:String>
 
 		<v:String x:Key="MB1">Sie müssen zuerst Speicher hochladen oder erstellen!</v:String>
@@ -61,9 +72,13 @@
 
 		<v:String x:Key="Not1">Artikel erfolgreich gespeichert!</v:String>
 		<v:String x:Key="Not2">Artikel erfolgreich geändert!</v:String>
-		<v:String x:Key="Not3">Speicher erfolgreich erstellt!</v:String>
-		<v:String x:Key="Not4">Speicher erfolgreich gespeichert!</v:String>
-
+		<v:String x:Key="Not3">Repository erfolgreich erstellt:</v:String>
+		<v:String x:Key="Not4">Repository erfolgreich gespeichert:</v:String>
+		<v:String x:Key="Not5">Alle Repositorys wurden erfolgreich gespeichert!</v:String>
+		<v:String x:Key="Not6">Alle Speicher wurden erfolgreich geöffnet!</v:String>
+		<v:String x:Key="Not7">Alle Tresore wurden erfolgreich gesperrt!</v:String>
+		<v:String x:Key="Not8">Alle Tresore wurden erfolgreich entsperrt!</v:String>
+		<v:String x:Key="Not9">Tresor erfolgreich gesperrt:</v:String>
 
 		<v:String x:Key="Lowercase">Kleinbuchstaben (abc)</v:String>
 		<v:String x:Key="Uppercase">Großbuchstaben (ABC)</v:String>
@@ -75,7 +90,6 @@
 		<v:String x:Key="PasswordSave">Speichern</v:String>
 		<v:String x:Key="Require">Zu fordern</v:String>
 
-
 		<v:String x:Key="OldMasterPassword">Altes Master-Passwort</v:String>
 		<v:String x:Key="NewMasterPassword">Neues Master-Passwort</v:String>
 
@@ -83,6 +97,11 @@
 		<v:String x:Key="MasterPassword">Master-Passwort</v:String>
 		<v:String x:Key="Directory">Speicherpfad</v:String>
 		<v:String x:Key="Select">Auswählen</v:String>
+		<v:String x:Key="Iteration">Anzahl der Iterationen:</v:String>
+		<v:String x:Key="NumberOfEncryptionProcedures">Anzahl der Verschlüsselungsverfahren:</v:String>
+		<v:String x:Key="CDBError1">In Feldern mit einem numerischen Eintrag müssen Werte Zahlen enthalten und dürfen nicht Null sein!</v:String>
+		<v:String x:Key="CDBError2">Sie haben keinen Repository-Pfad ausgewählt oder kein Hauptkennwort angegeben!</v:String>
+		<v:String x:Key="CDBError3">Sie können keinen Tresor erstellen, wenn dieser Tresor bereits geöffnet ist!</v:String>
 
 		<v:String x:Key="Open">Öffnen</v:String>
 		<v:String x:Key="EnterMP">Geben Sie das Master-Passwort ein</v:String>
@@ -94,26 +113,32 @@
 
 		<v:String x:Key="Language">Sprache:</v:String>
 		<v:String x:Key="Theme">Theme:</v:String>
-		<v:String x:Key="CBHideProgram">Programm beim Schließen ausblenden</v:String>
-		<v:String x:Key="CBAutorunApplication">Führen Sie mit Windows aus</v:String>
+		<v:String x:Key="General">Allgemeines</v:String>
+		<v:String x:Key="Storage">Gewölbe</v:String>
+		<v:String x:Key="Autosave">Automatisch speichern über:</v:String>
+		<v:String x:Key="Block">Blockieren Sie alle Datenbanken (außer mit einer Erinnerung) durch:</v:String>
+		<v:String x:Key="MessageDuration">Dauer der Nachrichtenanzeige:</v:String>
+		<v:String x:Key="Sec">Sekunden</v:String>
+		<v:String x:Key="Min">Protokoll</v:String>
 
 		<v:String x:Key="Dazzling">Blendend</v:String>
 		<v:String x:Key="Gloomy">Düster</v:String>
 		<v:String x:Key="Mysterious">Geheimnisvoll</v:String>
+		<v:String x:Key="Turquoise">Türkis</v:String>
 
-		<v:String x:Key="Reminder">Erinnerung</v:String>
+		<v:String x:Key="Reminder">ErTINerung</v:String>
 		<v:String x:Key="Pause">Pause</v:String>
 		<v:String x:Key="Disable">Deaktivieren</v:String>
 		<v:String x:Key="ZeroOut">Null raus</v:String>
-		<v:String x:Key="ReminderStarted">Erinnerung gestartet</v:String>
+		<v:String x:Key="ReminderStarted">ErTINerung gestartet</v:String>
 		<v:String x:Key="StartTime">Startzeit</v:String>
 
 		<v:String x:Key="ErrorElement1">Fehler im Artikel:</v:String>
-		<v:String x:Key="ErrorElement2">Die Zeit ist im Element falsch, daher ist die Erinnerung deaktiviert. Versuchen Sie, die Programmiersprache zu ändern, oder wechseln Sie zum richtigen Zeitformat, indem Sie auf die Schaltfläche "Zurücksetzen" klicken.</v:String>
-
+		<v:String x:Key="ErrorElement2">Die Zeit ist im Element falsch, daher ist die ErTINerung deaktiviert. Versuchen Sie, die Programmiersprache zu ändern, oder wechseln Sie zum richtigen Zeitformat, indem Sie auf die Schaltfläche "Zurücksetzen" klicken.</v:String>
 
 		<v:String x:Key="Name">Titel</v:String>
 		<v:String x:Key="Username">Benutzername</v:String>
+		<v:String x:Key="Email">E-Mail</v:String>
 		<v:String x:Key="WebSite">Website</v:String>
 		<v:String x:Key="Notes">Hinweise</v:String>
 		<v:String x:Key="ChangeElement">Element bearbeiten</v:String>
@@ -135,14 +160,24 @@
 
 		<v:String x:Key="Passport">Persönliche Daten</v:String>
 		<v:String x:Key="FullName">Vollständiger Name</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Serie und Nummer</v:String>
+		<v:String x:Key="SeriesAndNumber">Serie und Nummer</v:String>
 		<v:String x:Key="PlaceOfIssue">Ausstellungsort</v:String>
+		<v:String x:Key="SocialSecurityNumber">Sozialversicherungsnummer</v:String>
+		<v:String x:Key="TIN">Steueridentifikationsnummer</v:String>
+		<v:String x:Key="Telephone">Telefon</v:String>
+		<v:String x:Key="Company">Unternehmen</v:String>
+		<v:String x:Key="Postcode">PLZ</v:String>
+		<v:String x:Key="Country">Land</v:String>
+		<v:String x:Key="Region">Region</v:String>
+		<v:String x:Key="City">Die Stadt</v:String>
+		<v:String x:Key="Address">Adresse</v:String>
 
-		<v:String x:Key="CustomItems">Пользовательские элементы</v:String>
-		<v:String x:Key="Text">Текстовое</v:String>
-		<v:String x:Key="Hidden">Скрытое</v:String>
-		<v:String x:Key="Logical">Логическое</v:String>
-		<v:String x:Key="Data">Данные</v:String>
+		<v:String x:Key="CustomFields">Benutzerdefinierte Felder</v:String>
+		<v:String x:Key="AddField">Feld hinzufügen</v:String>
+		<v:String x:Key="Text">Text</v:String>
+		<v:String x:Key="Hidden">Versteckt</v:String>
+		<v:String x:Key="Logical">Logisch</v:String>
+		<v:String x:Key="Data">Daten</v:String>
 		<v:String x:Key="TypeColon">Eine Art:</v:String>
 
 		<v:String x:Key="ToApply">Bewerben</v:String>

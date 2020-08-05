@@ -9,6 +9,7 @@
 		<v:String x:Key="CreateBase">Ստեղծել պահեստ</v:String>
 		<v:String x:Key="OpenBase">Բացել պահեստ</v:String>
 		<v:String x:Key="SaveBase">Պահպանել պահեստ</v:String>
+		<v:String x:Key="SaveAllBases">Պահպանեք բոլոր պահոցները</v:String>
 		<v:String x:Key="AddLogin">Ավելացնել լոգին</v:String>
 		<v:String x:Key="Settings">Կարգավորումներ</v:String>
 		<v:String x:Key="ExitFrom">Դուրս գալ OlibKey-ից</v:String>
@@ -16,14 +17,22 @@
 		<v:String x:Key="ChangeMasterPassword">Փոխել վարպետության-գաղտաբառը</v:String>
 		<v:String x:Key="AboutPrograms">Ծրագրի մասին...</v:String>
 		<v:String x:Key="CheckUpdates">Ստուգել թարմացումները</v:String>
+		<v:String x:Key="FileOlib">OlibKey տվյալների շտեմարան</v:String>
+		
 		<v:String x:Key="Search">Որոնել</v:String>
-		<v:String x:Key="CreateFolder">Ստեղծեք թղթապանակ</v:String>
 		<v:String x:Key="AllItems">Բոլոր իրերը</v:String>
-		<v:String x:Key="CustomFolder">Օգտագործողի պանակ</v:String>
+		<v:String x:Key="Folder">Թղթապանակ</v:String>
 		<v:String x:Key="NotChosen">Ընտրված չէ</v:String>
 		<v:String x:Key="RemoveSelection">Elնջել</v:String>
+		<v:String x:Key="NameElement">Նյութի անվանումը</v:String>
+
+		<v:String x:Key="GitHub">OlibKey- ը GitHub- ում</v:String>
+		<v:String x:Key="VKontakte">OlibKey- ը VK- ում</v:String>
+		<v:String x:Key="Facebook">OlibKey- ը Ֆեյսբուքում</v:String>
 
 		<v:String x:Key="Ready">Պատրաստ է</v:String>
+		<v:String x:Key="Elements">Նյութեր:</v:String>
+		<v:String x:Key="OpenedBases">Բացված հիմքերը:</v:String>
 
 		<v:String x:Key="Collapse">Փլուզվել</v:String>
 		<v:String x:Key="Expand">Ընդլայնել</v:String>
@@ -43,9 +52,10 @@
 
 		<v:String x:Key="ListOfItems">Նյութերի ցուցակ</v:String>
 		<v:String x:Key="LockStorage">Կողպեք պահոցը</v:String>
+		<v:String x:Key="LockAllStorages">Կողպեք բոլոր պահոցները</v:String>
 		<v:String x:Key="UnlockStorage">Բացել պահեստը</v:String>
+		<v:String x:Key="UnlockAllStorages">Բացել բոլոր պահոցները</v:String>
 		<v:String x:Key="ShowOPM">Ուցադրել OlibKey</v:String>
-
 
 		<v:String x:Key="MB1">Առաջինը, դուք պետք էք բեռնել կամ ստեղծել պահեստ</v:String>
 		<v:String x:Key="Error">Սխալ</v:String>
@@ -60,12 +70,15 @@
 
 		<v:String x:Key="Successfully">Հաջող!</v:String>
 
-
 		<v:String x:Key="Not1">Ապրանքը հաջողությամբ պահպանվեց:</v:String>
 		<v:String x:Key="Not2">Նյութը հաջողությամբ փոփոխված է:</v:String>
-		<v:String x:Key="Not3">Պահպանումը հաջողությամբ ստեղծվեց:</v:String>
-		<v:String x:Key="Not4">Պահեստը հաջողությամբ պահպանվեց:</v:String>
-
+		<v:String x:Key="Not3">Ստեղծված պահեստը հաջողությամբ ստեղծվեց.</v:String>
+		<v:String x:Key="Not4">Հաջողությամբ պահպանված պահեստը.</v:String>
+		<v:String x:Key="Not5">Բոլոր պահեստարանները հաջողությամբ պահպանվել են:</v:String>
+		<v:String x:Key="Not6">Բոլոր պահեստները հաջողությամբ բացվել են:</v:String>
+		<v:String x:Key="Not7">Բոլոր պահոցները հաջողությամբ կողպվել են:</v:String>
+		<v:String x:Key="Not8">Բոլոր պահոցները հաջողությամբ բացվել են:</v:String>
+		<v:String x:Key="Not9">Հիմքը հաջողությամբ արգելափակված է.</v:String>
 
 		<v:String x:Key="Lowercase">Փոքրատառ (abc)</v:String>
 		<v:String x:Key="Uppercase">Մեծատառ (ABC)</v:String>
@@ -84,6 +97,11 @@
 		<v:String x:Key="MasterPassword">Վարպետության-Գաղտնաբաոռը</v:String>
 		<v:String x:Key="Directory">Պահպանման ուղին</v:String>
 		<v:String x:Key="Select">Ընտրել</v:String>
+		<v:String x:Key="Iteration">Կրկնությունների քանակը.</v:String>
+		<v:String x:Key="NumberOfEncryptionProcedures">Գաղտնագրման ընթացակարգերի քանակը.</v:String>
+		<v:String x:Key="CDBError1">Թվային մուտքագրման դաշտերում արժեքները պետք է պարունակեն թվեր և չեն կարող զրո լինել:</v:String>
+		<v:String x:Key="CDBError2">Դուք չեք ընտրել պահեստային ուղի կամ չեք տրամադրել վարպետ գաղտնաբառ:</v:String>
+		<v:String x:Key="CDBError3">Դուք չեք կարող ստեղծել պահոց, եթե այս կամարն արդեն բաց է:</v:String>
 
 		<v:String x:Key="Open">Բացել</v:String>
 		<v:String x:Key="EnterMP">Գրեք վարպետության գաղտնաբառը</v:String>
@@ -95,12 +113,18 @@
 
 		<v:String x:Key="Language">Լեզուն:</v:String>
 		<v:String x:Key="Theme">Թեման:</v:String>
-		<v:String x:Key="CBHideProgram">Թաքցնել ծրագիրը փակելիս</v:String>
-		<v:String x:Key="CBAutorunApplication">Գործարկել Windows- ի հետ</v:String>
+		<v:String x:Key="General">Գեներալ</v:String>
+		<v:String x:Key="Storage">Պահոց</v:String>
+		<v:String x:Key="Autosave">Ավտոմատ խնայողություն միջոցով ՝</v:String>
+		<v:String x:Key="Block">Արգելափակել բոլոր տվյալների բազաները (բացառությամբ հիշեցմամբ) ՝</v:String>
+		<v:String x:Key="MessageDuration">Հաղորդագրության ցուցադրման տևողությունը.</v:String>
+		<v:String x:Key="Sec">վայրկյան</v:String>
+		<v:String x:Key="Min">րոպեներ</v:String>
 
 		<v:String x:Key="Dazzling">Զարմանալի</v:String>
 		<v:String x:Key="Gloomy">Մռայլ</v:String>
 		<v:String x:Key="Mysterious">Առեղծվածային</v:String>
+		<v:String x:Key="Turquoise">Փիրուզագույն</v:String>
 
 		<v:String x:Key="Reminder">Հիշեցում</v:String>
 		<v:String x:Key="Pause">Դադար</v:String>
@@ -112,9 +136,9 @@
 		<v:String x:Key="ErrorElement1">Սխալ տարրում.</v:String>
 		<v:String x:Key="ErrorElement2">Ժամանակը սխալ է տարրի մեջ, այնպես որ հիշեցումն անջատված է: Փորձեք փոխել ծրագրի լեզուն կամ փոխեք ճիշտ ժամանակի ձևաչափին `սեղմելով« Վերականգնել »կոճակը:</v:String>
 
-
 		<v:String x:Key="Name">Անունը</v:String>
 		<v:String x:Key="Username">Օգտագործողի անունը</v:String>
+		<v:String x:Key="Email">Էլ</v:String>
 		<v:String x:Key="WebSite">Վեբ-կայք</v:String>
 		<v:String x:Key="Notes">Նշումներ</v:String>
 		<v:String x:Key="ChangeElement">Փոխել տարրը</v:String>
@@ -137,10 +161,20 @@
 
 		<v:String x:Key="Passport">Անձնական տվյալներ</v:String>
 		<v:String x:Key="FullName">Ամբողջական անուն</v:String>
-		<v:String x:Key="PassportSeriesAndNumber">Սերիան և համարը</v:String>
+		<v:String x:Key="SeriesAndNumber">Սերիան և համարը</v:String>
 		<v:String x:Key="PlaceOfIssue">Թողարկման վայրը</v:String>
+		<v:String x:Key="SocialSecurityNumber">Սոցիալական քարտի համար</v:String>
+		<v:String x:Key="TIN">ՊԱՆԴՈԿ</v:String>
+		<v:String x:Key="Telephone">Հեռախոս</v:String>
+		<v:String x:Key="Company">Ընկերություն</v:String>
+		<v:String x:Key="Postcode">Փոստային ինդեքս</v:String>
+		<v:String x:Key="Country">Երկիր</v:String>
+		<v:String x:Key="Region">Մարզ</v:String>
+		<v:String x:Key="City">Քաղաք</v:String>
+		<v:String x:Key="Address">Հասցե</v:String>
 
-		<v:String x:Key="CustomItems">Պատվերով իրեր</v:String>
+		<v:String x:Key="CustomFields">Հատուկ դաշտեր</v:String>
+		<v:String x:Key="AddField">Ավելացնել դաշտ</v:String>
 		<v:String x:Key="Text">Տեքստ</v:String>
 		<v:String x:Key="Hidden">Թաքնված</v:String>
 		<v:String x:Key="Logical">Տրամաբանական</v:String>

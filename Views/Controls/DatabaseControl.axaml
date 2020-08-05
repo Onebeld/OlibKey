@@ -1,0 +1,27 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:reactiveUi="http://reactiveui.net"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:l="clr-namespace:OlibKey.Views.Pages;assembly=OlibKey"
+			 BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
+			 BorderThickness="0 1 0 0"
+             x:Class="OlibKey.Views.Controls.DatabaseControl">
+	<Grid ColumnDefinitions="1*,2*" RowDefinitions="*,50">
+		<reactiveUi:RoutedViewHost Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" PageTransition="{x:Null}" Router="{Binding Router}">
+			<reactiveUi:RoutedViewHost.DefaultContent>
+				<l:StartPage/>
+			</reactiveUi:RoutedViewHost.DefaultContent>
+		</reactiveUi:RoutedViewHost>
+		<ListBox x:Name="listBox" Grid.Row="0" Grid.Column="0" Grid.RowSpan="1" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding LoginList}" SelectedIndex="{Binding SelectedIndex}" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
+		<Border Grid.Column="0" Grid.Row="2" BorderThickness="0 1 1 0" Classes="ButtonsMenu">
+			<Grid ColumnDefinitions="*,40">
+				<Button Command="{Binding CreateLoginCommand}" Content="{DynamicResource Add}" Margin="10" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<Button Grid.Column="1" Margin="0 10 10 10" ToolTip.Tip="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Padding="5">
+					<Path Data="M 10.24949 0 C 7.0671703 0 4.4803723 2.5636361 4.4803723 5.6909091 c 0 1.327272 0.465251 2.527273 1.228264 3.509091 L 0.23727825 14.618182 c -0.316371 0.327273 -0.316371 0.836363 0 1.145454 C 0.40476825 15.927273 0.60947925 16 0.81419029 16 1.0375103 16 1.2422213 15.92727 1.4097123 15.763636 l 5.471357 -5.418181 C 7.8301823 11.018182 8.9840063 11.4 10.23088 11.4 13.4132 11.4 15.999999 8.8363641 15.999999 5.7090901 15.999999 2.5818181 13.431811 0 10.24949 0 Z m 0 9.9636363 c -2.3634777 0 -4.2803137 -1.9090912 -4.2803137 -4.2545462 0 -2.345454 1.916836 -4.254545 4.2803137 -4.254545 2.363478 0 4.280314 1.909091 4.280314 4.254545 0 2.345455 -1.916836 4.2545462 -4.280314 4.2545462 z m 2.88456 -4.1818182 c -0.03722 0.309091 -0.316371 0.545454 -0.632743 0.545454 -0.03722 0 -0.05583 0 -0.09305 0 -0.353591 -0.05454 -0.595522 -0.363636 -0.558302 -0.709091 0.130271 -0.945454 -0.949113 -1.436363 -1.004943 -1.454545 -0.316371 -0.145455 -0.465252 -0.527273 -0.316371 -0.836364 0.14888 -0.309091 0.521081 -0.454545 0.856063 -0.327272 0.07444 0.01818 2.009886 0.890909 1.749346 2.781818 z m -1.358535 1.381818 c 0.13027 0.127273 0.223321 0.327273 0.223321 0.509091 0 0.2 -0.07444 0.381818 -0.223321 0.509091 -0.13027 0.127273 -0.334981 0.218182 -0.521081 0.218182 -0.186102 0 -0.390812 -0.07273 -0.521083 -0.218182 -0.130269 -0.127273 -0.22332 -0.327273 -0.22332 -0.509091 0 -0.181818 0.07444 -0.381818 0.22332 -0.509091 0.130271 -0.127273 0.334981 -0.218182 0.521083 -0.218182 0.1861 0 0.372201 0.07273 0.521081 0.218182 z"/>
+				</Button>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

@@ -6,6 +6,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.0] - 2020-08-05
+### Added
+- Added click animations
+- Added Noto Sans font
+- Added tabs in settings and for storages
+- Added information about the number of items and bases in the list to StatusBar
+- With the addition of tabs, two new commands have been added: "Save all storages", "Unlock all storages" and "Lock all storages"
+- Added "Turquoise" theme
+- Added Drag and Drop support
+- Added more hotkeys
+- Added automatic blocking of storages (except for those who have an activated "Reminder" element)
+- New item type: Notes
+
+### Changed
+- Moving to .NET 5 Preview 7
+- Migrating to Avalonia 0.10.0-preview2
+- Open menu in rounded corners will not show a piece of background
+- Button icon color now changes when pressed
+- Styled ScrollBar
+- The operation of the encryptor has been changed (you can specify the iteration and the number of encryption procedures) **We need to create the repository again!**
+- Supplemented by Personal Data
+- In the password generator, when copying an empty field, it now first generates and then copies
+- With the addition of tabs, you can now open multiple storages at a time
+- Message box with OK button, you can press Enter to close
+- Redrawn logo, simplified geometry in vector images
+- In the settings, you can now change the autosave interval and message display duration in the StatusBar
+- If the field with username is empty, Email will be shown on the main screen
+- In the list of items, if you click on an empty field, the selection will be inactive and will redirect to the initial screen
+
+### Fixed
+- Fixed crash in search (element name was null)
+- TextBox does not focus when editing folder
+- With the addition of the font, the symbols of the Armenian language were fixed on some OS ("squares")
+- Fixed some hotkey interactions on locked storage
+
 ## [3.0.0] - 2020-07-16
 ### Added
 - Custom Elements Added

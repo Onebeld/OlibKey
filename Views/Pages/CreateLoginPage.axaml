@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:c="clr-namespace:OlibKey.Core;assembly=OlibKey"
+			 Background="{DynamicResource ThemeWindowBackgroundBrush}"
              x:Class="OlibKey.Views.Pages.CreateLoginPage">
 	<Grid>
 		<Grid.RowDefinitions>
@@ -22,6 +23,7 @@
 							<ComboBoxItem Content="{DynamicResource BankCard}"/>
 							<ComboBoxItem Content="{DynamicResource Passport}"/>
 							<ComboBoxItem Content="{DynamicResource Reminder}"/>
+							<ComboBoxItem Content="{DynamicResource Notes}"/>
 						</ComboBox>
 					</StackPanel>
 				</Border>
@@ -34,13 +36,18 @@
 							<Separator Margin="15,5"/>
 							<TextBlock Text="{DynamicResource Username}" Classes="Heading"/>
 							<TextBox Margin="5" Text="{Binding NewLogin.Username}"/>
+							
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Email}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Email}"/>
 
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
 							<TextBox x:Name="txtPassword" Margin="5" Text="{Binding NewLogin.Password}" PasswordChar="•"/>
 							<StackPanel Orientation="Horizontal">
-								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5" Padding="5 2"/>
+								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Margin="5 0 5 0" Padding="5 2"/>
 								<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword" VerticalAlignment="Center"/>
 							</StackPanel>
 							<DockPanel Margin="5 0">
@@ -89,20 +96,68 @@
 
 							<Separator/>
 
-							<TextBlock Text="{DynamicResource PassportSeriesAndNumber}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding NewLogin.PersonalDataNumber}"/>
+							<TextBlock Text="{DynamicResource SeriesAndNumber}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Number}"/>
 
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource PlaceOfIssue}" Classes="Heading"/>
-							<TextBox Margin="5" Text="{Binding NewLogin.PersonalDataPlaceOfIssue}"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.PlaceOfIssue}"/>
 
+							<Separator/>
 
+							<TextBlock Text="{DynamicResource SocialSecurityNumber}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.SocialSecurityNumber}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource TIN}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.TIN}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Email}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Email}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Telephone}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Telephone}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Company}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Company}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Postcode}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Postcode}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Country}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Country}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Region}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Region}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource City}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.City}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Address}" Classes="Heading"/>
+							<TextBox Margin="5" Text="{Binding NewLogin.Address}"/>
 						</StackPanel>
 
 						<Separator/>
 
-						<TextBlock Text="{DynamicResource CustomFolder}" Classes="Heading"/>
+						<TextBlock Text="{DynamicResource Folder}" Classes="Heading"/>
 						<ComboBox Margin="5" Items="{Binding Folders}" SelectedIndex="{Binding SelectionFolderIndex}">
 							<ComboBox.ItemTemplate>
 								<DataTemplate>
@@ -112,28 +167,28 @@
 						</ComboBox>
 					</StackPanel>
 				</Border>
-				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
+				<Border Classes="BorderStyle" Margin="0 0 0 5" Padding="0 5">
 					<StackPanel>
 						<TextBlock Text="{DynamicResource Notes}" Classes="Heading"/>
 						<TextBox Margin="5 5 5 0" AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewLogin.Note}"/>
 					</StackPanel>
 				</Border>
-				<TextBlock Text="{DynamicResource CustomItems}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
+				<TextBlock Text="{DynamicResource CustomFields}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 5 0 5"/>
 				<Border Classes="BorderStyle" Margin="0 5" Padding="0 5">
 					<StackPanel>
 						<ScrollViewer>
-							<ItemsRepeater Items="{Binding CustomElements}"/>
+							<ItemsRepeater Items="{Binding CustomFields}"/>
 						</ScrollViewer>
-						<TextBlock Text="{DynamicResource AddElement}" Classes="Heading"/>
+						<TextBlock Text="{DynamicResource AddField}" Classes="Heading"/>
 						<DockPanel Margin="5">
-							<TextBlock Text="{DynamicResource TypeColon}" VerticalAlignment="Center" Margin="0 0 5 0"/>
-							<ComboBox x:Name="TypeCustomElement" SelectedIndex="{Binding Type}">
+							<TextBlock Text="{DynamicResource TypeColon}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
+							<ComboBox x:Name="TypeCustomField" SelectedIndex="{Binding Type}">
 								<ComboBoxItem Content="{StaticResource Text}"/>
 								<ComboBoxItem Content="{DynamicResource Hidden}"/>
 								<ComboBoxItem Content="{DynamicResource Logical}"/>
 							</ComboBox>
 						</DockPanel>
-						<Button Content="{DynamicResource Add}" Command="{Binding AddCustomElementCommand}" Margin="5 0 5 0"/>
+						<Button Content="{DynamicResource Add}" Command="{Binding AddCustomFieldCommand}" Margin="5 0 5 0"/>
 					</StackPanel>
 				</Border>
 			</StackPanel>

@@ -32,22 +32,22 @@ namespace OlibKey.ViewModels.Pages
 		private ReactiveCommand<Unit, Unit> SaveLoginCommand { get; }
 		private ReactiveCommand<Unit, Unit> DeleteLoginCommand { get; }
 		private ReactiveCommand<Unit, Unit> CancelCommand { get; }
-		private ReactiveCommand<Unit, Unit> AddCustomElementCommand { get; }
+		private ReactiveCommand<Unit, Unit> AddCustomFieldCommand { get; }
 
 		#endregion
 
 		#region Property's
 
 		public int Type { get; set; }
-		public ObservableCollection<CustomElementListItem> CustomElements { get; set; }
+		public ObservableCollection<CustomFieldListItem> CustomFields { get; set; }
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
 			set => this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
 		}
 
-		private CustomFolder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
-		private ObservableCollection<CustomFolder> Folders { get; set; }
+		private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
+		private ObservableCollection<Folder> Folders { get; set; }
 
 		public LoginListItem LoginList;
 
@@ -64,12 +64,12 @@ namespace OlibKey.ViewModels.Pages
 
 		public IScreen HostScreen { get; }
 
-		public EditLoginPageViewModel(LoginListItem acc, IScreen screen = null)
+		public EditLoginPageViewModel(LoginListItem acc, Database db, IScreen screen = null)
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
 
-			CustomElements = new ObservableCollection<CustomElementListItem>();
+			CustomFields = new ObservableCollection<CustomFieldListItem>();
 
 			LoginList = acc;
 
@@ -77,6 +77,7 @@ namespace OlibKey.ViewModels.Pages
 			{
 				Name = acc.LoginItem.Name,
 				Username = acc.LoginItem.Username,
+				Email = acc.LoginItem.Email,
 				Note = acc.LoginItem.Note,
 				Type = acc.LoginItem.Type,
 				TimeCreate = acc.LoginItem.TimeCreate
@@ -109,8 +110,17 @@ namespace OlibKey.ViewModels.Pages
 					VisiblePersonalDataSection = true;
 					VisibleReminderSection = false;
 
-					NewLogin.PersonalDataNumber = acc.LoginItem.PersonalDataNumber;
-					NewLogin.PersonalDataPlaceOfIssue = acc.LoginItem.PersonalDataPlaceOfIssue;
+					NewLogin.Number = acc.LoginItem.Number;
+					NewLogin.PlaceOfIssue = acc.LoginItem.PlaceOfIssue;
+					NewLogin.SocialSecurityNumber = acc.LoginItem.SocialSecurityNumber;
+					NewLogin.TIN = acc.LoginItem.TIN;
+					NewLogin.Telephone = acc.LoginItem.Telephone;
+					NewLogin.Company = acc.LoginItem.Company;
+					NewLogin.Postcode = acc.LoginItem.Postcode;
+					NewLogin.Country = acc.LoginItem.Country;
+					NewLogin.Region = acc.LoginItem.Region;
+					NewLogin.City = acc.LoginItem.City;
+					NewLogin.Address = acc.LoginItem.Address;
 					break;
 				case 3:
 					VisiblePasswordSection = false;
@@ -120,37 +130,43 @@ namespace OlibKey.ViewModels.Pages
 
 					NewLogin.IsReminderActive = acc.LoginItem.IsReminderActive;
 					break;
+				case 4:
+					VisiblePasswordSection = false;
+					VisibleBankCardSection = false;
+					VisiblePersonalDataSection = false;
+					VisibleReminderSection = false;
+					break;
 			}
 
 			SaveLoginCommand = ReactiveCommand.Create(SaveLogin);
 			CancelCommand = ReactiveCommand.Create(BackVoid);
 			DeleteLoginCommand = ReactiveCommand.Create(DeleteLogin);
-			AddCustomElementCommand = ReactiveCommand.Create(AddCustomElement);
+			AddCustomFieldCommand = ReactiveCommand.Create(AddCustomField);
 
-			Folders = new ObservableCollection<CustomFolder>
+			Folders = new ObservableCollection<Folder>
 			{
-				new CustomFolder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
+				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
 			};
-			if (App.Database.CustomFolders != null)
-				foreach (CustomFolder i in App.Database.CustomFolders) Folders.Add(i);
+
+			if (db.Folders != null) foreach (Folder i in db.Folders) Folders.Add(i);
 
 			SelectionFolderIndex = 0;
-			foreach (CustomFolder i in Folders.Where(i => i.ID == LoginList.LoginItem.FolderID))
+			foreach (Folder i in Folders.Where(i => i.ID == LoginList.LoginItem.FolderID))
 			{
 				SelectionFolderIndex = Folders.IndexOf(i);
 				break;
 			}
 
-			foreach (CustomElement i in acc.LoginItem.CustomElements)
+			foreach (CustomField i in acc.LoginItem.CustomFields)
 			{
-				CustomElements.Add(new CustomElementListItem(new Housing
+				CustomFields.Add(new CustomFieldListItem(new Housing
 				{
-					CustomElement = i,
+					CustomField = i,
 					IsEnabled = true
 				})
 				{
 					ID = Guid.NewGuid().ToString("N"),
-					DeleteCustomElement = DeleteCustomElement
+					DeleteCustomField = DeleteCustomField
 				});
 			}
 		}
@@ -160,7 +176,7 @@ namespace OlibKey.ViewModels.Pages
 			LoginList.LoginItem = NewLogin;
 			LoginList.LoginItem.FolderID = SelectionFolderItem.ID;
 
-			LoginList.LoginItem.CustomElements = CustomElements.Select(item => item.HousingElement.CustomElement).ToList();
+			LoginList.LoginItem.CustomFields = CustomFields.Select(item => item.HousingElement.CustomField).ToList();
 			LoginList.LoginItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 			if (NewLogin.IsReminderActive)
 			{
@@ -169,13 +185,12 @@ namespace OlibKey.ViewModels.Pages
 			}
 			else
 			{
-				if (LoginList.ReminderTimer != null)
-					LoginList.ReminderTimer.Stop();
+				LoginList.ReminderTimer?.Stop();
 			}
 			LoginList.EditedLogin();
 
 			EditCompleteCallback?.Invoke(LoginList);
-			App.MainWindow.MessageStatusBar("Not2");
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not2"));
 		}
 		private async void DeleteLogin()
 		{
@@ -185,23 +200,23 @@ namespace OlibKey.ViewModels.Pages
 			if (r == MessageBox.MessageBoxResult.Yes)
 				DeleteLoginCallback?.Invoke();
 		}
-		private void AddCustomElement()
+		private void AddCustomField()
 		{
-			CustomElements.Add(new CustomElementListItem(new Housing
+			CustomFields.Add(new CustomFieldListItem(new Housing
 			{
-				CustomElement = new CustomElement { Type = Type },
+				CustomField = new CustomField { Type = Type },
 				IsEnabled = true
 			})
 			{
 				ID = Guid.NewGuid().ToString("N"),
-				DeleteCustomElement = DeleteCustomElement
+				DeleteCustomField = DeleteCustomField
 			});
 		}
-		private void DeleteCustomElement(string id)
+		private void DeleteCustomField(string id)
 		{
-			foreach (CustomElementListItem item in CustomElements.Where(item => item.ID == id))
+			foreach (CustomFieldListItem item in CustomFields.Where(item => item.ID == id))
 			{
-				CustomElements.Remove(item);
+				CustomFields.Remove(item);
 				break;
 			}
 		}

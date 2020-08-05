@@ -45,9 +45,9 @@ namespace OlibKey.Views.Windows
 				}
 				if (App.Settings.GeneratorAllowOther) allowed += other;
 				int minChars = int.Parse(App.Settings.GenerationCount);
-				int numChars = Crypto.RandomInteger(minChars, minChars);
+				int numChars = Encryptor.RandomInteger(minChars, minChars);
 				while (password.Length < numChars)
-					password += allowed.Substring(Crypto.RandomInteger(0, allowed.Length - 1), 1);
+					password += allowed.Substring(Encryptor.RandomInteger(0, allowed.Length - 1), 1);
 				password = RandomizeString(password);
 				return password;
 			}
@@ -64,7 +64,7 @@ namespace OlibKey.Views.Windows
 			string result = "";
 			while (str.Length > 0)
 			{
-				int i = Crypto.RandomInteger(0, str.Length - 1);
+				int i = Encryptor.RandomInteger(0, str.Length - 1);
 				result += str.Substring(i, 1);
 				str = str.Remove(i, 1);
 			}
@@ -73,10 +73,14 @@ namespace OlibKey.Views.Windows
 		}
 		private void SavePassword(object sender, RoutedEventArgs e)
 		{
-			if (_tbPassword.Text == null || _tbPassword.Text.Length < 1) _tbPassword.Text = RandomPassword();
+			if (string.IsNullOrEmpty(_tbPassword.Text)) _tbPassword.Text = RandomPassword();
 
 			Close(true);
 		}
-		private void CopyGeneratedPassword(object sender, RoutedEventArgs e) => Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
+		private void CopyGeneratedPassword(object sender, RoutedEventArgs e)
+		{
+			if (string.IsNullOrEmpty(_tbPassword.Text)) _tbPassword.Text = RandomPassword();
+			Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
+		}
 	}
 }

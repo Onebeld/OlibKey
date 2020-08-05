@@ -3,17 +3,17 @@
        xmlns:sys="clr-namespace:System;assembly=netstandard">
     <Style.Resources>
 		<Color x:Key="ThemeWindowBackgroundColor">#FF5A0F26</Color>
-        <Color x:Key="ThemeBackgroundColor">#FFFFFFFF</Color>
+        <Color x:Key="ThemeBackgroundColor">#FFD2FEFF</Color>
 		<Color x:Key="ThemeForegroundColor">#FF000000</Color>
-		<Color x:Key="ThemeForegroundOpacityColor">#FF777777</Color>
-		<Color x:Key="ThemeGlobalBorderColor">#FFA5A5A5</Color>
-		<Color x:Key="ThemeHoverBackgroundColor">#FFE3E3E3</Color>
+		<Color x:Key="ThemeForegroundOpacityColor">#FF5E3B82</Color>
+		<Color x:Key="ThemeGlobalBorderColor">#FF679593</Color>
+		<Color x:Key="ThemeHoverBackgroundColor">#FFC1E9EA</Color>
 		<Color x:Key="ThemeWindowForegroundColor">#FFFFFFFF</Color>
-		<Color x:Key="ThemePanelBackgroundColor">#FFEAEAEA</Color>
-		<Color x:Key="ThemeSelectedControlColor">#FF931D60</Color>
+		<Color x:Key="ThemePanelBackgroundColor">#FF9AE2DE</Color>
+		<Color x:Key="ThemeSelectedControlColor">#FFB30101</Color>
 		<Color x:Key="ThemeGitHubColor">#FF231E1B</Color>
 		<Color x:Key="ThemeScrollBoxHoverColor">#FF333333</Color>
-		<Color x:Key="ThemeBackgroundContentTabItemColor">#FFF3F3F3</Color>
+		<Color x:Key="ThemeBackgroundContentTabItemColor">#FFC2EAEB</Color>
 
 		<SolidColorBrush x:Key="ThemeWindowBackgroundBrush" Color="{DynamicResource ThemeWindowBackgroundColor}"/>
         <SolidColorBrush x:Key="ThemeBackgroundBrush" Color="{DynamicResource ThemeBackgroundColor}"/>

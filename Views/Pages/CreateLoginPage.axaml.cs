@@ -49,9 +49,7 @@ namespace OlibKey.Views.Pages
 
 		private void SectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			ComboBox c = (ComboBox)sender;
-
-			switch (c.SelectedIndex)
+			switch (((ComboBox)sender).SelectedIndex)
 			{
 				case 0:
 					_passwordSection.IsVisible = true;
@@ -78,32 +76,25 @@ namespace OlibKey.Views.Pages
 					_bankCartSection.IsVisible = false;
 					_personalDataSection.IsVisible = false;
 					break;
+				case 4:
+					_passwordSection.IsVisible = false;
+					_reminderSection.IsVisible = false;
+					_bankCartSection.IsVisible = false;
+					_personalDataSection.IsVisible = false;
+					break;
 			}
 		}
 
-		private void CheckedPassword(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			_txtPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
+		private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
 
-		private void CheckedSecurityCode(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			_txtSecurityCode.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
+		private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
 
 		private void TimeZeroing(object sender, RoutedEventArgs e) => _txtStartTime.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 
 		private async void GeneratePassword(object sender, RoutedEventArgs e)
 		{
-			var a = new PasswordGeneratorWindow();
-			a._saveButton.IsVisible = true;
-			bool b = await a.ShowDialog<bool>(App.MainWindow);
-			if (b == true)
-			{
-				_txtPassword.Text = a._tbPassword.Text;
-			}
+			PasswordGeneratorWindow a = new PasswordGeneratorWindow { _saveButton = { IsVisible = true } };
+			if (await a.ShowDialog<bool>(App.MainWindow)) _txtPassword.Text = a._tbPassword.Text;
 		}
 	}
 }

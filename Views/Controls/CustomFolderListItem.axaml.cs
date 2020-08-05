@@ -2,16 +2,17 @@
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using OlibKey.Structures;
+using System.Threading.Tasks;
 
 namespace OlibKey.Views.Controls
 {
-	public class CustomFolderListItem : UserControl
+	public class FolderListItem : UserControl
 	{
 		public TextBox _tbName;
 		private TextBlock _textName;
 
-		public CustomFolder FolderContext => DataContext as CustomFolder;
-		public CustomFolderListItem() => InitializeComponent();
+		public Folder FolderContext => DataContext as Folder;
+		public FolderListItem() => InitializeComponent();
 
 		private void InitializeComponent()
 		{
@@ -32,9 +33,11 @@ namespace OlibKey.Views.Controls
 				}
 			};
 		}
-		public void Focusing()
+		public async void Focusing()
 		{
 			_tbName.IsVisible = true;
+			await Task.Delay(50);
+			_tbName.Focus();
 		}
 	}
 }

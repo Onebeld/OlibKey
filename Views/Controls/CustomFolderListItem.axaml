@@ -4,14 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="450"
              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-             x:Class="OlibKey.Views.Controls.CustomFolderListItem">
+             x:Class="OlibKey.Views.Controls.FolderListItem">
 	<Border Padding="0,2">
 		<Grid ColumnDefinitions="Auto,*">
 			<Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
 				<Image x:Name="imageIcon" Source="{StaticResource FolderIcon}" Margin="5"/>
 			</Border>
 			
-			<TextBlock x:Name="textName" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundWindow}"/>
+			<TextBlock x:Name="textName" Foreground="{StaticResource ThemeForegroundBrush}" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
 			<TextBox x:Name="tbName" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
 		</Grid>
 	</Border>

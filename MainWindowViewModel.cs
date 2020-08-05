@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reactive;
-using System.Runtime.InteropServices;
 using Avalonia.Controls;
 using ReactiveUI;
 using OlibKey.Core;
@@ -11,23 +9,22 @@ using OlibKey.Views.Controls;
 using OlibKey.Structures;
 using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Windows;
-using Path = System.IO.Path;
+using System;
+using System.Collections.Generic;
+using Avalonia;
 
 namespace OlibKey
 {
-	public class MainWindowViewModel : ReactiveObject, IScreen
+	public class MainWindowViewModel : ReactiveObject
 	{
-		private string _nameDatabase;
-
 		private bool _isUnlockDatabase;
 		private bool _isLockDatabase;
-		private bool _isOSX;
+		private bool _isActivateDnD;
 
-		private int _selectedIndex;
+		private int _selectedTabIndex;
+		private int _countLogins;
 
-		private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
-
-		public RoutingState _router = new RoutingState();
+		private ObservableCollection<TabItem> _tabItems = new ObservableCollection<TabItem>();
 
 		#region ReactiveCommands   
 
@@ -44,52 +41,47 @@ namespace OlibKey
 		private ReactiveCommand<Unit, Unit> OpenAboutWindowCommand { get; }
 		private ReactiveCommand<Unit, Unit> OpenSettingsWindowCommand { get; }
 		private ReactiveCommand<Unit, Unit> CheckUpdateCommand { get; }
+		private ReactiveCommand<Unit, Unit> LockAllDatabasesCommand { get; }
+		private ReactiveCommand<Unit, Unit> SaveAllDatabasesCommand { get; }
+		private ReactiveCommand<Unit, Unit> UnlockAllDatabasesCommand { get; }
 
 		#endregion
 
 		#region Propertie's
 
-		public ObservableCollection<LoginListItem> LoginList
+		public ObservableCollection<TabItem> TabItems
 		{
-			get => _loginList;
-			set => this.RaiseAndSetIfChanged(ref _loginList, value);
+			get => _tabItems;
+			set => this.RaiseAndSetIfChanged(ref _tabItems, value);
 		}
-		public RoutingState Router
-		{
-			get => _router;
-			set => this.RaiseAndSetIfChanged(ref _router, value);
-		}
-		private bool IsLockDatabase
+		public bool IsLockDatabase
 		{
 			get => _isLockDatabase;
 			set => this.RaiseAndSetIfChanged(ref _isLockDatabase, value);
 		}
-		private bool IsUnlockDatabase
+		public bool IsUnlockDatabase
 		{
 			get => _isUnlockDatabase;
 			set => this.RaiseAndSetIfChanged(ref _isUnlockDatabase, value);
 		}
-		private bool IsOSX
+		private int SelectedTabIndex
 		{
-			get => _isOSX;
-			set => this.RaiseAndSetIfChanged(ref _isOSX, value);
+			get => _selectedTabIndex;
+			set => this.RaiseAndSetIfChanged(ref _selectedTabIndex, value);
 		}
-		private string NameStorage
+		public int CountLogins
 		{
-			get => _nameDatabase;
-			set => this.RaiseAndSetIfChanged(ref _nameDatabase, value);
+			get => _countLogins;
+			set => this.RaiseAndSetIfChanged(ref _countLogins, value);
 		}
-		private int SelectedIndex
+		public bool IsActivateDnD
 		{
-			get => _selectedIndex;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref _selectedIndex, value);
-				InformationLogin(SelectedLoginItem);
-			}
+			get => _isActivateDnD;
+			set => this.RaiseAndSetIfChanged(ref _isActivateDnD, value);
 		}
-		public string MasterPassword { get; set; }
-		private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedIndex]; } catch { return null; } } }
+		public DatabaseControl SelectedTabItem { get { try { return (DatabaseControl)TabItems[SelectedTabIndex].Content; } catch { return null; } } }
+		public DatabaseTabHeader SelectedTabItemHeader { get { try { return (DatabaseTabHeader)TabItems[SelectedTabIndex].Header; } catch { return null; } } }
+		public List<string> OpenStorages { get; set; }
 
 		#endregion
 
@@ -99,7 +91,7 @@ namespace OlibKey
 			CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
 			OpenSettingsWindowCommand = ReactiveCommand.Create(OpenSettingsWindow);
 			CreateDatabaseCommand = ReactiveCommand.Create(CreateDatabase);
-			SaveDatabaseCommand = ReactiveCommand.Create(SaveDatabase);
+			SaveDatabaseCommand = ReactiveCommand.Create(() => SaveDatabase(SelectedTabItem));
 			UnlockDatabaseCommand = ReactiveCommand.Create(UnlockDatabase);
 			LockDatabaseCommand = ReactiveCommand.Create(LockDatabase);
 			OpenDatabaseCommand = ReactiveCommand.Create(OpenDatabase);
@@ -108,215 +100,383 @@ namespace OlibKey
 			OpenPasswordGeneratorWindowCommand = ReactiveCommand.Create(() => { new PasswordGeneratorWindow().ShowDialog(App.MainWindow); });
 			OpenAboutWindowCommand = ReactiveCommand.Create(() => { new AboutWindow().ShowDialog(App.MainWindow); });
 			ChangeMasterPasswordCommand = ReactiveCommand.Create(ChangeMasterPassword);
+			LockAllDatabasesCommand = ReactiveCommand.Create(LockAllDatabases);
+			SaveAllDatabasesCommand = ReactiveCommand.Create(SaveAllDatabases);
+			UnlockAllDatabasesCommand = ReactiveCommand.Create(UnlockAllDatabases);
 
-
-			if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX)) IsOSX = true;
+			App.Autoblock.Tick += AutoblockStorage;
 		}
 
 		public async void Loading(MainWindow mainWindow)
 		{
-			if (!string.IsNullOrEmpty(App.Settings.PathDatabase) && File.Exists(App.Settings.PathDatabase))
+			foreach (var item in OpenStorages.Where(item => Path.GetExtension(item) == ".olib"))
 			{
-				NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase);
-				IsLockDatabase = true;
+				App.Settings.PathDatabase = item;
+
+				string id = Guid.NewGuid().ToString("N");
+
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				{
+					CloseTab = CloseTab,
+					iLock = { IsVisible = true },
+					iUnlock = { IsVisible = false }
+				};
+
+				DatabaseControl db = new DatabaseControl
+				{
+					ViewModel =
+					{
+						IsLockDatabase = true,
+						IsUnlockDatabase = false,
+						PathDatabase = App.Settings.PathDatabase,
+						TabID = id
+					}
+				};
+
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
+
 				RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
 				{
-					LoadStorageCallback = LoadDatabase
+					LoadStorageCallback = LoadDatabase,
+					databaseControl = db,
+					databaseTabHeader = tabHeader,
+					tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
 				};
-				await passwordWindow.ShowDialog(mainWindow);
+				IsActivateDnD = false;
+				await passwordWindow.ShowDialog(App.MainWindow);
+				IsActivateDnD = true;
 			}
+
+			if (OpenStorages.Count > 0)
+			{
+				OpenStorages = null;
+				return;
+			}
+
+			if (!string.IsNullOrEmpty(App.Settings.PathDatabase) && File.Exists(App.Settings.PathDatabase))
+			{
+				string id = Guid.NewGuid().ToString("N");
+
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				{
+					CloseTab = CloseTab,
+					iLock = { IsVisible = true },
+					iUnlock = { IsVisible = false }
+				};
+
+				DatabaseControl db = new DatabaseControl
+				{
+					ViewModel =
+					{
+						IsLockDatabase = true,
+						IsUnlockDatabase = false,
+						PathDatabase = App.Settings.PathDatabase,
+						TabID = id
+					}
+				};
+
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
+
+				RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
+				{
+					LoadStorageCallback = LoadDatabase,
+					databaseControl = db,
+					databaseTabHeader = tabHeader,
+					tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
+				};
+				IsActivateDnD = false;
+				await passwordWindow.ShowDialog(mainWindow);
+				IsActivateDnD = true;
+			}
+		}
+		public async void OpenStorageDnD(List<string> files)
+		{
+			foreach (var item in files.Where(item => Path.GetExtension(item) == ".olib").Where(item => TabItems.All(i => ((DatabaseControl)i.Content).ViewModel.PathDatabase != item)))
+			{
+				App.Settings.PathDatabase = item;
+
+				string id = Guid.NewGuid().ToString("N");
+
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				{
+					CloseTab = CloseTab,
+					iLock = { IsVisible = true },
+					iUnlock = { IsVisible = false }
+				};
+
+				DatabaseControl db = new DatabaseControl
+				{
+					ViewModel =
+					{
+						IsLockDatabase = true,
+						IsUnlockDatabase = false,
+						PathDatabase = App.Settings.PathDatabase,
+						TabID = id
+					}
+				};
+
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
+
+				RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
+				{
+					LoadStorageCallback = LoadDatabase,
+					databaseControl = db,
+					databaseTabHeader = tabHeader,
+					tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) }
+				};
+				IsActivateDnD = false;
+				await passwordWindow.ShowDialog(App.MainWindow);
+				IsActivateDnD = true;
+			}
+
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not6"));
+		}
+		public void AutoblockStorage(object sender, EventArgs e)
+		{
+			foreach (TabItem item in TabItems)
+			{
+				DatabaseControl db = (DatabaseControl)item.Content;
+				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
+
+				if (db.ViewModel.IsUnlockDatabase)
+				{
+					if (db.ViewModel.LoginList.Any(login => login.LoginItem.IsReminderActive)) continue;
+
+					SaveDatabase(db);
+					db.ViewModel.ClearLoginsList();
+					IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
+					IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
+					db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+				}
+			}
+			App.Autoblock.Stop();
 		}
 		public void ProgramClosing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			App.Autosave.Stop();
 			SaveSettings();
-			SaveDatabase();
+			foreach (TabItem item in TabItems) SaveDatabase((DatabaseControl)item.Content);
 		}
-		public void SaveDatabase()
+		public void SaveDatabase(DatabaseControl db)
 		{
-			if (IsLockDatabase || !IsUnlockDatabase) return;
-			if (App.Settings.PathDatabase != null)
+			if (db == null || db.ViewModel.IsLockDatabase || !db.ViewModel.IsUnlockDatabase) return;
+			if (db.ViewModel.PathDatabase != null)
 			{
-				App.Database.Logins = LoginList.Select(item => item.LoginItem).ToList();
+				db.ViewModel.Database.Logins = db.ViewModel.LoginList.Select(item => item.LoginItem).ToList();
 
-				SaveAndLoadDatabase.SaveFiles(App.Database, App.Settings.PathDatabase, MasterPassword);
-				App.MainWindow.MessageStatusBar("Not4");
+				SaveAndLoadDatabase.SaveFiles(db);
+				App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not4") + $" {Path.GetFileNameWithoutExtension(db.ViewModel.PathDatabase)}");
 			}
-			for (int i = 0; i < Router.NavigationStack.Count - 1; i++)
+			for (int i = 0; i < db.ViewModel.Router.NavigationStack.Count - 1; i++)
 			{
-				IRoutableViewModel item = Router.NavigationStack[i];
-				Router.NavigationStack.Remove(item);
+				IRoutableViewModel item = db.ViewModel.Router.NavigationStack[i];
+				db.ViewModel.Router.NavigationStack.Remove(item);
 			}
 		}
-		public void SearchSelectLogin(LoginListItem i)
+		public void TabItemsSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			foreach (var item in LoginList)
+			if (SelectedTabItem != null)
 			{
-				if (item.LoginID == i.LoginID)
-				{
-					SelectedIndex = LoginList.IndexOf(item);
-					break;
-				}
+				IsUnlockDatabase = SelectedTabItem.ViewModel.IsUnlockDatabase;
+				IsLockDatabase = SelectedTabItem.ViewModel.IsLockDatabase;
+				CountLogins = SelectedTabItem.ViewModel.LoginList.Count;
+			}
+			else
+			{
+				IsUnlockDatabase = false;
+				IsLockDatabase = false;
+			}
+
+		}
+		public void CloseTab(string tabID)
+		{
+			foreach (TabItem item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.TabID == tabID))
+			{
+				SaveDatabase((DatabaseControl)item.Content);
+
+				TabItems.Remove(item);
+				break;
 			}
 		}
-		private void UnlockDatabase()
+		private async void UnlockDatabase()
 		{
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsUnlockDatabase) return;
+
 			RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
 			{
-				LoadStorageCallback = LoadDatabase
+				LoadStorageCallback = LoadDatabase,
+				databaseControl = SelectedTabItem,
+				databaseTabHeader = SelectedTabItemHeader,
+				tbNameStorage = { Text = Path.GetFileNameWithoutExtension(SelectedTabItem.ViewModel.PathDatabase) }
 			};
-			passwordWindow.ShowDialog(App.MainWindow);
+			IsActivateDnD = false;
+			await passwordWindow.ShowDialog(App.MainWindow);
+			IsActivateDnD = true;
+		}
+		private async void UnlockAllDatabases()
+		{
+			foreach (var item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.IsLockDatabase))
+			{
+				DatabaseControl db = (DatabaseControl)item.Content;
+				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
+				RequireMasterPasswordWindow passwordWindow = new RequireMasterPasswordWindow
+				{
+					LoadStorageCallback = LoadDatabase,
+					databaseControl = db,
+					databaseTabHeader = dbHeader,
+					tbNameStorage = { Text = Path.GetFileNameWithoutExtension(db.ViewModel.PathDatabase) }
+				};
+				IsActivateDnD = false;
+				await passwordWindow.ShowDialog(App.MainWindow);
+				IsActivateDnD = true;
+			}
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not8"));
 		}
 		private void LockDatabase()
 		{
-			App.Autosave.Stop();
-			SaveDatabase();
-			ClearLoginsList();
-			IsUnlockDatabase = false;
-			IsLockDatabase = true;
-			Router.Navigate.Execute(new StartPageViewModel());
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsLockDatabase) return;
+
+			SaveDatabase(SelectedTabItem);
+			SelectedTabItem.ViewModel.ClearLoginsList();
+			IsUnlockDatabase = SelectedTabItem.ViewModel.IsUnlockDatabase = false;
+			IsLockDatabase = SelectedTabItem.ViewModel.IsLockDatabase = true;
+			SelectedTabItemHeader.iLock.IsVisible = true;
+			SelectedTabItemHeader.iUnlock.IsVisible = false;
+			SelectedTabItem.ViewModel.Router.Navigate.Execute(new StartPageViewModel(SelectedTabItem.ViewModel));
+		}
+		private void LockAllDatabases()
+		{
+			foreach (TabItem item in TabItems)
+			{
+				DatabaseControl db = (DatabaseControl)item.Content;
+				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
+
+				SaveDatabase(db);
+				db.ViewModel.ClearLoginsList();
+				IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
+				IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
+				db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+			}
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not7"));
 		}
 		private async void OpenDatabase()
 		{
-			var dialog = new OpenFileDialog();
-			dialog.Filters.Add(new FileDialogFilter { Name = "Olib-Files", Extensions = { "olib" } });
-			string[] res = await dialog.ShowAsync(App.MainWindow);
-			try
+			OpenFileDialog dialog = new OpenFileDialog { AllowMultiple = true };
+			dialog.Filters.Add(new FileDialogFilter { Name = (string)Application.Current.FindResource("FileOlib"), Extensions = { "olib" } });
+			List<string> files = (await dialog.ShowAsync(App.MainWindow)).ToList();
+
+			if (files.Count == 0) return;
+
+			foreach (var file in files.Where(file => TabItems.All(i => ((DatabaseControl)i.Content).ViewModel.PathDatabase != file)))
 			{
-				if (res?[0] != null)
+				App.Settings.PathDatabase = file;
+
+				string id = Guid.NewGuid().ToString("N");
+
+				DatabaseControl db = new DatabaseControl
 				{
-					LockDatabase();
+					ViewModel =
+						{
+							Database = new Database(),
+							IsLockDatabase = true,
+							IsUnlockDatabase = false,
+							PathDatabase = file,
+							TabID = id
+						}
+				};
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				{
+					CloseTab = CloseTab,
+					iLock = { IsVisible = true },
+					iUnlock = { IsVisible = false }
+				};
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
-					App.Settings.PathDatabase = res[0];
-					NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase);
-
-					var requireMaster = new RequireMasterPasswordWindow { LoadStorageCallback = LoadDatabase };
-					await requireMaster.ShowDialog(App.MainWindow);
-				}
+				RequireMasterPasswordWindow requireMaster = new RequireMasterPasswordWindow { LoadStorageCallback = LoadDatabase, databaseControl = db, databaseTabHeader = tabHeader, tbNameStorage = { Text = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase) } };
+				IsActivateDnD = false;
+				await requireMaster.ShowDialog(App.MainWindow);
+				IsActivateDnD = true;
 			}
-			catch { }
 		}
 		private void CreateLogin()
 		{
-			SelectedIndex = -1;
-			CreateLoginPageViewModel page = new CreateLoginPageViewModel
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsLockDatabase) return;
+
+			SelectedTabItem.ViewModel.SelectedIndex = -1;
+
+			SelectedTabItem.ViewModel.Router.Navigate.Execute(new CreateLoginPageViewModel(SelectedTabItem.ViewModel.Database, SelectedTabItem.ViewModel)
 			{
-				BackPageCallback = StartPage,
-				CreateLoginCallback = AddLogin
-			};
-			Router.Navigate.Execute(page);
-		}
-		private void EditLogin(LoginListItem login)
-		{
-			Router.Navigate.Execute(new EditLoginPageViewModel(login)
-			{
-				CancelCallback = BackPage,
-				EditCompleteCallback = EditComplete,
-				DeleteLoginCallback = DeleteLogin
+				BackPageCallback = SelectedTabItem.ViewModel.StartPage,
+				CreateLoginCallback = SelectedTabItem.ViewModel.AddLogin
 			});
 		}
-		private void AddLogin(Login loginContent)
+		private void LoadDatabase(DatabaseControl db, DatabaseTabHeader dbHeader)
 		{
-			LoginListItem ali = new LoginListItem(loginContent)
+			db.ViewModel.Database = SaveAndLoadDatabase.LoadFiles(db);
+			foreach (Login logins in db.ViewModel.Database.Logins) db.ViewModel.AddLogin(logins);
+			db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = false;
+			db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = true;
+
+			if (Equals(SelectedTabItem, db))
 			{
-				LoginID = Guid.NewGuid().ToString("N")
-			};
+				IsLockDatabase = false;
+				IsUnlockDatabase = true;
+			}
 
-			LoginList.Add(ali);
-			ali.GetIconElement();
-			Router.Navigate.Execute(new StartPageViewModel());
-		}
-		private void DeleteLogin()
-		{
-			int i = SelectedIndex;
-			LoginList.RemoveAt(SelectedIndex);
-			SelectedIndex = i;
-			SelectedIndex = -1;
-			Router.Navigate.Execute(new StartPageViewModel());
-		}
-		private void EditComplete(LoginListItem a)
-		{
-			a.EditedLogin();
-			a.GetIconElement();
-			Router.Navigate.Execute(new LoginInformationPageViewModel(a) { EditContentCallback = EditLogin });
-		}
-		private void InformationLogin(LoginListItem i)
-		{
-			if (i == null) return;
-			Router.Navigate.Execute(new LoginInformationPageViewModel(i) { EditContentCallback = EditLogin });
-		}
-		private void LoadDatabase()
-		{
-			App.Database = SaveAndLoadDatabase.LoadFiles(App.Settings.PathDatabase, MasterPassword);
-			ClearLoginsList();
-			foreach (Login logins in App.Database.Logins) AddLogin(logins);
-			IsUnlockDatabase = true;
-			IsLockDatabase = false;
-
-			App.Autosave.Start();
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not9") + $" {Path.GetFileNameWithoutExtension(db.ViewModel.PathDatabase)}");
 		}
 		private async void CreateDatabase()
 		{
 			CreateDatabaseWindow window = new CreateDatabaseWindow();
-			bool res = await window.ShowDialog<bool>(App.MainWindow);
-			if (res)
+			if (await window.ShowDialog<bool>(App.MainWindow))
 			{
-				App.Database = new Database();
+				App.Settings.PathDatabase = window.TbPathDatabase.Text;
 
-				App.Settings.PathDatabase = window._tbPathDatabase.Text;
-				MasterPassword = window._tbPassword.Text;
-				NameStorage = Path.GetFileNameWithoutExtension(App.Settings.PathDatabase);
-				IsUnlockDatabase = true;
-				IsLockDatabase = false;
+				string id = Guid.NewGuid().ToString("N");
 
-				ClearLoginsList();
-				SaveDatabase();
-				Router.Navigate.Execute(new StartPageViewModel());
-				App.Autosave.Start();
-				App.MainWindow.MessageStatusBar("Not3");
+				DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(App.Settings.PathDatabase))
+				{
+					CloseTab = CloseTab,
+					iLock = { IsVisible = false },
+					iUnlock = { IsVisible = true }
+				};
+
+				DatabaseControl db = new DatabaseControl
+				{
+					ViewModel =
+					{
+						Database = new Database { Folders = new List<Folder>(), Logins = new List<Login>() },
+						MasterPassword = window.TbPassword.Text,
+						Iterations = int.Parse(window.TbIteration.Text),
+						NumberOfEncryptionProcedures = int.Parse(window.TbNumberOfEncryptionProcedures.Text),
+						IsLockDatabase = false,
+						IsUnlockDatabase = true,
+						PathDatabase = window.TbPathDatabase.Text,
+						TabID = id
+					}
+				};
+
+				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
+
+				SaveDatabase(db);
+				App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not3"));
 			}
-		}
-		private void OpenSettingsWindow()
-		{
-			SettingsWindow window = new SettingsWindow();
-			window.ShowDialog(App.MainWindow);
-		}
-		private void ClearLoginsList()
-		{
-			SelectedIndex = -1;
-			LoginList.Clear();
 		}
 		private void ShowSearchWindow()
 		{
+			if (SelectedTabItem == null || SelectedTabItem.ViewModel.IsLockDatabase) return;
 			App.SearchWindow = new SearchWindow();
-			foreach (CustomFolder folder in App.Database.CustomFolders) App.SearchWindow.SearchViewModel.AddFolder(folder);
+			foreach (Folder folder in SelectedTabItem.ViewModel.Database.Folders) App.SearchWindow.SearchViewModel.AddFolder(folder);
 			App.SearchWindow.ShowDialog(App.MainWindow);
 		}
+		private void SaveAllDatabases()
+		{
+			foreach (TabItem item in TabItems) SaveDatabase((DatabaseControl)item.Content);
+		}
+		private void OpenSettingsWindow() => new SettingsWindow().ShowDialog(App.MainWindow);
 		private void CheckUpdate() => App.CheckUpdate(true);
 		private void ChangeMasterPassword() => new ChangeMasterPasswordWindow().ShowDialog(App.MainWindow);
 		private void ExitApplication() => App.MainWindow.Close();
-		private void StartPage() => Router.Navigate.Execute(new StartPageViewModel());
-		private void BackPage(LoginListItem a) => Router.Navigate.Execute(new LoginInformationPageViewModel(a) { EditContentCallback = EditLogin });
 		private void SaveSettings() => SaveAndLoadSettings.SaveSettings();
-
-		//// Problem with ListBox ////
-
-		//public void MoveUp() => MoveItem(-1);
-
-		//public void MoveDown() => MoveItem(1);
-
-		//private void MoveItem(int direction)
-		//{
-		//	if (SelectedLoginItem == null)
-		//		return;
-
-		//	var newIndex = SelectedIndex + direction;
-
-		//	if (newIndex < 0 || newIndex >= LoginsList.Count)
-		//		return;
-
-		//	LoginsList.Move(SelectedIndex, newIndex);
-		//	SelectedIndex = newIndex;
-		//}
 	}
 }

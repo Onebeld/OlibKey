@@ -5,8 +5,9 @@ namespace OlibKey.Structures
 	public class Login
 	{
 		public int Type { get; set; }
-		public string Name { get; set; }
+		public string Name { get; set; } = "";
 		public string Username { get; set; }
+		public string Email { get; set; }
 		public string TimeCreate { get; set; }
 		public string TimeChanged { get; set; }
 
@@ -29,8 +30,17 @@ namespace OlibKey.Structures
 
 		#region PersonalData
 
-		public string PersonalDataNumber { get; set; }
-		public string PersonalDataPlaceOfIssue { get; set; }
+		public string Number { get; set; }
+		public string PlaceOfIssue { get; set; }
+		public string SocialSecurityNumber { get; set; }
+		public string TIN { get; set; }
+		public string Telephone { get; set; }
+		public string Company { get; set; }
+		public string Postcode { get; set; }
+		public string Country { get; set; }
+		public string Region { get; set; }
+		public string City { get; set; }
+		public string Address { get; set; }
 
 		#endregion
 
@@ -42,14 +52,14 @@ namespace OlibKey.Structures
 
 		public string Note { get; set; }
 
-		public List<CustomElement> CustomElements;
+		public List<CustomField> CustomFields;
 	}
-	public class CustomFolder
+	public class Folder
 	{
 		public string Name { get; set; }
 		public string ID { get; set; }
 	}
-	public class CustomElement
+	public class CustomField
 	{
 		public string Name { get; set; }
 		public int Type { get; set; }
@@ -61,6 +71,6 @@ namespace OlibKey.Structures
 	public class Database
 	{
 		public List<Login> Logins;
-		public List<CustomFolder> CustomFolders;
+		public List<Folder> Folders;
 	}
 }

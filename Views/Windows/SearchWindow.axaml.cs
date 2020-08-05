@@ -22,6 +22,7 @@ namespace OlibKey.Views.Windows
 		private RadioButton _rBankCard;
 		private RadioButton _rPassport;
 		private RadioButton _rReminder;
+		private RadioButton _rNotes;
 		private RadioButton _rAll;
 
 		private ListBox _lbFolders;
@@ -38,6 +39,7 @@ namespace OlibKey.Views.Windows
 			_rBankCard = this.FindControl<RadioButton>("rBankCard");
 			_rPassport = this.FindControl<RadioButton>("rPassport");
 			_rReminder = this.FindControl<RadioButton>("rReminder");
+			_rNotes = this.FindControl<RadioButton>("rNotes");
 			_rAll = this.FindControl<RadioButton>("rAll");
 			_tbSearchText = this.FindControl<TextBox>("tbSearchText");
 			_lbFolders = this.FindControl<ListBox>("lbFolders");
@@ -53,107 +55,122 @@ namespace OlibKey.Views.Windows
 			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchLogin());
 		}
 
-		private void SearchWindow_Closed(object sender, EventArgs e) => App.Database.CustomFolders = SearchViewModel.FolderList.Select(item => item.DataContext as CustomFolder).ToList();
+		private void SearchWindow_Closed(object sender, EventArgs e) => App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Folders = SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
 
 		private async void SearchLogin()
 		{
 			SearchViewModel.ClearLoginsList();
 			await Task.Delay(10);
 
-			foreach (LoginListItem i in App.MainWindowViewModel.LoginList)
+			foreach (LoginListItem i in App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList)
 			{
-				Login Login = i.LoginItem;
-				if ((bool)_rLogin.IsChecked && Login.Type == 0)
+				Login login = i.LoginItem;
+				if (login.Name != null)
 				{
-					if (SearchViewModel.SelectedFolderItem == null)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-					else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-				}
-				else if ((bool)_rBankCard.IsChecked && Login.Type == 1)
-				{
-					if (SearchViewModel.SelectedFolderItem == null)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-					else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-				}
-				else if ((bool)_rPassport.IsChecked && Login.Type == 2)
-				{
-					if (SearchViewModel.SelectedFolderItem == null)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-					else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-				}
-				else if ((bool)_rReminder.IsChecked && Login.Type == 3)
-				{
-					if (SearchViewModel.SelectedFolderItem == null)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-					else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-				}
-				else if ((bool)_rAll.IsChecked)
-				{
-					if (SearchViewModel.SelectedFolderItem == null)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
-					else if (Login.FolderID == ((CustomFolder)SearchViewModel.SelectedFolderItem.DataContext).ID)
-						if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-						{
-							if (Login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(Login, i.IconLogin, i.LoginID);
-						}
-						else Add(Login, i.IconLogin, i.LoginID);
+					if ((bool)_rLogin.IsChecked && login.Type == 0)
+					{
+						if (SearchViewModel.SelectedFolderItem == null)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+					}
+					else if ((bool)_rBankCard.IsChecked && login.Type == 1)
+					{
+						if (SearchViewModel.SelectedFolderItem == null)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+					}
+					else if ((bool)_rPassport.IsChecked && login.Type == 2)
+					{
+						if (SearchViewModel.SelectedFolderItem == null)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+					}
+					else if ((bool)_rReminder.IsChecked && login.Type == 3)
+					{
+						if (SearchViewModel.SelectedFolderItem == null)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+					}
+					else if ((bool)_rNotes.IsChecked && login.Type == 4)
+					{
+						if (SearchViewModel.SelectedFolderItem == null)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+					}
+					else if ((bool)_rAll.IsChecked)
+					{
+						if (SearchViewModel.SelectedFolderItem == null)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
+							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+							{
+								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
+							}
+							else Add(login, i.IconLogin, i.LoginID);
+					}
 				}
 			}
 		}
 
-		private void Add(Login a, Image i, string id)
-		{
-			LoginListItem ali = new LoginListItem(a)
+		private void Add(Login a, Image i, string id) =>
+			AddLogin(new LoginListItem(a)
 			{
 				LoginID = id,
 				IconLogin = { Source = i.Source }
-			};
-			AddLogin(ali);
-		}
+			});
 
 		private void lbFolders_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchLogin();
 		private void rLogin_Click(object sender, RoutedEventArgs e) => SearchLogin();
 
-		private void AddLogin(LoginListItem Login) => SearchViewModel.AddLogin(Login);
+		private void AddLogin(LoginListItem login) => SearchViewModel.AddLogin(login);
 	}
 }

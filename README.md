@@ -40,7 +40,7 @@ This version is compiled using AOT CoreRT, which allows you to run applications 
 This version supports other platforms (x86, ARM), .NET Runtime is required to run. macOS and Linux does not support x86
 #### Requirements:
 * Almost all platforms ([see here](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
-* .NET Runtime 5 Preview 7;
+* .NET Runtime 5 Preview 7 (starting from 3.1.1 the application will become standalone and you will not have to install .NET 5 separately);
 
 ## Where can I watch previews?
 You can watch the previews in the "dev-channel", where all the latest changes are posted. When the release is ready, a request is made to merge this branch into "master".

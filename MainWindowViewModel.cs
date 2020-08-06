@@ -459,7 +459,7 @@ namespace OlibKey
 				TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
 				SaveDatabase(db);
-				App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not3"));
+				App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not3") + $" {Path.GetFileNameWithoutExtension(App.Settings.PathDatabase)}");
 			}
 		}
 		private void ShowSearchWindow()

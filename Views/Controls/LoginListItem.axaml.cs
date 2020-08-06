@@ -73,7 +73,16 @@ namespace OlibKey.Views.Controls
 			if (LoginItem.Type == 0)
 			{
 				if (!string.IsNullOrEmpty(LoginItem.WebSite))
-					IconLogin.Source = await Core.ImageInteraction.DownloadImage(LoginItem.WebSite);
+				{
+					try
+					{
+						IconLogin.Source = await Core.ImageInteraction.DownloadImage(LoginItem.WebSite);
+					}
+					catch
+					{
+						IconLogin.Source = (DrawingImage)Application.Current.FindResource("GlobeIcon");
+					}
+				}
 				else
 					IconLogin.Source = (DrawingImage)Application.Current.FindResource("GlobeIcon");
 			}

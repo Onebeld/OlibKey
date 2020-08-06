@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [3.1.1] - 2020-08-06
-
 ### Fixed
 - Fixed crash of the program when loading an icon for login, but there are no network connections
 - After creating a repository, the name of the created repository is not shown

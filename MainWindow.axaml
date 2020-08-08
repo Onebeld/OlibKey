@@ -10,7 +10,7 @@
         Title="OlibKey"
         WindowStartupLocation="CenterScreen"
 		Icon="avares://OlibKey/app.ico"
-		DragDrop.AllowDrop="{Binding IsActivateDnD}"
+		DragDrop.AllowDrop="True"
 		Background="{DynamicResource ThemeWindowBackgroundBrush}"
         MinWidth="500" MinHeight="350">
 	<Window.KeyBindings>
@@ -52,7 +52,8 @@
 				<NativeMenuItem.Menu>
 					<NativeMenu>
 						<NativeMenuItem Header="{DynamicResource PasswordGenerator}" Gesture="CMD+G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
-						<NativeMenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}"/>
+						<NativeMenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+						<NativeMenuItem Header="{DynamicResource CheckingWeakPasswords}" Command="{Binding OpenCheckingWeakPasswordsWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
 					</NativeMenu>
 				</NativeMenuItem.Menu>
 			</NativeMenuItem>
@@ -119,6 +120,7 @@
 			<MenuItem Header="{DynamicResource Tools}">
 				<MenuItem Header="{DynamicResource PasswordGenerator}" InputGesture="Ctrl + G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
 				<MenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<MenuItem Header="{DynamicResource CheckingWeakPasswords}" Command="{Binding OpenCheckingWeakPasswordsWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
 			</MenuItem>
 			<MenuItem Header="{DynamicResource Reference}">
 				<MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdateCommand}">

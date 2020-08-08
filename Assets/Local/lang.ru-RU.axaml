@@ -102,6 +102,12 @@
 		<v:String x:Key="CDBError1">В полях с вводом цифровых значении должны содержать числа и не могут быть равны нулю!</v:String>
 		<v:String x:Key="CDBError2">Вы не выбрали путь хранилища или не указали мастер-пароль!</v:String>
 		<v:String x:Key="CDBError3">Вы не сможете создать хранилище, оно уже открыто!</v:String>
+		
+		<v:String x:Key="CheckingWeakPasswords">Проверка слабых паролей</v:String>
+		<v:String x:Key="OverallComplexity">Общая сложность:</v:String>
+		<v:String x:Key="Fix">Исправить</v:String>
+		<v:String x:Key="SelectAll">Выделить все</v:String>
+		<v:String x:Key="CWPInfo">Здесь представлены слабые пароли, которые можно заменить. Выберите те, которые вы хотите изменить, и нажмите на кнопку Исправить. Замена будет происходить согласно настройкам генератора паролей.</v:String>
 
 		<v:String x:Key="Open">Открыть</v:String>
 		<v:String x:Key="EnterMP">Введите мастер-пароль</v:String>

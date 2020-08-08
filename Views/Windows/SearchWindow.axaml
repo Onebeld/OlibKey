@@ -17,8 +17,19 @@
 				<TextBox x:Name="tbSearchText" Text="{Binding SearchText}" Watermark="{StaticResource NameElement}"/>
 			</DockPanel>
 		</Border>
+		
+		<Grid RowDefinitions="35,*" Grid.Column="1" Grid.Row="1">
+			<Border Classes="ButtonsMenu" BorderThickness="1 1 0 1">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5">
+					<ToggleButton x:Name="tbSortAlphabetically" Content="A-Z" Margin="0 0 5 0" Padding="5 2"/>
+					<ToggleButton x:Name="tbFavorite" Padding="5 2">
+						<Path Data="m 12.491678 15.994844 c -0.14548 0 -0.272774 -0.03808 -0.400069 -0.114249 L 7.9999999 13.081497 3.908391 15.880595 C 3.653802 16.051968 3.3264733 16.032927 3.0900692 15.861553 2.8536651 15.671139 2.7445555 15.347433 2.8172952 15.04277 L 4.1084252 10.2824 0.25322018 6.873975 C 0.03500108 6.68356 -0.05592362 6.359855 0.03500108 6.055191 0.12592568 5.7505272 0.38051468 5.5601123 0.67147358 5.5220294 L 5.2722607 5.1792827 7.3453426 0.4379541 C 7.4544522 0.1713733 7.7090412 0 7.9999999 0 c 0.290959 0 0.545548 0.1713733 0.654658 0.4379541 l 2.0730821 4.7413286 4.600787 0.3427467 c 0.290958 0.019042 0.545547 0.2284978 0.636472 0.5331616 0.09093 0.285622 0 0.609327 -0.218219 0.818784 l -3.83702 3.389383 1.29113 4.76037 c 0.09092 0.304664 -0.01819 0.628369 -0.272774 0.818784 -0.127295 0.09521 -0.272774 0.152332 -0.436438 0.152332 z M 7.9999999 11.424888 c 0.14548 0 0.272774 0.03808 0.400069 0.114249 L 11.273287 13.50041 10.382226 10.206234 C 10.309486 9.920611 10.400406 9.615948 10.61863 9.425533 L 13.437294 6.931099 10.200377 6.664518 C 9.9276029 6.645477 9.7093829 6.474103 9.5820889 6.226564 L 7.9999999 2.5896414 6.4179112 6.226564 C 6.3088016 6.474103 6.0723976 6.645477 5.7996236 6.664518 L 2.5627062 6.912057 5.3813702 9.406491 C 5.5995894 9.596906 5.690514 9.90157 5.6177743 10.187192 L 4.7267128 13.50041 7.5999316 11.558179 c 0.1272945 -0.09521 0.254589 -0.133291 0.4000683 -0.133291 z"/>
+					</ToggleButton>
+				</StackPanel>
+			</Border>
+			<ListBox x:Name="lbLoginList" Padding="0" SelectedIndex="{Binding SelectedLoginIndex}" Items="{Binding LoginList}" VirtualizationMode="None" Grid.Row="1" Background="Transparent" BorderThickness="1,0,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}"/>
+		</Grid>
 
-		<ListBox x:Name="lbLoginList" Padding="0" Grid.Column="1" SelectedIndex="{Binding SelectedLoginIndex}" Items="{Binding LoginList}" VirtualizationMode="None" Grid.Row="1" Background="Transparent" BorderThickness="1,1,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}"/>
 
 		<Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}">
 			<Grid RowDefinitions="Auto,*,50">

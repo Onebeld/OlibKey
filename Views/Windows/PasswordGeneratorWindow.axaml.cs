@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -58,7 +59,19 @@ namespace OlibKey.Views.Windows
 				return _tbPassword.Text;
 			}
 		}
-		private void ClickGeneratePassword(object sender, RoutedEventArgs e) => _tbPassword.Text = RandomPassword();
+		private void ClickGeneratePassword(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				_tbPassword.Text = PasswordGenerator.RandomPassword();
+			}
+			catch
+			{
+				_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("MB7"), (string)Application.Current.FindResource("Error"),
+					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+			}
+		}
+
 		private static string RandomizeString(string str)
 		{
 			string result = "";

@@ -10,7 +10,7 @@
 		<StyleInclude Source="/Assets/Themes/Dazzling.axaml"/>
 		<StyleInclude Source="/Assets/Images/Icons.axaml"/>
 		<StyleInclude Source="/Assets/Local/lang.en-US.axaml"/>
-		
+
 		<Style Selector="Window">
 			<Setter Property="FontFamily" Value="/Assets/Font#Noto Sans"/>
 		</Style>
@@ -96,15 +96,15 @@
 		<Style Selector="Button > Path">
 			<Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}"/>
 		</Style>
-		<Style Selector="Button > Path#GitHubIcon">
-			<Setter Property="Fill" Value="{DynamicResource ThemeGitHubBrush}"/>
-		</Style>
 		<Style Selector="Button:pressed > Path">
 			<Setter Property="Fill" Value="White"/>
 		</Style>
 		<Style Selector="Button:pressed">
 			<Setter Property="Foreground" Value="White"/>
 			<Setter Property="RenderTransform" Value="scale(0.98)" />
+		</Style>
+		<Style Selector="Button > Path#GitHubIcon">
+			<Setter Property="Fill" Value="{DynamicResource ThemeGitHubBrush}"/>
 		</Style>
 
 		<Style Selector="TextBox">
@@ -736,6 +736,52 @@
 		</Style>
 		<Style Selector="TabItem:selected /template/ Border#indicator">
 			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
+		</Style>
+
+		<Style Selector="ToggleButton">
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+			<Setter Property="Padding" Value="2"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="RenderTransform" Value="none" />
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+				</Transitions>
+			</Setter>
+		</Style>
+		
+		<Style Selector="ToggleButton /template/ContentPresenter">
+			<Setter Property="CornerRadius" Value="5"/>
+		</Style>
+		<Style Selector="ToggleButton:pressed  /template/ ContentPresenter">
+			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
+		</Style>
+		<Style Selector="ToggleButton > Path">
+			<Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}"/>
+		</Style>
+		<Style Selector="ToggleButton:checked > Path">
+			<Setter Property="Fill" Value="White"/>
+		</Style>
+		<Style Selector="ToggleButton:checked">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style Selector="ToggleButton:pressed > Path">
+			<Setter Property="Fill" Value="White"/>
+		</Style>
+		<Style Selector="ToggleButton:pressed">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="RenderTransform" Value="scale(0.98)" />
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
+		</Style>
+		<Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+			<Setter Property="BorderBrush" Value="Transparent"/>
+		</Style>
+		<Style Selector="ToggleButton:checked /template/ ContentPresenter">
+			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
 		</Style>
 	</Application.Styles>
 </Application>

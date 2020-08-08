@@ -11,6 +11,8 @@ namespace OlibKey.Structures
 		public string TimeCreate { get; set; }
 		public string TimeChanged { get; set; }
 
+		public bool Favorite { get; set; }
+
 		public string FolderID { get; set; }
 
 		#region Login

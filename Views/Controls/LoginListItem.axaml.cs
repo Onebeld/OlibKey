@@ -6,12 +6,15 @@ using Avalonia.Threading;
 using OlibKey.Structures;
 using OlibKey.Views.Windows;
 using System;
+using Avalonia.Controls.Primitives;
 
 namespace OlibKey.Views.Controls
 {
 	public class LoginListItem : UserControl
 	{
 		public Image IconLogin;
+		public CheckBox SelectedItem;
+		public ToggleButton IsFavorite;
 		private readonly TextBlock _tbLoginName;
 		private readonly TextBlock _tbUsername;
 
@@ -30,6 +33,8 @@ namespace OlibKey.Views.Controls
 			IconLogin = this.FindControl<Image>("imageIconWebSite");
 			_tbLoginName = this.FindControl<TextBlock>("tbLoginName");
 			_tbUsername = this.FindControl<TextBlock>("tbUsername");
+			SelectedItem = this.FindControl<CheckBox>("selectedItem");
+			IsFavorite = this.FindControl<ToggleButton>("isFavorite");
 
 			LoginItem = Login;
 
@@ -49,9 +54,23 @@ namespace OlibKey.Views.Controls
 					break;
 			}
 
-			if (LoginItem.Type == 0 && string.IsNullOrEmpty(Login.Username)) _tbUsername.Text = Login.Email;
+			_tbUsername.Text = LoginItem.Type switch
+			{
+				0 when string.IsNullOrEmpty(Login.Username) => Login.Email,
+				4 => LoginItem.TimeCreate,
+				_ => _tbUsername.Text
+			};
 
-			if (LoginItem.Type == 4) _tbUsername.Text = LoginItem.TimeCreate;
+			IsFavorite.IsChecked = LoginItem.Favorite;
+
+			IsFavorite.Checked += IsFavoriteChecking;
+			IsFavorite.Unchecked += IsFavoriteChecking;
+		}
+
+		private void IsFavoriteChecking(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+		{
+			bool? isChecked = ((ToggleButton)sender).IsChecked;
+			if (isChecked != null) LoginItem.Favorite = (bool)isChecked;
 		}
 
 		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
@@ -60,11 +79,13 @@ namespace OlibKey.Views.Controls
 		{
 			if (LoginItem == null) return;
 			_tbLoginName.Text = LoginItem.Name;
-			_tbUsername.Text = LoginItem.Username;
 
-			if (LoginItem.Type == 0 && string.IsNullOrEmpty(LoginItem.Username)) _tbUsername.Text = LoginItem.Email;
-
-			if (LoginItem.Type == 4) _tbUsername.Text = LoginItem.TimeCreate;
+			_tbUsername.Text = LoginItem.Type switch
+			{
+				0 when string.IsNullOrEmpty(LoginItem.Username) => LoginItem.Email,
+				4 => LoginItem.TimeCreate,
+				_ => LoginItem.Username
+			};
 		}
 
 		public async void GetIconElement()

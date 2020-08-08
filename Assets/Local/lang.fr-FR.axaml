@@ -103,6 +103,12 @@
 		<v:String x:Key="CDBError2">Vous n'avez pas sélectionné de chemin de référentiel ou n'avez pas fourni de mot de passe principal!</v:String>
 		<v:String x:Key="CDBError3">Vous ne pouvez pas créer de coffre-fort si ce coffre-fort est déjà ouvert!</v:String>
 
+		<v:String x:Key="CheckingWeakPasswords">Vérification des mots de passe faibles</v:String>
+		<v:String x:Key="OverallComplexity">Complexité globale:</v:String>
+		<v:String x:Key="Fix">Réparer</v:String>
+		<v:String x:Key="SelectAll">Tout sélectionner</v:String>
+		<v:String x:Key="CWPInfo">Voici les mots de passe faibles que vous pouvez remplacer. Sélectionnez ceux que vous souhaitez modifier et cliquez sur le bouton Réparer. Le remplacement aura lieu selon les paramètres du générateur de mot de passe.</v:String>
+
 		<v:String x:Key="Open">Ouverte</v:String>
 		<v:String x:Key="EnterMP">Entrez le mot de passe principal</v:String>
 

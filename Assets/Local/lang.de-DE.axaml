@@ -103,6 +103,12 @@
 		<v:String x:Key="CDBError2">Sie haben keinen Repository-Pfad ausgewählt oder kein Hauptkennwort angegeben!</v:String>
 		<v:String x:Key="CDBError3">Sie können keinen Tresor erstellen, wenn dieser Tresor bereits geöffnet ist!</v:String>
 
+		<v:String x:Key="CheckingWeakPasswords">Überprüfen schwacher Passwörter</v:String>
+		<v:String x:Key="OverallComplexity">Gesamtkomplexität:</v:String>
+		<v:String x:Key="Fix">Fix</v:String>
+		<v:String x:Key="SelectAll">Wählen Sie Alle</v:String>
+		<v:String x:Key="CWPInfo">Hier sind schwache Passwörter, die Sie ersetzen können. Wählen Sie diejenigen aus, die Sie ändern möchten, und klicken Sie auf die Schaltfläche Fix. Der Austausch erfolgt gemäß den Einstellungen des Passwortgenerators.</v:String>
+
 		<v:String x:Key="Open">Öffnen</v:String>
 		<v:String x:Key="EnterMP">Geben Sie das Master-Passwort ein</v:String>
 

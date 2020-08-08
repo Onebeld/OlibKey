@@ -77,9 +77,7 @@
 			</TabItem>
 		</TabControl>
 		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
-			<Grid>
-				<Button x:Name="bClose" Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-			</Grid>
+			<Button x:Name="bClose" Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
 		</Border>
 	</Grid>
 </Window>

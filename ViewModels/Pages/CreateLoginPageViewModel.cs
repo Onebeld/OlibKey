@@ -14,7 +14,7 @@ namespace OlibKey.ViewModels.Pages
 {
 	public class CreateLoginPageViewModel : ReactiveObject, IRoutableViewModel
 	{
-		#region ReactiveCommands
+		#region ReactiveCommand's
 		public ReactiveCommand<Unit, Unit> BackCommand { get; }
 		public ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
 		public ReactiveCommand<Unit, Unit> AddCustomFieldCommand { get; }

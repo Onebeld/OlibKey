@@ -25,6 +25,10 @@
 		<v:String x:Key="NotChosen">Ընտրված չէ</v:String>
 		<v:String x:Key="RemoveSelection">Elնջել</v:String>
 		<v:String x:Key="NameElement">Նյութի անվանումը</v:String>
+		
+		<v:String x:Key="RunningReminders">Գործարկման հիշեցումներ</v:String>
+		<v:String x:Key="SortAlphabetically">Դասավորեք այբբենական կարգով</v:String>
+		<v:String x:Key="Favorite">Ընտրյալներ</v:String>
 
 		<v:String x:Key="GitHub">OlibKey- ը GitHub- ում</v:String>
 		<v:String x:Key="VKontakte">OlibKey- ը VK- ում</v:String>
@@ -33,6 +37,7 @@
 		<v:String x:Key="Ready">Պատրաստ է</v:String>
 		<v:String x:Key="Elements">Նյութեր:</v:String>
 		<v:String x:Key="OpenedBases">Բացված հիմքերը:</v:String>
+		<v:String x:Key="ClearGC">Մաքրումը կատարվում է</v:String>
 
 		<v:String x:Key="Collapse">Փլուզվել</v:String>
 		<v:String x:Key="Expand">Ընդլայնել</v:String>

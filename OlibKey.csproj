@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
+		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Platforms>AnyCPU;x64</Platforms>
+		<AssemblyVersion>3.2.0</AssemblyVersion>
+		<FileVersion>3.2.0</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -45,9 +47,9 @@
 		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.0-preview2" />
-		<PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview2" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview2" />
+		<PackageReference Include="Avalonia" Version="0.10.999-cibuild0009873-beta" />
+		<PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0009873-beta" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0009873-beta" />
 	</ItemGroup>
 	<ItemGroup>
 		<RdXmlFile Include="rd.xml" />

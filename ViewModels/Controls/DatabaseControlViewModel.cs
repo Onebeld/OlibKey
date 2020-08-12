@@ -29,7 +29,7 @@ namespace OlibKey.ViewModels.Controls
 
 		private RoutingState _router = new RoutingState();
 
-		#region ReactiveCommands   
+		#region ReactiveCommand's   
 
 		private ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
 		private ReactiveCommand<Unit, Unit> ShowSearchWindowCommand { get; }
@@ -107,7 +107,7 @@ namespace OlibKey.ViewModels.Controls
 
 			Router.Navigate.Execute(new StartPageViewModel(this));
 		}
-		public void CreateLogin()
+		private void CreateLogin()
 		{
 			SelectedIndex = -1;
 			Router.Navigate.Execute(new CreateLoginPageViewModel(Database, this)
@@ -152,22 +152,22 @@ namespace OlibKey.ViewModels.Controls
 
 		//// Problem with ListBox ////
 
-		//public void MoveUp() => MoveItem(-1);
-
-		//public void MoveDown() => MoveItem(1);
-
-		//private void MoveItem(int direction)
-		//{
-		//	if (SelectedLoginItem == null)
-		//		return;
-
-		//	var newIndex = SelectedIndex + direction;
-
-		//	if (newIndex < 0 || newIndex >= LoginsList.Count)
-		//		return;
-
-		//	LoginsList.Move(SelectedIndex, newIndex);
-		//	SelectedIndex = newIndex;
-		//}
+		// public void MoveUp() => MoveItem(-1);
+		//
+		// public void MoveDown() => MoveItem(1);
+		//
+		// private void MoveItem(int direction)
+		// {
+		// 	if (SelectedLoginItem == null)
+		// 		return;
+		//
+		// 	var newIndex = SelectedIndex + direction;
+		//
+		// 	if (newIndex < 0 || newIndex >= LoginList.Count)
+		// 		return;
+		//
+		// 	LoginList.Move(SelectedIndex, newIndex);
+		// 	SelectedIndex = newIndex;
+		// }
 	}
 }

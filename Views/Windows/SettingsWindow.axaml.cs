@@ -118,7 +118,7 @@ namespace OlibKey.Views.Windows
 			_tiStorage = this.FindControl<TabItem>("tiStorage");
 			_tbAutosave = this.FindControl<TextBox>("tbAutosave");
 			_tbBlock = this.FindControl<TextBox>("tbBlock");
-			_tbMessage = this.FindControl<TextBox>("tbMessage");
+			_tbMessage = this.FindControl<TextBox>("tbMessage");		
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)

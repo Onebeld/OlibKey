@@ -25,6 +25,10 @@
 		<v:String x:Key="NotChosen">Not chosen</v:String>
 		<v:String x:Key="RemoveSelection">Remove selection</v:String>
 		<v:String x:Key="NameElement">Item name</v:String>
+		
+		<v:String x:Key="RunningReminders">Running reminders</v:String>
+		<v:String x:Key="SortAlphabetically">Sort alphabetically</v:String>
+		<v:String x:Key="Favorite">Favorites</v:String>
 
 		<v:String x:Key="GitHub">OlibKey on GitHub</v:String>
 		<v:String x:Key="VKontakte">OlibKey on VK</v:String>
@@ -33,6 +37,7 @@
 		<v:String x:Key="Ready">Ready</v:String>
 		<v:String x:Key="Elements">Elements:</v:String>
 		<v:String x:Key="OpenedBases">Opened bases:</v:String>
+		<v:String x:Key="ClearGC">Cleaning done</v:String>
 
 		<v:String x:Key="Collapse">Collapse</v:String>
 		<v:String x:Key="Expand">Expand</v:String>

@@ -25,6 +25,10 @@
 		<v:String x:Key="NotChosen">Не вибрано</v:String>
 		<v:String x:Key="RemoveSelection">Зняти виділення</v:String>
 		<v:String x:Key="NameElement">Назва елемента</v:String>
+		
+		<v:String x:Key="RunningReminders">Запущені нагадування</v:String>
+		<v:String x:Key="SortAlphabetically">Сортування за алфавітом</v:String>
+		<v:String x:Key="Favorite">Вибране</v:String>
 
 		<v:String x:Key="GitHub">OlibKey на GitHub</v:String>
 		<v:String x:Key="VKontakte">OlibKey у ВКонтакте</v:String>
@@ -33,6 +37,7 @@
 		<v:String x:Key="Ready">Готовий</v:String>
 		<v:String x:Key="Elements">Елементів:</v:String>
 		<v:String x:Key="OpenedBases">Відкрито баз:</v:String>
+		<v:String x:Key="ClearGC">Очищено</v:String>
 
 		<v:String x:Key="Collapse">Згорнути</v:String>
 		<v:String x:Key="Expand">Розгорнути</v:String>

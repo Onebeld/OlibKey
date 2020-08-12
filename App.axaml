@@ -706,7 +706,7 @@
 		<Style Selector="TabItem">
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
-			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundLightBrush}"/>
+			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
 			<Setter Property="HorizontalContentAlignment" Value="Left"/>
 			<Setter Property="Padding" Value="10 5 10 5"/>
 			<Setter Property="Template">
@@ -752,34 +752,34 @@
 			</Setter>
 		</Style>
 		
-		<Style Selector="ToggleButton /template/ContentPresenter">
+		<Style Selector="ToggleButton.SelectorButt /template/ContentPresenter">
 			<Setter Property="CornerRadius" Value="5"/>
 		</Style>
-		<Style Selector="ToggleButton:pressed  /template/ ContentPresenter">
+		<Style Selector="ToggleButton.SelectorButt:pressed  /template/ ContentPresenter">
 			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
 		</Style>
-		<Style Selector="ToggleButton > Path">
+		<Style Selector="ToggleButton.SelectorButt > Path">
 			<Setter Property="Fill" Value="{DynamicResource ThemeForegroundBrush}"/>
 		</Style>
-		<Style Selector="ToggleButton:checked > Path">
+		<Style Selector="ToggleButton.SelectorButt:checked > Path">
 			<Setter Property="Fill" Value="White"/>
 		</Style>
-		<Style Selector="ToggleButton:checked">
+		<Style Selector="ToggleButton.SelectorButt:checked">
 			<Setter Property="Foreground" Value="White"/>
 		</Style>
-		<Style Selector="ToggleButton:pressed > Path">
+		<Style Selector="ToggleButton.SelectorButt:pressed > Path">
 			<Setter Property="Fill" Value="White"/>
 		</Style>
-		<Style Selector="ToggleButton:pressed">
+		<Style Selector="ToggleButton.SelectorButt:pressed">
 			<Setter Property="Foreground" Value="White"/>
 			<Setter Property="RenderTransform" Value="scale(0.98)" />
 			<Setter Property="BorderBrush" Value="Transparent"/>
 			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
 		</Style>
-		<Style Selector="ToggleButton:pointerover /template/ ContentPresenter">
+		<Style Selector="ToggleButton.SelectorButt:pointerover /template/ ContentPresenter">
 			<Setter Property="BorderBrush" Value="Transparent"/>
 		</Style>
-		<Style Selector="ToggleButton:checked /template/ ContentPresenter">
+		<Style Selector="ToggleButton.SelectorButt:checked /template/ ContentPresenter">
 			<Setter Property="Background" Value="{DynamicResource ThemeSelectedControlBrush}"/>
 			<Setter Property="BorderBrush" Value="Transparent"/>
 		</Style>

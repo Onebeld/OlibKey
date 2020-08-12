@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
+using OlibKey.Core;
 using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Pages;
 using ReactiveUI;
@@ -14,9 +15,19 @@ namespace OlibKey
 	class Program
 	{
 		[STAThread]
-		public static void Main(string[] args) => BuildAvaloniaApp().Start(AppMain, args);
+		public static void Main(string[] args)
+		{
+			try
+			{
+				BuildAvaloniaApp().Start(AppMain, args);
+			}
+			catch (Exception ex)
+			{
+				Log.WriteFatal(ex);
+			}
+		}
 
-		public static AppBuilder BuildAvaloniaApp() =>
+		private static AppBuilder BuildAvaloniaApp() =>
 			AppBuilder.Configure<App>()
 				.UsePlatformDetect()
 				.LogToDebug()
@@ -40,6 +51,7 @@ namespace OlibKey
 			App.MainWindow = new MainWindow { DataContext = App.MainWindowViewModel };
 
 			app.Run(App.MainWindow);
+
 		}
 	}
 }

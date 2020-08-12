@@ -30,7 +30,7 @@ namespace OlibKey
 
 		private ObservableCollection<TabItem> _tabItems = new ObservableCollection<TabItem>();
 
-		#region ReactiveCommands   
+		#region ReactiveCommand's   
 
 		private ReactiveCommand<Unit, Unit> ExitProgramCommand { get; }
 		private ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
@@ -49,6 +49,7 @@ namespace OlibKey
 		private ReactiveCommand<Unit, Unit> SaveAllDatabasesCommand { get; }
 		private ReactiveCommand<Unit, Unit> UnlockAllDatabasesCommand { get; }
 		private ReactiveCommand<Unit, Unit> OpenCheckingWeakPasswordsWindowCommand { get; }
+		private ReactiveCommand<Unit, Unit> ClearGCCommand { get; }
 
 		#endregion
 
@@ -59,7 +60,7 @@ namespace OlibKey
 			get => _tabItems;
 			set => this.RaiseAndSetIfChanged(ref _tabItems, value);
 		}
-		public bool IsLockDatabase
+		private bool IsLockDatabase
 		{
 			get => _isLockDatabase;
 			set => this.RaiseAndSetIfChanged(ref _isLockDatabase, value);
@@ -80,7 +81,7 @@ namespace OlibKey
 			set => this.RaiseAndSetIfChanged(ref _countLogins, value);
 		}
 		public DatabaseControl SelectedTabItem { get { try { return (DatabaseControl)TabItems[SelectedTabIndex].Content; } catch { return null; } } }
-		public DatabaseTabHeader SelectedTabItemHeader { get { try { return (DatabaseTabHeader)TabItems[SelectedTabIndex].Header; } catch { return null; } } }
+		private DatabaseTabHeader SelectedTabItemHeader { get { try { return (DatabaseTabHeader)TabItems[SelectedTabIndex].Header; } catch { return null; } } }
 		public List<string> OpenStorages { get; set; }
 
 		#endregion
@@ -104,6 +105,7 @@ namespace OlibKey
 			SaveAllDatabasesCommand = ReactiveCommand.Create(SaveAllDatabases);
 			UnlockAllDatabasesCommand = ReactiveCommand.Create(UnlockAllDatabases);
 			OpenCheckingWeakPasswordsWindowCommand = ReactiveCommand.Create(OpenCheckingWeakPasswordsWindow);
+			ClearGCCommand = ReactiveCommand.Create(ClearGC);
 
 			App.Autoblock.Tick += AutoblockStorage;
 		}
@@ -237,33 +239,6 @@ namespace OlibKey
 
 			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not6"));
 		}
-		public void AutoblockStorage(object sender, EventArgs e)
-		{
-			App.SearchWindow?.Close();
-			_windowChangeMasterPassword?.Close();
-			_settingsWindow?.Close();
-			PasswordGenerator?.Close();
-			CheckingWindow?.Close();
-			for (var index = 0; index < TabItems.Count; index++)
-			{
-				TabItem item = TabItems[index];
-				DatabaseControl db = (DatabaseControl)item.Content;
-				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
-
-				if (db.ViewModel.IsUnlockDatabase)
-				{
-					if (db.ViewModel.LoginList.Any(login => login.LoginItem.IsReminderActive)) continue;
-
-					SaveDatabase(db);
-					db.ViewModel.ClearLoginsList();
-					IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
-					IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
-					db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
-				}
-			}
-
-			App.Autoblock.Stop();
-		}
 		public void ProgramClosing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			App.Autosave.Stop();
@@ -301,7 +276,7 @@ namespace OlibKey
 			}
 
 		}
-		public void CloseTab(string tabID)
+		private void CloseTab(string tabID)
 		{
 			foreach (TabItem item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.TabID == tabID))
 			{
@@ -310,6 +285,33 @@ namespace OlibKey
 				TabItems.Remove(item);
 				break;
 			}
+		}
+		private void AutoblockStorage(object sender, EventArgs e)
+		{
+			App.SearchWindow?.Close();
+			_windowChangeMasterPassword?.Close();
+			_settingsWindow?.Close();
+			PasswordGenerator?.Close();
+			CheckingWindow?.Close();
+			for (var index = 0; index < TabItems.Count; index++)
+			{
+				TabItem item = TabItems[index];
+				DatabaseControl db = (DatabaseControl)item.Content;
+				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
+
+				if (db.ViewModel.IsUnlockDatabase)
+				{
+					if (db.ViewModel.LoginList.Any(login => login.LoginItem.IsReminderActive)) continue;
+
+					SaveDatabase(db);
+					db.ViewModel.ClearLoginsList();
+					IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
+					IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
+					db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+				}
+			}
+
+			App.Autoblock.Stop();
 		}
 		private async void UnlockDatabase()
 		{
@@ -326,7 +328,7 @@ namespace OlibKey
 		}
 		private async void UnlockAllDatabases()
 		{
-			foreach (var item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.IsLockDatabase))
+			foreach (TabItem item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.IsLockDatabase))
 			{
 				DatabaseControl db = (DatabaseControl)item.Content;
 				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
@@ -362,10 +364,13 @@ namespace OlibKey
 				DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
 
 				SaveDatabase(db);
-				db.ViewModel.ClearLoginsList();
-				IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
-				IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
-				db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+				if (dbHeader != null)
+				{
+					db.ViewModel.ClearLoginsList();
+					IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
+					IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
+					db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+				}
 			}
 
 			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not7"));
@@ -503,14 +508,27 @@ namespace OlibKey
 			_settingsWindow = new SettingsWindow();
 			_settingsWindow.ShowDialog(App.MainWindow);
 		}
-
-		private void CheckUpdate() => App.CheckUpdate(true);
 		private void ChangeMasterPassword()
 		{
 			_windowChangeMasterPassword = new ChangeMasterPasswordWindow();
 			_windowChangeMasterPassword.ShowDialog(App.MainWindow);
 		}
 
+		private void ClearGC()
+		{
+			for (var index = 0; index < TabItems.Count; index++)
+			{
+				DatabaseControl item = (DatabaseControl)TabItems[index].Content;
+				foreach (IRoutableViewModel i in item.ViewModel.Router.NavigationStack)
+				{
+					item.ViewModel.Router.NavigationStack.Remove(i);
+				}
+			}
+			GC.Collect(0, GCCollectionMode.Forced);
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("ClearGC"));
+		}
+		
+		private void CheckUpdate() => App.CheckUpdate(true);
 		private void ExitApplication() => App.MainWindow.Close();
 		private void SaveSettings() => SaveAndLoadSettings.SaveSettings();
 	}

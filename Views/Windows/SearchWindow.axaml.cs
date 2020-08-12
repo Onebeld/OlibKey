@@ -29,6 +29,7 @@ namespace OlibKey.Views.Windows
 
 		private ToggleButton _tbSortAlphabetically;
 		private ToggleButton _tbFavorite;
+		private ToggleButton _tbActiveReminder;
 
 		private ListBox _lbFolders;
 
@@ -50,15 +51,11 @@ namespace OlibKey.Views.Windows
 			_lbFolders = this.FindControl<ListBox>("lbFolders");
 			_tbSortAlphabetically = this.FindControl<ToggleButton>("tbSortAlphabetically");
 			_tbFavorite = this.FindControl<ToggleButton>("tbFavorite");
+			_tbActiveReminder = this.FindControl<ToggleButton>("tbActiveReminder");
 
 			DataContext = SearchViewModel = new SearchWindowViewModel();
 			_rAll.IsChecked = true;
 			Closed += SearchWindow_Closed;
-			_tbSortAlphabetically.Checked += (s, e) => SearchLogin();
-			_tbSortAlphabetically.Unchecked += (s, e) => SearchLogin();
-			_tbFavorite.Checked += (s, e) => SearchLogin();
-			_tbFavorite.Unchecked += (s, e) => SearchLogin();
-			_lbFolders.PointerPressed += (s, e) => SearchViewModel.SelectedFolderIndex = -1;
 			await Task.Delay(50);
 			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchLogin());
 		}
@@ -97,6 +94,9 @@ namespace OlibKey.Views.Windows
 			if (SearchViewModel.SelectedFolderItem != null)
 				selectedItemList = selectedItemList.FindAll(x =>
 					x.LoginItem.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID);
+
+			if (_tbActiveReminder.IsChecked != null && (bool)_tbActiveReminder.IsChecked)
+				selectedItemList = selectedItemList.FindAll(x => x.LoginItem.IsReminderActive);
 
 			if (_tbFavorite.IsChecked != null && (bool)_tbFavorite.IsChecked)
 				selectedItemList = selectedItemList.FindAll(x => x.LoginItem.Favorite);

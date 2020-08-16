@@ -15,17 +15,20 @@ namespace OlibKey.ViewModels.Pages
 	public class CreateLoginPageViewModel : ReactiveObject, IRoutableViewModel
 	{
 		#region ReactiveCommand's
-		public ReactiveCommand<Unit, Unit> BackCommand { get; }
-		public ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
-		public ReactiveCommand<Unit, Unit> AddCustomFieldCommand { get; }
+
+		private ReactiveCommand<Unit, Unit> BackCommand { get; }
+		private ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
+		private ReactiveCommand<Unit, Unit> AddCustomFieldCommand { get; }
+		
 		#endregion
 
 		private int _selectionFolderIndex;
-		private ObservableCollection<CustomFieldListItem> _CustomFields;
+		private ObservableCollection<CustomFieldListItem> _customFields;
 
 		#region Property's
-		public int Type { get; set; }
-		public Login NewLogin { get; set; }
+
+		private int Type { get; set; }
+		private Login NewLogin { get; set; }
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
@@ -37,10 +40,11 @@ namespace OlibKey.ViewModels.Pages
 		}
 		private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
 		private ObservableCollection<Folder> Folders { get; set; }
-		public ObservableCollection<CustomFieldListItem> CustomFields
+
+		private ObservableCollection<CustomFieldListItem> CustomFields
 		{
-			get => _CustomFields;
-			set => this.RaiseAndSetIfChanged(ref _CustomFields, value);
+			get => _customFields;
+			set => this.RaiseAndSetIfChanged(ref _customFields, value);
 		}
 
 		#endregion

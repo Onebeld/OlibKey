@@ -22,7 +22,32 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e6f68fb9-733b-45e9-a2eb-a03dd0d0a640" name="Default Changelist" comment="" />
+    <list default="true" id="e6f68fb9-733b-45e9-a2eb-a03dd0d0a640" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OlibKey/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OlibKey/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.OlibKey/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OlibKey/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/OlibKey/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/OlibKey/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/OlibKey/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/OlibKey/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/App.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Themes/Dazzling.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Themes/Dazzling.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/Log.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Core/Log.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OlibKey.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OlibKey.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/Controls/DatabaseControlViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/Controls/DatabaseControlViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/Pages/CreateLoginPageViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/Pages/CreateLoginPageViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/Pages/EditLoginPageViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/Pages/EditLoginPageViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/Pages/LoginInformationPageViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/Pages/LoginInformationPageViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/Windows/CheckingWeakPasswordsWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/Windows/CheckingWeakPasswordsWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/Windows/SearchWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/Windows/SearchWindowViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Pages/CreateLoginPage.axaml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Pages/CreateLoginPage.axaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Windows/AboutWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Windows/AboutWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Windows/CheckingWeakPasswordsWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Windows/CheckingWeakPasswordsWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Windows/CreateDatabaseWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Windows/CreateDatabaseWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Windows/MessageBox.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Windows/MessageBox.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Windows/PasswordGeneratorWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Windows/PasswordGeneratorWindow.axaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Windows/SettingsWindow.axaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Windows/SettingsWindow.axaml.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,6 +58,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/19266337-A54F-4F5D-8448-DC3361015DD7/5/AvaloniaObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/MainWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/19266337-A54F-4F5D-8448-DC3361015DD7/2D/Dispatcher.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/A2CB62BB-E04D-42E7-8F85-3C750CBE7C9D/1/Win32Platform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/MainWindowViewModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -40,9 +66,18 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/19266337-A54F-4F5D-8448-DC3361015DD7/14/StyledPropertyBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/19266337-A54F-4F5D-8448-DC3361015DD7/16/ValueStore.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/ImageInteraction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/19266337-A54F-4F5D-8448-DC3361015DD7/17/AvaloniaPropertyValueStore.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/PasswordGenerator.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/SaveAndLoadSettings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/ItemControls.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/SaveAndLoadDatabase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/902C9A43-110E-4101-AC8D-478F0FFF0D76/38/RoutingState.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Structures/Database.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Log.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/PasswordUtils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Structures/Settings.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Core/Encryptor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DB9CEB1E-F6C3-448D-8D4A-C9F8963779FB/12/Array.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/Pages/EditLoginPageViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ViewModels/Pages/LoginInformationPageViewModel.cs" root0="FORCE_HIGHLIGHTING" />
@@ -56,8 +91,17 @@
     <setting file="file://$PROJECT_DIR$/Views/Windows/SettingsWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5229C25D-81F5-4835-AB74-B9A4F21E8AA6/A/ObservableCollection.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5229C25D-81F5-4835-AB74-B9A4F21E8AA6/D/NotifyCollectionChangedEventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/PasswordGeneratorWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/SearchWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/ChangeMasterPasswordWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/MessageBox.axaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/ReminderWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DB9CEB1E-F6C3-448D-8D4A-C9F8963779FB/3CC/Collection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/RequireMasterPasswordWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/AboutWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/DB9CEB1E-F6C3-448D-8D4A-C9F8963779FB/3DC/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/CreateDatabaseWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Views/Windows/CheckingWeakPasswordsWindow.axaml.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/D28804C8-977F-4E0D-99A1-3933B6062EB6/18/ContentControl.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -71,11 +115,26 @@
         <option value="$PROJECT_DIR$/Assets/Local/lang.uk-UA.axaml" />
         <option value="$PROJECT_DIR$/MainWindow.axaml" />
         <option value="$PROJECT_DIR$/Views/Windows/SettingsWindow.axaml" />
-        <option value="$PROJECT_DIR$/Views/Windows/SettingsWindow.axaml.cs" />
         <option value="$PROJECT_DIR$/Program.cs" />
-        <option value="$PROJECT_DIR$/ViewModels/Pages/CreateLoginPageViewModel.cs" />
-        <option value="$PROJECT_DIR$/ViewModels/Controls/DatabaseControlViewModel.cs" />
+        <option value="$PROJECT_DIR$/OlibKey.csproj" />
+        <option value="$PROJECT_DIR$/Views/Pages/CreateLoginPage.axaml" />
         <option value="$PROJECT_DIR$/MainWindowViewModel.cs" />
+        <option value="$PROJECT_DIR$/ViewModels/Pages/CreateLoginPageViewModel.cs" />
+        <option value="$PROJECT_DIR$/ViewModels/Pages/EditLoginPageViewModel.cs" />
+        <option value="$PROJECT_DIR$/ViewModels/Pages/LoginInformationPageViewModel.cs" />
+        <option value="$PROJECT_DIR$/ViewModels/Controls/DatabaseControlViewModel.cs" />
+        <option value="$PROJECT_DIR$/ViewModels/Windows/CheckingWeakPasswordsWindowViewModel.cs" />
+        <option value="$PROJECT_DIR$/ViewModels/Windows/SearchWindowViewModel.cs" />
+        <option value="$PROJECT_DIR$/Core/Log.cs" />
+        <option value="$PROJECT_DIR$/MainWindow.axaml.cs" />
+        <option value="$PROJECT_DIR$/Views/Windows/AboutWindow.axaml.cs" />
+        <option value="$PROJECT_DIR$/Views/Windows/CheckingWeakPasswordsWindow.axaml.cs" />
+        <option value="$PROJECT_DIR$/Views/Windows/PasswordGeneratorWindow.axaml.cs" />
+        <option value="$PROJECT_DIR$/Views/Windows/MessageBox.axaml.cs" />
+        <option value="$PROJECT_DIR$/Views/Windows/SettingsWindow.axaml.cs" />
+        <option value="$PROJECT_DIR$/Views/Windows/CreateDatabaseWindow.axaml.cs" />
+        <option value="$PROJECT_DIR$/Assets/Themes/Dazzling.axaml" />
+        <option value="$PROJECT_DIR$/App.axaml" />
       </list>
     </option>
   </component>
@@ -129,6 +188,8 @@
       <workItem from="1597118977277" duration="455000" />
       <workItem from="1597137007610" duration="303000" />
       <workItem from="1597137838927" duration="3256000" />
+      <workItem from="1597508218097" duration="5097000" />
+      <workItem from="1597553390850" duration="5693000" />
     </task>
     <servers />
   </component>
@@ -144,6 +205,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
@@ -157,26 +219,30 @@
       <screen x="0" y="0" width="1280" height="1024" />
     </state>
     <state x="395" y="216" key="#xdebugger.evaluate/0.0.1280.1024@0.0.1280.1024" timestamp="1597140504130" />
+    <state x="387" y="367" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1" timestamp="1597557673707">
+      <screen x="0" y="0" width="1280" height="1024" />
+    </state>
+    <state x="387" y="367" key="ANALYSIS_DLG_com.jetbrains.rider.actions.impl.cleanup.RiderCodeCleanupAction$actionPerformed$dlg$1/0.0.1280.1024@0.0.1280.1024" timestamp="1597557673707" />
     <state width="586" height="464" key="DebuggerActiveHint" timestamp="1597140523675">
       <screen x="0" y="0" width="1280" height="1024" />
     </state>
     <state width="586" height="464" key="DebuggerActiveHint/0.0.1280.1024@0.0.1280.1024" timestamp="1597140523675" />
-    <state width="1167" height="368" key="GridCell.Tab.0.bottom" timestamp="1597141153678">
+    <state width="1237" height="273" key="GridCell.Tab.0.bottom" timestamp="1597559000531">
       <screen x="0" y="0" width="1280" height="1024" />
     </state>
-    <state width="1167" height="368" key="GridCell.Tab.0.bottom/0.0.1280.1024@0.0.1280.1024" timestamp="1597141153678" />
-    <state width="1167" height="368" key="GridCell.Tab.0.center" timestamp="1597141153678">
+    <state width="1237" height="273" key="GridCell.Tab.0.bottom/0.0.1280.1024@0.0.1280.1024" timestamp="1597559000531" />
+    <state width="1237" height="273" key="GridCell.Tab.0.center" timestamp="1597559000531">
       <screen x="0" y="0" width="1280" height="1024" />
     </state>
-    <state width="1167" height="368" key="GridCell.Tab.0.center/0.0.1280.1024@0.0.1280.1024" timestamp="1597141153678" />
-    <state width="1167" height="368" key="GridCell.Tab.0.left" timestamp="1597141153678">
+    <state width="1237" height="273" key="GridCell.Tab.0.center/0.0.1280.1024@0.0.1280.1024" timestamp="1597559000531" />
+    <state width="1237" height="273" key="GridCell.Tab.0.left" timestamp="1597559000531">
       <screen x="0" y="0" width="1280" height="1024" />
     </state>
-    <state width="1167" height="368" key="GridCell.Tab.0.left/0.0.1280.1024@0.0.1280.1024" timestamp="1597141153678" />
-    <state width="1167" height="368" key="GridCell.Tab.0.right" timestamp="1597141153678">
+    <state width="1237" height="273" key="GridCell.Tab.0.left/0.0.1280.1024@0.0.1280.1024" timestamp="1597559000531" />
+    <state width="1237" height="273" key="GridCell.Tab.0.right" timestamp="1597559000531">
       <screen x="0" y="0" width="1280" height="1024" />
     </state>
-    <state width="1167" height="368" key="GridCell.Tab.0.right/0.0.1280.1024@0.0.1280.1024" timestamp="1597141153678" />
+    <state width="1237" height="273" key="GridCell.Tab.0.right/0.0.1280.1024@0.0.1280.1024" timestamp="1597559000531" />
     <state width="1167" height="368" key="GridCell.Tab.1.bottom" timestamp="1597141153679">
       <screen x="0" y="0" width="1280" height="1024" />
     </state>

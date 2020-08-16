@@ -89,7 +89,8 @@ namespace OlibKey.ViewModels.Controls
 		private void ShowSearchWindow()
 		{
 			App.SearchWindow = new SearchWindow();
-			foreach (Folder folder in Database.Folders) App.SearchWindow.SearchViewModel.AddFolder(folder);
+			for (int index = 0; index < Database.Folders.Count; index++) App.SearchWindow.SearchViewModel.AddFolder(Database.Folders[index]);
+
 			App.SearchWindow.ShowDialog(App.MainWindow);
 		}
 		public void AddLogin(Login loginContent)

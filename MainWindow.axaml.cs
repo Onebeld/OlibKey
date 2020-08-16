@@ -10,8 +10,7 @@ namespace OlibKey
 {
     public class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
-	    public ListBox MainWindowListBox;
-		private TextBlock _tbMessageStatusBar;
+	    private TextBlock _tbMessageStatusBar;
 		private TextBlock _tbReady;
 		private TabControl _tabItems;
 
@@ -21,8 +20,7 @@ namespace OlibKey
 	    {
 		    this.WhenActivated(disposables => { });
 		    AvaloniaXamlLoader.Load(this);
-
-		    MainWindowListBox = this.FindControl<ListBox>("listBox");
+		    
 			_tbMessageStatusBar = this.FindControl<TextBlock>("tbMessageStatusBar");
 			_tabItems = this.FindControl<TabControl>("tabItems");
 			_tbReady = this.FindControl<TextBlock>("tbReady");
@@ -58,8 +56,8 @@ namespace OlibKey
 		public async void MessageStatusBar(string message)
 		{
 			_tbMessageStatusBar.IsVisible = true;
-			_tbReady.IsVisible = false;
 			_tbMessageStatusBar.Text = message;
+			_tbReady.IsVisible = false;
 			await Task.Delay(App.Settings.MessageDuration * 1000);
 			_tbMessageStatusBar.IsVisible = false;
 			_tbReady.IsVisible = true;

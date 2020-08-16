@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace OlibKey
 {
-	class Program
+	static class Program
 	{
 		[STAThread]
 		public static void Main(string[] args)
@@ -39,9 +39,7 @@ namespace OlibKey
 
 		private static void AppMain(Application app, string[] args)
 		{
-			List<string> files = args.ToList();
-
-			App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = files };
+			App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = args.ToList() };
 
 			Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
 			Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());
@@ -51,7 +49,6 @@ namespace OlibKey
 			App.MainWindow = new MainWindow { DataContext = App.MainWindowViewModel };
 
 			app.Run(App.MainWindow);
-
 		}
 	}
 }

@@ -28,33 +28,21 @@ namespace OlibKey.Views.Windows
 			_bFacebook = this.FindControl<Button>("bFacebook");
 
 			_bClose.Click += (s, e) => Close();
-			_bGitHub.Click += (s, e) =>
+			_bGitHub.Click += (s, e) => Process.Start(new ProcessStartInfo
 			{
-				ProcessStartInfo psi = new ProcessStartInfo
-				{
-					FileName = "https://github.com/MagnificentEagle/OlibKey",
-					UseShellExecute = true
-				};
-				Process.Start(psi);
-			};
-			_bVK.Click += (s, e) =>
+				FileName = "https://github.com/MagnificentEagle/OlibKey",
+				UseShellExecute = true
+			});
+			_bVK.Click += (s, e) => Process.Start(new ProcessStartInfo
 			{
-				ProcessStartInfo psi = new ProcessStartInfo
-				{
-					FileName = "https://vk.com/olibkey",
-					UseShellExecute = true
-				};
-				Process.Start(psi);
-			};
-			_bFacebook.Click += (s, e) =>
+				FileName = "https://vk.com/olibkey",
+				UseShellExecute = true
+			});
+			_bFacebook.Click += (s, e) => Process.Start(new ProcessStartInfo
 			{
-				ProcessStartInfo psi = new ProcessStartInfo
-				{
-					FileName = "https://www.facebook.com/olibkey",
-					UseShellExecute = true
-				};
-				Process.Start(psi);
-			};
+				FileName = "https://www.facebook.com/olibkey",
+				UseShellExecute = true
+			});
 			_tbInformation.Text = $"{Application.Current.FindResource("AccessText1")}\n{Application.Current.FindResource("AccessText2")}\n\nVersion .NET: {Environment.Version}\nOS: {RuntimeInformation.OSDescription}\nArchitecture: {RuntimeInformation.OSArchitecture}";
 		}
 	}

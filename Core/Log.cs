@@ -6,7 +6,7 @@ namespace OlibKey.Core
 {
 	public class Log
 	{
-		private static readonly object sync = new object();
+		private static readonly object Sync = new object();
 
 		public enum Type
 		{
@@ -19,33 +19,40 @@ namespace OlibKey.Core
 		{
 			try
 			{
-				string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+				string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory! , "Log");
 				if(!Directory.Exists(pathToLog)) Directory.CreateDirectory(pathToLog);
-				string fileName = Path.Combine(pathToLog, string.Format("{0}_{1:dd.MM.yyy}.log", AppDomain.CurrentDomain.FriendlyName, DateTime.Now));
-				string fullText = string.Format("[{0:dd.MM.yyy HH:mm:ss.fff}] | Fatal | [{1}.{2}()] {4}\r\n", DateTime.Now, ex.TargetSite.DeclaringType, ex.TargetSite.Name, ex.Message, ex);
-				lock (sync)
+				
+				if (ex.TargetSite != null)
 				{
-					File.AppendAllText(fileName, fullText, Encoding.UTF8);
+					lock (Sync)
+						File.AppendAllText(Path.Combine(pathToLog,
+								$"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log"),
+							$"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] | Fatal | [{ex.TargetSite.DeclaringType}.{ex.TargetSite.Name}()] {ex}\r\n",
+							Encoding.UTF8);
 				}
-
 			}
-			catch {}
+			catch
+			{
+				// ignored
+			}
 		}
 		public static void Write(string message, Type type)
 		{
 			try
 			{
-				string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Log");
+				string pathToLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory!, "Log");
 				if(!Directory.Exists(pathToLog)) Directory.CreateDirectory(pathToLog);
-				string fileName = Path.Combine(pathToLog, string.Format("{0}_{1:dd.MM.yyy}.log", AppDomain.CurrentDomain.FriendlyName, DateTime.Now));
-				string fullText = string.Format("[{0:dd.MM.yyy HH:mm:ss.fff}] | {1} | {2}\r\n", DateTime.Now, type ,message);
-				lock (sync)
-				{
-					File.AppendAllText(fileName, fullText, Encoding.UTF8);
-				}
+
+				lock (Sync)
+					File.AppendAllText(Path.Combine(pathToLog,
+							$"{AppDomain.CurrentDomain.FriendlyName}_{DateTime.Now:dd.MM.yyy}.log"),
+						$"[{DateTime.Now:dd.MM.yyy HH:mm:ss.fff}] | {type} | {message}\r\n", Encoding.UTF8);
 
 			}
-			catch {}
+			catch
+			{
+				// ignored
+			}
 		}
 	}
 }

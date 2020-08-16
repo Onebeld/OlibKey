@@ -19,7 +19,7 @@
 					<StackPanel>
 						<TextBlock Text="{DynamicResource Type}" Classes="Heading"/>
 						<ComboBox x:Name="cbType" Margin="5" SelectedIndex="{Binding NewLogin.Type}">
-							<ComboBoxItem Content="{DynamicResource Login}"/>
+							<ComboBoxItem Content="{StaticResource Login}"/>
 							<ComboBoxItem Content="{DynamicResource BankCard}"/>
 							<ComboBoxItem Content="{DynamicResource Passport}"/>
 							<ComboBoxItem Content="{DynamicResource Reminder}"/>

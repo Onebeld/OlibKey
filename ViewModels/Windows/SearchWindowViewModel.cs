@@ -19,10 +19,10 @@ namespace OlibKey.ViewModels.Windows
 
 		#region ReactiveCommand's
 
-		public ReactiveCommand<Unit, Unit> CreateFolderCommand { get; }
-		public ReactiveCommand<Unit, Unit> DeleteFolderCommand { get; }
-		public ReactiveCommand<Unit, Unit> EditFolderCommand { get; }
-		public ReactiveCommand<Unit, Unit> UnselectFolderItemCommand { get; }
+		private ReactiveCommand<Unit, Unit> CreateFolderCommand { get; }
+		private ReactiveCommand<Unit, Unit> DeleteFolderCommand { get; }
+		private ReactiveCommand<Unit, Unit> EditFolderCommand { get; }
+		private ReactiveCommand<Unit, Unit> UnselectFolderItemCommand { get; }
 
 		#endregion
 
@@ -65,32 +65,19 @@ namespace OlibKey.ViewModels.Windows
 			EditFolderCommand = ReactiveCommand.Create(() => SelectedFolderItem.Focusing());
 			UnselectFolderItemCommand = ReactiveCommand.Create(() => { SelectedFolderIndex = -1; });
 
-			SelectedLoginIndex = -1;
-			SelectedFolderIndex = -1;
+			SelectedLoginIndex = SelectedFolderIndex = -1;
 		}
-		public void AddLogin(LoginListItem Login) => LoginList.Add(Login);
+		public void AddLogin(LoginListItem login) => LoginList.Add(login);
 
 		public void ClearLoginsList() => LoginList.Clear();
 		public FolderListItem SelectedFolderItem { get { try { return FolderList[SelectedFolderIndex]; } catch { return null; } } }
-		public LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
-		private void CreateFolder()
-		{
-			FolderListItem a = new FolderListItem
+		private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
+		private void CreateFolder() =>
+			FolderList.Add(new FolderListItem
 			{
-				DataContext = new Folder()
-			};
-			a.FolderContext.ID = Guid.NewGuid().ToString("N");
-			FolderList.Add(a);
-		}
-		public void AddFolder(Folder LoginContent)
-		{
-			FolderListItem ali = new FolderListItem
-			{
-				DataContext = LoginContent,
-			};
-			ali._tbName.IsVisible = false;
-
-			FolderList.Add(ali);
-		}
+				DataContext = new Folder(),
+				FolderContext = { ID = Guid.NewGuid().ToString("N")}
+			});
+		public void AddFolder(Folder loginContent) => FolderList.Add(new FolderListItem {DataContext = loginContent, _tbName = {IsVisible = false}});
 	}
 }

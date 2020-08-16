@@ -39,6 +39,7 @@
         <e p="Encryptor.cs" t="Include" />
         <e p="ImageInteraction.cs" t="Include" />
         <e p="ItemControls.cs" t="Include" />
+        <e p="Log.cs" t="Include" />
         <e p="PasswordGenerator.cs" t="Include" />
         <e p="PasswordUtils.cs" t="Include" />
         <e p="SaveAndLoadDatabase.cs" t="Include" />

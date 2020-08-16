@@ -8,9 +8,9 @@ namespace OlibKey.Views.Windows
 {
 	public class CheckingWeakPasswordsWindow : Window
 	{
-		public CheckingWeakPasswordsWindowViewModel ViewModel;
+		private CheckingWeakPasswordsWindowViewModel ViewModel;
 
-		public ProgressBar pbHard;
+		private ProgressBar pbHard;
 
 		public CheckingWeakPasswordsWindow()
 		{

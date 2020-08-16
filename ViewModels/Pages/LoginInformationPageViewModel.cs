@@ -15,7 +15,7 @@ namespace OlibKey.ViewModels.Pages
 	public class LoginInformationPageViewModel : ReactiveObject, IRoutableViewModel
 	{
 		private int _selectionFolderIndex;
-		private ObservableCollection<CustomFieldListItem> _CustomFields;
+		private ObservableCollection<CustomFieldListItem> _customFields;
 
 		#region Section's
 
@@ -28,26 +28,26 @@ namespace OlibKey.ViewModels.Pages
 
 		#region ReactiveCommand's
 
-		public ReactiveCommand<Unit, Unit> EditContentCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyUsernameCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyPasswordCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyWebSiteCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyTypeBankCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyDateCardCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopySecurityCodeCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyNumberCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyPlaceOfIssueCommand { get; }
-		public ReactiveCommand<Unit, Unit> OpenWebSiteCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopySocialSecurityNumberCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyTINCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyTelephoneCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyCompanyCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyPostcodeCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyCountryCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyRegionCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyCityCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyAddressCommand { get; }
-		public ReactiveCommand<Unit, Unit> CopyEmailCommand { get; }
+		private ReactiveCommand<Unit, Unit> EditContentCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyUsernameCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyPasswordCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyWebSiteCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyTypeBankCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyDateCardCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopySecurityCodeCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyNumberCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyPlaceOfIssueCommand { get; }
+		private ReactiveCommand<Unit, Unit> OpenWebSiteCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopySocialSecurityNumberCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyTINCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyTelephoneCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyCompanyCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyPostcodeCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyCountryCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyRegionCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyCityCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyAddressCommand { get; }
+		private ReactiveCommand<Unit, Unit> CopyEmailCommand { get; }
 
 		#endregion
 
@@ -59,14 +59,14 @@ namespace OlibKey.ViewModels.Pages
 		}
 		private ObservableCollection<CustomFieldListItem> CustomFields
 		{
-			get => _CustomFields;
-			set => this.RaiseAndSetIfChanged(ref _CustomFields, value);
+			get => _customFields;
+			set => this.RaiseAndSetIfChanged(ref _customFields, value);
 		}
 		private LoginListItem LoginItem { get; set; }
 		private bool VisibleDateChanged { get; set; }
 		private bool IsVisible { get; set; } = true;
 		private ObservableCollection<Folder> Folders { get; set; }
-		public Login LoginInformation { get; set; }
+		private Login LoginInformation { get; set; }
 
 		#endregion
 
@@ -165,12 +165,9 @@ namespace OlibKey.ViewModels.Pages
 				break;
 			}
 
-			foreach (CustomField i in LoginInformation.CustomFields)
+			for (int index = 0; index < LoginInformation.CustomFields.Count; index++)
 				CustomFields.Add(new CustomFieldListItem(new Housing
-				{
-					CustomField = i,
-					IsEnabled = false
-				}));
+					{CustomField = LoginInformation.CustomFields[index], IsEnabled = false}));
 
 			if (CustomFields.Count != 0) CustomFields[^1].SLine.IsVisible = false;
 

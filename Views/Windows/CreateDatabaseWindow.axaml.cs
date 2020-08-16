@@ -25,17 +25,15 @@ namespace OlibKey.Views.Windows
 			InitializeComponent();
 			_bSelectPath.Click += SelectPath;
 			_bSave.Click += (s, e) => {
-				Regex reg = new Regex(@"^\d+$");
+				Regex reg = new Regex(@"^[1-9]\d*$");
 				if (!reg.IsMatch(TbIteration.Text)
-					|| TbIteration.Text == "0"
-					|| !reg.IsMatch(TbNumberOfEncryptionProcedures.Text)
-					|| TbNumberOfEncryptionProcedures.Text == "0")
+				    || !reg.IsMatch(TbNumberOfEncryptionProcedures.Text))
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 					return;
 				}
-				if (string.IsNullOrEmpty(TbPassword.Text) || TbPathDatabase.Text == null)
+				if (string.IsNullOrEmpty(TbPassword.Text) || string.IsNullOrEmpty(TbPathDatabase.Text))
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError2"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);

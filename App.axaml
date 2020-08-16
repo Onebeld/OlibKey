@@ -126,9 +126,8 @@
 		</Style>
 
 		<Style Selector="ProgressBar">
-			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
-			<Setter Property="BorderThickness" Value="1"/>
 			<Setter Property="Maximum" Value="300"/>
 		</Style>
 		<Style Selector="ProgressBar /template/ Border">

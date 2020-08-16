@@ -32,7 +32,7 @@ namespace OlibKey.ViewModels.Windows
 		{
 			get => _loginList; set => this.RaiseAndSetIfChanged(ref _loginList, value);
 		}
-		public double OverallComplexity
+		private double OverallComplexity
 		{
 			get => _overallComplexity;
 			set => this.RaiseAndSetIfChanged(ref _overallComplexity, value);
@@ -79,11 +79,7 @@ namespace OlibKey.ViewModels.Windows
 
 		private void SelectAll()
 		{
-			for (int index = 0; index < LoginList.Count; index++)
-			{
-				LoginListItem item = LoginList[index];
-				item.SelectedItem.IsChecked = true;
-			}
+			for (int index = 0; index < LoginList.Count; index++) LoginList[index].SelectedItem.IsChecked = true;
 		}
 
 		private async void ChangeWeakPassword()

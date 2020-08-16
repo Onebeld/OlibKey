@@ -18,7 +18,7 @@
 		<Version>3.2.0</Version>
 		<Authors>Dmitry Zhutkov</Authors>
 		<Copyright>© Dmitry Zhutkov 2020</Copyright>
-		<Description>OlibKey - an open source password manager.</Description>
+		<Description>OlibKey - cross-platform, modern, open source password manager.</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<RepositoryType>Publish</RepositoryType>
@@ -47,9 +47,9 @@
 		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.999-cibuild0009873-beta" />
-		<PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0009873-beta" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0009873-beta" />
+		<PackageReference Include="Avalonia" Version="0.10.999-cibuild0009903-beta" />
+		<PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0009903-beta" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0009903-beta" />
 	</ItemGroup>
 	<ItemGroup>
 		<RdXmlFile Include="rd.xml" />

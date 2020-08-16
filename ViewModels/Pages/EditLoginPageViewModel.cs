@@ -38,8 +38,8 @@ namespace OlibKey.ViewModels.Pages
 
 		#region Property's
 
-		public int Type { get; set; }
-		public ObservableCollection<CustomFieldListItem> CustomFields { get; set; }
+		private int Type { get; set; }
+		private ObservableCollection<CustomFieldListItem> CustomFields { get; set; }
 		private int SelectionFolderIndex
 		{
 			get => _selectionFolderIndex;
@@ -49,7 +49,7 @@ namespace OlibKey.ViewModels.Pages
 		private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
 		private ObservableCollection<Folder> Folders { get; set; }
 
-		public LoginListItem LoginList;
+		private LoginListItem LoginList;
 
 		#endregion
 

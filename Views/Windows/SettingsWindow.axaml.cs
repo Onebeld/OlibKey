@@ -47,12 +47,10 @@ namespace OlibKey.Views.Windows
 			_bClose.Click += (s, e) => Close();
 			Closing += (s, e) =>
 			{
-				Regex reg = new Regex(@"^\d+$");
-				if (_tbAutosave.Text == "0"
+				Regex reg = new Regex(@"^[1-9]\d*$");
+				if (!reg.IsMatch(_tbAutosave.Text)
 				|| !reg.IsMatch(_tbBlock.Text)
-				|| _tbBlock.Text == "0"
-				|| !reg.IsMatch(_tbMessage.Text)
-				|| _tbMessage.Text == "0")
+				|| !reg.IsMatch(_tbMessage.Text))
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
@@ -63,10 +61,7 @@ namespace OlibKey.Views.Windows
 				if (App.MainWindowViewModel.IsUnlockDatabase)
 				{
 					if (!reg.IsMatch(_tbIteration.Text)
-						|| _tbIteration.Text == "0"
-						|| !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text)
-						|| _tbNumberOfEncryptionProcedures.Text == "0"
-						|| !reg.IsMatch(_tbAutosave.Text))
+					    || !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text))
 					{
 						_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);

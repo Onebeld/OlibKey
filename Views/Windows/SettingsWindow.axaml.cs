@@ -74,7 +74,7 @@ namespace OlibKey.Views.Windows
 					{
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations = int.Parse(_tbIteration.Text);
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
-						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression = (bool)_cbUseCompression.IsChecked;
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression = _cbUseCompression.IsChecked ?? false;
 					}
 				}
 

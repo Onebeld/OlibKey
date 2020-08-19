@@ -25,8 +25,8 @@ namespace OlibKey.Views.Windows
 			_tbNewPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _tbNewPassword));
 		}
 
-		private void CheckedOldPassword(object sender, RoutedEventArgs e) => _tbOldPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
-		private void CheckedNewPassword(object sender, RoutedEventArgs e) => _tbNewPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
+		private void CheckedOldPassword(object sender, RoutedEventArgs e) => _tbOldPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
+		private void CheckedNewPassword(object sender, RoutedEventArgs e) => _tbNewPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
 		private void CloseWindow(object sender, RoutedEventArgs e) => Close();
 

@@ -67,13 +67,9 @@ namespace OlibKey.Views.Controls
 			IsFavorite.Unchecked += IsFavoriteChecking;
 		}
 
-		private void IsFavoriteChecking(object sender, Avalonia.Interactivity.RoutedEventArgs e)
-		{
-			bool? isChecked = ((ToggleButton)sender).IsChecked;
-			if (isChecked != null) LoginItem.Favorite = (bool)isChecked;
-		}
+        private void IsFavoriteChecking(object sender, Avalonia.Interactivity.RoutedEventArgs e) => LoginItem.Favorite = ((ToggleButton)sender).IsChecked ?? false;
 
-		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
+        private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 
 		public void EditedLogin()
 		{

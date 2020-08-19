@@ -380,7 +380,7 @@ namespace OlibKey
 						IsUnlockDatabase = true,
 						PathDatabase = window.TbPathDatabase.Text,
 						TabID = id,
-						UseCompression = (bool)window.CbUseCompression.IsChecked
+						UseCompression = window.CbUseCompression.IsChecked ?? false
 					}
 				};
 

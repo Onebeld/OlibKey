@@ -86,7 +86,7 @@ namespace OlibKey.ViewModels.Windows
 				for (int index = 0; index < LoginList.Count; index++)
 				{
 					LoginListItem i = LoginList[index];
-					if (i.SelectedItem.IsChecked != null && (bool)i.SelectedItem.IsChecked)
+					if (i.SelectedItem.IsChecked ?? false)
 					{
 						foreach (LoginListItem item in App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.Where(
 							item => item.LoginID == i.LoginID))

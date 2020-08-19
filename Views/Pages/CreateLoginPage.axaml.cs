@@ -85,9 +85,9 @@ namespace OlibKey.Views.Pages
 			}
 		}
 
-		private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
+		private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
-		private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
+		private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
 		private void TimeZeroing(object sender, RoutedEventArgs e) => _txtStartTime.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 

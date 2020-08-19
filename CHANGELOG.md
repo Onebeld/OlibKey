@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0] - ???
+### Added
+- Added new window "Check for weak passwords"
+- You can now mark items as favorites
+- Added sorting in search
+- Now you can compress the database to save disk space, the option is enabled by default
+- Added "Hardware acceleration" option, disabled by default
+- Added logging
+
+### Changed
+- Moving to .NET 5 Preview 8
+- Migrating to Avalonia 0.10.999-cibuild0009962-beta
+- Application icons changed
+- Search algorithm rewritten
+- ProgressBar changed due to overflow
+
+### Fixed
+- Fixed crash on some OS when opening a database: if there are no selected databases, the program terminates abnormally
+- Fixed MessageBox with an exception: it shouldn't stretch to the sides
+
 ## [3.1.1] - 2020-08-06
 ### Fixed
 - Fixed crash of the program when loading an icon for login, but there are no network connections

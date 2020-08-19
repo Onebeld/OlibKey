@@ -6,6 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
 		MinWidth="350"
 		MinHeight="120"
+		MaxWidth="450"
 		Icon="avares://OlibKey/app.ico"
 		WindowStartupLocation="CenterScreen"
 		Background="{StaticResource ThemeBackgroundBrush}"

@@ -225,8 +225,7 @@
 								   StaysOpen="False">
 								<Border BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
 										Background="{DynamicResource ThemeBackgroundBrush}"
-										BorderThickness="1"
-										CornerRadius="5">
+										BorderThickness="1">
 									<ScrollViewer>
 										<ItemsPresenter Name="PART_ItemsPresenter"
 														Items="{TemplateBinding Items}"
@@ -366,7 +365,6 @@
 								   IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}"
 								   StaysOpen="True">
 								<Border Background="{DynamicResource ThemeBackgroundBrush}"
-										CornerRadius="5"
 										BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
 										BorderThickness="{TemplateBinding BorderThickness}">
 									<ScrollViewer Classes="menuscroller">
@@ -625,47 +623,15 @@
 		<Style Selector="ToolTip">
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
-			<Setter Property="Transitions">
-				<Transitions>
-					<DoubleTransition Property="Opacity" Duration="0:0:0.15" />
-				</Transitions>
-			</Setter>
 			<Setter Property="Template">
 				<ControlTemplate>
 					<Border Padding="4,2" Background="{DynamicResource ThemeBackgroundBrush}"
 							BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
-							BorderThickness="1" IsHitTestVisible="True"
-							CornerRadius="5">
+							BorderThickness="1" IsHitTestVisible="True">
 						<ContentPresenter Name="PART_ContentPresenter"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  Content="{TemplateBinding Content}"/>
 					</Border>
-				</ControlTemplate>
-			</Setter>
-		</Style>
-		<Style Selector="ToolTip">
-			<Setter Property="Opacity" Value="0" />
-		</Style>
-
-		<Style Selector="ToolTip:open">
-			<Setter Property="Opacity" Value="1" />
-		</Style>
-
-		<Style Selector="PopupRoot">
-			<Setter Property="TransparencyLevelHint" Value="Transparent" />
-			<Setter Property="Background" Value="{x:Null}" />
-			<Setter Property="Template">
-				<ControlTemplate>
-					<Panel>
-						<Border Name="PART_TransparencyFallback" IsHitTestVisible="False" />
-						<VisualLayerManager IsPopup="True">
-							<ContentPresenter Name="PART_ContentPresenter"
-											  Background="{TemplateBinding Background}"
-											  ContentTemplate="{TemplateBinding ContentTemplate}"
-											  Content="{TemplateBinding Content}"
-											  Padding="{TemplateBinding Padding}"/>
-						</VisualLayerManager>
-					</Panel>
 				</ControlTemplate>
 			</Setter>
 		</Style>

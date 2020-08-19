@@ -58,7 +58,7 @@ namespace OlibKey.Views.Windows
 			_lbFolders.PointerPressed += (s, e) => ViewModel.SelectedFolderIndex = -1;
 			Closed += SearchWindow_Closed;
 			await Task.Delay(50);
-			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchLogin());
+			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => DeleteListAndSearchElement());
 		}
 
 		private void SearchWindow_Closed(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace OlibKey.Views.Windows
 				SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
 		}
 
-		private async void SearchLogin()
+		private async void DeleteListAndSearchElement()
 		{
 			SearchViewModel.ClearLoginsList();
 			await Task.Delay(10);
@@ -90,7 +90,6 @@ namespace OlibKey.Views.Windows
 				selectedItemList = App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList()
 					.FindAll(x => x.LoginItem.Type == 4);
 			else selectedItemList = App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList();
-			
 
 			if (SearchViewModel.SelectedFolderItem != null)
 				selectedItemList = selectedItemList.FindAll(x =>
@@ -120,8 +119,8 @@ namespace OlibKey.Views.Windows
 				IsFavorite = { IsEnabled = false}
 			});
 
-		private void lbFolders_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchLogin();
-		private void rLogin_Click(object sender, RoutedEventArgs e) => SearchLogin();
+		private void lbFolders_SelectionChanged(object sender, SelectionChangedEventArgs e) => DeleteListAndSearchElement();
+		private void rLogin_Click(object sender, RoutedEventArgs e) => DeleteListAndSearchElement();
 
 		private void AddLogin(LoginListItem login) => SearchViewModel.AddLogin(login);
 	}

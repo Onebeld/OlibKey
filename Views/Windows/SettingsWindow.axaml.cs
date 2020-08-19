@@ -18,13 +18,14 @@ namespace OlibKey.Views.Windows
 		private ComboBox _cbTheme;
 		private ComboBox _cbLanguage;
 		private Button _bClose;
+		private CheckBox _cbUseCompression;
 
 		public SettingsWindow()
 		{
 			InitializeComponent();
-			DataContext = App.Settings;
+			DataContext = Program.Settings;
 
-			_cbLanguage.SelectedIndex = App.Settings.Language switch
+			_cbLanguage.SelectedIndex = Program.Settings.Language switch
 			{
 				"ru-RU" => 1,
 				"uk-UA" => 2,
@@ -34,7 +35,7 @@ namespace OlibKey.Views.Windows
 				_ => 0
 			};
 
-			_cbTheme.SelectedIndex = App.Settings.Theme switch
+			_cbTheme.SelectedIndex = Program.Settings.Theme switch
 			{
 				"Gloomy" => 1,
 				"Mysterious" => 2,
@@ -73,17 +74,18 @@ namespace OlibKey.Views.Windows
 					{
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations = int.Parse(_tbIteration.Text);
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression = (bool)_cbUseCompression.IsChecked;
 					}
 				}
 
-				App.Settings.AutosaveDuration = int.Parse(_tbAutosave.Text);
-				App.Settings.BlockDuration = int.Parse(_tbBlock.Text);
-				App.Settings.MessageDuration = int.Parse(_tbMessage.Text);
+				Program.Settings.AutosaveDuration = int.Parse(_tbAutosave.Text);
+				Program.Settings.BlockDuration = int.Parse(_tbBlock.Text);
+				Program.Settings.MessageDuration = int.Parse(_tbMessage.Text);
 
 				App.Autosave.Stop();
 
-				App.Autosave.Interval = new TimeSpan(0, App.Settings.AutosaveDuration, 0);
-				App.Autoblock.Interval = new TimeSpan(0, App.Settings.BlockDuration, 0);
+				App.Autosave.Interval = new TimeSpan(0, Program.Settings.AutosaveDuration, 0);
+				App.Autoblock.Interval = new TimeSpan(0, Program.Settings.BlockDuration, 0);
 
 				App.Autosave.Start();
 			};
@@ -94,11 +96,12 @@ namespace OlibKey.Views.Windows
 			{
 				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations.ToString();
 				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures.ToString();
+				_cbUseCompression.IsChecked = App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression;
 			}
 
-			_tbAutosave.Text = App.Settings.AutosaveDuration.ToString();
-			_tbBlock.Text = App.Settings.BlockDuration.ToString();
-			_tbMessage.Text = App.Settings.MessageDuration.ToString();
+			_tbAutosave.Text = Program.Settings.AutosaveDuration.ToString();
+			_tbBlock.Text = Program.Settings.BlockDuration.ToString();
+			_tbMessage.Text = Program.Settings.MessageDuration.ToString();
 		}
 
 
@@ -113,12 +116,13 @@ namespace OlibKey.Views.Windows
 			_tiStorage = this.FindControl<TabItem>("tiStorage");
 			_tbAutosave = this.FindControl<TextBox>("tbAutosave");
 			_tbBlock = this.FindControl<TextBox>("tbBlock");
-			_tbMessage = this.FindControl<TextBox>("tbMessage");		
+			_tbMessage = this.FindControl<TextBox>("tbMessage");
+			_cbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)
 		{
-			App.Settings.Language = _cbLanguage.SelectedIndex switch
+			Program.Settings.Language = _cbLanguage.SelectedIndex switch
 			{
 				1 => "ru-RU",
 				2 => "uk-UA",
@@ -129,13 +133,13 @@ namespace OlibKey.Views.Windows
 			};
 			Application.Current.Styles[4] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 			{
-				Source = new Uri($"avares://OlibKey/Assets/Local/lang.{App.Settings.Language}.axaml")
+				Source = new Uri($"avares://OlibKey/Assets/Local/lang.{Program.Settings.Language}.axaml")
 			};
 		}
 
 		private void ThemeChange(object sender, SelectionChangedEventArgs e)
 		{
-			App.Settings.Theme = _cbTheme.SelectedIndex switch
+			Program.Settings.Theme = _cbTheme.SelectedIndex switch
 			{
 				1 => "Gloomy",
 				2 => "Mysterious",
@@ -145,7 +149,7 @@ namespace OlibKey.Views.Windows
 
 			Application.Current.Styles[2] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 			{
-				Source = new Uri($"avares://OlibKey/Assets/Themes/{App.Settings.Theme}.axaml")
+				Source = new Uri($"avares://OlibKey/Assets/Themes/{Program.Settings.Theme}.axaml")
 			};
 		}
 	}

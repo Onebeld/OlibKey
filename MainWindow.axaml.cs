@@ -26,12 +26,12 @@ namespace OlibKey
 			_tbReady = this.FindControl<TextBlock>("tbReady");
 
 			Closing += App.MainWindowViewModel.ProgramClosing;
-			Opened += (s, e) => App.MainWindowViewModel.Loading(this);
+			Opened += (_, __) => App.MainWindowViewModel.Loading();
 
 			_tabItems.SelectionChanged += App.MainWindowViewModel.TabItemsSelectionChanged;
 
-			Activated += (s, e) => { App.Autoblock.Stop(); };
-			Deactivated += (s, e) => { if (App.Settings.AutoblockEnabled) App.Autoblock.Start(); };
+			Activated += (_, __) => { App.Autoblock.Stop(); };
+			Deactivated += (_, __) => { if (Program.Settings.AutoblockEnabled) App.Autoblock.Start(); };
 
 			SetupDnd();
 		}
@@ -40,7 +40,7 @@ namespace OlibKey
 		{
 			static void DragOver(object sender, DragEventArgs e)
 			{
-				e.DragEffects &= (DragDropEffects.Copy | DragDropEffects.Link);
+				e.DragEffects &= DragDropEffects.Copy | DragDropEffects.Link;
 
 				if (!e.Data.Contains(DataFormats.FileNames)) e.DragEffects = DragDropEffects.None;
 			}
@@ -58,7 +58,7 @@ namespace OlibKey
 			_tbMessageStatusBar.IsVisible = true;
 			_tbMessageStatusBar.Text = message;
 			_tbReady.IsVisible = false;
-			await Task.Delay(App.Settings.MessageDuration * 1000);
+			await Task.Delay(Program.Settings.MessageDuration * 1000);
 			_tbMessageStatusBar.IsVisible = false;
 			_tbReady.IsVisible = true;
 		}

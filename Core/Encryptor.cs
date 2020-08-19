@@ -96,16 +96,12 @@ namespace OlibKey.Core
 				encryptString = Convert.ToBase64String(baEncrypted);
 			}
 
-			return db.ViewModel.Iterations + ":" + db.ViewModel.NumberOfEncryptionProcedures + ":" + encryptString;
+			return encryptString;
 		}
 
-		public static string DecryptString(string text, DatabaseControl db)
+		public static string DecryptString(string text, DatabaseControl db, int iterations, int numberOfEncryptionProcedures)
 		{
-
-			string[] split = text.Split(':');
-			int iterations = int.Parse(split[0]);
-			int numberOfEncryptionProcedures = int.Parse(split[1]);
-			string result = split[2];
+			string result = text;
 
 			byte[] baPwdHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(db.ViewModel.MasterPassword));
 

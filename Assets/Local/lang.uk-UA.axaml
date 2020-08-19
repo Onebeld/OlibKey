@@ -104,6 +104,7 @@
 		<v:String x:Key="Select">Вибрати</v:String>
 		<v:String x:Key="Iteration">Кількість ітерації:</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Кількість процедур шифрування:</v:String>
+		<v:String x:Key="UseCompression">Використовувати стиснення</v:String>
 		<v:String x:Key="CDBError1">У полях з введенням цифрових значенні повинні містити числа і не можуть бути рівними нулю!</v:String>
 		<v:String x:Key="CDBError2">Ви не обрали шлях сховища або не вказали майстер-пароль!</v:String>
 		<v:String x:Key="CDBError3">Ви не зможете створити сховище, якщо це сховище вже відкрито!</v:String>
@@ -131,6 +132,7 @@
 		<v:String x:Key="MessageDuration">Тривалість показу повідомлення:</v:String>
 		<v:String x:Key="Sec">секунд</v:String>
 		<v:String x:Key="Min">хвилин</v:String>
+		<v:String x:Key="HardwareAcceleration">Апаратне прискорення (потрібне перезавантаження)</v:String>
 
 		<v:String x:Key="Dazzling">Сліпуча</v:String>
 		<v:String x:Key="Gloomy">Похмура</v:String>

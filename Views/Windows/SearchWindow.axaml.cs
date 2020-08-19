@@ -55,6 +55,7 @@ namespace OlibKey.Views.Windows
 
 			DataContext = SearchViewModel = new SearchWindowViewModel();
 			_rAll.IsChecked = true;
+			_lbFolders.PointerPressed += (s, e) => ViewModel.SelectedFolderIndex = -1;
 			Closed += SearchWindow_Closed;
 			await Task.Delay(50);
 			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchLogin());

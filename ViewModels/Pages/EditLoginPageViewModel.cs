@@ -157,11 +157,11 @@ namespace OlibKey.ViewModels.Pages
 				break;
 			}
 
-			foreach (CustomField i in acc.LoginItem.CustomFields)
+			for (int i = 0; i < acc.LoginItem.CustomFields.Count; i++)
 			{
 				CustomFields.Add(new CustomFieldListItem(new Housing
 				{
-					CustomField = i,
+					CustomField = acc.LoginItem.CustomFields[i],
 					IsEnabled = true
 				})
 				{
@@ -178,15 +178,15 @@ namespace OlibKey.ViewModels.Pages
 
 			LoginList.LoginItem.CustomFields = CustomFields.Select(item => item.HousingElement.CustomField).ToList();
 			LoginList.LoginItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+
 			if (NewLogin.IsReminderActive)
 			{
 				LoginList.ReminderTimer.Interval = new TimeSpan(0, 0, 3);
 				LoginList.ReminderTimer.Start();
 			}
 			else
-			{
 				LoginList.ReminderTimer?.Stop();
-			}
+			
 			LoginList.EditedLogin();
 
 			EditCompleteCallback?.Invoke(LoginList);
@@ -194,10 +194,9 @@ namespace OlibKey.ViewModels.Pages
 		}
 		private async void DeleteLogin()
 		{
-			MessageBox.MessageBoxResult r = await MessageBox.Show(App.MainWindow, null,
+			if (await MessageBox.Show(App.MainWindow, null,
 				(string)Application.Current.FindResource("MB2"), (string)Application.Current.FindResource("Message"),
-				MessageBox.MessageBoxButtons.YesNo, MessageBox.MessageBoxIcon.Question);
-			if (r == MessageBox.MessageBoxResult.Yes)
+				MessageBox.MessageBoxButtons.YesNo, MessageBox.MessageBoxIcon.Question) == MessageBox.MessageBoxResult.Yes)
 				DeleteLoginCallback?.Invoke();
 		}
 		private void AddCustomField()

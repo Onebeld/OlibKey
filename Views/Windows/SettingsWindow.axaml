@@ -45,12 +45,13 @@
 									</StackPanel>
 								</CheckBox>
 							</StackPanel>
-							<StackPanel Orientation="Horizontal" Margin="0 5">
+							<CheckBox Content="{DynamicResource HardwareAcceleration}" IsChecked="{Binding UsingGPU}" Margin="0 5"/>
+							<StackPanel Orientation="Horizontal">
 								<TextBlock Text="{DynamicResource Autosave}"/>
 								<TextBox x:Name="tbAutosave" Margin="5 0" Width="50"/>
 								<TextBlock Text="{DynamicResource Min}"/>
 							</StackPanel>
-							<StackPanel Orientation="Horizontal">
+							<StackPanel Orientation="Horizontal" Margin="0 5">
 								<TextBlock Text="{DynamicResource MessageDuration}"/>
 								<TextBox x:Name="tbMessage" Margin="5 0" Width="50"/>
 								<TextBlock Text="{DynamicResource Sec}"/>
@@ -63,11 +64,12 @@
 				<Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 					<ScrollViewer>
 						<StackPanel Margin="5">
-							<DockPanel Margin="0 0 0 5">
+							<CheckBox x:Name="cbUseCompression" Content="{DynamicResource UseCompression}"/>
+							<DockPanel Margin="0 5">
 								<TextBlock Text="{DynamicResource NumberOfEncryptionProcedures}"/>
 								<TextBox x:Name="tbNumberOfEncryptionProcedures" Margin="5 0 0 0"/>
 							</DockPanel>
-							<DockPanel Margin="0 0 0 5">
+							<DockPanel>
 								<TextBlock Text="{DynamicResource Iteration}"/>
 								<TextBox x:Name="tbIteration" Margin="5 0 0 0"/>
 							</DockPanel>

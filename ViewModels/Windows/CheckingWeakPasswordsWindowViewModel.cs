@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
 using Avalonia;
@@ -50,10 +49,8 @@ namespace OlibKey.ViewModels.Windows
 			{
 				LoginListItem item = App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList[index];
 				if (item.LoginItem.Type == 0)
-				{
 					if (PasswordUtils.CheckPasswordStrength(item.LoginItem.Password) < 200)
 						Add(item.LoginItem, item.IconLogin, item.LoginID);
-				}
 			}
 
 			double sum = 0;

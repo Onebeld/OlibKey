@@ -2,23 +2,30 @@
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
 using OlibKey.Core;
+using OlibKey.Structures;
 using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Pages;
 using ReactiveUI;
 using Splat;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace OlibKey
 {
-	static class Program
+	public static class Program
 	{
+		public static Settings Settings { get; set; }
+
 		[STAThread]
 		public static void Main(string[] args)
 		{
 			try
 			{
+				Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.xml")
+				? SaveAndLoadSettings.LoadSettings()
+				: new Settings();
+
 				BuildAvaloniaApp().Start(AppMain, args);
 			}
 			catch (Exception ex)
@@ -32,10 +39,10 @@ namespace OlibKey
 				.UsePlatformDetect()
 				.LogToDebug()
 				.UseReactiveUI()
-				.With(new Win32PlatformOptions { AllowEglInitialization = false, UseDeferredRendering = true })
+				.With(new Win32PlatformOptions { AllowEglInitialization = Settings.UsingGPU, UseDeferredRendering = true })
 				.With(new MacOSPlatformOptions { ShowInDock = true })
-				.With(new AvaloniaNativePlatformOptions { UseGpu = true, UseDeferredRendering = true })
-				.With(new X11PlatformOptions { UseGpu = true, UseEGL = true });
+				.With(new AvaloniaNativePlatformOptions { UseGpu = Settings.UsingGPU, UseDeferredRendering = true })
+				.With(new X11PlatformOptions { UseGpu = Settings.UsingGPU, UseEGL = true });
 
 		private static void AppMain(Application app, string[] args)
 		{

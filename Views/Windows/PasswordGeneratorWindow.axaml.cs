@@ -1,5 +1,4 @@
-﻿using System;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
@@ -20,7 +19,7 @@ namespace OlibKey.Views.Windows
 			_tbPassword = this.FindControl<TextBox>("tbPassword");
 			_saveButton = this.FindControl<Button>("saveButton");
 
-			DataContext = App.Settings;
+			DataContext = Program.Settings;
 		}
 		private void ClickGeneratePassword(object sender, RoutedEventArgs e)
 		{

@@ -105,7 +105,7 @@ namespace OlibKey.ViewModels.Pages
 		{
 			foreach (CustomFieldListItem item in CustomFields.Where(item => item.ID == id))
 			{
-				_ = CustomFields.Remove(item);
+				CustomFields.Remove(item);
 				break;
 			}
 		}

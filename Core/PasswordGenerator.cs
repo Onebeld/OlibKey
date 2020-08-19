@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Avalonia;
-using Avalonia.Controls;
-using OlibKey.Views.Windows;
-
-namespace OlibKey.Core
+﻿namespace OlibKey.Core
 {
 	public static class PasswordGenerator
 	{
@@ -15,21 +8,21 @@ namespace OlibKey.Core
 			const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			const string number = "0123456789";
 			const string special = @"~!@#$%^&*():;[]{}<>,.?/\|";
-			string other = App.Settings.GeneratorTextOther;
+			string other = Program.Settings.GeneratorTextOther;
 
 			string allowed = "";
 			string password = "";
-			if (App.Settings.GeneratorAllowLowercase) allowed += lower;
-			if (App.Settings.GeneratorAllowUppercase) allowed += upper;
-			if (App.Settings.GeneratorAllowNumber) allowed += number;
-			if (App.Settings.GeneratorAllowSpecial) allowed += special;
-			if (App.Settings.GeneratorAllowUnderscore && password.IndexOfAny("_".ToCharArray()) == -1)
+			if (Program.Settings.GeneratorAllowLowercase) allowed += lower;
+			if (Program.Settings.GeneratorAllowUppercase) allowed += upper;
+			if (Program.Settings.GeneratorAllowNumber) allowed += number;
+			if (Program.Settings.GeneratorAllowSpecial) allowed += special;
+			if (Program.Settings.GeneratorAllowUnderscore && password.IndexOfAny("_".ToCharArray()) == -1)
 			{
 				allowed += "_";
 				password += "_";
 			}
-			if (App.Settings.GeneratorAllowOther) allowed += other;
-			int minChars = int.Parse(App.Settings.GenerationCount);
+			if (Program.Settings.GeneratorAllowOther) allowed += other;
+			int minChars = int.Parse(Program.Settings.GenerationCount);
 			int numChars = Encryptor.RandomInteger(minChars, minChars);
 			while (password.Length < numChars)
 				password += allowed.Substring(Encryptor.RandomInteger(0, allowed.Length - 1), 1);

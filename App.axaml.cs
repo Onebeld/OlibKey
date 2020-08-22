@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Reflection;
-using JetBrains.Annotations;
 
 namespace OlibKey
 {
@@ -51,7 +50,6 @@ namespace OlibKey
 
 			Autosave.Interval = new TimeSpan(0, Program.Settings.AutosaveDuration, 0);
 			Autoblock.Interval = new TimeSpan(0, Program.Settings.BlockDuration, 0);
-
 
 			if (Program.Settings.FirstRun)
 			{
@@ -99,6 +97,7 @@ namespace OlibKey
 				float latest = float.Parse(_resultCheckUpdate.Replace(".", ""));
 				float current =
 					float.Parse(Assembly.GetExecutingAssembly().GetName().Version?.ToString().Replace(".", "")!);
+
 				if (!(latest > current) && b)
 				{
 					await MessageBox.Show(MainWindow,
@@ -106,6 +105,7 @@ namespace OlibKey
 						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
 					return;
 				}
+
 
 				if (!(latest > current)) return;
 				if (await MessageBox.Show(MainWindow,

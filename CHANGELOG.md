@@ -14,17 +14,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Now you can compress the database to save disk space, the option is enabled by default
 - Added "Hardware acceleration" option, disabled by default
 - Added logging
+- Added trash
 
 ### Changed
 - Moving to .NET 5 Preview 8
-- Migrating to Avalonia 0.10.999-cibuild0009962-beta
+- Migrating to Avalonia 0.10.999-cibuild0010094-beta
 - Application icons changed
 - Search algorithm rewritten
 - ProgressBar changed due to overflow
+- In Windows, when Program Files is detected, the program will automatically start with administrator rights
 
 ### Fixed
 - Fixed crash on some OS when opening a database: if there are no selected databases, the program terminates abnormally
 - Fixed MessageBox with an exception: it shouldn't stretch to the sides
+- Fixed list virtualization for folders
 
 ## [3.1.1] - 2020-08-06
 ### Fixed

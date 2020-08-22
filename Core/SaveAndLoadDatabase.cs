@@ -16,7 +16,7 @@ namespace OlibKey.Core
 			int numberOfEncryptionProcedures = int.Parse(split[1]);
 			string encryptString = split[2];
 
-			if (split != null && split.Length > 3)
+			if (split.Length > 3)
 			{
 				bool useArchiving = bool.Parse(split[3]);
 
@@ -30,8 +30,10 @@ namespace OlibKey.Core
 			{
 				s = Encryptor.DecryptString(encryptString, db, iterations, numberOfEncryptionProcedures);
 				db.ViewModel.UseCompression = false;
-			}
+            }
 
+			if (split.Length > 4)
+				db.ViewModel.UseTrash = bool.Parse(split[4]);
 
 			return (Database)new XmlSerializer(typeof(Database)).Deserialize(new StringReader(s));
 		}
@@ -40,16 +42,12 @@ namespace OlibKey.Core
 		{
 			string file = db.ViewModel.Iterations + ":" + db.ViewModel.NumberOfEncryptionProcedures + ":";
 
-			string s;
-
 			using StringWriter writer = new StringWriter();
 			new XmlSerializer(typeof(Database)).Serialize(writer, db.ViewModel.Database);
 
-			if (db.ViewModel.UseCompression)
-				s = Encryptor.EncryptString(Archiving.Compress(writer.ToString()), db);
-			else s = Encryptor.EncryptString(writer.ToString(), db);
+			string s = Encryptor.EncryptString(db.ViewModel.UseCompression ? Archiving.Compress(writer.ToString()) : writer.ToString(), db);
 
-			file += s + ":" + db.ViewModel.UseCompression;
+			file += s + ":" + db.ViewModel.UseCompression + ":" + db.ViewModel.UseTrash;
 
 			File.WriteAllText(db.ViewModel.PathDatabase, file);
 		}

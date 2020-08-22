@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Reflection;
+using JetBrains.Annotations;
 
 namespace OlibKey
 {
@@ -18,8 +19,8 @@ namespace OlibKey
 		public static DispatcherTimer Autosave { get; set; }
 		public static DispatcherTimer Autoblock { get; set; }
 
-		private static string ResultCheckUpdate;
-		private static string ErrorResult;
+		private static string _resultCheckUpdate;
+		private static string _errorResult;
 
 		public static MainWindow MainWindow { get; set; }
 		public static MainWindowViewModel MainWindowViewModel { get; set; }
@@ -44,7 +45,8 @@ namespace OlibKey
 
 			Autosave.Tick += (_, __) =>
 			{
-				foreach (TabItem item in MainWindowViewModel.TabItems) MainWindowViewModel.SaveDatabase((DatabaseControl)item.Content);
+				for (var i = 0; i < MainWindowViewModel.TabItems.Count; i++)
+					MainWindowViewModel.SaveDatabase((DatabaseControl) MainWindowViewModel.TabItems[i].Content);
 			};
 
 			Autosave.Interval = new TimeSpan(0, Program.Settings.AutosaveDuration, 0);
@@ -87,16 +89,16 @@ namespace OlibKey
 				{
 					if (args.Error != null)
 					{
-						ErrorResult = args.Error.ToString();
+						_errorResult = args.Error.ToString();
 						return;
 					}
-					ResultCheckUpdate = args.Result;
+					_resultCheckUpdate = args.Result;
 				};
 				await wb.DownloadStringTaskAsync(new Uri(
 					"https://raw.githubusercontent.com/MagnificentEagle/OlibKey/master/ForRepository/version.txt"));
-				float latest = float.Parse(ResultCheckUpdate.Replace(".", ""));
+				float latest = float.Parse(_resultCheckUpdate.Replace(".", ""));
 				float current =
-					float.Parse(Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".", ""));
+					float.Parse(Assembly.GetExecutingAssembly().GetName().Version?.ToString().Replace(".", "")!);
 				if (!(latest > current) && b)
 				{
 					await MessageBox.Show(MainWindow,
@@ -122,13 +124,9 @@ namespace OlibKey
 			{
 				if (b)
 				{
-					if (ErrorResult != null)
-						await MessageBox.Show(MainWindow, ErrorResult,
+					await MessageBox.Show(MainWindow, _errorResult ?? ex.ToString(),
 							(string)Current.FindResource("MB5"), (string)Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok,
 							MessageBox.MessageBoxIcon.Error);
-					else await MessageBox.Show(MainWindow, ex.ToString(),
-						(string)Current.FindResource("MB5"), (string)Current.FindResource("Error"), MessageBox.MessageBoxButtons.Ok,
-						MessageBox.MessageBoxIcon.Error);
 				}
 			}
 		}

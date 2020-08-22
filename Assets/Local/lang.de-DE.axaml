@@ -11,6 +11,7 @@
 		<v:String x:Key="SaveBase">Sicher speichern</v:String>
 		<v:String x:Key="SaveAllBases">Speichern Sie alle Tresore</v:String>
 		<v:String x:Key="AddLogin">Login hinzufügen</v:String>
+		<v:String x:Key="Trash">Korb</v:String>
 		<v:String x:Key="Settings">Einstellungen</v:String>
 		<v:String x:Key="ExitFrom">Melden Sie sich von OlibKey ab</v:String>
 		<v:String x:Key="PasswordGenerator">Passwortgenerator</v:String>
@@ -38,6 +39,8 @@
 		<v:String x:Key="Elements">Artikel:</v:String>
 		<v:String x:Key="OpenedBases">Geöffnete Basen:</v:String>
 		<v:String x:Key="ClearGC">Reinigung erfolgt</v:String>
+		<v:String x:Key="Folders">Ordner:</v:String>
+		<v:String x:Key="Removed">Entfernt:</v:String>
 
 		<v:String x:Key="Collapse">Zusammenbruch</v:String>
 		<v:String x:Key="Expand">Erweitern</v:String>
@@ -60,7 +63,10 @@
 		<v:String x:Key="LockAllStorages">Verschließen Sie alle Tresore</v:String>
 		<v:String x:Key="UnlockStorage">Speicher entsperren</v:String>
 		<v:String x:Key="UnlockAllStorages">Schalte alle Tresore frei</v:String>
-		<v:String x:Key="ShowOPM">Zeigen OlibKey</v:String>
+		
+		<v:String x:Key="ClearTrash">Очистить корзину</v:String>
+		<v:String x:Key="DeleteSelected">Удалить выбранное</v:String>
+		<v:String x:Key="ReturnSelected">Вернуть выбранное</v:String>
 
 		<v:String x:Key="MB1">Sie müssen zuerst Speicher hochladen oder erstellen!</v:String>
 		<v:String x:Key="Error">Fehler</v:String>
@@ -72,6 +78,7 @@
 		<v:String x:Key="MB6">Sie können keine Zeichen aus einer leeren Zeichenfolge verlangen!</v:String>
 		<v:String x:Key="MB7">Keine Häkchen ausgewählt oder Passwortlänge angegeben!</v:String>
 		<v:String x:Key="MB8">Derzeit gibt es keine neuen Updates.</v:String>
+		<v:String x:Key="MB9">Sind Sie sicher, dass Sie Ihren Müll leeren möchten?</v:String>
 
 		<v:String x:Key="Successfully">Erfolgreich!</v:String>
 
@@ -105,6 +112,7 @@
 		<v:String x:Key="Iteration">Anzahl der Iterationen:</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Anzahl der Verschlüsselungsverfahren:</v:String>
 		<v:String x:Key="UseCompression">Verwenden Sie die Komprimierung</v:String>
+		<v:String x:Key="UseTrash">Verwenden Sie Müll</v:String>
 		<v:String x:Key="CDBError1">In Feldern mit einem numerischen Eintrag müssen Werte Zahlen enthalten und dürfen nicht Null sein!</v:String>
 		<v:String x:Key="CDBError2">Sie haben keinen Repository-Pfad ausgewählt oder kein Hauptkennwort angegeben!</v:String>
 		<v:String x:Key="CDBError3">Sie können keinen Tresor erstellen, wenn dieser Tresor bereits geöffnet ist!</v:String>
@@ -132,7 +140,10 @@
 		<v:String x:Key="MessageDuration">Dauer der Nachrichtenanzeige:</v:String>
 		<v:String x:Key="Sec">Sekunden</v:String>
 		<v:String x:Key="Min">Protokoll</v:String>
+		<v:String x:Key="Day">Tage</v:String>
 		<v:String x:Key="HardwareAcceleration">Hardwarebeschleunigung (Neustart erforderlich)</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Entfernen Sie automatisch einen Artikel aus dem Papierkorb</v:String>
+		<v:String x:Key="DaysDeleteFromTrash">Entfernen eines Artikels aus dem Papierkorb über:</v:String>
 
 		<v:String x:Key="Dazzling">Blendend</v:String>
 		<v:String x:Key="Gloomy">Düster</v:String>

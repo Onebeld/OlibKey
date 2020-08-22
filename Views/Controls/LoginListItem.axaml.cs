@@ -17,6 +17,7 @@ namespace OlibKey.Views.Controls
 		public ToggleButton IsFavorite;
 		private readonly TextBlock _tbLoginName;
 		private readonly TextBlock _tbUsername;
+		private TextBlock _tbDeleteDate;
 
 		public string LoginID { get; set; }
 
@@ -35,6 +36,7 @@ namespace OlibKey.Views.Controls
 			_tbUsername = this.FindControl<TextBlock>("tbUsername");
 			SelectedItem = this.FindControl<CheckBox>("selectedItem");
 			IsFavorite = this.FindControl<ToggleButton>("isFavorite");
+			_tbDeleteDate = this.FindControl<TextBlock>("tbDeleteDate");
 
 			LoginItem = Login;
 
@@ -61,10 +63,18 @@ namespace OlibKey.Views.Controls
 				_ => _tbUsername.Text
 			};
 
+			if (!string.IsNullOrEmpty(LoginItem.DeleteDate))
+            {
+				_tbDeleteDate.IsVisible = true;
+				_tbDeleteDate.Text = $"{(string)Application.Current.FindResource("Removed")} {LoginItem.DeleteDate}";
+				Height = 60;
+            }
+
 			IsFavorite.IsChecked = LoginItem.Favorite;
 
 			IsFavorite.Checked += IsFavoriteChecking;
 			IsFavorite.Unchecked += IsFavoriteChecking;
+
 		}
 
         private void IsFavoriteChecking(object sender, Avalonia.Interactivity.RoutedEventArgs e) => LoginItem.Favorite = ((ToggleButton)sender).IsChecked ?? false;

@@ -11,6 +11,8 @@
 		public bool AutoblockEnabled { get; set; } = true;
 		public int MessageDuration { get; set; } = 3;
 		public bool UsingGPU { get; set; } = false;
+		public int DaysAfterDeletion { get; set; } = 10;
+		public bool AutoRemoveItemsTrash { get; set; } = true;
 
 		public string GenerationCount { get; set; } = "10";
 		public bool GeneratorAllowLowercase { get; set; } = true;

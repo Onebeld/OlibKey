@@ -22,7 +22,6 @@
 					<Border Background="{DynamicResource ThemeBackgroundBrush}"
 							BorderBrush="{DynamicResource ThemeGlobalBorderBrush}"
 							BorderThickness="1"
-							CornerRadius="5"
 							Padding="4,2">
 						<ScrollViewer Classes="menuscroller">
 							<ItemsPresenter Name="PART_ItemsPresenter"
@@ -68,7 +67,6 @@
 			<Setter Property="Background" Value="{DynamicResource ThemePanelBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
 		</Style>
-
 
 		<Style Selector="Button">
 			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
@@ -716,7 +714,7 @@
 				</Transitions>
 			</Setter>
 		</Style>
-		
+
 		<Style Selector="ToggleButton.SelectorButt /template/ContentPresenter">
 			<Setter Property="CornerRadius" Value="5"/>
 		</Style>

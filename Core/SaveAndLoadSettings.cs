@@ -19,7 +19,6 @@ namespace OlibKey.Core
 				return new Settings();
 			}
 		}
-		[SecurityPermission(SecurityAction.Demand)]
 		public static void SaveSettings()
 		{
 			using StringWriter writer = new StringWriter();

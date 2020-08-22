@@ -46,6 +46,12 @@
 								</CheckBox>
 							</StackPanel>
 							<CheckBox Content="{DynamicResource HardwareAcceleration}" IsChecked="{Binding UsingGPU}" Margin="0 5"/>
+							<CheckBox Content="{DynamicResource AutoDeleteFromTrash}" IsChecked="{Binding AutoRemoveItemsTrash}"/>
+							<StackPanel Orientation="Horizontal" Margin="0 5">
+								<TextBlock Text="{DynamicResource DaysDeleteFromTrash}"/>
+								<TextBox x:Name="tbDaysDeleteFromTrash" Margin="5 0" Width="50"/>
+								<TextBlock Text="{DynamicResource Day}"/>
+							</StackPanel>
 							<StackPanel Orientation="Horizontal">
 								<TextBlock Text="{DynamicResource Autosave}"/>
 								<TextBox x:Name="tbAutosave" Margin="5 0" Width="50"/>
@@ -65,11 +71,12 @@
 					<ScrollViewer>
 						<StackPanel Margin="5">
 							<CheckBox x:Name="cbUseCompression" Content="{DynamicResource UseCompression}"/>
-							<DockPanel Margin="0 5">
+							<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}" Margin="0 5"/>
+							<DockPanel>
 								<TextBlock Text="{DynamicResource NumberOfEncryptionProcedures}"/>
 								<TextBox x:Name="tbNumberOfEncryptionProcedures" Margin="5 0 0 0"/>
 							</DockPanel>
-							<DockPanel>
+							<DockPanel Margin="0 5">
 								<TextBlock Text="{DynamicResource Iteration}"/>
 								<TextBox x:Name="tbIteration" Margin="5 0 0 0"/>
 							</DockPanel>

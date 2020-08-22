@@ -17,6 +17,7 @@ namespace OlibKey.Views.Windows
 		public TextBox TbIteration;
 		public TextBox TbNumberOfEncryptionProcedures;
 		public CheckBox CbUseCompression;
+		public CheckBox CbUseTrash;
 		private Button _bSelectPath;
 		private Button _bSave;
 		private ProgressBar _pbHard;
@@ -68,6 +69,7 @@ namespace OlibKey.Views.Windows
 			_bSelectPath = this.FindControl<Button>("bSelectPath");
 			_pbHard = this.FindControl<ProgressBar>("pbHard");
 			_bSave = this.FindControl<Button>("bSave");
+			CbUseTrash = this.FindControl<CheckBox>("cbUseTrash");
 			CbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
 
 			_ = TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, TbPassword));

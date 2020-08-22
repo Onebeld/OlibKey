@@ -10,6 +10,7 @@ namespace OlibKey.Structures
 		public string Email { get; set; }
 		public string TimeCreate { get; set; }
 		public string TimeChanged { get; set; }
+		public string DeleteDate { get; set; }
 
 		public bool Favorite { get; set; }
 
@@ -60,6 +61,7 @@ namespace OlibKey.Structures
 	{
 		public string Name { get; set; }
 		public string ID { get; set; }
+		public string DeleteDate { get; set; }
 	}
 	public class CustomField
 	{
@@ -69,10 +71,16 @@ namespace OlibKey.Structures
 		public string TextElement { get; set; }
 		public bool CheckedElement { get; set; }
 	}
+	public class Trash
+    {
+		public List<Login> Logins;
+		public List<Folder> Folders;
+    }
 
 	public class Database
 	{
 		public List<Login> Logins;
 		public List<Folder> Folders;
+		public Trash Trash;
 	}
 }

@@ -64,7 +64,7 @@ namespace OlibKey.Core
 				{"[!,@#\\$%\\^&\\*?_~=;:'\"<>[]()~`\\\\|/]", 0.4},
 				{@"[¶©]", 0.5}
 			};
-			foreach ((string key, double value) in patterns)
+			foreach ((string key, double value) in patterns) 
 				if (Regex.Matches(password, key).Count > 0)
 					multi2 += value;
 			if (password.Length > 2) multi3 += 0;

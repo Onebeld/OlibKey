@@ -100,7 +100,7 @@
 						</RadioButton.Content>
 					</RadioButton>
 				</StackPanel>
-				<ListBox x:Name="lbFolders" Padding="0" Items="{Binding FolderList}" SelectionChanged="lbFolders_SelectionChanged" SelectedIndex="{Binding SelectedFolderIndex}" Grid.Row="1" BorderBrush="{StaticResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="{StaticResource ThemeBackgroundBrush}">
+				<ListBox x:Name="lbFolders" Padding="0" Items="{Binding FolderList}" VirtualizationMode="None" SelectionChanged="lbFolders_SelectionChanged" SelectedIndex="{Binding SelectedFolderIndex}" Grid.Row="1" BorderBrush="{StaticResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="{StaticResource ThemeBackgroundBrush}">
 					<ListBox.ContextMenu>
 						<ContextMenu>
 							<MenuItem Header="{StaticResource RemoveSelection}" Command="{Binding UnselectFolderItemCommand}"/>

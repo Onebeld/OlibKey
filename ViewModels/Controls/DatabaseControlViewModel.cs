@@ -21,6 +21,7 @@ namespace OlibKey.ViewModels.Controls
 		public int NumberOfEncryptionProcedures { get; set; }
 
 		public bool UseCompression { get; set; }
+		public bool UseTrash { get; set; } = true;
 
 		private bool _isUnlockDatabase;
 		private bool _isLockDatabase;

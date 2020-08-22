@@ -30,6 +30,7 @@
 						</DockPanel>
 						<Separator Margin="15,5"/>
 						<CheckBox x:Name="cbUseCompression" Content="{StaticResource UseCompression}" Margin="5 5 5 0" IsChecked="True"/>
+						<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}" Margin="5 5 5 0" IsChecked="True"/>
 						<DockPanel Margin="5">
 							<TextBlock Text="{StaticResource NumberOfEncryptionProcedures}" Foreground="{StaticResource ThemeForegroundBrush}"/>
 							<TextBox x:Name="tbNumberOfEncryptionProcedures" Text="1" Margin="5 0 0 0"/>

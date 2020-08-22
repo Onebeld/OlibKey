@@ -12,9 +12,7 @@ namespace OlibKey.Core
 			byte[] buffer = Encoding.UTF8.GetBytes(text);
 			MemoryStream memoryStream = new MemoryStream();
             using (GZipStream gZipStream = new GZipStream(memoryStream, CompressionMode.Compress, true))
-            {
-                gZipStream.Write(buffer, 0, buffer.Length);
-            }
+	            gZipStream.Write(buffer, 0, buffer.Length);
 
             memoryStream.Position = 0;
 
@@ -38,9 +36,7 @@ namespace OlibKey.Core
 
 			memoryStream.Position = 0;
 			using (GZipStream gZipStream = new GZipStream(memoryStream, CompressionMode.Decompress))
-			{
 				gZipStream.Read(buffer, 0, buffer.Length);
-			}
 
 			return Encoding.UTF8.GetString(buffer);
 		}

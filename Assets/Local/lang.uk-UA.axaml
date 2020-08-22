@@ -11,6 +11,7 @@
 		<v:String x:Key="SaveBase">Зберегти сховище</v:String>
 		<v:String x:Key="SaveAllBases">Зберегти всі сховища</v:String>
 		<v:String x:Key="AddLogin">Додати логін</v:String>
+		<v:String x:Key="Trash">Кошик</v:String>
 		<v:String x:Key="Settings">Налаштування</v:String>
 		<v:String x:Key="ExitFrom">Вийти з OlibKey</v:String>
 		<v:String x:Key="PasswordGenerator">Генератор паролей</v:String>
@@ -38,6 +39,8 @@
 		<v:String x:Key="Elements">Елементів:</v:String>
 		<v:String x:Key="OpenedBases">Відкрито баз:</v:String>
 		<v:String x:Key="ClearGC">Очищено</v:String>
+		<v:String x:Key="Folders">Папки:</v:String>
+		<v:String x:Key="Removed">Вилучений:</v:String>
 
 		<v:String x:Key="Collapse">Згорнути</v:String>
 		<v:String x:Key="Expand">Розгорнути</v:String>
@@ -60,7 +63,10 @@
 		<v:String x:Key="LockAllStorages">Заблокувати всі сховища</v:String>
 		<v:String x:Key="UnlockStorage">Розблокувати сховище</v:String>
 		<v:String x:Key="UnlockAllStorages">Розблокувати все сховища</v:String>
-		<v:String x:Key="ShowOPM">Показати OlibKey</v:String>
+		
+		<v:String x:Key="ClearTrash">Очистить корзину</v:String>
+		<v:String x:Key="DeleteSelected">Удалить выбранное</v:String>
+		<v:String x:Key="ReturnSelected">Вернуть выбранное</v:String>
 
 		<v:String x:Key="MB1">Спочатку ви повинні завантажити або створити сховище!</v:String>
 		<v:String x:Key="Error">Помилка</v:String>
@@ -72,6 +78,7 @@
 		<v:String x:Key="MB6">Ви не можете вимагати символи з порожнього рядка!</v:String>
 		<v:String x:Key="MB7">Не вибрано жодної галочки або не зазначена довжина пароля!</v:String>
 		<v:String x:Key="MB8">На даний момент немає нових оновлень</v:String>
+		<v:String x:Key="MB9">Ви дійсно хочете очистити кошик?</v:String>
 
 		<v:String x:Key="Successfully">Успішно!</v:String>
 
@@ -105,6 +112,7 @@
 		<v:String x:Key="Iteration">Кількість ітерації:</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Кількість процедур шифрування:</v:String>
 		<v:String x:Key="UseCompression">Використовувати стиснення</v:String>
+		<v:String x:Key="UseTrash">Використовувати кошик</v:String>
 		<v:String x:Key="CDBError1">У полях з введенням цифрових значенні повинні містити числа і не можуть бути рівними нулю!</v:String>
 		<v:String x:Key="CDBError2">Ви не обрали шлях сховища або не вказали майстер-пароль!</v:String>
 		<v:String x:Key="CDBError3">Ви не зможете створити сховище, якщо це сховище вже відкрито!</v:String>
@@ -132,7 +140,10 @@
 		<v:String x:Key="MessageDuration">Тривалість показу повідомлення:</v:String>
 		<v:String x:Key="Sec">секунд</v:String>
 		<v:String x:Key="Min">хвилин</v:String>
+		<v:String x:Key="Day">днів</v:String>
 		<v:String x:Key="HardwareAcceleration">Апаратне прискорення (потрібне перезавантаження)</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Автоматично видаляти елемент з кошика</v:String>
+		<v:String x:Key="DaysDeleteFromTrash">Видалення елемента з кошика через:</v:String>
 
 		<v:String x:Key="Dazzling">Сліпуча</v:String>
 		<v:String x:Key="Gloomy">Похмура</v:String>

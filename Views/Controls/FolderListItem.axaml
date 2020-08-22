@@ -10,9 +10,16 @@
 			<Border Background="White" CornerRadius="999" Height="25" Width="25" Margin="5,0">
 				<Image x:Name="imageIcon" Source="{StaticResource FolderIcon}" Margin="5"/>
 			</Border>
-			
-			<TextBlock x:Name="textName" Foreground="{StaticResource ThemeForegroundBrush}" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
+
+			<StackPanel VerticalAlignment="Center" Grid.Column="1">
+				<TextBlock x:Name="textName" Foreground="{StaticResource ThemeForegroundBrush}" Text="{Binding Name}"/>
+				<TextBlock x:Name="tbDeleteDate" FontSize="12" Foreground="{StaticResource ThemeForegroundOpacityBrush}" IsVisible="False"/>
+			</StackPanel>
 			<TextBox x:Name="tbName" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="10 0 10 0">
+				<CheckBox x:Name="selectedItem" IsVisible="False"/>
+			</StackPanel>
 		</Grid>
 	</Border>
 </UserControl>

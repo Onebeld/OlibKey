@@ -27,6 +27,8 @@ namespace OlibKey
         private SettingsWindow _settingsWindow;
         public PasswordGeneratorWindow PasswordGenerator;
         public CheckingWeakPasswordsWindow CheckingWindow;
+        public TrashWindow TrashWindow;
+
 
         private ObservableCollection<TabItem> _tabItems = new ObservableCollection<TabItem>();
 
@@ -50,6 +52,7 @@ namespace OlibKey
         private ReactiveCommand<Unit, Unit> UnlockAllDatabasesCommand { get; }
         private ReactiveCommand<Unit, Unit> OpenCheckingWeakPasswordsWindowCommand { get; }
         private ReactiveCommand<Unit, Unit> ClearGCCommand { get; }
+        private ReactiveCommand<Unit, Unit> OpenTrashWindowCommand { get; }
 
         #endregion
 
@@ -106,6 +109,8 @@ namespace OlibKey
             UnlockAllDatabasesCommand = ReactiveCommand.Create(UnlockAllDatabases);
             OpenCheckingWeakPasswordsWindowCommand = ReactiveCommand.Create(OpenCheckingWeakPasswordsWindow);
             ClearGCCommand = ReactiveCommand.Create(ClearGC);
+            OpenTrashWindowCommand = ReactiveCommand.Create(OpenTrashWindow);
+
 
             App.Autoblock.Tick += AutoblockStorage;
         }
@@ -232,6 +237,7 @@ namespace OlibKey
             _settingsWindow?.Close();
             PasswordGenerator?.Close();
             CheckingWindow?.Close();
+            TrashWindow?.Close();
             for (int index = 0; index < TabItems.Count; index++)
             {
                 TabItem item = TabItems[index];
@@ -315,7 +321,7 @@ namespace OlibKey
                 dialog.Filters.Add(new FileDialogFilter { Name = (string)Application.Current.FindResource("FileOlib"), Extensions = { "olib" } });
                 List<string> files = (await dialog.ShowAsync(App.MainWindow)).ToList();
 
-                if (files == null || files.Count == 0) return;
+                if (files.Count == 0) return;
 
                 foreach (string file in files.Where(file =>
                     TabItems.All(i => ((DatabaseControl)i.Content).ViewModel.PathDatabase != file)))
@@ -325,7 +331,10 @@ namespace OlibKey
                     CreateTab(Program.Settings.PathDatabase, true, false);
                 }
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
         private void CreateLogin()
         {
@@ -352,6 +361,20 @@ namespace OlibKey
             {
                 IsLockDatabase = false;
                 IsUnlockDatabase = true;
+            }
+
+            if (Program.Settings.AutoRemoveItemsTrash)
+            {
+                if (db.ViewModel.Database.Trash != null)
+                {
+                    for (int i = db.ViewModel.Database.Trash.Logins.Count - 1; i > -1; i--)
+                        if (DateTime.Parse(db.ViewModel.Database.Trash.Logins[i].DeleteDate, System.Threading.Thread.CurrentThread.CurrentUICulture).AddDays(Program.Settings.DaysAfterDeletion) <= DateTime.Now)
+                            db.ViewModel.Database.Trash.Logins.Remove(db.ViewModel.Database.Logins[i]);
+
+                    for (int i = db.ViewModel.Database.Trash.Folders.Count - 1; i > -1; i--)
+                        if (DateTime.Parse(db.ViewModel.Database.Trash.Folders[i].DeleteDate, System.Threading.Thread.CurrentThread.CurrentUICulture).AddDays(Program.Settings.DaysAfterDeletion) <= DateTime.Now)
+                            db.ViewModel.Database.Trash.Folders.Remove(db.ViewModel.Database.Folders[i]);
+                }
             }
 
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not9") + $" {Path.GetFileNameWithoutExtension(db.ViewModel.PathDatabase)}");
@@ -384,7 +407,8 @@ namespace OlibKey
                         IsUnlockDatabase = true,
                         PathDatabase = window.TbPathDatabase.Text,
                         TabID = id,
-                        UseCompression = window.CbUseCompression.IsChecked ?? false
+                        UseCompression = window.CbUseCompression.IsChecked ?? false,
+                        UseTrash = window.CbUseTrash.IsChecked ?? false
                     }
                 };
 
@@ -429,6 +453,14 @@ namespace OlibKey
             }
             GC.Collect(0, GCCollectionMode.Forced);
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("ClearGC"));
+        }
+        private void OpenTrashWindow()
+        {
+            if (IsUnlockDatabase)
+            {
+                TrashWindow = new TrashWindow();
+                TrashWindow.ShowDialog(App.MainWindow);
+            }
         }
 
         private void CheckUpdate() => App.CheckUpdate(true);

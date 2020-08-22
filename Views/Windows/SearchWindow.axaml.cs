@@ -107,14 +107,14 @@ namespace OlibKey.Views.Windows
             if (_tbSortAlphabetically.IsChecked ?? false)
                 selectedItemList = selectedItemList.OrderBy(x => x.LoginItem.Name).ToList();
 
-            foreach (LoginListItem item in selectedItemList) Add(item.LoginItem, item.IconLogin, item.LoginID);
+            for (int i = 0; i < selectedItemList.Count; i++) Add(selectedItemList[i]);
         }
 
-        private void Add(Login a, Image i, string id) =>
-            AddLogin(new LoginListItem(a)
+        private void Add(LoginListItem item) =>
+            AddLogin(new LoginListItem(item.LoginItem)
             {
-                LoginID = id,
-                IconLogin = { Source = i.Source },
+                LoginID = item.LoginID,
+                IconLogin = { Source = item.IconLogin.Source },
                 IsFavorite = { IsEnabled = false }
             });
 

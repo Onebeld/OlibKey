@@ -15,10 +15,12 @@ namespace OlibKey.Views.Windows
 		private TextBox _tbAutosave;
 		private TextBox _tbBlock;
 		private TextBox _tbMessage;
+		private TextBox _tbDaysDeleteFromTrash;
 		private ComboBox _cbTheme;
 		private ComboBox _cbLanguage;
 		private Button _bClose;
 		private CheckBox _cbUseCompression;
+		private CheckBox _cbUseTrash;
 
 		public SettingsWindow()
 		{
@@ -51,7 +53,8 @@ namespace OlibKey.Views.Windows
 				Regex reg = new Regex(@"^[1-9]\d*$");
 				if (!reg.IsMatch(_tbAutosave.Text)
 				|| !reg.IsMatch(_tbBlock.Text)
-				|| !reg.IsMatch(_tbMessage.Text))
+				|| !reg.IsMatch(_tbMessage.Text)
+				|| !reg.IsMatch(_tbDaysDeleteFromTrash.Text))
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
@@ -75,12 +78,14 @@ namespace OlibKey.Views.Windows
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations = int.Parse(_tbIteration.Text);
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression = _cbUseCompression.IsChecked ?? false;
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash = _cbUseTrash.IsChecked ?? false;
 					}
 				}
 
 				Program.Settings.AutosaveDuration = int.Parse(_tbAutosave.Text);
 				Program.Settings.BlockDuration = int.Parse(_tbBlock.Text);
 				Program.Settings.MessageDuration = int.Parse(_tbMessage.Text);
+				Program.Settings.DaysAfterDeletion = int.Parse(_tbDaysDeleteFromTrash.Text);
 
 				App.Autosave.Stop();
 
@@ -97,11 +102,13 @@ namespace OlibKey.Views.Windows
 				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations.ToString();
 				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures.ToString();
 				_cbUseCompression.IsChecked = App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression;
+				_cbUseTrash.IsChecked = App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash;
 			}
 
 			_tbAutosave.Text = Program.Settings.AutosaveDuration.ToString();
 			_tbBlock.Text = Program.Settings.BlockDuration.ToString();
 			_tbMessage.Text = Program.Settings.MessageDuration.ToString();
+			_tbDaysDeleteFromTrash.Text = Program.Settings.DaysAfterDeletion.ToString();
 		}
 
 
@@ -118,6 +125,8 @@ namespace OlibKey.Views.Windows
 			_tbBlock = this.FindControl<TextBox>("tbBlock");
 			_tbMessage = this.FindControl<TextBox>("tbMessage");
 			_cbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
+			_tbDaysDeleteFromTrash = this.FindControl<TextBox>("tbDaysDeleteFromTrash");
+			_cbUseTrash = this.FindControl<CheckBox>("cbUseTrash");
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)

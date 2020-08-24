@@ -111,7 +111,6 @@ namespace OlibKey
             ClearGCCommand = ReactiveCommand.Create(ClearGC);
             OpenTrashWindowCommand = ReactiveCommand.Create(OpenTrashWindow);
 
-
             App.Autoblock.Tick += AutoblockStorage;
         }
 
@@ -232,6 +231,8 @@ namespace OlibKey
         }
         private void AutoblockStorage(object sender, EventArgs e)
         {
+            App.Autoblock.Stop();
+
             App.SearchWindow?.Close();
             _windowChangeMasterPassword?.Close();
             _settingsWindow?.Close();
@@ -255,8 +256,6 @@ namespace OlibKey
                     db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
                 }
             }
-
-            App.Autoblock.Stop();
         }
         private async void UnlockDatabase()
         {
@@ -369,11 +368,11 @@ namespace OlibKey
                 {
                     for (int i = db.ViewModel.Database.Trash.Logins.Count - 1; i > -1; i--)
                         if (DateTime.Parse(db.ViewModel.Database.Trash.Logins[i].DeleteDate, System.Threading.Thread.CurrentThread.CurrentUICulture).AddDays(Program.Settings.DaysAfterDeletion) <= DateTime.Now)
-                            db.ViewModel.Database.Trash.Logins.Remove(db.ViewModel.Database.Logins[i]);
+                            db.ViewModel.Database.Trash.Logins.Remove(db.ViewModel.Database.Trash.Logins[i]);
 
                     for (int i = db.ViewModel.Database.Trash.Folders.Count - 1; i > -1; i--)
                         if (DateTime.Parse(db.ViewModel.Database.Trash.Folders[i].DeleteDate, System.Threading.Thread.CurrentThread.CurrentUICulture).AddDays(Program.Settings.DaysAfterDeletion) <= DateTime.Now)
-                            db.ViewModel.Database.Trash.Folders.Remove(db.ViewModel.Database.Folders[i]);
+                            db.ViewModel.Database.Trash.Folders.Remove(db.ViewModel.Database.Trash.Folders[i]);
                 }
             }
 

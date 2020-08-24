@@ -14,14 +14,6 @@ namespace OlibKey.ViewModels.Pages
 {
 	public class CreateLoginPageViewModel : ReactiveObject, IRoutableViewModel
 	{
-		#region ReactiveCommand's
-
-		private ReactiveCommand<Unit, Unit> BackCommand { get; }
-		private ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
-		private ReactiveCommand<Unit, Unit> AddCustomFieldCommand { get; }
-		
-		#endregion
-
 		private int _selectionFolderIndex;
 		private ObservableCollection<CustomFieldListItem> _customFields;
 
@@ -56,7 +48,6 @@ namespace OlibKey.ViewModels.Pages
 		public string UrlPathSegment => "/addLogin";
 		public IScreen HostScreen { get; }
 
-
 		public CreateLoginPageViewModel(Database db, IScreen screen = null)
 		{
 			HostScreen = screen ?? Locator.Current.GetService<IScreen>();
@@ -67,10 +58,6 @@ namespace OlibKey.ViewModels.Pages
 			};
 			CustomFields = new ObservableCollection<CustomFieldListItem>();
 
-			BackCommand = ReactiveCommand.Create(BackVoid);
-			CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
-			AddCustomFieldCommand = ReactiveCommand.Create(AddCustomField);
-
 			Folders = new ObservableCollection<Folder>
 			{
 				new Folder { ID = null, Name = (string)Application.Current.FindResource("NotChosen") }
@@ -78,8 +65,7 @@ namespace OlibKey.ViewModels.Pages
 
 			if (db.Folders != null) foreach (Folder i in db.Folders) Folders.Add(i);
 
-			SelectionFolderIndex = 0;
-			Type = 0;
+            SelectionFolderIndex = Type = 0;
 		}
 
 		private void CreateLogin()
@@ -109,6 +95,6 @@ namespace OlibKey.ViewModels.Pages
 				break;
 			}
 		}
-		private void BackVoid() => BackPageCallback?.Invoke();
+		private void Back() => BackPageCallback?.Invoke();
 	}
 }

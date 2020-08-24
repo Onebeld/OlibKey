@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Logging;
 using OlibKey.Structures;
 using OlibKey.Views.Controls;
 using OlibKey.Views.Windows;
@@ -38,18 +35,12 @@ namespace OlibKey.ViewModels.Windows
         #region ReactiveCommand's
 
         private ReactiveCommand<Unit, Unit> CloseCommand { get; }
-        private ReactiveCommand<Unit, Unit> ClearTrashCommand { get; }
-        private ReactiveCommand<Unit, Unit> RemoveSelectedItemsCommand { get; }
-        private ReactiveCommand<Unit, Unit> RestoreSelectedItemsCommand { get; }
 
         #endregion
 
         public TrashWindowViewModel()
         {
             CloseCommand = ReactiveCommand.Create(() => { App.MainWindowViewModel.TrashWindow.Close(); });
-            ClearTrashCommand = ReactiveCommand.Create(ClearTrash);
-            RemoveSelectedItemsCommand = ReactiveCommand.Create(RemoveSelectedItems);
-            RestoreSelectedItemsCommand = ReactiveCommand.Create(RestoreSelectedItems);
 
             if (App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash == null)
                 App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash = new Trash

@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Перевірити наявність оновленні</v:String>
 		<v:String x:Key="FileOlib">Файл бази даних OlibKey</v:String>
 		
+		<v:String x:Key="Empty">Пусто</v:String>
+		<v:String x:Key="NotFound">Не знайдено</v:String>
+		
 		<v:String x:Key="Search">Пошук</v:String>
 		<v:String x:Key="AllItems">Всі елементи</v:String>
 		<v:String x:Key="Folder">Тека</v:String>
@@ -91,6 +94,8 @@
 		<v:String x:Key="Not7">Всі сховища успішно заблоковані!</v:String>
 		<v:String x:Key="Not8">Всі сховища успішно розблоковані!</v:String>
 		<v:String x:Key="Not9">Успішно розблоковано сховище:</v:String>
+		<v:String x:Key="Copied">Скопійовано в буфер обміну!</v:String>
+		<v:String x:Key="ClipboardIsCleared">Буфер обміну очищений!</v:String>
 
 		<v:String x:Key="Lowercase">Рядкові (abc)</v:String>
 		<v:String x:Key="Uppercase">Заголовні (ABC)</v:String>
@@ -136,14 +141,14 @@
 		<v:String x:Key="General">Загальна</v:String>
 		<v:String x:Key="Storage">Сховище</v:String>
 		<v:String x:Key="Autosave">Автозбереження через:</v:String>
-		<v:String x:Key="Block">Заблокувати всі бази (крім з нагадуванням) через:</v:String>
+		<v:String x:Key="Block">Заблокувати всі бази (крім з запущеним нагадуванням) через:</v:String>
 		<v:String x:Key="MessageDuration">Тривалість показу повідомлення:</v:String>
 		<v:String x:Key="Sec">секунд</v:String>
 		<v:String x:Key="Min">хвилин</v:String>
 		<v:String x:Key="Day">днів</v:String>
 		<v:String x:Key="HardwareAcceleration">Апаратне прискорення (потрібне перезавантаження)</v:String>
-		<v:String x:Key="AutoDeleteFromTrash">Автоматично видаляти елемент з кошика</v:String>
-		<v:String x:Key="DaysDeleteFromTrash">Видалення елемента з кошика через:</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Автоматично видаляти елемент з кошика через:</v:String>
+		<v:String x:Key="ClearingClipboard">Очищати буфер обміну після копіювання через:</v:String>
 
 		<v:String x:Key="Dazzling">Сліпуча</v:String>
 		<v:String x:Key="Gloomy">Похмура</v:String>

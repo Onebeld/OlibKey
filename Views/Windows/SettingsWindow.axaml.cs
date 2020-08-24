@@ -16,9 +16,9 @@ namespace OlibKey.Views.Windows
 		private TextBox _tbBlock;
 		private TextBox _tbMessage;
 		private TextBox _tbDaysDeleteFromTrash;
+		private TextBox _tbClearingClipboard;
 		private ComboBox _cbTheme;
 		private ComboBox _cbLanguage;
-		private Button _bClose;
 		private CheckBox _cbUseCompression;
 		private CheckBox _cbUseTrash;
 
@@ -47,14 +47,15 @@ namespace OlibKey.Views.Windows
 
 			_cbTheme.SelectionChanged += ThemeChange;
 			_cbLanguage.SelectionChanged += LanguageChange;
-			_bClose.Click += (s, e) => Close();
+			this.FindControl<Button>("bClose").Click += (s, e) => Close();
 			Closing += (s, e) =>
 			{
 				Regex reg = new Regex(@"^[1-9]\d*$");
 				if (!reg.IsMatch(_tbAutosave.Text)
 				|| !reg.IsMatch(_tbBlock.Text)
 				|| !reg.IsMatch(_tbMessage.Text)
-				|| !reg.IsMatch(_tbDaysDeleteFromTrash.Text))
+				|| !reg.IsMatch(_tbDaysDeleteFromTrash.Text)
+				|| !reg.IsMatch(_tbClearingClipboard.Text))
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
@@ -86,6 +87,7 @@ namespace OlibKey.Views.Windows
 				Program.Settings.BlockDuration = int.Parse(_tbBlock.Text);
 				Program.Settings.MessageDuration = int.Parse(_tbMessage.Text);
 				Program.Settings.DaysAfterDeletion = int.Parse(_tbDaysDeleteFromTrash.Text);
+				Program.Settings.TimeToClearTheClipboard = int.Parse(_tbClearingClipboard.Text);
 
 				App.Autosave.Stop();
 
@@ -109,6 +111,7 @@ namespace OlibKey.Views.Windows
 			_tbBlock.Text = Program.Settings.BlockDuration.ToString();
 			_tbMessage.Text = Program.Settings.MessageDuration.ToString();
 			_tbDaysDeleteFromTrash.Text = Program.Settings.DaysAfterDeletion.ToString();
+			_tbClearingClipboard.Text = Program.Settings.TimeToClearTheClipboard.ToString();
 		}
 
 
@@ -117,7 +120,6 @@ namespace OlibKey.Views.Windows
 			AvaloniaXamlLoader.Load(this);
 			_cbTheme = this.FindControl<ComboBox>("cbTheme");
 			_cbLanguage = this.FindControl<ComboBox>("cbLanguage");
-			_bClose = this.FindControl<Button>("bClose");
 			_tbIteration = this.FindControl<TextBox>("tbIteration");
 			_tbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
 			_tiStorage = this.FindControl<TabItem>("tiStorage");
@@ -127,6 +129,7 @@ namespace OlibKey.Views.Windows
 			_cbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
 			_tbDaysDeleteFromTrash = this.FindControl<TextBox>("tbDaysDeleteFromTrash");
 			_cbUseTrash = this.FindControl<CheckBox>("cbUseTrash");
+			_tbClearingClipboard = this.FindControl<TextBox>("tbClearingClipboard");
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)

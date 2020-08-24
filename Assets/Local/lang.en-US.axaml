@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Check for Updates</v:String>
 		<v:String x:Key="FileOlib">OlibKey Database File</v:String>
 		
+		<v:String x:Key="Empty">Empty</v:String>
+		<v:String x:Key="NotFound">Not found</v:String>
+		
 		<v:String x:Key="Search">Search</v:String>
 		<v:String x:Key="AllItems">All items</v:String>
 		<v:String x:Key="Folder">Folder</v:String>
@@ -91,6 +94,8 @@
 		<v:String x:Key="Not7">All storages are locked successfully!</v:String>
 		<v:String x:Key="Not8">All storages have been successfully unlocked!</v:String>
 		<v:String x:Key="Not9">Storage locked successfully:</v:String>
+		<v:String x:Key="Copied">Copied to the clipboard!</v:String>
+		<v:String x:Key="ClipboardIsCleared">Clipboard is cleared!</v:String>
 
 		<v:String x:Key="Lowercase">Lowercase (abc)</v:String>
 		<v:String x:Key="Uppercase">Uppercase (ABC)</v:String>
@@ -136,14 +141,14 @@
 		<v:String x:Key="General">General</v:String>
 		<v:String x:Key="Storage">Storage</v:String>
 		<v:String x:Key="Autosave">Autosave via:</v:String>
-		<v:String x:Key="Block">Block all databases (except with a reminder) through:</v:String>
+		<v:String x:Key="Block">Block all databases (except with a running reminder) through:</v:String>
 		<v:String x:Key="MessageDuration">Message display duration:</v:String>
 		<v:String x:Key="Sec">seconds</v:String>
 		<v:String x:Key="Min">minutes</v:String>
 		<v:String x:Key="Day">days</v:String>
 		<v:String x:Key="HardwareAcceleration">Hardware acceleration (reboot required)</v:String>
-		<v:String x:Key="AutoDeleteFromTrash">Automatically remove an item from the trash</v:String>
-		<v:String x:Key="DaysDeleteFromTrash">Removing an item from the trash via:</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Automatically remove an item from the trash via:</v:String>
+		<v:String x:Key="ClearingClipboard">Clear clipboard after copying via:</v:String>
 
 		<v:String x:Key="Dazzling">Dazzling</v:String>
 		<v:String x:Key="Gloomy">Gloomy</v:String>

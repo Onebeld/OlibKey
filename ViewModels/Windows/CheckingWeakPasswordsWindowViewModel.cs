@@ -19,9 +19,7 @@ namespace OlibKey.ViewModels.Windows
 
         #region ReactiveCommand's
 
-        private ReactiveCommand<Unit, Unit> SelectAllCommand { get; }
         private ReactiveCommand<Unit, Unit> CloseWindowCommand { get; }
-        private ReactiveCommand<Unit, Unit> ChangeWeakPasswordsCommand { get; }
 
         #endregion
 
@@ -41,9 +39,7 @@ namespace OlibKey.ViewModels.Windows
 
         public CheckingWeakPasswordsWindowViewModel()
         {
-            SelectAllCommand = ReactiveCommand.Create(SelectAll);
             CloseWindowCommand = ReactiveCommand.Create(() => { App.MainWindowViewModel.CheckingWindow.Close(); });
-            ChangeWeakPasswordsCommand = ReactiveCommand.Create(ChangeWeakPassword);
 
             for (int index = 0; index < App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.Count; index++)
             {
@@ -83,7 +79,6 @@ namespace OlibKey.ViewModels.Windows
         {
             try
             {
-                bool theseElement = false;
                 for (int index = 0; index < LoginList.Count; index++)
                 {
                     LoginListItem i = LoginList[index];
@@ -95,14 +90,10 @@ namespace OlibKey.ViewModels.Windows
                             item.LoginItem.Password = PasswordGenerator.RandomPassword();
                             break;
                         }
-                        theseElement = true;
                     }
                 }
-                if (theseElement)
-                {
-                    await MessageBox.Show(App.MainWindowViewModel.CheckingWindow, null, (string)Application.Current.FindResource("Successfully"), (string)Application.Current.FindResource("Message"),
-                        MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
-                }
+                await MessageBox.Show(App.MainWindowViewModel.CheckingWindow, null, (string)Application.Current.FindResource("Successfully"), (string)Application.Current.FindResource("Message"),
+                    MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
                 App.MainWindowViewModel.CheckingWindow.Close();
             }
             catch

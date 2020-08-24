@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Ստուգել թարմացումները</v:String>
 		<v:String x:Key="FileOlib">OlibKey տվյալների շտեմարան</v:String>
 		
+		<v:String x:Key="Empty">Դատարկ</v:String>
+		<v:String x:Key="NotFound">Չի գտնվել</v:String>
+		
 		<v:String x:Key="Search">Որոնել</v:String>
 		<v:String x:Key="AllItems">Բոլոր իրերը</v:String>
 		<v:String x:Key="Folder">Թղթապանակ</v:String>
@@ -91,6 +94,8 @@
 		<v:String x:Key="Not7">Բոլոր պահոցները հաջողությամբ կողպվել են:</v:String>
 		<v:String x:Key="Not8">Բոլոր պահոցները հաջողությամբ բացվել են:</v:String>
 		<v:String x:Key="Not9">Հիմքը հաջողությամբ արգելափակված է.</v:String>
+		<v:String x:Key="Copied">Պատճենահանվեց clipboard- ին:</v:String>
+		<v:String x:Key="ClipboardIsCleared">Տեսահոլովակը մաքրված է:</v:String>
 
 		<v:String x:Key="Lowercase">Փոքրատառ (abc)</v:String>
 		<v:String x:Key="Uppercase">Մեծատառ (ABC)</v:String>
@@ -136,14 +141,14 @@
 		<v:String x:Key="General">Գեներալ</v:String>
 		<v:String x:Key="Storage">Պահոց</v:String>
 		<v:String x:Key="Autosave">Ավտոմատ խնայողություն միջոցով ՝</v:String>
-		<v:String x:Key="Block">Արգելափակել բոլոր տվյալների բազաները (բացառությամբ հիշեցմամբ) ՝</v:String>
+		<v:String x:Key="Block">Արգելափակել բոլոր տվյալների բազաները (բացառությամբ գործարկման հիշեցման) միջոցով ՝</v:String>
 		<v:String x:Key="MessageDuration">Հաղորդագրության ցուցադրման տևողությունը.</v:String>
 		<v:String x:Key="Sec">վայրկյան</v:String>
 		<v:String x:Key="Min">րոպեներ</v:String>
 		<v:String x:Key="Day">օրեր</v:String>
 		<v:String x:Key="HardwareAcceleration">Սարքավորումների արագացում (անհրաժեշտ է վերաբեռնումը)</v:String>
-		<v:String x:Key="AutoDeleteFromTrash">Ավտոմատ հանեք իրը ​​զամբյուղից</v:String>
-		<v:String x:Key="DaysDeleteFromTrash">Զամբյուղից որևէ իրը հեռացնելով ՝</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Ավտոմատ կերպով հանեք իրը ​​զամբյուղից ՝</v:String>
+		<v:String x:Key="ClearingClipboard">Մաքրել clipboard միջոցով պատճենելուց հետո ՝</v:String>
 
 		<v:String x:Key="Dazzling">Զարմանալի</v:String>
 		<v:String x:Key="Gloomy">Մռայլ</v:String>

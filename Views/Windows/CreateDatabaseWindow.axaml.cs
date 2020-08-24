@@ -18,15 +18,13 @@ namespace OlibKey.Views.Windows
 		public TextBox TbNumberOfEncryptionProcedures;
 		public CheckBox CbUseCompression;
 		public CheckBox CbUseTrash;
-		private Button _bSelectPath;
-		private Button _bSave;
 		private ProgressBar _pbHard;
 
 		public CreateDatabaseWindow()
 		{
 			InitializeComponent();
-			_bSelectPath.Click += SelectPath;
-			_bSave.Click += (s, e) => {
+			this.FindControl<Button>("bSelectPath").Click += SelectPath;
+			this.FindControl<Button>("bSave").Click += (s, e) => {
 				Regex reg = new Regex(@"^[1-9]\d*$");
 				if (!reg.IsMatch(TbIteration.Text)
 				    || !reg.IsMatch(TbNumberOfEncryptionProcedures.Text))
@@ -49,6 +47,20 @@ namespace OlibKey.Views.Windows
 				}
 				Close(true); 
 			};
+
+		}
+		private void InitializeComponent()
+		{
+			AvaloniaXamlLoader.Load(this);
+			TbPassword = this.FindControl<TextBox>("tbPassword");
+			TbPathDatabase = this.FindControl<TextBox>("tbPathDatabase");
+			TbIteration = this.FindControl<TextBox>("tbIteration");
+			TbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
+			_pbHard = this.FindControl<ProgressBar>("pbHard");
+			CbUseTrash = this.FindControl<CheckBox>("cbUseTrash");
+			CbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
+
+			_ = TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, TbPassword));
 		}
 
 		private async void SelectPath(object sender, RoutedEventArgs e)
@@ -57,22 +69,6 @@ namespace OlibKey.Views.Windows
 			dialog.Filters.Add(new FileDialogFilter { Name = (string)Application.Current.FindResource("FileOlib"), Extensions = { "olib" } });
 			string res = await dialog.ShowAsync(this);
 			if (res != null) TbPathDatabase.Text = res;
-		}
-
-		private void InitializeComponent()
-		{
-			AvaloniaXamlLoader.Load(this);
-			TbPassword = this.FindControl<TextBox>("tbPassword");
-			TbPathDatabase = this.FindControl<TextBox>("tbPathDatabase");
-			TbIteration = this.FindControl<TextBox>("tbIteration");
-			TbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
-			_bSelectPath = this.FindControl<Button>("bSelectPath");
-			_pbHard = this.FindControl<ProgressBar>("pbHard");
-			_bSave = this.FindControl<Button>("bSave");
-			CbUseTrash = this.FindControl<CheckBox>("cbUseTrash");
-			CbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
-
-			_ = TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, TbPassword));
 		}
 
 		private void CheckedPassword(object sender, RoutedEventArgs e) => TbPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';

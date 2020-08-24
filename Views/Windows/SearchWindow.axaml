@@ -30,6 +30,7 @@
 					</ToggleButton>
 				</StackPanel>
 			</Border>
+			<TextBlock Text="{StaticResource NotFound}" IsVisible="{Binding !LoginList.Count}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource ThemeForegroundOpacityBrush}"/>
 			<ListBox x:Name="lbLoginList" Padding="0" SelectedIndex="{Binding SelectedLoginIndex}" Items="{Binding LoginList}" VirtualizationMode="None" Grid.Row="1" Background="Transparent" BorderThickness="1,0,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}"/>
 		</Grid>
 
@@ -100,6 +101,7 @@
 						</RadioButton.Content>
 					</RadioButton>
 				</StackPanel>
+				<TextBlock Grid.Row="1" ZIndex="5" Text="{StaticResource Empty}" Foreground="{StaticResource ThemeForegroundOpacityBrush}" IsVisible="{Binding !FolderList.Count}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 				<ListBox x:Name="lbFolders" Padding="0" Items="{Binding FolderList}" VirtualizationMode="None" SelectionChanged="lbFolders_SelectionChanged" SelectedIndex="{Binding SelectedFolderIndex}" Grid.Row="1" BorderBrush="{StaticResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0" Margin="0 5 0 0" Background="{StaticResource ThemeBackgroundBrush}">
 					<ListBox.ContextMenu>
 						<ContextMenu>

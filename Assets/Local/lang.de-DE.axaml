@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Auf Update prüfen</v:String>
 		<v:String x:Key="FileOlib">OlibKey-Datenbankdatei</v:String>
 		
+		<v:String x:Key="Empty">Leer</v:String>
+		<v:String x:Key="NotFound">Nicht gefunden</v:String>
+		
 		<v:String x:Key="Search">Suche</v:String>
 		<v:String x:Key="AllItems">Alle Artikel</v:String>
 		<v:String x:Key="Folder">Ordner</v:String>
@@ -91,6 +94,8 @@
 		<v:String x:Key="Not7">Alle Tresore wurden erfolgreich gesperrt!</v:String>
 		<v:String x:Key="Not8">Alle Tresore wurden erfolgreich entsperrt!</v:String>
 		<v:String x:Key="Not9">Tresor erfolgreich gesperrt:</v:String>
+		<v:String x:Key="Copied">In die Zwischenablage kopiert!</v:String>
+		<v:String x:Key="ClipboardIsCleared">Die Zwischenablage wird gelöscht!</v:String>
 
 		<v:String x:Key="Lowercase">Kleinbuchstaben (abc)</v:String>
 		<v:String x:Key="Uppercase">Großbuchstaben (ABC)</v:String>
@@ -136,14 +141,14 @@
 		<v:String x:Key="General">Allgemeines</v:String>
 		<v:String x:Key="Storage">Gewölbe</v:String>
 		<v:String x:Key="Autosave">Automatisch speichern über:</v:String>
-		<v:String x:Key="Block">Blockieren Sie alle Datenbanken (außer mit einer Erinnerung) durch:</v:String>
+		<v:String x:Key="Block">Blockieren Sie alle Datenbanken (außer mit einer laufenden Erinnerung) durch:</v:String>
 		<v:String x:Key="MessageDuration">Dauer der Nachrichtenanzeige:</v:String>
 		<v:String x:Key="Sec">Sekunden</v:String>
 		<v:String x:Key="Min">Protokoll</v:String>
 		<v:String x:Key="Day">Tage</v:String>
 		<v:String x:Key="HardwareAcceleration">Hardwarebeschleunigung (Neustart erforderlich)</v:String>
-		<v:String x:Key="AutoDeleteFromTrash">Entfernen Sie automatisch einen Artikel aus dem Papierkorb</v:String>
-		<v:String x:Key="DaysDeleteFromTrash">Entfernen eines Artikels aus dem Papierkorb über:</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Entfernen Sie einen Artikel automatisch aus dem Papierkorb über:</v:String>
+		<v:String x:Key="ClearingClipboard">Zwischenablage nach dem Kopieren löschen über:</v:String>
 
 		<v:String x:Key="Dazzling">Blendend</v:String>
 		<v:String x:Key="Gloomy">Düster</v:String>

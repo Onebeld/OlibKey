@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Проверить наличие обновлении</v:String>
 		<v:String x:Key="FileOlib">Файл базы данных OlibKey</v:String>
 		
+		<v:String x:Key="Empty">Пусто</v:String>
+		<v:String x:Key="NotFound">Не найдено</v:String>
+		
 		<v:String x:Key="Search">Поиск</v:String>
 		<v:String x:Key="AllItems">Все элементы</v:String>
 		<v:String x:Key="Folder">Папка</v:String>
@@ -91,6 +94,8 @@
 		<v:String x:Key="Not7">Все хранилища успешно заблокированы!</v:String>
 		<v:String x:Key="Not8">Все хранилища успешно разблокированы!</v:String>
 		<v:String x:Key="Not9">Успешно разблокировано хранилище:</v:String>
+		<v:String x:Key="Copied">Скопировано в буфер обмена!</v:String>
+		<v:String x:Key="ClipboardIsCleared">Буфер обмена очищен!</v:String>
 
 		<v:String x:Key="Lowercase">Строчные (abc)</v:String>
 		<v:String x:Key="Uppercase">Заглавные (ABC)</v:String>
@@ -142,8 +147,8 @@
 		<v:String x:Key="Min">минут</v:String>
 		<v:String x:Key="Day">дней</v:String>
 		<v:String x:Key="HardwareAcceleration">Аппаратное ускорение (требуется перезагрузка)</v:String>
-		<v:String x:Key="AutoDeleteFromTrash">Автоматически удалять элемент из корзины</v:String>
-		<v:String x:Key="DaysDeleteFromTrash">Удаление элемента из корзины через:</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Автоматически удалять элемент из корзины через:</v:String>
+		<v:String x:Key="ClearingClipboard">Очищать буфер обмена после копирования через:</v:String>
 
 		<v:String x:Key="Dazzling">Ослепительная</v:String>
 		<v:String x:Key="Gloomy">Мрачная</v:String>

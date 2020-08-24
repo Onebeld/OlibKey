@@ -21,7 +21,7 @@ namespace OlibKey.Core
 				bool useArchiving = bool.Parse(split[3]);
 
 				if (useArchiving)
-					s = Archiving.Decompress(Encryptor.DecryptString(encryptString, db, iterations, numberOfEncryptionProcedures));
+					s = Compressing.Decompress(Encryptor.DecryptString(encryptString, db, iterations, numberOfEncryptionProcedures));
 				
 
 				db.ViewModel.UseCompression = useArchiving;
@@ -45,7 +45,7 @@ namespace OlibKey.Core
 			using StringWriter writer = new StringWriter();
 			new XmlSerializer(typeof(Database)).Serialize(writer, db.ViewModel.Database);
 
-			string s = Encryptor.EncryptString(db.ViewModel.UseCompression ? Archiving.Compress(writer.ToString()) : writer.ToString(), db);
+			string s = Encryptor.EncryptString(db.ViewModel.UseCompression ? Compressing.Compress(writer.ToString()) : writer.ToString(), db);
 
 			file += s + ":" + db.ViewModel.UseCompression + ":" + db.ViewModel.UseTrash;
 

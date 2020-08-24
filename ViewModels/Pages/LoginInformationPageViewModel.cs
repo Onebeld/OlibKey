@@ -29,25 +29,7 @@ namespace OlibKey.ViewModels.Pages
 		#region ReactiveCommand's
 
 		private ReactiveCommand<Unit, Unit> EditContentCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyUsernameCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyPasswordCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyWebSiteCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyTypeBankCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyDateCardCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopySecurityCodeCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyNumberCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyPlaceOfIssueCommand { get; }
 		private ReactiveCommand<Unit, Unit> OpenWebSiteCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopySocialSecurityNumberCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyTINCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyTelephoneCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyCompanyCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyPostcodeCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyCountryCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyRegionCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyCityCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyAddressCommand { get; }
-		private ReactiveCommand<Unit, Unit> CopyEmailCommand { get; }
 
 		#endregion
 
@@ -122,25 +104,6 @@ namespace OlibKey.ViewModels.Pages
 
 			EditContentCommand = ReactiveCommand.Create(() => EditContentCallback?.Invoke(LoginItem));
 
-			CopyUsernameCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Username); });
-			CopyPasswordCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Password); });
-			CopyWebSiteCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.WebSite); });
-			CopyTypeBankCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.TypeBankCard); });
-			CopyDateCardCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.DateCard); });
-			CopySecurityCodeCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.SecurityCode); });
-			CopyNumberCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Number); });
-			CopyPlaceOfIssueCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.PlaceOfIssue); });
-			CopySocialSecurityNumberCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.SocialSecurityNumber); });
-			CopyTINCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.TIN); });
-			CopyTelephoneCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Telephone); });
-			CopyCompanyCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Company); });
-			CopyPostcodeCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Postcode); });
-			CopyCountryCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Country); });
-			CopyRegionCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Region); });
-			CopyCityCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.City); });
-			CopyAddressCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Address); });
-			CopyEmailCommand = ReactiveCommand.Create(() => { Application.Current.Clipboard.SetTextAsync(LoginInformation.Email); });
-
 			OpenWebSiteCommand = ReactiveCommand.Create(() =>
 			{
 				ProcessStartInfo psi = new ProcessStartInfo
@@ -173,5 +136,17 @@ namespace OlibKey.ViewModels.Pages
 
 			if (CustomFields.Count == 0) IsVisible = false;
 		}
+
+		private void CopyInformation(string s)
+        {
+			Application.Current.Clipboard.SetTextAsync(s);
+			if (Program.Settings.ClearingTheClipboard)
+            {
+				App.ClearingClipboard.Stop();
+				App.ClearingClipboard.Interval = new TimeSpan(0, 0, Program.Settings.TimeToClearTheClipboard);
+				App.ClearingClipboard.Start();
+            }
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Copied"));
+        }
 	}
 }

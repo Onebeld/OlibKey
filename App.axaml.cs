@@ -17,6 +17,7 @@ namespace OlibKey
 	{
 		public static DispatcherTimer Autosave { get; set; }
 		public static DispatcherTimer Autoblock { get; set; }
+		public static DispatcherTimer ClearingClipboard { get; set; }
 
 		private static string _resultCheckUpdate;
 		private static string _errorResult;
@@ -41,12 +42,19 @@ namespace OlibKey
 
 			Autosave = new DispatcherTimer();
 			Autoblock = new DispatcherTimer();
+			ClearingClipboard = new DispatcherTimer();
 
 			Autosave.Tick += (_, __) =>
 			{
 				for (var i = 0; i < MainWindowViewModel.TabItems.Count; i++)
 					MainWindowViewModel.SaveDatabase((DatabaseControl) MainWindowViewModel.TabItems[i].Content);
 			};
+			ClearingClipboard.Tick += (_, __) =>
+            {
+				ClearingClipboard.Stop();
+				Current.Clipboard.ClearAsync();
+				MainWindow.MessageStatusBar((string)Current.FindResource("ClipboardIsCleared"));
+            };
 
 			Autosave.Interval = new TimeSpan(0, Program.Settings.AutosaveDuration, 0);
 			Autoblock.Interval = new TimeSpan(0, Program.Settings.BlockDuration, 0);

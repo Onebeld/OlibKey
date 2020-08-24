@@ -14,20 +14,22 @@
 	<Grid RowDefinitions="30,*,50,20">
 		<Border Classes="ButtonsMenu" BorderThickness="0 0 0 1"/>
 		<Grid Grid.Row="1" ColumnDefinitions="1.5*,*">
+			<TextBlock Text="{StaticResource Empty}" Foreground="{StaticResource ThemeForegroundOpacityBrush}" IsVisible="{Binding !LoginsList.Count}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 			<Border BorderThickness="0 0 1 0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}">
 				<ScrollViewer>
 					<ItemsRepeater Items="{Binding LoginsList}"/>
 				</ScrollViewer>
 			</Border>
+			<TextBlock Grid.Column="1" Text="{StaticResource Empty}" Foreground="{StaticResource ThemeForegroundOpacityBrush}" IsVisible="{Binding !FoldersList.Count}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 			<ScrollViewer Grid.Column="1">
 				<ItemsRepeater Items="{Binding FoldersList}"/>
 			</ScrollViewer>
 		</Grid>
 		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0 1 0 0">
 			<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Orientation="Horizontal">
-				<Button Content="{StaticResource ReturnSelected}" Command="{Binding RestoreSelectedItemsCommand}" Margin="5 0"/>
-				<Button Content="{StaticResource DeleteSelected}" Command="{Binding RemoveSelectedItemsCommand}"/>
-				<Button Content="{StaticResource ClearTrash}" Command="{Binding ClearTrashCommand}" Margin="5 0"/>
+				<Button Content="{StaticResource ReturnSelected}" Command="{Binding RestoreSelectedItems}" Margin="5 0"/>
+				<Button Content="{StaticResource DeleteSelected}" Command="{Binding RemoveSelectedItems}"/>
+				<Button Content="{StaticResource ClearTrash}" Command="{Binding ClearTrash}" Margin="5 0"/>
 				<Button Content="{StaticResource Close}" Command="{Binding CloseCommand}"/>
 			</StackPanel>
 		</Border>

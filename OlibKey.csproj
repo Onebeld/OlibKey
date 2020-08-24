@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Platforms>AnyCPU;x64</Platforms>
 		<AssemblyVersion>3.2.0</AssemblyVersion>
 		<FileVersion>3.2.0</FileVersion>

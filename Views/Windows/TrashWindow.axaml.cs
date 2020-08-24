@@ -8,10 +8,7 @@ namespace OlibKey.Views.Windows
     {
         public TrashWindowViewModel ViewModel;
 
-        public TrashWindow()
-        {
-            InitializeComponent();
-        }
+        public TrashWindow() => InitializeComponent();
 
         private void InitializeComponent()
         {

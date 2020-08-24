@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Vérifier les mises à jour</v:String>
 		<v:String x:Key="FileOlib">Fichier de base de données OlibKey</v:String>
 		
+		<v:String x:Key="Empty">Vide</v:String>
+		<v:String x:Key="NotFound">Pas trouvé</v:String>
+		
 		<v:String x:Key="Search">Chercher</v:String>
 		<v:String x:Key="AllItems">Tous les articles</v:String>
 		<v:String x:Key="Folder">Dossier</v:String>
@@ -91,6 +94,8 @@
 		<v:String x:Key="Not7">Tous les stockage ont été verrouillés avec succès!</v:String>
 		<v:String x:Key="Not8">Tous les stockage ont été déverrouillés avec succès!</v:String>
 		<v:String x:Key="Not9">Stockage verrouillé avec succès:</v:String>
+		<v:String x:Key="Copied">Copié dans le presse-papiers!</v:String>
+		<v:String x:Key="ClipboardIsCleared">Le presse-papiers est effacé!</v:String>
 
 		<v:String x:Key="Lowercase">Minuscules (abc)</v:String>
 		<v:String x:Key="Uppercase">Majuscules (ABC)</v:String>
@@ -136,14 +141,14 @@
 		<v:String x:Key="General">Général</v:String>
 		<v:String x:Key="Storage">Voûte</v:String>
 		<v:String x:Key="Autosave">Sauvegarde automatique via:</v:String>
-		<v:String x:Key="Block">Bloquez toutes les bases de données (sauf avec un rappel) via:</v:String>
+		<v:String x:Key="Block">Bloquez toutes les bases de données (sauf avec un rappel en cours) via:</v:String>
 		<v:String x:Key="MessageDuration">Durée d'affichage des messages:</v:String>
 		<v:String x:Key="Sec">secondes</v:String>
 		<v:String x:Key="Min">minutes</v:String>
 		<v:String x:Key="Day">journées</v:String>
 		<v:String x:Key="HardwareAcceleration">Accélération matérielle (redémarrage requis)</v:String>
-		<v:String x:Key="AutoDeleteFromTrash">Supprimer automatiquement un élément de la corbeille</v:String>
-		<v:String x:Key="DaysDeleteFromTrash">Suppression d'un élément de la corbeille via:</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Supprimer automatiquement un élément de la corbeille via:</v:String>
+		<v:String x:Key="ClearingClipboard">Effacer le presse-papiers après la copie via:</v:String>
 
 		<v:String x:Key="Dazzling">Éblouissant</v:String>
 		<v:String x:Key="Gloomy">Sombre</v:String>

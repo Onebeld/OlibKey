@@ -10,19 +10,13 @@ namespace OlibKey.Views.Windows
 	{
 		private CheckingWeakPasswordsWindowViewModel ViewModel;
 
-		private ProgressBar pbHard;
-
 		public CheckingWeakPasswordsWindow()
 		{
 			InitializeComponent();
 			DataContext = ViewModel = new CheckingWeakPasswordsWindowViewModel();
-			ItemControls.ColorProgressBar(pbHard);
+			ItemControls.ColorProgressBar(this.FindControl<ProgressBar>("pbHard"));
 		}
 
-		private void InitializeComponent()
-		{
-			AvaloniaXamlLoader.Load(this);
-			pbHard = this.FindControl<ProgressBar>("pbHard");
-		}
-	}
+        private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
+    }
 }

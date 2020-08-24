@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
-using System.Reactive;
 
 namespace OlibKey.ViewModels.Pages
 {
@@ -25,15 +24,6 @@ namespace OlibKey.ViewModels.Pages
         private bool VisiblePersonalDataSection { get; set; }
         private bool VisibleReminderSection { get; set; }
         private bool VisibleDateChanged { get; set; }
-
-        #endregion
-
-        #region ReactiveCommand's
-
-        private ReactiveCommand<Unit, Unit> SaveLoginCommand { get; }
-        private ReactiveCommand<Unit, Unit> DeleteLoginCommand { get; }
-        private ReactiveCommand<Unit, Unit> CancelCommand { get; }
-        private ReactiveCommand<Unit, Unit> AddCustomFieldCommand { get; }
 
         #endregion
 
@@ -138,11 +128,6 @@ namespace OlibKey.ViewModels.Pages
                     VisibleReminderSection = false;
                     break;
             }
-
-            SaveLoginCommand = ReactiveCommand.Create(SaveLogin);
-            CancelCommand = ReactiveCommand.Create(BackVoid);
-            DeleteLoginCommand = ReactiveCommand.Create(DeleteLogin);
-            AddCustomFieldCommand = ReactiveCommand.Create(AddCustomField);
 
             Folders = new ObservableCollection<Folder>
             {

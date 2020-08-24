@@ -32,13 +32,6 @@ namespace OlibKey.ViewModels.Controls
 
 		private RoutingState _router = new RoutingState();
 
-		#region ReactiveCommand's   
-
-		private ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
-		private ReactiveCommand<Unit, Unit> ShowSearchWindowCommand { get; }
-
-		#endregion
-
 		#region Propertie's
 
 		public ObservableCollection<LoginListItem> LoginList
@@ -73,15 +66,11 @@ namespace OlibKey.ViewModels.Controls
 		public string MasterPassword { get; set; }
 		private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedIndex]; } catch { return null; } } }
 
-		#endregion
+        #endregion
 
-		public DatabaseControlViewModel()
-		{
-			CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
-			ShowSearchWindowCommand = ReactiveCommand.Create(ShowSearchWindow);
-			SelectedIndex = -1;
-		}
-		public void SearchSelectLogin(LoginListItem i)
+        public DatabaseControlViewModel() => SelectedIndex = -1;
+
+        public void SearchSelectLogin(LoginListItem i)
 		{
 			foreach (LoginListItem item in LoginList.Where(item => item.LoginID == i.LoginID))
 			{

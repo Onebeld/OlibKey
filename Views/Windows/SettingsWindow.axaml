@@ -6,7 +6,8 @@
 		Height="300" Width="710"
 		MinWidth="710" MinHeight="400"
         x:Class="OlibKey.Views.Windows.SettingsWindow"
-		WindowStartupLocation="CenterScreen"
+		WindowStartupLocation="CenterOwner"
+		ShowInTaskbar="False"
 		Icon="avares://OlibKey/app.ico"
 		Background="{DynamicResource ThemeWindowBackgroundBrush}"
         Title="{DynamicResource Settings}">

@@ -257,9 +257,9 @@
 			<Setter Property="Background" Value="Transparent"/>
 			<Setter Property="Template">
 				<ControlTemplate>
-					<Border Name="back" CornerRadius="4.5">
+					<Border Name="back">
 						<Grid ColumnDefinitions="5,*">
-							<Border Name="border" ZIndex="5" CornerRadius="4.5 0 0 4.5"/>
+							<Border Name="border" ZIndex="5"/>
 							<ContentPresenter Grid.Column="1" Name="PART_ContentPresenter"
 											Background="{TemplateBinding Background}"
 											BorderBrush="{TemplateBinding BorderBrush}"
@@ -339,7 +339,6 @@
 		<Style Selector="MenuItem:selected /template/ Border#root">
 			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
-			<Setter Property="CornerRadius" Value="5"/>
 		</Style>
 		<Style Selector="Menu > MenuItem">
 			<Setter Property="Padding" Value="6 0"/>

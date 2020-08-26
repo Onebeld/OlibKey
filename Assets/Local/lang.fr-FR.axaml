@@ -96,6 +96,7 @@
 		<v:String x:Key="Not9">Stockage verrouillé avec succès:</v:String>
 		<v:String x:Key="Copied">Copié dans le presse-papiers!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Le presse-papiers est effacé!</v:String>
+		<v:String x:Key="Loading1">Chargement...</v:String>
 
 		<v:String x:Key="Lowercase">Minuscules (abc)</v:String>
 		<v:String x:Key="Uppercase">Majuscules (ABC)</v:String>

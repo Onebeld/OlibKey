@@ -5,12 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 Background="{DynamicResource ThemeWindowBackgroundBrush}"
              x:Class="OlibKey.Views.Pages.EditLoginPage">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition Height="50"/>
-		</Grid.RowDefinitions>
-
+	<Grid RowDefinitions="*,50">
 		<ScrollViewer VerticalScrollBarVisibility="Auto">
 			<StackPanel Margin="10">
 				<TextBlock Text="{DynamicResource ChangeElement}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 0 0 5"/>
@@ -185,7 +180,7 @@
 			<Grid>
 				<StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Left">
 					<Button Content="{DynamicResource PasswordSave}" Command="{Binding SaveLogin}"/>
-					<Button Content="{DynamicResource Cancel}" Command="{Binding Cancel}" Margin="15,0"/>
+					<Button Content="{DynamicResource Cancel}" Command="{Binding Back}" Margin="5,0"/>
 				</StackPanel>
 				<Button Margin="10" Content="{DynamicResource Delete}" Command="{Binding DeleteLogin}" HorizontalAlignment="Right"/>
 			</Grid>

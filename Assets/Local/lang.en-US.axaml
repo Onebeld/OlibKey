@@ -96,6 +96,7 @@
 		<v:String x:Key="Not9">Storage locked successfully:</v:String>
 		<v:String x:Key="Copied">Copied to the clipboard!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Clipboard is cleared!</v:String>
+		<v:String x:Key="Loading1">Loading...</v:String>
 
 		<v:String x:Key="Lowercase">Lowercase (abc)</v:String>
 		<v:String x:Key="Uppercase">Uppercase (ABC)</v:String>

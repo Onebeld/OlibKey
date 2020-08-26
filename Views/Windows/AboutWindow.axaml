@@ -4,7 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
         x:Class="OlibKey.Views.Windows.AboutWindow"
-		WindowStartupLocation="CenterScreen"
+		WindowStartupLocation="CenterOwner"
+		WindowState="Normal"
+		ShowInTaskbar="False"
 		Icon="avares://OlibKey/app.ico"
 		Background="{StaticResource ThemeWindowBackgroundBrush}"
         Title="{StaticResource AboutPrograms}" Height="400" Width="450" CanResize="False">

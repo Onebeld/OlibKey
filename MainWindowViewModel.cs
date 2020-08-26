@@ -12,6 +12,7 @@ using OlibKey.Views.Windows;
 using System;
 using System.Collections.Generic;
 using Avalonia;
+using System.Threading.Tasks;
 
 namespace OlibKey
 {
@@ -28,7 +29,6 @@ namespace OlibKey
         public PasswordGeneratorWindow PasswordGenerator;
         public CheckingWeakPasswordsWindow CheckingWindow;
         public TrashWindow TrashWindow;
-
 
         private ObservableCollection<TabItem> _tabItems = new ObservableCollection<TabItem>();
 
@@ -63,16 +63,6 @@ namespace OlibKey
             get => _tabItems;
             set => this.RaiseAndSetIfChanged(ref _tabItems, value);
         }
-        private bool IsLockDatabase
-        {
-            get => _isLockDatabase;
-            set => this.RaiseAndSetIfChanged(ref _isLockDatabase, value);
-        }
-        public bool IsUnlockDatabase
-        {
-            get => _isUnlockDatabase;
-            set => this.RaiseAndSetIfChanged(ref _isUnlockDatabase, value);
-        }
         private int SelectedTabIndex
         {
             get => _selectedTabIndex;
@@ -82,6 +72,16 @@ namespace OlibKey
         {
             get => _countLogins;
             set => this.RaiseAndSetIfChanged(ref _countLogins, value);
+        }
+        public bool IsUnlockDatabase
+        {
+            get => _isUnlockDatabase;
+            set => this.RaiseAndSetIfChanged(ref _isUnlockDatabase, value);
+        }
+        private bool IsLockDatabase
+        {
+            get => _isLockDatabase;
+            set => this.RaiseAndSetIfChanged(ref _isLockDatabase, value);
         }
         public DatabaseControl SelectedTabItem { get { try { return (DatabaseControl)TabItems[SelectedTabIndex].Content; } catch { return null; } } }
         private DatabaseTabHeader SelectedTabItemHeader { get { try { return (DatabaseTabHeader)TabItems[SelectedTabIndex].Header; } catch { return null; } } }
@@ -116,11 +116,11 @@ namespace OlibKey
 
         public void Loading()
         {
-            foreach (string item in OpenStorages.Where(item => Path.GetExtension(item) == ".olib"))
+            for (int i = 0; i < OpenStorages.Count; i++)
             {
-                Program.Settings.PathDatabase = item;
-
-                CreateTab(Program.Settings.PathDatabase, true, false);
+                string item = OpenStorages[i];
+                if (Path.GetExtension(item) == ".olib")
+                    CreateTab(Program.Settings.PathDatabase = item, true, false);
             }
 
             if (OpenStorages.Count > 0)
@@ -136,17 +136,12 @@ namespace OlibKey
         {
             foreach (string item in files.Where(item => Path.GetExtension(item) == ".olib").Where(item =>
                 TabItems.All(i => ((DatabaseControl)i.Content).ViewModel.PathDatabase != item)))
-            {
-                Program.Settings.PathDatabase = item;
-
-                CreateTab(Program.Settings.PathDatabase, true, false);
-            }
+                CreateTab(Program.Settings.PathDatabase = item, true, false);
 
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not6"));
         }
         public void ProgramClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            App.Autosave.Stop();
             SaveSettings();
             for (int index = 0; index < TabItems.Count; index++) SaveDatabase((DatabaseControl)TabItems[index].Content);
         }
@@ -156,7 +151,6 @@ namespace OlibKey
             if (db.ViewModel.PathDatabase != null)
             {
                 db.ViewModel.Database.Logins = db.ViewModel.LoginList.Select(item => item.LoginItem).ToList();
-
                 SaveAndLoadDatabase.SaveFiles(db);
                 App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not4") + $" {Path.GetFileNameWithoutExtension(db.ViewModel.PathDatabase)}");
             }
@@ -176,9 +170,8 @@ namespace OlibKey
                 IsUnlockDatabase = false;
                 IsLockDatabase = false;
             }
-
         }
-        private async void CreateTab(string path, bool isLockDatabase, bool isUnlockDatabase)
+        private void CreateTab(string path, bool isLockDatabase, bool isUnlockDatabase)
         {
             string id = Guid.NewGuid().ToString("N");
 
@@ -202,7 +195,7 @@ namespace OlibKey
 
             TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
-            await new RequireMasterPasswordWindow
+            new RequireMasterPasswordWindow
             {
                 LoadStorageCallback = LoadDatabase,
                 databaseControl = db,
@@ -221,12 +214,16 @@ namespace OlibKey
         }
         private void CloseTab(string tabID)
         {
-            foreach (TabItem item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.TabID == tabID))
+            for (int i = 0; i < TabItems.Count; i++)
             {
-                SaveDatabase((DatabaseControl)item.Content);
+                DatabaseControl item = (DatabaseControl)TabItems[i].Content;
+                if (item.ViewModel.TabID == tabID)
+                {
+                    SaveDatabase(item);
 
-                TabItems.Remove(item);
-                break;
+                    TabItems.Remove(TabItems[i]);
+                    break;
+                }
             }
         }
         private void AutoblockStorage(object sender, EventArgs e)
@@ -239,21 +236,21 @@ namespace OlibKey
             PasswordGenerator?.Close();
             CheckingWindow?.Close();
             TrashWindow?.Close();
+
             for (int index = 0; index < TabItems.Count; index++)
             {
-                TabItem item = TabItems[index];
-                DatabaseControl db = (DatabaseControl)item.Content;
-                DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
+                DatabaseControl control = (DatabaseControl)TabItems[index].Content;
+                DatabaseTabHeader header = (DatabaseTabHeader)TabItems[index].Header;
 
-                if (db.ViewModel.IsUnlockDatabase && dbHeader != null)
+                if (control.ViewModel.IsUnlockDatabase && header != null)
                 {
-                    if (db.ViewModel.LoginList.Any(login => login.LoginItem.IsReminderActive)) continue;
+                    if (control.ViewModel.LoginList.Any(login => login.LoginItem.IsReminderActive)) continue;
 
-                    SaveDatabase(db);
-                    db.ViewModel.ClearLoginsList();
-                    IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
-                    IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
-                    db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+                    SaveDatabase(control);
+                    control.ViewModel.ClearLoginsList();
+                    IsUnlockDatabase = control.ViewModel.IsUnlockDatabase = header.iUnlock.IsVisible = false;
+                    IsLockDatabase = control.ViewModel.IsLockDatabase = header.iLock.IsVisible = true;
+                    control.ViewModel.Router.Navigate.Execute(new StartPageViewModel(control.ViewModel));
                 }
             }
         }
@@ -271,14 +268,20 @@ namespace OlibKey
         }
         private async void UnlockAllDatabases()
         {
-            foreach (TabItem item in TabItems.Where(item => ((DatabaseControl)item.Content).ViewModel.IsLockDatabase))
-                await new RequireMasterPasswordWindow
+            for (int i = 0; i < TabItems.Count; i++)
+            {
+                TabItem item = TabItems[i];
+                if (((DatabaseControl)item.Content).ViewModel.IsLockDatabase)
                 {
-                    LoadStorageCallback = LoadDatabase,
-                    databaseControl = (DatabaseControl)item.Content,
-                    databaseTabHeader = (DatabaseTabHeader)item.Header,
-                    tbNameStorage = { Text = Path.GetFileNameWithoutExtension(((DatabaseControl)item.Content).ViewModel.PathDatabase) }
-                }.ShowDialog(App.MainWindow);
+                    await new RequireMasterPasswordWindow
+                    {
+                        LoadStorageCallback = LoadDatabase,
+                        databaseControl = (DatabaseControl)item.Content,
+                        databaseTabHeader = (DatabaseTabHeader)item.Header,
+                        tbNameStorage = { Text = Path.GetFileNameWithoutExtension(((DatabaseControl)item.Content).ViewModel.PathDatabase) }
+                    }.ShowDialog(App.MainWindow);
+                }
+            }
 
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not8"));
         }
@@ -296,17 +299,16 @@ namespace OlibKey
         {
             for (int index = 0; index < TabItems.Count; index++)
             {
-                TabItem item = TabItems[index];
-                DatabaseControl db = (DatabaseControl)item.Content;
-                DatabaseTabHeader dbHeader = (DatabaseTabHeader)item.Header;
+                DatabaseControl control = (DatabaseControl)TabItems[index].Content;
+                DatabaseTabHeader header = (DatabaseTabHeader)TabItems[index].Header;
 
-                SaveDatabase(db);
-                if (dbHeader != null)
+                SaveDatabase(control);
+                if (header != null)
                 {
-                    db.ViewModel.ClearLoginsList();
-                    IsUnlockDatabase = db.ViewModel.IsUnlockDatabase = dbHeader.iUnlock.IsVisible = false;
-                    IsLockDatabase = db.ViewModel.IsLockDatabase = dbHeader.iLock.IsVisible = true;
-                    db.ViewModel.Router.Navigate.Execute(new StartPageViewModel(db.ViewModel));
+                    control.ViewModel.ClearLoginsList();
+                    IsUnlockDatabase = control.ViewModel.IsUnlockDatabase = header.iUnlock.IsVisible = false;
+                    IsLockDatabase = control.ViewModel.IsLockDatabase = header.iLock.IsVisible = true;
+                    control.ViewModel.Router.Navigate.Execute(new StartPageViewModel(control.ViewModel));
                 }
             }
 
@@ -324,11 +326,7 @@ namespace OlibKey
 
                 foreach (string file in files.Where(file =>
                     TabItems.All(i => ((DatabaseControl)i.Content).ViewModel.PathDatabase != file)))
-                {
-                    Program.Settings.PathDatabase = file;
-
-                    CreateTab(Program.Settings.PathDatabase, true, false);
-                }
+                    CreateTab(Program.Settings.PathDatabase = file, true, false);
             }
             catch
             {
@@ -383,11 +381,9 @@ namespace OlibKey
             CreateDatabaseWindow window = new CreateDatabaseWindow();
             if (await window.ShowDialog<bool>(App.MainWindow))
             {
-                Program.Settings.PathDatabase = window.TbPathDatabase.Text;
-
                 string id = Guid.NewGuid().ToString("N");
 
-                DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(Program.Settings.PathDatabase))
+                DatabaseTabHeader tabHeader = new DatabaseTabHeader(id, Path.GetFileNameWithoutExtension(Program.Settings.PathDatabase = window.TbPathDatabase.Text))
                 {
                     CloseTab = CloseTab,
                     iLock = { IsVisible = false },
@@ -447,8 +443,8 @@ namespace OlibKey
             for (int index = 0; index < TabItems.Count; index++)
             {
                 DatabaseControl item = (DatabaseControl)TabItems[index].Content;
-                foreach (IRoutableViewModel i in item.ViewModel.Router.NavigationStack)
-                    item.ViewModel.Router.NavigationStack.Remove(i);
+                for (int i = 0; i < item.ViewModel.Router.NavigationStack.Count; i++)
+                    item.ViewModel.Router.NavigationStack.Remove(item.ViewModel.Router.NavigationStack[i]);
             }
             GC.Collect(0, GCCollectionMode.Forced);
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("ClearGC"));

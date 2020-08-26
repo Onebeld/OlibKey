@@ -96,6 +96,7 @@
 		<v:String x:Key="Not9">Успешно разблокировано хранилище:</v:String>
 		<v:String x:Key="Copied">Скопировано в буфер обмена!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Буфер обмена очищен!</v:String>
+		<v:String x:Key="Loading1">Идёт загрузка...</v:String>
 
 		<v:String x:Key="Lowercase">Строчные (abc)</v:String>
 		<v:String x:Key="Uppercase">Заглавные (ABC)</v:String>

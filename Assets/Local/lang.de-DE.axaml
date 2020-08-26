@@ -96,6 +96,7 @@
 		<v:String x:Key="Not9">Tresor erfolgreich gesperrt:</v:String>
 		<v:String x:Key="Copied">In die Zwischenablage kopiert!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Die Zwischenablage wird gelöscht!</v:String>
+		<v:String x:Key="Loading1">Wird geladen...</v:String>
 
 		<v:String x:Key="Lowercase">Kleinbuchstaben (abc)</v:String>
 		<v:String x:Key="Uppercase">Großbuchstaben (ABC)</v:String>

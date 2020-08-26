@@ -96,6 +96,7 @@
 		<v:String x:Key="Not9">Успішно розблоковано сховище:</v:String>
 		<v:String x:Key="Copied">Скопійовано в буфер обміну!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Буфер обміну очищений!</v:String>
+		<v:String x:Key="Loading1">Іде завантаження...</v:String>
 
 		<v:String x:Key="Lowercase">Рядкові (abc)</v:String>
 		<v:String x:Key="Uppercase">Заголовні (ABC)</v:String>

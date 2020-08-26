@@ -66,9 +66,9 @@ namespace OlibKey.ViewModels.Pages
 			LoginItem = acc;
 			CustomFields = new ObservableCollection<CustomFieldListItem>();
 
-			switch (LoginInformation.Type)
+            switch (LoginInformation.Type)
 			{
-				case 0:
+                case 0:
 					VisiblePasswordSection = true;
 					VisibleBankCardSection = false;
 					VisiblePersonalDataSection = false;

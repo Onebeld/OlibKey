@@ -6,12 +6,7 @@
 			 xmlns:c="clr-namespace:OlibKey.Core;assembly=OlibKey"
 			 Background="{DynamicResource ThemeWindowBackgroundBrush}"
              x:Class="OlibKey.Views.Pages.CreateLoginPage">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition Height="50"/>
-		</Grid.RowDefinitions>
-
+	<Grid RowDefinitions="*,50">
 		<ScrollViewer VerticalScrollBarVisibility="Auto">
 			<StackPanel Margin="10">
 				<TextBlock Text="{DynamicResource AddElement}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold" Margin="0 0 0 5"/>
@@ -197,7 +192,7 @@
 		<Border BorderThickness="0 1 0 0" Grid.Row="1" Classes="ButtonsMenu">
 			<StackPanel Orientation="Horizontal" Margin="10">
 				<Button Content="{DynamicResource PasswordSave}" Command="{Binding CreateLogin}"/>
-				<Button Content="{DynamicResource Cancel}" Margin="15,0" Command="{Binding Back}"/>
+				<Button Content="{DynamicResource Cancel}" Margin="5,0" Command="{Binding Back}"/>
 			</StackPanel>
 		</Border>
 	</Grid>

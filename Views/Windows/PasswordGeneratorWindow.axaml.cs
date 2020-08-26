@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using OlibKey.Core;
+using System;
 
 namespace OlibKey.Views.Windows
 {
@@ -43,6 +44,13 @@ namespace OlibKey.Views.Windows
 		{
 			if (string.IsNullOrEmpty(_tbPassword.Text)) _tbPassword.Text = PasswordGenerator.RandomPassword();
 			Application.Current.Clipboard.SetTextAsync(_tbPassword.Text);
+			if (Program.Settings.ClearingTheClipboard)
+            {
+				App.ClearingClipboard.Stop();
+				App.ClearingClipboard.Interval = new TimeSpan(0, 0, Program.Settings.TimeToClearTheClipboard);
+				App.ClearingClipboard.Start();
+            }
+			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Copied"));
 		}
 	}
 }

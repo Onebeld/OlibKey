@@ -13,6 +13,8 @@ namespace OlibKey.ViewModels.Windows
         private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
         private ObservableCollection<FolderListItem> _folderList = new ObservableCollection<FolderListItem>();
 
+        private FolderListItem _selectedFolderItem;
+
         private string _searchText;
 
         private int _selectedLoginIndex;
@@ -29,7 +31,7 @@ namespace OlibKey.ViewModels.Windows
 
         #region Property's
 
-        private ObservableCollection<LoginListItem> LoginList
+        public ObservableCollection<LoginListItem> LoginList
         {
             get => _loginList; set => this.RaiseAndSetIfChanged(ref _loginList, value);
         }
@@ -84,10 +86,13 @@ namespace OlibKey.ViewModels.Windows
 
             SelectedLoginIndex = SelectedFolderIndex = -1;
         }
-        public void AddLogin(LoginListItem login) => LoginList.Add(login);
 
-        public void ClearLoginsList() => LoginList.Clear();
-        public FolderListItem SelectedFolderItem { get { try { return FolderList[SelectedFolderIndex]; } catch { return null; } } }
+        public FolderListItem SelectedFolderItem
+        {
+            get => _selectedFolderItem;
+            set => this.RaiseAndSetIfChanged(ref _selectedFolderItem, value);
+        }
+
         private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
         private void CreateFolder() =>
             FolderList.Add(new FolderListItem

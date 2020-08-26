@@ -47,8 +47,8 @@ namespace OlibKey.Views.Windows
 				}
 				Close(true); 
 			};
-
 		}
+
 		private void InitializeComponent()
 		{
 			AvaloniaXamlLoader.Load(this);
@@ -62,7 +62,6 @@ namespace OlibKey.Views.Windows
 
 			_ = TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, TbPassword));
 		}
-
 		private async void SelectPath(object sender, RoutedEventArgs e)
 		{
 			SaveFileDialog dialog = new SaveFileDialog();
@@ -70,7 +69,6 @@ namespace OlibKey.Views.Windows
 			string res = await dialog.ShowAsync(this);
 			if (res != null) TbPathDatabase.Text = res;
 		}
-
 		private void CheckedPassword(object sender, RoutedEventArgs e) => TbPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 	}
 }

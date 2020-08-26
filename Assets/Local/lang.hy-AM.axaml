@@ -96,6 +96,7 @@
 		<v:String x:Key="Not9">Հիմքը հաջողությամբ արգելափակված է.</v:String>
 		<v:String x:Key="Copied">Պատճենահանվեց clipboard- ին:</v:String>
 		<v:String x:Key="ClipboardIsCleared">Տեսահոլովակը մաքրված է:</v:String>
+		<v:String x:Key="Loading1">Բեռնվում է...</v:String>
 
 		<v:String x:Key="Lowercase">Փոքրատառ (abc)</v:String>
 		<v:String x:Key="Uppercase">Մեծատառ (ABC)</v:String>

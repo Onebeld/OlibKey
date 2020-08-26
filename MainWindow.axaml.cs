@@ -46,7 +46,7 @@ namespace OlibKey
 			}
 			static void Drop(object sender, DragEventArgs e)
 			{
-				if (e.Data.Contains(DataFormats.FileNames)) App.MainWindowViewModel.OpenStorageDnD(e.Data.GetFileNames().ToList());
+				if (e.Data.Contains(DataFormats.FileNames)) App.MainWindowViewModel.OpenStorageDnD(e.Data.GetFileNames().ToArray());
 			}
 
 			AddHandler(DragDrop.DropEvent, Drop);
@@ -62,5 +62,16 @@ namespace OlibKey
 			_tbMessageStatusBar.IsVisible = false;
 			_tbReady.IsVisible = true;
 		}
+		public void PermanentMessageStatusBar(string message)
+        {
+			_tbMessageStatusBar.IsVisible = true;
+			_tbMessageStatusBar.Text = message;
+			_tbReady.IsVisible = false;
+        }
+		public void ResetMessageStatusBar()
+        {
+			_tbMessageStatusBar.IsVisible = false;
+			_tbReady.IsVisible = true;
+        }
 	}
 }

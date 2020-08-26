@@ -58,20 +58,18 @@ namespace OlibKey.Views.Windows
             _lbFolders.PointerPressed += (_, __) => ViewModel.SelectedFolderIndex = -1;
             Closed += SearchWindow_Closed;
             await Task.Delay(50);
-            _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => DeleteListAndSearchElement());
+            _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(_ => ClearListAndSearchElement());
         }
 
-        private void SearchWindow_Closed(object sender, EventArgs e)
-        {
+        private void SearchWindow_Closed(object sender, EventArgs e) =>
             App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Folders =
                 SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
-        }
 
-        private async void DeleteListAndSearchElement()
+        private async void ClearListAndSearchElement()
         {
-            SearchViewModel.ClearLoginsList();
+            SearchViewModel.LoginList.Clear();
 
-            await Task.Delay(10); // needed because the list does not correctly handle found items
+            await Task.Delay(1); // needed because the list does not correctly handle found items
 
             List<LoginListItem> selectedItemList = _rLogin.IsChecked ?? false
                 ? App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList()
@@ -107,20 +105,16 @@ namespace OlibKey.Views.Windows
             if (_tbSortAlphabetically.IsChecked ?? false)
                 selectedItemList = selectedItemList.OrderBy(x => x.LoginItem.Name).ToList();
 
-            for (int i = 0; i < selectedItemList.Count; i++) Add(selectedItemList[i]);
+            for (int i = 0; i < selectedItemList.Count; i++)
+                SearchViewModel.LoginList.Add(new LoginListItem(selectedItemList[i].LoginItem)
+                {
+                    LoginID = selectedItemList[i].LoginID,
+                    IconLogin = { Source = selectedItemList[i].IconLogin.Source },
+                    IsFavorite = { IsEnabled = false }
+                });
         }
 
-        private void Add(LoginListItem item) =>
-            AddLogin(new LoginListItem(item.LoginItem)
-            {
-                LoginID = item.LoginID,
-                IconLogin = { Source = item.IconLogin.Source },
-                IsFavorite = { IsEnabled = false }
-            });
-
-        private void lbFolders_SelectionChanged(object sender, SelectionChangedEventArgs e) => DeleteListAndSearchElement();
-        private void rLogin_Click(object sender, RoutedEventArgs e) => DeleteListAndSearchElement();
-
-        private void AddLogin(LoginListItem login) => SearchViewModel.AddLogin(login);
+        private void FoldersSelectionChanged(object sender, SelectionChangedEventArgs e) => ClearListAndSearchElement();
+        private void Checking(object sender, RoutedEventArgs e) => ClearListAndSearchElement();
     }
 }

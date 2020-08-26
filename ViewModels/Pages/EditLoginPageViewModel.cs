@@ -59,7 +59,6 @@ namespace OlibKey.ViewModels.Pages
         {
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
-
             CustomFields = new ObservableCollection<CustomFieldListItem>();
 
             LoginList = acc;
@@ -167,7 +166,7 @@ namespace OlibKey.ViewModels.Pages
 
             if (NewLogin.IsReminderActive)
             {
-                LoginList.ReminderTimer.Interval = new TimeSpan(0, 0, 3);
+                LoginList.ReminderTimer.Interval = new TimeSpan(0, 0, 1);
                 LoginList.ReminderTimer.Start();
             }
             else
@@ -222,6 +221,6 @@ namespace OlibKey.ViewModels.Pages
                 break;
             }
         }
-        private void BackVoid() => CancelCallback?.Invoke(LoginList);
+        private void Back() => CancelCallback?.Invoke(LoginList);
     }
 }

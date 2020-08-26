@@ -4,7 +4,7 @@
 
 ![](https://github.com/MagnificentEagle/OlibKey/blob/master/ForRepository/ScreenProgram.png)
 
-OlibKey is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET 5 Prewiev 6 using  Avalonia UI. With OlibKey, you can store passwords on your computer **using AES encryption**.
+OlibKey is free software that allows you to store passwords, notes, documents and other important personal data on your computer. Powered by Microsoft .NET 5 Prewiev 7 using  Avalonia UI. With OlibKey, you can store passwords on your computer **using AES encryption**.
 
 For feedback and the latest news, use the links below:
 
@@ -40,11 +40,8 @@ This version is compiled using AOT CoreRT, which allows you to run applications 
 This version supports other platforms (x86, ARM), .NET Runtime is required to run. macOS and Linux does not support x86
 #### Requirements:
 * Almost all platforms ([see here](https://github.com/dotnet/core/blob/master/release-notes/5.0/5.0-supported-os.md))
-* .NET Runtime 5 Preview 7;
+* .NET Runtime 5 Preview 7 (starting from 3.1.1 the application will become standalone and you will not have to install .NET 5 separately);
 
 ## Where can I watch previews?
 You can watch the previews in the "dev-channel", where all the latest changes are posted. When the release is ready, a request is made to merge this branch into "master".
 > **Attention:** these releases may be unstable and may even damage your base. Use only if you know what you are doing. It is recommended to make a backup copy of the database.
-
-## Screenshot's
-![](https://github.com/MagnificentEagle/OlibKey/blob/master/ForRepository/screenshot1.png)

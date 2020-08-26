@@ -11,6 +11,7 @@
 		<v:String x:Key="SaveBase">Enregistrer le stockage</v:String>
 		<v:String x:Key="SaveAllBases">Enregistrer tous les coffres</v:String>
 		<v:String x:Key="AddLogin">Ajouter une connexion</v:String>
+		<v:String x:Key="Trash">Panier</v:String>
 		<v:String x:Key="Settings">Paramètres</v:String>
 		<v:String x:Key="ExitFrom">Déconnectez-vous d'OlibKey</v:String>
 		<v:String x:Key="PasswordGenerator">Générateur de mot de passe</v:String>
@@ -19,12 +20,19 @@
 		<v:String x:Key="CheckUpdates">Vérifier les mises à jour</v:String>
 		<v:String x:Key="FileOlib">Fichier de base de données OlibKey</v:String>
 		
+		<v:String x:Key="Empty">Vide</v:String>
+		<v:String x:Key="NotFound">Pas trouvé</v:String>
+		
 		<v:String x:Key="Search">Chercher</v:String>
 		<v:String x:Key="AllItems">Tous les articles</v:String>
 		<v:String x:Key="Folder">Dossier</v:String>
 		<v:String x:Key="NotChosen">Non sélectionné</v:String>
 		<v:String x:Key="RemoveSelection">Désélectionner</v:String>
 		<v:String x:Key="NameElement">Nom de l'article</v:String>
+		
+		<v:String x:Key="RunningReminders">Rappels en cours d'exécution</v:String>
+		<v:String x:Key="SortAlphabetically">Trier par ordre alphabétique</v:String>
+		<v:String x:Key="Favorite">Favoris</v:String>
 
 		<v:String x:Key="GitHub">OlibKey sur GitHub</v:String>
 		<v:String x:Key="VKontakte">OlibKey sur VK</v:String>
@@ -33,6 +41,9 @@
 		<v:String x:Key="Ready">Prêt</v:String>
 		<v:String x:Key="Elements">Articles:</v:String>
 		<v:String x:Key="OpenedBases">Bases ouvertes:</v:String>
+		<v:String x:Key="ClearGC">Nettoyage terminé</v:String>
+		<v:String x:Key="Folders">Dossiers:</v:String>
+		<v:String x:Key="Removed">Supprimé:</v:String>
 
 		<v:String x:Key="Collapse">Réduire</v:String>
 		<v:String x:Key="Expand">Développer</v:String>
@@ -55,7 +66,10 @@
 		<v:String x:Key="LockAllStorages">Verrouiller tous les stockages</v:String>
 		<v:String x:Key="UnlockStorage">Déverrouillez le stockage</v:String>
 		<v:String x:Key="UnlockAllStorages">Déverrouiller tous les stockages</v:String>
-		<v:String x:Key="ShowOPM">Afficher OlibKey</v:String>
+		
+		<v:String x:Key="ClearTrash">Poubelle vide</v:String>
+		<v:String x:Key="DeleteSelected">Supprimer sélectionnée</v:String>
+		<v:String x:Key="ReturnSelected">Retour sélectionné</v:String>
 
 		<v:String x:Key="MB1">Vous devez d'abord télécharger ou créer du stockage!</v:String>
 		<v:String x:Key="Error">Erreur</v:String>
@@ -67,6 +81,7 @@
 		<v:String x:Key="MB6">Vous ne pouvez pas exiger des caractères d'une chaîne vide!</v:String>
 		<v:String x:Key="MB7">Aucune coche sélectionnée ou longueur de mot de passe spécifiée!</v:String>
 		<v:String x:Key="MB8">Il n'y a aucune nouvelle mise à jour pour le moment.</v:String>
+		<v:String x:Key="MB9">Voulez-vous vraiment vider votre corbeille?</v:String>
 
 		<v:String x:Key="Successfully">Avec succès!</v:String>
 
@@ -79,6 +94,9 @@
 		<v:String x:Key="Not7">Tous les stockage ont été verrouillés avec succès!</v:String>
 		<v:String x:Key="Not8">Tous les stockage ont été déverrouillés avec succès!</v:String>
 		<v:String x:Key="Not9">Stockage verrouillé avec succès:</v:String>
+		<v:String x:Key="Copied">Copié dans le presse-papiers!</v:String>
+		<v:String x:Key="ClipboardIsCleared">Le presse-papiers est effacé!</v:String>
+		<v:String x:Key="Loading1">Chargement...</v:String>
 
 		<v:String x:Key="Lowercase">Minuscules (abc)</v:String>
 		<v:String x:Key="Uppercase">Majuscules (ABC)</v:String>
@@ -99,9 +117,17 @@
 		<v:String x:Key="Select">Sélectionnez</v:String>
 		<v:String x:Key="Iteration">Nombre d'itérations:</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Nombre de procédures de cryptage:</v:String>
+		<v:String x:Key="UseCompression">Utiliser la compression</v:String>
+		<v:String x:Key="UseTrash">Utiliser la poubelle</v:String>
 		<v:String x:Key="CDBError1">Dans les champs avec une entrée numérique, les valeurs doivent contenir des nombres et ne peuvent pas être zéro!</v:String>
 		<v:String x:Key="CDBError2">Vous n'avez pas sélectionné de chemin de référentiel ou n'avez pas fourni de mot de passe principal!</v:String>
 		<v:String x:Key="CDBError3">Vous ne pouvez pas créer de coffre-fort si ce coffre-fort est déjà ouvert!</v:String>
+
+		<v:String x:Key="CheckingWeakPasswords">Vérification des mots de passe faibles</v:String>
+		<v:String x:Key="OverallComplexity">Complexité globale:</v:String>
+		<v:String x:Key="Fix">Réparer</v:String>
+		<v:String x:Key="SelectAll">Tout sélectionner</v:String>
+		<v:String x:Key="CWPInfo">Voici les mots de passe faibles que vous pouvez remplacer. Sélectionnez ceux que vous souhaitez modifier et cliquez sur le bouton Réparer. Le remplacement aura lieu selon les paramètres du générateur de mot de passe.</v:String>
 
 		<v:String x:Key="Open">Ouverte</v:String>
 		<v:String x:Key="EnterMP">Entrez le mot de passe principal</v:String>
@@ -116,10 +142,14 @@
 		<v:String x:Key="General">Général</v:String>
 		<v:String x:Key="Storage">Voûte</v:String>
 		<v:String x:Key="Autosave">Sauvegarde automatique via:</v:String>
-		<v:String x:Key="Block">Bloquez toutes les bases de données (sauf avec un rappel) via:</v:String>
+		<v:String x:Key="Block">Bloquez toutes les bases de données (sauf avec un rappel en cours) via:</v:String>
 		<v:String x:Key="MessageDuration">Durée d'affichage des messages:</v:String>
 		<v:String x:Key="Sec">secondes</v:String>
 		<v:String x:Key="Min">minutes</v:String>
+		<v:String x:Key="Day">journées</v:String>
+		<v:String x:Key="HardwareAcceleration">Accélération matérielle (redémarrage requis)</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Supprimer automatiquement un élément de la corbeille via:</v:String>
+		<v:String x:Key="ClearingClipboard">Effacer le presse-papiers après la copie via:</v:String>
 
 		<v:String x:Key="Dazzling">Éblouissant</v:String>
 		<v:String x:Key="Gloomy">Sombre</v:String>

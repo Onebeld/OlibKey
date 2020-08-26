@@ -11,6 +11,7 @@
 		<v:String x:Key="SaveBase">Պահպանել պահեստ</v:String>
 		<v:String x:Key="SaveAllBases">Պահպանեք բոլոր պահոցները</v:String>
 		<v:String x:Key="AddLogin">Ավելացնել լոգին</v:String>
+		<v:String x:Key="Trash">Զամբյուղ</v:String>
 		<v:String x:Key="Settings">Կարգավորումներ</v:String>
 		<v:String x:Key="ExitFrom">Դուրս գալ OlibKey-ից</v:String>
 		<v:String x:Key="PasswordGenerator">Գաղտնաբառի գեներատոր</v:String>
@@ -19,12 +20,19 @@
 		<v:String x:Key="CheckUpdates">Ստուգել թարմացումները</v:String>
 		<v:String x:Key="FileOlib">OlibKey տվյալների շտեմարան</v:String>
 		
+		<v:String x:Key="Empty">Դատարկ</v:String>
+		<v:String x:Key="NotFound">Չի գտնվել</v:String>
+		
 		<v:String x:Key="Search">Որոնել</v:String>
 		<v:String x:Key="AllItems">Բոլոր իրերը</v:String>
 		<v:String x:Key="Folder">Թղթապանակ</v:String>
 		<v:String x:Key="NotChosen">Ընտրված չէ</v:String>
 		<v:String x:Key="RemoveSelection">Elնջել</v:String>
 		<v:String x:Key="NameElement">Նյութի անվանումը</v:String>
+		
+		<v:String x:Key="RunningReminders">Գործարկման հիշեցումներ</v:String>
+		<v:String x:Key="SortAlphabetically">Դասավորեք այբբենական կարգով</v:String>
+		<v:String x:Key="Favorite">Ընտրյալներ</v:String>
 
 		<v:String x:Key="GitHub">OlibKey- ը GitHub- ում</v:String>
 		<v:String x:Key="VKontakte">OlibKey- ը VK- ում</v:String>
@@ -33,6 +41,9 @@
 		<v:String x:Key="Ready">Պատրաստ է</v:String>
 		<v:String x:Key="Elements">Նյութեր:</v:String>
 		<v:String x:Key="OpenedBases">Բացված հիմքերը:</v:String>
+		<v:String x:Key="ClearGC">Մաքրումը կատարվում է</v:String>
+		<v:String x:Key="Folders">Թղթապանակներ:</v:String>
+		<v:String x:Key="Removed">Հեռացված:</v:String>
 
 		<v:String x:Key="Collapse">Փլուզվել</v:String>
 		<v:String x:Key="Expand">Ընդլայնել</v:String>
@@ -55,7 +66,10 @@
 		<v:String x:Key="LockAllStorages">Կողպեք բոլոր պահոցները</v:String>
 		<v:String x:Key="UnlockStorage">Բացել պահեստը</v:String>
 		<v:String x:Key="UnlockAllStorages">Բացել բոլոր պահոցները</v:String>
-		<v:String x:Key="ShowOPM">Ուցադրել OlibKey</v:String>
+		
+		<v:String x:Key="ClearTrash">Դատարկ աղբարկղ</v:String>
+		<v:String x:Key="DeleteSelected">Ջնջել ընտրված</v:String>
+		<v:String x:Key="ReturnSelected">Վերադարձնել ընտրված</v:String>
 
 		<v:String x:Key="MB1">Առաջինը, դուք պետք էք բեռնել կամ ստեղծել պահեստ</v:String>
 		<v:String x:Key="Error">Սխալ</v:String>
@@ -67,6 +81,7 @@
 		<v:String x:Key="MB6">Դուք չեք կարող պահանջել նիշ դատարկ տողից:</v:String>
 		<v:String x:Key="MB7">Ընտրված չէ նշման նշան կամ գաղտնաբառի երկարություն:</v:String>
 		<v:String x:Key="MB8">Այս պահին նոր թարմացումներ չկան:</v:String>
+		<v:String x:Key="MB9">Вы дейстивтельно хотите очистить корзину?</v:String>
 
 		<v:String x:Key="Successfully">Հաջող!</v:String>
 
@@ -79,6 +94,9 @@
 		<v:String x:Key="Not7">Բոլոր պահոցները հաջողությամբ կողպվել են:</v:String>
 		<v:String x:Key="Not8">Բոլոր պահոցները հաջողությամբ բացվել են:</v:String>
 		<v:String x:Key="Not9">Հիմքը հաջողությամբ արգելափակված է.</v:String>
+		<v:String x:Key="Copied">Պատճենահանվեց clipboard- ին:</v:String>
+		<v:String x:Key="ClipboardIsCleared">Տեսահոլովակը մաքրված է:</v:String>
+		<v:String x:Key="Loading1">Բեռնվում է...</v:String>
 
 		<v:String x:Key="Lowercase">Փոքրատառ (abc)</v:String>
 		<v:String x:Key="Uppercase">Մեծատառ (ABC)</v:String>
@@ -99,9 +117,17 @@
 		<v:String x:Key="Select">Ընտրել</v:String>
 		<v:String x:Key="Iteration">Կրկնությունների քանակը.</v:String>
 		<v:String x:Key="NumberOfEncryptionProcedures">Գաղտնագրման ընթացակարգերի քանակը.</v:String>
+		<v:String x:Key="UseCompression">Օգտագործեք սեղմում</v:String>
+		<v:String x:Key="UseTrash">Օգտագործեք զամբյուղը</v:String>
 		<v:String x:Key="CDBError1">Թվային մուտքագրման դաշտերում արժեքները պետք է պարունակեն թվեր և չեն կարող զրո լինել:</v:String>
 		<v:String x:Key="CDBError2">Դուք չեք ընտրել պահեստային ուղի կամ չեք տրամադրել վարպետ գաղտնաբառ:</v:String>
 		<v:String x:Key="CDBError3">Դուք չեք կարող ստեղծել պահոց, եթե այս կամարն արդեն բաց է:</v:String>
+		
+		<v:String x:Key="CheckingWeakPasswords">Ստուգում են թույլ գաղտնաբառերը</v:String>
+		<v:String x:Key="OverallComplexity">Ընդհանուր դժվարություն.</v:String>
+		<v:String x:Key="Fix">Ուղղել</v:String>
+		<v:String x:Key="SelectAll">Ընտրել բոլորը</v:String>
+		<v:String x:Key="CWPInfo">Ահա թույլ գաղտնաբառերը, որոնք կարող եք փոխարինել: Ընտրեք դրանք, որոնք ցանկանում եք փոխել և կտտացրեք ամրագրման կոճակին: Փոխումը տեղի է ունենալու ըստ գաղտնաբառի գեներատորի պարամետրերի:</v:String>
 
 		<v:String x:Key="Open">Բացել</v:String>
 		<v:String x:Key="EnterMP">Գրեք վարպետության գաղտնաբառը</v:String>
@@ -116,10 +142,14 @@
 		<v:String x:Key="General">Գեներալ</v:String>
 		<v:String x:Key="Storage">Պահոց</v:String>
 		<v:String x:Key="Autosave">Ավտոմատ խնայողություն միջոցով ՝</v:String>
-		<v:String x:Key="Block">Արգելափակել բոլոր տվյալների բազաները (բացառությամբ հիշեցմամբ) ՝</v:String>
+		<v:String x:Key="Block">Արգելափակել բոլոր տվյալների բազաները (բացառությամբ գործարկման հիշեցման) միջոցով ՝</v:String>
 		<v:String x:Key="MessageDuration">Հաղորդագրության ցուցադրման տևողությունը.</v:String>
 		<v:String x:Key="Sec">վայրկյան</v:String>
 		<v:String x:Key="Min">րոպեներ</v:String>
+		<v:String x:Key="Day">օրեր</v:String>
+		<v:String x:Key="HardwareAcceleration">Սարքավորումների արագացում (անհրաժեշտ է վերաբեռնումը)</v:String>
+		<v:String x:Key="AutoDeleteFromTrash">Ավտոմատ կերպով հանեք իրը ​​զամբյուղից ՝</v:String>
+		<v:String x:Key="ClearingClipboard">Մաքրել clipboard միջոցով պատճենելուց հետո ՝</v:String>
 
 		<v:String x:Key="Dazzling">Զարմանալի</v:String>
 		<v:String x:Key="Gloomy">Մռայլ</v:String>

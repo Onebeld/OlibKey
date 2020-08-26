@@ -4,7 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
         x:Class="OlibKey.Views.Windows.AboutWindow"
-		WindowStartupLocation="CenterScreen"
+		WindowStartupLocation="CenterOwner"
+		WindowState="Normal"
+		ShowInTaskbar="False"
 		Icon="avares://OlibKey/app.ico"
 		Background="{StaticResource ThemeWindowBackgroundBrush}"
         Title="{StaticResource AboutPrograms}" Height="400" Width="450" CanResize="False">
@@ -14,7 +16,7 @@
 			<TextBlock Text="©2020 Dmitry Zhutkov" HorizontalAlignment="Center" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 				<TextBlock Text="{StaticResource Version}" Margin="0 0 5 0" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
-				<TextBlock Text="3.1.1" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
+				<TextBlock x:Name="tbVersion" Text="3.2.0" Foreground="{StaticResource ThemeWindowForegroundBrush}"/>
 			</StackPanel>
 			<TextBox x:Name="tbInformation" Margin="10" Height="150" IsReadOnly="True" TextAlignment="Center" HorizontalContentAlignment="Center" AcceptsReturn="True" TextWrapping="Wrap"/>
 		</StackPanel>

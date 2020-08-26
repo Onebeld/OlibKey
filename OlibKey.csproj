@@ -3,6 +3,8 @@
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net5.0</TargetFramework>
 		<Platforms>AnyCPU;x64</Platforms>
+		<AssemblyVersion>3.2.0</AssemblyVersion>
+		<FileVersion>3.2.0</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -13,10 +15,10 @@
     	<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
     	<IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
 		<ApplicationIcon>app.ico</ApplicationIcon>
-		<Version>3.1.1</Version>
+		<Version>3.2.0</Version>
 		<Authors>Dmitry Zhutkov</Authors>
 		<Copyright>© Dmitry Zhutkov 2020</Copyright>
-		<Description>OlibKey - an open source password manager.</Description>
+		<Description>OlibKey - cross-platform, modern, open source password manager.</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<RepositoryType>Publish</RepositoryType>
@@ -45,9 +47,9 @@
 		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.0-preview2" />
-		<PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview2" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview2" />
+		<PackageReference Include="Avalonia" Version="0.10.999-cibuild0010094-beta" />
+		<PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0010094-beta" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0010094-beta" />
 	</ItemGroup>
 	<ItemGroup>
 		<RdXmlFile Include="rd.xml" />
@@ -61,5 +63,13 @@
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
 	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Views\Controls\FolderListItem.axaml.cs">
+	    <DependentUpon>FolderListItem.axaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Windows\TrashWindow.axaml.cs">
+	    <DependentUpon>TrashWindow.axaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 </Project>

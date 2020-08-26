@@ -13,8 +13,6 @@ namespace OlibKey.Views.Windows
 		public Action<DatabaseControl, DatabaseTabHeader> LoadStorageCallback { get; set; }
 
 		private TextBox _tbPassword;
-		private Button _bOpen;
-		private Button _bCancel;
 
 		public TextBlock tbNameStorage;
 		public DatabaseControl databaseControl;
@@ -23,8 +21,8 @@ namespace OlibKey.Views.Windows
 		public RequireMasterPasswordWindow()
 		{
 			InitializeComponent();
-			_bCancel.Click += (s, e) => Close();
-			_bOpen.Click += ButtonLoadStorage;
+			this.FindControl<Button>("bCancel").Click += (s, e) => Close();
+			this.FindControl<Button>("bOpen").Click += ButtonLoadStorage;
 			_tbPassword.KeyDown += KeyEnterLoadStorage;
 		}
 
@@ -37,8 +35,6 @@ namespace OlibKey.Views.Windows
 		{
 			AvaloniaXamlLoader.Load(this);
 			_tbPassword = this.FindControl<TextBox>("tbPassword");
-			_bOpen = this.FindControl<Button>("bOpen");
-			_bCancel = this.FindControl<Button>("bCancel");
 			tbNameStorage = this.FindControl<TextBlock>("tbNameStorage");
 		}
 

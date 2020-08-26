@@ -9,7 +9,7 @@
 		<Color x:Key="ThemeGlobalBorderColor">#FFA5A5A5</Color>
 		<Color x:Key="ThemeHoverBackgroundColor">#FFE3E3E3</Color>
 		<Color x:Key="ThemeWindowForegroundColor">#FFFFFFFF</Color>
-		<Color x:Key="ThemePanelBackgroundColor">#FFEAEAEA</Color>
+		<Color x:Key="ThemePanelBackgroundColor">#FFEDEDED</Color>
 		<Color x:Key="ThemeSelectedControlColor">#FF931D60</Color>
 		<Color x:Key="ThemeGitHubColor">#FF231E1B</Color>
 		<Color x:Key="ThemeScrollBoxHoverColor">#FF333333</Color>

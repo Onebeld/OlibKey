@@ -51,12 +51,8 @@ namespace OlibKey.Views.Controls
 
 		private void Delete(object sender, RoutedEventArgs e) => DeleteCustomField?.Invoke(ID);
 
-		private void CheckedPassword(object sender, RoutedEventArgs e)
-		{
-			CheckBox cb = (CheckBox)sender;
-			_tbPassword.PasswordChar = cb.IsChecked == true ? '\0' : '•';
-		}
-	}
+        private void CheckedPassword(object sender, RoutedEventArgs e) => _tbPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
+    }
 	public class Housing
 	{
 		public CustomField CustomField { get; set; }

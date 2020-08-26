@@ -7,170 +7,114 @@ using OlibKey.Structures;
 using OlibKey.ViewModels.Windows;
 using OlibKey.Views.Controls;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls.Primitives;
 
 namespace OlibKey.Views.Windows
 {
-	public class SearchWindow : ReactiveWindow<SearchWindowViewModel>
-	{
-		public SearchWindowViewModel SearchViewModel { get; set; }
+    public class SearchWindow : ReactiveWindow<SearchWindowViewModel>
+    {
+        public SearchWindowViewModel SearchViewModel { get; set; }
 
-		private TextBox _tbSearchText;
+        private TextBox _tbSearchText;
 
-		private RadioButton _rLogin;
-		private RadioButton _rBankCard;
-		private RadioButton _rPassport;
-		private RadioButton _rReminder;
-		private RadioButton _rNotes;
-		private RadioButton _rAll;
+        private RadioButton _rLogin;
+        private RadioButton _rBankCard;
+        private RadioButton _rPassport;
+        private RadioButton _rReminder;
+        private RadioButton _rNotes;
+        private RadioButton _rAll;
 
-		private ListBox _lbFolders;
+        private ToggleButton _tbSortAlphabetically;
+        private ToggleButton _tbFavorite;
+        private ToggleButton _tbActiveReminder;
 
-		public SearchWindow()
-		{
-			AvaloniaXamlLoader.Load(this);
-			InitializeComponent();
-		}
+        private ListBox _lbFolders;
 
-		private async void InitializeComponent()
-		{
-			_rLogin = this.FindControl<RadioButton>("rLogin");
-			_rBankCard = this.FindControl<RadioButton>("rBankCard");
-			_rPassport = this.FindControl<RadioButton>("rPassport");
-			_rReminder = this.FindControl<RadioButton>("rReminder");
-			_rNotes = this.FindControl<RadioButton>("rNotes");
-			_rAll = this.FindControl<RadioButton>("rAll");
-			_tbSearchText = this.FindControl<TextBox>("tbSearchText");
-			_lbFolders = this.FindControl<ListBox>("lbFolders");
+        public SearchWindow()
+        {
+            AvaloniaXamlLoader.Load(this);
+            InitializeComponent();
+        }
 
-			DataContext = SearchViewModel = new SearchWindowViewModel();
-			_rAll.IsChecked = true;
-			Closed += SearchWindow_Closed;
-			_lbFolders.PointerPressed += (s, e) =>
-			{
-				SearchViewModel.SelectedFolderIndex = -1;
-			};
-			await Task.Delay(50);
-			_ = _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(value => SearchLogin());
-		}
+        private async void InitializeComponent()
+        {
+            _rLogin = this.FindControl<RadioButton>("rLogin");
+            _rBankCard = this.FindControl<RadioButton>("rBankCard");
+            _rPassport = this.FindControl<RadioButton>("rPassport");
+            _rReminder = this.FindControl<RadioButton>("rReminder");
+            _rNotes = this.FindControl<RadioButton>("rNotes");
+            _rAll = this.FindControl<RadioButton>("rAll");
+            _tbSearchText = this.FindControl<TextBox>("tbSearchText");
+            _lbFolders = this.FindControl<ListBox>("lbFolders");
+            _tbSortAlphabetically = this.FindControl<ToggleButton>("tbSortAlphabetically");
+            _tbFavorite = this.FindControl<ToggleButton>("tbFavorite");
+            _tbActiveReminder = this.FindControl<ToggleButton>("tbActiveReminder");
 
-		private void SearchWindow_Closed(object sender, EventArgs e) => App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Folders = SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
+            DataContext = SearchViewModel = new SearchWindowViewModel();
+            _rAll.IsChecked = true;
+            _lbFolders.PointerPressed += (_, __) => ViewModel.SelectedFolderIndex = -1;
+            Closed += SearchWindow_Closed;
+            await Task.Delay(50);
+            _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(_ => ClearListAndSearchElement());
+        }
 
-		private async void SearchLogin()
-		{
-			SearchViewModel.ClearLoginsList();
-			await Task.Delay(10);
+        private void SearchWindow_Closed(object sender, EventArgs e) =>
+            App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Folders =
+                SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
 
-			foreach (LoginListItem i in App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList)
-			{
-				Login login = i.LoginItem;
-				if (login.Name != null)
-				{
-					if ((bool)_rLogin.IsChecked && login.Type == 0)
-					{
-						if (SearchViewModel.SelectedFolderItem == null)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-					}
-					else if ((bool)_rBankCard.IsChecked && login.Type == 1)
-					{
-						if (SearchViewModel.SelectedFolderItem == null)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-					}
-					else if ((bool)_rPassport.IsChecked && login.Type == 2)
-					{
-						if (SearchViewModel.SelectedFolderItem == null)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-					}
-					else if ((bool)_rReminder.IsChecked && login.Type == 3)
-					{
-						if (SearchViewModel.SelectedFolderItem == null)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-					}
-					else if ((bool)_rNotes.IsChecked && login.Type == 4)
-					{
-						if (SearchViewModel.SelectedFolderItem == null)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-					}
-					else if ((bool)_rAll.IsChecked)
-					{
-						if (SearchViewModel.SelectedFolderItem == null)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-						else if (login.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID)
-							if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
-							{
-								if (login.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower())) Add(login, i.IconLogin, i.LoginID);
-							}
-							else Add(login, i.IconLogin, i.LoginID);
-					}
-				}
-			}
-		}
+        private async void ClearListAndSearchElement()
+        {
+            SearchViewModel.LoginList.Clear();
 
-		private void Add(Login a, Image i, string id) =>
-			AddLogin(new LoginListItem(a)
-			{
-				LoginID = id,
-				IconLogin = { Source = i.Source }
-			});
+            await Task.Delay(1); // needed because the list does not correctly handle found items
 
-		private void lbFolders_SelectionChanged(object sender, SelectionChangedEventArgs e) => SearchLogin();
-		private void rLogin_Click(object sender, RoutedEventArgs e) => SearchLogin();
+            List<LoginListItem> selectedItemList = _rLogin.IsChecked ?? false
+                ? App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 0)
+                : _rBankCard.IsChecked ?? false
+                ? App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 1)
+                : _rPassport.IsChecked ?? false
+                ? App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 2)
+                : _rReminder.IsChecked ?? false
+                ? App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 3)
+                : _rNotes.IsChecked ?? false
+                ? App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 4)
+                : App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.ToList();
 
-		private void AddLogin(LoginListItem login) => SearchViewModel.AddLogin(login);
-	}
+            if (SearchViewModel.SelectedFolderItem != null)
+                selectedItemList = selectedItemList.FindAll(x =>
+                    x.LoginItem.FolderID == ((Folder)SearchViewModel.SelectedFolderItem.DataContext)?.ID);
+
+            if (_tbActiveReminder.IsChecked ?? false)
+                selectedItemList = selectedItemList.FindAll(x => x.LoginItem.IsReminderActive);
+
+            if (_tbFavorite.IsChecked ?? false)
+                selectedItemList = selectedItemList.FindAll(x => x.LoginItem.Favorite);
+
+            if (!string.IsNullOrEmpty(SearchViewModel.SearchText))
+                selectedItemList = selectedItemList.FindAll(x =>
+                    x.LoginItem.Name.ToLower().Contains(SearchViewModel.SearchText.ToLower()));
+
+            if (_tbSortAlphabetically.IsChecked ?? false)
+                selectedItemList = selectedItemList.OrderBy(x => x.LoginItem.Name).ToList();
+
+            for (int i = 0; i < selectedItemList.Count; i++)
+                SearchViewModel.LoginList.Add(new LoginListItem(selectedItemList[i].LoginItem)
+                {
+                    LoginID = selectedItemList[i].LoginID,
+                    IconLogin = { Source = selectedItemList[i].IconLogin.Source },
+                    IsFavorite = { IsEnabled = false }
+                });
+        }
+
+        private void FoldersSelectionChanged(object sender, SelectionChangedEventArgs e) => ClearListAndSearchElement();
+        private void Checking(object sender, RoutedEventArgs e) => ClearListAndSearchElement();
+    }
 }

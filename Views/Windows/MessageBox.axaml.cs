@@ -35,7 +35,7 @@ namespace OlibKey.Views.Windows
 
 		public static Task<MessageBoxResult> Show(Window parent, string textException, string text, string title, MessageBoxButtons buttons, MessageBoxIcon icon)
 		{
-			MessageBox msgbox = new MessageBox()
+			MessageBox msgbox = new MessageBox
 			{
 				Title = title
 			};

@@ -1,45 +1,77 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.ReactiveUI;
+using OlibKey.Core;
+using OlibKey.Structures;
 using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Pages;
 using ReactiveUI;
 using Splat;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
+using System.Diagnostics;
 
 namespace OlibKey
 {
-	class Program
-	{
-		[STAThread]
-		public static void Main(string[] args) => BuildAvaloniaApp().Start(AppMain, args);
+    public static class Program
+    {
+        public static Settings Settings { get; set; }
 
-		public static AppBuilder BuildAvaloniaApp() =>
-			AppBuilder.Configure<App>()
-				.UsePlatformDetect()
-				.LogToDebug()
-				.UseReactiveUI()
-				.With(new Win32PlatformOptions { AllowEglInitialization = false, UseDeferredRendering = true })
-				.With(new MacOSPlatformOptions { ShowInDock = true })
-				.With(new AvaloniaNativePlatformOptions { UseGpu = true, UseDeferredRendering = true })
-				.With(new X11PlatformOptions { UseGpu = true, UseEGL = true });
+        [STAThread]
+        public static void Main(string[] args)
+        {
+            try
+            {
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && AppDomain.CurrentDomain.BaseDirectory.ToLower().Contains("program files") && !IsAdmin())
+                {
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "OlibKey",
+                        UseShellExecute = true,
+                        Verb = "runas"
+                    });
+                    return;
+                }
 
-		private static void AppMain(Application app, string[] args)
-		{
-			List<string> files = args.ToList();
+                Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.xml")
+                ? SaveAndLoadSettings.LoadSettings()
+                : new Settings();
 
-			App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = files };
+                BuildAvaloniaApp().Start(AppMain, args);
+            }
+            catch (Exception ex)
+            {
+                Log.WriteFatal(ex);
+            }
+        }
 
-			Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
-			Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());
-			Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() => new LoginInformationPage());
-			Locator.CurrentMutable.Register<IViewFor<EditLoginPageViewModel>>(() => new EditLoginPage());
+        private static AppBuilder BuildAvaloniaApp() =>
+            AppBuilder.Configure<App>()
+                .UsePlatformDetect()
+                .LogToDebug()
+                .UseReactiveUI()
+                .With(new Win32PlatformOptions { AllowEglInitialization = Settings.UsingGPU, UseDeferredRendering = true })
+                .With(new MacOSPlatformOptions { ShowInDock = true })
+                .With(new AvaloniaNativePlatformOptions { UseGpu = Settings.UsingGPU, UseDeferredRendering = true })
+                .With(new X11PlatformOptions { UseGpu = Settings.UsingGPU, UseEGL = true });
 
-			App.MainWindow = new MainWindow { DataContext = App.MainWindowViewModel };
+        private static void AppMain(Application app, string[] args)
+        {
+            App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = args.ToList() };
 
-			app.Run(App.MainWindow);
-		}
-	}
+            Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
+            Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());
+            Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() => new LoginInformationPage());
+            Locator.CurrentMutable.Register<IViewFor<EditLoginPageViewModel>>(() => new EditLoginPage());
+
+            App.MainWindow = new MainWindow { DataContext = App.MainWindowViewModel };
+
+            app.Run(App.MainWindow);
+        }
+
+        public static bool IsAdmin() => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+    }
 }

@@ -15,16 +15,19 @@ namespace OlibKey.Views.Windows
 		private TextBox _tbAutosave;
 		private TextBox _tbBlock;
 		private TextBox _tbMessage;
+		private TextBox _tbDaysDeleteFromTrash;
+		private TextBox _tbClearingClipboard;
 		private ComboBox _cbTheme;
 		private ComboBox _cbLanguage;
-		private Button _bClose;
+		private CheckBox _cbUseCompression;
+		private CheckBox _cbUseTrash;
 
 		public SettingsWindow()
 		{
 			InitializeComponent();
-			DataContext = App.Settings;
+			DataContext = Program.Settings;
 
-			_cbLanguage.SelectedIndex = App.Settings.Language switch
+			_cbLanguage.SelectedIndex = Program.Settings.Language switch
 			{
 				"ru-RU" => 1,
 				"uk-UA" => 2,
@@ -34,7 +37,7 @@ namespace OlibKey.Views.Windows
 				_ => 0
 			};
 
-			_cbTheme.SelectedIndex = App.Settings.Theme switch
+			_cbTheme.SelectedIndex = Program.Settings.Theme switch
 			{
 				"Gloomy" => 1,
 				"Mysterious" => 2,
@@ -44,15 +47,15 @@ namespace OlibKey.Views.Windows
 
 			_cbTheme.SelectionChanged += ThemeChange;
 			_cbLanguage.SelectionChanged += LanguageChange;
-			_bClose.Click += (s, e) => Close();
+			this.FindControl<Button>("bClose").Click += (s, e) => Close();
 			Closing += (s, e) =>
 			{
-				Regex reg = new Regex(@"^\d+$");
-				if (_tbAutosave.Text == "0"
+				Regex reg = new Regex(@"^[1-9]\d*$");
+				if (!reg.IsMatch(_tbAutosave.Text)
 				|| !reg.IsMatch(_tbBlock.Text)
-				|| _tbBlock.Text == "0"
 				|| !reg.IsMatch(_tbMessage.Text)
-				|| _tbMessage.Text == "0")
+				|| !reg.IsMatch(_tbDaysDeleteFromTrash.Text)
+				|| !reg.IsMatch(_tbClearingClipboard.Text))
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
@@ -63,10 +66,7 @@ namespace OlibKey.Views.Windows
 				if (App.MainWindowViewModel.IsUnlockDatabase)
 				{
 					if (!reg.IsMatch(_tbIteration.Text)
-						|| _tbIteration.Text == "0"
-						|| !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text)
-						|| _tbNumberOfEncryptionProcedures.Text == "0"
-						|| !reg.IsMatch(_tbAutosave.Text))
+					    || !reg.IsMatch(_tbNumberOfEncryptionProcedures.Text))
 					{
 						_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError1"), (string)Application.Current.FindResource("Error"),
 						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
@@ -78,17 +78,21 @@ namespace OlibKey.Views.Windows
 					{
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations = int.Parse(_tbIteration.Text);
 						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression = _cbUseCompression.IsChecked ?? false;
+						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash = _cbUseTrash.IsChecked ?? false;
 					}
 				}
 
-				App.Settings.AutosaveDuration = int.Parse(_tbAutosave.Text);
-				App.Settings.BlockDuration = int.Parse(_tbBlock.Text);
-				App.Settings.MessageDuration = int.Parse(_tbMessage.Text);
+				Program.Settings.AutosaveDuration = int.Parse(_tbAutosave.Text);
+				Program.Settings.BlockDuration = int.Parse(_tbBlock.Text);
+				Program.Settings.MessageDuration = int.Parse(_tbMessage.Text);
+				Program.Settings.DaysAfterDeletion = int.Parse(_tbDaysDeleteFromTrash.Text);
+				Program.Settings.TimeToClearTheClipboard = int.Parse(_tbClearingClipboard.Text);
 
 				App.Autosave.Stop();
 
-				App.Autosave.Interval = new TimeSpan(0, App.Settings.AutosaveDuration, 0);
-				App.Autoblock.Interval = new TimeSpan(0, App.Settings.BlockDuration, 0);
+				App.Autosave.Interval = new TimeSpan(0, Program.Settings.AutosaveDuration, 0);
+				App.Autoblock.Interval = new TimeSpan(0, Program.Settings.BlockDuration, 0);
 
 				App.Autosave.Start();
 			};
@@ -99,11 +103,15 @@ namespace OlibKey.Views.Windows
 			{
 				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations.ToString();
 				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures.ToString();
+				_cbUseCompression.IsChecked = App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression;
+				_cbUseTrash.IsChecked = App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash;
 			}
 
-			_tbAutosave.Text = App.Settings.AutosaveDuration.ToString();
-			_tbBlock.Text = App.Settings.BlockDuration.ToString();
-			_tbMessage.Text = App.Settings.MessageDuration.ToString();
+			_tbAutosave.Text = Program.Settings.AutosaveDuration.ToString();
+			_tbBlock.Text = Program.Settings.BlockDuration.ToString();
+			_tbMessage.Text = Program.Settings.MessageDuration.ToString();
+			_tbDaysDeleteFromTrash.Text = Program.Settings.DaysAfterDeletion.ToString();
+			_tbClearingClipboard.Text = Program.Settings.TimeToClearTheClipboard.ToString();
 		}
 
 
@@ -112,18 +120,21 @@ namespace OlibKey.Views.Windows
 			AvaloniaXamlLoader.Load(this);
 			_cbTheme = this.FindControl<ComboBox>("cbTheme");
 			_cbLanguage = this.FindControl<ComboBox>("cbLanguage");
-			_bClose = this.FindControl<Button>("bClose");
 			_tbIteration = this.FindControl<TextBox>("tbIteration");
 			_tbNumberOfEncryptionProcedures = this.FindControl<TextBox>("tbNumberOfEncryptionProcedures");
 			_tiStorage = this.FindControl<TabItem>("tiStorage");
 			_tbAutosave = this.FindControl<TextBox>("tbAutosave");
 			_tbBlock = this.FindControl<TextBox>("tbBlock");
 			_tbMessage = this.FindControl<TextBox>("tbMessage");
+			_cbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
+			_tbDaysDeleteFromTrash = this.FindControl<TextBox>("tbDaysDeleteFromTrash");
+			_cbUseTrash = this.FindControl<CheckBox>("cbUseTrash");
+			_tbClearingClipboard = this.FindControl<TextBox>("tbClearingClipboard");
 		}
 
 		private void LanguageChange(object sender, SelectionChangedEventArgs e)
 		{
-			App.Settings.Language = _cbLanguage.SelectedIndex switch
+			Program.Settings.Language = _cbLanguage.SelectedIndex switch
 			{
 				1 => "ru-RU",
 				2 => "uk-UA",
@@ -134,13 +145,13 @@ namespace OlibKey.Views.Windows
 			};
 			Application.Current.Styles[4] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 			{
-				Source = new Uri($"avares://OlibKey/Assets/Local/lang.{App.Settings.Language}.axaml")
+				Source = new Uri($"avares://OlibKey/Assets/Local/lang.{Program.Settings.Language}.axaml")
 			};
 		}
 
 		private void ThemeChange(object sender, SelectionChangedEventArgs e)
 		{
-			App.Settings.Theme = _cbTheme.SelectedIndex switch
+			Program.Settings.Theme = _cbTheme.SelectedIndex switch
 			{
 				1 => "Gloomy",
 				2 => "Mysterious",
@@ -150,7 +161,7 @@ namespace OlibKey.Views.Windows
 
 			Application.Current.Styles[2] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 			{
-				Source = new Uri($"avares://OlibKey/Assets/Themes/{App.Settings.Theme}.axaml")
+				Source = new Uri($"avares://OlibKey/Assets/Themes/{Program.Settings.Theme}.axaml")
 			};
 		}
 	}

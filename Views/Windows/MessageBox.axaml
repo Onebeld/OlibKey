@@ -7,19 +7,20 @@
 		MinWidth="350"
 		MinHeight="120"
 		Icon="avares://OlibKey/app.ico"
-		WindowStartupLocation="CenterScreen"
+		WindowStartupLocation="CenterOwner"
+		ShowInTaskbar="False"
 		Background="{StaticResource ThemeBackgroundBrush}"
 		Foreground="{StaticResource ThemeForegroundBrush}"
         x:Class="OlibKey.Views.Windows.MessageBox"
         SizeToContent="WidthAndHeight" CanResize="False">
-	<Grid Name="ContentC" RowDefinitions="*,Auto,40" Width="{Binding $parent.Width}" Height="{Binding $parent.Height}">
+	<Grid Name="ContentC" RowDefinitions="*,Auto,40">
 		<Grid Name="Content" ColumnDefinitions="70,*">
 			<Image Name="Icon" Width="40" Margin="10"/>
 			<ScrollViewer Grid.Column="1">
 				<TextBlock VerticalAlignment="Center" Name="Text" TextWrapping="Wrap" Margin="0 0 10 0" Width="250"/>
 			</ScrollViewer>
 		</Grid>
-		<TextBox Name="ErrorText" Height="100" Grid.Row="1" Margin="10" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
+		<TextBox Name="ErrorText" Height="100" MaxWidth="450" Grid.Row="1" Margin="10" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
 		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
 			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Name="Buttons">
 				<StackPanel.Styles>

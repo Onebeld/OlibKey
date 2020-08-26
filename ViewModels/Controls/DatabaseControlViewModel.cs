@@ -20,6 +20,9 @@ namespace OlibKey.ViewModels.Controls
 		public int Iterations { get; set; }
 		public int NumberOfEncryptionProcedures { get; set; }
 
+		public bool UseCompression { get; set; }
+		public bool UseTrash { get; set; } = true;
+
 		private bool _isUnlockDatabase;
 		private bool _isLockDatabase;
 
@@ -28,13 +31,6 @@ namespace OlibKey.ViewModels.Controls
 		private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
 
 		private RoutingState _router = new RoutingState();
-
-		#region ReactiveCommands   
-
-		private ReactiveCommand<Unit, Unit> CreateLoginCommand { get; }
-		private ReactiveCommand<Unit, Unit> ShowSearchWindowCommand { get; }
-
-		#endregion
 
 		#region Propertie's
 
@@ -70,15 +66,11 @@ namespace OlibKey.ViewModels.Controls
 		public string MasterPassword { get; set; }
 		private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedIndex]; } catch { return null; } } }
 
-		#endregion
+        #endregion
 
-		public DatabaseControlViewModel()
-		{
-			CreateLoginCommand = ReactiveCommand.Create(CreateLogin);
-			ShowSearchWindowCommand = ReactiveCommand.Create(ShowSearchWindow);
-			SelectedIndex = -1;
-		}
-		public void SearchSelectLogin(LoginListItem i)
+        public DatabaseControlViewModel() => SelectedIndex = -1;
+
+        public void SearchSelectLogin(LoginListItem i)
 		{
 			foreach (LoginListItem item in LoginList.Where(item => item.LoginID == i.LoginID))
 			{
@@ -89,7 +81,8 @@ namespace OlibKey.ViewModels.Controls
 		private void ShowSearchWindow()
 		{
 			App.SearchWindow = new SearchWindow();
-			foreach (Folder folder in Database.Folders) App.SearchWindow.SearchViewModel.AddFolder(folder);
+			for (int index = 0; index < Database.Folders.Count; index++) App.SearchWindow.SearchViewModel.AddFolder(Database.Folders[index]);
+
 			App.SearchWindow.ShowDialog(App.MainWindow);
 		}
 		public void AddLogin(Login loginContent)
@@ -107,7 +100,7 @@ namespace OlibKey.ViewModels.Controls
 
 			Router.Navigate.Execute(new StartPageViewModel(this));
 		}
-		public void CreateLogin()
+		private void CreateLogin()
 		{
 			SelectedIndex = -1;
 			Router.Navigate.Execute(new CreateLoginPageViewModel(Database, this)
@@ -152,22 +145,22 @@ namespace OlibKey.ViewModels.Controls
 
 		//// Problem with ListBox ////
 
-		//public void MoveUp() => MoveItem(-1);
-
-		//public void MoveDown() => MoveItem(1);
-
-		//private void MoveItem(int direction)
-		//{
-		//	if (SelectedLoginItem == null)
-		//		return;
-
-		//	var newIndex = SelectedIndex + direction;
-
-		//	if (newIndex < 0 || newIndex >= LoginsList.Count)
-		//		return;
-
-		//	LoginsList.Move(SelectedIndex, newIndex);
-		//	SelectedIndex = newIndex;
-		//}
+		// public void MoveUp() => MoveItem(-1);
+		//
+		// public void MoveDown() => MoveItem(1);
+		//
+		// private void MoveItem(int direction)
+		// {
+		// 	if (SelectedLoginItem == null)
+		// 		return;
+		//
+		// 	var newIndex = SelectedIndex + direction;
+		//
+		// 	if (newIndex < 0 || newIndex >= LoginList.Count)
+		// 		return;
+		//
+		// 	LoginList.Move(SelectedIndex, newIndex);
+		// 	SelectedIndex = newIndex;
+		// }
 	}
 }

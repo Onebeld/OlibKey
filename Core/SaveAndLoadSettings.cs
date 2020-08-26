@@ -1,6 +1,7 @@
 ﻿using OlibKey.Structures;
 using System;
 using System.IO;
+using System.Security.Permissions;
 using System.Xml.Serialization;
 
 namespace OlibKey.Core
@@ -18,11 +19,10 @@ namespace OlibKey.Core
 				return new Settings();
 			}
 		}
-
 		public static void SaveSettings()
 		{
 			using StringWriter writer = new StringWriter();
-			new XmlSerializer(typeof(Settings)).Serialize(writer, App.Settings);
+			new XmlSerializer(typeof(Settings)).Serialize(writer, Program.Settings);
 
 			File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "settings.xml", writer.ToString());
 		}

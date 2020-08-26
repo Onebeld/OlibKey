@@ -10,7 +10,7 @@
         Title="OlibKey"
         WindowStartupLocation="CenterScreen"
 		Icon="avares://OlibKey/app.ico"
-		DragDrop.AllowDrop="{Binding IsActivateDnD}"
+		DragDrop.AllowDrop="True"
 		Background="{DynamicResource ThemeWindowBackgroundBrush}"
         MinWidth="500" MinHeight="350">
 	<Window.KeyBindings>
@@ -25,6 +25,8 @@
 		<KeyBinding Command="{Binding UnlockDatabaseCommand}" Gesture="Ctrl+U"/>
 		<KeyBinding Command="{Binding UnlockAllDatabasesCommand}" Gesture="Ctrl+Shift+U"/>
 		<KeyBinding Command="{Binding ShowSearchWindowCommand}" Gesture="Ctrl+F"/>
+		<KeyBinding Command="{Binding ClearGCCommand}" Gesture="Ctrl+Alt+Shift+F12"/>
+		<KeyBinding Command="{Binding OpenTrashWindowCommand}" Gesture="Ctrl+R"/>
 	</Window.KeyBindings>
 	<NativeMenu.Menu>
 		<NativeMenu>
@@ -42,6 +44,7 @@
 						<NativeMenuItemSeperator/>
 						<NativeMenuItem Header="{DynamicResource AddLogin}" Command="{Binding CreateLoginCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="Ctrl+N"/>
 						<NativeMenuItem Header="{DynamicResource Search}" Command="{Binding ShowSearchWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="Ctrl+F"/>
+						<NativeMenuItem Header="{DynamicResource Trash}" Command="{Binding OpenTrashWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}" Gesture="Ctrl+R"/>
 						<NativeMenuItemSeperator/>
 						<NativeMenuItem Header="{DynamicResource Settings}" Command="{Binding OpenSettingsWindowCommand}"/>
 						<NativeMenuItem Header="{DynamicResource ExitFrom}" Command="{Binding ExitProgramCommand}" Gesture="Ctrl+Q"/>
@@ -52,7 +55,8 @@
 				<NativeMenuItem.Menu>
 					<NativeMenu>
 						<NativeMenuItem Header="{DynamicResource PasswordGenerator}" Gesture="CMD+G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
-						<NativeMenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}"/>
+						<NativeMenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+						<NativeMenuItem Header="{DynamicResource CheckingWeakPasswords}" Command="{Binding OpenCheckingWeakPasswordsWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
 					</NativeMenu>
 				</NativeMenuItem.Menu>
 			</NativeMenuItem>
@@ -69,7 +73,11 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top" Foreground="{DynamicResource ThemeForegroundBrush}" IsVisible="{Binding $parent[TopLevel].(NativeMenu.IsNativeMenuExported), Converter={StaticResource AvaloniaThemesDefaultNativeMenuBarInverseBooleanValueConverter}}" Background="{DynamicResource ThemeBackgroundBrush}" BorderThickness="0 0 0 1" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 			<MenuItem Header="{DynamicResource File}">
-				<MenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}"/>
+				<MenuItem Header="{DynamicResource CreateBase}" Command="{Binding CreateDatabaseCommand}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource NewFileImage}"/>
+					</MenuItem.Icon>
+				</MenuItem>
 				<MenuItem Header="{DynamicResource OpenBase}" Command="{Binding OpenDatabaseCommand}" InputGesture="Ctrl+O"/>
 				<MenuItem Header="{DynamicResource SaveBase}" Command="{Binding SaveDatabaseCommand}" InputGesture="Ctrl+S" IsEnabled="{Binding IsUnlockDatabase}">
 					<MenuItem.Icon>
@@ -102,6 +110,11 @@
 						<Image Source="{DynamicResource SearchIcon}"/>
 					</MenuItem.Icon>
 				</MenuItem>
+				<MenuItem Header="{DynamicResource Trash}" Command="{Binding OpenTrashWindowCommand}" InputGesture="Ctrl+R" IsEnabled="{Binding IsUnlockDatabase}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource TrashIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
 				
 				<Separator Classes="MenuItemSeparators"/>
 				
@@ -117,8 +130,17 @@
 				</MenuItem>
 			</MenuItem>
 			<MenuItem Header="{DynamicResource Tools}">
-				<MenuItem Header="{DynamicResource PasswordGenerator}" InputGesture="Ctrl + G" Command="{Binding OpenPasswordGeneratorWindowCommand}"/>
+				<MenuItem Header="{DynamicResource PasswordGenerator}" InputGesture="Ctrl + G" Command="{Binding OpenPasswordGeneratorWindowCommand}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource KeyIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
 				<MenuItem Header="{DynamicResource ChangeMasterPassword}" Command="{Binding ChangeMasterPasswordCommand}" IsEnabled="{Binding IsUnlockDatabase}"/>
+				<MenuItem Header="{DynamicResource CheckingWeakPasswords}" Command="{Binding OpenCheckingWeakPasswordsWindowCommand}" IsEnabled="{Binding IsUnlockDatabase}">
+					<MenuItem.Icon>
+						<Image Source="{DynamicResource ShieldIcon}"/>
+					</MenuItem.Icon>
+				</MenuItem>
 			</MenuItem>
 			<MenuItem Header="{DynamicResource Reference}">
 				<MenuItem Header="{DynamicResource CheckUpdates}" Command="{Binding CheckUpdateCommand}">

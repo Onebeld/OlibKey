@@ -3,10 +3,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="300"
-		Height="300" Width="590"
-		MinWidth="590" MinHeight="400"
+		Height="300" Width="710"
+		MinWidth="710" MinHeight="400"
         x:Class="OlibKey.Views.Windows.SettingsWindow"
-		WindowStartupLocation="CenterScreen"
+		WindowStartupLocation="CenterOwner"
+		ShowInTaskbar="False"
 		Icon="avares://OlibKey/app.ico"
 		Background="{DynamicResource ThemeWindowBackgroundBrush}"
         Title="{DynamicResource Settings}">
@@ -36,21 +37,35 @@
 									<ComboBoxItem Content="{DynamicResource Turquoise}"/>
 								</ComboBox>
 							</DockPanel>
+							<CheckBox x:Name="cbBlock" IsChecked="{Binding AutoblockEnabled}">
+								<StackPanel Orientation="Horizontal">
+									<TextBlock Text="{DynamicResource Block}"/>
+									<TextBox x:Name="tbBlock" Margin="5 0" Width="50"/>
+									<TextBlock Text="{DynamicResource Min}"/>
+								</StackPanel>
+							</CheckBox>
+							<CheckBox IsChecked="{Binding AutoRemoveItemsTrash}" Margin="0 5">
+								<StackPanel Orientation="Horizontal">
+									<TextBlock Text="{DynamicResource AutoDeleteFromTrash}"/>
+									<TextBox x:Name="tbDaysDeleteFromTrash" Margin="5 0" Width="50"/>
+									<TextBlock Text="{DynamicResource Day}"/>
+								</StackPanel>
+							</CheckBox>
+							<CheckBox IsChecked="{Binding ClearingTheClipboard}">
+								<StackPanel Orientation="Horizontal">
+									<TextBlock Text="{DynamicResource ClearingClipboard}"/>
+									<TextBox x:Name="tbClearingClipboard" Margin="5 0" Width="50"/>
+									<TextBlock Text="{DynamicResource Sec}"/>
+								</StackPanel>
+							</CheckBox>
+							<CheckBox Content="{DynamicResource HardwareAcceleration}" IsChecked="{Binding UsingGPU}" Margin="0 5"/>
+
 							<StackPanel Orientation="Horizontal">
-								<CheckBox x:Name="cbBlock" IsChecked="{Binding AutoblockEnabled}">
-									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="{DynamicResource Block}"/>
-										<TextBox x:Name="tbBlock" Margin="5 0" Width="50"/>
-										<TextBlock Text="{DynamicResource Min}"/>
-									</StackPanel>
-								</CheckBox>
-							</StackPanel>
-							<StackPanel Orientation="Horizontal" Margin="0 5">
 								<TextBlock Text="{DynamicResource Autosave}"/>
 								<TextBox x:Name="tbAutosave" Margin="5 0" Width="50"/>
 								<TextBlock Text="{DynamicResource Min}"/>
 							</StackPanel>
-							<StackPanel Orientation="Horizontal">
+							<StackPanel Orientation="Horizontal" Margin="0 5">
 								<TextBlock Text="{DynamicResource MessageDuration}"/>
 								<TextBox x:Name="tbMessage" Margin="5 0" Width="50"/>
 								<TextBlock Text="{DynamicResource Sec}"/>
@@ -63,11 +78,13 @@
 				<Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 					<ScrollViewer>
 						<StackPanel Margin="5">
-							<DockPanel Margin="0 0 0 5">
+							<CheckBox x:Name="cbUseCompression" Content="{DynamicResource UseCompression}"/>
+							<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}" Margin="0 5"/>
+							<DockPanel>
 								<TextBlock Text="{DynamicResource NumberOfEncryptionProcedures}"/>
 								<TextBox x:Name="tbNumberOfEncryptionProcedures" Margin="5 0 0 0"/>
 							</DockPanel>
-							<DockPanel Margin="0 0 0 5">
+							<DockPanel Margin="0 5">
 								<TextBlock Text="{DynamicResource Iteration}"/>
 								<TextBox x:Name="tbIteration" Margin="5 0 0 0"/>
 							</DockPanel>
@@ -77,9 +94,7 @@
 			</TabItem>
 		</TabControl>
 		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
-			<Grid>
-				<Button x:Name="bClose" Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
-			</Grid>
+			<Button x:Name="bClose" Content="{DynamicResource Close}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
 		</Border>
 	</Grid>
 </Window>

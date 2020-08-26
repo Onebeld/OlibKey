@@ -33,14 +33,14 @@ namespace OlibKey.Views.Pages
 			_txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _txtPassword));
 		}
 
-		private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
+		private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
-		private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked == true ? '\0' : '•';
+		private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
 		private async void GeneratePassword(object sender, RoutedEventArgs e)
 		{
-			PasswordGeneratorWindow a = new PasswordGeneratorWindow { _saveButton = { IsVisible = true } };
-			if (await a.ShowDialog<bool>(App.MainWindow)) _txtPassword.Text = a._tbPassword.Text;
+			App.MainWindowViewModel.PasswordGenerator = new PasswordGeneratorWindow { _saveButton = { IsVisible = true } };
+			if (await App.MainWindowViewModel.PasswordGenerator.ShowDialog<bool>(App.MainWindow)) _txtPassword.Text = App.MainWindowViewModel.PasswordGenerator._tbPassword.Text;
 		}
 	}
 }

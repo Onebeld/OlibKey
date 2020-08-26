@@ -10,6 +10,11 @@
 		public int BlockDuration { get; set; } = 5;
 		public bool AutoblockEnabled { get; set; } = true;
 		public int MessageDuration { get; set; } = 3;
+		public bool UsingGPU { get; set; } = false;
+		public int DaysAfterDeletion { get; set; } = 10;
+		public bool AutoRemoveItemsTrash { get; set; } = true;
+		public bool ClearingTheClipboard { get; set; }
+		public int TimeToClearTheClipboard { get; set; } = 10;
 
 		public string GenerationCount { get; set; } = "10";
 		public bool GeneratorAllowLowercase { get; set; } = true;

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [3.2.0] - ???
+## [3.2.0] - 2020-08-26
 ### Added
 - Added new window "Check for weak passwords"
 - You can now mark items as favorites
@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added "Hardware acceleration" option, disabled by default
 - Added logging
 - Added trash
+- Now automatically clears the clipboard after copying
 
 ### Changed
 - Moving to .NET 5 Preview 8
@@ -23,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Search algorithm rewritten
 - ProgressBar changed due to overflow
 - In Windows, when Program Files is detected, the program will automatically start with administrator rights
+- Context menu buttons for folders in search are now deactivated if a folder is not selected
+- Modals run in the middle of the native, not in the middle of the screen
+- Improved performance
 
 ### Fixed
 - Fixed crash on some OS when opening a database: if there are no selected databases, the program terminates abnormally

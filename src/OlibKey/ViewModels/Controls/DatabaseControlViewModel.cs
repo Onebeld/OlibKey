@@ -126,7 +126,7 @@ namespace OlibKey.ViewModels.Controls
 		private void EditComplete(LoginListItem a)
 		{
 			a.EditedLogin();
-			a.GetIconElement();
+			a.GetIconElement(true);
 			Router.Navigate.Execute(new LoginInformationPageViewModel(a, Database, this) { EditContentCallback = EditLogin });
 		}
 		private void InformationLogin(LoginListItem i)

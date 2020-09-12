@@ -25,6 +25,7 @@ namespace OlibKey.Core
 
             return Convert.ToBase64String(gZipBuffer);
         }
+
         public static string Decompress(string text)
         {
             byte[] gZipBuffer = Convert.FromBase64String(text);

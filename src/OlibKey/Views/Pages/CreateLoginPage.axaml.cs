@@ -44,7 +44,6 @@ namespace OlibKey.Views.Pages
 
 			_txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _txtPassword));
 			_cbType.SelectionChanged += SectionChanged;
-			_cbType.SelectedIndex = 0;
 		}
 
 		private void SectionChanged(object sender, SelectionChangedEventArgs e)

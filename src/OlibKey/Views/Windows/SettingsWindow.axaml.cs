@@ -22,6 +22,8 @@ namespace OlibKey.Views.Windows
 		private CheckBox _cbUseCompression;
 		private CheckBox _cbUseTrash;
 
+		private int _selectionTheme;
+
 		public SettingsWindow()
 		{
 			InitializeComponent();
@@ -37,7 +39,7 @@ namespace OlibKey.Views.Windows
 				_ => 0
 			};
 
-			_cbTheme.SelectedIndex = Program.Settings.Theme switch
+			_cbTheme.SelectedIndex = _selectionTheme = Program.Settings.Theme switch
 			{
 				"Gloomy" => 1,
 				"Mysterious" => 2,
@@ -147,6 +149,11 @@ namespace OlibKey.Views.Windows
 			{
 				Source = new Uri($"avares://OlibKey/Assets/Local/lang.{Program.Settings.Language}.axaml")
 			};
+
+            int theme = _selectionTheme;
+
+            _cbTheme.SelectedIndex = -1;
+            _cbTheme.SelectedIndex = theme;
 		}
 
 		private void ThemeChange(object sender, SelectionChangedEventArgs e)
@@ -158,6 +165,8 @@ namespace OlibKey.Views.Windows
 				3 => "Turquoise",
 				_ => "Dazzling"
 			};
+
+			_selectionTheme = _cbTheme.SelectedIndex;
 
 			Application.Current.Styles[2] = new StyleInclude(new Uri("resm:Styles?assembly=OlibKey"))
 			{

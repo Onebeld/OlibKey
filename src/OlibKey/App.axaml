@@ -3,6 +3,13 @@
 			 xmlns:c="clr-namespace:OlibKey.Core;assembly=OlibKey"
 			 xmlns:sys="clr-namespace:System;assembly=netstandard"
              x:Class="OlibKey.App">
+	<Application.Resources>
+		<ContextMenu x:Key="TextBoxContextMenu" x:Name="TextBoxContextMenu">
+      <MenuItem x:Name="TextBoxContextMenuCutItem" Header="Cut" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}" />
+      <MenuItem x:Name="TextBoxContextMenuCopyItem" Header="{DynamicResource Copy}" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}"/>
+      <MenuItem x:Name="TextBoxContextMenuPasteItem" Header="Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}"/>
+    </ContextMenu>
+	</Application.Resources>
 	<Application.Styles>
 		<StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
 		<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
@@ -112,6 +119,7 @@
 			<Setter Property="SelectionBrush" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="SelectionForegroundBrush" Value="{DynamicResource ThemeForegroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
+			<Setter Property="ContextMenu" Value="{StaticResource TextBoxContextMenu}"/>
 		</Style>
 		<Style Selector="TextBox /template/ Border#border">
 			<Setter Property="CornerRadius" Value="5"/>
@@ -648,7 +656,7 @@
 							<ScrollViewer Background="{DynamicResource ThemeBackgroundBrush}" DockPanel.Dock="Top" HorizontalScrollBarVisibility="Auto">
 								<ItemsPresenter
 									Name="PART_ItemsPresenter"
-									Items="{TemplateBinding Items}"
+									Items="{TemplateBinding Items, Mode=TwoWay}"
 									ItemsPanel="{TemplateBinding ItemsPanel}"
 									ItemTemplate="{TemplateBinding ItemTemplate}"/>
 							</ScrollViewer>
@@ -657,7 +665,7 @@
 									Name="PART_SelectedContentHost"
 									HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-									Content="{TemplateBinding SelectedContent}"
+									Content="{TemplateBinding SelectedContent, Mode=TwoWay}"
 									ContentTemplate="{TemplateBinding SelectedContentTemplate}"/>
 							</Border>
 						</DockPanel>

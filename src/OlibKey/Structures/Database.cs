@@ -4,7 +4,7 @@ namespace OlibKey.Structures
 {
 	public class Login
 	{
-		public int Type { get; set; }
+		public int Type { get; set; } = -1;
 		public string Name { get; set; } = "";
 		public string Username { get; set; }
 		public string Email { get; set; }
@@ -17,6 +17,8 @@ namespace OlibKey.Structures
 		public string FolderID { get; set; }
 
 		#region Login
+
+		public string Image { get; set; }
 
 		public string Password { get; set; }
 		public string WebSite { get; set; }

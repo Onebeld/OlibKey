@@ -12,7 +12,6 @@ using OlibKey.Views.Windows;
 using System;
 using System.Collections.Generic;
 using Avalonia;
-using System.Threading.Tasks;
 
 namespace OlibKey
 {
@@ -195,6 +194,9 @@ namespace OlibKey
 
             TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
+            IsLockDatabase = true;
+            IsUnlockDatabase = false;
+
             new RequireMasterPasswordWindow
             {
                 LoadStorageCallback = LoadDatabase,
@@ -221,7 +223,7 @@ namespace OlibKey
                 {
                     SaveDatabase(item);
 
-                    TabItems.Remove(TabItems[i]);
+                    TabItems.RemoveAt(i);
                     break;
                 }
             }

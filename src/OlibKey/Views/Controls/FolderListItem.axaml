@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:cp="clr-namespace:OlibKey.Controls.ColorPicker;assembly=OlibKey.Controls.ColorPicker"
              mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="450"
              HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
              x:Class="OlibKey.Views.Controls.FolderListItem">
@@ -11,13 +12,23 @@
 				<Image x:Name="imageIcon" Source="{StaticResource FolderIcon}" Margin="5"/>
 			</Border>
 
-			<StackPanel VerticalAlignment="Center" Grid.Column="1">
+			<StackPanel VerticalAlignment="Center" Grid.Column="1" Margin="0 0 20 0">
 				<TextBlock x:Name="textName" Foreground="{StaticResource ThemeForegroundBrush}" Text="{Binding Name}"/>
 				<TextBlock x:Name="tbDeleteDate" FontSize="12" Foreground="{StaticResource ThemeForegroundOpacityBrush}" IsVisible="False"/>
 			</StackPanel>
-			<TextBox x:Name="tbName" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center"/>
+			<TextBox x:Name="tbName" Grid.Column="1" Text="{Binding Name}" VerticalAlignment="Center" Margin="0 0 20 0"/>
 
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="10 0 10 0">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Margin="0 0 5 0" Spacing="5">
+				<Border x:Name="bLabelColor" Padding="5" Background="WhiteSmoke" CornerRadius="99" Width="10" Height="10">
+					<Popup x:Name="pColorPicker" StaysOpen="False">
+						<Popup.Resources>
+							<cp:HexToColorConverter x:Key="HexToColorConverter"/>
+						</Popup.Resources>
+						<Border BorderThickness="1" BorderBrush="{StaticResource ThemeGlobalBorderBrush}" Padding="5">
+							<cp:ColorPicker x:Name="colorPicker" Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}"/>
+						</Border>
+					</Popup>
+				</Border>
 				<CheckBox x:Name="selectedItem" IsVisible="False"/>
 			</StackPanel>
 		</Grid>

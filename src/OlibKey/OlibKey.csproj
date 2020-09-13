@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
+		<OutputType>Exe</OutputType>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<Platforms>AnyCPU;x64</Platforms>
 		<AssemblyVersion>3.3.0</AssemblyVersion>
@@ -54,11 +54,11 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="Avalonia" Version="0.10.999-cibuild0010551-beta" />
-		<PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0010551-beta" />
-		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0010551-beta" />
+		<PackageReference Include="Avalonia" Version="0.10.999-cibuild0010595-beta" />
+		<PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0010595-beta" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0010595-beta" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\OlibKey.ColorPicker\OlibKey.ColorPicker.csproj" />
+	  <ProjectReference Include="..\OlibKey.ColorPicker\OlibKey.Controls.ColorPicker.csproj" />
 	</ItemGroup>
 </Project>

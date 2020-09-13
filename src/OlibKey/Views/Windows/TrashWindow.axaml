@@ -27,22 +27,22 @@
 			</ScrollViewer>
 		</Grid>
 		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0 1 0 0">
-			<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Orientation="Horizontal">
-				<Button Content="{StaticResource ReturnSelected}" Command="{Binding RestoreSelectedItems}" Margin="5 0"/>
+			<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10" Orientation="Horizontal" Spacing="5">
+				<Button Content="{StaticResource ReturnSelected}" Command="{Binding RestoreSelectedItems}"/>
 				<Button Content="{StaticResource DeleteSelected}" Command="{Binding RemoveSelectedItems}"/>
-				<Button Content="{StaticResource ClearTrash}" Command="{Binding ClearTrash}" Margin="5 0"/>
+				<Button Content="{StaticResource ClearTrash}" Command="{Binding ClearTrash}"/>
 				<Button Content="{StaticResource Close}" Command="{Binding CloseCommand}"/>
 			</StackPanel>
 		</Border>
-		<Border Grid.Row="3" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
+		<Border Grid.Row="3" Background="{DynamicResource ThemeBackgroundBrush}" Padding="5 0" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 1 0 0">
 			<Grid ColumnDefinitions="Auto">
-				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-					<TextBlock Text="{StaticResource Elements}" Foreground="{DynamicResource ThemeForegroundBrush}" Margin="0 0 5 0"/>
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<TextBlock Text="{StaticResource Elements}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					<TextBlock Text="{Binding LoginsList.Count}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					
-					<TextBlock Text="|" Foreground="{DynamicResource ThemeForegroundBrush}" Margin="5 0"/>
+					<TextBlock Text="|" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					
-					<TextBlock Text="{StaticResource Folders}" Foreground="{DynamicResource ThemeForegroundBrush}" Margin="0 0 5 0"/>
+					<TextBlock Text="{StaticResource Folders}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					<TextBlock Text="{Binding FoldersList.Count}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 				</StackPanel>
 			</Grid>

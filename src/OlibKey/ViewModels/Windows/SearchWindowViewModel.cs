@@ -1,4 +1,5 @@
 ﻿using OlibKey.Structures;
+using OlibKey.ViewModels.Color;
 using OlibKey.Views.Controls;
 using ReactiveUI;
 using System;
@@ -95,11 +96,10 @@ namespace OlibKey.ViewModels.Windows
 
         private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
         private void CreateFolder() =>
-            FolderList.Add(new FolderListItem
+            FolderList.Add(new FolderListItem(new Folder())
             {
-                DataContext = new Folder(),
                 FolderContext = { ID = Guid.NewGuid().ToString("N") }
             });
-        public void AddFolder(Folder loginContent) => FolderList.Add(new FolderListItem { DataContext = loginContent, _tbName = { IsVisible = false } });
+        public void AddFolder(Folder loginContent) => FolderList.Add(new FolderListItem(loginContent) { tbName = { IsVisible = false } });
     }
 }

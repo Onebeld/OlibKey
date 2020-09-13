@@ -16,7 +16,7 @@
 			<TabItem Header="{DynamicResource General}">
 				<Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 					<ScrollViewer>
-						<StackPanel Margin="5">
+						<StackPanel Margin="5" Spacing="5">
 							<DockPanel>
 								<TextBlock Text="{DynamicResource Language}" Margin="0 0 5 0" VerticalAlignment="Center"/>
 								<ComboBox x:Name="cbLanguage">
@@ -28,7 +28,7 @@
 									<ComboBoxItem Content="Հայերեն (Armenian)"/>
 								</ComboBox>
 							</DockPanel>
-							<DockPanel Margin="0 5">
+							<DockPanel>
 								<TextBlock Text="{DynamicResource Theme}" Margin="0 0 5 0" VerticalAlignment="Center"/>
 								<ComboBox x:Name="cbTheme">
 									<ComboBoxItem Content="{DynamicResource Dazzling}"/>
@@ -38,36 +38,36 @@
 								</ComboBox>
 							</DockPanel>
 							<CheckBox IsChecked="{Binding AutoblockEnabled}">
-								<StackPanel Orientation="Horizontal">
+								<StackPanel Orientation="Horizontal" Spacing="5">
 									<TextBlock Text="{DynamicResource Block}"/>
-									<TextBox x:Name="tbBlock" Margin="5 0" Width="50"/>
+									<TextBox x:Name="tbBlock" Width="50"/>
 									<TextBlock Text="{DynamicResource Min}"/>
 								</StackPanel>
 							</CheckBox>
-							<CheckBox IsChecked="{Binding AutoRemoveItemsTrash}" Margin="0 5">
-								<StackPanel Orientation="Horizontal">
+							<CheckBox IsChecked="{Binding AutoRemoveItemsTrash}">
+								<StackPanel Orientation="Horizontal" Spacing="5">
 									<TextBlock Text="{DynamicResource AutoDeleteFromTrash}"/>
-									<TextBox x:Name="tbDaysDeleteFromTrash" Margin="5 0" Width="50"/>
+									<TextBox x:Name="tbDaysDeleteFromTrash" Width="50"/>
 									<TextBlock Text="{DynamicResource Day}"/>
 								</StackPanel>
 							</CheckBox>
 							<CheckBox IsChecked="{Binding ClearingTheClipboard}">
-								<StackPanel Orientation="Horizontal">
+								<StackPanel Orientation="Horizontal" Spacing="5">
 									<TextBlock Text="{DynamicResource ClearingClipboard}"/>
-									<TextBox x:Name="tbClearingClipboard" Margin="5 0" Width="50"/>
+									<TextBox x:Name="tbClearingClipboard" Width="50"/>
 									<TextBlock Text="{DynamicResource Sec}"/>
 								</StackPanel>
 							</CheckBox>
-							<CheckBox Content="{DynamicResource HardwareAcceleration}" IsChecked="{Binding UsingGPU}" Margin="0 5"/>
+							<CheckBox Content="{DynamicResource HardwareAcceleration}" IsChecked="{Binding UsingGPU}"/>
 
-							<StackPanel Orientation="Horizontal">
+							<StackPanel Orientation="Horizontal" Spacing="5">
 								<TextBlock Text="{DynamicResource Autosave}"/>
-								<TextBox x:Name="tbAutosave" Margin="5 0" Width="50"/>
+								<TextBox x:Name="tbAutosave" Width="50"/>
 								<TextBlock Text="{DynamicResource Min}"/>
 							</StackPanel>
-							<StackPanel Orientation="Horizontal" Margin="0 5">
+							<StackPanel Orientation="Horizontal" Spacing="5">
 								<TextBlock Text="{DynamicResource MessageDuration}"/>
-								<TextBox x:Name="tbMessage" Margin="5 0" Width="50"/>
+								<TextBox x:Name="tbMessage" Width="50"/>
 								<TextBlock Text="{DynamicResource Sec}"/>
 							</StackPanel>
 						</StackPanel>
@@ -77,14 +77,14 @@
 			<TabItem x:Name="tiStorage" Header="{DynamicResource Storage}">
 				<Border BorderThickness="0 1 0 0" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}">
 					<ScrollViewer>
-						<StackPanel Margin="5">
+						<StackPanel Margin="5" Spacing="5">
 							<CheckBox x:Name="cbUseCompression" Content="{DynamicResource UseCompression}"/>
-							<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}" Margin="0 5"/>
+							<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}"/>
 							<DockPanel>
 								<TextBlock Text="{DynamicResource NumberOfEncryptionProcedures}"/>
 								<TextBox x:Name="tbNumberOfEncryptionProcedures" Margin="5 0 0 0"/>
 							</DockPanel>
-							<DockPanel Margin="0 5">
+							<DockPanel>
 								<TextBlock Text="{DynamicResource Iteration}"/>
 								<TextBox x:Name="tbIteration" Margin="5 0 0 0"/>
 							</DockPanel>

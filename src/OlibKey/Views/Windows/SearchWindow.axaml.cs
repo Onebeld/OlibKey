@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.Primitives;
+using OlibKey.Controls.ColorPicker;
+using OlibKey.ViewModels.Color;
+using Avalonia.Media;
 
 namespace OlibKey.Views.Windows
 {
@@ -32,6 +35,8 @@ namespace OlibKey.Views.Windows
         private ToggleButton _tbActiveReminder;
 
         private ListBox _lbFolders;
+
+        private ArgbColorViewModel _argbColorViewModel;
 
         public SearchWindow()
         {
@@ -59,6 +64,8 @@ namespace OlibKey.Views.Windows
             Closed += SearchWindow_Closed;
             await Task.Delay(50);
             _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(_ => ClearListAndSearchElement());
+
+            
         }
 
         private void SearchWindow_Closed(object sender, EventArgs e) =>

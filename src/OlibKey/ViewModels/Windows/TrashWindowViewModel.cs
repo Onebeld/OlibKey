@@ -115,7 +115,7 @@ namespace OlibKey.ViewModels.Windows
         private void AddFolder(Folder a) =>
             FoldersList.Add(new FolderListItem(a)
             {
-                _tbName = { IsVisible = false },
+                tbName = { IsVisible = false },
                 SelectedItem = { IsVisible = true }
             });
     }

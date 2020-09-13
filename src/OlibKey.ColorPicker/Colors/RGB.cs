@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OlibKey.ColorPicker.Colors
+namespace OlibKey.Controls.ColorPicker.Colors
 {
     public readonly struct RGB
     {
@@ -52,9 +52,7 @@ namespace OlibKey.ColorPicker.Colors
 
         public static HSV ToHSV(double r, double g, double b)
         {
-            double H = default;
-            double S = default;
-            double V = default;
+            double H = default, S, V;
 
             double min = Math.Min(Math.Min(r, g), b);
             double max = Math.Max(Math.Max(r, g), b);
@@ -63,38 +61,17 @@ namespace OlibKey.ColorPicker.Colors
 
             V = 100.0 * max / 255.0;
 
-            if (max == 0.0)
-            {
-                S = 0;
-            }
+            if (max == 0.0) S = 0;
+            else S = 100.0 * delta / max;
+
+            if (S == 0) H = 0;
             else
             {
-                S = 100.0 * delta / max;
-            }
+                if (r == max) H = 60.0 * (g - b) / delta;
+                else if (g == max) H = 120.0 + 60.0 * (b - r) / delta;
+                else if (b == max) H = 240.0 + 60.0 * (r - g) / delta;
 
-            if (S == 0)
-            {
-                H = 0;
-            }
-            else
-            {
-                if (r == max)
-                {
-                    H = 60.0 * (g - b) / delta;
-                }
-                else if (g == max)
-                {
-                    H = 120.0 + 60.0 * (b - r) / delta;
-                }
-                else if (b == max)
-                {
-                    H = 240.0 + 60.0 * (r - g) / delta;
-                }
-
-                if (H < 0.0)
-                {
-                    H += 360.0;
-                }
+                if (H < 0.0) H += 360.0;
             }
 
             return new HSV(H, S, V);
@@ -102,19 +79,14 @@ namespace OlibKey.ColorPicker.Colors
 
         public static CMYK ToCMYK(double r, double g, double b)
         {
-            double C = default(double);
-            double M = default(double);
-            double Y = default(double);
-            double K = default(double);
-
             double rr = r / 255.0;
             double gg = g / 255.0;
             double bb = b / 255.0;
 
-            K = 1.0 - Math.Max(Math.Max(rr, gg), bb);
-            C = (1.0 - rr - K) / (1.0 - K);
-            M = (1.0 - gg - K) / (1.0 - K);
-            Y = (1.0 - bb - K) / (1.0 - K);
+            double K = 1.0 - Math.Max(Math.Max(rr, gg), bb);
+            double C = (1.0 - rr - K) / (1.0 - K);
+            double M = (1.0 - gg - K) / (1.0 - K);
+            double Y = (1.0 - bb - K) / (1.0 - K);
 
             C *= 100.0;
             M *= 100.0;

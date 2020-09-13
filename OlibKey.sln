@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30428.66
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OlibKey", "src\OlibKey\OlibKey.csproj", "{57B94734-3845-422B-8D20-26B2A1928258}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OlibKey.ColorPicker", "src\OlibKey.ColorPicker\OlibKey.ColorPicker.csproj", "{F9FF2829-E149-44A2-87DF-14DB381D10D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OlibKey.Controls.ColorPicker", "src\OlibKey.ColorPicker\OlibKey.Controls.ColorPicker.csproj", "{F9FF2829-E149-44A2-87DF-14DB381D10D1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

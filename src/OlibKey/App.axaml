@@ -17,6 +17,8 @@
 		<StyleInclude Source="/Assets/Themes/Dazzling.axaml"/>
 		<StyleInclude Source="/Assets/Images/Icons.axaml"/>
 		<StyleInclude Source="/Assets/Local/lang.en-US.axaml"/>
+		
+		<StyleInclude Source="avares://OlibKey.Controls.ColorPicker/ColorPicker.xaml"/>
 
 		<Style Selector="Window">
 			<Setter Property="FontFamily" Value="/Assets/Font#Noto Sans"/>
@@ -55,7 +57,6 @@
 
 		<Style Selector="TextBlock.Heading">
 			<Setter Property="FontWeight" Value="Bold"/>
-			<Setter Property="Padding" Value="5 0 0 0"/>
 			<Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
 		</Style>
 		<Style Selector="Border.BorderStyle">
@@ -68,7 +69,7 @@
 		<Style Selector="Separator">
 			<Setter Property="Background" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
 			<Setter Property="Height" Value="1"/>
-			<Setter Property="Margin" Value="15,5"/>
+			<Setter Property="Margin" Value="15 5"/>
 		</Style>
 		<Style Selector="Border.ButtonsMenu">
 			<Setter Property="Background" Value="{DynamicResource ThemePanelBackgroundBrush}"/>

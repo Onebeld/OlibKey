@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OlibKey.ColorPicker.Colors
+namespace OlibKey.Controls.ColorPicker.Colors
 {
     public readonly struct HSV
     {
@@ -52,9 +52,7 @@ namespace OlibKey.ColorPicker.Colors
 
         public static RGB ToRGB(double h, double s, double v)
         {
-            double R = default;
-            double G = default;
-            double B = default;
+            double R, G, B;
 
             if (s == 0)
             {
@@ -65,8 +63,7 @@ namespace OlibKey.ColorPicker.Colors
             double hh = h;
             double ss = s / 100.0;
             double vv = v / 100.0;
-            if (hh >= 360.0)
-                hh = 0.0;
+            if (hh >= 360.0) hh = 0.0;
             hh /= 60.0;
 
             long i = (long)hh;
@@ -116,9 +113,6 @@ namespace OlibKey.ColorPicker.Colors
             return new RGB(R, G, B);
         }
 
-        public static CMYK ToCMYK(double h, double s, double v)
-        {
-            return ToRGB(h, s, v).ToCMYK();
-        }
+        public static CMYK ToCMYK(double h, double s, double v) => ToRGB(h, s, v).ToCMYK();
     }
 }

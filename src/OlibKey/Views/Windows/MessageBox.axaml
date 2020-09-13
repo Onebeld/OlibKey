@@ -21,14 +21,8 @@
 			</ScrollViewer>
 		</Grid>
 		<TextBox Name="ErrorText" Height="100" MaxWidth="450" Grid.Row="1" Margin="10" AcceptsReturn="True" TextWrapping="Wrap" IsReadOnly="True"/>
-		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
-			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Name="Buttons">
-				<StackPanel.Styles>
-					<Style Selector="Button">
-						<Setter Property="Margin" Value="5"/>
-					</Style>
-				</StackPanel.Styles>
-			</StackPanel>
+		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0 1 0 0" Padding="5">
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Name="Buttons" Spacing="5"/>
 		</Border>
 	</Grid>
 </Window>

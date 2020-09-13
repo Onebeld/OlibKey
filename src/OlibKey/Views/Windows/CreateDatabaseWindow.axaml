@@ -14,29 +14,31 @@
 	<Grid RowDefinitions="*,50">
 		<ScrollViewer>
 			<StackPanel Margin="5">
-				<Border Classes="BorderStyle" Padding="0 5">
-					<StackPanel>
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel Spacing="5">
 						<TextBlock Text="{StaticResource Directory}" Classes="Heading"/>
-						<TextBox x:Name="tbPathDatabase" Margin="5" IsReadOnly="True"/>
-						<StackPanel Orientation="Horizontal" Margin="5 0 5 0">
-							<Button x:Name="bSelectPath" Content="{StaticResource Select}" Padding="5 2"/>
-						</StackPanel>
-						<Separator Margin="15,5"/>
+						<TextBox x:Name="tbPathDatabase" IsReadOnly="True"/>
+						<Button x:Name="bSelectPath" Content="{StaticResource Select}" Padding="5 2"/>
+						
+						<Separator/>
+						
 						<TextBlock Text="{StaticResource MasterPassword}" Classes="Heading"/>
-						<TextBox x:Name="tbPassword" Margin="5" PasswordChar="•"/>
-						<CheckBox Margin="5 0 5 0" Content="{StaticResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
-						<DockPanel Margin="5 0">
+						<TextBox x:Name="tbPassword" PasswordChar="•"/>
+						<CheckBox Content="{StaticResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
+						<DockPanel>
 							<TextBlock Text="{StaticResource Complexity}" Foreground="{StaticResource ThemeForegroundBrush}" VerticalAlignment="Center"/>
-							<ProgressBar x:Name="pbHard" Margin="5 5 0 5"/>
+							<ProgressBar x:Name="pbHard" Margin="5 0 0 0"/>
 						</DockPanel>
-						<Separator Margin="15,5"/>
-						<CheckBox x:Name="cbUseCompression" Content="{StaticResource UseCompression}" Margin="5 5 5 0" IsChecked="True"/>
-						<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}" Margin="5 5 5 0" IsChecked="True"/>
-						<DockPanel Margin="5">
+						
+						<Separator/>
+						
+						<CheckBox x:Name="cbUseCompression" Content="{StaticResource UseCompression}" IsChecked="True"/>
+						<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}" IsChecked="True"/>
+						<DockPanel>
 							<TextBlock Text="{StaticResource NumberOfEncryptionProcedures}" Foreground="{StaticResource ThemeForegroundBrush}"/>
 							<TextBox x:Name="tbNumberOfEncryptionProcedures" Text="1" Margin="5 0 0 0"/>
 						</DockPanel>
-						<DockPanel Margin="5 0 5 5">
+						<DockPanel>
 							<TextBlock Text="{StaticResource Iteration}" Foreground="{StaticResource ThemeForegroundBrush}"/>
 							<TextBox x:Name="tbIteration" Text="100000" Margin="5 0 0 0"/>
 						</DockPanel>
@@ -44,7 +46,7 @@
 				</Border>
 			</StackPanel>
 		</ScrollViewer>
-		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
+		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0 1 0 0">
 			<Grid>
 				<Button x:Name="bSave" Content="{StaticResource PasswordSave}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
 			</Grid>

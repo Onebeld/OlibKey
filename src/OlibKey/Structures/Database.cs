@@ -4,7 +4,7 @@ namespace OlibKey.Structures
 {
 	public class Login
 	{
-		public int Type { get; set; } = -1;
+		public int Type { get; set; }
 		public string Name { get; set; } = "";
 		public string Username { get; set; }
 		public string Email { get; set; }
@@ -58,12 +58,14 @@ namespace OlibKey.Structures
 		public string Note { get; set; }
 
 		public List<CustomField> CustomFields;
+		public List<UploadedFile> UploadedFiles;
 	}
 	public class Folder
 	{
 		public string Name { get; set; }
 		public string ID { get; set; }
 		public string DeleteDate { get; set; }
+		public string Color { get; set; }
 	}
 	public class CustomField
 	{
@@ -77,6 +79,12 @@ namespace OlibKey.Structures
     {
 		public List<Login> Logins;
 		public List<Folder> Folders;
+    }
+	public class UploadedFile
+    {
+		public string Name { get; set; }
+		public string Extension { get; set; }
+		public string Data { get; set; }
     }
 
 	public class Database

@@ -1,36 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
-using OlibKey.ColorPicker.Colors;
+using OlibKey.Controls.ColorPicker.Colors;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 
-namespace OlibKey.ColorPicker
+namespace OlibKey.Controls.ColorPicker
 {
     public static class ColorHelpers
     {
         private static readonly Regex s_hexRegex = new Regex("^#[a-fA-F0-9]{8}$");
 
-        public static bool IsValidHexColor(string hex)
-        {
-            return !string.IsNullOrWhiteSpace(hex) && s_hexRegex.Match(hex).Success;
-        }
+        public static bool IsValidHexColor(string hex) => !string.IsNullOrWhiteSpace(hex) && s_hexRegex.Match(hex).Success;
 
-        public static string ToHexColor(Color color)
-        {
-            return $"#{color.ToUint32():X8}";
-        }
+        public static string ToHexColor(Color color) => $"#{color.ToUint32():X8}";
 
-        public static Color FromHexColor(string hex)
-        {
-            return Color.Parse(hex);
-        }
+        public static Color FromHexColor(string hex) => Color.Parse(hex);
 
         public static void FromColor(Color color, out double h, out double s, out double v, out double a)
         {
@@ -44,15 +36,10 @@ namespace OlibKey.ColorPicker
         public static Color FromHSVA(double h, double s, double v, double a)
         {
             RGB rgb = new HSV(h, s, v).ToRGB();
-            byte A = (byte)(a * 255.0 / 100.0);
-            return new Color(A, (byte)rgb.R, (byte)rgb.G, (byte)rgb.B);
+            return new Color((byte)(a * 255.0 / 100.0), (byte)rgb.R, (byte)rgb.G, (byte)rgb.B);
         }
 
-        public static Color FromRGBA(byte r, byte g, byte b, double a)
-        {
-            byte A = (byte)(a * 255.0 / 100.0);
-            return new Color(A, r, g, b);
-        }
+        public static Color FromRGBA(byte r, byte g, byte b, double a) => new Color((byte)(a * 255.0 / 100.0), r, g, b);
     }
 
     public class HexToColorConverter : IValueConverter
@@ -234,8 +221,7 @@ namespace OlibKey.ColorPicker
 
         public ColorPicker ColorPicker
         {
-            get { return GetValue(ColorPickerProperty); }
-            set { SetValue(ColorPickerProperty, value); }
+            get => GetValue(ColorPickerProperty); set => SetValue(ColorPickerProperty, value);
         }
 
         public abstract void UpdateColorPickerValues();
@@ -303,20 +289,20 @@ namespace OlibKey.ColorPicker
 
         public double Hue
         {
-            get { return GetValue(HueProperty); }
-            set { SetValue(HueProperty, value); }
+            get => GetValue(HueProperty); 
+            set => SetValue(HueProperty, value);
         }
 
         public double Saturation
         {
-            get { return GetValue(SaturationProperty); }
-            set { SetValue(SaturationProperty, value); }
+            get => GetValue(SaturationProperty); 
+            set => SetValue(SaturationProperty, value);
         }
 
         public double Value
         {
-            get { return GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            get => GetValue(ValueProperty); 
+            set => SetValue(ValueProperty, value);
         }
 
         public override void UpdateColorPickerValues()
@@ -393,20 +379,20 @@ namespace OlibKey.ColorPicker
 
         public byte Red
         {
-            get { return GetValue(RedProperty); }
-            set { SetValue(RedProperty, value); }
+            get => GetValue(RedProperty);
+            set => SetValue(RedProperty, value);
         }
 
         public byte Green
         {
-            get { return GetValue(GreenProperty); }
-            set { SetValue(GreenProperty, value); }
+            get => GetValue(GreenProperty);
+            set => SetValue(GreenProperty, value);
         }
 
         public byte Blue
         {
-            get { return GetValue(BlueProperty); }
-            set { SetValue(BlueProperty, value); }
+            get => GetValue(BlueProperty);
+            set => SetValue(BlueProperty, value);
         }
 
         public override void UpdateColorPickerValues()
@@ -500,26 +486,26 @@ namespace OlibKey.ColorPicker
 
         public double Cyan
         {
-            get { return GetValue(CyanProperty); }
-            set { SetValue(CyanProperty, value); }
+            get => GetValue(CyanProperty);
+            set => SetValue(CyanProperty, value);
         }
 
         public double Magenta
         {
-            get { return GetValue(MagentaProperty); }
-            set { SetValue(MagentaProperty, value); }
+            get => GetValue(MagentaProperty);
+            set => SetValue(MagentaProperty, value);
         }
 
         public double Yellow
         {
-            get { return GetValue(YellowProperty); }
-            set { SetValue(YellowProperty, value); }
+            get => GetValue(YellowProperty);
+            set => SetValue(YellowProperty, value);
         }
 
         public double BlackKey
         {
-            get { return GetValue(BlackKeyProperty); }
-            set { SetValue(BlackKeyProperty, value); }
+            get => GetValue(BlackKeyProperty);
+            set => SetValue(BlackKeyProperty, value);
         }
 
         public override void UpdateColorPickerValues()
@@ -575,8 +561,8 @@ namespace OlibKey.ColorPicker
 
         public string Hex
         {
-            get { return GetValue(HexProperty); }
-            set { SetValue(HexProperty, value); }
+            get => GetValue(HexProperty);
+            set => SetValue(HexProperty, value);
         }
 
         public override void UpdateColorPickerValues()
@@ -599,7 +585,7 @@ namespace OlibKey.ColorPicker
             if (_updating == false && ColorPicker != null)
             {
                 _updating = true;
-                var color = ColorHelpers.FromHSVA(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3, ColorPicker.Value4);
+                Color color = ColorHelpers.FromHSVA(ColorPicker.Value1, ColorPicker.Value2, ColorPicker.Value3, ColorPicker.Value4);
                 Hex = ColorHelpers.ToHexColor(color);
                 _updating = false;
             }
@@ -629,8 +615,8 @@ namespace OlibKey.ColorPicker
 
         public double Alpha
         {
-            get { return GetValue(AlphaProperty); }
-            set { SetValue(AlphaProperty, value); }
+            get => GetValue(AlphaProperty);
+            set => SetValue(AlphaProperty, value);
         }
 
         public override void UpdateColorPickerValues()
@@ -690,6 +676,9 @@ namespace OlibKey.ColorPicker
         public static readonly StyledProperty<Color> ColorProperty =
             AvaloniaProperty.Register<ColorPicker, Color>(nameof(Color));
 
+        public static readonly RoutedEvent<RoutedEventArgs> ChangeColorEvent =
+            RoutedEvent.Register<ColorPicker, RoutedEventArgs>(nameof(ChangeColor), RoutingStrategies.Bubble);
+
         private Canvas? _colorCanvas;
         private Thumb? _colorThumb;
         private Canvas? _hueCanvas;
@@ -711,32 +700,46 @@ namespace OlibKey.ColorPicker
 
         public double Value1
         {
-            get { return GetValue(Value1Property); }
-            set { SetValue(Value1Property, value); }
+            get => GetValue(Value1Property);
+            set => SetValue(Value1Property, value);
         }
 
         public double Value2
         {
-            get { return GetValue(Value2Property); }
-            set { SetValue(Value2Property, value); }
+            get => GetValue(Value2Property);
+            set => SetValue(Value2Property, value);
         }
 
         public double Value3
         {
-            get { return GetValue(Value3Property); }
-            set { SetValue(Value3Property, value); }
+            get => GetValue(Value3Property);
+            set => SetValue(Value3Property, value);
         }
 
         public double Value4
         {
-            get { return GetValue(Value4Property); }
-            set { SetValue(Value4Property, value); }
+            get => GetValue(Value4Property);
+            set => SetValue(Value4Property, value);
         }
 
         public Color Color
         {
-            get { return GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
+        }
+
+        public event EventHandler<RoutedEventArgs> ChangeColor
+        {
+            add { AddHandler(ChangeColorEvent, value); }
+            remove { RemoveHandler(ChangeColorEvent, value); }
+        }
+
+        protected virtual void OnChangeColor()
+        {
+            var e = new RoutedEventArgs(ChangeColorEvent);
+            RaiseEvent(e);
+
+            e.Handled = true;
         }
 
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -823,25 +826,19 @@ namespace OlibKey.ColorPicker
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            var size = base.ArrangeOverride(finalSize);
+            Size size = base.ArrangeOverride(finalSize);
             OnColorChange();
             return size;
         }
 
-        private bool IsTemplateValid()
-        {
-            return _colorCanvas != null
+        private bool IsTemplateValid() => _colorCanvas != null
                 && _colorThumb != null
                 && _hueCanvas != null
                 && _hueThumb != null
                 && _alphaCanvas != null
                 && _alphaThumb != null;
-        }
 
-        private double Clamp(double val, double min, double max)
-        {
-            return Math.Min(Math.Max(val, min), max);
-        }
+        private double Clamp(double val, double min, double max) => Math.Min(Math.Max(val, min), max);
 
         private void MoveThumb(Canvas? canvas, Thumb? thumb, double x, double y)
         {
@@ -850,19 +847,13 @@ namespace OlibKey.ColorPicker
                 double left = Clamp(x, 0, canvas.Bounds.Width);
                 double top = Clamp(y, 0, canvas.Bounds.Height);
                 Canvas.SetLeft(thumb, left);
-                Canvas.SetTop(thumb, top); 
+                Canvas.SetTop(thumb, top);
             }
         }
 
-        private T Convert<T>(IValueConverter converter, T value, T range)
-        {
-            return (T)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
-        }
+        private T Convert<T>(IValueConverter converter, T value, T range) => (T)converter.Convert(value, typeof(T), range, CultureInfo.CurrentCulture);
 
-        private T ConvertBack<T>(IValueConverter converter, T value, T range)
-        {
-            return (T)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
-        }
+        private T ConvertBack<T>(IValueConverter converter, T value, T range) => (T)converter.ConvertBack(value, typeof(T), range, CultureInfo.CurrentCulture);
 
         private double GetValue1Range() => _hueCanvas?.Bounds.Height ?? 0.0;
 
@@ -919,6 +910,7 @@ namespace OlibKey.ColorPicker
             double v = ConvertBack(_converters.Value3Converter, colorY, GetValue3Range());
             double a = ConvertBack(_converters.Value4Converter, alphaX, GetValue4Range());
             Color = ColorHelpers.FromHSVA(h, s, v, a);
+            OnChangeColor();
         }
 
         private void OnValueChange()
@@ -945,9 +937,9 @@ namespace OlibKey.ColorPicker
             }
         }
 
-        private void ColorCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void ColorCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            var position = e.GetPosition(_colorCanvas);
+            Point position = e.GetPosition(_colorCanvas);
             _updating = true;
             MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
             UpdateValuesFromThumbs();
@@ -956,28 +948,26 @@ namespace OlibKey.ColorPicker
             _captured = true;
         }
 
-        private void ColorCanvas_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void ColorCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
-            if (_captured == true)
-            {
-                _captured = false;
-            }
+            if (_captured == true) _captured = false;
         }
 
-        private void ColorCanvas_PointerMoved(object sender, PointerEventArgs e)
+        private void ColorCanvas_PointerMoved(object? sender, PointerEventArgs e)
         {
             if (_captured == true)
             {
-                var position = e.GetPosition(_colorCanvas);
+                Point position = e.GetPosition(_colorCanvas);
                 _updating = true;
                 MoveThumb(_colorCanvas, _colorThumb, position.X, position.Y);
                 UpdateValuesFromThumbs();
                 UpdateColorFromThumbs();
+                OnChangeColor();
                 _updating = false;
             }
         }
 
-        private void ColorThumb_DragDelta(object sender, VectorEventArgs e)
+        private void ColorThumb_DragDelta(object? sender, VectorEventArgs e)
         {
             double left = Canvas.GetLeft(_colorThumb);
             double top = Canvas.GetTop(_colorThumb);
@@ -988,9 +978,9 @@ namespace OlibKey.ColorPicker
             _updating = false;
         }
 
-        private void HueCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void HueCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            var position = e.GetPosition(_hueCanvas);
+            Point position = e.GetPosition(_hueCanvas);
             _updating = true;
             MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
             UpdateValuesFromThumbs();
@@ -999,19 +989,16 @@ namespace OlibKey.ColorPicker
             _captured = true;
         }
 
-        private void HueCanvas_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void HueCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
-            if (_captured == true)
-            {
-                _captured = false;
-            }
+            if (_captured == true) _captured = false;
         }
 
-        private void HueCanvas_PointerMoved(object sender, PointerEventArgs e)
+        private void HueCanvas_PointerMoved(object? sender, PointerEventArgs e)
         {
             if (_captured == true)
             {
-                var position = e.GetPosition(_hueCanvas);
+                Point position = e.GetPosition(_hueCanvas);
                 _updating = true;
                 MoveThumb(_hueCanvas, _hueThumb, 0, position.Y);
                 UpdateValuesFromThumbs();
@@ -1020,7 +1007,7 @@ namespace OlibKey.ColorPicker
             }
         }
 
-        private void HueThumb_DragDelta(object sender, VectorEventArgs e)
+        private void HueThumb_DragDelta(object? sender, VectorEventArgs e)
         {
             double top = Canvas.GetTop(_hueThumb);
             _updating = true;
@@ -1030,9 +1017,9 @@ namespace OlibKey.ColorPicker
             _updating = false;
         }
 
-        private void AlphaCanvas_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void AlphaCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
-            var position = e.GetPosition(_alphaCanvas);
+            Point position = e.GetPosition(_alphaCanvas);
             _updating = true;
             MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
             UpdateValuesFromThumbs();
@@ -1041,19 +1028,16 @@ namespace OlibKey.ColorPicker
             _captured = true;
         }
 
-        private void AlphaCanvas_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void AlphaCanvas_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
-            if (_captured == true)
-            {
-                _captured = false;
-            }
+            if (_captured == true) _captured = false;
         }
 
-        private void AlphaCanvas_PointerMoved(object sender, PointerEventArgs e)
+        private void AlphaCanvas_PointerMoved(object? sender, PointerEventArgs e)
         {
             if (_captured == true)
             {
-                var position = e.GetPosition(_alphaCanvas);
+                Point position = e.GetPosition(_alphaCanvas);
                 _updating = true;
                 MoveThumb(_alphaCanvas, _alphaThumb, position.X, 0);
                 UpdateValuesFromThumbs();
@@ -1062,7 +1046,7 @@ namespace OlibKey.ColorPicker
             }
         }
 
-        private void AlphaThumb_DragDelta(object sender, VectorEventArgs e)
+        private void AlphaThumb_DragDelta(object? sender, VectorEventArgs e)
         {
             double left = Canvas.GetLeft(_alphaThumb);
             _updating = true;

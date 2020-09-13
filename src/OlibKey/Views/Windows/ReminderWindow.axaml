@@ -12,14 +12,14 @@
         Title="ReminderWindow" Height="300" Width="350" ShowInTaskbar="False" UseLayoutRounding="True">
 	<Grid RowDefinitions="150,*,50">
 		<Image Source="{DynamicResource ReminderImage}" Margin="10"/>
-		<StackPanel Grid.Row="1">
+		<StackPanel Grid.Row="1" Spacing="5">
 			<TextBlock x:Name="tbName" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 			<TextBlock x:Name="tbTime" HorizontalAlignment="Center" Foreground="{DynamicResource ThemeForegroundOpacityBrush}"/>
 		</StackPanel>
-		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0,1,0,0">
+		<Border Grid.Row="2" Classes="ButtonsMenu" BorderThickness="0 1 0 0" Padding="10">
 			<Grid>
-				<Button Content="{DynamicResource Disable}" Click="ButtonShutdown" HorizontalAlignment="Left" MinWidth="100"  Margin="10"/>
-				<Button Content="{DynamicResource Pause}" Click="ButtonPause" HorizontalAlignment="Right" MinWidth="100" Margin="10"/>
+				<Button Content="{DynamicResource Disable}" Click="ButtonShutdown" HorizontalAlignment="Left" MinWidth="100"/>
+				<Button Content="{DynamicResource Pause}" Click="ButtonPause" HorizontalAlignment="Right" MinWidth="100"/>
 			</Grid>
 		</Border>
 	</Grid>

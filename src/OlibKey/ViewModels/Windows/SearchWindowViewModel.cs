@@ -18,6 +18,8 @@ namespace OlibKey.ViewModels.Windows
 
         private string _searchText;
 
+        public Action ChangeIndexCallback;
+
         private int _selectedLoginIndex;
         private int _selectedFolderIndex;
 
@@ -42,7 +44,11 @@ namespace OlibKey.ViewModels.Windows
         }
         public int SelectedFolderIndex
         {
-            get => _selectedFolderIndex; set => this.RaiseAndSetIfChanged(ref _selectedFolderIndex, value);
+            get => _selectedFolderIndex; set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedFolderIndex, value);
+                ChangeIndexCallback?.Invoke();
+            }
         }
         private int SelectedLoginIndex
         {

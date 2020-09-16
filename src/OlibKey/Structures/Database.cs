@@ -11,6 +11,8 @@ namespace OlibKey.Structures
 		public string TimeCreate { get; set; }
 		public string TimeChanged { get; set; }
 		public string DeleteDate { get; set; }
+		public string Color { get; set; }
+		public bool UseColor { get; set; }
 
 		public bool Favorite { get; set; }
 
@@ -58,7 +60,7 @@ namespace OlibKey.Structures
 		public string Note { get; set; }
 
 		public List<CustomField> CustomFields;
-		public List<UploadedFile> UploadedFiles;
+		public List<ImportedFile> ImportedFiles;
 	}
 	public class Folder
 	{
@@ -66,6 +68,7 @@ namespace OlibKey.Structures
 		public string ID { get; set; }
 		public string DeleteDate { get; set; }
 		public string Color { get; set; }
+		public bool UseColor { get; set; }
 	}
 	public class CustomField
 	{
@@ -80,10 +83,9 @@ namespace OlibKey.Structures
 		public List<Login> Logins;
 		public List<Folder> Folders;
     }
-	public class UploadedFile
+	public class ImportedFile
     {
 		public string Name { get; set; }
-		public string Extension { get; set; }
 		public string Data { get; set; }
     }
 

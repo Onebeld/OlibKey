@@ -5,7 +5,6 @@ using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Controls;
 using ReactiveUI;
 using System.Linq;
-using System.Reactive;
 using OlibKey.Views.Windows;
 
 namespace OlibKey.ViewModels.Controls

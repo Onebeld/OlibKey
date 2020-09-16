@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Auf Update prüfen</v:String>
 		<v:String x:Key="FileOlib">OlibKey-Datenbankdatei</v:String>
 		
+		<v:String x:Key="Cut">Ausgeschnitten</v:String>
+		<v:String x:Key="Paste">Einfügen</v:String>
+		
 		<v:String x:Key="Empty">Leer</v:String>
 		<v:String x:Key="NotFound">Nicht gefunden</v:String>
 		
@@ -67,9 +70,9 @@
 		<v:String x:Key="UnlockStorage">Speicher entsperren</v:String>
 		<v:String x:Key="UnlockAllStorages">Schalte alle Tresore frei</v:String>
 		
-		<v:String x:Key="ClearTrash">Очистить корзину</v:String>
-		<v:String x:Key="DeleteSelected">Удалить выбранное</v:String>
-		<v:String x:Key="ReturnSelected">Вернуть выбранное</v:String>
+		<v:String x:Key="ClearTrash">Leerer Müll</v:String>
+		<v:String x:Key="DeleteSelected">Ausgewählte löschen</v:String>
+		<v:String x:Key="ReturnSelected">Selected zurückgeben</v:String>
 
 		<v:String x:Key="MB1">Sie müssen zuerst Speicher hochladen oder erstellen!</v:String>
 		<v:String x:Key="Error">Fehler</v:String>
@@ -94,6 +97,7 @@
 		<v:String x:Key="Not7">Alle Tresore wurden erfolgreich gesperrt!</v:String>
 		<v:String x:Key="Not8">Alle Tresore wurden erfolgreich entsperrt!</v:String>
 		<v:String x:Key="Not9">Tresor erfolgreich gesperrt:</v:String>
+		<v:String x:Key="Not10">Datei erfolgreich exportiert!</v:String>
 		<v:String x:Key="Copied">In die Zwischenablage kopiert!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Die Zwischenablage wird gelöscht!</v:String>
 		<v:String x:Key="Loading1">Wird geladen...</v:String>
@@ -155,6 +159,7 @@
 		<v:String x:Key="Gloomy">Düster</v:String>
 		<v:String x:Key="Mysterious">Geheimnisvoll</v:String>
 		<v:String x:Key="Turquoise">Türkis</v:String>
+		<v:String x:Key="Emerald">Smaragd</v:String>
 
 		<v:String x:Key="Reminder">ErTINerung</v:String>
 		<v:String x:Key="Pause">Pause</v:String>
@@ -181,6 +186,9 @@
 		<v:String x:Key="Type">Typ</v:String>
 		<v:String x:Key="Login">Benutzername</v:String>
 		<v:String x:Key="BankCard">EC Karte</v:String>
+		
+		<v:String x:Key="Color">Farbe</v:String>
+		<v:String x:Key="UseColor">Verwenden Sie Farbe</v:String>
 
 		<v:String x:Key="CardName">Name des Karteninhabers</v:String>
 		<v:String x:Key="CartType">Kartentyp</v:String>
@@ -209,6 +217,10 @@
 		<v:String x:Key="Logical">Logisch</v:String>
 		<v:String x:Key="Data">Daten</v:String>
 		<v:String x:Key="TypeColon">Eine Art:</v:String>
+		<v:String x:Key="ImportedFiles">Angehängte Dokumente</v:String>
+		<v:String x:Key="NameColon">Name:</v:String>
+		<v:String x:Key="Import">Importieren</v:String>
+		<v:String x:Key="Export">Exportieren</v:String>
 
 		<v:String x:Key="ToApply">Bewerben</v:String>
 		<v:String x:Key="Cancel">Abbrechen</v:String>

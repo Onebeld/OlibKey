@@ -30,9 +30,15 @@ namespace OlibKey.Views.Windows
         private RadioButton _rNotes;
         private RadioButton _rAll;
 
+        private CheckBox _cbUseColor;
+
         private ToggleButton _tbSortAlphabetically;
         private ToggleButton _tbFavorite;
         private ToggleButton _tbActiveReminder;
+
+        public ColorPicker colorPicker;
+
+        public Popup pColorPicker;
 
         private ListBox _lbFolders;
 
@@ -57,15 +63,73 @@ namespace OlibKey.Views.Windows
             _tbSortAlphabetically = this.FindControl<ToggleButton>("tbSortAlphabetically");
             _tbFavorite = this.FindControl<ToggleButton>("tbFavorite");
             _tbActiveReminder = this.FindControl<ToggleButton>("tbActiveReminder");
+            pColorPicker = this.FindControl<Popup>("pColorPicker");
+            colorPicker = this.FindControl<ColorPicker>("colorPicker");
+            _cbUseColor = this.FindControl<CheckBox>("cbUseColor");
 
-            DataContext = SearchViewModel = new SearchWindowViewModel();
+
+            DataContext = SearchViewModel = new SearchWindowViewModel { ChangeIndexCallback = CloseColorPicker };
             _rAll.IsChecked = true;
             _lbFolders.PointerPressed += (_, __) => ViewModel.SelectedFolderIndex = -1;
             Closed += SearchWindow_Closed;
             await Task.Delay(50);
             _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(_ => ClearListAndSearchElement());
 
-            
+
+            colorPicker.ChangeColor += _colorPicker_ChangeColor;
+        }
+
+        private void CommandCheckingUseColor(object sender, RoutedEventArgs e)
+        {
+            _cbUseColor.IsChecked = !_cbUseColor.IsChecked;
+        }
+
+        private void CloseColorPicker()
+        {
+            pColorPicker.Close();
+        }
+
+        private void OpenColorPicker(object sender, RoutedEventArgs e)
+        {
+            if (SearchViewModel.SelectedFolderItem.FolderContext.UseColor)
+            {
+                _argbColorViewModel = new ArgbColorViewModel
+                {
+                    Hex = SearchViewModel.SelectedFolderItem.FolderContext.Color
+                };
+
+                pColorPicker.DataContext = _argbColorViewModel;
+
+                pColorPicker.Open();
+            }
+        }
+
+        private void CheckedUseColor(object sender, RoutedEventArgs e)
+        {
+            if (((CheckBox)sender).IsChecked ?? false)
+            {
+                if (!SearchViewModel.SelectedFolderItem.FolderContext.UseColor)
+                {
+                    SearchViewModel.SelectedFolderItem.FolderContext.UseColor = true;
+                    SearchViewModel.SelectedFolderItem.FolderContext.Color = ((Color)Application.Current.FindResource("ThemeSelectedControlColor")).ToString();
+                    SearchViewModel.SelectedFolderItem.bLabelColor.Background = new SolidColorBrush(ColorHelpers.FromHexColor(((Color)Application.Current.FindResource("ThemeSelectedControlColor")).ToString()));
+                }
+            }
+            else
+            {
+                if (SearchViewModel.SelectedFolderItem.FolderContext.UseColor)
+                {
+                    SearchViewModel.SelectedFolderItem.FolderContext.UseColor = false;
+                    SearchViewModel.SelectedFolderItem.FolderContext.Color = null;
+                    SearchViewModel.SelectedFolderItem.bLabelColor.Background = null;
+                }
+            }
+        }
+
+        private void _colorPicker_ChangeColor(object sender, RoutedEventArgs e)
+        {
+            SearchViewModel.SelectedFolderItem.FolderContext.Color = _argbColorViewModel.ToHexString();
+            SearchViewModel.SelectedFolderItem.bLabelColor.Background = new SolidColorBrush(ColorHelpers.FromHexColor(_argbColorViewModel.ToHexString()));
         }
 
         private void SearchWindow_Closed(object sender, EventArgs e) =>

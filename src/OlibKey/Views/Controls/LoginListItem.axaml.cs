@@ -10,6 +10,7 @@ using Avalonia.Controls.Primitives;
 using System.IO;
 using Avalonia.Media.Imaging;
 using OlibKey.Core;
+using OlibKey.Controls.ColorPicker;
 
 namespace OlibKey.Views.Controls
 {
@@ -21,6 +22,8 @@ namespace OlibKey.Views.Controls
         private readonly TextBlock _tbLoginName;
         private readonly TextBlock _tbUsername;
         private TextBlock _tbDeleteDate;
+
+        private Border _bLabelColor;
 
         public string LoginID { get; set; }
 
@@ -40,6 +43,7 @@ namespace OlibKey.Views.Controls
             SelectedItem = this.FindControl<CheckBox>("selectedItem");
             IsFavorite = this.FindControl<ToggleButton>("isFavorite");
             _tbDeleteDate = this.FindControl<TextBlock>("tbDeleteDate");
+            _bLabelColor = this.FindControl<Border>("bLabelColor");
 
             LoginItem = Login;
 
@@ -77,6 +81,8 @@ namespace OlibKey.Views.Controls
             IsFavorite.Checked += IsFavoriteChecking;
             IsFavorite.Unchecked += IsFavoriteChecking;
 
+            if (LoginItem.UseColor && !string.IsNullOrEmpty(LoginItem.Color))
+                _bLabelColor.Background = new SolidColorBrush(ColorHelpers.FromHexColor(LoginItem.Color));
         }
 
         private void IsFavoriteChecking(object sender, Avalonia.Interactivity.RoutedEventArgs e) => LoginItem.Favorite = ((ToggleButton)sender).IsChecked ?? false;
@@ -87,6 +93,14 @@ namespace OlibKey.Views.Controls
         {
             if (LoginItem == null) return;
             _tbLoginName.Text = LoginItem.Name;
+            if (!LoginItem.UseColor)
+            {
+                LoginItem.Color = null;
+                _bLabelColor.Background = null;
+            }
+
+            if (LoginItem.UseColor && !string.IsNullOrEmpty(LoginItem.Color))
+                _bLabelColor.Background = new SolidColorBrush(ColorHelpers.FromHexColor(LoginItem.Color));
 
             _tbUsername.Text = LoginItem.Type switch
             {

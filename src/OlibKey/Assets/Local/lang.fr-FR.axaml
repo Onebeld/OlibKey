@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Vérifier les mises à jour</v:String>
 		<v:String x:Key="FileOlib">Fichier de base de données OlibKey</v:String>
 		
+		<v:String x:Key="Cut">Coupé</v:String>
+		<v:String x:Key="Paste">Pâte</v:String>
+		
 		<v:String x:Key="Empty">Vide</v:String>
 		<v:String x:Key="NotFound">Pas trouvé</v:String>
 		
@@ -94,6 +97,7 @@
 		<v:String x:Key="Not7">Tous les stockage ont été verrouillés avec succès!</v:String>
 		<v:String x:Key="Not8">Tous les stockage ont été déverrouillés avec succès!</v:String>
 		<v:String x:Key="Not9">Stockage verrouillé avec succès:</v:String>
+		<v:String x:Key="Not10">Fichier exporté avec succès!</v:String>
 		<v:String x:Key="Copied">Copié dans le presse-papiers!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Le presse-papiers est effacé!</v:String>
 		<v:String x:Key="Loading1">Chargement...</v:String>
@@ -155,6 +159,7 @@
 		<v:String x:Key="Gloomy">Sombre</v:String>
 		<v:String x:Key="Mysterious">Mystérieux</v:String>
 		<v:String x:Key="Turquoise">Turquoise</v:String>
+		<v:String x:Key="Emerald">Émeraude</v:String>
 
 		<v:String x:Key="Reminder">Rappel</v:String>
 		<v:String x:Key="Pause">Pause</v:String>
@@ -181,6 +186,9 @@
 		<v:String x:Key="Type">Tapez</v:String>
 		<v:String x:Key="Login">Identifiant</v:String>
 		<v:String x:Key="BankCard">Carte bancaire</v:String>
+		
+		<v:String x:Key="Color">Couleur</v:String>
+		<v:String x:Key="UseColor">Utiliser la couleur</v:String>
 
 		<v:String x:Key="CardName">Nom du titulaire de la carte</v:String>
 		<v:String x:Key="CartType">Type de carte</v:String>
@@ -209,6 +217,10 @@
 		<v:String x:Key="Logical">Logique</v:String>
 		<v:String x:Key="Data">Les données</v:String>
 		<v:String x:Key="TypeColon">Type:</v:String>
+		<v:String x:Key="ImportedFiles">Fichiers joints</v:String>
+		<v:String x:Key="NameColon">Nom:</v:String>
+		<v:String x:Key="Import">Importer</v:String>
+		<v:String x:Key="Export">Exportation</v:String>
 
 		<v:String x:Key="ToApply">Pour postuler</v:String>
 		<v:String x:Key="Cancel">Annuler</v:String>

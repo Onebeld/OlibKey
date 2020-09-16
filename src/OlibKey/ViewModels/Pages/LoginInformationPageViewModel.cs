@@ -16,6 +16,7 @@ namespace OlibKey.ViewModels.Pages
 	{
 		private int _selectionFolderIndex;
 		private ObservableCollection<CustomFieldListItem> _customFields;
+		private ObservableCollection<ImportedFileListItem> _importedFiles;
 
 		#region Section's
 
@@ -44,9 +45,15 @@ namespace OlibKey.ViewModels.Pages
 			get => _customFields;
 			set => this.RaiseAndSetIfChanged(ref _customFields, value);
 		}
+		private ObservableCollection<ImportedFileListItem> ImportedFiles
+        {
+			get => _importedFiles;
+			set => this.RaiseAndSetIfChanged(ref _importedFiles, value);
+        }
 		private LoginListItem LoginItem { get; set; }
 		private bool VisibleDateChanged { get; set; }
-		private bool IsVisible { get; set; } = true;
+		private bool IsVisibleCustomFields { get; set; } = true;
+		private bool IsVisibleImportedFiles { get; set; } = true;
 		private ObservableCollection<Folder> Folders { get; set; }
 		private Login LoginInformation { get; set; }
 
@@ -65,6 +72,7 @@ namespace OlibKey.ViewModels.Pages
 			LoginInformation = acc.LoginItem;
 			LoginItem = acc;
 			CustomFields = new ObservableCollection<CustomFieldListItem>();
+			ImportedFiles = new ObservableCollection<ImportedFileListItem>();
 
             switch (LoginInformation.Type)
 			{
@@ -131,10 +139,22 @@ namespace OlibKey.ViewModels.Pages
 			for (int index = 0; index < LoginInformation.CustomFields.Count; index++)
 				CustomFields.Add(new CustomFieldListItem(new Housing
 					{CustomField = LoginInformation.CustomFields[index], IsEnabled = false}));
+            for (int i = 0; i < LoginInformation.ImportedFiles.Count; i++)
+            {
+				ImportedFiles.Add(new ImportedFileListItem
+                {
+					DataContext = LoginInformation.ImportedFiles[i],
+					BDelete = { IsVisible = false }
+                });
+            }
 
 			if (CustomFields.Count != 0) CustomFields[^1].SLine.IsVisible = false;
 
-			if (CustomFields.Count == 0) IsVisible = false;
+			if (CustomFields.Count == 0) IsVisibleCustomFields = false;
+
+			if (ImportedFiles.Count == 0) IsVisibleImportedFiles = false;
+
+			if (ImportedFiles.Count != 0) ImportedFiles[^1].SLine.IsVisible = false;
 		}
 
 		private void CopyInformation(string s)

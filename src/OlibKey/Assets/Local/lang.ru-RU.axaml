@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Проверить наличие обновлении</v:String>
 		<v:String x:Key="FileOlib">Файл базы данных OlibKey</v:String>
 		
+		<v:String x:Key="Cut">Вырезать</v:String>
+		<v:String x:Key="Paste">Вставить</v:String>
+		
 		<v:String x:Key="Empty">Пусто</v:String>
 		<v:String x:Key="NotFound">Не найдено</v:String>
 		
@@ -94,6 +97,7 @@
 		<v:String x:Key="Not7">Все хранилища успешно заблокированы!</v:String>
 		<v:String x:Key="Not8">Все хранилища успешно разблокированы!</v:String>
 		<v:String x:Key="Not9">Успешно разблокировано хранилище:</v:String>
+		<v:String x:Key="Not10">Файл успешно экспортирован!</v:String>
 		<v:String x:Key="Copied">Скопировано в буфер обмена!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Буфер обмена очищен!</v:String>
 		<v:String x:Key="Loading1">Идёт загрузка...</v:String>
@@ -155,6 +159,7 @@
 		<v:String x:Key="Gloomy">Мрачная</v:String>
 		<v:String x:Key="Mysterious">Загадочная</v:String>
 		<v:String x:Key="Turquoise">Бирюза</v:String>
+		<v:String x:Key="Emerald">Изумрудный</v:String>
 
 		<v:String x:Key="Reminder">Напоминание</v:String>
 		<v:String x:Key="Pause">Пауза</v:String>
@@ -181,6 +186,9 @@
 		<v:String x:Key="Type">Тип</v:String>
 		<v:String x:Key="Login">Логин</v:String>
 		<v:String x:Key="BankCard">Банковская карта</v:String>
+		
+		<v:String x:Key="Color">Цвет</v:String>
+		<v:String x:Key="UseColor">Использовать цвет</v:String>
 
 		<v:String x:Key="CardName">Имя владельца карты</v:String>
 		<v:String x:Key="CartType">Тип карты</v:String>
@@ -209,6 +217,10 @@
 		<v:String x:Key="Logical">Логическое</v:String>
 		<v:String x:Key="Data">Данные</v:String>
 		<v:String x:Key="TypeColon">Тип:</v:String>
+		<v:String x:Key="ImportedFiles">Прикреплённые файлы</v:String>
+		<v:String x:Key="NameColon">Название:</v:String>
+		<v:String x:Key="Import">Импортировать</v:String>
+		<v:String x:Key="Export">Экспортировать</v:String>
 
 		<v:String x:Key="ToApply">Применить</v:String>
 		<v:String x:Key="Cancel">Отмена</v:String>

@@ -1,7 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
+using OlibKey.Controls.ColorPicker;
+using OlibKey.ViewModels.Color;
 using System;
 using System.Text.RegularExpressions;
 
@@ -44,6 +48,7 @@ namespace OlibKey.Views.Windows
 				"Gloomy" => 1,
 				"Mysterious" => 2,
 				"Turquoise" => 3,
+				"Emerald" => 4,
 				_ => 0
 			};
 
@@ -163,6 +168,7 @@ namespace OlibKey.Views.Windows
 				1 => "Gloomy",
 				2 => "Mysterious",
 				3 => "Turquoise",
+				4 => "Emerald",
 				_ => "Dazzling"
 			};
 

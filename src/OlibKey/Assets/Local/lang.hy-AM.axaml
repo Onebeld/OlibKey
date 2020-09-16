@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Ստուգել թարմացումները</v:String>
 		<v:String x:Key="FileOlib">OlibKey տվյալների շտեմարան</v:String>
 		
+		<v:String x:Key="Cut">Կտրեք</v:String>
+		<v:String x:Key="Paste">Կպցնել</v:String>
+		
 		<v:String x:Key="Empty">Դատարկ</v:String>
 		<v:String x:Key="NotFound">Չի գտնվել</v:String>
 		
@@ -94,6 +97,7 @@
 		<v:String x:Key="Not7">Բոլոր պահոցները հաջողությամբ կողպվել են:</v:String>
 		<v:String x:Key="Not8">Բոլոր պահոցները հաջողությամբ բացվել են:</v:String>
 		<v:String x:Key="Not9">Հիմքը հաջողությամբ արգելափակված է.</v:String>
+		<v:String x:Key="Not10">Ֆայլը հաջողությամբ արտահանվեց:</v:String>
 		<v:String x:Key="Copied">Պատճենահանվեց clipboard- ին:</v:String>
 		<v:String x:Key="ClipboardIsCleared">Տեսահոլովակը մաքրված է:</v:String>
 		<v:String x:Key="Loading1">Բեռնվում է...</v:String>
@@ -155,6 +159,7 @@
 		<v:String x:Key="Gloomy">Մռայլ</v:String>
 		<v:String x:Key="Mysterious">Առեղծվածային</v:String>
 		<v:String x:Key="Turquoise">Փիրուզագույն</v:String>
+		<v:String x:Key="Emerald">Զմրուխտ</v:String>
 
 		<v:String x:Key="Reminder">Հիշեցում</v:String>
 		<v:String x:Key="Pause">Դադար</v:String>
@@ -178,6 +183,9 @@
 		<v:String x:Key="ItemInformation">Տարրի մասին տեղեկություններ</v:String>
 		<v:String x:Key="Create">Ստեղծվել է:</v:String>
 		<v:String x:Key="Update">Թարմացվել է:</v:String>
+		
+		<v:String x:Key="Color">Գույնը</v:String>
+		<v:String x:Key="UseColor">Օգտագործեք գույն</v:String>
 
 		<v:String x:Key="Type">Տեսակը</v:String>
 		<v:String x:Key="Login">Մականուն</v:String>
@@ -210,6 +218,10 @@
 		<v:String x:Key="Logical">Տրամաբանական</v:String>
 		<v:String x:Key="Data">Տվյալներ</v:String>
 		<v:String x:Key="TypeColon">Մի տեսակ.</v:String>
+		<v:String x:Key="ImportedFiles">Կցված ֆայլեր</v:String>
+		<v:String x:Key="NameColon">Անուն:</v:String>
+		<v:String x:Key="Import">Ներմուծում</v:String>
+		<v:String x:Key="Export">Արտահանում</v:String>
 
 		<v:String x:Key="ToApply">Գործադրել</v:String>
 		<v:String x:Key="Cancel">Չեղյալ</v:String>

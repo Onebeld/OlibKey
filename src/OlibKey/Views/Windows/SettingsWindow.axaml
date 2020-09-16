@@ -35,6 +35,7 @@
 									<ComboBoxItem Content="{DynamicResource Gloomy}"/>
 									<ComboBoxItem Content="{DynamicResource Mysterious}"/>
 									<ComboBoxItem Content="{DynamicResource Turquoise}"/>
+									<ComboBoxItem Content="{DynamicResource Emerald}"/>
 								</ComboBox>
 							</DockPanel>
 							<CheckBox IsChecked="{Binding AutoblockEnabled}">

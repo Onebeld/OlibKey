@@ -3,9 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30428.66
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OlibKey", "src\OlibKey\OlibKey.csproj", "{57B94734-3845-422B-8D20-26B2A1928258}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OlibKey.Controls.ColorPicker", "src\OlibKey.ColorPicker\OlibKey.Controls.ColorPicker.csproj", "{F9FF2829-E149-44A2-87DF-14DB381D10D1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A2E3D54C-9EC0-43E8-9C30-EF84456FDDF1}"
+	ProjectSection(SolutionItems) = preProject
+		build\Avalonia.props = build\Avalonia.props
+		build\Base.props = build\Base.props
+		build\EmbedXaml.props = build\EmbedXaml.props
+		build\ReactiveUI.props = build\ReactiveUI.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey", "src\OlibKey\OlibKey.csproj", "{1F166DAC-47CB-428E-857F-0325CAB649CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,14 +23,6 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57B94734-3845-422B-8D20-26B2A1928258}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57B94734-3845-422B-8D20-26B2A1928258}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57B94734-3845-422B-8D20-26B2A1928258}.Debug|x64.ActiveCfg = Debug|x64
-		{57B94734-3845-422B-8D20-26B2A1928258}.Debug|x64.Build.0 = Debug|x64
-		{57B94734-3845-422B-8D20-26B2A1928258}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57B94734-3845-422B-8D20-26B2A1928258}.Release|Any CPU.Build.0 = Release|Any CPU
-		{57B94734-3845-422B-8D20-26B2A1928258}.Release|x64.ActiveCfg = Release|x64
-		{57B94734-3845-422B-8D20-26B2A1928258}.Release|x64.Build.0 = Release|x64
 		{F9FF2829-E149-44A2-87DF-14DB381D10D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9FF2829-E149-44A2-87DF-14DB381D10D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9FF2829-E149-44A2-87DF-14DB381D10D1}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -31,6 +31,14 @@ Global
 		{F9FF2829-E149-44A2-87DF-14DB381D10D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F9FF2829-E149-44A2-87DF-14DB381D10D1}.Release|x64.ActiveCfg = Release|Any CPU
 		{F9FF2829-E149-44A2-87DF-14DB381D10D1}.Release|x64.Build.0 = Release|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Debug|x64.Build.0 = Debug|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Release|x64.ActiveCfg = Release|Any CPU
+		{1F166DAC-47CB-428E-857F-0325CAB649CC}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

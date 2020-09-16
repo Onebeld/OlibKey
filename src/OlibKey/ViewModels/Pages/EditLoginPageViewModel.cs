@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 
 namespace OlibKey.ViewModels.Pages
@@ -31,6 +32,7 @@ namespace OlibKey.ViewModels.Pages
 
         private int Type { get; set; }
         private ObservableCollection<CustomFieldListItem> CustomFields { get; set; }
+        private ObservableCollection<ImportedFileListItem> ImportedFiles { get; set; }
         private int SelectionFolderIndex
         {
             get => _selectionFolderIndex;
@@ -60,6 +62,7 @@ namespace OlibKey.ViewModels.Pages
             HostScreen = screen ?? Locator.Current.GetService<IScreen>();
 
             CustomFields = new ObservableCollection<CustomFieldListItem>();
+            ImportedFiles = new ObservableCollection<ImportedFileListItem>();
 
             LoginList = acc;
 
@@ -70,7 +73,9 @@ namespace OlibKey.ViewModels.Pages
                 Email = acc.LoginItem.Email,
                 Note = acc.LoginItem.Note,
                 Type = acc.LoginItem.Type,
-                TimeCreate = acc.LoginItem.TimeCreate
+                TimeCreate = acc.LoginItem.TimeCreate,
+                Color = acc.LoginItem.Color,
+                UseColor = acc.LoginItem.UseColor
             };
 
             switch (acc.LoginItem.Type)
@@ -154,14 +159,44 @@ namespace OlibKey.ViewModels.Pages
                     DeleteCustomField = DeleteCustomField
                 });
             }
+            for (int i = 0; i < acc.LoginItem.ImportedFiles.Count; i++)
+            {
+                ImportedFiles.Add(new ImportedFileListItem
+                {
+                    DataContext = acc.LoginItem.ImportedFiles[i],
+                    ID = Guid.NewGuid().ToString("N"),
+                    DeleteFileCallback = DeleteImportedFile
+                });
+            }
         }
 
+        private async void ImportFile()
+        {
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog{ AllowMultiple = true };
+
+                List<string> files = (await dialog.ShowAsync(App.MainWindow)).ToList();
+
+                foreach (var file in files)
+                {
+                    ImportedFiles.Add(new ImportedFileListItem { 
+                        DataContext = new ImportedFile { Name = Path.GetFileName(file) , Data = Core.FileInteractions.ImportFile(file) }, 
+                        ID = Guid.NewGuid().ToString("N"),
+                        DeleteFileCallback = DeleteImportedFile
+                    });
+                }
+
+            }
+            catch { }
+        }
         private void SaveLogin()
         {
             LoginList.LoginItem = NewLogin;
             LoginList.LoginItem.FolderID = SelectionFolderItem.ID;
 
             LoginList.LoginItem.CustomFields = CustomFields.Select(item => item.HousingElement.CustomField).ToList();
+            LoginList.LoginItem.ImportedFiles = ImportedFiles.Select(item => item.DataContext as ImportedFile).ToList();
             LoginList.LoginItem.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 
             if (NewLogin.IsReminderActive)
@@ -218,6 +253,14 @@ namespace OlibKey.ViewModels.Pages
             foreach (CustomFieldListItem item in CustomFields.Where(item => item.ID == id))
             {
                 CustomFields.Remove(item);
+                break;
+            }
+        }
+        private void DeleteImportedFile(string id)
+        {
+            foreach (ImportedFileListItem item in ImportedFiles.Where(item => item.ID == id))
+            {
+                ImportedFiles.Remove(item);
                 break;
             }
         }

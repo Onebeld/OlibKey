@@ -60,8 +60,8 @@
                                     <Thumb.Template>
                                         <ControlTemplate>
                                             <Grid Background="Transparent">
-                                                <Path Fill="#FF000000" Data="M 0,0 L 5,5 L 0,10 Z"/>
-                                                <Path Fill="#FF000000" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right"/>
+                                                <Path Fill="{DynamicResource ThemeForegroundBrush}" Data="M 0,0 L 5,5 L 0,10 Z"/>
+                                                <Path Fill="{DynamicResource ThemeForegroundBrush}" Data="M 5,0 L 0,5 L 5,10 Z" HorizontalAlignment="Right"/>
                                             </Grid>
                                         </ControlTemplate>
                                     </Thumb.Template>
@@ -102,7 +102,7 @@
                                     <Thumb.Template>
                                         <ControlTemplate>
                                             <Grid Background="Transparent">
-                                                <Path Fill="#FF000000" Data="M 0,9 L 0,4 L 5,0 L 10,4 L 10,9 Z" VerticalAlignment="Bottom"/>
+                                                <Path Fill="{DynamicResource ThemeForegroundBrush}" Data="M 0,9 L 0,4 L 5,0 L 10,4 L 10,9 Z" VerticalAlignment="Bottom"/>
                                             </Grid>
                                         </ControlTemplate>
                                     </Thumb.Template>

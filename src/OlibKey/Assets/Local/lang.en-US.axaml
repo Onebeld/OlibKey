@@ -19,6 +19,9 @@
 		<v:String x:Key="AboutPrograms">About the program</v:String>
 		<v:String x:Key="CheckUpdates">Check for Updates</v:String>
 		<v:String x:Key="FileOlib">OlibKey Database File</v:String>
+
+		<v:String x:Key="Cut">Cut</v:String>
+		<v:String x:Key="Paste">Paste</v:String>
 		
 		<v:String x:Key="Empty">Empty</v:String>
 		<v:String x:Key="NotFound">Not found</v:String>
@@ -94,6 +97,7 @@
 		<v:String x:Key="Not7">All storages are locked successfully!</v:String>
 		<v:String x:Key="Not8">All storages have been successfully unlocked!</v:String>
 		<v:String x:Key="Not9">Storage locked successfully:</v:String>
+		<v:String x:Key="Not10">File exported successfully!</v:String>
 		<v:String x:Key="Copied">Copied to the clipboard!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Clipboard is cleared!</v:String>
 		<v:String x:Key="Loading1">Loading...</v:String>
@@ -155,6 +159,7 @@
 		<v:String x:Key="Gloomy">Gloomy</v:String>
 		<v:String x:Key="Mysterious">Mysterious</v:String>
 		<v:String x:Key="Turquoise">Turquoise</v:String>
+		<v:String x:Key="Emerald">Emerald</v:String>
 
 		<v:String x:Key="Reminder">Reminder</v:String>
 		<v:String x:Key="Pause">Pause</v:String>
@@ -180,6 +185,9 @@
 		<v:String x:Key="Update">Update:</v:String>
 		<v:String x:Key="Type">Type</v:String>
 		<v:String x:Key="Login">Login</v:String>
+		
+		<v:String x:Key="Color">Color</v:String>
+		<v:String x:Key="UseColor">Use color</v:String>
 
 		<v:String x:Key="BankCard">Bank card</v:String>
 		<v:String x:Key="CardName">Cardholder Name</v:String>
@@ -209,6 +217,10 @@
 		<v:String x:Key="Logical">Logical</v:String>
 		<v:String x:Key="Data">Data</v:String>
 		<v:String x:Key="TypeColon">Type:</v:String>
+		<v:String x:Key="ImportedFiles">Attached files</v:String>
+		<v:String x:Key="NameColon">Name:</v:String>
+		<v:String x:Key="Import">Import</v:String>
+		<v:String x:Key="Export">Export</v:String>
 
 		<v:String x:Key="ToApply">To apply</v:String>
 		<v:String x:Key="Cancel">Cancel</v:String>

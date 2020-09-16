@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:cp="clr-namespace:OlibKey.Controls.ColorPicker;assembly=OlibKey.Controls.ColorPicker"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:c="clr-namespace:OlibKey.Core;assembly=OlibKey"
 			 Background="{DynamicResource ThemeWindowBackgroundBrush}"
@@ -14,7 +15,7 @@
 					<StackPanel Spacing="5">
 						<TextBlock Text="{DynamicResource Type}" Classes="Heading"/>
 						<ComboBox x:Name="cbType" SelectedIndex="{Binding NewLogin.Type}">
-							<ComboBoxItem Content="{DynamicResource Login}"/>
+							<ComboBoxItem Content="{StaticResource Login}"/>
 							<ComboBoxItem Content="{DynamicResource BankCard}"/>
 							<ComboBoxItem Content="{DynamicResource Passport}"/>
 							<ComboBoxItem Content="{DynamicResource Reminder}"/>
@@ -44,7 +45,7 @@
 							<TextBox x:Name="txtPassword" Text="{Binding NewLogin.Password}" PasswordChar="•"/>
 							<StackPanel Orientation="Horizontal" Spacing="5">
 								<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Padding="5 2"/>
-								<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword" VerticalAlignment="Center"/>
+								<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
 							</StackPanel>
 							<DockPanel>
 								<TextBlock Text="{DynamicResource Complexity}" VerticalAlignment="Center" Margin="0 0 5 0"/>
@@ -61,7 +62,7 @@
 							<TextBox x:Name="tbStartTime" Text="{Binding NewLogin.Username}"/>
 							<StackPanel Orientation="Horizontal" Spacing="5">
 								<Button Content="{DynamicResource ZeroOut}" Click="TimeZeroing" Padding="5 2"/>
-								<CheckBox x:Name="cbIsStartRemember" IsChecked="{Binding NewLogin.IsReminderActive}" Content="{DynamicResource ReminderStarted}" VerticalAlignment="Center"/>
+								<CheckBox x:Name="cbIsStartRemember" IsChecked="{Binding NewLogin.IsReminderActive}" Content="{DynamicResource ReminderStarted}"/>
 							</StackPanel>
 						</StackPanel>
 						<StackPanel x:Name="BankCartSection" Spacing="5">
@@ -81,7 +82,7 @@
 
 							<TextBlock Text="{DynamicResource SecurityCodeCard}" Classes="Heading"/>
 							<TextBox x:Name="txtSecurityCode" Text="{Binding NewLogin.SecurityCode}" PasswordChar="•"/>
-							<CheckBox Content="{DynamicResource Show}" Checked="CheckedSecurityCode" Unchecked="CheckedSecurityCode" VerticalAlignment="Center"/>
+							<CheckBox Content="{DynamicResource Show}" Checked="CheckedSecurityCode" Unchecked="CheckedSecurityCode"/>
 						</StackPanel>
 
 						<StackPanel x:Name="PersonalDataSection" Spacing="5">
@@ -150,6 +151,25 @@
 							<TextBlock Text="{DynamicResource Address}" Classes="Heading"/>
 							<TextBox Text="{Binding NewLogin.Address}"/>
 						</StackPanel>
+						
+						<Separator/>
+
+						<TextBlock Text="{DynamicResource Color}" Classes="Heading"/>
+						<StackPanel Spacing="5" Orientation="Horizontal">
+							<Border x:Name="bColor" CornerRadius="5" Width="30" Height="20">
+								<Popup x:Name="pColorPicker" StaysOpen="False">
+									<Popup.Resources>
+										<cp:HexToColorConverter x:Key="HexToColorConverter"/>
+									</Popup.Resources>
+									<Border BorderThickness="1" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" Padding="5">
+										<cp:ColorPicker x:Name="colorPicker" Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}"/>
+									</Border>
+								</Popup>
+							</Border>
+							<Button Content="{DynamicResource ChangeP}" Click="OpenColorPicker" Padding="5 2"/>
+							<CheckBox Content="{DynamicResource UseColor}" IsChecked="{Binding NewLogin.UseColor}"/>
+							<TextBox x:Name="tbColor" Text="{Binding NewLogin.Color}" IsVisible="False"/>
+						</StackPanel>
 
 						<Separator/>
 
@@ -189,6 +209,18 @@
 							</DockPanel>
 							<Button Content="{DynamicResource Add}" Command="{Binding AddCustomField}"/>
 						</StackPanel>
+					</StackPanel>
+				</Border>
+			
+				<TextBlock Text="{DynamicResource ImportedFiles}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold"/>
+			
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel>
+						<ScrollViewer>
+							<ItemsRepeater Items="{Binding ImportedFiles}"/>
+						</ScrollViewer>
+						
+						<Button Content="{DynamicResource Import}" Command="{Binding ImportFile}"/>
 					</StackPanel>
 				</Border>
 			</StackPanel>

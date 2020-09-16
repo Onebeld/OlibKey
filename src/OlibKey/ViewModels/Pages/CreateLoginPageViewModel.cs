@@ -5,8 +5,10 @@ using OlibKey.Views.Controls;
 using ReactiveUI;
 using Splat;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 
 namespace OlibKey.ViewModels.Pages
@@ -15,6 +17,7 @@ namespace OlibKey.ViewModels.Pages
     {
         private int _selectionFolderIndex;
         private ObservableCollection<CustomFieldListItem> _customFields;
+        private ObservableCollection<ImportedFileListItem> _importedFiles;
 
         #region Property's
 
@@ -38,6 +41,12 @@ namespace OlibKey.ViewModels.Pages
             set => this.RaiseAndSetIfChanged(ref _customFields, value);
         }
 
+        private ObservableCollection<ImportedFileListItem> ImportedFiles
+        {
+            get => _importedFiles;
+            set => this.RaiseAndSetIfChanged(ref _importedFiles, value);
+        }
+
         #endregion
 
         public Action BackPageCallback { get; set; }
@@ -53,9 +62,11 @@ namespace OlibKey.ViewModels.Pages
 
             NewLogin = new Login
             {
-                CustomFields = new System.Collections.Generic.List<CustomField>()
+                CustomFields = new List<CustomField>(),
+                ImportedFiles = new List<ImportedFile>()
             };
             CustomFields = new ObservableCollection<CustomFieldListItem>();
+            ImportedFiles = new ObservableCollection<ImportedFileListItem>();
 
             Folders = new ObservableCollection<Folder>
             {
@@ -70,7 +81,9 @@ namespace OlibKey.ViewModels.Pages
         private void CreateLogin()
         {
             NewLogin.CustomFields.AddRange(CustomFields.Select(item => item.HousingElement.CustomField));
+            NewLogin.ImportedFiles.AddRange(ImportedFiles.Select(item => item.DataContext as ImportedFile));
             NewLogin.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+            if (!NewLogin.UseColor) NewLogin.Color = null;
             CreateLoginCallback?.Invoke(NewLogin);
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not1"));
         }
@@ -86,11 +99,39 @@ namespace OlibKey.ViewModels.Pages
                 DeleteCustomField = DeleteCustomField
             });
         }
+        private async void ImportFile()
+        {
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog{ AllowMultiple = true };
+
+                List<string> files = (await dialog.ShowAsync(App.MainWindow)).ToList();
+
+                foreach (var file in files)
+                {
+                    ImportedFiles.Add(new ImportedFileListItem { 
+                        DataContext = new ImportedFile { Name = Path.GetFileName(file) , Data = Core.FileInteractions.ImportFile(file) }, 
+                        ID = Guid.NewGuid().ToString("N"),
+                        DeleteFileCallback = DeleteImportedFile
+                    });
+                }
+
+            }
+            catch { }
+        }
         private void DeleteCustomField(string id)
         {
             foreach (CustomFieldListItem item in CustomFields.Where(item => item.ID == id))
             {
                 CustomFields.Remove(item);
+                break;
+            }
+        }
+        private void DeleteImportedFile(string id)
+        {
+            foreach (ImportedFileListItem item in ImportedFiles.Where(item => item.ID == id))
+            {
+                ImportedFiles.Remove(item);
                 break;
             }
         }

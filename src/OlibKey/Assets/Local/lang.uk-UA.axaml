@@ -20,6 +20,9 @@
 		<v:String x:Key="CheckUpdates">Перевірити наявність оновленні</v:String>
 		<v:String x:Key="FileOlib">Файл бази даних OlibKey</v:String>
 		
+		<v:String x:Key="Cut">Вирізати</v:String>
+		<v:String x:Key="Paste">Вставити</v:String>
+		
 		<v:String x:Key="Empty">Пусто</v:String>
 		<v:String x:Key="NotFound">Не знайдено</v:String>
 		
@@ -67,9 +70,9 @@
 		<v:String x:Key="UnlockStorage">Розблокувати сховище</v:String>
 		<v:String x:Key="UnlockAllStorages">Розблокувати все сховища</v:String>
 		
-		<v:String x:Key="ClearTrash">Очистить корзину</v:String>
-		<v:String x:Key="DeleteSelected">Удалить выбранное</v:String>
-		<v:String x:Key="ReturnSelected">Вернуть выбранное</v:String>
+		<v:String x:Key="ClearTrash">Очистити кошик</v:String>
+		<v:String x:Key="DeleteSelected">Видалити вибране</v:String>
+		<v:String x:Key="ReturnSelected">Повернути вибране</v:String>
 
 		<v:String x:Key="MB1">Спочатку ви повинні завантажити або створити сховище!</v:String>
 		<v:String x:Key="Error">Помилка</v:String>
@@ -94,6 +97,7 @@
 		<v:String x:Key="Not7">Всі сховища успішно заблоковані!</v:String>
 		<v:String x:Key="Not8">Всі сховища успішно розблоковані!</v:String>
 		<v:String x:Key="Not9">Успішно розблоковано сховище:</v:String>
+		<v:String x:Key="Not10">Файл успішно експортований!</v:String>
 		<v:String x:Key="Copied">Скопійовано в буфер обміну!</v:String>
 		<v:String x:Key="ClipboardIsCleared">Буфер обміну очищений!</v:String>
 		<v:String x:Key="Loading1">Іде завантаження...</v:String>
@@ -155,6 +159,7 @@
 		<v:String x:Key="Gloomy">Похмура</v:String>
 		<v:String x:Key="Mysterious">Загадкова</v:String>
 		<v:String x:Key="Turquoise">Бірюза</v:String>
+		<v:String x:Key="Emerald">Смарагдовий</v:String>
 
 		<v:String x:Key="Reminder">Нагадування</v:String>
 		<v:String x:Key="Pause">Пауза</v:String>
@@ -178,6 +183,9 @@
 		<v:String x:Key="ItemInformation">Інформація про елемент</v:String>
 		<v:String x:Key="Create">Створено:</v:String>
 		<v:String x:Key="Update">Оновлений:</v:String>
+		
+		<v:String x:Key="Color">Колір</v:String>
+		<v:String x:Key="UseColor">Використовувати колір</v:String>
 
 		<v:String x:Key="Type">Тип</v:String>
 		<v:String x:Key="Login">Логін</v:String>
@@ -210,6 +218,10 @@
 		<v:String x:Key="Logical">Логічне</v:String>
 		<v:String x:Key="Data">Дані</v:String>
 		<v:String x:Key="TypeColon">Тип:</v:String>
+		<v:String x:Key="ImportedFiles">Прикріплені файли</v:String>
+		<v:String x:Key="NameColon">Назва:</v:String>
+		<v:String x:Key="Import">Iмпортувати</v:String>
+		<v:String x:Key="Export">Експортувати</v:String>
 
 		<v:String x:Key="ToApply">Застосувати</v:String>
 		<v:String x:Key="Cancel">Скасувати</v:String>

@@ -1,9 +1,13 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Avalonia.ReactiveUI;
+using OlibKey.Controls.ColorPicker;
 using OlibKey.Core;
+using OlibKey.ViewModels.Color;
 using OlibKey.ViewModels.Pages;
 using OlibKey.Views.Windows;
 using ReactiveUI;
@@ -24,6 +28,12 @@ namespace OlibKey.Views.Pages
 		private TextBox _txtStartTime;
 		private ProgressBar _pbHard;
 		private ComboBox _cbType;
+		private Border _bColor;
+		private Popup _pColorPicker;
+		private ColorPicker _colorPicker;
+		private TextBox _tbColor;
+
+		private ArgbColorViewModel _argbColorViewModel;
 
 		public CreateLoginPage() => InitializeComponent();
 
@@ -41,12 +51,40 @@ namespace OlibKey.Views.Pages
 			_pbHard = this.FindControl<ProgressBar>("pbHard");
 			_txtStartTime = this.FindControl<TextBox>("tbStartTime");
 			_cbType = this.FindControl<ComboBox>("cbType");
+			_bColor = this.FindControl<Border>("bColor");
+			_pColorPicker = this.FindControl<Popup>("pColorPicker");
+			_colorPicker = this.FindControl<ColorPicker>("colorPicker");
+			_tbColor = this.FindControl<TextBox>("tbColor");
 
 			_txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _txtPassword));
 			_cbType.SelectionChanged += SectionChanged;
+
+			_tbColor.Text = ((Color)Application.Current.FindResource("ThemeSelectedControlColor")).ToString();
+
+			_argbColorViewModel = new ArgbColorViewModel
+            {
+				Hex = _tbColor.Text
+            };
+
+			_pColorPicker.DataContext = _argbColorViewModel;
+
+			_bColor.Background = new SolidColorBrush(ColorHelpers.FromHexColor(_tbColor.Text));
+
+			_colorPicker.ChangeColor += _colorPicker_ChangeColor;
 		}
 
-		private void SectionChanged(object sender, SelectionChangedEventArgs e)
+        private void _colorPicker_ChangeColor(object sender, RoutedEventArgs e)
+        {
+			_tbColor.Text = _argbColorViewModel.ToHexString();
+			_bColor.Background = new SolidColorBrush(ColorHelpers.FromHexColor(_argbColorViewModel.ToHexString()));
+        }
+
+        private void OpenColorPicker(object sender, RoutedEventArgs e)
+        {
+            _pColorPicker.Open();
+        }
+
+        private void SectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			switch (((ComboBox)sender).SelectedIndex)
 			{

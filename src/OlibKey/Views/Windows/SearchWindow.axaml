@@ -118,20 +118,26 @@
 									<Image Source="{StaticResource TrashIcon}"/>
 								</MenuItem.Icon>
 							</MenuItem>
+							<MenuItem Header="Изменить цвет" Click="OpenColorPicker" IsEnabled="{Binding SelectedFolderItem, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+							<MenuItem Header="{StaticResource UseColor}" Click="CommandCheckingUseColor" IsEnabled="{Binding SelectedFolderItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+								<MenuItem.Icon>
+									<CheckBox x:Name="cbUseColor" IsHitTestVisible="False" BorderThickness="0" Checked="CheckedUseColor" Unchecked="CheckedUseColor" IsChecked="{Binding SelectedFolderItem.FolderContext.UseColor, Mode=TwoWay}"/>
+								</MenuItem.Icon>
+							</MenuItem>
 						</ContextMenu>
 					</ListBox.ContextMenu>
 				</ListBox>
+				<Popup x:Name="pColorPicker" StaysOpen="False">
+						<Popup.Resources>
+							<cp:HexToColorConverter x:Key="HexToColorConverter"/>
+						</Popup.Resources>
+						<Border BorderThickness="1" BorderBrush="{StaticResource ThemeGlobalBorderBrush}" Padding="5">
+							<cp:ColorPicker x:Name="colorPicker" Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}"/>
+						</Border>
+					</Popup>
 				<Border Grid.Row="2" BorderThickness="0 1 0 0"
 						Classes="ButtonsMenu">
 					<Grid>
-						<Popup x:Name="pColorPicker">
-							<Popup.Resources>
-								<cp:HexToColorConverter x:Key="HexToColorConverter"/>
-							</Popup.Resources>
-							<Border BorderThickness="1" BorderBrush="{StaticResource ThemeGlobalBorderBrush}" Padding="5">
-								<cp:ColorPicker x:Name="colorPicker" Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}"/>
-							</Border>
-						</Popup>
 						<Button Command="{Binding CreateFolderCommand}" Content="{StaticResource Add}" Margin="10"/>
 					</Grid>
 				</Border>

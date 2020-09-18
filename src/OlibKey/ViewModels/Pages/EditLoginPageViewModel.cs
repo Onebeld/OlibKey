@@ -46,7 +46,7 @@ namespace OlibKey.ViewModels.Pages
 
         #endregion
 
-        public Action<LoginListItem> EditCompleteCallback;
+        public Action<LoginListItem, bool> EditCompleteCallback;
         public Action<LoginListItem> CancelCallback;
         public Action DeleteLoginCallback;
 
@@ -82,28 +82,19 @@ namespace OlibKey.ViewModels.Pages
             {
                 case 0:
                     VisiblePasswordSection = true;
-                    VisibleBankCardSection = false;
-                    VisiblePersonalDataSection = false;
-                    VisibleReminderSection = false;
 
                     NewLogin.Password = acc.LoginItem.Password;
                     NewLogin.WebSite = acc.LoginItem.WebSite;
                     break;
                 case 1:
-                    VisiblePasswordSection = false;
                     VisibleBankCardSection = true;
-                    VisiblePersonalDataSection = false;
-                    VisibleReminderSection = false;
 
                     NewLogin.TypeBankCard = acc.LoginItem.TypeBankCard;
                     NewLogin.DateCard = acc.LoginItem.DateCard;
                     NewLogin.SecurityCode = acc.LoginItem.SecurityCode;
                     break;
                 case 2:
-                    VisiblePasswordSection = false;
-                    VisibleBankCardSection = false;
                     VisiblePersonalDataSection = true;
-                    VisibleReminderSection = false;
 
                     NewLogin.Number = acc.LoginItem.Number;
                     NewLogin.PlaceOfIssue = acc.LoginItem.PlaceOfIssue;
@@ -118,19 +109,11 @@ namespace OlibKey.ViewModels.Pages
                     NewLogin.Address = acc.LoginItem.Address;
                     break;
                 case 3:
-                    VisiblePasswordSection = false;
-                    VisibleBankCardSection = false;
-                    VisiblePersonalDataSection = false;
                     VisibleReminderSection = true;
 
                     NewLogin.IsReminderActive = acc.LoginItem.IsReminderActive;
                     break;
-                case 4:
-                    VisiblePasswordSection = false;
-                    VisibleBankCardSection = false;
-                    VisiblePersonalDataSection = false;
-                    VisibleReminderSection = false;
-                    break;
+               default: break;
             }
 
             Folders = new ObservableCollection<Folder>
@@ -192,6 +175,10 @@ namespace OlibKey.ViewModels.Pages
         }
         private void SaveLogin()
         {
+            bool changeWebSite = false;
+
+            if (LoginList.LoginItem.WebSite != NewLogin.WebSite) changeWebSite = true;
+
             LoginList.LoginItem = NewLogin;
             LoginList.LoginItem.FolderID = SelectionFolderItem.ID;
 
@@ -207,9 +194,7 @@ namespace OlibKey.ViewModels.Pages
             else
                 LoginList.ReminderTimer?.Stop();
 
-            LoginList.EditedLogin();
-
-            EditCompleteCallback?.Invoke(LoginList);
+            EditCompleteCallback?.Invoke(LoginList, changeWebSite);
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not2"));
         }
         private async void DeleteLogin()

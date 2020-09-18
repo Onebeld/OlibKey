@@ -31,7 +31,8 @@ namespace OlibKey
                     {
                         FileName = "OlibKey",
                         UseShellExecute = true,
-                        Verb = "runas"
+                        Verb = "runas",
+                        Arguments = args?[0]
                     });
                     return;
                 }

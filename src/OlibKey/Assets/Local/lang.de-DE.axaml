@@ -189,6 +189,7 @@
 		
 		<v:String x:Key="Color">Farbe</v:String>
 		<v:String x:Key="UseColor">Verwenden Sie Farbe</v:String>
+		<v:String x:Key="EditColor">Farbe ändern</v:String>
 
 		<v:String x:Key="CardName">Name des Karteninhabers</v:String>
 		<v:String x:Key="CartType">Kartentyp</v:String>

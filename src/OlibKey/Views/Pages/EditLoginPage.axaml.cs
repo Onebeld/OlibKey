@@ -27,8 +27,6 @@ namespace OlibKey.Views.Pages
 
         private Border _bColor;
 
-        private ArgbColorViewModel _argbColorViewModel;
-
         public EditLoginPage() => InitializeComponent();
 
         private void InitializeComponent()

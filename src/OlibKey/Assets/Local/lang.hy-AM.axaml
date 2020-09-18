@@ -186,6 +186,7 @@
 		
 		<v:String x:Key="Color">Գույնը</v:String>
 		<v:String x:Key="UseColor">Օգտագործեք գույն</v:String>
+		<v:String x:Key="EditColor">Փոխել գույնը</v:String>
 
 		<v:String x:Key="Type">Տեսակը</v:String>
 		<v:String x:Key="Login">Մականուն</v:String>

@@ -188,6 +188,7 @@
 		
 		<v:String x:Key="Color">Color</v:String>
 		<v:String x:Key="UseColor">Use color</v:String>
+		<v:String x:Key="EditColor">Change color</v:String>
 
 		<v:String x:Key="BankCard">Bank card</v:String>
 		<v:String x:Key="CardName">Cardholder Name</v:String>

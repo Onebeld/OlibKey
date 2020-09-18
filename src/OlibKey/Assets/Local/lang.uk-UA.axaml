@@ -186,6 +186,7 @@
 		
 		<v:String x:Key="Color">Колір</v:String>
 		<v:String x:Key="UseColor">Використовувати колір</v:String>
+		<v:String x:Key="EditColor">Змінити колір</v:String>
 
 		<v:String x:Key="Type">Тип</v:String>
 		<v:String x:Key="Login">Логін</v:String>

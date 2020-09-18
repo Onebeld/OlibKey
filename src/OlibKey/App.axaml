@@ -6,7 +6,11 @@
 	<Application.Resources>
 		<ContextMenu x:Key="TextBoxContextMenu" x:Name="TextBoxContextMenu">
 			<MenuItem x:Name="TextBoxContextMenuCutItem" Header="{DynamicResource Cut}" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}" />
-			<MenuItem x:Name="TextBoxContextMenuCopyItem" Header="{DynamicResource Copy}" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}"/>
+			<MenuItem x:Name="TextBoxContextMenuCopyItem" Header="{DynamicResource Copy}" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}">
+				<MenuItem.Icon>
+					<Image Source="{DynamicResource ClipboardIcon}"/>
+				</MenuItem.Icon>
+			</MenuItem>
 			<MenuItem x:Name="TextBoxContextMenuPasteItem" Header="{DynamicResource Paste}" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}"/>
 		</ContextMenu>
 	</Application.Resources>

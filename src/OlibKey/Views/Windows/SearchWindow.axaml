@@ -118,7 +118,11 @@
 									<Image Source="{StaticResource TrashIcon}"/>
 								</MenuItem.Icon>
 							</MenuItem>
-							<MenuItem Header="Изменить цвет" Click="OpenColorPicker" IsEnabled="{Binding SelectedFolderItem, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+							<MenuItem Header="{StaticResource EditColor}" Click="OpenColorPicker" IsEnabled="{Binding SelectedFolderItem, Converter={x:Static ObjectConverters.IsNotNull}}">
+								<MenuItem.Icon>
+									<Image Source="{StaticResource PaletteIcon}"/>
+								</MenuItem.Icon>
+							</MenuItem>
 							<MenuItem Header="{StaticResource UseColor}" Click="CommandCheckingUseColor" IsEnabled="{Binding SelectedFolderItem, Converter={x:Static ObjectConverters.IsNotNull}}">
 								<MenuItem.Icon>
 									<CheckBox x:Name="cbUseColor" IsHitTestVisible="False" BorderThickness="0" Checked="CheckedUseColor" Unchecked="CheckedUseColor" IsChecked="{Binding SelectedFolderItem.FolderContext.UseColor, Mode=TwoWay}"/>

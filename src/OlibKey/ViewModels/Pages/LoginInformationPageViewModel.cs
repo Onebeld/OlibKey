@@ -78,34 +78,17 @@ namespace OlibKey.ViewModels.Pages
 			{
                 case 0:
 					VisiblePasswordSection = true;
-					VisibleBankCardSection = false;
-					VisiblePersonalDataSection = false;
-					VisibleReminderSection = false;
 					break;
 				case 1:
-					VisiblePasswordSection = false;
 					VisibleBankCardSection = true;
-					VisiblePersonalDataSection = false;
-					VisibleReminderSection = false;
 					break;
 				case 2:
-					VisiblePasswordSection = false;
-					VisibleBankCardSection = false;
 					VisiblePersonalDataSection = true;
-					VisibleReminderSection = false;
 					break;
 				case 3:
-					VisiblePasswordSection = false;
-					VisibleBankCardSection = false;
-					VisiblePersonalDataSection = false;
 					VisibleReminderSection = true;
 					break;
-				case 4:
-					VisiblePasswordSection = false;
-					VisibleBankCardSection = false;
-					VisiblePersonalDataSection = false;
-					VisibleReminderSection = false;
-					break;
+				default: break;
 			}
 
 			if (!string.IsNullOrEmpty(LoginInformation.TimeChanged)) VisibleDateChanged = true;

@@ -1,5 +1,5 @@
-﻿using OlibKey.Structures;
-using OlibKey.ViewModels.Color;
+﻿using Avalonia.Controls.Templates;
+using OlibKey.Structures;
 using OlibKey.Views.Controls;
 using ReactiveUI;
 using System;
@@ -15,13 +15,11 @@ namespace OlibKey.ViewModels.Windows
         private ObservableCollection<FolderListItem> _folderList = new ObservableCollection<FolderListItem>();
 
         private FolderListItem _selectedFolderItem;
+        private LoginListItem _selectedLoginItem;
 
         private string _searchText;
 
-        public Action ChangeIndexCallback;
-
-        private int _selectedLoginIndex;
-        private int _selectedFolderIndex;
+        public Action ChangeItemCallback;
 
         #region ReactiveCommand's
 
@@ -41,25 +39,6 @@ namespace OlibKey.ViewModels.Windows
         public ObservableCollection<FolderListItem> FolderList
         {
             get => _folderList; set => this.RaiseAndSetIfChanged(ref _folderList, value);
-        }
-        public int SelectedFolderIndex
-        {
-            get => _selectedFolderIndex; set
-            {
-                this.RaiseAndSetIfChanged(ref _selectedFolderIndex, value);
-                ChangeIndexCallback?.Invoke();
-            }
-        }
-        private int SelectedLoginIndex
-        {
-            get => _selectedLoginIndex;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _selectedLoginIndex, value);
-                if (SelectedLoginIndex == -1) return;
-                App.MainWindowViewModel.SelectedTabItem.SearchSelectLogin(SelectedLoginItem);
-                App.SearchWindow.Close();
-            }
         }
         public string SearchText
         {
@@ -89,18 +68,30 @@ namespace OlibKey.ViewModels.Windows
                 FolderList.Remove(SelectedFolderItem);
             });
             EditFolderCommand = ReactiveCommand.Create(() => SelectedFolderItem.Focusing());
-            UnselectFolderItemCommand = ReactiveCommand.Create(() => { SelectedFolderIndex = -1; });
-
-            SelectedLoginIndex = SelectedFolderIndex = -1;
+            UnselectFolderItemCommand = ReactiveCommand.Create(() => { SelectedFolderItem = null; });
         }
 
         public FolderListItem SelectedFolderItem
         {
             get => _selectedFolderItem;
-            set => this.RaiseAndSetIfChanged(ref _selectedFolderItem, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedFolderItem, value);
+                ChangeItemCallback?.Invoke();
+            }
+        }
+        public LoginListItem SelectedLoginItem
+        {
+            get => _selectedLoginItem;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedLoginItem, value);
+                if (SelectedLoginItem == null) return;
+                App.MainWindowViewModel.SelectedTabItem.SearchSelectLogin(SelectedLoginItem);
+                App.SearchWindow.Close();
+            }
         }
 
-        private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
         private void CreateFolder() =>
             FolderList.Add(new FolderListItem(new Folder())
             {

@@ -61,7 +61,7 @@ namespace OlibKey
 
         private static void AppMain(Application app, string[] args)
         {
-            App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = args.ToList() };
+            App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = args };
 
             Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
             Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());

@@ -24,6 +24,7 @@ namespace OlibKey.Structures
 
 		public string Password { get; set; }
 		public string WebSite { get; set; }
+		public string SecretKey { get; set; }
 
 		#endregion
 

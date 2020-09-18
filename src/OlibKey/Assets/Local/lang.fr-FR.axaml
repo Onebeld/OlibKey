@@ -85,6 +85,7 @@
 		<v:String x:Key="MB7">Aucune coche sélectionnée ou longueur de mot de passe spécifiée!</v:String>
 		<v:String x:Key="MB8">Il n'y a aucune nouvelle mise à jour pour le moment.</v:String>
 		<v:String x:Key="MB9">Voulez-vous vraiment vider votre corbeille?</v:String>
+		<v:String x:Key="MB10">Vous avez entré la mauvaise clé secrète!</v:String>
 
 		<v:String x:Key="Successfully">Avec succès!</v:String>
 
@@ -186,6 +187,9 @@
 		<v:String x:Key="Type">Tapez</v:String>
 		<v:String x:Key="Login">Identifiant</v:String>
 		<v:String x:Key="BankCard">Carte bancaire</v:String>
+		<v:String x:Key="VerificationCode">Code de vérification (TOTP)</v:String>
+		<v:String x:Key="Activate">Activer</v:String>
+		<v:String x:Key="SecretKey">La clé secrète</v:String>
 		
 		<v:String x:Key="Color">Couleur</v:String>
 		<v:String x:Key="UseColor">Utiliser la couleur</v:String>

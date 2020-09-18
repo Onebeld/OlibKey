@@ -25,7 +25,7 @@ namespace OlibKey.ViewModels.Controls
 		private bool _isUnlockDatabase;
 		private bool _isLockDatabase;
 
-		private int _selectedIndex;
+		private LoginListItem _selectedLoginItem;
 
 		private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
 
@@ -55,27 +55,26 @@ namespace OlibKey.ViewModels.Controls
 			get => _isUnlockDatabase;
 			set => this.RaiseAndSetIfChanged(ref _isUnlockDatabase, value);
 		}
-		public int SelectedIndex
-		{
-			get => _selectedIndex;
-			set
-			{
-				this.RaiseAndSetIfChanged(ref _selectedIndex, value);
-				InformationLogin(SelectedLoginItem);
-			}
-		}
 		public string MasterPassword { get; set; }
-		private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedIndex]; } catch { return null; } } }
+		public LoginListItem SelectedLoginItem
+        {
+			get => _selectedLoginItem;
+			set
+            {
+				this.RaiseAndSetIfChanged(ref _selectedLoginItem, value);
+				InformationLogin(SelectedLoginItem);
+            }
+        }
 
         #endregion
 
-        public DatabaseViewModel() => SelectedIndex = -1;
+        public DatabaseViewModel() => SelectedLoginItem = null;
 
         public void SearchSelectLogin(LoginListItem i)
 		{
 			foreach (LoginListItem item in LoginList.Where(item => item.LoginID == i.LoginID))
 			{
-				SelectedIndex = LoginList.IndexOf(item);
+				SelectedLoginItem = item;
 				break;
 			}
 		}
@@ -96,14 +95,11 @@ namespace OlibKey.ViewModels.Controls
 			LoginList.Add(ali);
 			ali.GetIconElement();
 
-			if (App.MainWindowViewModel.SelectedTabItem == this)
-				App.MainWindowViewModel.CountLogins = LoginList.Count;
-
 			Router.Navigate.Execute(new StartPageViewModel(this));
 		}
 		private void CreateLogin()
 		{
-			SelectedIndex = -1;
+			SelectedLoginItem = null;
 			Router.Navigate.Execute(new CreateLoginPageViewModel(Database, this)
 			{
 				BackPageCallback = StartPage,
@@ -121,7 +117,7 @@ namespace OlibKey.ViewModels.Controls
 		}
 		private void DeleteLogin()
 		{
-			LoginList.RemoveAt(SelectedIndex);
+			LoginList.Remove(SelectedLoginItem);
 			Router.Navigate.Execute(new StartPageViewModel(this));
 		}
 		private void EditComplete(LoginListItem a, bool changeWebSite)
@@ -136,7 +132,7 @@ namespace OlibKey.ViewModels.Controls
 		}
 		public void ClearLoginsList()
 		{
-			SelectedIndex = -1;
+			SelectedLoginItem = null;
 			LoginList.Clear();
 		}
 		public void StartPage() => Router.Navigate.Execute(new StartPageViewModel(this));

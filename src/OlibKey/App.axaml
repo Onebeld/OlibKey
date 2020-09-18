@@ -139,7 +139,7 @@
 		<Style Selector="ProgressBar">
 			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeGlobalBorderBrush}"/>
-			<Setter Property="Maximum" Value="300"/>
+			<Setter Property="Foreground" Value="{DynamicResource ThemeSelectedControlColor}"/>
 		</Style>
 		<Style Selector="ProgressBar /template/ Border">
 			<Setter Property="CornerRadius" Value="5"/>

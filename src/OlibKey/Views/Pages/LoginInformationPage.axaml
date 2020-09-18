@@ -41,7 +41,7 @@
 							</StackPanel>
 							<DockPanel>
 								<TextBlock Text="{DynamicResource Complexity}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
-								<ProgressBar x:Name="pbHard"/>
+								<ProgressBar x:Name="pbHard" Maximum="300"/>
 							</DockPanel>
 							<Separator/>
 
@@ -51,6 +51,13 @@
 								<Button Content="{DynamicResource GoTo}" Command="{Binding OpenWebSiteCommand}" Padding="5 2"/>
 								<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.WebSite}" Padding="5 2"/>
 							</StackPanel>
+							
+							<Separator/>
+							
+							<TextBlock Text="{DynamicResource VerificationCode}" Classes="Heading"/>
+							<TextBox IsReadOnly="True" Text="{Binding GeneratedCode}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding GeneratedCode}" Padding="5 2"/>
+							<ProgressBar Maximum="30" Value="{Binding TimeLeft}"/>
 						</StackPanel>
 						<StackPanel IsVisible="{Binding VisibleReminderSection}" Spacing="5">
 							<Separator/>

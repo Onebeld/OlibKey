@@ -37,8 +37,8 @@
 		<v:String x:Key="SortAlphabetically">Сортировка по алфавиту</v:String>
 		<v:String x:Key="Favorite">Избранное</v:String>
 
-		<v:String x:Key="GitHub">OlibKey на GitHub</v:String>
-		<v:String x:Key="VKontakte">OlibKey во ВКонтакте</v:String>
+		<v:String x:Key="GitHub">OlibKey в GitHub</v:String>
+		<v:String x:Key="VKontakte">OlibKey в ВКонтакте</v:String>
 		<v:String x:Key="Facebook">OlibKey в Facebook</v:String>
 
 		<v:String x:Key="Ready">Готов</v:String>
@@ -85,6 +85,7 @@
 		<v:String x:Key="MB7">Не выбрано ни одной галочки или не указана длина пароля!</v:String>
 		<v:String x:Key="MB8">На данный момент нет новых обновлений</v:String>
 		<v:String x:Key="MB9">Вы действительно хотите очистить корзину?</v:String>
+		<v:String x:Key="MB10">Вы ввели неправильный секретный ключ!</v:String>
 
 		<v:String x:Key="Successfully">Успешно!</v:String>
 
@@ -186,6 +187,9 @@
 		<v:String x:Key="Type">Тип</v:String>
 		<v:String x:Key="Login">Логин</v:String>
 		<v:String x:Key="BankCard">Банковская карта</v:String>
+		<v:String x:Key="VerificationCode">Код верификации (TOTP)</v:String>
+		<v:String x:Key="Activate">Активировать</v:String>
+		<v:String x:Key="SecretKey">Секретный ключ</v:String>
 		
 		<v:String x:Key="Color">Цвет</v:String>
 		<v:String x:Key="UseColor">Использовать цвет</v:String>

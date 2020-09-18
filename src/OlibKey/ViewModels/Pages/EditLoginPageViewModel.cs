@@ -1,8 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Threading;
 using OlibKey.Structures;
 using OlibKey.Views.Controls;
 using OlibKey.Views.Windows;
+using OtpNet;
 using ReactiveUI;
 using Splat;
 using System;
@@ -16,6 +18,13 @@ namespace OlibKey.ViewModels.Pages
 {
     public class EditLoginPageViewModel : ReactiveObject, IRoutableViewModel
     {
+        private Totp Totp;
+
+        private string _generatedCode;
+        private int _timeLeft;
+
+        private DispatcherTimer Timer;
+
         private int _selectionFolderIndex;
 
         #region Section's
@@ -37,6 +46,16 @@ namespace OlibKey.ViewModels.Pages
         {
             get => _selectionFolderIndex;
             set => this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
+        }
+        private string GeneratedCode
+        {
+            get => _generatedCode;
+            set => this.RaiseAndSetIfChanged(ref _generatedCode, value);
+        }
+        private int TimeLeft
+        {
+            get => _timeLeft;
+            set => this.RaiseAndSetIfChanged(ref _timeLeft, value);
         }
 
         private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
@@ -85,6 +104,7 @@ namespace OlibKey.ViewModels.Pages
 
                     NewLogin.Password = acc.LoginItem.Password;
                     NewLogin.WebSite = acc.LoginItem.WebSite;
+                    NewLogin.SecretKey = acc.LoginItem.SecretKey;
                     break;
                 case 1:
                     VisibleBankCardSection = true;
@@ -151,6 +171,20 @@ namespace OlibKey.ViewModels.Pages
                     DeleteFileCallback = DeleteImportedFile
                 });
             }
+
+            try
+            {
+                Totp = new Totp(Base32Encoding.ToBytes(NewLogin.SecretKey.Replace(" ", "")), step: 30, timeCorrection: new TimeCorrection(DateTime.UtcNow));
+                GeneratedCode = Totp.ComputeTotp();
+                TimeLeft = Totp.RemainingSeconds();
+                Timer = new DispatcherTimer
+                {
+                    Interval = new TimeSpan(0, 0, 0, 0, 50)
+                };
+                Timer.Tick += Timer_Tick;
+                Timer.Start();
+            }
+            catch {}
         }
 
         private async void ImportFile()
@@ -250,5 +284,33 @@ namespace OlibKey.ViewModels.Pages
             }
         }
         private void Back() => CancelCallback?.Invoke(LoginList);
+        private async void ActivateTOTP()
+        {
+            try
+            {
+                if (Timer != null && Timer.IsEnabled) Timer.Stop();
+
+                Totp = new Totp(Base32Encoding.ToBytes(NewLogin.SecretKey.Replace(" ", "")), step: 30, timeCorrection: new TimeCorrection(DateTime.UtcNow));
+                GeneratedCode = Totp.ComputeTotp();
+                TimeLeft = Totp.RemainingSeconds();
+                Timer = new DispatcherTimer
+                {
+                    Interval = new TimeSpan(0, 0, 0, 0, 50)
+                };
+                Timer.Tick += Timer_Tick;
+                Timer.Start();
+            }
+            catch
+            {
+                await MessageBox.Show(App.MainWindow, null,
+                    (string)Application.Current.FindResource("MB10"), (string)Application.Current.FindResource("Error"),
+                    MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+            }
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            GeneratedCode = Totp.ComputeTotp();
+            TimeLeft = Totp.RemainingSeconds();
+        }
     }
 }

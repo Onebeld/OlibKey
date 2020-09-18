@@ -85,6 +85,7 @@
 		<v:String x:Key="MB7">Keine Häkchen ausgewählt oder Passwortlänge angegeben!</v:String>
 		<v:String x:Key="MB8">Derzeit gibt es keine neuen Updates.</v:String>
 		<v:String x:Key="MB9">Sind Sie sicher, dass Sie Ihren Müll leeren möchten?</v:String>
+		<v:String x:Key="MB10">Sie haben den falschen geheimen Schlüssel eingegeben!</v:String>
 
 		<v:String x:Key="Successfully">Erfolgreich!</v:String>
 
@@ -196,6 +197,9 @@
 		<v:String x:Key="CardNumber">Nummer</v:String>
 		<v:String x:Key="YearOfService">Dienstjahr</v:String>
 		<v:String x:Key="SecurityCodeCard">Sicherheitscode</v:String>
+		<v:String x:Key="VerificationCode">Bestätigungscode (TOTP)</v:String>
+		<v:String x:Key="Activate">Aktivieren</v:String>
+		<v:String x:Key="SecretKey">Der geheime Schlüssel</v:String>
 
 		<v:String x:Key="Passport">Persönliche Daten</v:String>
 		<v:String x:Key="FullName">Vollständiger Name</v:String>

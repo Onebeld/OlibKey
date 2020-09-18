@@ -10,6 +10,9 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using OtpNet;
+using Avalonia.Threading;
+using OlibKey.Views.Windows;
 
 namespace OlibKey.ViewModels.Pages
 {
@@ -18,6 +21,13 @@ namespace OlibKey.ViewModels.Pages
         private int _selectionFolderIndex;
         private ObservableCollection<CustomFieldListItem> _customFields;
         private ObservableCollection<ImportedFileListItem> _importedFiles;
+
+        private Totp Totp;
+
+        private string _generatedCode;
+        private int _timeLeft;
+
+        private DispatcherTimer Timer;
 
         #region Property's
 
@@ -40,11 +50,20 @@ namespace OlibKey.ViewModels.Pages
             get => _customFields;
             set => this.RaiseAndSetIfChanged(ref _customFields, value);
         }
-
         private ObservableCollection<ImportedFileListItem> ImportedFiles
         {
             get => _importedFiles;
             set => this.RaiseAndSetIfChanged(ref _importedFiles, value);
+        }
+        private string GeneratedCode
+        {
+            get => _generatedCode;
+            set => this.RaiseAndSetIfChanged(ref _generatedCode, value);
+        }
+        private int TimeLeft
+        {
+            get => _timeLeft;
+            set => this.RaiseAndSetIfChanged(ref _timeLeft, value);
         }
 
         #endregion
@@ -103,14 +122,15 @@ namespace OlibKey.ViewModels.Pages
         {
             try
             {
-                OpenFileDialog dialog = new OpenFileDialog{ AllowMultiple = true };
+                OpenFileDialog dialog = new OpenFileDialog { AllowMultiple = true };
 
                 List<string> files = (await dialog.ShowAsync(App.MainWindow)).ToList();
 
                 foreach (var file in files)
                 {
-                    ImportedFiles.Add(new ImportedFileListItem { 
-                        DataContext = new ImportedFile { Name = Path.GetFileName(file) , Data = Core.FileInteractions.ImportFile(file) }, 
+                    ImportedFiles.Add(new ImportedFileListItem
+                    {
+                        DataContext = new ImportedFile { Name = Path.GetFileName(file), Data = Core.FileInteractions.ImportFile(file) },
                         ID = Guid.NewGuid().ToString("N"),
                         DeleteFileCallback = DeleteImportedFile
                     });
@@ -136,5 +156,34 @@ namespace OlibKey.ViewModels.Pages
             }
         }
         private void Back() => BackPageCallback?.Invoke();
+        private async void ActivateTOTP()
+        {
+            try
+            {
+                if (Timer != null && Timer.IsEnabled) Timer.Stop();
+
+                Totp = new Totp(Base32Encoding.ToBytes(NewLogin.SecretKey.Replace(" ", "")), step: 30, timeCorrection: new TimeCorrection(DateTime.UtcNow));
+                GeneratedCode = Totp.ComputeTotp();
+                TimeLeft = Totp.RemainingSeconds();
+                Timer = new DispatcherTimer
+                {
+                    Interval = new TimeSpan(0, 0, 0, 0, 50)
+                };
+                Timer.Tick += Timer_Tick;
+                Timer.Start();
+            }
+            catch
+            {
+                await MessageBox.Show(App.MainWindow, null,
+                    (string)Application.Current.FindResource("MB10"), (string)Application.Current.FindResource("Error"),
+                    MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
+            }
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            GeneratedCode = Totp.ComputeTotp();
+            TimeLeft = Totp.RemainingSeconds();
+        }
     }
 }

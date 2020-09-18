@@ -35,12 +35,20 @@
 							</StackPanel>
 							<DockPanel>
 								<TextBlock Text="{DynamicResource Complexity}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
-								<ProgressBar x:Name="pbHard"/>
+								<ProgressBar x:Name="pbHard" Maximum="300"/>
 							</DockPanel>
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource WebSite}" Classes="Heading"/>
 							<TextBox Text="{Binding NewLogin.WebSite}"/>
+							
+							<Separator/>
+							
+							<TextBlock Text="{DynamicResource VerificationCode}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.SecretKey}" Watermark="{DynamicResource SecretKey}" PasswordChar="•"/>
+							<Button Content="{DynamicResource Activate}" Command="{Binding ActivateTOTP}" Padding="5 2"/>
+							<TextBox IsReadOnly="True" Text="{Binding GeneratedCode}"/>
+							<ProgressBar Maximum="30" Value="{Binding TimeLeft}"/>
 						</StackPanel>
 						<StackPanel IsVisible="{Binding VisibleReminderSection}" Spacing="5">
 							<Separator/>

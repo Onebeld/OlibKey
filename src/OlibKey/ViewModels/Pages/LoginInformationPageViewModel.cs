@@ -1,7 +1,9 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Threading;
 using OlibKey.Structures;
 using OlibKey.Views.Controls;
+using OtpNet;
 using ReactiveUI;
 using Splat;
 using System;
@@ -17,6 +19,13 @@ namespace OlibKey.ViewModels.Pages
 		private int _selectionFolderIndex;
 		private ObservableCollection<CustomFieldListItem> _customFields;
 		private ObservableCollection<ImportedFileListItem> _importedFiles;
+
+		private Totp Totp;
+
+        private string _generatedCode;
+        private int _timeLeft;
+
+        private DispatcherTimer Timer;
 
 		#region Section's
 
@@ -50,12 +59,23 @@ namespace OlibKey.ViewModels.Pages
 			get => _importedFiles;
 			set => this.RaiseAndSetIfChanged(ref _importedFiles, value);
         }
+		private string GeneratedCode
+        {
+            get => _generatedCode;
+            set => this.RaiseAndSetIfChanged(ref _generatedCode, value);
+        }
+        private int TimeLeft
+        {
+            get => _timeLeft;
+            set => this.RaiseAndSetIfChanged(ref _timeLeft, value);
+        }
 		private LoginListItem LoginItem { get; set; }
 		private bool VisibleDateChanged { get; set; }
 		private bool IsVisibleCustomFields { get; set; } = true;
 		private bool IsVisibleImportedFiles { get; set; } = true;
 		private ObservableCollection<Folder> Folders { get; set; }
 		private Login LoginInformation { get; set; }
+
 
 		#endregion
 
@@ -138,6 +158,20 @@ namespace OlibKey.ViewModels.Pages
 			if (ImportedFiles.Count == 0) IsVisibleImportedFiles = false;
 
 			if (ImportedFiles.Count != 0) ImportedFiles[^1].SLine.IsVisible = false;
+
+			try
+            {
+                Totp = new Totp(Base32Encoding.ToBytes(LoginInformation.SecretKey.Replace(" ", "")), step: 30, timeCorrection: new TimeCorrection(DateTime.UtcNow));
+                GeneratedCode = Totp.ComputeTotp();
+                TimeLeft = Totp.RemainingSeconds();
+                Timer = new DispatcherTimer
+                {
+                    Interval = new TimeSpan(0, 0, 0, 0, 50)
+                };
+                Timer.Tick += Timer_Tick;
+                Timer.Start();
+            }
+            catch {}
 		}
 
 		private void CopyInformation(string s)
@@ -150,6 +184,12 @@ namespace OlibKey.ViewModels.Pages
 				App.ClearingClipboard.Start();
             }
 			App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Copied"));
+        }
+
+		private void Timer_Tick(object sender, EventArgs e)
+        {
+            GeneratedCode = Totp.ComputeTotp();
+            TimeLeft = Totp.RemainingSeconds();
         }
 	}
 }

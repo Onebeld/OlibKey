@@ -156,7 +156,7 @@
 			</MenuItem>
 		</Menu>
 		<Grid ColumnDefinitions="1*,2*" RowDefinitions="Auto,*,20">
-			<TabControl x:Name="tabItems" Grid.ColumnSpan="2" Grid.RowSpan="2" ZIndex="5" SelectedIndex="{Binding SelectedTabIndex}" Items="{Binding TabItems}">
+			<TabControl x:Name="tabItems" Grid.ColumnSpan="2" Grid.RowSpan="2" ZIndex="5" SelectedItem="{Binding SelectedTabItem, Mode=TwoWay}" Items="{Binding TabItems}">
 				<TabControl.ItemTemplate>
 					<DataTemplate>
 						<StackPanel Spacing="5" Orientation="Horizontal">
@@ -179,7 +179,7 @@
 									</reactiveUi:RoutedViewHost.DefaultContent>
 								</reactiveUi:RoutedViewHost>
 								<TextBlock Text="{DynamicResource Empty}" ZIndex="5" Foreground="{DynamicResource ThemeForegroundOpacityBrush}" IsVisible="{Binding !LoginList.Count}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-								<ListBox Grid.Row="0" Grid.Column="0" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding LoginList}" SelectedIndex="{Binding SelectedIndex}" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
+								<ListBox Grid.Row="0" Grid.Column="0" Padding="0" AutoScrollToSelectedItem="True" VirtualizationMode="None" Items="{Binding LoginList}" SelectedItem="{Binding SelectedLoginItem}" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" BorderThickness="0 0 1 0"/>
 								<Border Grid.Column="0" Grid.Row="2" BorderThickness="0 1 1 0" Classes="ButtonsMenu">
 									<Grid ColumnDefinitions="*,40">
 										<Button Command="{Binding CreateLogin}" Content="{DynamicResource Add}" Margin="10 10 5 10" IsEnabled="{Binding IsUnlockDatabase}"/>
@@ -202,7 +202,7 @@
 					</StackPanel>
 					<StackPanel IsVisible="{Binding IsUnlockDatabase}" Grid.Column="2" Orientation="Horizontal" Spacing="5">
 						<TextBlock Text="{DynamicResource Elements}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
-						<TextBlock Text="{Binding CountLogins}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
+						<TextBlock Text="{Binding SelectedTabItem.LoginList.Count}" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 
 						<TextBlock Text="|" Margin="0 0 5 0" Foreground="{DynamicResource ThemeForegroundBrush}"/>
 					</StackPanel>

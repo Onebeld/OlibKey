@@ -20,14 +20,13 @@ namespace OlibKey
         private bool _isUnlockDatabase;
         private bool _isLockDatabase;
 
-        private int _selectedTabIndex;
-        private int _countLogins;
-
         private ChangeMasterPasswordWindow _windowChangeMasterPassword;
         private SettingsWindow _settingsWindow;
         public PasswordGeneratorWindow PasswordGenerator;
         public CheckingWeakPasswordsWindow CheckingWindow;
         public TrashWindow TrashWindow;
+
+        private DatabaseViewModel _selectedTabItem;
 
         private ObservableCollection<DatabaseViewModel> _tabItems = new ObservableCollection<DatabaseViewModel>();
 
@@ -62,16 +61,6 @@ namespace OlibKey
             get => _tabItems;
             set => this.RaiseAndSetIfChanged(ref _tabItems, value);
         }
-        private int SelectedTabIndex
-        {
-            get => _selectedTabIndex;
-            set => this.RaiseAndSetIfChanged(ref _selectedTabIndex, value);
-        }
-        public int CountLogins
-        {
-            get => _countLogins;
-            set => this.RaiseAndSetIfChanged(ref _countLogins, value);
-        }
         public bool IsUnlockDatabase
         {
             get => _isUnlockDatabase;
@@ -82,8 +71,12 @@ namespace OlibKey
             get => _isLockDatabase;
             set => this.RaiseAndSetIfChanged(ref _isLockDatabase, value);
         }
-        public DatabaseViewModel SelectedTabItem { get { try { return TabItems[SelectedTabIndex]; } catch { return null; } } }
-        public List<string> OpenStorages { get; set; }
+        public DatabaseViewModel SelectedTabItem
+        {
+            get => _selectedTabItem;
+            set => this.RaiseAndSetIfChanged(ref _selectedTabItem, value);
+        }
+        public string[] OpenStorages { get; set; }
 
         #endregion
 
@@ -114,14 +107,14 @@ namespace OlibKey
 
         public void Loading()
         {
-            for (int i = 0; i < OpenStorages.Count; i++)
+            for (int i = 0; i < OpenStorages.Length; i++)
             {
                 string item = OpenStorages[i];
                 if (Path.GetExtension(item) == ".olib")
                     CreateTab(Program.Settings.PathDatabase = item, true, false);
             }
 
-            if (OpenStorages.Count > 0)
+            if (OpenStorages.Length > 0)
             {
                 OpenStorages = null;
                 return;
@@ -133,7 +126,7 @@ namespace OlibKey
         public void OpenStorageDnD(IEnumerable<string> files)
         {
             foreach (string item in files.Where(item => Path.GetExtension(item) == ".olib").Where(item =>
-                TabItems.All(i => ((DatabaseViewModel)i).PathDatabase != item)))
+                TabItems.All(i => i.PathDatabase != item)))
                 CreateTab(Program.Settings.PathDatabase = item, true, false);
 
             App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not6"));
@@ -150,7 +143,7 @@ namespace OlibKey
             {
                 db.Database.Logins = db.LoginList.Select(item => item.LoginItem).ToList();
                 SaveAndLoadDatabase.SaveFiles(db);
-                App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not4") + $" {Path.GetFileNameWithoutExtension(db.PathDatabase)}");
+                App.MainWindow.MessageStatusBar((string)Application.Current.FindResource("Not4") + $" {db.Header}");
             }
             for (int i = 0; i < db.Router.NavigationStack.Count - 1; i++)
                 db.Router.NavigationStack.Remove(db.Router.NavigationStack[i]);
@@ -161,7 +154,6 @@ namespace OlibKey
             {
                 IsUnlockDatabase = SelectedTabItem.IsUnlockDatabase;
                 IsLockDatabase = SelectedTabItem.IsLockDatabase;
-                CountLogins = SelectedTabItem.LoginList.Count;
             }
             else
             {
@@ -171,8 +163,6 @@ namespace OlibKey
         }
         private void CreateTab(string path, bool isLockDatabase, bool isUnlockDatabase)
         {
-            string id = Guid.NewGuid().ToString("N");
-
             DatabaseViewModel db = new DatabaseViewModel
             {
                 Database = new Database(),
@@ -185,14 +175,17 @@ namespace OlibKey
 
             TabItems.Add(db);
 
-            IsLockDatabase = true;
-            IsUnlockDatabase = false;
+            if (Equals(SelectedTabItem, db))
+            {
+                IsLockDatabase = true;
+                IsUnlockDatabase = false;
+            }
 
             new RequireMasterPasswordWindow
             {
                 LoadStorageCallback = LoadDatabase,
                 databaseControl = db,
-                tbNameStorage = { Text = Path.GetFileNameWithoutExtension(Program.Settings.PathDatabase) }
+                tbNameStorage = { Text = db.Header }
             }.ShowDialog(App.MainWindow);
         }
         private void OpenCheckingWeakPasswordsWindow()
@@ -201,7 +194,7 @@ namespace OlibKey
             CheckingWindow = new CheckingWeakPasswordsWindow();
             CheckingWindow.ShowDialog(App.MainWindow);
 
-            SelectedTabItem.SelectedIndex = -1;
+            SelectedTabItem.SelectedLoginItem = null;
             SelectedTabItem.Router.Navigate.Execute(new StartPageViewModel());
         }
         private void CloseTab(DatabaseViewModel tab)
@@ -314,7 +307,7 @@ namespace OlibKey
         {
             if (SelectedTabItem == null || SelectedTabItem.IsLockDatabase) return;
 
-            SelectedTabItem.SelectedIndex = -1;
+            SelectedTabItem.SelectedLoginItem = null;
 
             SelectedTabItem.Router.Navigate.Execute(new CreateLoginPageViewModel(SelectedTabItem.Database, SelectedTabItem)
             {

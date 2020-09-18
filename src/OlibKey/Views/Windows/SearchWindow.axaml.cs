@@ -68,9 +68,9 @@ namespace OlibKey.Views.Windows
             _cbUseColor = this.FindControl<CheckBox>("cbUseColor");
 
 
-            DataContext = SearchViewModel = new SearchWindowViewModel { ChangeIndexCallback = CloseColorPicker };
+            DataContext = SearchViewModel = new SearchWindowViewModel { ChangeItemCallback = CloseColorPicker };
             _rAll.IsChecked = true;
-            _lbFolders.PointerPressed += (_, __) => ViewModel.SelectedFolderIndex = -1;
+            _lbFolders.PointerPressed += (_, __) => ViewModel.SelectedFolderItem = null;
             Closed += SearchWindow_Closed;
             await Task.Delay(50);
             _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(_ => ClearListAndSearchElement());
@@ -79,15 +79,9 @@ namespace OlibKey.Views.Windows
             colorPicker.ChangeColor += _colorPicker_ChangeColor;
         }
 
-        private void CommandCheckingUseColor(object sender, RoutedEventArgs e)
-        {
-            _cbUseColor.IsChecked = !_cbUseColor.IsChecked;
-        }
+        private void CommandCheckingUseColor(object sender, RoutedEventArgs e) => _cbUseColor.IsChecked = !_cbUseColor.IsChecked;
 
-        private void CloseColorPicker()
-        {
-            pColorPicker.Close();
-        }
+        private void CloseColorPicker() => pColorPicker.Close();
 
         private void OpenColorPicker(object sender, RoutedEventArgs e)
         {

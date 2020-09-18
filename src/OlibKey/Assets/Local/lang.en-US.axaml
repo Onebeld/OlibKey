@@ -85,6 +85,7 @@
 		<v:String x:Key="MB7">No checkmarks selected or password length specified!</v:String>
 		<v:String x:Key="MB8">There are no new updates at this time.</v:String>
 		<v:String x:Key="MB9">Are you sure you want to empty your trash?</v:String>
+		<v:String x:Key="MB10">You entered the wrong secret key!</v:String>
 
 		<v:String x:Key="Successfully">Successfully!</v:String>
 
@@ -196,6 +197,9 @@
 		<v:String x:Key="CardNumber">Number</v:String>
 		<v:String x:Key="YearOfService">Year of service</v:String>
 		<v:String x:Key="SecurityCodeCard">Security code</v:String>
+		<v:String x:Key="VerificationCode">Verification code (TOTP)</v:String>
+		<v:String x:Key="Activate">Activate</v:String>
+		<v:String x:Key="SecretKey">Secret key</v:String>
 
 		<v:String x:Key="Passport">Personal data</v:String>
 		<v:String x:Key="FullName">Full name</v:String>

@@ -1,4 +1,5 @@
-﻿using OlibKey.Views.Controls;
+﻿using OlibKey.ViewModels.Controls;
+using OlibKey.Views.Controls;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -78,20 +79,20 @@ namespace OlibKey.Core
 			return ms.ToArray();
 		}
 
-		public static string EncryptString(string text, DatabaseControl db)
+		public static string EncryptString(string text, DatabaseViewModel db)
 		{
 			string encryptString = text;
-			byte[] baPwd = Encoding.UTF8.GetBytes(db.ViewModel.MasterPassword);
+			byte[] baPwd = Encoding.UTF8.GetBytes(db.MasterPassword);
 			byte[] baPwdHash = SHA256.Create().ComputeHash(baPwd);
 
-			for (int d = 0; d < db.ViewModel.NumberOfEncryptionProcedures; d++)
+			for (int d = 0; d < db.NumberOfEncryptionProcedures; d++)
 			{
 				byte[] baText = Encoding.UTF8.GetBytes(encryptString);
 				byte[] baSalt = GetRandomBytes();
 				byte[] baEncrypted = new byte[baSalt.Length + baText.Length];
 				for (int i = 0; i < baSalt.Length; i++) baEncrypted[i] = baSalt[i];
 				for (int i = 0; i < baText.Length; i++) baEncrypted[i + baSalt.Length] = baText[i];
-				baEncrypted = AES_Encrypt(baEncrypted, baPwdHash, db.ViewModel.Iterations);
+				baEncrypted = AES_Encrypt(baEncrypted, baPwdHash, db.Iterations);
 
 				encryptString = Convert.ToBase64String(baEncrypted);
 			}
@@ -99,11 +100,11 @@ namespace OlibKey.Core
 			return encryptString;
 		}
 
-		public static string DecryptString(string text, DatabaseControl db, int iterations, int numberOfEncryptionProcedures)
+		public static string DecryptString(string text, DatabaseViewModel db, int iterations, int numberOfEncryptionProcedures)
 		{
 			string result = text;
 
-			byte[] baPwdHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(db.ViewModel.MasterPassword));
+			byte[] baPwdHash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(db.MasterPassword));
 
 			for (int d = 0; d < numberOfEncryptionProcedures; d++)
 			{
@@ -115,8 +116,8 @@ namespace OlibKey.Core
 				result = Encoding.UTF8.GetString(baResult);
 			}
 
-			db.ViewModel.Iterations = iterations;
-			db.ViewModel.NumberOfEncryptionProcedures = numberOfEncryptionProcedures;
+			db.Iterations = iterations;
+			db.NumberOfEncryptionProcedures = numberOfEncryptionProcedures;
 
 			return result;
 		}

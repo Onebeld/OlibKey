@@ -9,12 +9,12 @@ using OlibKey.Views.Windows;
 
 namespace OlibKey.ViewModels.Controls
 {
-	public class DatabaseControlViewModel : ReactiveObject, IScreen
+	public class DatabaseViewModel : ReactiveObject, IScreen
 	{
 		public Database Database { get; set; }
 
 		public string PathDatabase { get; set; }
-		public string TabID { get; set; }
+		public string Header { get; set; }
 
 		public int Iterations { get; set; }
 		public int NumberOfEncryptionProcedures { get; set; }
@@ -30,6 +30,8 @@ namespace OlibKey.ViewModels.Controls
 		private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
 
 		private RoutingState _router = new RoutingState();
+
+		public Action<DatabaseViewModel> CloseTabCallback { get; set; }
 
 		#region Propertie's
 
@@ -67,7 +69,7 @@ namespace OlibKey.ViewModels.Controls
 
         #endregion
 
-        public DatabaseControlViewModel() => SelectedIndex = -1;
+        public DatabaseViewModel() => SelectedIndex = -1;
 
         public void SearchSelectLogin(LoginListItem i)
 		{
@@ -94,7 +96,7 @@ namespace OlibKey.ViewModels.Controls
 			LoginList.Add(ali);
 			ali.GetIconElement();
 
-			if (App.MainWindowViewModel.SelectedTabItem.ViewModel == this)
+			if (App.MainWindowViewModel.SelectedTabItem == this)
 				App.MainWindowViewModel.CountLogins = LoginList.Count;
 
 			Router.Navigate.Execute(new StartPageViewModel(this));
@@ -140,6 +142,11 @@ namespace OlibKey.ViewModels.Controls
 		public void StartPage() => Router.Navigate.Execute(new StartPageViewModel(this));
 
 		private void BackPage(LoginListItem a) => Router.Navigate.Execute(new LoginInformationPageViewModel(a, Database, this) { EditContentCallback = EditLogin });
+
+		private void CloseTab()
+        {
+			CloseTabCallback?.Invoke(this);
+        }
 
 
         //// Problem with ListBox ////

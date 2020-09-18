@@ -41,9 +41,9 @@ namespace OlibKey.ViewModels.Windows
         {
             CloseWindowCommand = ReactiveCommand.Create(() => { App.MainWindowViewModel.CheckingWindow.Close(); });
 
-            for (int index = 0; index < App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.Count; index++)
+            for (int index = 0; index < App.MainWindowViewModel.SelectedTabItem.LoginList.Count; index++)
             {
-                LoginListItem item = App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList[index];
+                LoginListItem item = App.MainWindowViewModel.SelectedTabItem.LoginList[index];
                 if (item.LoginItem.Type == 0)
                     if (PasswordUtils.CheckPasswordStrength(item.LoginItem.Password) < 200)
                         Add(item.LoginItem, item.IconLogin, item.LoginID);
@@ -51,12 +51,12 @@ namespace OlibKey.ViewModels.Windows
 
             double sum = 0;
 
-            sum += App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.Where(item => item.LoginItem.Type == 0)
+            sum += App.MainWindowViewModel.SelectedTabItem.LoginList.Where(item => item.LoginItem.Type == 0)
                 .Aggregate<LoginListItem, double>(0, (current, item) => current + (PasswordUtils.CheckPasswordStrength(item.LoginItem.Password) > 300
                     ? 300
                     : PasswordUtils.CheckPasswordStrength(item.LoginItem.Password)));
 
-            int count = App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.Count(item => item.LoginItem.Type == 0);
+            int count = App.MainWindowViewModel.SelectedTabItem.LoginList.Count(item => item.LoginItem.Type == 0);
 
             OverallComplexity = count == 0 ? 0 : sum / count;
         }
@@ -84,7 +84,7 @@ namespace OlibKey.ViewModels.Windows
                     LoginListItem i = LoginList[index];
                     if (i.SelectedItem.IsChecked ?? false)
                     {
-                        foreach (LoginListItem item in App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.Where(
+                        foreach (LoginListItem item in App.MainWindowViewModel.SelectedTabItem.LoginList.Where(
                             item => item.LoginID == i.LoginID))
                         {
                             item.LoginItem.Password = PasswordGenerator.RandomPassword();

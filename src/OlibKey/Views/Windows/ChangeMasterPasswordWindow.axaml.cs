@@ -35,7 +35,7 @@ namespace OlibKey.Views.Windows
 			try
 			{
 				SaveAndLoadDatabase.LoadFiles(App.MainWindowViewModel.SelectedTabItem);
-				App.MainWindowViewModel.SelectedTabItem.ViewModel.MasterPassword = _tbNewPassword.Text;
+				App.MainWindowViewModel.SelectedTabItem.MasterPassword = _tbNewPassword.Text;
 
 				App.MainWindowViewModel.SaveDatabase(App.MainWindowViewModel.SelectedTabItem);
 

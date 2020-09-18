@@ -199,18 +199,18 @@ namespace OlibKey.ViewModels.Pages
         }
         private async void DeleteLogin()
         {
-            if (App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash)
+            if (App.MainWindowViewModel.SelectedTabItem.UseTrash)
             {
-                if (App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash == null)
+                if (App.MainWindowViewModel.SelectedTabItem.Database.Trash == null)
                 {
-                    App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash = new Trash
+                    App.MainWindowViewModel.SelectedTabItem.Database.Trash = new Trash
                     {
                         Logins = new List<Login>(),
                         Folders = new List<Folder>()
                     };
                 }
                 LoginList.LoginItem.DeleteDate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
-                App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Logins.Add(LoginList.LoginItem);
+                App.MainWindowViewModel.SelectedTabItem.Database.Trash.Logins.Add(LoginList.LoginItem);
                 DeleteLoginCallback?.Invoke();
             }
             else

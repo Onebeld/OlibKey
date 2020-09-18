@@ -57,7 +57,7 @@ namespace OlibKey.ViewModels.Windows
             {
                 this.RaiseAndSetIfChanged(ref _selectedLoginIndex, value);
                 if (SelectedLoginIndex == -1) return;
-                App.MainWindowViewModel.SelectedTabItem.ViewModel.SearchSelectLogin(SelectedLoginItem);
+                App.MainWindowViewModel.SelectedTabItem.SearchSelectLogin(SelectedLoginItem);
                 App.SearchWindow.Close();
             }
         }
@@ -73,18 +73,18 @@ namespace OlibKey.ViewModels.Windows
             CreateFolderCommand = ReactiveCommand.Create(CreateFolder);
             DeleteFolderCommand = ReactiveCommand.Create(() =>
             {
-                if (App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash)
+                if (App.MainWindowViewModel.SelectedTabItem.UseTrash)
                 {
-                    if (App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash == null)
+                    if (App.MainWindowViewModel.SelectedTabItem.Database.Trash == null)
                     {
-                        App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash = new Trash
+                        App.MainWindowViewModel.SelectedTabItem.Database.Trash = new Trash
                         {
                             Logins = new List<Login>(),
                             Folders = new List<Folder>()
                         };
                     }
                     SelectedFolderItem.FolderContext.DeleteDate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
-                    App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Folders.Add(SelectedFolderItem.FolderContext);
+                    App.MainWindowViewModel.SelectedTabItem.Database.Trash.Folders.Add(SelectedFolderItem.FolderContext);
                 }
                 FolderList.Remove(SelectedFolderItem);
             });

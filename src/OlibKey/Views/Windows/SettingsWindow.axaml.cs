@@ -83,10 +83,10 @@ namespace OlibKey.Views.Windows
 
 					if (App.MainWindowViewModel.SelectedTabItem != null)
 					{
-						App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations = int.Parse(_tbIteration.Text);
-						App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
-						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression = _cbUseCompression.IsChecked ?? false;
-						App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash = _cbUseTrash.IsChecked ?? false;
+						App.MainWindowViewModel.SelectedTabItem.Iterations = int.Parse(_tbIteration.Text);
+						App.MainWindowViewModel.SelectedTabItem.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+						App.MainWindowViewModel.SelectedTabItem.UseCompression = _cbUseCompression.IsChecked ?? false;
+						App.MainWindowViewModel.SelectedTabItem.UseTrash = _cbUseTrash.IsChecked ?? false;
 					}
 				}
 
@@ -104,14 +104,14 @@ namespace OlibKey.Views.Windows
 				App.Autosave.Start();
 			};
 
-			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem != null && App.MainWindowViewModel.SelectedTabItem.ViewModel.IsUnlockDatabase;
+			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem != null && App.MainWindowViewModel.SelectedTabItem.IsUnlockDatabase;
 
 			if (App.MainWindowViewModel.SelectedTabItem != null)
 			{
-				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.Iterations.ToString();
-				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.ViewModel.NumberOfEncryptionProcedures.ToString();
-				_cbUseCompression.IsChecked = App.MainWindowViewModel.SelectedTabItem.ViewModel.UseCompression;
-				_cbUseTrash.IsChecked = App.MainWindowViewModel.SelectedTabItem.ViewModel.UseTrash;
+				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.Iterations.ToString();
+				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.NumberOfEncryptionProcedures.ToString();
+				_cbUseCompression.IsChecked = App.MainWindowViewModel.SelectedTabItem.UseCompression;
+				_cbUseTrash.IsChecked = App.MainWindowViewModel.SelectedTabItem.UseTrash;
 			}
 
 			_tbAutosave.Text = Program.Settings.AutosaveDuration.ToString();

@@ -42,17 +42,17 @@ namespace OlibKey.ViewModels.Windows
         {
             CloseCommand = ReactiveCommand.Create(() => { App.MainWindowViewModel.TrashWindow.Close(); });
 
-            if (App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash == null)
-                App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash = new Trash
+            if (App.MainWindowViewModel.SelectedTabItem.Database.Trash == null)
+                App.MainWindowViewModel.SelectedTabItem.Database.Trash = new Trash
                 {
                     Folders = new List<Folder>(),
                     Logins = new List<Login>()
                 };
 
-            for (int i = 0; i < App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Logins.Count; i++)
-                AddLogin(App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Logins[i]);
-            for (int i = 0; i < App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Folders.Count; i++)
-                AddFolder(App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Folders[i]);
+            for (int i = 0; i < App.MainWindowViewModel.SelectedTabItem.Database.Trash.Logins.Count; i++)
+                AddLogin(App.MainWindowViewModel.SelectedTabItem.Database.Trash.Logins[i]);
+            for (int i = 0; i < App.MainWindowViewModel.SelectedTabItem.Database.Trash.Folders.Count; i++)
+                AddFolder(App.MainWindowViewModel.SelectedTabItem.Database.Trash.Folders[i]);
         }
 
         private async void ClearTrash()
@@ -61,8 +61,8 @@ namespace OlibKey.ViewModels.Windows
                     (string)Application.Current.FindResource("MB9"), (string)Application.Current.FindResource("Message"),
                     MessageBox.MessageBoxButtons.YesNo, MessageBox.MessageBoxIcon.Question) == MessageBox.MessageBoxResult.Yes)
             {
-                App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Logins.Clear();
-                App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Folders.Clear();
+                App.MainWindowViewModel.SelectedTabItem.Database.Trash.Logins.Clear();
+                App.MainWindowViewModel.SelectedTabItem.Database.Trash.Folders.Clear();
                 LoginsList.Clear();
                 FoldersList.Clear();
             }
@@ -74,8 +74,8 @@ namespace OlibKey.ViewModels.Windows
             for (int x = FoldersList.Count - 1; x > -1; x--)
                 if (FoldersList[x].SelectedItem.IsChecked ?? false) FoldersList.Remove(FoldersList[x]);
 
-            App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Logins = LoginsList.Select(item => item.LoginItem).ToList();
-            App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Folders = FoldersList.Select(item => item.FolderContext).ToList();
+            App.MainWindowViewModel.SelectedTabItem.Database.Trash.Logins = LoginsList.Select(item => item.LoginItem).ToList();
+            App.MainWindowViewModel.SelectedTabItem.Database.Trash.Folders = FoldersList.Select(item => item.FolderContext).ToList();
         }
         private void RestoreSelectedItems()
         {
@@ -83,7 +83,7 @@ namespace OlibKey.ViewModels.Windows
                 if (LoginsList[x].SelectedItem.IsChecked ?? false)
                 {
                     LoginsList[x].LoginItem.DeleteDate = null;
-                    App.MainWindowViewModel.SelectedTabItem.ViewModel.LoginList.Add(new LoginListItem(LoginsList[x].LoginItem)
+                    App.MainWindowViewModel.SelectedTabItem.LoginList.Add(new LoginListItem(LoginsList[x].LoginItem)
                     {
                         LoginID = Guid.NewGuid().ToString("N"),
                         IconLogin = { Source = LoginsList[x].IconLogin.Source },
@@ -94,12 +94,12 @@ namespace OlibKey.ViewModels.Windows
                 if (FoldersList[x].SelectedItem.IsChecked ?? false)
                 {
                     FoldersList[x].FolderContext.DeleteDate = null;
-                    App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Folders.Add(FoldersList[x].FolderContext);
+                    App.MainWindowViewModel.SelectedTabItem.Database.Folders.Add(FoldersList[x].FolderContext);
                     FoldersList.Remove(FoldersList[x]);
                 }
 
-            App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Logins = LoginsList.Select(item => item.LoginItem).ToList();
-            App.MainWindowViewModel.SelectedTabItem.ViewModel.Database.Trash.Folders = FoldersList.Select(item => item.FolderContext).ToList();
+            App.MainWindowViewModel.SelectedTabItem.Database.Trash.Logins = LoginsList.Select(item => item.LoginItem).ToList();
+            App.MainWindowViewModel.SelectedTabItem.Database.Trash.Folders = FoldersList.Select(item => item.FolderContext).ToList();
         }
 
         private void AddLogin(Login a)

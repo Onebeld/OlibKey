@@ -152,7 +152,6 @@
 		<v:String x:Key="Sec">վայրկյան</v:String>
 		<v:String x:Key="Min">րոպեներ</v:String>
 		<v:String x:Key="Day">օրեր</v:String>
-		<v:String x:Key="HardwareAcceleration">Սարքավորումների արագացում (անհրաժեշտ է վերաբեռնումը)</v:String>
 		<v:String x:Key="AutoDeleteFromTrash">Ավտոմատ կերպով հանեք իրը ​​զամբյուղից ՝</v:String>
 		<v:String x:Key="ClearingClipboard">Մաքրել clipboard միջոցով պատճենելուց հետո ՝</v:String>
 

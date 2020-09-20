@@ -35,7 +35,7 @@
 		<AvaloniaResource Include="Assets\Font\NotoSans-Bold.ttf" />
 		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
 	  <PackageReference Include="Otp.NET" Version="1.2.2" />
 	</ItemGroup>
@@ -45,7 +45,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\Controls\ImpotedFileListItem.axaml.cs">
+	  <Compile Update="Views\Controls\ImportedFileListItem.axaml.cs">
 	    <DependentUpon>ImpotedFileListItem.axaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>

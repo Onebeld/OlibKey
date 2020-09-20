@@ -152,7 +152,6 @@
 		<v:String x:Key="Sec">seconds</v:String>
 		<v:String x:Key="Min">minutes</v:String>
 		<v:String x:Key="Day">days</v:String>
-		<v:String x:Key="HardwareAcceleration">Hardware acceleration (reboot required)</v:String>
 		<v:String x:Key="AutoDeleteFromTrash">Automatically remove an item from the trash via:</v:String>
 		<v:String x:Key="ClearingClipboard">Clear clipboard after copying via:</v:String>
 

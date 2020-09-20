@@ -1,11 +1,8 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
-using OlibKey.Controls.ColorPicker;
-using OlibKey.ViewModels.Color;
+using OlibKey.Views.Controls;
 using System;
 using System.Text.RegularExpressions;
 
@@ -83,10 +80,10 @@ namespace OlibKey.Views.Windows
 
 					if (App.MainWindowViewModel.SelectedTabItem != null)
 					{
-						App.MainWindowViewModel.SelectedTabItem.Iterations = int.Parse(_tbIteration.Text);
-						App.MainWindowViewModel.SelectedTabItem.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
-						App.MainWindowViewModel.SelectedTabItem.UseCompression = _cbUseCompression.IsChecked ?? false;
-						App.MainWindowViewModel.SelectedTabItem.UseTrash = _cbUseTrash.IsChecked ?? false;
+						((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Iterations = int.Parse(_tbIteration.Text);
+						((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.NumberOfEncryptionProcedures = int.Parse(_tbNumberOfEncryptionProcedures.Text);
+						((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.UseCompression = _cbUseCompression.IsChecked ?? false;
+						((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.UseTrash = _cbUseTrash.IsChecked ?? false;
 					}
 				}
 
@@ -104,14 +101,14 @@ namespace OlibKey.Views.Windows
 				App.Autosave.Start();
 			};
 
-			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem != null && App.MainWindowViewModel.SelectedTabItem.IsUnlockDatabase;
+			_tiStorage.IsEnabled = App.MainWindowViewModel.SelectedTabItem != null && ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.IsUnlockDatabase;
 
 			if (App.MainWindowViewModel.SelectedTabItem != null)
 			{
-				_tbIteration.Text = App.MainWindowViewModel.SelectedTabItem.Iterations.ToString();
-				_tbNumberOfEncryptionProcedures.Text = App.MainWindowViewModel.SelectedTabItem.NumberOfEncryptionProcedures.ToString();
-				_cbUseCompression.IsChecked = App.MainWindowViewModel.SelectedTabItem.UseCompression;
-				_cbUseTrash.IsChecked = App.MainWindowViewModel.SelectedTabItem.UseTrash;
+				_tbIteration.Text = ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Iterations.ToString();
+				_tbNumberOfEncryptionProcedures.Text = ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.NumberOfEncryptionProcedures.ToString();
+				_cbUseCompression.IsChecked = ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.UseCompression;
+				_cbUseTrash.IsChecked = ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.UseTrash;
 			}
 
 			_tbAutosave.Text = Program.Settings.AutosaveDuration.ToString();

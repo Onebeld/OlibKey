@@ -1,16 +1,16 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Threading;
-using OlibKey.Structures;
-using OlibKey.Views.Controls;
-using OtpNet;
-using ReactiveUI;
-using Splat;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Threading;
+using OlibKey.Structures;
+using OlibKey.Views.Controls;
+using ReactiveUI;
+using Splat;
+using OtpNet;
 
 namespace OlibKey.ViewModels.Pages
 {
@@ -75,7 +75,6 @@ namespace OlibKey.ViewModels.Pages
 		private bool IsVisibleImportedFiles { get; set; } = true;
 		private ObservableCollection<Folder> Folders { get; set; }
 		private Login LoginInformation { get; set; }
-
 
 		#endregion
 

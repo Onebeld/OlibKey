@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using OlibKey.Core;
+using OlibKey.Views.Controls;
 using System;
 
 namespace OlibKey.Views.Windows
@@ -34,10 +35,10 @@ namespace OlibKey.Views.Windows
 		{
 			try
 			{
-				SaveAndLoadDatabase.LoadFiles(App.MainWindowViewModel.SelectedTabItem);
-				App.MainWindowViewModel.SelectedTabItem.MasterPassword = _tbNewPassword.Text;
+				SaveAndLoadDatabase.LoadFiles(((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content));
+				((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.MasterPassword = _tbNewPassword.Text;
 
-				App.MainWindowViewModel.SaveDatabase(App.MainWindowViewModel.SelectedTabItem);
+				App.MainWindowViewModel.SaveDatabase((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content);
 
 				_ = await MessageBox.Show(this, null, (string)Application.Current.FindResource("Successfully"), (string)Application.Current.FindResource("Message"), MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Information);
 				Close();

@@ -1,5 +1,4 @@
 ﻿using OlibKey.Structures;
-using OlibKey.ViewModels.Controls;
 using OlibKey.Views.Controls;
 using System.IO;
 using System.Xml.Serialization;
@@ -8,9 +7,9 @@ namespace OlibKey.Core
 {
 	public class SaveAndLoadDatabase
 	{
-		public static Database LoadFiles(DatabaseViewModel db)
+		public static Database LoadFiles(DatabaseControl db)
 		{
-			string s = File.ReadAllText(db.PathDatabase);
+			string s = File.ReadAllText(db.ViewModel.PathDatabase);
 
 			string[] split = s.Split(':');
 			int iterations = int.Parse(split[0]);
@@ -25,32 +24,32 @@ namespace OlibKey.Core
 					s = Compressing.Decompress(Encryptor.DecryptString(encryptString, db, iterations, numberOfEncryptionProcedures));
 				
 
-				db.UseCompression = useArchiving;
+				db.ViewModel.UseCompression = useArchiving;
 			}
 			else
 			{
 				s = Encryptor.DecryptString(encryptString, db, iterations, numberOfEncryptionProcedures);
-				db.UseCompression = false;
+				db.ViewModel.UseCompression = false;
             }
 
 			if (split.Length > 4)
-				db.UseTrash = bool.Parse(split[4]);
+				db.ViewModel.UseTrash = bool.Parse(split[4]);
 
 			return (Database)new XmlSerializer(typeof(Database)).Deserialize(new StringReader(s));
 		}
 
-		public static void SaveFiles(DatabaseViewModel db)
+		public static void SaveFiles(DatabaseControl db)
 		{
-			string file = db.Iterations + ":" + db.NumberOfEncryptionProcedures + ":";
+			string file = db.ViewModel.Iterations + ":" + db.ViewModel.NumberOfEncryptionProcedures + ":";
 
 			using StringWriter writer = new StringWriter();
-			new XmlSerializer(typeof(Database)).Serialize(writer, db.Database);
+			new XmlSerializer(typeof(Database)).Serialize(writer, db.ViewModel.Database);
 
-			string s = Encryptor.EncryptString(db.UseCompression ? Compressing.Compress(writer.ToString()) : writer.ToString(), db);
+			string s = Encryptor.EncryptString(db.ViewModel.UseCompression ? Compressing.Compress(writer.ToString()) : writer.ToString(), db);
 
-			file += s + ":" + db.UseCompression + ":" + db.UseTrash;
+			file += s + ":" + db.ViewModel.UseCompression + ":" + db.ViewModel.UseTrash;
 
-			File.WriteAllText(db.PathDatabase, file);
+			File.WriteAllText(db.ViewModel.PathDatabase, file);
 		}
 	}
 }

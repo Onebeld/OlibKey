@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Threading;
+using OlibKey.Views.Controls;
 using OlibKey.Views.Windows;
 using System;
 using System.Diagnostics;
@@ -46,7 +47,7 @@ namespace OlibKey
 			Autosave.Tick += (_, __) =>
 			{
 				for (var i = 0; i < MainWindowViewModel.TabItems.Count; i++)
-					MainWindowViewModel.SaveDatabase(MainWindowViewModel.TabItems[i]);
+					MainWindowViewModel.SaveDatabase((DatabaseControl) MainWindowViewModel.TabItems[i].Content);
 			};
 			ClearingClipboard.Tick += (_, __) =>
             {

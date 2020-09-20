@@ -57,7 +57,7 @@
 							<TextBox Text="{Binding NewLogin.WebSite}"/>
 							
 							<Separator/>
-							
+
 							<TextBlock Text="{DynamicResource VerificationCode}" Classes="Heading"/>
 							<TextBox Text="{Binding NewLogin.SecretKey}" Watermark="{DynamicResource SecretKey}" PasswordChar="•"/>
 							<Button Content="{DynamicResource Activate}" Command="{Binding ActivateTOTP}" Padding="5 2"/>

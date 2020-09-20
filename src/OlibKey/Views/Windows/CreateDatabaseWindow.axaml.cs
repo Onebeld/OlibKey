@@ -39,13 +39,12 @@ namespace OlibKey.Views.Windows
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 					return;
 				}
-				if (App.MainWindowViewModel.TabItems.Any(item => item.PathDatabase == TbPathDatabase.Text))
+				if (App.MainWindowViewModel.TabItems.Select(item => (DatabaseControl)item.Content).Any(db => db.ViewModel.PathDatabase == TbPathDatabase.Text))
 				{
 					_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("CDBError3"), (string)Application.Current.FindResource("Error"),
 						MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 					return;
 				}
-
 				Close(true); 
 			};
 		}

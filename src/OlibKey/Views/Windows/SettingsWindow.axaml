@@ -59,7 +59,6 @@
 									<TextBlock Text="{DynamicResource Sec}"/>
 								</StackPanel>
 							</CheckBox>
-							<CheckBox Content="{DynamicResource HardwareAcceleration}" IsChecked="{Binding UsingGPU}"/>
 
 							<StackPanel Orientation="Horizontal" Spacing="5">
 								<TextBlock Text="{DynamicResource Autosave}"/>

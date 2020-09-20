@@ -12,7 +12,6 @@ namespace OlibKey
     {
 	    private TextBlock _tbMessageStatusBar;
 		private TextBlock _tbReady;
-		private TabControl _tabItems;
 
 		public MainWindow() => InitializeComponent();
 
@@ -22,13 +21,10 @@ namespace OlibKey
 		    AvaloniaXamlLoader.Load(this);
 		    
 			_tbMessageStatusBar = this.FindControl<TextBlock>("tbMessageStatusBar");
-			_tabItems = this.FindControl<TabControl>("tabItems");
 			_tbReady = this.FindControl<TextBlock>("tbReady");
 
 			Closing += App.MainWindowViewModel.ProgramClosing;
 			Opened += (_, __) => App.MainWindowViewModel.Loading();
-
-			_tabItems.SelectionChanged += App.MainWindowViewModel.TabItemsSelectionChanged;
 
 			Activated += (_, __) => { App.Autoblock.Stop(); };
 			Deactivated += (_, __) => { if (Program.Settings.AutoblockEnabled) App.Autoblock.Start(); };

@@ -53,7 +53,7 @@
 							</StackPanel>
 							
 							<Separator/>
-							
+
 							<TextBlock Text="{DynamicResource VerificationCode}" Classes="Heading"/>
 							<TextBox IsReadOnly="True" Text="{Binding GeneratedCode}"/>
 							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding GeneratedCode}" Padding="5 2"/>

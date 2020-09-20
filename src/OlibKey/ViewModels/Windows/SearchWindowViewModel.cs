@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls.Templates;
-using OlibKey.Structures;
+﻿using OlibKey.Structures;
 using OlibKey.Views.Controls;
 using ReactiveUI;
 using System;
@@ -15,11 +14,13 @@ namespace OlibKey.ViewModels.Windows
         private ObservableCollection<FolderListItem> _folderList = new ObservableCollection<FolderListItem>();
 
         private FolderListItem _selectedFolderItem;
-        private LoginListItem _selectedLoginItem;
 
         private string _searchText;
 
-        public Action ChangeItemCallback;
+        public Action ChangeIndexCallback;
+
+        private int _selectedLoginIndex;
+        private int _selectedFolderIndex;
 
         #region ReactiveCommand's
 
@@ -40,6 +41,25 @@ namespace OlibKey.ViewModels.Windows
         {
             get => _folderList; set => this.RaiseAndSetIfChanged(ref _folderList, value);
         }
+        public int SelectedFolderIndex
+        {
+            get => _selectedFolderIndex; set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedFolderIndex, value);
+                ChangeIndexCallback?.Invoke();
+            }
+        }
+        private int SelectedLoginIndex
+        {
+            get => _selectedLoginIndex;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedLoginIndex, value);
+                if (SelectedLoginIndex == -1) return;
+                ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.SearchSelectLogin(SelectedLoginItem);
+                App.SearchWindow.Close();
+            }
+        }
         public string SearchText
         {
             get => _searchText; set => this.RaiseAndSetIfChanged(ref _searchText, value);
@@ -52,46 +72,34 @@ namespace OlibKey.ViewModels.Windows
             CreateFolderCommand = ReactiveCommand.Create(CreateFolder);
             DeleteFolderCommand = ReactiveCommand.Create(() =>
             {
-                if (App.MainWindowViewModel.SelectedTabItem.UseTrash)
+                if (((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.UseTrash)
                 {
-                    if (App.MainWindowViewModel.SelectedTabItem.Database.Trash == null)
+                    if (((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Database.Trash == null)
                     {
-                        App.MainWindowViewModel.SelectedTabItem.Database.Trash = new Trash
+                        ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Database.Trash = new Trash
                         {
                             Logins = new List<Login>(),
                             Folders = new List<Folder>()
                         };
                     }
                     SelectedFolderItem.FolderContext.DeleteDate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
-                    App.MainWindowViewModel.SelectedTabItem.Database.Trash.Folders.Add(SelectedFolderItem.FolderContext);
+                    ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Database.Trash.Folders.Add(SelectedFolderItem.FolderContext);
                 }
                 FolderList.Remove(SelectedFolderItem);
             });
             EditFolderCommand = ReactiveCommand.Create(() => SelectedFolderItem.Focusing());
-            UnselectFolderItemCommand = ReactiveCommand.Create(() => { SelectedFolderItem = null; });
+            UnselectFolderItemCommand = ReactiveCommand.Create(() => { SelectedFolderIndex = -1; });
+
+            SelectedLoginIndex = SelectedFolderIndex = -1;
         }
 
         public FolderListItem SelectedFolderItem
         {
             get => _selectedFolderItem;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _selectedFolderItem, value);
-                ChangeItemCallback?.Invoke();
-            }
-        }
-        public LoginListItem SelectedLoginItem
-        {
-            get => _selectedLoginItem;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _selectedLoginItem, value);
-                if (SelectedLoginItem == null) return;
-                App.MainWindowViewModel.SelectedTabItem.SearchSelectLogin(SelectedLoginItem);
-                App.SearchWindow.Close();
-            }
+            set => this.RaiseAndSetIfChanged(ref _selectedFolderItem, value);
         }
 
+        private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
         private void CreateFolder() =>
             FolderList.Add(new FolderListItem(new Folder())
             {

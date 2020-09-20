@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Diagnostics;
+using Avalonia.OpenGL;
 
 namespace OlibKey
 {
@@ -54,10 +55,10 @@ namespace OlibKey
                 .UsePlatformDetect()
                 .LogToDebug()
                 .UseReactiveUI()
-                .With(new Win32PlatformOptions { AllowEglInitialization = Settings.UsingGPU, UseDeferredRendering = true })
+                .With(new Win32PlatformOptions { AllowEglInitialization = false, UseDeferredRendering = false, OverlayPopups = false })
                 .With(new MacOSPlatformOptions { ShowInDock = true })
-                .With(new AvaloniaNativePlatformOptions { UseGpu = Settings.UsingGPU, UseDeferredRendering = true })
-                .With(new X11PlatformOptions { UseGpu = Settings.UsingGPU, UseEGL = true });
+                .With(new AvaloniaNativePlatformOptions { UseGpu = true, UseDeferredRendering = false, OverlayPopups = false })
+                .With(new X11PlatformOptions { UseGpu = true, UseEGL = true });
 
         private static void AppMain(Application app, string[] args)
         {

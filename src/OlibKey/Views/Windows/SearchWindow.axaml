@@ -33,7 +33,7 @@
 				</StackPanel>
 			</Border>
 			<TextBlock Text="{StaticResource NotFound}" IsVisible="{Binding !LoginList.Count}" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{StaticResource ThemeForegroundOpacityBrush}"/>
-			<ListBox x:Name="lbLoginList" Padding="0" SelectedItem="{Binding SelectedLoginItem}" Items="{Binding LoginList}" VirtualizationMode="None" Grid.Row="1" Background="Transparent" BorderThickness="1,0,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}"/>
+			<ListBox x:Name="lbLoginList" Padding="0" SelectedIndex="{Binding SelectedLoginIndex}" Items="{Binding LoginList}" VirtualizationMode="None" Grid.Row="1" Background="Transparent" BorderThickness="1,0,0,0" BorderBrush="{StaticResource ThemeGlobalBorderBrush}"/>
 		</Grid>
 
 

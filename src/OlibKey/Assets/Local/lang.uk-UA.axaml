@@ -152,7 +152,6 @@
 		<v:String x:Key="Sec">секунд</v:String>
 		<v:String x:Key="Min">хвилин</v:String>
 		<v:String x:Key="Day">днів</v:String>
-		<v:String x:Key="HardwareAcceleration">Апаратне прискорення (потрібне перезавантаження)</v:String>
 		<v:String x:Key="AutoDeleteFromTrash">Автоматично видаляти елемент з кошика через:</v:String>
 		<v:String x:Key="ClearingClipboard">Очищати буфер обміну після копіювання через:</v:String>
 

@@ -9,12 +9,12 @@ using OlibKey.Views.Windows;
 
 namespace OlibKey.ViewModels.Controls
 {
-	public class DatabaseViewModel : ReactiveObject, IScreen
+	public class DatabaseControlViewModel : ReactiveObject, IScreen
 	{
 		public Database Database { get; set; }
 
 		public string PathDatabase { get; set; }
-		public string Header { get; set; }
+		public string TabID { get; set; }
 
 		public int Iterations { get; set; }
 		public int NumberOfEncryptionProcedures { get; set; }
@@ -25,13 +25,11 @@ namespace OlibKey.ViewModels.Controls
 		private bool _isUnlockDatabase;
 		private bool _isLockDatabase;
 
-		private LoginListItem _selectedLoginItem;
+		private int _selectedIndex;
 
 		private ObservableCollection<LoginListItem> _loginList = new ObservableCollection<LoginListItem>();
 
 		private RoutingState _router = new RoutingState();
-
-		public Action<DatabaseViewModel> CloseTabCallback { get; set; }
 
 		#region Propertie's
 
@@ -55,26 +53,27 @@ namespace OlibKey.ViewModels.Controls
 			get => _isUnlockDatabase;
 			set => this.RaiseAndSetIfChanged(ref _isUnlockDatabase, value);
 		}
-		public string MasterPassword { get; set; }
-		public LoginListItem SelectedLoginItem
-        {
-			get => _selectedLoginItem;
+		public int SelectedIndex
+		{
+			get => _selectedIndex;
 			set
-            {
-				this.RaiseAndSetIfChanged(ref _selectedLoginItem, value);
+			{
+				this.RaiseAndSetIfChanged(ref _selectedIndex, value);
 				InformationLogin(SelectedLoginItem);
-            }
-        }
+			}
+		}
+		public string MasterPassword { get; set; }
+		private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedIndex]; } catch { return null; } } }
 
         #endregion
 
-        public DatabaseViewModel() => SelectedLoginItem = null;
+        public DatabaseControlViewModel() => SelectedIndex = -1;
 
         public void SearchSelectLogin(LoginListItem i)
 		{
 			foreach (LoginListItem item in LoginList.Where(item => item.LoginID == i.LoginID))
 			{
-				SelectedLoginItem = item;
+				SelectedIndex = LoginList.IndexOf(item);
 				break;
 			}
 		}
@@ -95,11 +94,14 @@ namespace OlibKey.ViewModels.Controls
 			LoginList.Add(ali);
 			ali.GetIconElement();
 
+			if (((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel == this)
+				App.MainWindowViewModel.CountLogins = LoginList.Count;
+
 			Router.Navigate.Execute(new StartPageViewModel(this));
 		}
 		private void CreateLogin()
 		{
-			SelectedLoginItem = null;
+			SelectedIndex = -1;
 			Router.Navigate.Execute(new CreateLoginPageViewModel(Database, this)
 			{
 				BackPageCallback = StartPage,
@@ -117,7 +119,7 @@ namespace OlibKey.ViewModels.Controls
 		}
 		private void DeleteLogin()
 		{
-			LoginList.Remove(SelectedLoginItem);
+			LoginList.RemoveAt(SelectedIndex);
 			Router.Navigate.Execute(new StartPageViewModel(this));
 		}
 		private void EditComplete(LoginListItem a, bool changeWebSite)
@@ -132,37 +134,32 @@ namespace OlibKey.ViewModels.Controls
 		}
 		public void ClearLoginsList()
 		{
-			SelectedLoginItem = null;
+			SelectedIndex = -1;
 			LoginList.Clear();
 		}
 		public void StartPage() => Router.Navigate.Execute(new StartPageViewModel(this));
 
 		private void BackPage(LoginListItem a) => Router.Navigate.Execute(new LoginInformationPageViewModel(a, Database, this) { EditContentCallback = EditLogin });
 
-		private void CloseTab()
-        {
-			CloseTabCallback?.Invoke(this);
-        }
 
+		//// Problem with ListBox ////
 
-        //// Problem with ListBox ////
-
-        //public void MoveUp() => MoveItem(-1);
-
-        //public void MoveDown() => MoveItem(1);
-
-        //private void MoveItem(int direction)
-        //{
-        //    if (SelectedLoginItem == null)
-        //        return;
-
-        //    var newIndex = SelectedIndex + direction;
-
-        //    if (newIndex < 0 || newIndex >= LoginList.Count)
-        //        return;
-
-        //    LoginList.Move(SelectedIndex, newIndex);
-        //    SelectedIndex = newIndex;
-        //}
-    }
+		// public void MoveUp() => MoveItem(-1);
+		//
+		// public void MoveDown() => MoveItem(1);
+		//
+		// private void MoveItem(int direction)
+		// {
+		// 	if (SelectedLoginItem == null)
+		// 		return;
+		//
+		// 	var newIndex = SelectedIndex + direction;
+		//
+		// 	if (newIndex < 0 || newIndex >= LoginList.Count)
+		// 		return;
+		//
+		// 	LoginList.Move(SelectedIndex, newIndex);
+		// 	SelectedIndex = newIndex;
+		// }
+	}
 }

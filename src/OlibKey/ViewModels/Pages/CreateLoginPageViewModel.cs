@@ -31,8 +31,6 @@ namespace OlibKey.ViewModels.Pages
 
         #region Property's
 
-        private int Type { get; set; }
-        private Login NewLogin { get; set; }
         private int SelectionFolderIndex
         {
             get => _selectionFolderIndex;
@@ -41,19 +39,6 @@ namespace OlibKey.ViewModels.Pages
                 this.RaiseAndSetIfChanged(ref _selectionFolderIndex, value);
                 NewLogin.FolderID = SelectionFolderItem.ID;
             }
-        }
-        private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
-        private ObservableCollection<Folder> Folders { get; set; }
-
-        private ObservableCollection<CustomFieldListItem> CustomFields
-        {
-            get => _customFields;
-            set => this.RaiseAndSetIfChanged(ref _customFields, value);
-        }
-        private ObservableCollection<ImportedFileListItem> ImportedFiles
-        {
-            get => _importedFiles;
-            set => this.RaiseAndSetIfChanged(ref _importedFiles, value);
         }
         private string GeneratedCode
         {
@@ -65,6 +50,20 @@ namespace OlibKey.ViewModels.Pages
             get => _timeLeft;
             set => this.RaiseAndSetIfChanged(ref _timeLeft, value);
         }
+        private ObservableCollection<CustomFieldListItem> CustomFields
+        {
+            get => _customFields;
+            set => this.RaiseAndSetIfChanged(ref _customFields, value);
+        }
+        private ObservableCollection<ImportedFileListItem> ImportedFiles
+        {
+            get => _importedFiles;
+            set => this.RaiseAndSetIfChanged(ref _importedFiles, value);
+        }
+        private int Type { get; set; }
+        private Login NewLogin { get; set; }
+        private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
+        private ObservableCollection<Folder> Folders { get; set; }
 
         #endregion
 
@@ -128,9 +127,8 @@ namespace OlibKey.ViewModels.Pages
 
                 foreach (var file in files)
                 {
-                    ImportedFiles.Add(new ImportedFileListItem
-                    {
-                        DataContext = new ImportedFile { Name = Path.GetFileName(file), Data = Core.FileInteractions.ImportFile(file) },
+                    ImportedFiles.Add(new ImportedFileListItem { 
+                        DataContext = new ImportedFile { Name = Path.GetFileName(file) , Data = Core.FileInteractions.ImportFile(file) }, 
                         ID = Guid.NewGuid().ToString("N"),
                         DeleteFileCallback = DeleteImportedFile
                     });

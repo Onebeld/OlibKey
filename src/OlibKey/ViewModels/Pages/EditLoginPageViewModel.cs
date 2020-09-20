@@ -1,18 +1,19 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Threading;
-using OlibKey.Structures;
-using OlibKey.Views.Controls;
-using OlibKey.Views.Windows;
-using OtpNet;
-using ReactiveUI;
-using Splat;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Threading;
+using OlibKey.Structures;
+using OlibKey.Views.Controls;
+using OlibKey.Views.Windows;
+using ReactiveUI;
+using Splat;
+using OtpNet;
+
 
 namespace OlibKey.ViewModels.Pages
 {
@@ -39,9 +40,6 @@ namespace OlibKey.ViewModels.Pages
 
         #region Property's
 
-        private int Type { get; set; }
-        private ObservableCollection<CustomFieldListItem> CustomFields { get; set; }
-        private ObservableCollection<ImportedFileListItem> ImportedFiles { get; set; }
         private int SelectionFolderIndex
         {
             get => _selectionFolderIndex;
@@ -58,6 +56,9 @@ namespace OlibKey.ViewModels.Pages
             set => this.RaiseAndSetIfChanged(ref _timeLeft, value);
         }
 
+        private int Type { get; set; }
+        private ObservableCollection<CustomFieldListItem> CustomFields { get; set; }
+        private ObservableCollection<ImportedFileListItem> ImportedFiles { get; set; }
         private Folder SelectionFolderItem { get { try { return Folders[SelectionFolderIndex]; } catch { return null; } } }
         private ObservableCollection<Folder> Folders { get; set; }
 
@@ -133,7 +134,7 @@ namespace OlibKey.ViewModels.Pages
 
                     NewLogin.IsReminderActive = acc.LoginItem.IsReminderActive;
                     break;
-               default: break;
+                default: break;
             }
 
             Folders = new ObservableCollection<Folder>
@@ -233,18 +234,18 @@ namespace OlibKey.ViewModels.Pages
         }
         private async void DeleteLogin()
         {
-            if (App.MainWindowViewModel.SelectedTabItem.UseTrash)
+            if (((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.UseTrash)
             {
-                if (App.MainWindowViewModel.SelectedTabItem.Database.Trash == null)
+                if (((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Database.Trash == null)
                 {
-                    App.MainWindowViewModel.SelectedTabItem.Database.Trash = new Trash
+                    ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Database.Trash = new Trash
                     {
                         Logins = new List<Login>(),
                         Folders = new List<Folder>()
                     };
                 }
                 LoginList.LoginItem.DeleteDate = DateTime.Now.ToString(System.Threading.Thread.CurrentThread.CurrentUICulture);
-                App.MainWindowViewModel.SelectedTabItem.Database.Trash.Logins.Add(LoginList.LoginItem);
+                ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Database.Trash.Logins.Add(LoginList.LoginItem);
                 DeleteLoginCallback?.Invoke();
             }
             else
@@ -284,6 +285,7 @@ namespace OlibKey.ViewModels.Pages
             }
         }
         private void Back() => CancelCallback?.Invoke(LoginList);
+
         private async void ActivateTOTP()
         {
             try

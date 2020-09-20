@@ -152,7 +152,6 @@
 		<v:String x:Key="Sec">Sekunden</v:String>
 		<v:String x:Key="Min">Protokoll</v:String>
 		<v:String x:Key="Day">Tage</v:String>
-		<v:String x:Key="HardwareAcceleration">Hardwarebeschleunigung (Neustart erforderlich)</v:String>
 		<v:String x:Key="AutoDeleteFromTrash">Entfernen Sie einen Artikel automatisch aus dem Papierkorb über:</v:String>
 		<v:String x:Key="ClearingClipboard">Zwischenablage nach dem Kopieren löschen über:</v:String>
 

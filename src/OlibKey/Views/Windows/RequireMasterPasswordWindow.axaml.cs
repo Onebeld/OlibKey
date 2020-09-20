@@ -3,19 +3,20 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
-using OlibKey.ViewModels.Controls;
+using OlibKey.Views.Controls;
 using System;
 
 namespace OlibKey.Views.Windows
 {
 	public class RequireMasterPasswordWindow : Window
 	{
-		public Action<DatabaseViewModel> LoadStorageCallback { get; set; }
+		public Action<DatabaseControl, DatabaseTabHeader> LoadStorageCallback { get; set; }
 
 		private TextBox _tbPassword;
 
 		public TextBlock tbNameStorage;
-		public DatabaseViewModel databaseControl;
+		public DatabaseControl databaseControl;
+		public DatabaseTabHeader databaseTabHeader;
 
 		public RequireMasterPasswordWindow()
 		{
@@ -43,13 +44,13 @@ namespace OlibKey.Views.Windows
 		{
 			try
 			{
-				databaseControl.MasterPassword = _tbPassword.Text;
-				LoadStorageCallback?.Invoke(databaseControl);
+				databaseControl.ViewModel.MasterPassword = _tbPassword.Text;
+				LoadStorageCallback?.Invoke(databaseControl, databaseTabHeader);
 				Close();
 			}
 			catch
 			{
-				databaseControl.MasterPassword = null;
+				databaseControl.ViewModel.MasterPassword = null;
 				_ = MessageBox.Show(this, null, (string)Application.Current.FindResource("MB3"), (string)Application.Current.FindResource("Error"),
 					MessageBox.MessageBoxButtons.Ok, MessageBox.MessageBoxIcon.Error);
 			}

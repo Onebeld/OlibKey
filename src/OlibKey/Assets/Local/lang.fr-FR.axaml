@@ -152,7 +152,6 @@
 		<v:String x:Key="Sec">secondes</v:String>
 		<v:String x:Key="Min">minutes</v:String>
 		<v:String x:Key="Day">journées</v:String>
-		<v:String x:Key="HardwareAcceleration">Accélération matérielle (redémarrage requis)</v:String>
 		<v:String x:Key="AutoDeleteFromTrash">Supprimer automatiquement un élément de la corbeille via:</v:String>
 		<v:String x:Key="ClearingClipboard">Effacer le presse-papiers après la copie via:</v:String>
 

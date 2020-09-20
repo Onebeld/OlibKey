@@ -68,9 +68,9 @@ namespace OlibKey.Views.Windows
             _cbUseColor = this.FindControl<CheckBox>("cbUseColor");
 
 
-            DataContext = SearchViewModel = new SearchWindowViewModel { ChangeItemCallback = CloseColorPicker };
+            DataContext = SearchViewModel = new SearchWindowViewModel { ChangeIndexCallback = CloseColorPicker };
             _rAll.IsChecked = true;
-            _lbFolders.PointerPressed += (_, __) => ViewModel.SelectedFolderItem = null;
+            _lbFolders.PointerPressed += (_, __) => ViewModel.SelectedFolderIndex = -1;
             Closed += SearchWindow_Closed;
             await Task.Delay(50);
             _tbSearchText.GetObservable(TextBox.TextProperty).Subscribe(_ => ClearListAndSearchElement());
@@ -79,9 +79,15 @@ namespace OlibKey.Views.Windows
             colorPicker.ChangeColor += _colorPicker_ChangeColor;
         }
 
-        private void CommandCheckingUseColor(object sender, RoutedEventArgs e) => _cbUseColor.IsChecked = !_cbUseColor.IsChecked;
+        private void CommandCheckingUseColor(object sender, RoutedEventArgs e)
+        {
+            _cbUseColor.IsChecked = !_cbUseColor.IsChecked;
+        }
 
-        private void CloseColorPicker() => pColorPicker.Close();
+        private void CloseColorPicker()
+        {
+            pColorPicker.Close();
+        }
 
         private void OpenColorPicker(object sender, RoutedEventArgs e)
         {
@@ -127,7 +133,7 @@ namespace OlibKey.Views.Windows
         }
 
         private void SearchWindow_Closed(object sender, EventArgs e) =>
-            App.MainWindowViewModel.SelectedTabItem.Database.Folders =
+            ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.Database.Folders =
                 SearchViewModel.FolderList.Select(item => item.DataContext as Folder).ToList();
 
         private async void ClearListAndSearchElement()
@@ -137,21 +143,21 @@ namespace OlibKey.Views.Windows
             await Task.Delay(1); // needed because the list does not correctly handle found items
 
             List<LoginListItem> selectedItemList = _rLogin.IsChecked ?? false
-                ? App.MainWindowViewModel.SelectedTabItem.LoginList.ToList()
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
                     .FindAll(x => x.LoginItem.Type == 0)
                 : _rBankCard.IsChecked ?? false
-                ? App.MainWindowViewModel.SelectedTabItem.LoginList.ToList()
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
                     .FindAll(x => x.LoginItem.Type == 1)
                 : _rPassport.IsChecked ?? false
-                ? App.MainWindowViewModel.SelectedTabItem.LoginList.ToList()
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
                     .FindAll(x => x.LoginItem.Type == 2)
                 : _rReminder.IsChecked ?? false
-                ? App.MainWindowViewModel.SelectedTabItem.LoginList.ToList()
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
                     .FindAll(x => x.LoginItem.Type == 3)
                 : _rNotes.IsChecked ?? false
-                ? App.MainWindowViewModel.SelectedTabItem.LoginList.ToList()
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
                     .FindAll(x => x.LoginItem.Type == 4)
-                : App.MainWindowViewModel.SelectedTabItem.LoginList.ToList();
+                : ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList();
 
             if (SearchViewModel.SelectedFolderItem != null)
                 selectedItemList = selectedItemList.FindAll(x =>

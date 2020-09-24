@@ -23,7 +23,6 @@ namespace OlibKey.Views.Pages
 		private StackPanel _reminderSection;
 		private StackPanel _bankCartSection;
 		private StackPanel _personalDataSection;
-		private TextBox _txtSecurityCode;
 		private TextBox _txtPassword;
 		private TextBox _txtStartTime;
 		private ProgressBar _pbHard;
@@ -47,7 +46,6 @@ namespace OlibKey.Views.Pages
 			_bankCartSection = this.FindControl<StackPanel>("BankCartSection");
 			_personalDataSection = this.FindControl<StackPanel>("PersonalDataSection");
 			_txtPassword = this.FindControl<TextBox>("txtPassword");
-			_txtSecurityCode = this.FindControl<TextBox>("txtSecurityCode");
 			_pbHard = this.FindControl<ProgressBar>("pbHard");
 			_txtStartTime = this.FindControl<TextBox>("tbStartTime");
 			_cbType = this.FindControl<ComboBox>("cbType");
@@ -56,7 +54,7 @@ namespace OlibKey.Views.Pages
 			_colorPicker = this.FindControl<ColorPicker>("colorPicker");
 			_tbColor = this.FindControl<TextBox>("tbColor");
 
-			_txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _txtPassword));
+			_txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, value));
 			_cbType.SelectionChanged += SectionChanged;
 
 			_tbColor.Text = ((Color)Application.Current.FindResource("ThemeSelectedControlColor")).ToString();
@@ -121,10 +119,6 @@ namespace OlibKey.Views.Pages
 					break;
 			}
 		}
-
-		private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
-
-		private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
 		private void TimeZeroing(object sender, RoutedEventArgs e) => _txtStartTime.Text = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 

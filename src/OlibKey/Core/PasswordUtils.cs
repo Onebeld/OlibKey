@@ -78,9 +78,9 @@ namespace OlibKey.Core
 
 		private static double Map(double value, double fromLower, double fromUpper, double toLower, double toUpper) => toLower + ((value - fromLower) / (fromUpper - fromLower) * (toUpper - toLower));
 
-		public static void DeterminingPasswordComplexity(ProgressBar progressBar, TextBox textBox)
+		public static void DeterminingPasswordComplexity(ProgressBar progressBar, string value)
 		{
-			progressBar.Value = CheckPasswordStrength(textBox.Text);
+			progressBar.Value = CheckPasswordStrength(value);
 			ItemControls.ColorProgressBar(progressBar);
 		}
 	}

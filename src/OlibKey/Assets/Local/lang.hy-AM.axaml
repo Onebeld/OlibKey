@@ -55,6 +55,7 @@
 		<v:String x:Key="Password">Գաղտնաբառ:</v:String>
 		<v:String x:Key="Password+">Գաղտնաբառ</v:String>
 		<v:String x:Key="Show">Ցույց տալ</v:String>
+		<v:String x:Key="Hide">Թաքցնել</v:String>
 		<v:String x:Key="Complexity">Բարդությունը:</v:String>
 		<v:String x:Key="ChangeP">Փոխել</v:String>
 		<v:String x:Key="Back">Ետ</v:String>

@@ -15,7 +15,6 @@ namespace OlibKey.Views.Controls
 		private StackPanel _sectionOne;
 		private StackPanel _sectionTwo;
 		private StackPanel _sectionThree;
-		private TextBox _tbPassword;
 		public Separator SLine;
 		public Housing HousingElement { get; set; }
 
@@ -27,7 +26,6 @@ namespace OlibKey.Views.Controls
 			_sectionOne = this.FindControl<StackPanel>("SectionOne");
 			_sectionTwo = this.FindControl<StackPanel>("SectionTwo");
 			_sectionThree = this.FindControl<StackPanel>("SectionThree");
-			_tbPassword = this.FindControl<TextBox>("tbPassword");
 			SLine = this.FindControl<Separator>("sLine");
 
 			switch (HousingElement.CustomField.Type)
@@ -50,8 +48,6 @@ namespace OlibKey.Views.Controls
 		private void InitializeComponent() => AvaloniaXamlLoader.Load(this);
 
 		private void Delete(object sender, RoutedEventArgs e) => DeleteCustomField?.Invoke(ID);
-
-        private void CheckedPassword(object sender, RoutedEventArgs e) => _tbPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
     }
 	public class Housing
 	{

@@ -60,7 +60,7 @@ namespace OlibKey.Views.Windows
 			CbUseTrash = this.FindControl<CheckBox>("cbUseTrash");
 			CbUseCompression = this.FindControl<CheckBox>("cbUseCompression");
 
-			_ = TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, TbPassword));
+			TbPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, value));
 		}
 		private async void SelectPath(object sender, RoutedEventArgs e)
 		{
@@ -69,6 +69,5 @@ namespace OlibKey.Views.Windows
 			string res = await dialog.ShowAsync(this);
 			if (res != null) TbPathDatabase.Text = res;
 		}
-		private void CheckedPassword(object sender, RoutedEventArgs e) => TbPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 	}
 }

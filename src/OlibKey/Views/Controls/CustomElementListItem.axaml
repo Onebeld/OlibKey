@@ -12,8 +12,7 @@
 					<TextBox Watermark="{DynamicResource Data}" Text="{Binding CustomField.TextElement}" IsReadOnly="{Binding !IsEnabled}"/>
 				</StackPanel>
 				<StackPanel x:Name="SectionTwo" Spacing="5">
-					<TextBox x:Name="tbPassword" Watermark="{DynamicResource Data}" Text="{Binding CustomField.TextElement}" PasswordChar="•" IsReadOnly="{Binding !IsEnabled}"/>
-					<CheckBox Content="{DynamicResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
+					<TextBox Classes="revealPasswordButton" Watermark="{DynamicResource Data}" Text="{Binding CustomField.TextElement}" PasswordChar="•" IsReadOnly="{Binding !IsEnabled}"/>
 				</StackPanel>
 				<StackPanel x:Name="SectionThree">
 					<CheckBox IsChecked="{Binding CustomField.CheckedElement}" IsEnabled="{Binding IsEnabled}"/>

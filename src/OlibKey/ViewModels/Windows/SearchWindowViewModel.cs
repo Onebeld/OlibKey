@@ -4,6 +4,7 @@ using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reactive;
 
 namespace OlibKey.ViewModels.Windows
@@ -62,9 +63,23 @@ namespace OlibKey.ViewModels.Windows
         }
         public string SearchText
         {
-            get => _searchText; set => this.RaiseAndSetIfChanged(ref _searchText, value);
+            get => _searchText; 
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _searchText, value);
+                ClearListAndSearchElement();
+            }
         }
 
+        private bool Login { get; set; }
+        private bool BankCard { get; set; }
+        private bool PersonalData { get; set; }
+        private bool Reminder { get; set; }
+        private bool Notes { get; set; }
+
+        private bool ActiveReminder { get; set; }
+        private bool Favorite { get; set; }
+        private bool SortAlphabetically { get; set; }
         #endregion
 
         public SearchWindowViewModel()
@@ -91,12 +106,18 @@ namespace OlibKey.ViewModels.Windows
             UnselectFolderItemCommand = ReactiveCommand.Create(() => { SelectedFolderIndex = -1; });
 
             SelectedLoginIndex = SelectedFolderIndex = -1;
+
+            ClearListAndSearchElement();
         }
 
         public FolderListItem SelectedFolderItem
         {
             get => _selectedFolderItem;
-            set => this.RaiseAndSetIfChanged(ref _selectedFolderItem, value);
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedFolderItem, value);
+                ClearListAndSearchElement();
+            }
         }
 
         private LoginListItem SelectedLoginItem { get { try { return LoginList[SelectedLoginIndex]; } catch { return null; } } }
@@ -106,5 +127,47 @@ namespace OlibKey.ViewModels.Windows
                 FolderContext = { ID = Guid.NewGuid().ToString("N") }
             });
         public void AddFolder(Folder loginContent) => FolderList.Add(new FolderListItem(loginContent) { tbName = { IsVisible = false } });
+
+        public void ClearListAndSearchElement(bool isChecked = true)
+        {
+            if (!isChecked) return;
+            LoginList.Clear();
+
+            List<LoginListItem> selectedItemList = Login
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 0)
+                : BankCard
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 1)
+                : PersonalData
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 2)
+                : Reminder
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 3)
+                : Notes
+                ? ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList()
+                    .FindAll(x => x.LoginItem.Type == 4)
+                : ((DatabaseControl)App.MainWindowViewModel.SelectedTabItem.Content).ViewModel.LoginList.ToList();
+
+            if (SelectedFolderItem != null) selectedItemList = selectedItemList.FindAll(x => x.LoginItem.FolderID == ((Folder)SelectedFolderItem.DataContext)?.ID);
+
+            if (ActiveReminder) selectedItemList = selectedItemList.FindAll(x => x.LoginItem.IsReminderActive);
+
+            if (Favorite) selectedItemList = selectedItemList.FindAll(x => x.LoginItem.Favorite);
+
+            if (!string.IsNullOrEmpty(SearchText)) selectedItemList = selectedItemList.FindAll(x => x.LoginItem.Name.ToLower().Contains(SearchText.ToLower()));
+
+            if (SortAlphabetically) selectedItemList = selectedItemList.OrderBy(x => x.LoginItem.Name).ToList();
+
+            for (int i = 0; i < selectedItemList.Count; i++)
+                LoginList.Add(new LoginListItem(selectedItemList[i].LoginItem)
+                {
+                    LoginID = selectedItemList[i].LoginID,
+                    IconLogin = { Source = selectedItemList[i].IconLogin.Source },
+                    IsFavorite = { IsEnabled = false }
+                });
+        }
+        private void CheckedButton() => ClearListAndSearchElement();
     }
 }

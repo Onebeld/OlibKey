@@ -19,7 +19,6 @@ namespace OlibKey.Views.Pages
     public class EditLoginPage : ReactiveUserControl<EditLoginPageViewModel>
     {
         private TextBox _txtPassword;
-        private TextBox _txtSecurityCode;
         private ProgressBar _pbHard;
         private TextBox _tbColor;
         private ColorPicker _colorPicker;
@@ -36,7 +35,6 @@ namespace OlibKey.Views.Pages
             AvaloniaXamlLoader.Load(this);
 
             _txtPassword = this.FindControl<TextBox>("txtPassword");
-            _txtSecurityCode = this.FindControl<TextBox>("txtSecurityCode");
             _pbHard = this.FindControl<ProgressBar>("pbHard");
             _bColor = this.FindControl<Border>("bColor");
             _tbColor = this.FindControl<TextBox>("tbColor");
@@ -45,7 +43,7 @@ namespace OlibKey.Views.Pages
 
             _colorPicker.ChangeColor += _colorPicker_ChangeColor;
 
-            _txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _txtPassword));
+            _txtPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, value));
 
             _tbColor.GetObservable(TextBox.TextProperty).Subscribe(_ => ChangeColorTextBox());
         }
@@ -69,10 +67,6 @@ namespace OlibKey.Views.Pages
             };
             _pColorPicker.Open();
         }
-
-        private void CheckedPassword(object sender, RoutedEventArgs e) => _txtPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
-
-        private void CheckedSecurityCode(object sender, RoutedEventArgs e) => _txtSecurityCode.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
         private async void GeneratePassword(object sender, RoutedEventArgs e)
         {

@@ -142,24 +142,24 @@ namespace OlibKey.ViewModels.Controls
 		private void BackPage(LoginListItem a) => Router.Navigate.Execute(new LoginInformationPageViewModel(a, Database, this) { EditContentCallback = EditLogin });
 
 
-		//// Problem with ListBox ////
+        //// Problem with ListBox ////
 
-		// public void MoveUp() => MoveItem(-1);
-		//
-		// public void MoveDown() => MoveItem(1);
-		//
-		// private void MoveItem(int direction)
-		// {
-		// 	if (SelectedLoginItem == null)
-		// 		return;
-		//
-		// 	var newIndex = SelectedIndex + direction;
-		//
-		// 	if (newIndex < 0 || newIndex >= LoginList.Count)
-		// 		return;
-		//
-		// 	LoginList.Move(SelectedIndex, newIndex);
-		// 	SelectedIndex = newIndex;
-		// }
-	}
+        //public void MoveUp() => MoveItem(-1);
+
+        //public void MoveDown() => MoveItem(1);
+
+        //private void MoveItem(int direction)
+        //{
+        //    if (SelectedLoginItem == null)
+        //        return;
+
+        //    var newIndex = SelectedIndex + direction;
+
+        //    if (newIndex < 0 || newIndex >= LoginList.Count)
+        //        return;
+
+        //    LoginList.Move(SelectedIndex, newIndex);
+        //    SelectedIndex = newIndex;
+        //}
+    }
 }

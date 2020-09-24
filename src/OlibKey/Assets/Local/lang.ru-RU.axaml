@@ -55,6 +55,7 @@
 		<v:String x:Key="Password">Пароль:</v:String>
 		<v:String x:Key="Password+">Пароль</v:String>
 		<v:String x:Key="Show">Показать</v:String>
+		<v:String x:Key="Hide">Скрыть</v:String>
 		<v:String x:Key="Complexity">Сложность:</v:String>
 		<v:String x:Key="ChangeP">Изменить</v:String>
 		<v:String x:Key="Back">Назад</v:String>

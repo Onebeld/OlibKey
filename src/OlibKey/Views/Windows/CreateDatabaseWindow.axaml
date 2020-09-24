@@ -23,8 +23,7 @@
 						<Separator/>
 						
 						<TextBlock Text="{StaticResource MasterPassword}" Classes="Heading"/>
-						<TextBox x:Name="tbPassword" PasswordChar="•"/>
-						<CheckBox Content="{StaticResource Show}" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
+						<TextBox x:Name="tbPassword" Classes="revealPasswordButton" PasswordChar="•"/>
 						<DockPanel>
 							<TextBlock Text="{StaticResource Complexity}" Foreground="{StaticResource ThemeForegroundBrush}" VerticalAlignment="Center"/>
 							<ProgressBar x:Name="pbHard" Margin="5 0 0 0"/>

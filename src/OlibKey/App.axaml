@@ -805,5 +805,23 @@
 			<Setter Property="Background" Value="{DynamicResource ThemeHoverBackgroundBrush}"/>
 			<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
 		</Style>
+
+		<Style Selector="TextBox.revealPasswordButton[AcceptsReturn=False]">
+			<Setter Property="InnerRightContent">
+				<Template>
+					<Panel Margin="4,0">
+						<Panel.Styles>
+							<Style Selector="ToggleButton[IsChecked=True]">
+								<Setter Property="(ToolTip.Tip)" Value="{DynamicResource Hide}" />
+							</Style>
+							<Style Selector="ToggleButton[IsChecked=False]">
+								<Setter Property="(ToolTip.Tip)" Value="{DynamicResource Show}" />
+							</Style>
+						</Panel.Styles>
+						<ToggleButton Classes="passwordBoxRevealButton" Background="Transparent" Cursor="Arrow" IsChecked="{Binding $parent[TextBox].RevealPassword, Mode=TwoWay}" />
+					</Panel>
+				</Template>
+			</Setter>
+		</Style>
 	</Application.Styles>
 </Application>

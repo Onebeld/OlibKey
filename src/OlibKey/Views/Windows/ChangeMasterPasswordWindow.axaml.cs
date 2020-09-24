@@ -10,7 +10,6 @@ namespace OlibKey.Views.Windows
 {
 	public class ChangeMasterPasswordWindow : Window
 	{
-		private TextBox _tbOldPassword;
 		private TextBox _tbNewPassword;
 		private ProgressBar _pbHard;
 
@@ -19,15 +18,11 @@ namespace OlibKey.Views.Windows
 		private void InitializeComponent()
 		{
 			AvaloniaXamlLoader.Load(this);
-			_tbOldPassword = this.FindControl<TextBox>("tbOldPassword");
 			_tbNewPassword = this.FindControl<TextBox>("tbNewPassword");
 			_pbHard = this.FindControl<ProgressBar>("pbHard");
 
-			_tbNewPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, _tbNewPassword));
+			_tbNewPassword.GetObservable(TextBox.TextProperty).Subscribe(value => PasswordUtils.DeterminingPasswordComplexity(_pbHard, value));
 		}
-
-		private void CheckedOldPassword(object sender, RoutedEventArgs e) => _tbOldPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
-		private void CheckedNewPassword(object sender, RoutedEventArgs e) => _tbNewPassword.PasswordChar = ((CheckBox)sender).IsChecked ?? false ? '\0' : '•';
 
 		private void CloseWindow(object sender, RoutedEventArgs e) => Close();
 

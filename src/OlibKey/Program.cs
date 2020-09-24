@@ -14,6 +14,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Diagnostics;
 using Avalonia.OpenGL;
+using System.Threading.Tasks;
 
 namespace OlibKey
 {
@@ -46,6 +47,7 @@ namespace OlibKey
             }
             catch (Exception ex)
             {
+
                 Log.WriteFatal(ex);
             }
         }

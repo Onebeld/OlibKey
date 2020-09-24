@@ -34,11 +34,8 @@
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
-							<TextBox x:Name="txtPassword" Text="{Binding LoginInformation.Password}" PasswordChar="•"/>
-							<StackPanel Orientation="Horizontal" Spacing="5">
-								<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Password}" Padding="5 2"/>
-								<CheckBox x:Name="cbHide" Content="{DynamicResource Show}" VerticalAlignment="Center" Checked="CheckedPassword" Unchecked="CheckedPassword"/>
-							</StackPanel>
+							<TextBox x:Name="txtPassword" Classes="revealPasswordButton" Text="{Binding LoginInformation.Password}" PasswordChar="•"/>
+							<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Password}" Padding="5 2" HorizontalAlignment="Left"/>
 							<DockPanel>
 								<TextBlock Text="{DynamicResource Complexity}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
 								<ProgressBar x:Name="pbHard" Maximum="300"/>
@@ -86,11 +83,8 @@
 							<Separator/>
 
 							<TextBlock Text="{DynamicResource SecurityCodeCard}" Classes="Heading"/>
-							<TextBox x:Name="txtSecurityCode" Text="{Binding LoginInformation.SecurityCode}" PasswordChar="•"/>
-							<StackPanel Orientation="Horizontal" Spacing="5">
-								<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.SecurityCode}" Padding="5 2"/>
-								<CheckBox Content="{DynamicResource Show}" Checked="CheckedSecurityCode" Unchecked="CheckedSecurityCode" VerticalAlignment="Center"/>
-							</StackPanel>
+							<TextBox Classes="revealPasswordButton" Text="{Binding LoginInformation.SecurityCode}" PasswordChar="•"/>
+							<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.SecurityCode}" Padding="5 2" HorizontalAlignment="Left"/>
 						</StackPanel>
 
 						<StackPanel IsVisible="{Binding VisiblePersonalDataSection}" Spacing="5">

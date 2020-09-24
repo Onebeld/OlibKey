@@ -192,8 +192,11 @@ namespace OlibKey
 
             TabItems.Add(new TabItem { Header = tabHeader, Content = db });
 
-            IsLockDatabase = true;
-            IsUnlockDatabase = false;
+            if(Equals((DatabaseControl)SelectedTabItem.Content, db))
+            {
+                IsLockDatabase = true;
+                IsUnlockDatabase = false;
+            }
 
             new RequireMasterPasswordWindow
             {

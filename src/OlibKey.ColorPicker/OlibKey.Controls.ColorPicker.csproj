@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Description>An avalonia color picker control for OlibKey.</Description>
+		<PackageTags>color-picker;controls;avalonia;avaloniaui;xaml;olibkey</PackageTags>
+		<AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+		<PackageIcon>app.png</PackageIcon>
+	</PropertyGroup>
+	
+	<Import Project="..\..\build\Base.props" />
+	<Import Project="..\..\build\Avalonia.props" />
+	<Import Project="..\..\build\EmbedXaml.props" />
+
+	<ItemGroup>
+		<Compile Include="**\*.cs" Exclude="obj\**" />
+	</ItemGroup>
+</Project>

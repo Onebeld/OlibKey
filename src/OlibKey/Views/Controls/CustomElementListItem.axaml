@@ -1,0 +1,25 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Views.Controls.CustomFieldListItem">
+	<Grid>
+		<StackPanel>
+			<StackPanel Spacing="5">
+				<TextBox Text="{Binding CustomField.Name}" Watermark="{DynamicResource Name}" IsReadOnly="{Binding !IsEnabled}" FontWeight="Bold"/>
+				<StackPanel x:Name="SectionOne">
+					<TextBox Watermark="{DynamicResource Data}" Text="{Binding CustomField.TextElement}" IsReadOnly="{Binding !IsEnabled}"/>
+				</StackPanel>
+				<StackPanel x:Name="SectionTwo" Spacing="5">
+					<TextBox Classes="revealPasswordButton" Watermark="{DynamicResource Data}" Text="{Binding CustomField.TextElement}" PasswordChar="•" IsReadOnly="{Binding !IsEnabled}"/>
+				</StackPanel>
+				<StackPanel x:Name="SectionThree">
+					<CheckBox IsChecked="{Binding CustomField.CheckedElement}" IsEnabled="{Binding IsEnabled}"/>
+				</StackPanel>
+				<Button Content="{DynamicResource Delete}" Click="Delete" Padding="5 2" HorizontalAlignment="Left" IsVisible="{Binding IsEnabled}"/>
+			</StackPanel>
+			<Separator x:Name="sLine" Margin="15 10"/>
+		</StackPanel>
+	</Grid>
+</UserControl>

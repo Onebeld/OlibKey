@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.0] - ???
+### Added
+- Added color picker
+- Added TOTP
+- Added new theme "Emerald"
+- With Avalonia update added context menu for TextBox
+- Added the ability to attach any files
+
+### Changed
+- Migrating to .NET 5 Release Candidate 1
+- Migrating to Avalonia 0.10.999-cibuild0010903-beta
+- Icons are now saved to storage as a byte array
+- Removed hardware acceleration setting
+- Reduced amount of Margin (in code)
+- Show password button has been moved to the password field
+
+### Fixes
+- Fixes for tabs
+- Fixed some translation strings
+- ListBox fixed in search
+
 ## [3.2.0] - 2020-08-26
 ### Added
 - Added new window "Check for weak passwords"

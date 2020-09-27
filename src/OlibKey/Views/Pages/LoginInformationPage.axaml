@@ -1,0 +1,233 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Views.Pages.LoginInformationPage"
+			 Background="{DynamicResource ThemeWindowBackgroundBrush}">
+	<UserControl.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="IsReadOnly" Value="True"/>
+		</Style>
+	</UserControl.Styles>
+	<Grid RowDefinitions="*,50">
+		<ScrollViewer VerticalScrollBarVisibility="Auto">
+			<StackPanel Margin="10" Spacing="5">
+				<TextBlock Text="{DynamicResource ItemInformation}" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontSize="18" FontWeight="Bold"/>
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel Spacing="5">
+						<TextBlock Text="{DynamicResource Name}" Classes="Heading"/>
+						<TextBox Text="{Binding LoginInformation.Name}"/>
+
+						<StackPanel IsVisible="{Binding VisiblePasswordSection}" Spacing="5">
+							<Separator/>
+							<TextBlock Text="{DynamicResource Username}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Username}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Username}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Email}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Email}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Email}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
+							<TextBox x:Name="txtPassword" Classes="revealPasswordButton" Text="{Binding LoginInformation.Password}" PasswordChar="•"/>
+							<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Password}" Padding="5 2" HorizontalAlignment="Left"/>
+							<DockPanel>
+								<TextBlock Text="{DynamicResource Complexity}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
+								<ProgressBar x:Name="pbHard" Maximum="300"/>
+							</DockPanel>
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource WebSite}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.WebSite}"/>
+							<StackPanel Orientation="Horizontal" Spacing="5">
+								<Button Content="{DynamicResource GoTo}" Command="{Binding OpenWebSiteCommand}" Padding="5 2"/>
+								<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.WebSite}" Padding="5 2"/>
+							</StackPanel>
+							
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource VerificationCode}" Classes="Heading"/>
+							<TextBox IsReadOnly="True" Text="{Binding GeneratedCode}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding GeneratedCode}" Padding="5 2"/>
+							<ProgressBar Maximum="30" Value="{Binding TimeLeft}"/>
+						</StackPanel>
+						<StackPanel IsVisible="{Binding VisibleReminderSection}" Spacing="5">
+							<Separator/>
+							<TextBlock Text="{DynamicResource StartTime}" Classes="Heading"/>
+							<TextBox x:Name="tbStartTime" Text="{Binding LoginInformation.Username}"/>
+							<StackPanel Orientation="Horizontal" Spacing="5">
+								<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Username}" Padding="5 2"/>
+								<CheckBox x:Name="cbIsStartRemember" IsEnabled="False" IsChecked="{Binding LoginInformation.IsReminderActive}" Content="{DynamicResource ReminderStarted}"/>
+							</StackPanel>
+						</StackPanel>
+						<StackPanel IsVisible="{Binding VisibleBankCardSection}" Spacing="5">
+							<Separator/>
+							<TextBlock Text="{DynamicResource CartType}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.TypeBankCard}"/>
+
+							<Separator/>
+							<TextBlock Text="{DynamicResource CardNumber}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Username}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Username}" Padding="5 2"/>
+
+							<Separator/>
+							<TextBlock Text="{DynamicResource YearOfService}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.DateCard}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.DateCard}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource SecurityCodeCard}" Classes="Heading"/>
+							<TextBox Classes="revealPasswordButton" Text="{Binding LoginInformation.SecurityCode}" PasswordChar="•"/>
+							<Button Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.SecurityCode}" Padding="5 2" HorizontalAlignment="Left"/>
+						</StackPanel>
+
+						<StackPanel IsVisible="{Binding VisiblePersonalDataSection}" Spacing="5">
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource FullName}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Username}"/>
+							<Button HorizontalAlignment="Left" Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Username}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource SeriesAndNumber}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Number}"/>
+							<Button HorizontalAlignment="Left" Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Number}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource PlaceOfIssue}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.PlaceOfIssue}"/>
+							<Button HorizontalAlignment="Left" Content="{DynamicResource Copy}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.PlaceofIssue}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource SocialSecurityNumber}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.SocialSecurityNumber}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.SocialSecurityNumber}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource TIN}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.TIN}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.TIN}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Email}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Email}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Email}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Telephone}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Telephone}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Telephone}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Company}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Company}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Company}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Postcode}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Postcode}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Postcode}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Country}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Country}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Country}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Region}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Region}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Region}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource City}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.City}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.City}" Padding="5 2"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Address}" Classes="Heading"/>
+							<TextBox Text="{Binding LoginInformation.Address}"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Address}" Padding="5 2"/>
+						</StackPanel>
+
+						<Separator/>
+
+						<TextBlock Text="{DynamicResource Color}" Classes="Heading"/>
+						<StackPanel Spacing="5" Orientation="Horizontal">
+							<Border x:Name="bColor" CornerRadius="5" Width="30" Height="20"/>
+							<Button Content="{DynamicResource Copy}" HorizontalAlignment="Left" IsEnabled="{Binding LoginInformation.UseColor}" Command="{Binding CopyInformation}" CommandParameter="{Binding LoginInformation.Color}" Padding="5 2"/>
+							<CheckBox Content="{DynamicResource UseColor}" IsChecked="{Binding LoginInformation.UseColor}" IsEnabled="False"/>
+							<TextBox x:Name="tbColor" Text="{Binding LoginInformation.Color}" IsVisible="False"/>
+						</StackPanel>
+
+						<Separator/>
+
+						<TextBlock Text="{DynamicResource Folder}" Classes="Heading"/>
+						<ComboBox Items="{Binding Folders}" SelectedIndex="{Binding SelectionFolderIndex}" IsEnabled="False">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding Name}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel Spacing="5">
+						<TextBlock Text="{DynamicResource Notes}" Classes="Heading"/>
+						<TextBox AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding LoginInformation.Note}"/>
+					</StackPanel>
+				</Border>
+				<StackPanel IsVisible="{Binding IsVisibleCustomFields}" Spacing="5">
+					<TextBlock Text="{DynamicResource CustomFields}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold"/>
+					<Border Classes="BorderStyle" Padding="5">
+						<ScrollViewer>
+							<ItemsRepeater Items="{Binding CustomFields}"/>
+						</ScrollViewer>
+					</Border>
+				</StackPanel>
+
+				<StackPanel IsVisible="{Binding IsVisibleImportedFiles}" Spacing="5">
+					<TextBlock Text="{DynamicResource ImportedFiles}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold"/>
+					<Border Classes="BorderStyle" Padding="5">
+						<StackPanel>
+							<ScrollViewer>
+								<ItemsRepeater Items="{Binding ImportedFiles}"/>
+							</ScrollViewer>
+						</StackPanel>
+					</Border>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<TextBlock Text="{DynamicResource Create}" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+					<TextBlock Text="{Binding LoginInformation.TimeCreate}" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+				</StackPanel>
+				<StackPanel IsVisible="{Binding VisibleDateChanged}" Orientation="Horizontal" Spacing="5">
+					<TextBlock Text="{DynamicResource Update}" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+					<TextBlock Text="{Binding LoginInformation.TimeChanged}" Foreground="{DynamicResource ThemeWindowForegroundBrush}"/>
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+
+		<Border BorderThickness="0 1 0 0" Grid.Row="1" Classes="ButtonsMenu">
+			<Button Content="{DynamicResource ChangeP}" Command="{Binding EditContentCommand}" Margin="10" HorizontalAlignment="Left"/>
+		</Border>
+	</Grid>
+</UserControl>

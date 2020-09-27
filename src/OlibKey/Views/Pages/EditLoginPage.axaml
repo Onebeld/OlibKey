@@ -1,0 +1,229 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:cp="clr-namespace:OlibKey.Controls.ColorPicker;assembly=OlibKey.Controls.ColorPicker"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 Background="{DynamicResource ThemeWindowBackgroundBrush}"
+             x:Class="OlibKey.Views.Pages.EditLoginPage">
+	<Grid RowDefinitions="*,50">
+		<ScrollViewer VerticalScrollBarVisibility="Auto">
+			<StackPanel Margin="10" Spacing="5">
+				<TextBlock Text="{DynamicResource ChangeElement}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold"/>
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel Spacing="5">
+						<TextBlock Text="{DynamicResource Name}" Classes="Heading"/>
+						<TextBox Text="{Binding NewLogin.Name}"/>
+
+						<StackPanel IsVisible="{Binding VisiblePasswordSection}" Spacing="5">
+							<Separator/>
+							<TextBlock Text="{DynamicResource Username}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Username}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Email}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Email}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Password+}" Classes="Heading"/>
+							<TextBox x:Name="txtPassword" Classes="revealPasswordButton" Text="{Binding NewLogin.Password}" PasswordChar="•"/>
+							<Button Content="{DynamicResource Generate}" Click="GeneratePassword" Padding="5 2" HorizontalAlignment="Left"/>
+							<DockPanel>
+								<TextBlock Text="{DynamicResource Complexity}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
+								<ProgressBar x:Name="pbHard" Maximum="300"/>
+							</DockPanel>
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource WebSite}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.WebSite}"/>
+							
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource VerificationCode}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.SecretKey}" Watermark="{DynamicResource SecretKey}" PasswordChar="•"/>
+							<Button Content="{DynamicResource Activate}" Command="{Binding ActivateTOTP}" Padding="5 2"/>
+							<TextBox IsReadOnly="True" Text="{Binding GeneratedCode}"/>
+							<ProgressBar Maximum="30" Value="{Binding TimeLeft}"/>
+						</StackPanel>
+						<StackPanel IsVisible="{Binding VisibleReminderSection}" Spacing="5">
+							<Separator/>
+							<TextBlock Text="{DynamicResource StartTime}" Classes="Heading"/>
+							<TextBox x:Name="tbStartTime" Text="{Binding NewLogin.Username}"/>
+							<StackPanel Orientation="Horizontal" Spacing="5">
+								<Button Content="{DynamicResource ZeroOut}" Padding="5 2"/>
+								<CheckBox Content="{DynamicResource ReminderStarted}" IsChecked="{Binding NewLogin.IsReminderActive}" VerticalAlignment="Center"/>
+							</StackPanel>
+						</StackPanel>
+						<StackPanel IsVisible="{Binding VisibleBankCardSection}" Spacing="5">
+							<Separator/>
+							<TextBlock Text="{DynamicResource CartType}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.TypeBankCard}"/>
+
+							<Separator/>
+							<TextBlock Text="{DynamicResource CardNumber}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Username}"/>
+
+							<Separator/>
+							<TextBlock Text="{DynamicResource YearOfService}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.DateCard}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource SecurityCodeCard}" Classes="Heading"/>
+							<TextBox Classes="revealPasswordButton" Text="{Binding NewLogin.SecurityCode}" PasswordChar="•"/>
+						</StackPanel>
+
+						<StackPanel IsVisible="{Binding VisiblePersonalDataSection}" Spacing="5">
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource FullName}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Username}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource SeriesAndNumber}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Number}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource PlaceOfIssue}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.PlaceOfIssue}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource SocialSecurityNumber}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.SocialSecurityNumber}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource TIN}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.TIN}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Email}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Email}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Telephone}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Telephone}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Company}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Company}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Postcode}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Postcode}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Country}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Country}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Region}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Region}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource City}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.City}"/>
+
+							<Separator/>
+
+							<TextBlock Text="{DynamicResource Address}" Classes="Heading"/>
+							<TextBox Text="{Binding NewLogin.Address}"/>
+						</StackPanel>
+						
+						<Separator/>
+
+						<TextBlock Text="{DynamicResource Color}" Classes="Heading"/>
+						<StackPanel Spacing="5" Orientation="Horizontal">
+							<Border x:Name="bColor" CornerRadius="5" Width="30" Height="20">
+								<Popup x:Name="pColorPicker" StaysOpen="False">
+									<Popup.Resources>
+										<cp:HexToColorConverter x:Key="HexToColorConverter"/>
+									</Popup.Resources>
+									<Border BorderThickness="1" BorderBrush="{DynamicResource ThemeGlobalBorderBrush}" Padding="5">
+										<cp:ColorPicker x:Name="colorPicker" Color="{Binding Hex, Mode=TwoWay, Converter={StaticResource HexToColorConverter}}"/>
+									</Border>
+								</Popup>
+							</Border>
+							<Button Content="{DynamicResource ChangeP}" Click="OpenColorPicker" Padding="5 2"/>
+							<CheckBox Content="{DynamicResource UseColor}" IsChecked="{Binding NewLogin.UseColor}"/>
+							<TextBox x:Name="tbColor" Text="{Binding NewLogin.Color}" IsVisible="False"/>
+						</StackPanel>
+
+						<Separator/>
+
+						<TextBlock Text="{DynamicResource Folder}" Classes="Heading"/>
+						<ComboBox Items="{Binding Folders}" SelectedIndex="{Binding SelectionFolderIndex}">
+							<ComboBox.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding Name}"/>
+								</DataTemplate>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+					</StackPanel>
+				</Border>
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel Spacing="5">
+						<TextBlock Text="{DynamicResource Notes}" Classes="Heading"/>
+						<TextBox AcceptsReturn="True" TextWrapping="Wrap" Height="100" Text="{Binding NewLogin.Note}"/>
+					</StackPanel>
+				</Border>
+				
+				<TextBlock Text="{DynamicResource CustomFields}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold"/>
+				
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel>
+						<ScrollViewer>
+							<ItemsRepeater Items="{Binding CustomFields}"/>
+						</ScrollViewer>
+						<StackPanel Spacing="5">
+							<TextBlock Text="{DynamicResource AddField}" Classes="Heading"/>
+							<DockPanel>
+								<TextBlock Text="{DynamicResource TypeColon}" Foreground="{DynamicResource ThemeForegroundBrush}" VerticalAlignment="Center" Margin="0 0 5 0"/>
+								<ComboBox x:Name="TypeCustomField" SelectedIndex="{Binding Type}">
+									<ComboBoxItem Content="{StaticResource Text}"/>
+									<ComboBoxItem Content="{DynamicResource Hidden}"/>
+									<ComboBoxItem Content="{DynamicResource Logical}"/>
+								</ComboBox>
+							</DockPanel>
+							<Button Content="{DynamicResource Add}" Command="{Binding AddCustomField}"/>
+						</StackPanel>
+					</StackPanel>
+				</Border>
+				
+				<TextBlock Text="{DynamicResource ImportedFiles}" FontSize="18" Foreground="{DynamicResource ThemeWindowForegroundBrush}" FontWeight="Bold"/>
+			
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel>
+						<ScrollViewer>
+							<ItemsRepeater Items="{Binding ImportedFiles}"/>
+						</ScrollViewer>
+						
+						<Button Content="{DynamicResource Import}" Command="{Binding ImportFile}"/>
+					</StackPanel>
+				</Border>
+			</StackPanel>
+		</ScrollViewer>
+
+		<Border BorderThickness="0 1 0 0" Grid.Row="1" Classes="ButtonsMenu" Padding="10">
+			<Grid>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Spacing="5">
+					<Button Content="{DynamicResource PasswordSave}" Command="{Binding SaveLogin}"/>
+					<Button Content="{DynamicResource Cancel}" Command="{Binding Back}"/>
+				</StackPanel>
+				<Button Content="{DynamicResource Delete}" Command="{Binding DeleteLogin}" HorizontalAlignment="Right"/>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

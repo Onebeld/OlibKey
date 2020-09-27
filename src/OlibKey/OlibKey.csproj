@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<Platforms>AnyCPU;x64</Platforms>
+		<AssemblyVersion>3.3.0</AssemblyVersion>
+		<FileVersion>3.3.0</FileVersion>
+		<EnableDefaultCompileItems>False</EnableDefaultCompileItems>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PublishTrimmed>True</PublishTrimmed>
+		<PublishSingleFile>False</PublishSingleFile>
+		<PublishReadyToRun>True</PublishReadyToRun>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Description>A powerful and modern open source password manager.</Description>
+		<ApplicationIcon>app.ico</ApplicationIcon>
+		<Version>3.3.0</Version>
+		<PackageTags>olib,password-manager,opensource,program,modern,olibkey,avalonia,dotnet,avaloniaui,cross-platform</PackageTags>
+	</PropertyGroup>
+
+	<Import Project="..\..\build\Base.props" />
+	<Import Project="..\..\build\Avalonia.props" />
+	<Import Project="..\..\build\EmbedXaml.props" />
+	<Import Project="..\..\build\ReactiveUI.props" />
+
+	<ItemGroup>
+		<Compile Include="**\*.cs" Exclude="obj\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\*" />
+		<AvaloniaResource Include="app.ico" />
+		<AvaloniaResource Include="Assets\Font\NotoSans-Bold.ttf" />
+		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="Otp.NET" Version="1.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\OlibKey.ColorPicker\OlibKey.Controls.ColorPicker.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\Controls\ImportedFileListItem.axaml.cs">
+	    <DependentUpon>ImpotedFileListItem.axaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+</Project>

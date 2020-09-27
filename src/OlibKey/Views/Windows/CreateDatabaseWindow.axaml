@@ -1,0 +1,54 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
+        x:Class="OlibKey.Views.Windows.CreateDatabaseWindow"
+		WindowStartupLocation="CenterOwner"
+		ShowInTaskbar="False"
+		Icon="avares://OlibKey/app.ico"
+		Height="350" Width="400"
+		Background="{StaticResource ThemeWindowBackgroundBrush}"
+        Title="{StaticResource CreateBase}"
+		CanResize="False">
+	<Grid RowDefinitions="*,50">
+		<ScrollViewer>
+			<StackPanel Margin="5">
+				<Border Classes="BorderStyle" Padding="5">
+					<StackPanel Spacing="5">
+						<TextBlock Text="{StaticResource Directory}" Classes="Heading"/>
+						<TextBox x:Name="tbPathDatabase" IsReadOnly="True"/>
+						<Button x:Name="bSelectPath" Content="{StaticResource Select}" Padding="5 2"/>
+						
+						<Separator/>
+						
+						<TextBlock Text="{StaticResource MasterPassword}" Classes="Heading"/>
+						<TextBox x:Name="tbPassword" Classes="revealPasswordButton" PasswordChar="•"/>
+						<DockPanel>
+							<TextBlock Text="{StaticResource Complexity}" Foreground="{StaticResource ThemeForegroundBrush}" VerticalAlignment="Center"/>
+							<ProgressBar x:Name="pbHard" Margin="5 0 0 0"/>
+						</DockPanel>
+						
+						<Separator/>
+						
+						<CheckBox x:Name="cbUseCompression" Content="{StaticResource UseCompression}" IsChecked="True"/>
+						<CheckBox x:Name="cbUseTrash" Content="{DynamicResource UseTrash}" IsChecked="True"/>
+						<DockPanel>
+							<TextBlock Text="{StaticResource NumberOfEncryptionProcedures}" Foreground="{StaticResource ThemeForegroundBrush}"/>
+							<TextBox x:Name="tbNumberOfEncryptionProcedures" Text="1" Margin="5 0 0 0"/>
+						</DockPanel>
+						<DockPanel>
+							<TextBlock Text="{StaticResource Iteration}" Foreground="{StaticResource ThemeForegroundBrush}"/>
+							<TextBox x:Name="tbIteration" Text="100000" Margin="5 0 0 0"/>
+						</DockPanel>
+					</StackPanel>
+				</Border>
+			</StackPanel>
+		</ScrollViewer>
+		<Border Grid.Row="1" Classes="ButtonsMenu" BorderThickness="0 1 0 0">
+			<Grid>
+				<Button x:Name="bSave" Content="{StaticResource PasswordSave}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10"/>
+			</Grid>
+		</Border>
+	</Grid>
+</Window>

@@ -1,52 +1,61 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<OutputType>WinExe</OutputType>
-		<Platforms>AnyCPU;x64</Platforms>
-		<AssemblyVersion>3.3.0</AssemblyVersion>
-		<FileVersion>3.3.0</FileVersion>
-		<EnableDefaultCompileItems>False</EnableDefaultCompileItems>
-	</PropertyGroup>
+    <PropertyGroup>
+        <OutputType Condition="'$(Configuration.toUpper())' != 'DEBUG'">WinExe</OutputType>
+        <OutputType Condition="'$(Configuration.toUpper())' == 'DEBUG'">Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <IncludeAvaloniaGenerators>true</IncludeAvaloniaGenerators>
+        <PublishTrimmed>true</PublishTrimmed>
+        <PublishAot>true</PublishAot>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<PublishTrimmed>True</PublishTrimmed>
-		<PublishSingleFile>False</PublishSingleFile>
-		<PublishReadyToRun>True</PublishReadyToRun>
-	</PropertyGroup>
+    <PropertyGroup>
+        <IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
+        <IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
+        <IsOSX Condition="$([MSBuild]::IsOSPlatform('OSX'))">true</IsOSX>
 
-	<PropertyGroup>
-		<Description>A powerful and modern open source password manager.</Description>
-		<ApplicationIcon>app.ico</ApplicationIcon>
-		<Version>3.3.0</Version>
-		<PackageTags>olib,password-manager,opensource,program,modern,olibkey,avalonia,dotnet,avaloniaui,cross-platform</PackageTags>
-	</PropertyGroup>
+        <DefineConstants Condition="'$(IsWindows)'=='true'">Windows</DefineConstants>
+        <DefineConstants Condition="'$(IsOSX)'=='true'">OSX</DefineConstants>
+        <DefineConstants Condition="'$(IsLinux)'=='true'">Linux</DefineConstants>
+    </PropertyGroup>
 
-	<Import Project="..\..\build\Base.props" />
-	<Import Project="..\..\build\Avalonia.props" />
-	<Import Project="..\..\build\EmbedXaml.props" />
-	<Import Project="..\..\build\ReactiveUI.props" />
-
-	<ItemGroup>
-		<Compile Include="**\*.cs" Exclude="obj\**" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<AvaloniaResource Include="Assets\*" />
-		<AvaloniaResource Include="app.ico" />
-		<AvaloniaResource Include="Assets\Font\NotoSans-Bold.ttf" />
-		<AvaloniaResource Include="Assets\Font\NotoSans-Regular.ttf" />
-	</ItemGroup>
-	
-	<ItemGroup>
-	  <PackageReference Include="Otp.NET" Version="1.2.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\OlibKey.ColorPicker\OlibKey.Controls.ColorPicker.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="Views\Controls\ImportedFileListItem.axaml.cs">
-	    <DependentUpon>ImpotedFileListItem.axaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+    <PropertyGroup Condition="'$(Configuration.toUpper())' != 'DEBUG'">
+        <TrimMode>link</TrimMode>
+        <TrimmerDefaultAction>link</TrimmerDefaultAction>
+        <IlcGenerateCompleteTypeMetadata>false</IlcGenerateCompleteTypeMetadata>
+        <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+        <IlcDisableUnhandledExceptionExperience>true</IlcDisableUnhandledExceptionExperience>
+        <StripSymbols>true</StripSymbols>
+        <OptimizationPreference>Size</OptimizationPreference>
+        <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
+        <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
+        <EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
+        <EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
+        <TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
+        <UseSystemResourceKeys>true</UseSystemResourceKeys>
+        <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
+        <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
+        <ILLinkTreatWarningsAsErrors>false</ILLinkTreatWarningsAsErrors>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.4"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.4"/>
+        <PackageReference Include="PleasantUI" Version="3.0.10"/>
+        
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.4"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Folder Include="Views\" />
+      <Folder Include="Windows\" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\OlibKey.Assets\OlibKey.Assets.csproj" />
+      <ProjectReference Include="..\OlibKey.Core\OlibKey.Core.csproj" />
+    </ItemGroup>
 </Project>

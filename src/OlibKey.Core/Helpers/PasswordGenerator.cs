@@ -6,6 +6,10 @@ public static class PasswordGenerator
 {
     private static readonly RandomNumberGenerator Rand = RandomNumberGenerator.Create();
         
+    /// <summary>
+    /// Generates a new password according to the generator settings in <see cref="OlibKeySettings"/>
+    /// </summary>
+    /// <returns>Generated password</returns>
     public static string Generate()
     {
         const string lower = "abcdefghijklmnopqrstuvwxyz";

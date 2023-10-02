@@ -3,10 +3,20 @@ using System.Text;
 
 namespace OlibKey.Core.Helpers;
 
-public class Compressor
+public static class Compressor
 {
+    /// <summary>
+    /// Compresses a text
+    /// </summary>
+    /// <param name="text">Original text</param>
+    /// <returns>Compressed text</returns>
     public static string Compress(string text) => Compress(Encoding.UTF8.GetBytes(text));
 
+    /// <summary>
+    /// Compresses a byte array
+    /// </summary>
+    /// <param name="buffer">Buffer</param>
+    /// <returns>Compressed buffer</returns>
     public static string Compress(byte[] buffer)
     {
         MemoryStream memoryStream = new();
@@ -25,9 +35,14 @@ public class Compressor
         return Convert.ToBase64String(gZipBuffer);
     }
 
-    public static string Decompress(string text)
+    /// <summary>
+    /// Decompresses a compressed text
+    /// </summary>
+    /// <param name="compressedText">Compressed text</param>
+    /// <returns>Original text</returns>
+    public static string Decompress(string compressedText)
     {
-        byte[] gZipBuffer = Convert.FromBase64String(text);
+        byte[] gZipBuffer = Convert.FromBase64String(compressedText);
         using MemoryStream memoryStream = new();
         
         int dataLength = BitConverter.ToInt32(gZipBuffer, 0);

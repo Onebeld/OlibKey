@@ -1,7 +1,6 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="OlibKey.App"
-             RequestedThemeVariant="Default">
+             x:Class="OlibKey.App">
     <Application.Resources>
         <ResourceDictionary x:Key="LanguageDictionaries">
             <ResourceDictionary.MergedDictionaries>

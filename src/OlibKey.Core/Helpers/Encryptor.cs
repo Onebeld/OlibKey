@@ -68,7 +68,7 @@ public static class Encryptor
         return memoryStream.ToArray();
     }
     
-    public static byte[] EncryptBytes(byte[] data, string password, int iterations)
+    /*public static byte[] EncryptBytes(byte[] data, string password, int iterations)
     {
         byte[] salt = new byte[SaltLength];
         RandomNumberGenerator.Create().GetBytes(salt);
@@ -99,9 +99,9 @@ public static class Encryptor
         Buffer.BlockCopy(encryptedBytes, 0, outputBytes, salt.Length + iv.Length, encryptedBytes.Length);
 
         return outputBytes;
-    }
+    }*/
     
-    public static byte[] DecryptBytes(byte[] data, string password, int iterations)
+    /*public static byte[] DecryptBytes(byte[] data, string password, int iterations)
     {
         byte[] salt = new byte[SaltLength];
         Buffer.BlockCopy(data, 0, salt, 0, salt.Length);
@@ -130,8 +130,15 @@ public static class Encryptor
         byte[] decryptedBytes = memoryStream.ToArray();
 
         return decryptedBytes;
-    }
+    }*/
     
+    /// <summary>
+    /// Encrypts text
+    /// </summary>
+    /// <param name="text">Original text</param>
+    /// <param name="masterPassword">Master password</param>
+    /// <param name="iterations">Number of encryption iterations</param>
+    /// <returns>Encrypted text</returns>
     public static string EncryptString(string text, string masterPassword, int iterations)
     {
         string encryptString = text;
@@ -150,6 +157,13 @@ public static class Encryptor
         return encryptString;
     }
 
+    /// <summary>
+    /// Decrypts text
+    /// </summary>
+    /// <param name="text">Encrypted text</param>
+    /// <param name="masterPassword">Master password</param>
+    /// <param name="iterations">Number of decryption iterations</param>
+    /// <returns>Decrypted text</returns>
     public static string DecryptString(string text, string masterPassword, int iterations)
     {
         string result = text;

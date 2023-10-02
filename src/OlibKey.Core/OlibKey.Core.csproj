@@ -21,10 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Converters\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\OlibKey.Assets\OlibKey.Assets.csproj" />
     </ItemGroup>
 </Project>

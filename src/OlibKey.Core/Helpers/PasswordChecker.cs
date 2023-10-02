@@ -20,6 +20,11 @@ public static class PasswordChecker
 
     static PasswordChecker() => _badPasswords = Resources.BadPasswords.Split("\r\n");
 
+    /// <summary>
+    /// Checks the complexity of the password
+    /// </summary>
+    /// <param name="password">Password</param>
+    /// <returns>Complexity points</returns>
     public static double GetPasswordComplexity(string? password)
     {
         if (string.IsNullOrWhiteSpace(password)) return 0;

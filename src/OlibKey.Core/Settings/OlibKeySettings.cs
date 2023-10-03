@@ -166,7 +166,7 @@ public class OlibKeySettings : ViewModelBase
     /// </summary>
     private static void CreateInstance()
     {
-        Instance = new OlibKeySettings()
+        Instance = new OlibKeySettings
         {
             Language = CultureInfo.CurrentCulture.TwoLetterISOLanguageName
         };
@@ -180,5 +180,11 @@ public class OlibKeySettings : ViewModelBase
     private static void Setup()
     {
         Instance.FontName = FontManager.Current.DefaultFontFamily.Name;
+    }
+
+    public static void Save()
+    {
+        using FileStream fileStream = File.Create(Path.Combine(PleasantDirectories.Settings, "OlibKeySettings.json"));
+        JsonSerializer.Serialize(fileStream, Instance, OlibKeySettingsGenerationContext.Default.OlibKeySettings);
     }
 }

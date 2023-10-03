@@ -2,9 +2,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:OlibKey.Core.ViewModels"
+        xmlns:core="using:OlibKey.Core"
+        xmlns:conv="using:OlibKey.Core.Converters"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="OlibKey.MainWindow"
-        Title="OlibKey">
-    <StackPanel>
-    </StackPanel>
+        Title="OlibKey"
+        FontFamily="{CompiledBinding FontName, Source={x:Static core:OlibKeySettings.Instance}, Converter={x:Static conv:FontNameConverters.NameToFontFamily}}"
+        WindowStartupLocation="CenterScreen"
+        EnableTitleBarMargin="False"
+        TitleBarType="ClassicExtended"
+        x:DataType="vm:ApplicationViewModel">
+    <NavigationView Header="{x:Null}"
+                    IsOpen="False"
+                    SelectionMode="AlwaysSelected"
+                    DisplayTopIndent="{CompiledBinding WindowSettings.EnableCustomTitleBar, Source={x:Static PleasantSettings.Instance}}"
+                    BindWindowSettings="True">
+        <NavigationViewItem x:Name="PasswordManagerPage"
+                            IsSelected="True"
+                            Header="{DynamicResource PasswordManager}" />
+        
+        <NavigationViewItem x:Name="AboutPage"
+                            Header="{DynamicResource About}"
+                            Icon="{StaticResource InfoRegular}"
+                            Margin="0 5"
+                            DockPanel.Dock="Bottom"/>
+        <NavigationViewItem x:Name="SettingsPage"
+                            Header="{DynamicResource Settings}"
+                            Icon="{StaticResource SettingsRegular}"
+                            DockPanel.Dock="Bottom" />
+        <Panel />
+    </NavigationView>
 </PleasantWindow>

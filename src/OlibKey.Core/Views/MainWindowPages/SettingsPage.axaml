@@ -1,0 +1,151 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels"
+             xmlns:helpers="using:OlibKey.Core.Helpers"
+             xmlns:struct="using:OlibKey.Core.Structures"
+             xmlns:conv="using:OlibKey.Core.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.MainWindowPages.SettingsPage"
+             x:DataType="vm:SettingsViewModel">
+    <UserControl.DataContext>
+        <vm:SettingsViewModel />
+    </UserControl.DataContext>
+    
+    <SmoothScrollViewer>
+        <StackPanel Margin="25" Spacing="5">
+            <TextBlock Text="{StaticResource Settings}"
+                       Margin="0 0 0 10"
+                       Theme="{StaticResource TitleTextBlockTheme}" />
+            
+            <!--General-->
+            <TextBlock Theme="{StaticResource BaseTextBlockTheme}" Text="{StaticResource General}" />
+            
+            <OptionsDisplayItem Header="{StaticResource Language}"
+                                Icon="{StaticResource LocalLanguageRegular}">
+                <OptionsDisplayItem.ActionButton>
+                    <ComboBox MinWidth="150"
+                              ItemsSource="{CompiledBinding Source={x:Static helpers:Localization.Languages}}"
+                              SelectedItem="{CompiledBinding SelectedLanguage}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="struct:Language">
+                                <TextBlock Text="{CompiledBinding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </OptionsDisplayItem.ActionButton>
+            </OptionsDisplayItem>
+            
+            <!--Appearance-->
+            <TextBlock Theme="{StaticResource BaseTextBlockTheme}" Text="{StaticResource Appearance}" Margin="0 15 0 0" />
+            
+            <OptionsDisplayItem Header="{StaticResource Font}"
+                                Icon="{StaticResource TextFontRegular}">
+                <OptionsDisplayItem.ActionButton>
+                    <ComboBox MinWidth="150"
+                              ItemsSource="{CompiledBinding FontFamilies}"
+                              SelectedItem="{CompiledBinding SelectedFontFamily}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate x:DataType="FontFamily">
+                                <TextBlock Text="{CompiledBinding Name}" FontFamily="{CompiledBinding}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </OptionsDisplayItem.ActionButton>
+            </OptionsDisplayItem>
+            
+            <OptionsDisplayItem Header="{StaticResource EnableShadow}"
+                                Description="{StaticResource EnableShadowDescription}"
+                                Icon="{StaticResource SparkleRegular}">
+                <OptionsDisplayItem.ActionButton>
+                    <ToggleSwitch Classes="RightToggle"
+                                  IsChecked="{CompiledBinding RenderSettings.EnableShadowing, Source={x:Static PleasantSettings.Instance}}" />
+                </OptionsDisplayItem.ActionButton>
+            </OptionsDisplayItem>
+            
+            <OptionsDisplayItem x:Name="OptionsDisplayItemCustomTitleBar"
+                                Header="{StaticResource EnableCustomTitleBar}"
+                                Icon="{StaticResource WindowRegular}">
+                <OptionsDisplayItem.ActionButton>
+                    <ToggleSwitch Classes="RightToggle"
+                                  IsChecked="{CompiledBinding WindowSettings.EnableCustomTitleBar, Source={x:Static PleasantSettings.Instance}}" />
+                </OptionsDisplayItem.ActionButton>
+            </OptionsDisplayItem>
+            
+            <OptionsDisplayItem x:Name="OptionsDisplayItemEnableBlur"
+                                Header="{StaticResource EnableBlur}"
+                                Icon="{StaticResource WindowInprivateRegular}"
+                                Expands="True">
+                <OptionsDisplayItem.ActionButton>
+                    <ToggleSwitch Classes="RightToggle"
+                                  IsChecked="{CompiledBinding WindowSettings.OpacityLevel, Source={x:Static PleasantSettings.Instance}}"/>
+                </OptionsDisplayItem.ActionButton>
+                <OptionsDisplayItem.Content>
+                    <DockPanel Margin="48 0 33 0">
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                            <NumericUpDown Value="{CompiledBinding WindowSettings.OpacityLevel, Source={x:Static PleasantSettings.Instance}}"
+                                           Maximum="1"
+                                           Minimum="0"
+                                           Increment="0.1"
+                                           FormatString="P0"
+                                           Width="90"
+                                           HorizontalContentAlignment="Left"
+                                           VerticalAlignment="Center"
+                                           ParsingNumberStyle="Integer"
+                                           Margin="0 0 5 0" />
+                            
+                            <Slider Width="150"
+                                    Minimum="0"
+                                    Maximum="1"
+                                    TickFrequency="0.01"
+                                    Value="{CompiledBinding WindowSettings.OpacityLevel, Source={x:Static PleasantSettings.Instance}}"/>
+                        </StackPanel>
+                        
+                        <TextBlock VerticalAlignment="Center" Text="{StaticResource OpacityLevel}" TextWrapping="Wrap" />
+                    </DockPanel>
+                </OptionsDisplayItem.Content>
+            </OptionsDisplayItem>
+            
+            <OptionsDisplayItem Header="{StaticResource AccentColor}"
+                                Icon="{StaticResource ColorRegular}">
+                <OptionsDisplayItem.ActionButton>
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <CheckBox Content="{StaticResource UseSystemAccentColor}"
+                                  IsChecked="{CompiledBinding UseAccentColor}" />
+                        
+                        <Border Background="{StaticResource CheckeredBackgroundBrush}"
+                                Width="40"
+                                Height="25"
+                                CornerRadius="4"
+                                ToolTip.Tip="{CompiledBinding NumericalAccentColor, Source={x:Static PleasantSettings.Instance}, Converter={x:Static conv:UIntToHexConverter.Instance}}">
+                            <Border CornerRadius="4" Background="{CompiledBinding NumericalAccentColor, Source={x:Static PleasantSettings.Instance}, Converter={x:Static ColorConverters.UIntToBrush}}" />
+                        </Border>
+                        
+                        <Button Theme="{StaticResource AppBarButtonTheme}"
+                                Width="30"
+                                Height="30"
+                                ToolTip.Tip="{StaticResource Menu}">
+                            <Button.Flyout>
+                                <MenuFlyout>
+                                    <MenuItem Header="{StaticResource Copy}" />
+                                </MenuFlyout>
+                            </Button.Flyout>
+                        </Button>
+                    </StackPanel>
+                </OptionsDisplayItem.ActionButton>
+            </OptionsDisplayItem>
+            
+            <OptionsDisplayItem Header="{StaticResource Theme}"
+                                Icon="{StaticResource PaintBrushRegular}">
+                <OptionsDisplayItem.ActionButton>
+                    <ComboBox MinWidth="150" SelectedIndex="{CompiledBinding SelectedIndexTheme}">
+                        <ComboBoxItem Content="{StaticResource System}" />
+                        <ComboBoxItem Content="{StaticResource Light}" />
+                        <ComboBoxItem Content="{StaticResource Dark}" />
+                    </ComboBox>
+                </OptionsDisplayItem.ActionButton>
+            </OptionsDisplayItem>
+        </StackPanel>
+    </SmoothScrollViewer>
+</UserControl>

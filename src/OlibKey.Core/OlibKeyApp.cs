@@ -3,16 +3,32 @@ using Avalonia.Controls;
 using Avalonia.Styling;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Structures;
+using OlibKey.Core.ViewModels;
 using PleasantUI;
+using PleasantUI.Controls;
 
 namespace OlibKey.Core;
 
 public class OlibKeyApp : Application
 {
-    public static PleasantTheme PleasantTheme { get; protected set; } = null!;
-
     private static List<IResourceProvider>? _languageDictionaries;
     private static ResourceDictionary? _currentLocalizationDictionary;
+    
+    public static PleasantTheme PleasantTheme { get; private set; } = null!;
+
+    public static PleasantWindow MainWindow { get; protected set; } = null!;
+
+    public static ApplicationViewModel ViewModel { get; }
+
+    static OlibKeyApp()
+    {
+        ViewModel = new ApplicationViewModel();
+    }
+
+    public OlibKeyApp()
+    {
+        DataContext = ViewModel;
+    }
 
     public override void OnFrameworkInitializationCompleted()
     {

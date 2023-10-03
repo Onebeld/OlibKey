@@ -10,6 +10,7 @@ public static class DatabaseExtensions
     public static void Save(this Database database, string path, string masterPassword)
     {
         string file = database.Settings.Iterations + ":";
+        file += (database.ImageData ?? "none") + ":";
 
         string databaseJson = database.ToJson();
         string compressedDatabaseJson = Compressor.Compress(databaseJson);

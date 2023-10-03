@@ -16,4 +16,27 @@
     <s:String x:Key="Cut">Cut</s:String>
     <s:String x:Key="Copy">Copy</s:String>
     <s:String x:Key="Paste">Paste</s:String>
+    
+    <s:String x:Key="PasswordManager">Password manager</s:String>
+    <s:String x:Key="About">About</s:String>
+    
+    <!--Settings-->
+    <s:String x:Key="Settings">Settings</s:String>
+    
+    <s:String x:Key="General">General</s:String>
+    <s:String x:Key="Language">Language</s:String>
+    
+    <s:String x:Key="Appearance">Appearance</s:String>
+    <s:String x:Key="Font">Font</s:String>
+    <s:String x:Key="EnableShadow">Enable shadow</s:String>
+    <s:String x:Key="EnableShadowDescription">Enable shadow</s:String>
+    <s:String x:Key="EnableCustomTitleBar">Enable custom title bar</s:String>
+    <s:String x:Key="EnableBlur">Enable blur</s:String>
+    <s:String x:Key="OpacityLevel">Enable blur</s:String>
+    <s:String x:Key="AccentColor">Accent color</s:String>
+    <s:String x:Key="UseSystemAccentColor">Use system accent color</s:String>
+    <s:String x:Key="Theme">Theme</s:String>
+    <s:String x:Key="System">System</s:String>
+    <s:String x:Key="Light">Light</s:String>
+    <s:String x:Key="Dark">Dark</s:String>
 </ResourceDictionary>

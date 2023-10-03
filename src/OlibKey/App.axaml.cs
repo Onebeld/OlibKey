@@ -14,7 +14,8 @@ public class App : OlibKeyApp
         
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            desktop.MainWindow = new MainWindow();
+            MainWindow = new MainWindow();
+            desktop.MainWindow = MainWindow;
         }
     }
 }

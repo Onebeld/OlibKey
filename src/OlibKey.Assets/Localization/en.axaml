@@ -16,9 +16,12 @@
     <s:String x:Key="Cut">Cut</s:String>
     <s:String x:Key="Copy">Copy</s:String>
     <s:String x:Key="Paste">Paste</s:String>
+    <s:String x:Key="Change">Change</s:String>
     
+    <!--Password manager-->
     <s:String x:Key="PasswordManager">Password manager</s:String>
-    <s:String x:Key="About">About</s:String>
+    
+    <!--Tips-->
     
     <!--Settings-->
     <s:String x:Key="Settings">Settings</s:String>
@@ -39,4 +42,21 @@
     <s:String x:Key="System">System</s:String>
     <s:String x:Key="Light">Light</s:String>
     <s:String x:Key="Dark">Dark</s:String>
+    
+    <!--About-->
+    <s:String x:Key="About">About</s:String>
+    <s:String x:Key="License">License</s:String>
+    <s:String x:Key="Version">Version</s:String>
+    <s:String x:Key="ContactAuthor">Contact author</s:String>
+    <s:String x:Key="WriteLetter">Write letter</s:String>
+    <s:String x:Key="SocialNetwork">Social network</s:String>
+    <s:String x:Key="UsedLibraries">Used libraries</s:String>
+    <s:String x:Key="Author">Author</s:String>
+    <s:String x:Key="Links">Links</s:String>
+    <s:String x:Key="Description">Description</s:String>
+    <s:String x:Key="WorksOn">Works on</s:String>
+    <s:String x:Key="Copyright">Copyright</s:String>
+    <s:String x:Key="OlibKeyDescription">An application that allows you to store passwords and other data in encrypted form (password manager).</s:String>
+    <s:String x:Key="LicenseDescription1">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</s:String>
+    <s:String x:Key="LicenseDescription2">This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</s:String>
 </ResourceDictionary>

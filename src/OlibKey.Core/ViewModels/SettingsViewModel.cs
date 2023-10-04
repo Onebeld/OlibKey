@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Structures;
@@ -12,6 +11,8 @@ namespace OlibKey.Core.ViewModels;
 
 public class SettingsViewModel : ViewModelBase
 {
+    public bool IsNotLoaded = true;
+    
     public static List<FontFamily> FontFamilies { get; }
     
     public Language SelectedLanguage
@@ -19,6 +20,8 @@ public class SettingsViewModel : ViewModelBase
         get => Localization.Languages.First(lang => lang.Key == OlibKeySettings.Instance.Language);
         set
         {
+            if (IsNotLoaded) return;
+            
             OlibKeySettings.Instance.Language = value.Key;
             OlibKeyApp.UpdateLanguage();
         }
@@ -44,6 +47,8 @@ public class SettingsViewModel : ViewModelBase
         }
         set
         {
+            if (IsNotLoaded) return;
+            
             PleasantSettings.Instance.Theme = value switch
             {
                 1 => Theme.Light,
@@ -61,6 +66,8 @@ public class SettingsViewModel : ViewModelBase
         get => !PleasantSettings.Instance.PreferUserAccentColor;
         set
         {
+            if (IsNotLoaded) return;
+            
             PleasantSettings.Instance.PreferUserAccentColor = !value;
             
             if (PleasantSettings.Instance.PreferUserAccentColor)
@@ -97,10 +104,10 @@ public class SettingsViewModel : ViewModelBase
         await OlibKeyApp.MainWindow.Clipboard?.SetTextAsync(
             $"#{PleasantSettings.Instance.NumericalAccentColor.ToString("x8").ToUpper()}")!;
         
-        OlibKeyApp.ViewModel.NotificationManager.Show(new Notification(OlibKeyApp.GetLocalString("Information"),
+        /*OlibKeyApp.ViewModel.NotificationManager.Show(new Notification(OlibKeyApp.GetLocalString("Information"),
             OlibKeyApp.GetLocalString("ColorCopied"),
             NotificationType.Information,
-            TimeSpan.FromSeconds(2)));
+            TimeSpan.FromSeconds(2)));*/
     }
 
     public async void PasteAccentColor()

@@ -1,0 +1,138 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.BasicElements.DatabaseManagementButton"
+             x:DataType="vm:ApplicationViewModel">
+    <Button Theme="{StaticResource AppBarButtonTheme}"
+            Padding="5"
+            ToolTip.Tip="{DynamicResource Menu}">
+        <Button.Flyout>
+            <Flyout Placement="Bottom" ShowMode="Transient">
+                <Grid RowDefinitions="Auto,Auto,Auto" MinWidth="250">
+                    <StackPanel Grid.Row="0" Margin="0 10 0 0" Spacing="5">
+                        <Border HorizontalAlignment="Center"
+                                CornerRadius="99"
+                                Width="100"
+                                Height="100"
+                                ClipToBounds="True"
+                                Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
+                            <Image />
+                        </Border>
+                        
+                        <TextBlock Text="Test Database"
+                                   FontSize="22"
+                                   Theme="{StaticResource TitleTextBlockTheme}"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="1" Spacing="5" Margin="15 10 15 15">
+                        <StackPanel.Styles>
+                            <Style Selector="Button">
+                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                            </Style>
+                            <Style Selector="Button > StackPanel">
+                                <Setter Property="Spacing" Value="10" />
+                                <Setter Property="Orientation" Value="Horizontal" />
+                            </Style>
+                            <Style Selector="Button > StackPanel > Viewbox">
+                                <Setter Property="Width" Value="16" />
+                                <Setter Property="Height" Value="16" />
+                            </Style>
+                            <Style Selector="Button > StackPanel > Viewbox > Path">
+                                <Setter Property="Stretch" Value="Uniform" />
+                                <Setter Property="Fill" Value="{StaticResource TextFillColorPrimaryBrush}" />
+                            </Style>
+                            <Style Selector="Button > StackPanel > TextBlock.Hotkey">
+                                <Setter Property="Foreground" Value="{StaticResource TextFillColorTertiaryBrush}" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="Margin" Value="-5 0 0 0" />
+                            </Style>
+                        </StackPanel.Styles>
+                        
+                        <Button>
+                            <StackPanel>
+                                <Viewbox>
+                                    <Path Data="{StaticResource AddRegular}" />
+                                </Viewbox>
+                                
+                                <TextBlock Text="Create storage" />
+                                
+                                <TextBlock Classes="Hotkey" Text="(Ctrl+N)" />
+                            </StackPanel>
+                        </Button>
+                        <Button>
+                            <StackPanel>
+                                <Viewbox>
+                                    <Path Data="{StaticResource OpenRegular}" />
+                                </Viewbox>
+                                
+                                <TextBlock Text="Load storage" />
+                                
+                                <TextBlock Classes="Hotkey" Text="(Ctrl+O)" />
+                            </StackPanel>
+                        </Button>
+                        <Button>
+                            <StackPanel>
+                                <Viewbox>
+                                    <Path Data="{StaticResource SaveRegular}" />
+                                </Viewbox>
+                                
+                                <TextBlock Text="Save storage" />
+                                
+                                <TextBlock Classes="Hotkey" Text="(Ctrl+S)" />
+                            </StackPanel>
+                        </Button>
+                        
+                        <Separator Margin="0 5" />
+                        
+                        <Button>
+                            <StackPanel>
+                                <Viewbox>
+                                    <Path Data="{StaticResource ShieldRegular}" />
+                                </Viewbox>
+                                
+                                <TextBlock Text="Password checker" />
+                            </StackPanel>
+                        </Button>
+                        <Button>
+                            <StackPanel>
+                                <Viewbox>
+                                    <Path Data="{StaticResource SettingsRegular}" />
+                                </Viewbox>
+                                
+                                <TextBlock Text="Storage settings" />
+                            </StackPanel>
+                        </Button>
+                        
+                        <Separator Margin="0 5" />
+                        
+                        <Button>
+                            <StackPanel>
+                                <Viewbox>
+                                    <Path Data="{StaticResource DeleteRegular}" />
+                                </Viewbox>
+                                
+                                <TextBlock Text="Trashcan" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Flyout>
+        </Button.Flyout>
+        
+        <StackPanel Orientation="Horizontal">
+            <Border Width="26"
+                    Height="26"
+                    CornerRadius="99"
+                    ClipToBounds="True"
+                    Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
+                <Image />
+            </Border>
+            
+            <TextBlock Text="" Margin="5 0 0 0" VerticalAlignment="Center" />
+        </StackPanel>
+    </Button>
+</UserControl>

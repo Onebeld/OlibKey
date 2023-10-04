@@ -9,10 +9,6 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.MainWindowPages.SettingsPage"
              x:DataType="vm:SettingsViewModel">
-    <UserControl.DataContext>
-        <vm:SettingsViewModel />
-    </UserControl.DataContext>
-    
     <SmoothScrollViewer>
         <StackPanel Margin="25" Spacing="5">
             <TextBlock Text="{StaticResource Settings}"
@@ -99,7 +95,7 @@
                                     Minimum="0"
                                     Maximum="1"
                                     TickFrequency="0.01"
-                                    Value="{CompiledBinding WindowSettings.OpacityLevel, Source={x:Static PleasantSettings.Instance}}"/>
+                                    Value="{CompiledBinding WindowSettings.OpacityLevel, Source={x:Static PleasantSettings.Instance}}" />
                         </StackPanel>
                         
                         <TextBlock VerticalAlignment="Center" Text="{StaticResource OpacityLevel}" TextWrapping="Wrap" />
@@ -128,9 +124,49 @@
                                 ToolTip.Tip="{StaticResource Menu}">
                             <Button.Flyout>
                                 <MenuFlyout>
-                                    <MenuItem Header="{StaticResource Copy}" />
+                                    <MenuItem Header="{StaticResource Copy}"
+                                              Command="{CompiledBinding CopyAccentColor}"
+                                              CommandParameter="{CompiledBinding }">
+                                        <MenuItem.Icon>
+                                            <Viewbox Width="16" Height="16">
+                                                <Path Data="{StaticResource CopyRegular}"
+                                                      Fill="{StaticResource TextFillColorPrimaryBrush}"
+                                                      Stretch="Uniform" />
+                                            </Viewbox>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="{StaticResource Paste}"
+                                              IsEnabled="{CompiledBinding !UseAccentColor}"
+                                              Command="{CompiledBinding PasteAccentColor}"
+                                              CommandParameter="{CompiledBinding}">
+                                        <MenuItem.Icon>
+                                            <Viewbox Width="16" Height="16">
+                                                <Path Data="{StaticResource ClipboardPasteRegular}"
+                                                      Fill="{StaticResource TextFillColorPrimaryBrush}"
+                                                      Stretch="Uniform" />
+                                            </Viewbox>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    
+                                    <Separator />
+                                    
+                                    <MenuItem Header="{StaticResource Change}"
+                                              IsEnabled="{CompiledBinding !UseAccentColor}"
+                                              Command="{CompiledBinding ChangeAccentColor}">
+                                        <MenuItem.Icon>
+                                            <Viewbox Width="16" Height="16">
+                                                <Path Data="{StaticResource EditRegular}"
+                                                      Fill="{StaticResource TextFillColorPrimaryBrush}"
+                                                      Stretch="Uniform" />
+                                            </Viewbox>
+                                        </MenuItem.Icon>
+                                    </MenuItem>
                                 </MenuFlyout>
                             </Button.Flyout>
+                            
+                            <Viewbox Width="16" Height="16">
+                                <Path Data="{StaticResource MoreRegular}" />
+                            </Viewbox>
                         </Button>
                     </StackPanel>
                 </OptionsDisplayItem.ActionButton>

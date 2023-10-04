@@ -1,7 +1,9 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using OlibKey.Core;
 using OlibKey.Core.Views.MainWindowPages;
+using OlibKey.Views;
 using PleasantUI.Controls;
 using PleasantUI.Core;
 
@@ -14,8 +16,8 @@ public partial class MainWindow : PleasantWindow
         InitializeComponent();
 
         SettingsPage.FuncControl += () => new SettingsPage();
-        PasswordManagerPage.FuncControl += () => new UserControl();
-        AboutPage.FuncControl += () => new UserControl();
+        PasswordManagerPage.FuncControl += () => new PasswordManagerPage();
+        AboutPage.FuncControl += () => new AboutPage();
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)

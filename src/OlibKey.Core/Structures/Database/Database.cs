@@ -5,10 +5,18 @@ namespace OlibKey.Core.Structures;
 
 public class Database : ViewModelBase
 {
+    private string _name = string.Empty;
+    
     private AvaloniaList<Data> _data = new();
     private Trashcan _trashcan = new();
     private DatabaseSettings _settings = null!;
     private string? _imageData;
+
+    public string Name
+    {
+        get => _name;
+        set => RaiseAndSet(ref _name, value);
+    }
 
     public AvaloniaList<Data> Data
     {

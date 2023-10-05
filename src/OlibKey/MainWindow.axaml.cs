@@ -1,5 +1,3 @@
-using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using OlibKey.Core;
 using OlibKey.Core.Views.MainWindowPages;

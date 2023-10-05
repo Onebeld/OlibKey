@@ -6,7 +6,8 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.BasicElements.DatabaseManagementButton"
              x:DataType="vm:ApplicationViewModel">
-    <Button Theme="{StaticResource AppBarButtonTheme}"
+    <Button x:Name="ButtonDatabaseMenu"
+            Theme="{StaticResource AppBarButtonTheme}"
             Padding="5"
             ToolTip.Tip="{DynamicResource Menu}">
         <Button.Flyout>
@@ -15,8 +16,8 @@
                     <StackPanel Grid.Row="0" Margin="0 10 0 0" Spacing="5">
                         <Border HorizontalAlignment="Center"
                                 CornerRadius="99"
-                                Width="100"
-                                Height="100"
+                                Width="80"
+                                Height="80"
                                 ClipToBounds="True"
                                 Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
                             <Image />
@@ -28,7 +29,7 @@
                                    HorizontalAlignment="Center" />
                     </StackPanel>
                     
-                    <StackPanel Grid.Row="1" Spacing="5" Margin="15 10 15 15">
+                    <StackPanel x:Name="StackPanelMenuButtons" Grid.Row="1" Spacing="5" Margin="15 10 15 15">
                         <StackPanel.Styles>
                             <Style Selector="Button">
                                 <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -52,15 +53,15 @@
                             </Style>
                         </StackPanel.Styles>
                         
-                        <Button>
+                        <Button Command="{CompiledBinding CreateDatabase}">
                             <StackPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource AddRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="Create storage" />
+                                <TextBlock Text="{DynamicResource CreateStorage}" />
                                 
-                                <TextBlock Classes="Hotkey" Text="(Ctrl+N)" />
+                                <TextBlock x:Name="TextBlockHotkeyN" Classes="Hotkey" Text="(Ctrl+N)" />
                             </StackPanel>
                         </Button>
                         <Button>
@@ -69,9 +70,9 @@
                                     <Path Data="{StaticResource OpenRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="Load storage" />
+                                <TextBlock Text="{DynamicResource LoadStorage}" />
                                 
-                                <TextBlock Classes="Hotkey" Text="(Ctrl+O)" />
+                                <TextBlock x:Name="TextBlockHotkeyO" Classes="Hotkey" Text="(Ctrl+O)" />
                             </StackPanel>
                         </Button>
                         <Button>
@@ -80,9 +81,9 @@
                                     <Path Data="{StaticResource SaveRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="Save storage" />
+                                <TextBlock Text="{DynamicResource SaveStorage}" />
                                 
-                                <TextBlock Classes="Hotkey" Text="(Ctrl+S)" />
+                                <TextBlock x:Name="TextBlockHotkeyS" Classes="Hotkey" Text="(Ctrl+S)" />
                             </StackPanel>
                         </Button>
                         
@@ -94,7 +95,7 @@
                                     <Path Data="{StaticResource ShieldRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="Password checker" />
+                                <TextBlock Text="{DynamicResource PasswordChecker}" />
                             </StackPanel>
                         </Button>
                         <Button>
@@ -103,7 +104,7 @@
                                     <Path Data="{StaticResource SettingsRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="Storage settings" />
+                                <TextBlock Text="{DynamicResource StorageSettings}" />
                             </StackPanel>
                         </Button>
                         
@@ -115,7 +116,7 @@
                                     <Path Data="{StaticResource DeleteRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="Trashcan" />
+                                <TextBlock Text="{DynamicResource Trashcan}" />
                             </StackPanel>
                         </Button>
                     </StackPanel>
@@ -132,7 +133,7 @@
                 <Image />
             </Border>
             
-            <TextBlock Text="" Margin="5 0 0 0" VerticalAlignment="Center" />
+            <TextBlock Text="{CompiledBinding Database.Name}" Margin="5 0 0 0" VerticalAlignment="Center" />
         </StackPanel>
     </Button>
 </UserControl>

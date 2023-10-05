@@ -18,10 +18,43 @@
     <s:String x:Key="Paste">Paste</s:String>
     <s:String x:Key="Change">Change</s:String>
     
+    <s:String x:Key="Ok">OK</s:String>
+    <s:String x:Key="Cancel">Cancel</s:String>
+    
+    <s:String x:Key="CreateStorage">Create storage</s:String>
+    <s:String x:Key="LoadStorage">Load storage</s:String>
+    <s:String x:Key="SaveStorage">Save storage</s:String>
+    <s:String x:Key="PasswordChecker">Password checker</s:String>
+    <s:String x:Key="StorageSettings">Storage settings</s:String>
+    <s:String x:Key="Trashcan">Trashcan</s:String>
+    
+    <s:String x:Key="MasterPassword">Master password</s:String>
+    <s:String x:Key="Iterations">Iterations</s:String>
+    <s:String x:Key="Name">Name</s:String>
+    <s:String x:Key="Path">Path</s:String>
+    <s:String x:Key="ChoosePath">Choose a path</s:String>
+    <s:String x:Key="UseTrashcan">Use trashcan</s:String>
+    
     <!--Password manager-->
     <s:String x:Key="PasswordManager">Password manager</s:String>
+    <s:String x:Key="Tip">Tip</s:String>
     
     <!--Tips-->
+    <s:String x:Key="PasswordManagerTip1">Never use your one password for all sites! This will be a rather unfortunate consequence.</s:String>
+    <s:String x:Key="PasswordManagerTip2">Can't remember a complex password? Try playing the word game! Your made-up password is unlikely to ever be guessed.</s:String>
+    <s:String x:Key="PasswordManagerTip3">Do not use your date of birth, someone's name, nickname as a password. This password will be quite easy to guess.</s:String>
+    <s:String x:Key="PasswordManagerTip4">If the service offers to put 2FA, be sure to use it, good OlibKey is able to generate a unique key.</s:String>
+    <s:String x:Key="PasswordManagerTip5">After working on someone else's computer, be sure to log out of your account.</s:String>
+    <s:String x:Key="PasswordManagerTip6">Not all password managers are perfect, including this one.</s:String>
+    <s:String x:Key="PasswordManagerTip7">Check the site you're visiting. Phishing sites just want you to send them your details.</s:String>
+    <s:String x:Key="PasswordManagerTip8">If you are a streamer, pay attention. Even if you accidentally show your password for less than a second - the hacking process is inevitable.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny1">If you don't trust password managers, including this one, use the old-fashioned way - notebook and pen. Just don't show the notebook to anyone.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny2">It's not a bad idea to change your password every month. Am I right, my dear friend who has been using the same password for several years?</s:String>
+    <s:String x:Key="PasswordManagerTipFunny3">If you are streaming an Android emulator, it is recommended that you temporarily hide the screen.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny4">Please, you hear me? Never say your password out loud!</s:String>
+    <s:String x:Key="PasswordManagerTipFunny5">Don't trust your password manager? Do you trust the notepad on your computer?</s:String>
+    <s:String x:Key="PasswordManagerTipFunny6">If you go to a company website that tells you how to create a strong password, you are more likely to be advised to use their password manager.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny7">Since Adam was a boy people used the password as a way to pass on some hidden information from outsiders.</s:String>
     
     <!--Settings-->
     <s:String x:Key="Settings">Settings</s:String>

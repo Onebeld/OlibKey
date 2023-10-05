@@ -1,4 +1,6 @@
 ﻿using OlibKey.Core.Structures;
+using OlibKey.Core.ViewModels.Windows;
+using OlibKey.Core.Windows;
 using PleasantUI;
 
 namespace OlibKey.Core.ViewModels;
@@ -9,6 +11,8 @@ public class ApplicationViewModel : ViewModelBase
 
     private string _masterPassword = string.Empty;
 
+    private bool _isDirty;
+
     #region Properties
 
     public Database? Database
@@ -17,5 +21,17 @@ public class ApplicationViewModel : ViewModelBase
         private set => RaiseAndSet(ref _database, value);
     }
 
+    public bool IsDirty
+    {
+        get => _isDirty;
+        set => RaiseAndSet(ref _isDirty, value);
+    }
+
     #endregion
+
+    public async void CreateDatabase()
+    {
+        CreateDatabaseWindow window = new CreateDatabaseWindow();
+        window.Show(OlibKeyApp.MainWindow);
+    }
 }

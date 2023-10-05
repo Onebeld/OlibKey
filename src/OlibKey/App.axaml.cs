@@ -14,7 +14,10 @@ public class App : OlibKeyApp
         
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            MainWindow = new MainWindow();
+            MainWindow = new MainWindow
+            {
+                DataContext = ViewModel
+            };
             desktop.MainWindow = MainWindow;
         }
     }

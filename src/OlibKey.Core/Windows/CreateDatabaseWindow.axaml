@@ -1,0 +1,89 @@
+﻿<ContentDialog xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels.Windows"
+             xmlns:conv="using:OlibKey.Core.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Windows.CreateDatabaseWindow"
+             x:DataType="vm:CreateDatabaseViewModel"
+             MaxWidth="400"
+             VerticalAlignment="Center">
+    <SmoothScrollViewer>
+        <StackPanel Margin="20 15" Spacing="5">
+            <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
+                       Text="{StaticResource CreateStorage}"
+                       Margin="0 0 0 10"/>
+            
+            <DockPanel Margin="0 0 0 10">
+                <Border x:Name="BorderImage" DockPanel.Dock="Left"
+                        Background="{StaticResource ControlAltFillColorQuarternaryBrush}"
+                        Margin="0 0 5 0"
+                        Width="80"
+                        Height="80"
+                        ClipToBounds="True"
+                        CornerRadius="99"
+                        DragDrop.AllowDrop="True">
+                    <Image Source="{CompiledBinding ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                </Border>
+                
+                <TextBox VerticalAlignment="Center"
+                         Watermark="{StaticResource Name}"
+                         Text="{CompiledBinding Name}" />
+            </DockPanel>
+            
+            <TextBlock Text="{StaticResource MasterPassword}" FontWeight="SemiBold" />
+            <TextBox Classes="RevealPasswordTextBox"
+                     Text="{CompiledBinding MasterPassword}"
+                     PasswordChar="•" />
+            
+            <ProgressBar Maximum="300"
+                         Margin="10 -5 10 0"
+                         Value="{CompiledBinding MasterPassword, Converter={x:Static conv:GeneralConverters.ComplexityPasswordConverter}, Mode=OneWay}" />
+            
+            <Separator Margin="0 10" />
+            
+            <DockPanel>
+                <TextBlock Margin="0 0 5 0" VerticalAlignment="Center">
+                    <Run Text="{StaticResource Iterations}" /><Run Text=":" />
+                </TextBlock>
+                
+                <NumericUpDown HorizontalContentAlignment="Left"
+                               Value="{CompiledBinding Iterations}"/>
+            </DockPanel>
+            
+            <CheckBox Content="{StaticResource UseTrashcan}"
+                      IsChecked="{CompiledBinding UseTrashcan}" />
+            
+            <Separator Margin="0 10" />
+            
+            <DockPanel>
+                <TextBlock Margin="0 0 5 0" VerticalAlignment="Center" DockPanel.Dock="Left">
+                    <Run Text="{StaticResource Path}" /><Run Text=":" />
+                </TextBlock>
+                
+                <Button DockPanel.Dock="Right"
+                        ToolTip.Tip="{StaticResource ChoosePath}"
+                        Width="{CompiledBinding $self.Bounds.Height}">
+                    <Viewbox Width="16" Height="16">
+                        <Path Data="{StaticResource AttachRegular}" Stretch="Uniform" />
+                    </Viewbox>
+                </Button>
+                
+                <TextBox Margin="5 0" />
+            </DockPanel>
+        </StackPanel>
+    </SmoothScrollViewer>
+    
+    <ContentDialog.BottomPanelContent>
+        <UniformGrid Margin="15 0" Rows="1">
+            <Button Theme="{StaticResource AccentButton}"
+                    Content="{StaticResource Ok}"
+                    VerticalAlignment="Center" 
+                    Margin="5" />
+            <Button Content="{StaticResource Cancel}" 
+                    VerticalAlignment="Center"
+                    Margin="5" />
+        </UniformGrid>
+    </ContentDialog.BottomPanelContent>
+</ContentDialog>

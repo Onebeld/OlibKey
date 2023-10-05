@@ -1,0 +1,36 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.MainWindowPages.CreateAndDecryptDatabasePage">
+    <SmoothScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Image Source="{StaticResource OlibKeyIcon}" Height="100" />
+                
+                    <Viewbox Width="240" VerticalAlignment="Center">
+                        <Path Data="{StaticResource OlibKeyText}"
+                              Fill="{StaticResource TextFillColorPrimaryBrush}"
+                              Stretch="Uniform" />
+                    </Viewbox>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel VerticalAlignment="Bottom" Margin="25 0 25 70" HorizontalAlignment="Center" Spacing="5">
+                <StackPanel Orientation="Horizontal" Spacing="3">
+                    <Viewbox Width="16" Height="16">
+                        <Path Data="{StaticResource LampRegular}"
+                              Fill="{StaticResource TextFillColorTertiaryBrush}"
+                              Stretch="Uniform" />
+                    </Viewbox>
+                    
+                    <TextBlock Text="{StaticResource Tip}" FontWeight="Bold" Foreground="{StaticResource TextFillColorTertiaryBrush}" />
+                </StackPanel>
+                
+                <TextBlock x:Name="TextBlockTip" TextWrapping="Wrap" TextAlignment="Center" Foreground="{StaticResource TextFillColorTertiaryBrush}" />
+            </StackPanel>
+        </Grid>
+    </SmoothScrollViewer>
+</UserControl>

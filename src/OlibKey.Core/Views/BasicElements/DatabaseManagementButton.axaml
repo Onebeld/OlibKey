@@ -3,9 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OlibKey.Core.ViewModels"
+             xmlns:conv="clr-namespace:OlibKey.Core.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.BasicElements.DatabaseManagementButton"
-             x:DataType="vm:ApplicationViewModel">
+             x:DataType="vm:ApplicationViewModel"
+             IsVisible="{CompiledBinding Database, Converter={x:Static ObjectConverters.IsNotNull}}">
     <Button x:Name="ButtonDatabaseMenu"
             Theme="{StaticResource AppBarButtonTheme}"
             Padding="5"
@@ -20,10 +22,10 @@
                                 Height="80"
                                 ClipToBounds="True"
                                 Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
-                            <Image />
+                            <Image Source="{CompiledBinding Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
                         </Border>
                         
-                        <TextBlock Text="Test Database"
+                        <TextBlock Text="{CompiledBinding Database.Settings.Name}"
                                    FontSize="22"
                                    Theme="{StaticResource TitleTextBlockTheme}"
                                    HorizontalAlignment="Center" />
@@ -32,92 +34,90 @@
                     <StackPanel x:Name="StackPanelMenuButtons" Grid.Row="1" Spacing="5" Margin="15 10 15 15">
                         <StackPanel.Styles>
                             <Style Selector="Button">
-                                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             </Style>
-                            <Style Selector="Button > StackPanel">
-                                <Setter Property="Spacing" Value="10" />
-                                <Setter Property="Orientation" Value="Horizontal" />
-                            </Style>
-                            <Style Selector="Button > StackPanel > Viewbox">
+                            <Style Selector="Button > DockPanel > Viewbox">
+                                <Setter Property="Margin" Value="0 0 10 0" />
                                 <Setter Property="Width" Value="16" />
                                 <Setter Property="Height" Value="16" />
+                                <Setter Property="DockPanel.Dock" Value="Left" />
                             </Style>
-                            <Style Selector="Button > StackPanel > Viewbox > Path">
+                            <Style Selector="Button > DockPanel > Viewbox > Path">
                                 <Setter Property="Stretch" Value="Uniform" />
                                 <Setter Property="Fill" Value="{StaticResource TextFillColorPrimaryBrush}" />
                             </Style>
-                            <Style Selector="Button > StackPanel > TextBlock.Hotkey">
+                            <Style Selector="Button > DockPanel > TextBlock.Hotkey">
                                 <Setter Property="Foreground" Value="{StaticResource TextFillColorTertiaryBrush}" />
                                 <Setter Property="FontSize" Value="12" />
-                                <Setter Property="Margin" Value="-5 0 0 0" />
+                                <Setter Property="TextAlignment" Value="Right" />
                             </Style>
                         </StackPanel.Styles>
                         
                         <Button Command="{CompiledBinding CreateDatabase}">
-                            <StackPanel>
+                            <DockPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource AddRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="{DynamicResource CreateStorage}" />
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource CreateStorage}" />
                                 
                                 <TextBlock x:Name="TextBlockHotkeyN" Classes="Hotkey" Text="(Ctrl+N)" />
-                            </StackPanel>
+                            </DockPanel>
                         </Button>
                         <Button>
-                            <StackPanel>
+                            <DockPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource OpenRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="{DynamicResource LoadStorage}" />
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource LoadStorage}" />
                                 
                                 <TextBlock x:Name="TextBlockHotkeyO" Classes="Hotkey" Text="(Ctrl+O)" />
-                            </StackPanel>
+                            </DockPanel>
                         </Button>
                         <Button>
-                            <StackPanel>
+                            <DockPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource SaveRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="{DynamicResource SaveStorage}" />
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource SaveStorage}" />
                                 
                                 <TextBlock x:Name="TextBlockHotkeyS" Classes="Hotkey" Text="(Ctrl+S)" />
-                            </StackPanel>
+                            </DockPanel>
                         </Button>
                         
                         <Separator Margin="0 5" />
                         
                         <Button>
-                            <StackPanel>
+                            <DockPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource ShieldRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="{DynamicResource PasswordChecker}" />
-                            </StackPanel>
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource PasswordChecker}" />
+                            </DockPanel>
                         </Button>
                         <Button>
-                            <StackPanel>
+                            <DockPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource SettingsRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="{DynamicResource StorageSettings}" />
-                            </StackPanel>
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource StorageSettings}" />
+                            </DockPanel>
                         </Button>
                         
-                        <Separator Margin="0 5" />
+                        <Separator Margin="0 5" IsVisible="{CompiledBinding Database.Settings.UseTrashcan}" />
                         
-                        <Button>
-                            <StackPanel>
+                        <Button IsVisible="{CompiledBinding Database.Settings.UseTrashcan}">
+                            <DockPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource DeleteRegular}" />
                                 </Viewbox>
                                 
-                                <TextBlock Text="{DynamicResource Trashcan}" />
-                            </StackPanel>
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource Trashcan}" />
+                            </DockPanel>
                         </Button>
                     </StackPanel>
                 </Grid>
@@ -130,10 +130,13 @@
                     CornerRadius="99"
                     ClipToBounds="True"
                     Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
-                <Image />
+                <Image Source="{CompiledBinding Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
             </Border>
             
-            <TextBlock Text="{CompiledBinding Database.Name}" Margin="5 0 0 0" VerticalAlignment="Center" />
+            <TextBlock FontSize="12"
+                       Foreground="{StaticResource TextFillColorSecondaryBrush}"
+                       Text="{CompiledBinding Database.Settings.Name}"
+                       Margin="5 0 0 0" VerticalAlignment="Center" />
         </StackPanel>
     </Button>
 </UserControl>

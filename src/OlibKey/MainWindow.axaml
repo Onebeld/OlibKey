@@ -28,6 +28,11 @@
                                         Margin="0 0 5 0"/>
     </PleasantWindow.TitleBarContent>
     
+    <PleasantWindow.KeyBindings>
+        <KeyBinding Command="{CompiledBinding CreateDatabase}" Gesture="Ctrl+N" />
+    </PleasantWindow.KeyBindings>
+    
+    
     <Panel>
         <NavigationView Header="{x:Null}"
                         IsOpen="False"

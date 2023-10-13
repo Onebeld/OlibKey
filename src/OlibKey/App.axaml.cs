@@ -1,6 +1,8 @@
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using OlibKey.Core;
+using PleasantUI.Controls;
 
 namespace OlibKey;
 
@@ -14,11 +16,14 @@ public class App : OlibKeyApp
         
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            MainWindow = new MainWindow
+            Main = new MainWindow
             {
                 DataContext = ViewModel
             };
-            desktop.MainWindow = MainWindow;
+            
+            TopLevel = TopLevel.GetTopLevel(Main as PleasantWindow);
+            
+            desktop.MainWindow = Main as PleasantWindow;
         }
     }
 }

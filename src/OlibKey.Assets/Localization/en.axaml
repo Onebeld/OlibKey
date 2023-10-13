@@ -35,8 +35,12 @@
     <s:String x:Key="ChoosePath">Choose a path</s:String>
     <s:String x:Key="UseTrashcan">Use trashcan</s:String>
     
+    <s:String x:Key="ImageFiles">Image files</s:String>
+    <s:String x:Key="OlibFiles">Olib files</s:String>
+    
     <!--Password manager-->
     <s:String x:Key="PasswordManager">Password manager</s:String>
+    <s:String x:Key="LetsCreateNewStorage">Let's create a new storage!</s:String>
     <s:String x:Key="Tip">Tip</s:String>
     
     <!--Tips-->

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using Avalonia;
 using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
 using OlibKey.Core.Helpers;
@@ -22,5 +23,13 @@ public static class GeneralConverters
             using MemoryStream memoryStream = new(array);
 
             return new Bitmap(memoryStream);
+        });
+
+    public static readonly IValueConverter ImageDataToSmallImageConverter =
+        new FuncValueConverter<string?, Bitmap?>(imageData =>
+        {
+            Bitmap? bitmap = (Bitmap?)ImageDataToImageConverter.Convert(imageData, typeof(Bitmap), null, CultureInfo.CurrentCulture);
+
+            return bitmap?.CreateScaledBitmap(new PixelSize(26, 26), BitmapInterpolationMode.LowQuality);
         });
 }

@@ -4,8 +4,22 @@ namespace OlibKey.Core;
 
 public class DatabaseSettings : ViewModelBase
 {
+    private string _name = string.Empty;
+    private string? _imageData;
     private int _iterations;
     private bool _useTrash;
+
+    public string Name
+    {
+        get => _name;
+        set => RaiseAndSet(ref _name, value);
+    }
+
+    public string? ImageData
+    {
+        get => _imageData;
+        set => RaiseAndSet(ref _imageData, value);
+    }
     
     public int Iterations
     {

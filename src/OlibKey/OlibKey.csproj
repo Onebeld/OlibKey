@@ -18,12 +18,14 @@
 
     <PropertyGroup>
         <IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
+        <IsAndroid Condition="$([MSBuild]::IsOSPlatform('Android'))">true</IsAndroid>
         <IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
         <IsOSX Condition="$([MSBuild]::IsOSPlatform('OSX'))">true</IsOSX>
 
         <DefineConstants Condition="'$(IsWindows)'=='true'">Windows</DefineConstants>
         <DefineConstants Condition="'$(IsOSX)'=='true'">OSX</DefineConstants>
         <DefineConstants Condition="'$(IsLinux)'=='true'">Linux</DefineConstants>
+        <DefineConstants Condition="'$(IsAndroid)'=='true'">Android</DefineConstants>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration.toUpper())' != 'DEBUG'">
@@ -46,11 +48,11 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.4"/>
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.4"/>
-        <PackageReference Include="PleasantUI" Version="3.0.11" />
+        <PackageReference Include="Avalonia" Version="11.0.5-rc1" />
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.5-rc1" />
+        <PackageReference Include="PleasantUI" Version="3.1.0" />
         
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.4"/>
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5-rc1" />
     </ItemGroup>
     
     <ItemGroup>

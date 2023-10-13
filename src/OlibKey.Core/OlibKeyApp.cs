@@ -1,11 +1,13 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Styling;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Structures;
 using OlibKey.Core.ViewModels;
 using PleasantUI;
 using PleasantUI.Controls;
+using PleasantUI.Core.Interfaces;
 
 namespace OlibKey.Core;
 
@@ -16,9 +18,11 @@ public class OlibKeyApp : Application
     
     public static PleasantTheme PleasantTheme { get; private set; } = null!;
 
-    public static PleasantWindow MainWindow { get; protected set; } = null!;
+    public static IPleasantWindow Main { get; protected set; } = null!;
 
     public static ApplicationViewModel ViewModel { get; }
+    
+    public static TopLevel TopLevel { get; protected set; }
 
     static OlibKeyApp()
     {
@@ -38,6 +42,17 @@ public class OlibKeyApp : Application
 
         PleasantTheme = new PleasantTheme();
         Styles.Add(PleasantTheme);
+    }
+
+    public void ShowNotification(string title, string description, NotificationType notificationType, TimeSpan timeSpan = default)
+    {
+        ViewModel.NotificationManager?.Show(
+            new Notification(
+                GetLocalString(title), 
+                GetLocalString(description), 
+                notificationType, 
+                timeSpan)
+        );
     }
 
     /// <summary>

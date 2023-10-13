@@ -18,7 +18,7 @@
             <DockPanel Margin="0 0 0 10">
                 <Border x:Name="BorderImage" DockPanel.Dock="Left"
                         Background="{StaticResource ControlAltFillColorQuarternaryBrush}"
-                        Margin="0 0 5 0"
+                        Margin="0 0 10 0"
                         Width="80"
                         Height="80"
                         ClipToBounds="True"
@@ -49,7 +49,9 @@
                 </TextBlock>
                 
                 <NumericUpDown HorizontalContentAlignment="Left"
-                               Value="{CompiledBinding Iterations}"/>
+                               Value="{CompiledBinding Iterations}"
+                               Minimum="1"
+                               FormatString="N0" />
             </DockPanel>
             
             <CheckBox Content="{StaticResource UseTrashcan}"
@@ -64,13 +66,14 @@
                 
                 <Button DockPanel.Dock="Right"
                         ToolTip.Tip="{StaticResource ChoosePath}"
-                        Width="{CompiledBinding $self.Bounds.Height}">
+                        Width="{CompiledBinding $self.Bounds.Height}"
+                        Command="{CompiledBinding SelectPath}">
                     <Viewbox Width="16" Height="16">
                         <Path Data="{StaticResource AttachRegular}" Stretch="Uniform" />
                     </Viewbox>
                 </Button>
                 
-                <TextBox Margin="5 0" />
+                <TextBox Margin="5 0" Text="{CompiledBinding Path}" />
             </DockPanel>
         </StackPanel>
     </SmoothScrollViewer>
@@ -80,10 +83,14 @@
             <Button Theme="{StaticResource AccentButton}"
                     Content="{StaticResource Ok}"
                     VerticalAlignment="Center" 
-                    Margin="5" />
+                    Margin="5"
+                    Command="{CompiledBinding CloseWithResult}"
+                    CommandParameter="{CompiledBinding $parent[ContentDialog]}" />
             <Button Content="{StaticResource Cancel}" 
                     VerticalAlignment="Center"
-                    Margin="5" />
+                    Margin="5"
+                    Command="{CompiledBinding Close}"
+                    CommandParameter="{CompiledBinding $parent[ContentDialog]}" />
         </UniformGrid>
     </ContentDialog.BottomPanelContent>
 </ContentDialog>

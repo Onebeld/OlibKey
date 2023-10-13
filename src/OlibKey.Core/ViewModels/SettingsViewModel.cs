@@ -90,7 +90,7 @@ public class SettingsViewModel : ViewModelBase
 
     public async void ChangeAccentColor()
     {
-        Color? color = await ColorPickerWindow.SelectColor(OlibKeyApp.MainWindow, PleasantSettings.Instance.NumericalAccentColor);
+        Color? color = await ColorPickerWindow.SelectColor(OlibKeyApp.Main, PleasantSettings.Instance.NumericalAccentColor);
         
         if (color is null)
             return;
@@ -101,7 +101,7 @@ public class SettingsViewModel : ViewModelBase
 
     public async void CopyAccentColor()
     {
-        await OlibKeyApp.MainWindow.Clipboard?.SetTextAsync(
+        await OlibKeyApp.TopLevel.Clipboard?.SetTextAsync(
             $"#{PleasantSettings.Instance.NumericalAccentColor.ToString("x8").ToUpper()}")!;
         
         /*OlibKeyApp.ViewModel.NotificationManager.Show(new Notification(OlibKeyApp.GetLocalString("Information"),
@@ -112,7 +112,7 @@ public class SettingsViewModel : ViewModelBase
 
     public async void PasteAccentColor()
     {
-        string? data = await OlibKeyApp.MainWindow.Clipboard?.GetTextAsync()!;
+        string? data = await OlibKeyApp.TopLevel.Clipboard?.GetTextAsync()!;
 
         if (uint.TryParse(data, out uint uintColor))
         {
@@ -128,7 +128,7 @@ public class SettingsViewModel : ViewModelBase
 
     public async void ResetSettings()
     {
-        string result = await MessageBox.Show(OlibKeyApp.MainWindow, OlibKeyApp.GetLocalString(""), string.Empty, MessageBoxButtons.ReverseYesNo);
+        string result = await MessageBox.Show(OlibKeyApp.Main, OlibKeyApp.GetLocalString(""), string.Empty, MessageBoxButtons.ReverseYesNo);
         
         if (result != "Yes") return;
 

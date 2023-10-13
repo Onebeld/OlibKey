@@ -1,7 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Input;
 using Avalonia.Platform.Storage;
 using OlibKey.Core.ViewModels.Windows;
 using PleasantUI.Controls;
@@ -10,7 +7,7 @@ namespace OlibKey.Core.Windows;
 
 public partial class CreateDatabaseWindow : ContentDialog
 {
-    public CreateDatabaseViewModel ViewModel { get; private set; }
+    public CreateDatabaseViewModel ViewModel { get; }
     
     public CreateDatabaseWindow()
     {

@@ -1,22 +1,22 @@
-﻿using System.Text;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Media.Imaging;
+using OlibKey.Core.Helpers;
+using OlibKey.Core.Structures;
 using PleasantUI;
+using PleasantUI.Controls;
 
 namespace OlibKey.Core.ViewModels.Windows;
-
-public class Class
-{
-    
-}
 
 public class CreateDatabaseViewModel : ViewModelBase
 {
     private string _masterPassword = string.Empty;
+    
     private string _name = string.Empty;
     private string? _imageData;
     private int _iterations = 10000;
     private bool _useTrash = true;
+    
+    private string _path = string.Empty;
 
     #region Properties
 
@@ -50,11 +50,33 @@ public class CreateDatabaseViewModel : ViewModelBase
         set => RaiseAndSet(ref _imageData, value);
     }
 
+    public string Path
+    {
+        get => _path;
+        set => RaiseAndSet(ref _path, value);
+    }
+
     #endregion
 
-    public void LoadImage()
+    public async void SelectPath()
     {
+        string? databasePath = await StorageProvider.SaveFile(OlibKeyApp.TopLevel, 
+            pickerFileTypes: FileTypes.Olib, 
+            defaultExtension: "olib", 
+            suggestedFileName: "NewDatabase");
         
+        if (databasePath is null) return;
+
+        Path = databasePath;
+    }
+
+    public async void LoadImage()
+    {
+        string? imagePath = await StorageProvider.SelectFile(OlibKeyApp.TopLevel, pickerFileTypes: FileTypes.Images);
+        
+        if (imagePath is null) return;
+        
+        LoadImage(imagePath);
     }
 
     public void LoadImage(string path)
@@ -73,5 +95,18 @@ public class CreateDatabaseViewModel : ViewModelBase
         bitmap.Save(memoryStream);
 
         ImageData = Convert.ToBase64String(memoryStream.ToArray());
+    }
+
+    public void CloseWithResult(ContentDialog dialog)
+    {
+        if (string.IsNullOrWhiteSpace(MasterPassword) || string.IsNullOrWhiteSpace(Path) || string.IsNullOrWhiteSpace(Name))
+            return;
+        
+        dialog.Close(true);
+    }
+
+    public void Close(ContentDialog dialog)
+    {
+        dialog.Close(false);
     }
 }

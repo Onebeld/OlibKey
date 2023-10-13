@@ -2,8 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="OlibKey.Core.Views.MainWindowPages.CreateAndDecryptDatabasePage">
+             x:Class="OlibKey.Core.Views.MainWindowPages.CreateAndDecryptDatabasePage"
+             x:DataType="vm:ApplicationViewModel">
     <SmoothScrollViewer HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <StackPanel  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -16,7 +18,14 @@
                               Stretch="Uniform" />
                     </Viewbox>
                 </StackPanel>
+                
+                <TextBlock Text="{StaticResource LetsCreateNewStorage}" Margin="0 15 0 5" TextAlignment="Center" />
+                <Button Theme="{StaticResource AccentButton}"
+                        Content="{StaticResource CreateStorage}"
+                        Command="{CompiledBinding CreateDatabase}"
+                        Margin="15 0"/>
             </StackPanel>
+            
             
             <StackPanel VerticalAlignment="Bottom" Margin="25 0 25 70" HorizontalAlignment="Center" Spacing="5">
                 <StackPanel Orientation="Horizontal" Spacing="3">

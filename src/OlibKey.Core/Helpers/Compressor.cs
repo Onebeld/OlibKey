@@ -10,50 +10,46 @@ public static class Compressor
     /// </summary>
     /// <param name="text">Original text</param>
     /// <returns>Compressed text</returns>
-    public static string Compress(string text) => Compress(Encoding.UTF8.GetBytes(text));
+    public static string Compress(string text) => Convert.ToBase64String(Compress(Encoding.UTF8.GetBytes(text)));
+    
+    public static string Decompress(string text) => Encoding.UTF8.GetString(Decompress(Convert.FromBase64String(text)));
 
     /// <summary>
     /// Compresses a byte array
     /// </summary>
     /// <param name="buffer">Buffer</param>
     /// <returns>Compressed buffer</returns>
-    public static string Compress(byte[] buffer)
+    public static byte[] Compress(byte[] buffer)
     {
-        MemoryStream memoryStream = new();
-        using (GZipStream gZipStream = new(memoryStream, CompressionMode.Compress, true))
-            gZipStream.Write(buffer, 0, buffer.Length);
+        using MemoryStream output = new();
 
-        memoryStream.Position = 0;
-
-        byte[] compressedData = new byte[memoryStream.Length];
-        _ = memoryStream.Read(compressedData, 0, compressedData.Length);
-
-        byte[] gZipBuffer = new byte[compressedData.Length + 4];
-        Buffer.BlockCopy(compressedData, 0, gZipBuffer, 4, compressedData.Length);
-        Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gZipBuffer, 0, 4);
-
-        return Convert.ToBase64String(gZipBuffer);
+        using (MemoryStream input = new(buffer))
+        {
+            using (BrotliStream compressionStream = new(output, CompressionLevel.Optimal))
+            {
+                input.CopyTo(compressionStream);
+            }
+        }
+        
+        return output.ToArray();
     }
 
     /// <summary>
-    /// Decompresses a compressed text
+    /// Decompresses a compressed byte array
     /// </summary>
-    /// <param name="compressedText">Compressed text</param>
     /// <returns>Original text</returns>
-    public static string Decompress(string compressedText)
+    public static byte[] Decompress(byte[] compressedBuffer)
     {
-        byte[] gZipBuffer = Convert.FromBase64String(compressedText);
-        using MemoryStream memoryStream = new();
+        using MemoryStream output = new();
+
+        using (MemoryStream input = new(compressedBuffer))
+        {
+            using (BrotliStream decompressionStream = new(input, CompressionMode.Decompress))
+            {
+                decompressionStream.CopyTo(output);
+            }
+        }
         
-        int dataLength = BitConverter.ToInt32(gZipBuffer, 0);
-        memoryStream.Write(gZipBuffer, 4, gZipBuffer.Length - 4);
-
-        byte[] buffer = new byte[dataLength];
-
-        memoryStream.Position = 0;
-        using (GZipStream gZipStream = new(memoryStream, CompressionMode.Decompress))
-            _ = gZipStream.Read(buffer, 0, buffer.Length);
-
-        return Encoding.UTF8.GetString(buffer);
+        return output.ToArray();
     }
 }

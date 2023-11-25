@@ -60,8 +60,7 @@ public class CreateDatabaseViewModel : ViewModelBase
 
     public async void SelectPath()
     {
-        string? databasePath = await StorageProvider.SaveFile(OlibKeyApp.TopLevel, 
-            pickerFileTypes: FileTypes.Olib, 
+        string? databasePath = await StorageProvider.SaveFile(pickerFileTypes: FileTypes.Olib, 
             defaultExtension: "olib", 
             suggestedFileName: "NewDatabase");
         
@@ -72,7 +71,7 @@ public class CreateDatabaseViewModel : ViewModelBase
 
     public async void LoadImage()
     {
-        string? imagePath = await StorageProvider.SelectFile(OlibKeyApp.TopLevel, pickerFileTypes: FileTypes.Images);
+        string? imagePath = await StorageProvider.SelectFile(pickerFileTypes: FileTypes.Images);
         
         if (imagePath is null) return;
         

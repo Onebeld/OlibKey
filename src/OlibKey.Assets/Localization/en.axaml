@@ -34,14 +34,31 @@
     <s:String x:Key="Path">Path</s:String>
     <s:String x:Key="ChoosePath">Choose a path</s:String>
     <s:String x:Key="UseTrashcan">Use trashcan</s:String>
+    <s:String x:Key="NoElements">No elements</s:String>
     
     <s:String x:Key="ImageFiles">Image files</s:String>
     <s:String x:Key="OlibFiles">Olib files</s:String>
+    
+    <!--PasswordGenerator-->
+    <s:String x:Key="PasswordGenerator">Password generator</s:String>
+    <s:String x:Key="PasswordC">Password</s:String>
+    <s:String x:Key="OtherSpecialCharacters">Other special characters</s:String>
+
+    <s:String x:Key="Lowercase">Lowercase (abc)</s:String>
+    <s:String x:Key="Uppercase">Uppercase (ABC)</s:String>
+    <s:String x:Key="Length">Length</s:String>
+    <s:String x:Key="Numbers">Numbers (123)</s:String>
+    <s:String x:Key="Special">Special ($%#)</s:String>
+    <s:String x:Key="Underscore">Underscore (_)</s:String>
     
     <!--Password manager-->
     <s:String x:Key="PasswordManager">Password manager</s:String>
     <s:String x:Key="LetsCreateNewStorage">Let's create a new storage!</s:String>
     <s:String x:Key="Tip">Tip</s:String>
+    
+    <s:String x:Key="Search">Search</s:String>
+    <s:String x:Key="Favorite">Favorite</s:String>
+    <s:String x:Key="Deleted">Deleted</s:String>
     
     <!--Tips-->
     <s:String x:Key="PasswordManagerTip1">Never use your one password for all sites! This will be a rather unfortunate consequence.</s:String>

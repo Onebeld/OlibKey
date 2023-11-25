@@ -11,7 +11,7 @@ public partial class PasswordManagerPage : UserControl
     {
         InitializeComponent();
 
-        if (OlibKeyApp.ViewModel.Database is null)
+        if (OlibKeyApp.ViewModel.Session?.Database is null)
             Content = new CreateAndDecryptDatabasePage();
         else Content = new DatabasePage();
         

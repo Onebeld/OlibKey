@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.BasicElements.DatabaseManagementButton"
              x:DataType="vm:ApplicationViewModel"
-             IsVisible="{CompiledBinding Database, Converter={x:Static ObjectConverters.IsNotNull}}">
+             IsVisible="{CompiledBinding Session.Database, Converter={x:Static ObjectConverters.IsNotNull}}">
     <Button x:Name="ButtonDatabaseMenu"
             Theme="{StaticResource AppBarButtonTheme}"
             Padding="5"
@@ -22,10 +22,10 @@
                                 Height="80"
                                 ClipToBounds="True"
                                 Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
-                            <Image Source="{CompiledBinding Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                            <Image Source="{CompiledBinding Session.Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
                         </Border>
                         
-                        <TextBlock Text="{CompiledBinding Database.Settings.Name}"
+                        <TextBlock Text="{CompiledBinding Session.Database.Settings.Name}"
                                    FontSize="22"
                                    Theme="{StaticResource TitleTextBlockTheme}"
                                    HorizontalAlignment="Center" />
@@ -108,9 +108,9 @@
                             </DockPanel>
                         </Button>
                         
-                        <Separator Margin="0 5" IsVisible="{CompiledBinding Database.Settings.UseTrashcan}" />
+                        <Separator Margin="0 5" IsVisible="{CompiledBinding Session.Database.Settings.UseTrashcan}" />
                         
-                        <Button IsVisible="{CompiledBinding Database.Settings.UseTrashcan}">
+                        <Button IsVisible="{CompiledBinding Session.Database.Settings.UseTrashcan}">
                             <DockPanel>
                                 <Viewbox>
                                     <Path Data="{StaticResource DeleteRegular}" />
@@ -130,12 +130,12 @@
                     CornerRadius="99"
                     ClipToBounds="True"
                     Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
-                <Image Source="{CompiledBinding Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
+                <Image Source="{CompiledBinding Session.Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
             </Border>
             
             <TextBlock FontSize="12"
                        Foreground="{StaticResource TextFillColorSecondaryBrush}"
-                       Text="{CompiledBinding Database.Settings.Name}"
+                       Text="{CompiledBinding Session.Database.Settings.Name}"
                        Margin="5 0 0 0" VerticalAlignment="Center" />
         </StackPanel>
     </Button>

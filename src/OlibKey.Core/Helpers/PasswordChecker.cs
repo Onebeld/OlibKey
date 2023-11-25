@@ -1,12 +1,10 @@
 ﻿using System.Text.RegularExpressions;
-using OlibKey.Assets;
+using OlibKey.Core.Structures;
 
 namespace OlibKey.Core.Helpers;
 
 public static class PasswordChecker
 {
-    private static readonly string[] _badPasswords;
-    
     private static readonly Dictionary<string, double> _patterns = new()
     {
         { @"1234567890", 0.0 },
@@ -18,7 +16,6 @@ public static class PasswordChecker
         { @"[¶©]", 0.5 }
     };
 
-    static PasswordChecker() => _badPasswords = Resources.BadPasswords.Split("\r\n");
 
     /// <summary>
     /// Checks the complexity of the password
@@ -34,7 +31,7 @@ public static class PasswordChecker
 
         int score = 0;
 
-        foreach (string badPassword in _badPasswords)
+        foreach (string badPassword in TextInformation.BadPasswords)
         {
             if (password.Contains(badPassword.ToLower(), StringComparison.CurrentCultureIgnoreCase))
                 multi0 = 0.75;

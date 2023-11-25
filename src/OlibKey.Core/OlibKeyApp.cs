@@ -6,7 +6,6 @@ using OlibKey.Core.Helpers;
 using OlibKey.Core.Structures;
 using OlibKey.Core.ViewModels;
 using PleasantUI;
-using PleasantUI.Controls;
 using PleasantUI.Core.Interfaces;
 
 namespace OlibKey.Core;
@@ -44,7 +43,7 @@ public class OlibKeyApp : Application
         Styles.Add(PleasantTheme);
     }
 
-    public void ShowNotification(string title, string description, NotificationType notificationType, TimeSpan timeSpan = default)
+    public static void ShowNotification(string title, string description, NotificationType notificationType, TimeSpan timeSpan = default)
     {
         ViewModel.NotificationManager?.Show(
             new Notification(

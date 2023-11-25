@@ -113,7 +113,6 @@ public class Data : ViewModelBase, ICloneable
 
     #endregion
     
-    
     #region JsonIgnored
 
     [JsonIgnore]

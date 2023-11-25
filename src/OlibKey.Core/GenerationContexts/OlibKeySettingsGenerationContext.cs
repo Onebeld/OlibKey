@@ -4,6 +4,4 @@ namespace OlibKey.Core;
 
 [JsonSourceGenerationOptions(WriteIndented = true)]
 [JsonSerializable(typeof(OlibKeySettings))]
-internal partial class OlibKeySettingsGenerationContext : JsonSerializerContext
-{
-}
+internal partial class OlibKeySettingsGenerationContext : JsonSerializerContext;

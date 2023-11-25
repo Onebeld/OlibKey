@@ -19,8 +19,8 @@
         TitleBarType="ClassicExtended"
         MinWidth="630"
         MinHeight="550"
-        Width="900"
-        Height="600"
+        Width="1200"
+        Height="700"
         x:DataType="vm:ApplicationViewModel">
     <PleasantWindow.TitleBarContent>
         <contr:DatabaseManagementButton VerticalAlignment="Center" 

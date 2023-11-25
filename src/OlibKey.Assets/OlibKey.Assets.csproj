@@ -10,25 +10,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.5-rc1" />
+        <PackageReference Include="Avalonia" Version="11.0.5" />
     </ItemGroup>
     
     <ItemGroup>
         <AvaloniaResource Include="OlibKeyLogo.ico" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <EmbeddedResource Update="Resources.resx">
-        <Generator>PublicResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Compile Update="Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
-      </Compile>
     </ItemGroup>
 </Project>

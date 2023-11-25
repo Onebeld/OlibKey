@@ -1,11 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Views;
-using Avalonia;
 using Avalonia.Android;
 using OlibKey.Core;
-using PleasantUI.Controls;
 using PleasantUI.Core;
 
 namespace OlibKey.Android;

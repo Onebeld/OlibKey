@@ -46,27 +46,29 @@
         <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
         <ILLinkTreatWarningsAsErrors>false</ILLinkTreatWarningsAsErrors>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="Avalonia" Version="11.0.5-rc1" />
-        <PackageReference Include="Avalonia.Desktop" Version="11.0.5-rc1" />
-        <PackageReference Include="PleasantUI" Version="3.1.0" />
-        
-        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5-rc1" />
+        <PackageReference Include="Avalonia" Version="11.0.5"/>
+        <PackageReference Include="Avalonia.Desktop" Version="11.0.5"/>
+        <PackageReference Include="Microsoft.DotNet.ILCompiler" Version="8.0.0"/>
+        <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="8.0.100-1.23067.1"/>
+        <PackageReference Include="PleasantUI" Version="3.1.1"/>
+
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.5"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <Folder Include="Windows\" />
+        <Folder Include="Windows\"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\OlibKey.Assets\OlibKey.Assets.csproj" />
-      <ProjectReference Include="..\OlibKey.Core\OlibKey.Core.csproj" />
+        <ProjectReference Include="..\OlibKey.Assets\OlibKey.Assets.csproj"/>
+        <ProjectReference Include="..\OlibKey.Core\OlibKey.Core.csproj"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <None Include="..\OlibKey.Assets\OlibKeyLogo.ico">
-        <Link>OlibKeyLogo.ico</Link>
-      </None>
+        <None Include="..\OlibKey.Assets\OlibKeyLogo.ico">
+            <Link>OlibKeyLogo.ico</Link>
+        </None>
     </ItemGroup>
 </Project>

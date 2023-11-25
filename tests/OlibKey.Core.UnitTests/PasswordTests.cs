@@ -1,13 +1,11 @@
-﻿using OlibKey.Assets;
-
-namespace OlibKey.Core.UnitTests;
+﻿namespace OlibKey.Core.UnitTests;
 
 public class PasswordTests
 {
     [Test]
     public void Check_File_For_Duplicate_Bad_Passwords()
     {
-        string[] badPasswords = Resources.BadPasswords.Split("\r\n");
+        string[] badPasswords = Structures.TextInformation.BadPasswords;
         
         Array.Sort(badPasswords);
         

@@ -4,7 +4,6 @@ using OlibKey.Core.Helpers;
 using OlibKey.Core.Structures;
 using PleasantUI;
 using PleasantUI.Core;
-using PleasantUI.Core.Enums;
 using PleasantUI.Windows;
 
 namespace OlibKey.Core.ViewModels;
@@ -35,28 +34,12 @@ public class SettingsViewModel : ViewModelBase
 
     public int SelectedIndexTheme
     {
-        get
-        {
-            return PleasantSettings.Instance.Theme switch
-            {
-                Theme.Light => 1,
-                Theme.Dark => 2,
-
-                _ => 0
-            };
-        }
+        get => Dictionaries.Themes[PleasantSettings.Instance.Theme];
         set
         {
             if (IsNotLoaded) return;
-            
-            PleasantSettings.Instance.Theme = value switch
-            {
-                1 => Theme.Light,
-                2 => Theme.Dark,
 
-                _ => Theme.System
-            };
-            
+            PleasantSettings.Instance.Theme = Dictionaries.Themes.FirstOrDefault(x => x.Value == value).Key;
             OlibKeyApp.PleasantTheme.UpdateTheme();
         }
     }

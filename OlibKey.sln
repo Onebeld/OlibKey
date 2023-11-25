@@ -4,13 +4,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey", "src\OlibKey\Olib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey.Assets", "src\OlibKey.Assets\OlibKey.Assets.csproj", "{364A655A-47ED-45F9-8F3C-878E1EA42986}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey.Core", "src\OlibKey.Core\OlibKey.Core.csproj", "{115A9817-CCD5-4C67-9AEA-0E8716122745}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey.Core.UnitTests", "tests\OlibKey.Core.UnitTests\OlibKey.Core.UnitTests.csproj", "{254B1AA1-28E5-459E-905C-83B919B548BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{587C077C-E7D2-4095-9997-D3C80B796AF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey.Android", "src\OlibKey.Android\OlibKey.Android.csproj", "{D9AD1C07-56FA-4D5D-BC12-38D556CEC1DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey.Core", "src\OlibKey.Core\OlibKey.Core.csproj", "{9888CAC7-905F-4C51-9BEB-799E2FAB2C31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OlibKey.SourceGenerator", "generators\OlibKey.SourceGenerator\OlibKey.SourceGenerator.csproj", "{C92A5CEB-63FC-47B4-960A-329CDF416CD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +28,6 @@ Global
 		{364A655A-47ED-45F9-8F3C-878E1EA42986}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364A655A-47ED-45F9-8F3C-878E1EA42986}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364A655A-47ED-45F9-8F3C-878E1EA42986}.Release|Any CPU.Build.0 = Release|Any CPU
-		{115A9817-CCD5-4C67-9AEA-0E8716122745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{115A9817-CCD5-4C67-9AEA-0E8716122745}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{115A9817-CCD5-4C67-9AEA-0E8716122745}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{115A9817-CCD5-4C67-9AEA-0E8716122745}.Release|Any CPU.Build.0 = Release|Any CPU
 		{254B1AA1-28E5-459E-905C-83B919B548BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{254B1AA1-28E5-459E-905C-83B919B548BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{254B1AA1-28E5-459E-905C-83B919B548BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -38,6 +36,14 @@ Global
 		{D9AD1C07-56FA-4D5D-BC12-38D556CEC1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9AD1C07-56FA-4D5D-BC12-38D556CEC1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9AD1C07-56FA-4D5D-BC12-38D556CEC1DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9888CAC7-905F-4C51-9BEB-799E2FAB2C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9888CAC7-905F-4C51-9BEB-799E2FAB2C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9888CAC7-905F-4C51-9BEB-799E2FAB2C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9888CAC7-905F-4C51-9BEB-799E2FAB2C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C92A5CEB-63FC-47B4-960A-329CDF416CD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C92A5CEB-63FC-47B4-960A-329CDF416CD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C92A5CEB-63FC-47B4-960A-329CDF416CD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C92A5CEB-63FC-47B4-960A-329CDF416CD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{254B1AA1-28E5-459E-905C-83B919B548BC} = {587C077C-E7D2-4095-9997-D3C80B796AF9}

@@ -1,8 +1,8 @@
 ﻿namespace OlibKey.Core.Structures;
 
-public static class TextInformation
+public static partial class TextInformation
 {
-    public static string[] Tips = 
+    public static readonly string[] Tips = 
     {
         "PasswordManagerTip1",
         "PasswordManagerTip2",
@@ -18,6 +18,6 @@ public static class TextInformation
         "PasswordManagerTipFunny4",
         "PasswordManagerTipFunny5",
         "PasswordManagerTipFunny6",
-        "PasswordManagerTipFunny7",
+        "PasswordManagerTipFunny7"
     };
 }

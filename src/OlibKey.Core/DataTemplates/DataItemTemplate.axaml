@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:data="using:OlibKey.Core.Structures"
+                    xmlns:c="using:OlibKey.Core.Converters">
+    <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type data:Data}">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+            <Border Grid.Column="0"
+                    Background="White"
+                    CornerRadius="99"
+                    Height="25"
+                    Width="25"
+                    Margin="5 0">
+                <Image Source="{CompiledBinding Icon^, FallbackValue={StaticResource OlibKeyUpdateIcon}, TargetNullValue={StaticResource OlibKeyUpdateIcon}}"
+                       Margin="5" />
+            </Border>
+            
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="{CompiledBinding Name, Converter={x:Static c:GeneralConverters.EmptyToNotDataConverter}}"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           TextTrimming="CharacterEllipsis" />
+
+                <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}"
+                           FontSize="12"
+                           IsVisible="{CompiledBinding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                           TextTrimming="CharacterEllipsis">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{x:Static c:DataTypeToStringConverter.Instance}">
+                            <CompiledBinding Path="Login.Username" />
+                            <CompiledBinding Path="Login.Email" />
+                            <CompiledBinding Path="BankCard.CardNumber" />
+                            <CompiledBinding Path="PersonalData.Fullname" />
+                            <CompiledBinding Path="Type" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                    
+                <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}"
+                           IsVisible="{CompiledBinding DeleteDate, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                           TextTrimming="CharacterEllipsis"
+                           FontSize="12">
+                    <Run Text="{StaticResource Deleted}" /><Run Text=":" />
+                    &#8203;
+                    <Run Text="{CompiledBinding DeleteDate}" />
+                </TextBlock>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        Margin="10 0 10 0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Spacing="5">
+                <Border CornerRadius="99"
+                        Width="10"
+                        Height="10"
+                        Background="{CompiledBinding Color}">
+                    <Border.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.And}">
+                            <CompiledBinding Path="UseColor" />
+                            <CompiledBinding Path="Color" Converter="{x:Static c:NotEqualsConverter.Instance}" ConverterParameter="0" />
+                        </MultiBinding>
+                    </Border.IsVisible>
+                </Border>
+
+                <ToggleButton Theme="{StaticResource AppBarToggleButtonTheme}"
+                              Padding="4"
+                              IsChecked="{CompiledBinding IsFavorite}"
+                              ToolTip.Tip="{StaticResource Favorite}"
+                              IsEnabled="{CompiledBinding $parent[ContentDialog], Converter={x:Static ObjectConverters.IsNull}}">
+                    <ToggleButton.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                            <CompiledBinding Path="$parent[ContentControl].IsPointerOver" />
+                            <CompiledBinding Path="$parent[ISelectable].IsSelected" />
+                            <CompiledBinding Path="IsFavorite" />
+                        </MultiBinding>
+                    </ToggleButton.IsVisible>
+                    <Path Data="{StaticResource FavoriteIcon}" Stretch="Uniform" />
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

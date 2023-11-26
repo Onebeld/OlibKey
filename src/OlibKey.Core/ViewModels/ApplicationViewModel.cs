@@ -50,7 +50,7 @@ public class ApplicationViewModel : ViewModelBase
     
     public IManagedNotificationManager? NotificationManager { get; set; }
 
-    public DispatcherTimer? LockerTimer;
+    public static DispatcherTimer? LockerTimer { get; private set; }
 
     public Session? Session
     {
@@ -251,22 +251,28 @@ public class ApplicationViewModel : ViewModelBase
 
     public void LockDatabase()
     {
+        RestartLockerTimer();
         
+        DatabaseBlocking?.Invoke(this, EventArgs.Empty);
+        
+        
+        
+        DatabaseBlocked?.Invoke(this, EventArgs.Empty);
     }
 
     public void OpenDatabaseSettings()
     {
-        
+        RestartLockerTimer();
     }
 
     public void OpenTrashcan()
     {
-        
+        RestartLockerTimer();
     }
 
     public void OpenPasswordChecker()
     {
-        
+        RestartLockerTimer();
     }
 
     /*public void ActivateLockerTimer()
@@ -289,7 +295,7 @@ public class ApplicationViewModel : ViewModelBase
         }
     }*/
 
-    public void RestartLockerTimer()
+    public static void RestartLockerTimer()
     {
         if (LockerTimer is null || !LockerTimer.IsEnabled) return;
         
@@ -338,10 +344,10 @@ public class ApplicationViewModel : ViewModelBase
 
         if (!string.IsNullOrWhiteSpace(lowerSearchText))
         {
-            results = results.FindAll(data => data.Name.IsRightElement(lowerSearchText)
-                                           || data.Login is not null && (data.Login.Username.IsRightElement(lowerSearchText) || data.Login.Email.IsRightElement(lowerSearchText))
-                                           || data.BankCard is not null && data.BankCard.CardNumber.IsRightElement(lowerSearchText)
-                                           || data.PersonalData is not null && data.PersonalData.Fullname.IsRightElement(lowerSearchText)).ToList();
+            results = results.FindAll(data => data.Name.IsDesiredString(lowerSearchText)
+                                           || data.Login is not null && (data.Login.Username.IsDesiredString(lowerSearchText) || data.Login.Email.IsDesiredString(lowerSearchText))
+                                           || data.BankCard is not null && data.BankCard.CardNumber.IsDesiredString(lowerSearchText)
+                                           || data.PersonalData is not null && data.PersonalData.Fullname.IsDesiredString(lowerSearchText)).ToList();
         }
 
         List<Data> resultsFromTags = new();

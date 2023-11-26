@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿using OlibKey.Core.Extensions;
 
 namespace OlibKey.Core.Helpers;
 
@@ -12,15 +12,15 @@ public static class ImageInteractions
     /// <returns>Favicon in base 64 format</returns>
     public static async Task<string?> DownloadFavicon(string url, int size = 32)
     {
-        using WebClient client = new();
+        using HttpClient client = new();
         
         if (url.Contains("http://") || url.Contains("https://"))
         {
             return Convert.ToBase64String(await client.DownloadDataTaskAsync(
-                $"https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url={url}&size={size}"));
+                $"https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url={url}&size={size}".ToUri()));
         }
                 
         return Convert.ToBase64String(await client.DownloadDataTaskAsync(
-            $"https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://{url}&size={size}"));
+            $"https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://{url}&size={size}".ToUri()));
     }
 }

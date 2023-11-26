@@ -81,7 +81,7 @@ public class DataPageViewModel : ViewModelBase
                 throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
         }
         
-        OlibKeyApp.ViewModel.RestartLockerTimer();
+        ApplicationViewModel.RestartLockerTimer();
         
         RaisePropertyChanged(nameof(IsView));
         RaisePropertyChanged(nameof(IsEdit));
@@ -90,7 +90,7 @@ public class DataPageViewModel : ViewModelBase
 
     public void SaveData()
     {
-        OlibKeyApp.ViewModel.RestartLockerTimer();
+        ApplicationViewModel.RestartLockerTimer();
 
         if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null) throw new NullReferenceException();
 
@@ -150,7 +150,7 @@ public class DataPageViewModel : ViewModelBase
 
     public void ChangeData()
     {
-        OlibKeyApp.ViewModel.RestartLockerTimer();
+        ApplicationViewModel.RestartLockerTimer();
 
         _viewerMode = DataViewerMode.Edit;
         
@@ -164,7 +164,7 @@ public class DataPageViewModel : ViewModelBase
         if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null)
             throw new NullReferenceException();
         
-        OlibKeyApp.ViewModel.RestartLockerTimer();
+        ApplicationViewModel.RestartLockerTimer();
 
         int index = DataIndex;
 
@@ -187,7 +187,7 @@ public class DataPageViewModel : ViewModelBase
             throw new NullReferenceException();
 
         
-        OlibKeyApp.ViewModel.RestartLockerTimer();
+        ApplicationViewModel.RestartLockerTimer();
 
         _viewerMode = DataViewerMode.View;
 
@@ -200,7 +200,7 @@ public class DataPageViewModel : ViewModelBase
 
     public void Back()
     {
-        OlibKeyApp.ViewModel.RestartLockerTimer();
+        ApplicationViewModel.RestartLockerTimer();
         
         if (OlibKeyApp.ViewModel.SelectedData is null)
             OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
@@ -211,7 +211,7 @@ public class DataPageViewModel : ViewModelBase
 
     public async void CopyString(string str)
     {
-        OlibKeyApp.ViewModel.RestartLockerTimer();
+        ApplicationViewModel.RestartLockerTimer();
         
         
     }

@@ -3,7 +3,7 @@
 public class PasswordTests
 {
     [Test]
-    public void Check_File_For_Duplicate_Bad_Passwords()
+    public void Check_For_Duplicate_Bad_Passwords()
     {
         string[] badPasswords = Structures.TextInformation.BadPasswords;
         
@@ -11,10 +11,10 @@ public class PasswordTests
         
         List<string> duplicatedPasswords = new();
 
-        for (int i = 0; i < badPasswords.Length; i++)
+        for (int index = 0; index < badPasswords.Length; index++)
         {
-            if (i != 0 && badPasswords[i] == badPasswords[i - 1])
-                duplicatedPasswords.Add(badPasswords[i]);
+            if (index != 0 && badPasswords[index] == badPasswords[index - 1])
+                duplicatedPasswords.Add(badPasswords[index]);
         }
         
         if (duplicatedPasswords.Count == 0)

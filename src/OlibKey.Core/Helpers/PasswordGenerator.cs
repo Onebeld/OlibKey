@@ -16,6 +16,9 @@ public static class PasswordGenerator
         const string upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         const string number = "0123456789";
         const string special = @"~!@#$%^&*():;[]{}<>,.?/\|";
+
+        char[] bottomLine = { '_' };
+        
         string other = OlibKeySettings.Instance.GeneratorTextOther;
 
         string allowed = "";
@@ -26,7 +29,7 @@ public static class PasswordGenerator
         if (OlibKeySettings.Instance.GeneratorAllowNumber) allowed += number;
         if (OlibKeySettings.Instance.GeneratorAllowSpecial) allowed += special;
         if (OlibKeySettings.Instance.GeneratorAllowOther) allowed += other;
-        if (OlibKeySettings.Instance.GeneratorAllowUnderscore && password.IndexOfAny("_".ToCharArray()) == -1)
+        if (OlibKeySettings.Instance.GeneratorAllowUnderscore && password.IndexOfAny(bottomLine) == -1)
         {
             allowed += "_";
             password += "_";
@@ -55,7 +58,7 @@ public static class PasswordGenerator
             scale = BitConverter.ToUInt32(fourBytes, 0);
         }
 
-        return (int)(min + ((max - min) * (scale / (double)uint.MaxValue)));
+        return (int)(min + (max - min) * (scale / (double)uint.MaxValue));
     }
         
     private static string RandomString(string str)

@@ -26,6 +26,7 @@ public class OlibKeySettings : ViewModelBase
     private int _clearingClipboardTime = 10;
     private bool _cleanTrashcan = true;
     private int _clearingTrashcanTime = 30;
+    private double _searchSimilarity = 0.65;
 
     #region Properties
 
@@ -129,6 +130,12 @@ public class OlibKeySettings : ViewModelBase
     {
         get => _clearingTrashcanTime;
         set => RaiseAndSet(ref _clearingTrashcanTime, value);
+    }
+
+    public double SearchSimilarity
+    {
+        get => _searchSimilarity;
+        set => RaiseAndSet(ref _searchSimilarity, value);
     }
 
     #endregion

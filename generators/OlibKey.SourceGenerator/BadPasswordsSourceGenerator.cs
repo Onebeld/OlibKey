@@ -7,6 +7,9 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace OlibKey.SourceGenerator;
 
+/// <summary>
+/// 
+/// </summary>
 [Generator]
 public class BadPasswordsSourceGenerator : ISourceGenerator
 {

@@ -1,4 +1,3 @@
-# The project is closed and it is not planned to develop it
 ![](https://github.com/MagnificentEagle/OlibKey/blob/master/ForRepository/OlibKeyLogo.png)
 # OlibKey
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/MagnificentEagle/OlibPasswordManager) ![GitHub](https://img.shields.io/github/license/MagnificentEagle/OlibPasswordManager) [![CodeFactor](https://www.codefactor.io/repository/github/magnificenteagle/olibkey/badge)](https://www.codefactor.io/repository/github/magnificenteagle/olibkey)

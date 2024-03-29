@@ -1,8 +1,9 @@
 ﻿using System.Globalization;
 using Avalonia.Threading;
 using OlibKey.Core.Enums;
+using OlibKey.Core.Models.Database;
+using OlibKey.Core.Models.Database.StorageTypes;
 using OlibKey.Core.Structures;
-using OlibKey.Core.Structures.StorageTypes;
 using OlibKey.Core.Views.ViewerPages;
 using OtpNet;
 using PleasantUI;
@@ -13,7 +14,8 @@ public class DataPageViewModel : ViewModelBase
 {
     private DataViewerMode _viewerMode;
 
-    private Database _database = null!;
+    private Session _session = null!;
+    
     private Data _data = null!;
     
     private Totp? _totp;
@@ -21,10 +23,10 @@ public class DataPageViewModel : ViewModelBase
 
     #region Properties
 
-    public Database Database
+    public Session Session
     {
-        get => _database;
-        set => RaiseAndSet(ref _database, value);
+        get => _session;
+        set => RaiseAndSet(ref _session, value);
     }
 
     public Data Data
@@ -56,7 +58,7 @@ public class DataPageViewModel : ViewModelBase
 
     public DataPageViewModel(DataViewerMode viewerMode, Data? selectedData = null)
     {
-        Database = OlibKeyApp.ViewModel.Session?.Database ?? throw new NullReferenceException();
+        Session = OlibKeyApp.ViewModel.Session;
 
         _viewerMode = viewerMode;
 
@@ -70,18 +72,14 @@ public class DataPageViewModel : ViewModelBase
                 
                 Data = (Data)selectedData.Clone();
 
-                Data.Login ??= new Login();
-                Data.BankCard ??= new BankCard();
-                Data.PersonalData ??= new PersonalData();
-
-                if (Data.Login.IsActivatedTotp) ;
+                if (Data is Login { IsActivatedTotp: true }) ;
                 
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
         }
         
-        ApplicationViewModel.RestartLockerTimer();
+        Session.RestartLockerTimer();
         
         RaisePropertyChanged(nameof(IsView));
         RaisePropertyChanged(nameof(IsEdit));
@@ -90,31 +88,9 @@ public class DataPageViewModel : ViewModelBase
 
     public void SaveData()
     {
-        ApplicationViewModel.RestartLockerTimer();
+        Session.RestartLockerTimer();
 
         if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null) throw new NullReferenceException();
-
-        switch (Data.Type)
-        {
-            case DataType.BankCard:
-                Data.Login = null;
-                Data.PersonalData = null;
-                break;
-            case DataType.PersonalData:
-                Data.BankCard = null;
-                Data.Login = null;
-                break;
-            case DataType.Notes:
-                Data.BankCard = null;
-                Data.PersonalData = null;
-                Data.Login = null;
-                break;
-            
-            default:
-                Data.BankCard = null;
-                Data.PersonalData = null;
-                break;
-        }
 
         switch (_viewerMode)
         {
@@ -127,14 +103,14 @@ public class DataPageViewModel : ViewModelBase
             case DataViewerMode.Edit:
                 int index = DataIndex;
 
-                if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.Database.Data[index].Type is DataType.Login)
+                /*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.Database.Data[index].Type is DataType.Login)
                 {
                     if (OlibKeyApp.ViewModel.Session.Database.Data[index].Login?.WebSite != Data.Login?.WebSite)
                         Data.IsIconChange = true;
                 }
 
                 if (Data.Type != OlibKeyApp.ViewModel.Session.Database.Data[index].Type)
-                    Data.IsIconChange = true;
+                    Data.IsIconChange = true;*/
 
                 Data.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
                 
@@ -150,7 +126,7 @@ public class DataPageViewModel : ViewModelBase
 
     public void ChangeData()
     {
-        ApplicationViewModel.RestartLockerTimer();
+        Session.RestartLockerTimer();
 
         _viewerMode = DataViewerMode.Edit;
         
@@ -164,7 +140,7 @@ public class DataPageViewModel : ViewModelBase
         if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null)
             throw new NullReferenceException();
         
-        ApplicationViewModel.RestartLockerTimer();
+        Session.RestartLockerTimer();
 
         int index = DataIndex;
 
@@ -187,7 +163,7 @@ public class DataPageViewModel : ViewModelBase
             throw new NullReferenceException();
 
         
-        ApplicationViewModel.RestartLockerTimer();
+        Session.RestartLockerTimer();
 
         _viewerMode = DataViewerMode.View;
 
@@ -200,7 +176,7 @@ public class DataPageViewModel : ViewModelBase
 
     public void Back()
     {
-        ApplicationViewModel.RestartLockerTimer();
+        Session.RestartLockerTimer();
         
         if (OlibKeyApp.ViewModel.SelectedData is null)
             OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
@@ -211,7 +187,7 @@ public class DataPageViewModel : ViewModelBase
 
     public async void CopyString(string str)
     {
-        ApplicationViewModel.RestartLockerTimer();
+        Session.RestartLockerTimer();
         
         
     }
@@ -220,15 +196,15 @@ public class DataPageViewModel : ViewModelBase
 
     public void ActivateTotp()
     {
-        if (Data.Login is null || string.IsNullOrWhiteSpace(Data.Login.SecretKey))
+        if (Data is Login login && string.IsNullOrWhiteSpace(login.SecretKey))
             return;
         
-        if (_totpTimer is not null || _totpTimer.IsEnabled)
+        if (_totpTimer is not null && _totpTimer.IsEnabled)
             _totpTimer.Stop();
 
         try
         {
-            _totp = new Totp(Base32Encoding.ToBytes(Data.Login.SecretKey.Replace(" ", "")),
+            _totp = new Totp(Base32Encoding.ToBytes(login.SecretKey.Replace(" ", "")),
                 step: 30,
                 timeCorrection: new TimeCorrection(DateTime.UtcNow));
         }

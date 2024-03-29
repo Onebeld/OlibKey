@@ -6,7 +6,7 @@ public static class FileTypes
 {
     public static readonly FilePickerFileType[] Images = 
     {
-        new(OlibKeyApp.GetLocalString("ImageFiles"))
+        new(OlibKeyApp.GetLocalizationString("ImageFiles"))
         {
             Patterns = new[] { "*.png", "*.jpg", "*.bmp" }
         }
@@ -14,9 +14,17 @@ public static class FileTypes
     
     public static readonly FilePickerFileType[] Olib = 
     {
-        new(OlibKeyApp.GetLocalString("OlibFiles"))
+        new(OlibKeyApp.GetLocalizationString("OlibFiles"))
         {
-            Patterns = new []{ "*.olib" }
+            Patterns = new [] { "*.olib" }
+        }
+    };
+
+    public static readonly FilePickerFileType[] Any =
+    {
+        new("Any files")
+        {
+            Patterns = new[] { "*.*" }
         }
     };
 }

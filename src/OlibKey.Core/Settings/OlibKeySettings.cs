@@ -144,6 +144,8 @@ public class OlibKeySettings : ViewModelBase
     /// An instance of the <see cref="OlibKeySettings"/> class, which defines the program settings
     /// </summary>
     public static OlibKeySettings Instance { get; private set; } = null!;
+    
+    private OlibKeySettings() { }
 
     static OlibKeySettings()
     {
@@ -193,5 +195,10 @@ public class OlibKeySettings : ViewModelBase
     {
         using FileStream fileStream = File.Create(Path.Combine(PleasantDirectories.Settings, "OlibKeySettings.json"));
         JsonSerializer.Serialize(fileStream, Instance, OlibKeySettingsGenerationContext.Default.OlibKeySettings);
+    }
+
+    public static void Reset()
+    {
+        
     }
 }

@@ -13,17 +13,17 @@ public class App : OlibKeyApp
     public override void OnFrameworkInitializationCompleted()
     {
         base.OnFrameworkInitializationCompleted();
-        
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+
+        if (ApplicationLifetime is not IClassicDesktopStyleApplicationLifetime desktop)
+            return;
+
+        Main = new MainWindow
         {
-            Main = new MainWindow
-            {
-                DataContext = ViewModel
-            };
+            DataContext = ViewModel
+        };
             
-            TopLevel = TopLevel.GetTopLevel(Main as PleasantWindow);
+        TopLevel = TopLevel.GetTopLevel(Main as PleasantWindow) ?? throw new NullReferenceException("TopLevel is null");
             
-            desktop.MainWindow = Main as PleasantWindow;
-        }
+        desktop.MainWindow = Main as PleasantWindow;
     }
 }

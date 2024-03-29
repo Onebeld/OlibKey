@@ -58,7 +58,7 @@
     
     <s:String x:Key="Search">Search</s:String>
     <s:String x:Key="Favorite">Favorite</s:String>
-    <s:String x:Key="Deleted">Deleted</s:String>
+    <s:String x:Key="Deleted">Deleted: {0}</s:String>
     
     <!--Tips-->
     <s:String x:Key="PasswordManagerTip1">Never use your one password for all sites! This will be a rather unfortunate consequence.</s:String>

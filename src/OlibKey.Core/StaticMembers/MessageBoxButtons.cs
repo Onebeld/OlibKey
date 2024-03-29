@@ -8,11 +8,11 @@ public static class MessageBoxButtons
     {
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("Yes"), Default = true, Result = "Yes", IsKeyDown = true
+            Text = OlibKeyApp.GetLocalizationString("Yes"), Default = true, Result = "Yes", IsKeyDown = true
         },
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("No"), Result = "No"
+            Text = OlibKeyApp.GetLocalizationString("No"), Result = "No"
         }
     };
     
@@ -20,11 +20,11 @@ public static class MessageBoxButtons
     {
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("Yes"), Result = "Yes"
+            Text = OlibKeyApp.GetLocalizationString("Yes"), Result = "Yes"
         },
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("No"), Result = "No", IsKeyDown = true, Default = true
+            Text = OlibKeyApp.GetLocalizationString("No"), Result = "No", IsKeyDown = true, Default = true
         }
     };
 
@@ -32,15 +32,15 @@ public static class MessageBoxButtons
     {
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("Yes"), Default = true, Result = "Yes", IsKeyDown = true
+            Text = OlibKeyApp.GetLocalizationString("Yes"), Default = true, Result = "Yes", IsKeyDown = true
         },
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("No"), Result = "No"
+            Text = OlibKeyApp.GetLocalizationString("No"), Result = "No"
         },
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("Cancel"), Result = "Cancel"
+            Text = OlibKeyApp.GetLocalizationString("Cancel"), Result = "Cancel"
         }
     };
 
@@ -48,7 +48,7 @@ public static class MessageBoxButtons
     {
         new MessageBoxButton
         {
-            Text = OlibKeyApp.GetLocalString("Ok"), Default = true, Result = "Ok", IsKeyDown = true
+            Text = OlibKeyApp.GetLocalizationString("Ok"), Default = true, Result = "Ok", IsKeyDown = true
         },
     };
 }

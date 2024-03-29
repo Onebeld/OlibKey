@@ -15,7 +15,7 @@ public class BadPasswordsSourceGenerator : ISourceGenerator
 {
     public void Execute(GeneratorExecutionContext context)
     {
-        const string nameSpace = "OlibKey.Core.Structures";
+        const string nameSpace = "OlibKey.Core.StaticMembers";
         const string badPasswordsField = "BadPasswords";
         const string textInformationClass = "TextInformation";
 

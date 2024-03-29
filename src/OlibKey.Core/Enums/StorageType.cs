@@ -2,6 +2,7 @@
 
 public enum StorageType
 {
-    Disk = 0,
-    Cloud = 1
+    None = 0,
+    Disk = 1,
+    Cloud = 2
 }

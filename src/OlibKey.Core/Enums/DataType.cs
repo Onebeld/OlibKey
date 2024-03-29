@@ -2,6 +2,8 @@
 
 public enum DataType
 {
+    All,
+    
     Login,
     BankCard,
     PersonalData,

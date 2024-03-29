@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:data="using:OlibKey.Core.Structures"
-                    xmlns:c="using:OlibKey.Core.Converters">
-    <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type data:Data}">
+                    xmlns:c="using:OlibKey.Core.Converters"
+                    xmlns:database="clr-namespace:OlibKey.Core.Models.Database">
+    <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type database:Data}">
         <Grid ColumnDefinitions="Auto,*,Auto">
             <Border Grid.Column="0"
                     Background="White"
@@ -23,25 +23,20 @@
                 <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}"
                            FontSize="12"
                            IsVisible="{CompiledBinding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-                           TextTrimming="CharacterEllipsis">
-                    <TextBlock.Text>
-                        <MultiBinding Converter="{x:Static c:DataTypeToStringConverter.Instance}">
-                            <CompiledBinding Path="Login.Username" />
-                            <CompiledBinding Path="Login.Email" />
-                            <CompiledBinding Path="BankCard.CardNumber" />
-                            <CompiledBinding Path="PersonalData.Fullname" />
-                            <CompiledBinding Path="Type" />
-                        </MultiBinding>
-                    </TextBlock.Text>
+                           TextTrimming="CharacterEllipsis"
+                           Text="{CompiledBinding Information}">
                 </TextBlock>
-                    
+                
                 <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}"
                            IsVisible="{CompiledBinding DeleteDate, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                            TextTrimming="CharacterEllipsis"
                            FontSize="12">
-                    <Run Text="{StaticResource Deleted}" /><Run Text=":" />
-                    &#8203;
-                    <Run Text="{CompiledBinding DeleteDate}" />
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{x:Static c:GeneralConverters.StringFormat}">
+                            <StaticResource ResourceKey="Deleted" />
+                            <CompiledBinding Path="DeleteDate" />
+                        </MultiBinding>
+                    </TextBlock.Text>
                 </TextBlock>
             </StackPanel>
             

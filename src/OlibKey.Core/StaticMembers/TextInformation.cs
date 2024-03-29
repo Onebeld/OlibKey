@@ -1,4 +1,4 @@
-﻿namespace OlibKey.Core.Structures;
+﻿namespace OlibKey.Core.StaticMembers;
 
 public static partial class TextInformation
 {

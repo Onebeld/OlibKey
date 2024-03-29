@@ -1,11 +1,12 @@
 ﻿using System.Text.RegularExpressions;
+using OlibKey.Core.StaticMembers;
 using OlibKey.Core.Structures;
 
 namespace OlibKey.Core.Helpers;
 
 public static class PasswordChecker
 {
-    private static readonly Dictionary<string, double> _patterns = new()
+    private static readonly Dictionary<string, double> Patterns = new()
     {
         { "1234567890", 0.0 },
         { "[a-z]", 0.1 },
@@ -31,13 +32,14 @@ public static class PasswordChecker
 
         int score = 0;
 
-        foreach (string badPassword in TextInformation.BadPasswords)
+        // TODO: Fix source generator
+        /*foreach (string badPassword in TextInformation.BadPasswords)
         {
             if (password.Contains(badPassword.ToLower(), StringComparison.CurrentCultureIgnoreCase))
                 multi0 = 0.75;
             else if (string.Equals(badPassword, password, StringComparison.CurrentCultureIgnoreCase))
                 multi0 = 0.125;
-        }
+        }*/
 
         List<char> usedChars = new();
 
@@ -47,7 +49,7 @@ public static class PasswordChecker
         double multi1 = GetFrequencyFactor(password.ToLower());
         score += password.Length * 15;
 
-        foreach (KeyValuePair<string,double> pattern in _patterns)
+        foreach (KeyValuePair<string,double> pattern in Patterns)
         {
             if (Regex.Match(password, pattern.Key).Length > 0)
                 multi2 += pattern.Value;

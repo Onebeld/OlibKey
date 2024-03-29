@@ -47,8 +47,8 @@ public class OlibKeyApp : Application
     {
         ViewModel.NotificationManager?.Show(
             new Notification(
-                GetLocalString(title), 
-                GetLocalString(description), 
+                GetLocalizationString(title), 
+                GetLocalizationString(description), 
                 notificationType, 
                 timeSpan)
         );
@@ -59,7 +59,7 @@ public class OlibKeyApp : Application
     /// </summary>
     /// <param name="key">Key in the localization dictionary</param>
     /// <returns>Localized string or key itself</returns>
-    public static string GetLocalString(string key)
+    public static string GetLocalizationString(string key)
     {
         if (Current!.TryFindResource(key, out object? objectText))
             return objectText as string ?? string.Empty;

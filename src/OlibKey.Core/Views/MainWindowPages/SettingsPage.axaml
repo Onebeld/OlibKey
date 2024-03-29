@@ -6,6 +6,8 @@
              xmlns:helpers="using:OlibKey.Core.Helpers"
              xmlns:struct="using:OlibKey.Core.Structures"
              xmlns:conv="using:OlibKey.Core.Converters"
+             xmlns:enums="clr-namespace:PleasantUI.Core.Enums;assembly=PleasantUI"
+             xmlns:markupExtensions="clr-namespace:OlibKey.Core.MarkupExtensions"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.MainWindowPages.SettingsPage"
              x:DataType="vm:SettingsViewModel">
@@ -175,10 +177,9 @@
             <OptionsDisplayItem Header="{StaticResource Theme}"
                                 Icon="{StaticResource PaintBrushRegular}">
                 <OptionsDisplayItem.ActionButton>
-                    <ComboBox MinWidth="150" SelectedIndex="{CompiledBinding SelectedIndexTheme}">
-                        <ComboBoxItem Content="{StaticResource System}" />
-                        <ComboBoxItem Content="{StaticResource Light}" />
-                        <ComboBoxItem Content="{StaticResource Dark}" />
+                    <ComboBox MinWidth="150"
+                              ItemsSource="{markupExtensions:Enumerate {x:Type enums:Theme}}"
+                              SelectedValue="{CompiledBinding SelectedTheme}">
                     </ComboBox>
                 </OptionsDisplayItem.ActionButton>
             </OptionsDisplayItem>

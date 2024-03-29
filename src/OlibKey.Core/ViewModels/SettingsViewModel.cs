@@ -1,9 +1,11 @@
 ﻿using Avalonia;
+using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Structures;
 using PleasantUI;
 using PleasantUI.Core;
+using PleasantUI.Core.Enums;
 using PleasantUI.Windows;
 
 namespace OlibKey.Core.ViewModels;
@@ -32,14 +34,14 @@ public class SettingsViewModel : ViewModelBase
         set => OlibKeySettings.Instance.FontName = value.Name;
     }
 
-    public int SelectedIndexTheme
+    public Theme SelectedTheme
     {
-        get => Dictionaries.Themes[PleasantSettings.Instance.Theme];
+        get => PleasantSettings.Instance.Theme;
         set
         {
             if (IsNotLoaded) return;
-
-            PleasantSettings.Instance.Theme = Dictionaries.Themes.FirstOrDefault(x => x.Value == value).Key;
+            
+            PleasantSettings.Instance.Theme = value;
             OlibKeyApp.PleasantTheme.UpdateTheme();
         }
     }
@@ -82,15 +84,18 @@ public class SettingsViewModel : ViewModelBase
         OlibKeyApp.PleasantTheme.UpdateAccentColors(color.Value);
     }
 
+    /// <summary>
+    /// Asynchronously copies the accent color in hex format to the clipboard and shows a notification that reports the task has been completed.
+    /// </summary>
     public async void CopyAccentColor()
     {
         await OlibKeyApp.TopLevel.Clipboard?.SetTextAsync(
             $"#{PleasantSettings.Instance.NumericalAccentColor.ToString("x8").ToUpper()}")!;
         
-        /*OlibKeyApp.ViewModel.NotificationManager.Show(new Notification(OlibKeyApp.GetLocalString("Information"),
-            OlibKeyApp.GetLocalString("ColorCopied"),
+        OlibKeyApp.ShowNotification(OlibKeyApp.GetLocalizationString("Information"),
+            OlibKeyApp.GetLocalizationString("ColorCopied"),
             NotificationType.Information,
-            TimeSpan.FromSeconds(2)));*/
+            TimeSpan.FromSeconds(2));
     }
 
     public async void PasteAccentColor()
@@ -111,18 +116,20 @@ public class SettingsViewModel : ViewModelBase
 
     public async void ResetSettings()
     {
-        string result = await MessageBox.Show(OlibKeyApp.Main, OlibKeyApp.GetLocalString(""), string.Empty, MessageBoxButtons.ReverseYesNo);
+        string result = await MessageBox.Show(OlibKeyApp.Main, OlibKeyApp.GetLocalizationString(""), string.Empty, MessageBoxButtons.ReverseYesNo);
         
         if (result != "Yes") return;
 
-        SelectedIndexTheme = 0;
+        SelectedTheme = Theme.System;
         
         OlibKeyApp.UpdateLanguage();
         
         RaisePropertyChanged(nameof(SelectedLanguage));
         RaisePropertyChanged(nameof(SelectedFontFamily));
-        RaisePropertyChanged(nameof(SelectedIndexTheme));
+        RaisePropertyChanged(nameof(SelectedTheme));
         
+        OlibKeySettings.Reset();
         
+        // TODO: Notification after resetting
     }
 }

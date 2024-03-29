@@ -1,13 +1,15 @@
 ﻿using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
-using Avalonia.Threading;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
+using OlibKey.Core.Helpers;
+using OlibKey.Core.Models.Database;
 using OlibKey.Core.Structures;
 using OlibKey.Core.Views.ViewerPages;
 using OlibKey.Core.Windows;
 using PleasantUI;
+using PleasantUI.Controls;
 using PleasantUI.Extensions;
 using PleasantUI.Reactive;
 
@@ -15,24 +17,18 @@ namespace OlibKey.Core.ViewModels;
 
 public class ApplicationViewModel : ViewModelBase
 {
-    private Session? _session;
+    private Session _session;
 
-    private string _masterPassword = string.Empty;
     private Data? _selectedData;
+    private DataType _selectedDataType = DataType.All;
 
     private bool _isDirty;
-    private bool _isCreatedDatabase;
 
     private string _searchText = string.Empty;
-    private bool _searchByAllElements = true;
-    private bool _searchByLogins;
-    private bool _searchByBankCard;
-    private bool _searchByPersonalData;
-    private bool _searchByNotes;
 
-    private AvaloniaList<Tag> _tags = new();
-    private AvaloniaList<Tag> _selectedTags = new();
-    private AvaloniaList<Data> _foundedDataList = new();
+    private AvaloniaList<Tag> _tags = [];
+    private AvaloniaList<Tag> _selectedTags = [];
+    private AvaloniaList<Data> _foundedDataList = [];
 
     private Control? _viewerContent;
 
@@ -50,9 +46,7 @@ public class ApplicationViewModel : ViewModelBase
     
     public IManagedNotificationManager? NotificationManager { get; set; }
 
-    public static DispatcherTimer? LockerTimer { get; private set; }
-
-    public Session? Session
+    public Session Session
     {
         get => _session;
         set => RaiseAndSet(ref _session, value);
@@ -94,105 +88,20 @@ public class ApplicationViewModel : ViewModelBase
         set => RaiseAndSet(ref _viewerContent, value);
     }
 
-    public bool IsCreatedDatabase
-    {
-        get => _isCreatedDatabase;
-        set => RaiseAndSet(ref _isCreatedDatabase, value);
-    }
-
     public string SearchText
     {
         get => _searchText;
         set => RaiseAndSet(ref _searchText, value);
     }
-    
-    public bool SearchByAllElements
+
+    public DataType SelectedDataType
     {
-        get => _searchByAllElements;
+        get => _selectedDataType;
         set
         {
-            RaiseAndSet(ref _searchByAllElements, value);
+            RaiseAndSet(ref _selectedDataType, value);
             
-            if (!value) return;
-
             DoSearch();
-                
-            SearchByLogins = false;
-            SearchByBankCard = false;
-            SearchByPersonalData = false;
-            SearchByNotes = false;
-        }
-    }
-
-    public bool SearchByLogins
-    {
-        get => _searchByLogins;
-        set
-        {
-            RaiseAndSet(ref _searchByLogins, value);
-            
-            if (!value) return;
-
-            DoSearch();
-                
-            SearchByAllElements = false;
-            SearchByBankCard = false;
-            SearchByPersonalData = false;
-            SearchByNotes = false;
-        }
-    }
-
-    public bool SearchByBankCard
-    {
-        get => _searchByBankCard;
-        set
-        {
-            RaiseAndSet(ref _searchByBankCard, value);
-            
-            if (!value) return;
-
-            DoSearch();
-                
-            SearchByLogins = false;
-            SearchByAllElements = false;
-            SearchByPersonalData = false;
-            SearchByNotes = false;
-        }
-    }
-
-    public bool SearchByPersonalData
-    {
-        get => _searchByPersonalData;
-        set
-        {
-            RaiseAndSet(ref _searchByPersonalData, value);
-            
-            if (!value) return;
-
-            DoSearch();
-                
-            SearchByLogins = false;
-            SearchByBankCard = false;
-            SearchByAllElements = false;
-            SearchByNotes = false;
-        }
-    }
-
-    public bool SearchByNotes
-    {
-        get => _searchByNotes;
-        set
-        {
-            RaiseAndSet(ref _searchByNotes, value);
-            
-            if (!value) return;
-
-            DoSearch();
-                
-            SearchByLogins = false;
-            SearchByBankCard = false;
-            SearchByPersonalData = false;
-            SearchByAllElements = false;
         }
     }
 
@@ -203,6 +112,8 @@ public class ApplicationViewModel : ViewModelBase
         this.WhenAnyValue(x => x.SearchText)
             .Skip(1)
             .Subscribe(_ => DoSearch());
+
+        Session = new Session();
     }
 
     public async void CreateDatabase()
@@ -211,101 +122,85 @@ public class ApplicationViewModel : ViewModelBase
             return;
         
         CreateDatabaseWindow window = new();
-        bool result = await window.Show<bool>(OlibKeyApp.Main);
+        DatabaseInfo? result = await window.Show<DatabaseInfo?>(OlibKeyApp.Main);
 
-        if (!result) return;
+        if (result is null) return;
 
-        _masterPassword = window.ViewModel.MasterPassword;
-
-        Database database = new()
-        {
-            Settings = new DatabaseSettings
-            {
-                Name = window.ViewModel.Name,
-                ImageData = window.ViewModel.ImageData,
-                Iterations = window.ViewModel.Iterations,
-                UseTrashcan = window.ViewModel.UseTrashcan
-            }
-        };
-
-        Session = new Session
-        {
-            Database = database,
-            StorageType = StorageType.Disk,
-            PathToFile = window.ViewModel.Path
-        };
+        Session.CreateDatabase(result.Value);
 
         IsDirty = true;
-        IsCreatedDatabase = true;
 
         ViewerContent = new OlibKeyPage();
         
         DatabaseCreated?.Invoke(this, EventArgs.Empty);
     }
 
+    public async void OpenDatabase()
+    {
+        string? path = await StorageProvider.SelectFile(pickerFileTypes: FileTypes.Olib);
+        
+        if (path is null) return;
+
+        Session.OpenDatabase(path);
+        
+        // TODO: Open database
+    }
+
     public void AddData()
     {
         SelectedData = null;
         
+        // TODO: Add data
     }
 
     public void LockDatabase()
     {
-        RestartLockerTimer();
-        
         DatabaseBlocking?.Invoke(this, EventArgs.Empty);
         
-        
+        // TODO: Locking database
         
         DatabaseBlocked?.Invoke(this, EventArgs.Empty);
     }
 
     public void OpenDatabaseSettings()
     {
-        RestartLockerTimer();
-    }
-
-    public void OpenTrashcan()
-    {
-        RestartLockerTimer();
-    }
-
-    public void OpenPasswordChecker()
-    {
-        RestartLockerTimer();
-    }
-
-    /*public void ActivateLockerTimer()
-    {
-        LockerTimer = new DispatcherTimer()
-        {
-            Interval = TimeSpan.FromMinutes(OlibKeySettings.Instance.LockoutTime)
-        };
-        LockerTimer.Tick += (_, _) =>
-        {
-            if (string.IsNullOrWhiteSpace(P))
-                return;
-
-            foreach (PleasantModalWindow modalWindow in OlibKeyApp.Main.OpenedModalWindows)
-            {
-                modalWindow.Close();
-            }
-            
-            OlibKeyApp.ShowNotification();
-        }
-    }*/
-
-    public static void RestartLockerTimer()
-    {
-        if (LockerTimer is null || !LockerTimer.IsEnabled) return;
+        Session.RestartLockerTimer();
         
-        LockerTimer.Stop();
-        LockerTimer.Start();
+        // TODO: Open database settings
+    }
+
+    public void OpenTrashcanWindow()
+    {
+        Session.RestartLockerTimer();
+        
+        // TODO: Open trashcan
+    }
+
+    public void OpenPasswordCheckerWindow()
+    {
+        Session.RestartLockerTimer();
+        
+        // TODO: Open password checker
+    }
+
+    public void ActivateLockerTimer()
+    {
+        Session.ActivateLockerTimer(OlibKeySettings.Instance.LockoutTime, TickLockerTimer);
+        
+        // TODO: Activate locker timer
+    }
+
+    private void TickLockerTimer(object? sender, EventArgs e)
+    {
+        foreach (PleasantModalWindow modalWindow in OlibKeyApp.Main.OpenedModalWindows)
+        {
+            modalWindow.Close();
+        }
     }
 
     public void GetAllTags()
     {
-        if (Session?.Database is null) return;
+        if (Session.Database is null) return;
         
         Tags.Clear();
         
@@ -325,29 +220,20 @@ public class ApplicationViewModel : ViewModelBase
 
     public void DoSearch()
     {
-        if (Session?.Database is null) return;
+        if (Session.Database is null) return;
         
-        RestartLockerTimer();
+        Session.RestartLockerTimer();
 
         string lowerSearchText = SearchText.ToLower();
 
         List<Data> results = new(Session.Database.Data);
 
-        if (SearchByLogins)
-            results = results.FindAll(data => data.Type is DataType.Login);
-        else if (SearchByBankCard)
-            results = results.FindAll(data => data.Type is DataType.BankCard);
-        else if (SearchByPersonalData)
-            results = results.FindAll(data => data.Type is DataType.PersonalData);
-        else if (SearchByNotes)
-            results = results.FindAll(data => data.Type is DataType.Notes);
+        if (SelectedDataType is not DataType.All)
+            results = results.FindAll(data => data.Type == SelectedDataType);
 
         if (!string.IsNullOrWhiteSpace(lowerSearchText))
         {
-            results = results.FindAll(data => data.Name.IsDesiredString(lowerSearchText)
-                                           || data.Login is not null && (data.Login.Username.IsDesiredString(lowerSearchText) || data.Login.Email.IsDesiredString(lowerSearchText))
-                                           || data.BankCard is not null && data.BankCard.CardNumber.IsDesiredString(lowerSearchText)
-                                           || data.PersonalData is not null && data.PersonalData.Fullname.IsDesiredString(lowerSearchText)).ToList();
+            results = results.FindAll(data => data.IsDesired(lowerSearchText)).ToList();
         }
 
         List<Data> resultsFromTags = new();
@@ -360,10 +246,13 @@ public class ApplicationViewModel : ViewModelBase
         FoundedDataList = new AvaloniaList<Data>(results);
     }
 
+    private bool Match(Data obj)
+    {
+        
+    }
+
     public void Save()
     {
-        if (Session?.PathToFile is null) return;
-        
-        Session?.Database?.Save(Session.PathToFile, _masterPassword);
+        Session.SaveDatabase();
     }
 }

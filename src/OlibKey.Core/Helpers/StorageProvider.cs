@@ -14,9 +14,7 @@ public static class StorageProvider
         return result.Count == 0 ? null : result[0].Path.LocalPath;
     }
 
-    public static async Task<string?> SelectFile(
-        string? title = null,
-        IReadOnlyList<FilePickerFileType>? pickerFileTypes = null)
+    public static async Task<string?> SelectFile(string? title = null, IReadOnlyList<FilePickerFileType>? pickerFileTypes = null)
     {
         IReadOnlyList<IStorageFile> result = await OlibKeyApp.TopLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
         {
@@ -33,8 +31,7 @@ public static class StorageProvider
         string? title = null,
         bool showOverwritePrompt = true,
         string? suggestedFileName = null,
-        IReadOnlyList<FilePickerFileType>? pickerFileTypes = null
-        )
+        IReadOnlyList<FilePickerFileType>? pickerFileTypes = null)
     {
         IStorageFile? result = await OlibKeyApp.TopLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
         {

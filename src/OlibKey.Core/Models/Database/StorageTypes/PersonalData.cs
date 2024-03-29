@@ -1,8 +1,11 @@
-﻿using PleasantUI;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
+using OlibKey.Core.Extensions;
 
-namespace OlibKey.Core.Structures.StorageTypes;
+namespace OlibKey.Core.Models.Database.StorageTypes;
 
-public class PersonalData : ViewModelBase, ICloneable
+public class PersonalData : Data
 {
     private string? _fullname;
     private string? _number;
@@ -96,5 +99,27 @@ public class PersonalData : ViewModelBase, ICloneable
         set => RaiseAndSet(ref _address, value);
     }
 
-    public object Clone() => MemberwiseClone();
+    public override async Task<IImage> GetIcon()
+    {
+        return (DrawingImage)Application.Current!.FindResource("PersonalDataIcon")!;
+    }
+    
+    public override bool IsDesired(string text)
+    {
+        if (Fullname.IsDesiredString(text))
+            return true;
+        
+        return base.IsDesired(text);
+    }
+
+    public override string Information
+    {
+        get
+        {
+            if (!string.IsNullOrWhiteSpace(Fullname))
+                return Fullname;
+
+            return OlibKeyApp.GetResource<string>("NoData");
+        }
+    }
 }

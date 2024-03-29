@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OlibKey.Core.ViewModels"
+             xmlns:enums="clr-namespace:OlibKey.Core.Enums"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.BasicElements.ListOfItems"
              x:DataType="vm:ApplicationViewModel">
@@ -23,7 +24,7 @@
             </TextBox>
             <UniformGrid Rows="1" Columns="5">
                 <RadioButton Theme="{StaticResource RadioButtonLikeButton}"
-                             IsChecked="{CompiledBinding SearchByAllElements}"
+                             IsChecked="{CompiledBinding SelectedData, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.All}}"
                              Padding="0 8"
                              CornerRadius="5 0 0 5"
                              ToolTip.Tip="{StaticResource AllElements}">
@@ -32,7 +33,7 @@
                     </Viewbox>
                 </RadioButton>
                 <RadioButton Theme="{StaticResource RadioButtonLikeButton}"
-                             IsChecked="{CompiledBinding SearchByLogins}"
+                             IsChecked="{CompiledBinding SelectedData, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.Login}}"
                              Padding="0 8"
                              CornerRadius="0"
                              ToolTip.Tip="{StaticResource Login}">
@@ -41,7 +42,7 @@
                     </Viewbox>
                 </RadioButton>
                 <RadioButton Theme="{StaticResource RadioButtonLikeButton}"
-                             IsChecked="{CompiledBinding SearchByBankCard}"
+                             IsChecked="{CompiledBinding SelectedData, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.BankCard}}"
                              Padding="0 8"
                              CornerRadius="0"
                              ToolTip.Tip="{StaticResource BankCard}">
@@ -50,7 +51,7 @@
                     </Viewbox>
                 </RadioButton>
                 <RadioButton Theme="{StaticResource RadioButtonLikeButton}"
-                             IsChecked="{CompiledBinding SearchByPersonalData}"
+                             IsChecked="{CompiledBinding SelectedData, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.PersonalData}}"
                              Padding="0 8"
                              CornerRadius="0"
                              ToolTip.Tip="{StaticResource PersonalData}">
@@ -59,7 +60,7 @@
                     </Viewbox>
                 </RadioButton>
                 <RadioButton Theme="{StaticResource RadioButtonLikeButton}"
-                             IsChecked="{CompiledBinding SearchByNotes}"
+                             IsChecked="{CompiledBinding SelectedData, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.Notes}}"
                              Padding="0 8"
                              CornerRadius="0 5 5 0"
                              ToolTip.Tip="{StaticResource Notes}">

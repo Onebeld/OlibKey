@@ -30,7 +30,7 @@
         <ProjectReference Include="..\OlibKey.Assets\OlibKey.Assets.csproj"/>
         
         <ProjectReference Include="..\..\generators\OlibKey.SourceGenerator\OlibKey.SourceGenerator.csproj"
-                          OutputItemType="Analyzer"
+                          OutputItemType="A"
                           ReferenceOutputAssembly="false"/>
         
     </ItemGroup>

@@ -1,11 +1,13 @@
-﻿namespace OlibKey.Core.UnitTests;
+﻿using OlibKey.Core.StaticMembers;
+
+namespace OlibKey.Core.UnitTests;
 
 public class PasswordTests
 {
     [Test]
     public void Check_For_Duplicate_Bad_Passwords()
     {
-        string[] badPasswords = Structures.TextInformation.BadPasswords;
+        string[] badPasswords = TextInformation.BadPasswords;
         
         Array.Sort(badPasswords);
         

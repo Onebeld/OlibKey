@@ -100,12 +100,25 @@ public class CreateDatabaseViewModel : ViewModelBase
     {
         if (string.IsNullOrWhiteSpace(MasterPassword) || string.IsNullOrWhiteSpace(Path) || string.IsNullOrWhiteSpace(Name))
             return;
+
+        DatabaseInfo databaseInfo = new()
+        {
+            MasterPassword = _masterPassword,
+            Path = _path,
+            DatabaseSettings = new DatabaseSettings
+            {
+                Name = _name,
+                ImageData = _imageData,
+                UseTrashcan = _useTrash,
+                Iterations = _iterations
+            }
+        };
         
-        dialog.Close(true);
+        dialog.Close(databaseInfo);
     }
 
     public void Close(ContentDialog dialog)
     {
-        dialog.Close(false);
+        dialog.Close(null);
     }
 }

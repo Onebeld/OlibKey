@@ -4,9 +4,9 @@ using OlibKey.Core.Structures;
 
 namespace OlibKey.Core.Views.MainWindowPages;
 
-public partial class CreateAndDecryptDatabasePage : UserControl
+public partial class CreateDecryptDatabasePage : UserControl
 {
-    public CreateAndDecryptDatabasePage()
+    public CreateDecryptDatabasePage()
     {
         InitializeComponent();
 

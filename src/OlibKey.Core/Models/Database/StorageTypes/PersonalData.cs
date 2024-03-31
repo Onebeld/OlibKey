@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
 
 namespace OlibKey.Core.Models.Database.StorageTypes;
@@ -104,22 +105,24 @@ public class PersonalData : Data
         return (DrawingImage)Application.Current!.FindResource("PersonalDataIcon")!;
     }
     
-    public override bool IsDesired(string text)
+    public override bool MatchesSearchCriteria(string text)
     {
         if (Fullname.IsDesiredString(text))
             return true;
         
-        return base.IsDesired(text);
+        return base.MatchesSearchCriteria(text);
     }
 
-    public override string Information
+    public override bool MatchesDataType(DataType dataType) => dataType is DataType.PersonalData;
+
+    public override string? Information
     {
         get
         {
             if (!string.IsNullOrWhiteSpace(Fullname))
                 return Fullname;
 
-            return OlibKeyApp.GetResource<string>("NoData");
+            return null;
         }
     }
 }

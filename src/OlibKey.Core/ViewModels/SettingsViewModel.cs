@@ -2,7 +2,8 @@
 using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using OlibKey.Core.Helpers;
-using OlibKey.Core.Structures;
+using OlibKey.Core.Models;
+using OlibKey.Core.StaticMembers;
 using PleasantUI;
 using PleasantUI.Core;
 using PleasantUI.Core.Enums;
@@ -42,7 +43,6 @@ public class SettingsViewModel : ViewModelBase
             if (IsNotLoaded) return;
             
             PleasantSettings.Instance.Theme = value;
-            OlibKeyApp.PleasantTheme.UpdateTheme();
         }
     }
 
@@ -64,7 +64,6 @@ public class SettingsViewModel : ViewModelBase
                 return;
             
             PleasantSettings.Instance.NumericalAccentColor = accent.Value.ToUInt32();
-            OlibKeyApp.PleasantTheme.UpdateAccentColors(accent.Value);
         }
     }
 
@@ -81,7 +80,6 @@ public class SettingsViewModel : ViewModelBase
             return;
 
         PleasantSettings.Instance.NumericalAccentColor = color.Value.ToUInt32();
-        OlibKeyApp.PleasantTheme.UpdateAccentColors(color.Value);
     }
 
     /// <summary>
@@ -103,15 +101,9 @@ public class SettingsViewModel : ViewModelBase
         string? data = await OlibKeyApp.TopLevel.Clipboard?.GetTextAsync()!;
 
         if (uint.TryParse(data, out uint uintColor))
-        {
             PleasantSettings.Instance.NumericalAccentColor = uintColor;
-            OlibKeyApp.PleasantTheme.UpdateAccentColors(Color.FromUInt32(uintColor));
-        }
-        else if (Color.TryParse(data, out Color color))
-        {
+        else if (Color.TryParse(data, out Color color)) 
             PleasantSettings.Instance.NumericalAccentColor = color.ToUInt32();
-            OlibKeyApp.PleasantTheme.UpdateAccentColors(color);
-        }
     }
 
     public async void ResetSettings()
@@ -131,5 +123,6 @@ public class SettingsViewModel : ViewModelBase
         OlibKeySettings.Reset();
         
         // TODO: Notification after resetting
+        OlibKeyApp.ShowNotification("", "", NotificationType.Success, TimeSpan.FromSeconds(2));
     }
 }

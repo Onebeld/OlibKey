@@ -4,12 +4,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:OlibKey.Core.ViewModels"
         xmlns:core="using:OlibKey.Core"
-        xmlns:conv="using:OlibKey.Core.Converters"
         xmlns:contr="using:OlibKey.Core.Views.BasicElements"
+        xmlns:appearance="clr-namespace:OlibKey.Core.Converters.Appearance;assembly=OlibKey.Core"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="OlibKey.MainWindow"
         Title="OlibKey"
-        FontFamily="{CompiledBinding FontName, Source={x:Static core:OlibKeySettings.Instance}, Converter={x:Static conv:FontNameConverters.NameToFontFamily}}"
+        FontFamily="{CompiledBinding FontName, Source={x:Static core:OlibKeySettings.Instance}, Converter={x:Static appearance:FontNameConverters.NameToFontFamily}}"
         WindowStartupLocation="CenterScreen"
         TitleGeometry="{StaticResource OlibKeyText}"
         IconImage="{StaticResource OlibKeyIcon}"
@@ -17,16 +17,16 @@
         ShowTitleBarContentAnyway="True"
         EnableTitleBarMargin="False"
         TitleBarType="ClassicExtended"
-        MinWidth="630"
+        MinWidth="900"
         MinHeight="550"
         Width="1200"
         Height="700"
         x:DataType="vm:ApplicationViewModel">
-    <PleasantWindow.TitleBarContent>
+    <PleasantWindow.TitleContent>
         <contr:DatabaseManagementButton VerticalAlignment="Center" 
                                         HorizontalAlignment="Right"
                                         Margin="0 0 5 0"/>
-    </PleasantWindow.TitleBarContent>
+    </PleasantWindow.TitleContent>
     
     <PleasantWindow.KeyBindings>
         <KeyBinding Command="{CompiledBinding CreateDatabase}" Gesture="Ctrl+N" />
@@ -34,8 +34,7 @@
     
     
     <Panel>
-        <NavigationView Header="{x:Null}"
-                        IsOpen="False"
+        <NavigationView IsOpen="False"
                         SelectionMode="AlwaysSelected">
             <NavigationViewItem x:Name="PasswordManagerPage"
                                 IsSelected="True"
@@ -51,7 +50,6 @@
                                 Header="{DynamicResource Settings}"
                                 Icon="{StaticResource SettingsRegular}"
                                 DockPanel.Dock="Bottom" />
-            <Panel />
         </NavigationView>
     </Panel>
 </PleasantWindow>

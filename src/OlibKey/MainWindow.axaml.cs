@@ -36,6 +36,6 @@ public partial class MainWindow : PleasantWindow
     private void OnClosed(object? sender, EventArgs e)
     {
         OlibKeySettings.Save();
-        PleasantSettings.Instance.Save();
+        PleasantSettings.Save();
     }
 }

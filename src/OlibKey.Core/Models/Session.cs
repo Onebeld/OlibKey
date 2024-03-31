@@ -1,18 +1,19 @@
 ﻿using Avalonia.Threading;
 using OlibKey.Core.Enums;
+using OlibKey.Core.Structures;
 using PleasantUI;
 
-namespace OlibKey.Core.Structures;
+namespace OlibKey.Core.Models;
 
 public class Session : ViewModelBase
 {
     private StorageType _storageType = StorageType.None;
-    private Database? _database;
+    private Database.Database? _database;
     private string? _pathToFile;
 
     private string _currentMasterPassword;
 
-    public Database? Database
+    public Database.Database? Database
     {
         get => _database;
         set => RaiseAndSet(ref _database, value);
@@ -36,7 +37,7 @@ public class Session : ViewModelBase
     {
         _currentMasterPassword = databaseInfo.MasterPassword;
 
-        Database = new Database
+        Database = new Database.Database
         {
             Settings = databaseInfo.DatabaseSettings
         };

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Avalonia.Collections;
 using Avalonia.Media;
+using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
 using PleasantUI;
 
@@ -89,12 +90,15 @@ public class Data : ViewModelBase, ICloneable
 
     public virtual Task<IImage> GetIcon() => throw new NotImplementedException();
 
-    public virtual string Information => string.Empty;
+    [JsonIgnore]
+    public virtual string? Information => null;
 
-    public virtual bool IsDesired(string text)
+    public virtual bool MatchesSearchCriteria(string text)
     {
         return Name.IsDesiredString(text);
     }
+
+    public virtual bool MatchesDataType(DataType dataType) => dataType is DataType.All;
 
     public object Clone()
     {

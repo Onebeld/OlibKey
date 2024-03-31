@@ -17,7 +17,7 @@ public static class PasswordGenerator
         const string number = "0123456789";
         const string special = @"~!@#$%^&*():;[]{}<>,.?/\|";
 
-        char[] bottomLine = { '_' };
+        char[] bottomLine = ['_'];
         
         string other = OlibKeySettings.Instance.GeneratorTextOther;
 

@@ -17,7 +17,7 @@
             
             <DockPanel Margin="0 0 0 10">
                 <Border x:Name="BorderImage" DockPanel.Dock="Left"
-                        Background="{StaticResource ControlAltFillColorQuarternaryBrush}"
+                        Background="{StaticResource ControlFillColor2Brush}"
                         Margin="0 0 10 0"
                         Width="80"
                         Height="80"
@@ -68,9 +68,7 @@
                         ToolTip.Tip="{StaticResource ChoosePath}"
                         Width="{CompiledBinding $self.Bounds.Height}"
                         Command="{CompiledBinding SelectPath}">
-                    <Viewbox Width="16" Height="16">
-                        <Path Data="{StaticResource AttachRegular}" Stretch="Uniform" />
-                    </Viewbox>
+                    <PathIcon Data="{StaticResource AttachRegular}" />
                 </Button>
                 
                 <TextBox Margin="5 0" Text="{CompiledBinding Path}" />
@@ -80,7 +78,7 @@
     
     <ContentDialog.BottomPanelContent>
         <UniformGrid Margin="15 0" Rows="1">
-            <Button Theme="{StaticResource AccentButton}"
+            <Button Theme="{StaticResource AccentButtonTheme}"
                     Content="{StaticResource Ok}"
                     VerticalAlignment="Center" 
                     Margin="5"

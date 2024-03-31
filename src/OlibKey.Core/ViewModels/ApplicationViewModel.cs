@@ -2,9 +2,10 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using OlibKey.Core.Enums;
-using OlibKey.Core.Extensions;
 using OlibKey.Core.Helpers;
+using OlibKey.Core.Models;
 using OlibKey.Core.Models.Database;
+using OlibKey.Core.StaticMembers;
 using OlibKey.Core.Structures;
 using OlibKey.Core.Views.ViewerPages;
 using OlibKey.Core.Windows;
@@ -118,7 +119,7 @@ public class ApplicationViewModel : ViewModelBase
 
     public async void CreateDatabase()
     {
-        if (OlibKeyApp.Main.OpenedModalWindows.Any(modalWindow => modalWindow is CreateDatabaseWindow))
+        if (OlibKeyApp.Main.ModalWindows.Any(modalWindow => modalWindow is CreateDatabaseWindow))
             return;
         
         CreateDatabaseWindow window = new();
@@ -151,13 +152,14 @@ public class ApplicationViewModel : ViewModelBase
         SelectedData = null;
         
         // TODO: Add data
+        ViewerContent = new DataPage();
     }
 
     public void LockDatabase()
     {
         DatabaseBlocking?.Invoke(this, EventArgs.Empty);
         
-        // TODO: Locking database
+        Session.LockDatabase();
         
         DatabaseBlocked?.Invoke(this, EventArgs.Empty);
     }
@@ -192,10 +194,10 @@ public class ApplicationViewModel : ViewModelBase
 
     private void TickLockerTimer(object? sender, EventArgs e)
     {
-        foreach (PleasantModalWindow modalWindow in OlibKeyApp.Main.OpenedModalWindows)
-        {
+        foreach (PleasantModalWindow modalWindow in OlibKeyApp.Main.ModalWindows) 
             modalWindow.Close();
-        }
+        
+        LockDatabase();
     }
 
     public void GetAllTags()
@@ -229,14 +231,12 @@ public class ApplicationViewModel : ViewModelBase
         List<Data> results = new(Session.Database.Data);
 
         if (SelectedDataType is not DataType.All)
-            results = results.FindAll(data => data.Type == SelectedDataType);
+            results = results.FindAll(data => data.MatchesDataType(SelectedDataType));
 
-        if (!string.IsNullOrWhiteSpace(lowerSearchText))
-        {
-            results = results.FindAll(data => data.IsDesired(lowerSearchText)).ToList();
-        }
+        if (!string.IsNullOrWhiteSpace(lowerSearchText)) 
+            results = results.FindAll(data => data.MatchesSearchCriteria(lowerSearchText)).ToList();
 
-        List<Data> resultsFromTags = new();
+        List<Data> resultsFromTags = [];
 
         foreach (Tag tag in SelectedTags)
             resultsFromTags.AddRange(results.FindAll(data => data.Tags.Any(x1 => x1 == tag.Name)));
@@ -244,11 +244,6 @@ public class ApplicationViewModel : ViewModelBase
         results = resultsFromTags.Distinct().ToList();
 
         FoundedDataList = new AvaloniaList<Data>(results);
-    }
-
-    private bool Match(Data obj)
-    {
-        
     }
 
     public void Save()

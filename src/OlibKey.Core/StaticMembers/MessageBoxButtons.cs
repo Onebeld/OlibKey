@@ -1,6 +1,6 @@
 ﻿using PleasantUI.Core.Structures;
 
-namespace OlibKey.Core.Structures;
+namespace OlibKey.Core.StaticMembers;
 
 public static class MessageBoxButtons
 {

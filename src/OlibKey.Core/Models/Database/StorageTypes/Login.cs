@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
 using OlibKey.Core.Helpers;
 
@@ -84,17 +85,19 @@ public class Login : Data
         }
     }
     
-    public override bool IsDesired(string text)
+    public override bool MatchesSearchCriteria(string text)
     {
         if (Username.IsDesiredString(text))
             return true;
         if (Email.IsDesiredString(text))
             return true;
         
-        return base.IsDesired(text);
+        return base.MatchesSearchCriteria(text);
     }
 
-    public override string Information
+    public override bool MatchesDataType(DataType dataType) => dataType is DataType.Login;
+
+    public override string? Information
     {
         get
         {
@@ -103,7 +106,7 @@ public class Login : Data
             if (!string.IsNullOrWhiteSpace(Email))
                 return Email;
 
-            return OlibKeyApp.GetResource<string>("NoData");
+            return null;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Avalonia.Platform.Storage;
 
-namespace OlibKey.Core.Structures;
+namespace OlibKey.Core.StaticMembers;
 
 public static class FileTypes
 {

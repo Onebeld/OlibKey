@@ -1,14 +1,13 @@
 ﻿using System.Text.Json;
 using Avalonia.Collections;
 using OlibKey.Core.Helpers;
-using OlibKey.Core.Models.Database;
 using PleasantUI;
 
-namespace OlibKey.Core.Structures;
+namespace OlibKey.Core.Models.Database;
 
 public class Database : ViewModelBase
 {
-    private AvaloniaList<Data> _data = new();
+    private AvaloniaList<Data> _data = [];
     private Trashcan _trashcan = new();
     private DatabaseSettings _settings = null!;
 

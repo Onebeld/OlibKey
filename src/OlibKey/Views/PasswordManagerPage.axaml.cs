@@ -12,7 +12,7 @@ public partial class PasswordManagerPage : UserControl
         InitializeComponent();
 
         if (OlibKeyApp.ViewModel.Session?.Database is null)
-            Content = new CreateAndDecryptDatabasePage();
+            Content = new CreateDecryptDatabasePage();
         else Content = new DatabasePage();
         
         OlibKeyApp.ViewModel.DatabaseCreated += ViewModelOnDatabaseCreated;

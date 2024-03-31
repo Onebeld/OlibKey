@@ -1,25 +1,22 @@
 ﻿using System.Globalization;
-using Avalonia.Threading;
 using OlibKey.Core.Enums;
+using OlibKey.Core.Models;
 using OlibKey.Core.Models.Database;
 using OlibKey.Core.Models.Database.StorageTypes;
-using OlibKey.Core.Structures;
 using OlibKey.Core.Views.ViewerPages;
-using OtpNet;
 using PleasantUI;
 
 namespace OlibKey.Core.ViewModels.ViewerPages;
 
 public class DataPageViewModel : ViewModelBase
 {
+    private DataType _selectedType = DataType.Login;
     private DataViewerMode _viewerMode;
 
     private Session _session = null!;
-    
     private Data _data = null!;
     
-    private Totp? _totp;
-    private DispatcherTimer? _totpTimer;
+    private OlibTotp _totp;
 
     #region Properties
 
@@ -33,6 +30,18 @@ public class DataPageViewModel : ViewModelBase
     {
         get => _data;
         set => RaiseAndSet(ref _data, value);
+    }
+    
+    public int SelectedTypeIndex
+    {
+        get => (int)_selectedType;
+        set
+        {
+            _selectedType = (DataType)value;
+            RaisePropertyChanged();
+            
+            ChangeDataType(_selectedType);
+        }
     }
 
     private int DataIndex
@@ -48,11 +57,11 @@ public class DataPageViewModel : ViewModelBase
         }
     }
 
-    public bool IsView { get => _viewerMode is DataViewerMode.View; }
-    
-    public bool IsEdit { get => _viewerMode is DataViewerMode.Edit; }
-    
-    public bool IsCreate { get => _viewerMode is DataViewerMode.Create; }
+    public bool IsView => _viewerMode is DataViewerMode.View;
+
+    public bool IsEdit => _viewerMode is DataViewerMode.Edit;
+
+    public bool IsCreate => _viewerMode is DataViewerMode.Create;
 
     #endregion
 
@@ -65,7 +74,7 @@ public class DataPageViewModel : ViewModelBase
         switch (_viewerMode)
         {
             case DataViewerMode.Create:
-                Data = new Data();
+                Data = new Login();
                 break;
             case DataViewerMode.View:
                 if (selectedData is null) throw new NullReferenceException();
@@ -75,6 +84,8 @@ public class DataPageViewModel : ViewModelBase
                 if (Data is Login { IsActivatedTotp: true }) ;
                 
                 break;
+            
+            case DataViewerMode.Edit:
             default:
                 throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
         }
@@ -161,7 +172,6 @@ public class DataPageViewModel : ViewModelBase
     {
         if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null)
             throw new NullReferenceException();
-
         
         Session.RestartLockerTimer();
 
@@ -182,7 +192,6 @@ public class DataPageViewModel : ViewModelBase
             OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
 
         OlibKeyApp.ViewModel.SelectedData = null;
-
     }
 
     public async void CopyString(string str)
@@ -192,49 +201,51 @@ public class DataPageViewModel : ViewModelBase
         
     }
 
-    #region TOTP
+    private void ChangeDataType(DataType dataType)
+    {
+        switch (dataType)
+        {
+            case DataType.Login:
+                Data = (Login)Data;
+                break;
+            case DataType.BankCard:
+                Data = (BankCard)Data;
+                break;
+            case DataType.PersonalData:
+                Data = (PersonalData)Data;
+                break;
+            case DataType.Note:
+                break;
+            
+            case DataType.All:
+            default:
+                throw new ArgumentOutOfRangeException(nameof(dataType), dataType, null);
+        }
+    }
 
     public void ActivateTotp()
     {
-        if (Data is Login login && string.IsNullOrWhiteSpace(login.SecretKey))
+        if (Data is not Login login)
             return;
         
-        if (_totpTimer is not null && _totpTimer.IsEnabled)
-            _totpTimer.Stop();
+        if (string.IsNullOrWhiteSpace(login.SecretKey)) 
+            return;
 
         try
         {
-            _totp = new Totp(Base32Encoding.ToBytes(login.SecretKey.Replace(" ", "")),
-                step: 30,
-                timeCorrection: new TimeCorrection(DateTime.UtcNow));
+            _totp = new OlibTotp(login.SecretKey);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
         }
-        
-        
     }
 
     public void DeactivateTotp()
     {
-        if (_totpTimer is null || _totp is null || Data.Login is null)
+        if (Data is not Login)
             return;
-        
-        _totpTimer.Stop();
-        _totp = null;
-        
-        
-    }
 
-    public void OnTickTotpTimer(object? sender, EventArgs e)
-    {
-        if (_totp is null)
-            return;
-        
-        
+        _totp.Dispose();
     }
-
-    #endregion
 }

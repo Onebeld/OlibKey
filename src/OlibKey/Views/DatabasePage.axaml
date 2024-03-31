@@ -6,7 +6,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Views.DatabasePage">
     <Grid ColumnDefinitions="0.9*,5,*,5,1.5*" Margin="10">
-        <contr:ListOfItems Grid.Column="2" />
+        <contr:DataList Grid.Column="2" />
         <contr:Viewer Grid.Column="4" />
     </Grid>
 </UserControl>

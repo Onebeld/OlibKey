@@ -1,6 +1,6 @@
 ﻿using PleasantUI.Core.Enums;
 
-namespace OlibKey.Core.Structures;
+namespace OlibKey.Core.StaticMembers;
 
 public static class Dictionaries
 {

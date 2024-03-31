@@ -24,7 +24,7 @@
                            FontSize="12"
                            IsVisible="{CompiledBinding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                            TextTrimming="CharacterEllipsis"
-                           Text="{CompiledBinding Information}">
+                           Text="{CompiledBinding Information, TargetNullValue={StaticResource NoData}}">
                 </TextBlock>
                 
                 <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}"

@@ -2,7 +2,7 @@
 using Avalonia;
 using Avalonia.Data.Converters;
 
-namespace OlibKey.Core.Converters;
+namespace OlibKey.Core.Converters.Appearance;
 
 public class UIntToHexConverter : IValueConverter
 {

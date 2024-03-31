@@ -2,12 +2,83 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewerPages="clr-namespace:OlibKey.Core.ViewModels.ViewerPages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="OlibKey.Core.Views.ViewerPages.DataPage">
-    <SmoothScrollViewer>
-        <StackPanel Margin="20 15" Spacing="5">
+             x:Class="OlibKey.Core.Views.ViewerPages.DataPage"
+             x:DataType="viewerPages:DataPageViewModel">
+    <Grid RowDefinitions="*,60">
+        <SmoothScrollViewer>
+            <StackPanel Margin="20 15" Spacing="5">
+                <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
+                           Text="{StaticResource AddElement}"
+                           IsVisible="{CompiledBinding IsCreate}" />
+                <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
+                           Text="{StaticResource ItemInformation}"
+                           IsVisible="{CompiledBinding IsEdit}" />
+                <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
+                           Text="{StaticResource ChangeElement}"
+                           IsVisible="{CompiledBinding IsEdit}"/>
+                
+                <DockPanel>
+                    <Border DockPanel.Dock="Left"
+                            Background="{StaticResource BackgroundColor2Brush}"
+                            Width="60"
+                            Height="60"
+                            CornerRadius="99"
+                            ClipToBounds="True">
+                        <Image Source="{CompiledBinding Data.Icon}" />
+                    </Border>
+                    
+                    <TextBox Text="{CompiledBinding Data.Name}"
+                             Margin="5 0 0 0"
+                             Watermark="{StaticResource Name}"
+                             VerticalAlignment="Center"
+                             UseFloatingWatermark="True" />
+                </DockPanel>
+                
+                <StackPanel Spacing="5" IsVisible="{CompiledBinding !IsView}">
+                    <TextBlock Text="{StaticResource Type}" FontWeight="SemiBold" />
+                    
+                    <ComboBox>
+                        <ComboBoxItem Content="{StaticResource Login}" />
+                        <ComboBoxItem Content="{StaticResource BankCard}" />
+                        <ComboBoxItem Content="{StaticResource PersonalData}" />
+                        <ComboBoxItem Content="{StaticResource Notes}" />
+                    </ComboBox>
+                </StackPanel>
+                
+                
             
-            
-        </StackPanel>
-    </SmoothScrollViewer>
+            </StackPanel>
+        </SmoothScrollViewer>
+        
+        <Border Grid.Row="1"
+                Background="{StaticResource BackgroundColor1Brush}"
+                BorderBrush="{StaticResource ControlBorderColorBrush}"
+                BorderThickness="0 1 0 0"
+                CornerRadius="0 0 5 5">
+            <Panel Margin="15">
+                <StackPanel Orientation="Horizontal"
+                            Spacing="10"
+                            HorizontalAlignment="Left">
+                    <Button Content="{StaticResource Change}"
+                            IsVisible="{CompiledBinding IsView}" />
+                    <Button Content="{StaticResource Save}"
+                            IsVisible="{CompiledBinding !IsView}" />
+                    <Button Content="{StaticResource Back}"
+                            IsVisible="{CompiledBinding !IsEdit}" />
+                    <Button Content="{StaticResource Cancel}"
+                            IsVisible="{CompiledBinding IsEdit}" />
+                </StackPanel>
+                
+                <Button Theme="{StaticResource DangerButtonTheme}"
+                        HorizontalAlignment="Right"
+                        Padding="6 0"
+                        ToolTip.Tip="{StaticResource Delete}"
+                        IsVisible="{CompiledBinding IsEdit}">
+                    <PathIcon Data="{StaticResource DeleteRegular}" />
+                </Button>
+            </Panel>
+        </Border>
+    </Grid>
 </UserControl>

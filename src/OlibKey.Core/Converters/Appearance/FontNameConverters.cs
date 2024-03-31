@@ -1,7 +1,7 @@
 ﻿using Avalonia.Data.Converters;
 using Avalonia.Media;
 
-namespace OlibKey.Core.Converters;
+namespace OlibKey.Core.Converters.Appearance;
 
 public static class FontNameConverters
 {

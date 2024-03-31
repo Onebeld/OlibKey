@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OlibKey.Core.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="OlibKey.Core.Views.MainWindowPages.CreateAndDecryptDatabasePage"
+             x:Class="OlibKey.Core.Views.MainWindowPages.CreateDecryptDatabasePage"
              x:DataType="vm:ApplicationViewModel">
     <SmoothScrollViewer HorizontalScrollBarVisibility="Disabled">
         <Grid>
@@ -12,15 +12,14 @@
                 <StackPanel Orientation="Horizontal" Spacing="10">
                     <Image Source="{StaticResource OlibKeyIcon}" Height="100" />
                 
-                    <Viewbox Width="240" VerticalAlignment="Center">
-                        <Path Data="{StaticResource OlibKeyText}"
-                              Fill="{StaticResource TextFillColorPrimaryBrush}"
-                              Stretch="Uniform" />
-                    </Viewbox>
+                    <PathIcon Width="240"
+                              Foreground="{StaticResource TextFillColor1Brush}"
+                              Data="{StaticResource OlibKeyText}"
+                              Height="NaN" />
                 </StackPanel>
                 
                 <TextBlock Text="{StaticResource LetsCreateNewStorage}" Margin="0 15 0 5" TextAlignment="Center" />
-                <Button Theme="{StaticResource AccentButton}"
+                <Button Theme="{StaticResource AccentButtonTheme}"
                         Content="{StaticResource CreateStorage}"
                         Command="{CompiledBinding CreateDatabase}"
                         Margin="15 0"/>
@@ -29,16 +28,13 @@
             
             <StackPanel VerticalAlignment="Bottom" Margin="25 0 25 70" HorizontalAlignment="Center" Spacing="5">
                 <StackPanel Orientation="Horizontal" Spacing="3">
-                    <Viewbox Width="16" Height="16">
-                        <Path Data="{StaticResource LampRegular}"
-                              Fill="{StaticResource TextFillColorTertiaryBrush}"
-                              Stretch="Uniform" />
-                    </Viewbox>
                     
-                    <TextBlock Text="{StaticResource Tip}" FontWeight="Bold" Foreground="{StaticResource TextFillColorTertiaryBrush}" />
+                    <PathIcon Data="{StaticResource LampRegular}" Foreground="{StaticResource TextFillColor3Brush}" />
+                    
+                    <TextBlock Text="{StaticResource Tip}" FontWeight="Bold" Foreground="{StaticResource TextFillColor3Brush}" />
                 </StackPanel>
                 
-                <TextBlock x:Name="TextBlockTip" TextWrapping="Wrap" TextAlignment="Center" Foreground="{StaticResource TextFillColorTertiaryBrush}" />
+                <TextBlock x:Name="TextBlockTip" TextWrapping="Wrap" TextAlignment="Center" Foreground="{StaticResource TextFillColor3Brush}" />
             </StackPanel>
         </Grid>
     </SmoothScrollViewer>

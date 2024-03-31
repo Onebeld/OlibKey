@@ -2,10 +2,10 @@
 
 public enum DataType
 {
-    All,
+    All = -1,
     
-    Login,
-    BankCard,
-    PersonalData,
-    Notes
+    Login = 0,
+    BankCard = 1,
+    PersonalData = 2,
+    Note = 3
 }

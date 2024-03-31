@@ -1,12 +1,11 @@
 ﻿using Avalonia.Collections;
-using OlibKey.Core.Models.Database;
 using PleasantUI;
 
-namespace OlibKey.Core.Structures;
+namespace OlibKey.Core.Models.Database;
 
 public class Trashcan : ViewModelBase
 {
-    private AvaloniaList<Data> _data = new();
+    private AvaloniaList<Data> _data = [];
 
     public AvaloniaList<Data> Data
     {

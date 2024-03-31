@@ -5,16 +5,22 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.ViewerPages.OlibKeyPage">
     <Panel>
-        <Viewbox Margin="100" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Path Data="{StaticResource OlibKeyIconRegular}"
-                  Fill="{StaticResource TextFillColorSecondaryBrush}"
-                  Stretch="Uniform" />
-        </Viewbox>
+        <PathIcon Margin="100"
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  Data="{StaticResource OlibKeyIconRegular}"
+                  Foreground="{StaticResource TextFillColor2Brush}"
+                  Width="NaN"
+                  Height="NaN" />
         
-        <Viewbox MaxWidth="150" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20">
-            <Path Data="{StaticResource OlibKeyText}"
-                  Fill="{StaticResource TextFillColorSecondaryBrush}"
-                  Stretch="Uniform" />
-        </Viewbox>
+        
+        <PathIcon Margin="20"
+                  MaxWidth="150"
+                  VerticalAlignment="Bottom"
+                  HorizontalAlignment="Center"
+                  Data="{StaticResource OlibKeyText}"
+                  Foreground="{StaticResource TextFillColor2Brush}"
+                  Width="NaN"
+                  Height="NaN" />
     </Panel>
 </UserControl>

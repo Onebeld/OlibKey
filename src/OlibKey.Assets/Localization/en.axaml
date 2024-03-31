@@ -36,10 +36,15 @@
     <s:String x:Key="UseTrashcan">Use trashcan</s:String>
     <s:String x:Key="NoElements">No elements</s:String>
     
+    <s:String x:Key="Login">Login</s:String>
+    <s:String x:Key="BankCard">Bank card</s:String>
+    <s:String x:Key="PersonalData">Personal data</s:String>
+    <s:String x:Key="Notes">Notes</s:String>
+    
     <s:String x:Key="ImageFiles">Image files</s:String>
     <s:String x:Key="OlibFiles">Olib files</s:String>
     
-    <!--PasswordGenerator-->
+    <!--Password Generator-->
     <s:String x:Key="PasswordGenerator">Password generator</s:String>
     <s:String x:Key="PasswordC">Password</s:String>
     <s:String x:Key="OtherSpecialCharacters">Other special characters</s:String>
@@ -76,6 +81,15 @@
     <s:String x:Key="PasswordManagerTipFunny5">Don't trust your password manager? Do you trust the notepad on your computer?</s:String>
     <s:String x:Key="PasswordManagerTipFunny6">If you go to a company website that tells you how to create a strong password, you are more likely to be advised to use their password manager.</s:String>
     <s:String x:Key="PasswordManagerTipFunny7">Since Adam was a boy people used the password as a way to pass on some hidden information from outsiders.</s:String>
+    
+    <!--Data Page-->
+    <s:String x:Key="Save">Save</s:String>
+    <s:String x:Key="AddElement">Add element</s:String>
+    <s:String x:Key="ItemInformation">Item information</s:String>
+    <s:String x:Key="ChangeElement">Change element</s:String>
+    
+    <s:String x:Key="Type">Type</s:String>
+    
     
     <!--Settings-->
     <s:String x:Key="Settings">Settings</s:String>

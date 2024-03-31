@@ -20,8 +20,8 @@ public partial class AboutPage : UserControl
         Version appVersion = Assembly.GetExecutingAssembly().GetName().Version!;
         AppVersion.Text = $"{appVersion.Major}.{appVersion.Minor}.{appVersion.Build}";
         
-        Version pleasantUIVersion = typeof(PleasantTheme).Assembly.GetName().Version!;
-        PleasantUIVersion.Text = $"{pleasantUIVersion.Major}.{pleasantUIVersion.Minor}.{pleasantUIVersion.Build}";
+        Version pleasantUiVersion = typeof(PleasantTheme).Assembly.GetName().Version!;
+        PleasantUIVersion.Text = $"{pleasantUiVersion.Major}.{pleasantUiVersion.Minor}.{pleasantUiVersion.Build}";
         
         RunDotNet.Text = $"{RuntimeInformation.FrameworkDescription} {RuntimeInformation.ProcessArchitecture}";
         RunAuthor.Text = $"©2020-{DateTime.Now.Year} Dmitry Zhutkov (Onebeld)";

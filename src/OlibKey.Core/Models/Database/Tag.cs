@@ -1,15 +1,15 @@
 ﻿using PleasantUI;
 
-namespace OlibKey.Core.Structures;
+namespace OlibKey.Core.Models.Database;
 
-public class Tag(string _name) : ViewModelBase
+public class Tag(string name) : ViewModelBase
 {
     private int _count;
 
     public string Name
     {
-        get => _name;
-        set => RaiseAndSet(ref _name, value);
+        get => name;
+        set => RaiseAndSet(ref name, value);
     }
 
     public int Count

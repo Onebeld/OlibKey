@@ -5,9 +5,10 @@
              xmlns:vm="using:OlibKey.Core.ViewModels"
              xmlns:helpers="using:OlibKey.Core.Helpers"
              xmlns:struct="using:OlibKey.Core.Structures"
-             xmlns:conv="using:OlibKey.Core.Converters"
              xmlns:enums="clr-namespace:PleasantUI.Core.Enums;assembly=PleasantUI"
              xmlns:markupExtensions="clr-namespace:OlibKey.Core.MarkupExtensions"
+             xmlns:appearance="clr-namespace:OlibKey.Core.Converters.Appearance"
+             xmlns:models="clr-namespace:OlibKey.Core.Models"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.MainWindowPages.SettingsPage"
              x:DataType="vm:SettingsViewModel">
@@ -27,7 +28,7 @@
                               ItemsSource="{CompiledBinding Source={x:Static helpers:Localization.Languages}}"
                               SelectedItem="{CompiledBinding SelectedLanguage}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="struct:Language">
+                            <DataTemplate x:DataType="models:Language">
                                 <TextBlock Text="{CompiledBinding Name}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
@@ -44,6 +45,12 @@
                     <ComboBox MinWidth="150"
                               ItemsSource="{CompiledBinding FontFamilies}"
                               SelectedItem="{CompiledBinding SelectedFontFamily}">
+                        <ComboBox.Styles>
+                            <Style Selector="ComboBoxItem">
+                                <Setter Property="Height" Value="50" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                            </Style>
+                        </ComboBox.Styles>
                         <ComboBox.ItemTemplate>
                             <DataTemplate x:DataType="FontFamily">
                                 <TextBlock Text="{CompiledBinding Name}" FontFamily="{CompiledBinding}" />
@@ -73,11 +80,11 @@
             
             <OptionsDisplayItem x:Name="OptionsDisplayItemEnableBlur"
                                 Header="{StaticResource EnableBlur}"
-                                Icon="{StaticResource WindowInprivateRegular}"
+                                Icon="{StaticResource BlurRegular}"
                                 Expands="True">
                 <OptionsDisplayItem.ActionButton>
                     <ToggleSwitch Classes="RightToggle"
-                                  IsChecked="{CompiledBinding WindowSettings.OpacityLevel, Source={x:Static PleasantSettings.Instance}}"/>
+                                  IsChecked="{CompiledBinding WindowSettings.EnableBlur, Source={x:Static PleasantSettings.Instance}}"/>
                 </OptionsDisplayItem.ActionButton>
                 <OptionsDisplayItem.Content>
                     <DockPanel Margin="48 0 33 0">
@@ -116,7 +123,7 @@
                                 Width="40"
                                 Height="25"
                                 CornerRadius="4"
-                                ToolTip.Tip="{CompiledBinding NumericalAccentColor, Source={x:Static PleasantSettings.Instance}, Converter={x:Static conv:UIntToHexConverter.Instance}}">
+                                ToolTip.Tip="{CompiledBinding NumericalAccentColor, Source={x:Static PleasantSettings.Instance}, Converter={x:Static appearance:UIntToHexConverter.Instance}}">
                             <Border CornerRadius="4" Background="{CompiledBinding NumericalAccentColor, Source={x:Static PleasantSettings.Instance}, Converter={x:Static ColorConverters.UIntToBrush}}" />
                         </Border>
                         
@@ -130,11 +137,7 @@
                                               Command="{CompiledBinding CopyAccentColor}"
                                               CommandParameter="{CompiledBinding }">
                                         <MenuItem.Icon>
-                                            <Viewbox Width="16" Height="16">
-                                                <Path Data="{StaticResource CopyRegular}"
-                                                      Fill="{StaticResource TextFillColorPrimaryBrush}"
-                                                      Stretch="Uniform" />
-                                            </Viewbox>
+                                            <PathIcon Width="16" Height="16" Data="{StaticResource CopyRegular}" />
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     <MenuItem Header="{StaticResource Paste}"
@@ -142,11 +145,7 @@
                                               Command="{CompiledBinding PasteAccentColor}"
                                               CommandParameter="{CompiledBinding}">
                                         <MenuItem.Icon>
-                                            <Viewbox Width="16" Height="16">
-                                                <Path Data="{StaticResource ClipboardPasteRegular}"
-                                                      Fill="{StaticResource TextFillColorPrimaryBrush}"
-                                                      Stretch="Uniform" />
-                                            </Viewbox>
+                                            <PathIcon Width="16" Height="16" Data="{StaticResource ClipboardPasteRegular}" />
                                         </MenuItem.Icon>
                                     </MenuItem>
                                     
@@ -156,19 +155,13 @@
                                               IsEnabled="{CompiledBinding !UseAccentColor}"
                                               Command="{CompiledBinding ChangeAccentColor}">
                                         <MenuItem.Icon>
-                                            <Viewbox Width="16" Height="16">
-                                                <Path Data="{StaticResource EditRegular}"
-                                                      Fill="{StaticResource TextFillColorPrimaryBrush}"
-                                                      Stretch="Uniform" />
-                                            </Viewbox>
+                                            <PathIcon Width="16" Height="16" Data="{StaticResource EditRegular}" />
                                         </MenuItem.Icon>
                                     </MenuItem>
                                 </MenuFlyout>
                             </Button.Flyout>
                             
-                            <Viewbox Width="16" Height="16">
-                                <Path Data="{StaticResource MoreRegular}" />
-                            </Viewbox>
+                            <PathIcon Data="{StaticResource MoreRegular}" />
                         </Button>
                     </StackPanel>
                 </OptionsDisplayItem.ActionButton>

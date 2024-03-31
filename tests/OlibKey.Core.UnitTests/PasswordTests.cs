@@ -11,7 +11,7 @@ public class PasswordTests
         
         Array.Sort(badPasswords);
         
-        List<string> duplicatedPasswords = new();
+        List<string> duplicatedPasswords = [];
 
         for (int index = 0; index < badPasswords.Length; index++)
         {

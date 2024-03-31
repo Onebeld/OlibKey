@@ -1,4 +1,4 @@
-﻿namespace OlibKey.Core.Structures;
+﻿namespace OlibKey.Core.Models;
 
 public readonly struct Language(string name, string key, params string[] additionalKeys)
 {

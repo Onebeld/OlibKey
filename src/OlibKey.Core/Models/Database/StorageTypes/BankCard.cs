@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
 
 namespace OlibKey.Core.Models.Database.StorageTypes;
@@ -41,22 +42,24 @@ public class BankCard : Data
         return (DrawingImage)Application.Current!.FindResource("CardIcon")!;
     }
 
-    public override bool IsDesired(string text)
+    public override bool MatchesSearchCriteria(string text)
     {
         if (CardNumber.IsDesiredString(text))
             return true;
         
-        return base.IsDesired(text);
+        return base.MatchesSearchCriteria(text);
     }
 
-    public override string Information
+    public override bool MatchesDataType(DataType dataType) => dataType is DataType.BankCard;
+
+    public override string? Information
     {
         get
         {
             if (!string.IsNullOrWhiteSpace(CardNumber))
                 return CardNumber;
         
-            return OlibKeyApp.GetResource<string>("NoData");
+            return null;
         }
     }
 }

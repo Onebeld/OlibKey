@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
+using OlibKey.Core.Models.Database;
 using OlibKey.Core.Structures;
 
 namespace OlibKey.Core;

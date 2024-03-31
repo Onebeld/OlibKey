@@ -21,7 +21,7 @@
                                 Width="80"
                                 Height="80"
                                 ClipToBounds="True"
-                                Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
+                                Background="{StaticResource ControlFillColor2Brush}">
                             <Image Source="{CompiledBinding Session.Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
                         </Border>
                         
@@ -36,18 +36,15 @@
                             <Style Selector="Button">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                             </Style>
-                            <Style Selector="Button > DockPanel > Viewbox">
+                            <Style Selector="Button > DockPanel > PathIcon">
                                 <Setter Property="Margin" Value="0 0 10 0" />
                                 <Setter Property="Width" Value="16" />
                                 <Setter Property="Height" Value="16" />
                                 <Setter Property="DockPanel.Dock" Value="Left" />
-                            </Style>
-                            <Style Selector="Button > DockPanel > Viewbox > Path">
-                                <Setter Property="Stretch" Value="Uniform" />
-                                <Setter Property="Fill" Value="{StaticResource TextFillColorPrimaryBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource TextFillColor1Brush}" />
                             </Style>
                             <Style Selector="Button > DockPanel > TextBlock.Hotkey">
-                                <Setter Property="Foreground" Value="{StaticResource TextFillColorTertiaryBrush}" />
+                                <Setter Property="Foreground" Value="{StaticResource TextFillColor3Brush}" />
                                 <Setter Property="FontSize" Value="12" />
                                 <Setter Property="TextAlignment" Value="Right" />
                             </Style>
@@ -55,9 +52,7 @@
                         
                         <Button Command="{CompiledBinding CreateDatabase}">
                             <DockPanel>
-                                <Viewbox>
-                                    <Path Data="{StaticResource AddRegular}" />
-                                </Viewbox>
+                                <PathIcon Data="{StaticResource AddRegular}" />
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource CreateStorage}" />
                                 
@@ -66,9 +61,7 @@
                         </Button>
                         <Button>
                             <DockPanel>
-                                <Viewbox>
-                                    <Path Data="{StaticResource OpenRegular}" />
-                                </Viewbox>
+                                <PathIcon Data="{StaticResource OpenRegular}" />
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource LoadStorage}" />
                                 
@@ -77,9 +70,7 @@
                         </Button>
                         <Button>
                             <DockPanel>
-                                <Viewbox>
-                                    <Path Data="{StaticResource SaveRegular}" />
-                                </Viewbox>
+                                <PathIcon Data="{StaticResource SaveRegular}" />
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource SaveStorage}" />
                                 
@@ -91,18 +82,14 @@
                         
                         <Button>
                             <DockPanel>
-                                <Viewbox>
-                                    <Path Data="{StaticResource ShieldRegular}" />
-                                </Viewbox>
+                                <PathIcon Data="{StaticResource ShieldRegular}" />
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource PasswordChecker}" />
                             </DockPanel>
                         </Button>
                         <Button>
                             <DockPanel>
-                                <Viewbox>
-                                    <Path Data="{StaticResource SettingsRegular}" />
-                                </Viewbox>
+                                <PathIcon Data="{StaticResource SettingsRegular}" />
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource StorageSettings}" />
                             </DockPanel>
@@ -112,9 +99,7 @@
                         
                         <Button IsVisible="{CompiledBinding Session.Database.Settings.UseTrashcan}">
                             <DockPanel>
-                                <Viewbox>
-                                    <Path Data="{StaticResource DeleteRegular}" />
-                                </Viewbox>
+                                <PathIcon Data="{StaticResource DeleteRegular}" />
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource Trashcan}" />
                             </DockPanel>
@@ -129,12 +114,12 @@
                     Height="26"
                     CornerRadius="99"
                     ClipToBounds="True"
-                    Background="{StaticResource ControlAltFillColorQuarternaryBrush}">
+                    Background="{StaticResource ControlFillColor3Brush}">
                 <Image Source="{CompiledBinding Session.Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
             </Border>
             
             <TextBlock FontSize="12"
-                       Foreground="{StaticResource TextFillColorSecondaryBrush}"
+                       Foreground="{StaticResource TextFillColor2Brush}"
                        Text="{CompiledBinding Session.Database.Settings.Name}"
                        Margin="5 0 0 0" VerticalAlignment="Center" />
         </StackPanel>

@@ -14,14 +14,17 @@
                 <Grid HorizontalAlignment="Left" ColumnDefinitions="Auto,Auto">
                     <Image Grid.Column="0" Source="{StaticResource OlibKeyIcon}" Width="70" />
                     <StackPanel Grid.Column="1" Width="150" Margin="20 0 0 0" VerticalAlignment="Center">
-                        <Path Stretch="Uniform"
-                              Data="{StaticResource OlibKeyText}"
-                              Fill="{StaticResource TextFillColorPrimaryBrush}" />
-                        <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}" FontSize="12">
+                        <PathIcon Data="{StaticResource OlibKeyText}"
+                                  Foreground="{StaticResource TextFillColor1Brush}"
+                                  Height="NaN"
+                                  Width="NaN" />
+                        
+                        <TextBlock Foreground="{StaticResource TextFillColor3Brush}" FontSize="12">
                             <Run Text="{StaticResource License}" /><Run Text=":" />
                             &#8203;<Run Text="GPL-3.0" />
                         </TextBlock>
-                        <TextBlock Margin="0 -2 0 0" Foreground="{StaticResource TextFillColorTertiaryBrush}"
+                        
+                        <TextBlock Margin="0 -2 0 0" Foreground="{StaticResource TextFillColor3Brush}"
                                    FontSize="12">
                             <Run Text="{StaticResource Version}" /><Run Text=":" />
                             &#8203;<Run x:Name="AppVersion" />
@@ -32,9 +35,11 @@
                 <StackPanel HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Width="200">
-                    <Path Fill="{StaticResource TextFillColorPrimaryBrush}"
-                          Data="{StaticResource OnebeldIcon}"
-                          Stretch="Uniform" />
+                    <PathIcon Data="{StaticResource OnebeldIcon}"
+                              Foreground="{StaticResource TextFillColor1Brush}"
+                              Width="NaN" 
+                              Height="NaN" />
+                    
                     <TextBlock Text="Dmitry Zhutkov"
                                FontSize="12"
                                TextAlignment="Right"
@@ -56,11 +61,8 @@
                                                    TextWrapping="Wrap"
                                                    Margin="0 5 0 0"
                                                    FontSize="12" />
-                                        <Button x:Name="MailButton"
-                                                Padding="40 14">
-                                            <Viewbox Width="16" Height="16">
-                                                <Path Data="{StaticResource MailRegular}" />
-                                            </Viewbox>
+                                        <Button x:Name="MailButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource MailRegular}" />
                                         </Button>
                                     </DockPanel>
                                     <DockPanel Margin="5">
@@ -70,11 +72,8 @@
                                                    TextWrapping="Wrap"
                                                    Margin="0 5 0 0"
                                                    FontSize="12" />
-                                        <Button x:Name="DiscordButton"
-                                                Padding="40 14">
-                                            <Viewbox Width="16" Height="16">
-                                                <Path Data="{StaticResource DiscordRegular}" />
-                                            </Viewbox>
+                                        <Button x:Name="DiscordButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource DiscordRegular}" />
                                         </Button>
                                     </DockPanel>
                                     <DockPanel x:Name="SocialNetwork" Margin="5">
@@ -84,11 +83,8 @@
                                                    TextWrapping="Wrap"
                                                    Margin="0 5 0 0"
                                                    FontSize="12" />
-                                        <Button x:Name="SocialNetworkButton"
-                                                Padding="40 14">
-                                            <Viewbox Width="16" Height="16">
-                                                <Path Data="{StaticResource PeopleRegular}" />
-                                            </Viewbox>
+                                        <Button x:Name="SocialNetworkButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource PeopleRegular}" />
                                         </Button>
                                     </DockPanel>
                                     <DockPanel Margin="5">
@@ -98,12 +94,8 @@
                                                    TextWrapping="Wrap"
                                                    Margin="0 5 0 0"
                                                    FontSize="12" />
-                                        <Button x:Name="TelegramButton"
-                                                Padding="40 14"
-                                                Classes="EnabledIconAnimation">
-                                            <Viewbox Width="16" Height="16">
-                                                <Path Data="{StaticResource TelegramIcon}" />
-                                            </Viewbox>
+                                        <Button x:Name="TelegramButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource TelegramIcon}" />
                                         </Button>
                                     </DockPanel>
                                 </UniformGrid>
@@ -127,7 +119,7 @@
                             
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Right"
-                                       Foreground="{StaticResource TextFillColorTertiaryBrush}">
+                                       Foreground="{StaticResource TextFillColor3Brush}">
                                 <Run Text="{StaticResource Version}" /><Run Text=":" />
                                 &#8203;<Run Text="11.0.4" />
                             </TextBlock>
@@ -142,13 +134,13 @@
                             <StackPanel>
                                 <TextBlock VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           Foreground="{StaticResource TextFillColorTertiaryBrush}">
+                                           Foreground="{StaticResource TextFillColor3Brush}">
                                     <Run Text="{StaticResource Version}" /><Run Text=":" />
                                     &#8203;<Run x:Name="PleasantUIVersion" />
                                 </TextBlock>
                                 <TextBlock VerticalAlignment="Center"
                                            HorizontalAlignment="Right"
-                                           Foreground="{StaticResource TextFillColorTertiaryBrush}">
+                                           Foreground="{StaticResource TextFillColor3Brush}">
                                     <Run Text="{StaticResource Author}" /><Run Text=":" />
                                     &#8203;<Run Text="Onebeld" />
                                 </TextBlock>
@@ -159,7 +151,7 @@
             </OptionsDisplayItem>
             
             <OptionsDisplayItem Header="{StaticResource Links}"
-                                Icon="{StaticResource OpenRegular}"
+                                Icon="{StaticResource LinkRegular}"
                                 Expands="True"
                                 IsExpanded="True">
                 <OptionsDisplayItem.Content>
@@ -186,11 +178,11 @@
                 </OptionsDisplayItem.Content>
             </OptionsDisplayItem>
             
-            <Border Background="{StaticResource CardBackgroundFillColorDefaultBrush}"
+            <Border Background="{StaticResource ControlFillColor1Brush}"
                     BorderThickness="1"
-                    BorderBrush="{StaticResource ControlStrokeColorSecondaryBrush}"
+                    BorderBrush="{StaticResource ControlBorderColorBrush}"
                     Padding="12"
-                    CornerRadius="4">
+                    CornerRadius="{StaticResource ControlCornerRadius}">
                 <StackPanel>
                     <TextBlock Text="{StaticResource Description}" FontWeight="Bold" Margin="0 0 0 10" />
                     <TextBlock Text="{StaticResource OlibKeyDescription}" TextWrapping="Wrap" />

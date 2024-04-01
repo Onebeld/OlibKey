@@ -14,6 +14,9 @@ public static class StringExtensions
     {
         if (str is null) return false;
         
+        if (str.Contains(searchText))
+            return true;
+        
         double percent = StringFinder.CalculateSimilarity(str, searchText);
 
         return percent > OlibKeySettings.Instance.SearchSimilarity;

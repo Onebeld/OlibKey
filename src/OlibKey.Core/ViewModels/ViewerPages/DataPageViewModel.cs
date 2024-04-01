@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Runtime.CompilerServices;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Models;
 using OlibKey.Core.Models.Database;
@@ -15,6 +16,8 @@ public class DataPageViewModel : ViewModelBase
 
     private Session _session = null!;
     private Data _data = null!;
+
+    private string? _tagName;
     
     private OlibTotp _totp;
 
@@ -30,6 +33,12 @@ public class DataPageViewModel : ViewModelBase
     {
         get => _data;
         set => RaiseAndSet(ref _data, value);
+    }
+
+    public string? TagName
+    {
+        get => _tagName;
+        set => RaiseAndSet(ref _tagName, value);
     }
     
     public int SelectedTypeIndex
@@ -81,6 +90,17 @@ public class DataPageViewModel : ViewModelBase
                 
                 Data = (Data)selectedData.Clone();
 
+                _selectedType = Data switch
+                {
+                    Login => DataType.Login,
+                    BankCard => DataType.BankCard,
+                    PersonalData => DataType.PersonalData,
+                    Note => DataType.Note,
+                    _ => _selectedType
+                };
+                
+                RaisePropertyChanged(nameof(SelectedTypeIndex));
+
                 if (Data is Login { IsActivatedTotp: true }) ;
                 
                 break;
@@ -110,6 +130,8 @@ public class DataPageViewModel : ViewModelBase
                 OlibKeyApp.ViewModel.Session.Database.Data.Add(Data);
 
                 OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
+                
+                OlibKeyApp.ViewModel.DoSearch();
                 break;
             case DataViewerMode.Edit:
                 int index = DataIndex;
@@ -126,13 +148,15 @@ public class DataPageViewModel : ViewModelBase
                 Data.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
                 
                 OlibKeyApp.ViewModel.Session.Database.Data[index] = Data;
+                
+                OlibKeyApp.ViewModel.DoSearch();
+                OlibKeyApp.ViewModel.SelectedData = Data;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
         }
 
         OlibKeyApp.ViewModel.IsDirty = true;
-        OlibKeyApp.ViewModel.DoSearch();
     }
 
     public void ChangeData()
@@ -168,6 +192,20 @@ public class DataPageViewModel : ViewModelBase
         OlibKeyApp.ViewModel.DoSearch();
     }
 
+    public void AddTag()
+    {
+        if (string.IsNullOrWhiteSpace(TagName)) return;
+        
+        Data.Tags.Add(TagName);
+
+        TagName = null;
+    }
+
+    public void DeleteTag(string tag)
+    {
+        Data.Tags.Remove(tag);
+    }
+
     public void Cancel()
     {
         if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null)
@@ -198,7 +236,7 @@ public class DataPageViewModel : ViewModelBase
     {
         Session.RestartLockerTimer();
         
-        
+        // TODO: Copy to clipboard
     }
 
     private void ChangeDataType(DataType dataType)
@@ -206,15 +244,16 @@ public class DataPageViewModel : ViewModelBase
         switch (dataType)
         {
             case DataType.Login:
-                Data = (Login)Data;
+                Data = Data.ConvertData<Login>();
                 break;
             case DataType.BankCard:
-                Data = (BankCard)Data;
+                Data = Data.ConvertData<BankCard>();
                 break;
             case DataType.PersonalData:
-                Data = (PersonalData)Data;
+                Data = Data.ConvertData<PersonalData>();
                 break;
             case DataType.Note:
+                Data = Data.ConvertData<Note>();
                 break;
             
             case DataType.All:

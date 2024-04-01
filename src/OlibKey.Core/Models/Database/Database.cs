@@ -1,4 +1,7 @@
-﻿using System.Text.Json;
+﻿using System.Collections;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using Avalonia.Collections;
 using OlibKey.Core.Helpers;
 using PleasantUI;
@@ -83,11 +86,11 @@ public class Database : ViewModelBase
 
     public string ToJson()
     {
-        return JsonSerializer.Serialize(this, DatabaseGenerationContext.Default.Database);
+        return JsonSerializer.Serialize(this, GenerationContexts.DatabaseGenerationContext.Default.Database);
     }
 
     public static Database FromJson(string json)
     {
-        return JsonSerializer.Deserialize(json, DatabaseGenerationContext.Default.Database) ?? throw new NullReferenceException();
+        return JsonSerializer.Deserialize(json, GenerationContexts.DatabaseGenerationContext.Default.Database) ?? throw new NullReferenceException();
     }
 }

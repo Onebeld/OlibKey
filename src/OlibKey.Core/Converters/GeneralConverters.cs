@@ -18,6 +18,8 @@ public static class GeneralConverters
     public static readonly IValueConverter ObjectToString =
         new FuncValueConverter<object, string?>(value => value?.ToString());
     
+    
+    
     public static readonly IValueConverter ImageDataToImageConverter =
         new FuncValueConverter<string?, Bitmap?>(imageData =>
         {

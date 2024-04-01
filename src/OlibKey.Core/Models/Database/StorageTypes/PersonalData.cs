@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Text.Json.Serialization;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using OlibKey.Core.Enums;
@@ -25,49 +26,49 @@ public class PersonalData : Data
     public string? Fullname
     {
         get => _fullname;
-        set => RaiseAndSet(ref _fullname, value);
+        set => RaiseAndSetNullIfEmpty(ref _fullname, value);
     }
 
     public string? Number
     {
         get => _number;
-        set => RaiseAndSet(ref _number, value);
+        set => RaiseAndSetNullIfEmpty(ref _number, value);
     }
 
     public string? PlaceOfIssue
     {
         get => _placeOfIssue;
-        set => RaiseAndSet(ref _placeOfIssue, value);
+        set => RaiseAndSetNullIfEmpty(ref _placeOfIssue, value);
     }
 
     public string? SocialSecurityNumber
     {
         get => _socialSecurityNumber;
-        set => RaiseAndSet(ref _socialSecurityNumber, value);
+        set => RaiseAndSetNullIfEmpty(ref _socialSecurityNumber, value);
     }
 
     public string? Tin
     {
         get => _tin;
-        set => RaiseAndSet(ref _tin, value);
+        set => RaiseAndSetNullIfEmpty(ref _tin, value);
     }
 
     public string? Email
     {
         get => _email;
-        set => RaiseAndSet(ref _email, value);
+        set => RaiseAndSetNullIfEmpty(ref _email, value);
     }
 
     public string? Telephone
     {
         get => _telephone;
-        set => RaiseAndSet(ref _telephone, value);
+        set => RaiseAndSetNullIfEmpty(ref _telephone, value);
     }
 
     public string? Company
     {
         get => _company;
-        set => RaiseAndSet(ref _company, value);
+        set => RaiseAndSetNullIfEmpty(ref _company, value);
     }
 
     public string? Postcode
@@ -79,32 +80,29 @@ public class PersonalData : Data
     public string? Country
     {
         get => _country;
-        set => RaiseAndSet(ref _country, value);
+        set => RaiseAndSetNullIfEmpty(ref _country, value);
     }
 
     public string? Region
     {
         get => _region;
-        set => RaiseAndSet(ref _region, value);
+        set => RaiseAndSetNullIfEmpty(ref _region, value);
     }
 
     public string? City
     {
         get => _city;
-        set => RaiseAndSet(ref _city, value);
+        set => RaiseAndSetNullIfEmpty(ref _city, value);
     }
 
     public string? Address
     {
         get => _address;
-        set => RaiseAndSet(ref _address, value);
+        set => RaiseAndSetNullIfEmpty(ref _address, value);
     }
 
-    public override async Task<IImage> GetIcon()
-    {
-        return (DrawingImage)Application.Current!.FindResource("PersonalDataIcon")!;
-    }
-    
+    public override async Task<IImage?> GetIcon() => await Task.FromResult<IImage>((DrawingImage)Application.Current!.FindResource("PersonalDataIcon")!);
+
     public override bool MatchesSearchCriteria(string text)
     {
         if (Fullname.IsDesiredString(text))
@@ -115,6 +113,7 @@ public class PersonalData : Data
 
     public override bool MatchesDataType(DataType dataType) => dataType is DataType.PersonalData;
 
+    [JsonIgnore]
     public override string? Information
     {
         get

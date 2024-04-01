@@ -42,6 +42,31 @@
         </DrawingImage.Drawing>
     </DrawingImage>
     
+    <DrawingImage x:Key="GlobeIcon">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="#FF000000"
+                             Geometry="{StaticResource GlobeRegular}" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DrawingImage x:Key="NoteIcon">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="#FF000000"
+                             Geometry="{StaticResource NoteRegular}" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DrawingImage x:Key="PersonalDataIcon">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="#FF000000"
+                             Geometry="{StaticResource ContactCardRegular}" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DrawingImage x:Key="CardIcon">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="#FF000000"
+                             Geometry="{StaticResource CreditCardRegular}" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    
     <DrawingImage x:Key="OlibKeyUpdateIcon">
         <DrawingImage.Drawing>
             <GeometryDrawing Brush="#FF000000" Geometry="F1 M20,20z M0,0z M5,12.5A0.9,0.9,0,0,0,4,13.5L4,15.3A8.1,8.1,0,0,1,2,10A2.8,2.8,0,0,1,2.1,9.1A1.2,1.2,0,0,0,1.2,8A0.9,0.9,0,0,0,0.0999999999999999,8.9A4.1,4.1,0,0,0,0,10A10.2,10.2,0,0,0,2.4,16.5L1,16.5A1,1,0,0,0,1,18.5L5,18.5A1.2,1.2,0,0,0,5.8,18.1L6,17.8 6,13.8A0.9,0.9,0,0,0,5,12.8z M6.5,4L4.7,4A8.1,8.1,0,0,1,10,2L10.9,2A1.2,1.2,0,0,0,12,1.2A0.9,0.9,0,0,0,11.1,0.1L10,0.1A10.2,10.2,0,0,0,3.5,2.4L3.5,1A0.9,0.9,0,0,0,2.5,0A0.9,0.9,0,0,0,1.5,1L1.5,5.2 1.7,5.5 1.9,5.7 6.5,5.7A0.9,0.9,0,0,0,7.5,4.7A0.9,0.9,0,0,0,6.5,3.7z M18.5,14.8L18.3,14.5 18.1,14.3 18,14.3 17.6,14.1 13.5,14.1A1,1,0,0,0,13.5,16.1L15.3,16.1A8.1,8.1,0,0,1,10,18L9.1,18A1.2,1.2,0,0,0,8,18.9A0.9,0.9,0,0,0,8.9,20L10,20A10.2,10.2,0,0,0,16.5,17.6L16.5,19A1,1,0,0,0,18.5,19L18.5,14.8z M19,3.5A0.9,0.9,0,0,0,20,2.5A0.9,0.9,0,0,0,19,1.5L14.8,1.5 14.5,1.7 14.4,1.7 14.2,1.9A0.8,0.8,0,0,0,14,2.3L14,6.3A1,1,0,0,0,16,6.3L16,4.7A8.1,8.1,0,0,1,18,10A2.8,2.8,0,0,1,17.9,10.9A1.2,1.2,0,0,0,18.8,12L18.9,12A1,1,0,0,0,19.9,11.1A4.1,4.1,0,0,0,20,10A10.2,10.2,0,0,0,17.6,3.5z" />

@@ -1,20 +1,25 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using Avalonia.Collections;
 using Avalonia.Media;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
+using OlibKey.Core.Models.Database.StorageTypes;
 using PleasantUI;
 
 namespace OlibKey.Core.Models.Database;
 
+[JsonDerivedType(typeof(Login), typeDiscriminator: "login")]
+[JsonDerivedType(typeof(BankCard), typeDiscriminator: "bankcard")]
+[JsonDerivedType(typeof(PersonalData), typeDiscriminator: "personalData")]
+[JsonDerivedType(typeof(Note), typeDiscriminator: "note")]
 public class Data : ViewModelBase, ICloneable
 {
     private string? _name;
     private string? _timeCreate;
     private string? _timeChanged;
     private string? _deleteDate;
-    private uint _color;
-    private bool _useColor;
+    private uint? _color;
     private string? _note;
     
     private bool _isFavorite;
@@ -24,9 +29,9 @@ public class Data : ViewModelBase, ICloneable
     public string? Name
     {
         get => _name;
-        set => RaiseAndSet(ref _name, value);
+        set => RaiseAndSetNullIfEmpty(ref _name, value);
     }
-    
+
     public string? TimeCreate
     {
         get => _timeCreate;
@@ -45,24 +50,24 @@ public class Data : ViewModelBase, ICloneable
         set => RaiseAndSet(ref _deleteDate, value);
     }
 
-    public uint Color
+    public uint? Color
     {
         get => _color;
         set => RaiseAndSet(ref _color, value);
-    }
-
-    public bool UseColor
-    {
-        get => _useColor;
-        set => RaiseAndSet(ref _useColor, value);
     }
     
     public string? Note
     {
         get => _note;
-        set => RaiseAndSet(ref _note, value);
+        set
+        {
+            if (value == string.Empty)
+                value = null;
+            
+            RaiseAndSet(ref _note, value);
+        }
     }
-    
+
     public bool IsFavorite
     {
         get => _isFavorite;
@@ -84,11 +89,11 @@ public class Data : ViewModelBase, ICloneable
     public bool IsIconChange;
     
     [JsonIgnore]
-    public Task<IImage> Icon => GetIcon();
+    public Task<IImage?> Icon => GetIcon();
 
     #endregion
 
-    public virtual Task<IImage> GetIcon() => throw new NotImplementedException();
+    public virtual Task<IImage?> GetIcon() => Task.FromResult<IImage?>(null);
 
     [JsonIgnore]
     public virtual string? Information => null;
@@ -99,6 +104,34 @@ public class Data : ViewModelBase, ICloneable
     }
 
     public virtual bool MatchesDataType(DataType dataType) => dataType is DataType.All;
+    
+    public T ConvertData<T>() where T : Data, new()
+    {
+        return new T
+        {
+            Name = Name,
+            TimeCreate = TimeCreate,
+            TimeChanged = TimeChanged,
+            DeleteDate = DeleteDate,
+            Color = Color,
+            Note = Note,
+            IsFavorite = IsFavorite,
+            Tags = new AvaloniaList<string>(Tags)
+        };
+    }
+
+    protected bool RaiseAndSetNullIfEmpty(ref string? field, string? value, [CallerMemberName] string? propertyName = null)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            value = null;
+        
+        return RaiseAndSet(ref field, value, propertyName);
+    }
+
+    public void UpdateIcon()
+    {
+        RaisePropertyChanged(nameof(Icon));
+    }
 
     public object Clone()
     {

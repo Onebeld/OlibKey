@@ -7,6 +7,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.BasicElements.DataList"
              x:DataType="vm:ApplicationViewModel">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="/DataTemplates/DataItemTemplate.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     
     <Grid RowDefinitions="Auto,*,Auto">
         <StackPanel Grid.Row="0" Spacing="5">
@@ -47,7 +54,7 @@
                              Padding="0 8"
                              CornerRadius="0"
                              ToolTip.Tip="{StaticResource PersonalData}">
-                    <PathIcon Width="16" Height="16" Data="{StaticResource PersonRegular}" />
+                    <PathIcon Width="16" Height="16" Data="{StaticResource ContactCardRegular}" />
                 </RadioButton>
                 <RadioButton Theme="{StaticResource ButtonedRadioButton}"
                              IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.Note}}"
@@ -68,6 +75,7 @@
             <Panel>
                 <ListBox ItemsSource="{CompiledBinding FoundedDataList}"
                          SelectedItem="{CompiledBinding SelectedData}"
+                         ItemTemplate="{StaticResource DataItemTemplate}"
                          SelectionMode="Toggle"
                          AutoScrollToSelectedItem="True"
                          Padding="5">

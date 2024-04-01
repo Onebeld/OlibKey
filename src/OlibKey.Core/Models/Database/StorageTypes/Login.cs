@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Text.Json.Serialization;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
@@ -27,27 +28,27 @@ public class Login : Data
     public string? Username
     {
         get => _username;
-        set => RaiseAndSet(ref _username, value);
+        set => RaiseAndSetNullIfEmpty(ref _username, value);
     }
-    
+
     public string? Email
     {
         get => _email;
-        set => RaiseAndSet(ref _email, value);
+        set => RaiseAndSetNullIfEmpty(ref _email, value);
     }
-    
+
     public string? Password
     {
         get => _password;
-        set => RaiseAndSet(ref _password, value);
+        set => RaiseAndSetNullIfEmpty(ref _password, value);
     }
-    
+
     public string? WebSite
     {
         get => _webSite;
-        set => RaiseAndSet(ref _webSite, value);
+        set => RaiseAndSetNullIfEmpty(ref _webSite, value);
     }
-    
+
     public string? SecretKey
     {
         get => _secretKey;
@@ -65,7 +66,7 @@ public class Login : Data
         if (string.IsNullOrWhiteSpace(WebSite))
         {
             Favicon = null;
-            return (DrawingImage)Application.Current!.FindResource("GlobeIcon")!;
+            return await Task.FromResult<IImage>((DrawingImage)Application.Current!.FindResource("GlobeIcon")!);
         }
                 
         try
@@ -81,7 +82,7 @@ public class Login : Data
         catch
         { 
             Favicon = null;
-            return (DrawingImage)Application.Current!.FindResource("GlobeIcon")!;
+            return await Task.FromResult<IImage>((DrawingImage)Application.Current!.FindResource("GlobeIcon")!);
         }
     }
     
@@ -97,6 +98,7 @@ public class Login : Data
 
     public override bool MatchesDataType(DataType dataType) => dataType is DataType.Login;
 
+    [JsonIgnore]
     public override string? Information
     {
         get

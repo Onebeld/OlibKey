@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OlibKey.Core;
+namespace OlibKey.Core.GenerationContexts;
 
 [JsonSourceGenerationOptions(WriteIndented = true)]
 [JsonSerializable(typeof(OlibKeySettings))]

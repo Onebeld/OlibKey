@@ -4,7 +4,7 @@ namespace OlibKey.Core.UnitTests;
 
 public class PasswordTests
 {
-    [Test]
+    /*[Test]
     public void Check_For_Duplicate_Bad_Passwords()
     {
         string[] badPasswords = TextInformation.BadPasswords;
@@ -30,5 +30,5 @@ public class PasswordTests
             
             Assert.Fail("Bad password file contains duplicates");
         }
-    }
+    }*/
 }

@@ -56,7 +56,12 @@ public class ApplicationViewModel : ViewModelBase
     public Data? SelectedData
     {
         get => _selectedData;
-        set => RaiseAndSet(ref _selectedData, value);
+        set
+        {
+            RaiseAndSet(ref _selectedData, value);
+            
+            ShowData(value);
+        }
     }
 
     public bool IsDirty
@@ -155,6 +160,17 @@ public class ApplicationViewModel : ViewModelBase
         ViewerContent = new DataPage();
     }
 
+    public void ShowData(Data? data)
+    {
+        if (data is null)
+        {
+            ViewerContent = new OlibKeyPage();
+            return;
+        }
+        
+        ViewerContent = new DataPage(data);
+    }
+
     public void LockDatabase()
     {
         DatabaseBlocking?.Invoke(this, EventArgs.Empty);
@@ -238,11 +254,14 @@ public class ApplicationViewModel : ViewModelBase
 
         List<Data> resultsFromTags = [];
 
-        foreach (Tag tag in SelectedTags)
-            resultsFromTags.AddRange(results.FindAll(data => data.Tags.Any(x1 => x1 == tag.Name)));
+        if (SelectedTags.Count > 0)
+        {
+            foreach (Tag tag in SelectedTags)
+                resultsFromTags.AddRange(results.FindAll(data => data.Tags.Any(x1 => x1 == tag.Name)));
 
-        results = resultsFromTags.Distinct().ToList();
-
+            results = resultsFromTags.Distinct().ToList();
+        }
+        
         FoundedDataList = new AvaloniaList<Data>(results);
     }
 

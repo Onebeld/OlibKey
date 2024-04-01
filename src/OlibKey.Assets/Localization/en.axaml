@@ -36,6 +36,7 @@
     <s:String x:Key="UseTrashcan">Use trashcan</s:String>
     <s:String x:Key="NoElements">No elements</s:String>
     
+    <s:String x:Key="AllElements">All elements</s:String>
     <s:String x:Key="Login">Login</s:String>
     <s:String x:Key="BankCard">Bank card</s:String>
     <s:String x:Key="PersonalData">Personal data</s:String>
@@ -60,10 +61,11 @@
     <s:String x:Key="PasswordManager">Password manager</s:String>
     <s:String x:Key="LetsCreateNewStorage">Let's create a new storage!</s:String>
     <s:String x:Key="Tip">Tip</s:String>
+    <s:String x:Key="NoData">No data</s:String>
     
     <s:String x:Key="Search">Search</s:String>
     <s:String x:Key="Favorite">Favorite</s:String>
-    <s:String x:Key="Deleted">Deleted: {0}</s:String>
+    <s:String x:Key="Deleted">Deleted</s:String>
     
     <!--Tips-->
     <s:String x:Key="PasswordManagerTip1">Never use your one password for all sites! This will be a rather unfortunate consequence.</s:String>
@@ -87,8 +89,33 @@
     <s:String x:Key="AddElement">Add element</s:String>
     <s:String x:Key="ItemInformation">Item information</s:String>
     <s:String x:Key="ChangeElement">Change element</s:String>
+    <s:String x:Key="Tags">Tags</s:String>
     
     <s:String x:Key="Type">Type</s:String>
+    <s:String x:Key="Generate">Generate</s:String>
+    
+    <s:String x:Key="Username">Username</s:String>
+    <s:String x:Key="Email">Email</s:String>
+    <s:String x:Key="Password">Password</s:String>
+    <s:String x:Key="WebSite">Web site</s:String>
+    
+    <s:String x:Key="TypeBankCard">Type bank card</s:String>
+    <s:String x:Key="CardNumber">Card number</s:String>
+    <s:String x:Key="DateCard">Date card</s:String>
+    <s:String x:Key="SecurityCode">Security code</s:String>
+    
+    <s:String x:Key="FullName">Full name</s:String>
+    <s:String x:Key="Number">Number</s:String>
+    <s:String x:Key="PlaceOfIssue">Place of issue</s:String>
+    <s:String x:Key="SocialSecurityNumber">Social security number</s:String>
+    <s:String x:Key="Tin">Tin</s:String>
+    <s:String x:Key="Telephone">Telephone</s:String>
+    <s:String x:Key="Company">Company</s:String>
+    <s:String x:Key="Postcode">Postcode</s:String>
+    <s:String x:Key="Country">Country</s:String>
+    <s:String x:Key="Region">Region</s:String>
+    <s:String x:Key="City">City</s:String>
+    <s:String x:Key="Address">Address</s:String>
     
     
     <!--Settings-->

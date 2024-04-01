@@ -26,7 +26,7 @@ public class OlibKeySettings : ViewModelBase
     private int _clearingClipboardTime = 10;
     private bool _cleanTrashcan = true;
     private int _clearingTrashcanTime = 30;
-    private double _searchSimilarity = 0.65;
+    private double _searchSimilarity = 0.5;
 
     #region Properties
 
@@ -160,7 +160,7 @@ public class OlibKeySettings : ViewModelBase
             {
                 using FileStream fileStream = File.OpenRead(Path.Combine(PleasantDirectories.Settings, olibKeySettings));
 
-                Instance = JsonSerializer.Deserialize(fileStream, OlibKeySettingsGenerationContext.Default.OlibKeySettings) ?? throw new NullReferenceException();
+                Instance = JsonSerializer.Deserialize(fileStream, GenerationContexts.OlibKeySettingsGenerationContext.Default.OlibKeySettings) ?? throw new NullReferenceException();
             }
             catch
             {
@@ -194,7 +194,7 @@ public class OlibKeySettings : ViewModelBase
     public static void Save()
     {
         using FileStream fileStream = File.Create(Path.Combine(PleasantDirectories.Settings, "OlibKeySettings.json"));
-        JsonSerializer.Serialize(fileStream, Instance, OlibKeySettingsGenerationContext.Default.OlibKeySettings);
+        JsonSerializer.Serialize(fileStream, Instance, GenerationContexts.OlibKeySettingsGenerationContext.Default.OlibKeySettings);
     }
 
     public static void Reset()

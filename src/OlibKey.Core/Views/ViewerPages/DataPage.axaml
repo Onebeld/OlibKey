@@ -3,30 +3,64 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewerPages="clr-namespace:OlibKey.Core.ViewModels.ViewerPages"
+             xmlns:c="clr-namespace:OlibKey.Core.Converters"
+             xmlns:storageTypes="clr-namespace:OlibKey.Core.Models.Database.StorageTypes"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.ViewerPages.DataPage"
              x:DataType="viewerPages:DataPageViewModel">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="/DataTemplates/TagItemTemplate.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <Grid RowDefinitions="*,60">
         <SmoothScrollViewer>
             <StackPanel Margin="20 15" Spacing="5">
+                <StackPanel.Styles>
+                    <Style Selector="Button.Copy">
+                        <Setter Property="DockPanel.Dock" Value="Right" />
+                        <Setter Property="Padding" Value="5 0" />
+                        <Setter Property="Margin" Value="5 0 0 0" />
+                        <Setter Property="ToolTip.Tip" Value="{StaticResource Copy}" />
+                        <Setter Property="Width" Value="{CompiledBinding $self.Bounds.Height}" />
+                        
+                        <Setter Property="ContentTemplate">
+                            <DataTemplate>
+                                <PathIcon Data="{StaticResource CopyRegular}" />
+                            </DataTemplate>
+                        </Setter>
+                    </Style>
+                    
+                    <Style Selector="TextBox">
+                        <Setter Property="IsReadOnly" Value="{CompiledBinding IsView}" />
+                    </Style>
+                </StackPanel.Styles>
+                
                 <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
                            Text="{StaticResource AddElement}"
                            IsVisible="{CompiledBinding IsCreate}" />
                 <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
                            Text="{StaticResource ItemInformation}"
-                           IsVisible="{CompiledBinding IsEdit}" />
+                           IsVisible="{CompiledBinding IsView}" />
                 <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
                            Text="{StaticResource ChangeElement}"
                            IsVisible="{CompiledBinding IsEdit}"/>
                 
                 <DockPanel>
                     <Border DockPanel.Dock="Left"
-                            Background="{StaticResource BackgroundColor2Brush}"
-                            Width="60"
-                            Height="60"
+                            Background="#FFFFFFFF"
+                            Width="50"
+                            Height="50"
                             CornerRadius="99"
                             ClipToBounds="True">
-                        <Image Source="{CompiledBinding Data.Icon}" />
+                        <Image Source="{CompiledBinding Data.Icon^}"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               MaxWidth="32"
+                               MaxHeight="32" />
                     </Border>
                     
                     <TextBox Text="{CompiledBinding Data.Name}"
@@ -39,7 +73,7 @@
                 <StackPanel Spacing="5" IsVisible="{CompiledBinding !IsView}">
                     <TextBlock Text="{StaticResource Type}" FontWeight="SemiBold" />
                     
-                    <ComboBox>
+                    <ComboBox SelectedIndex="{CompiledBinding SelectedTypeIndex}">
                         <ComboBoxItem Content="{StaticResource Login}" />
                         <ComboBoxItem Content="{StaticResource BankCard}" />
                         <ComboBoxItem Content="{StaticResource PersonalData}" />
@@ -47,8 +81,270 @@
                     </ComboBox>
                 </StackPanel>
                 
+                <TextBlock Text="{StaticResource Tags}" FontWeight="SemiBold" />
                 
-            
+                <ItemsControl ItemsSource="{CompiledBinding Data.Tags}"
+                              ItemTemplate="{StaticResource TagItemTemplate}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                
+                <DockPanel IsVisible="{CompiledBinding !IsView}" Margin="0 5 0 0">
+                    <Button ToolTip.Tip="{StaticResource Add}"
+                            Command="{CompiledBinding AddTag}"
+                            Margin="5 0 0 0"
+                            DockPanel.Dock="Right">
+                        <PathIcon />
+                    </Button>
+                    
+                    <TextBox Text="{CompiledBinding TagName}">
+                        
+                    </TextBox>
+                </DockPanel>
+                
+                <Separator Margin="10 10" />
+                
+                <!--Login-->
+                <Border IsVisible="{CompiledBinding Data, Converter={x:Static c:EqualsTypeConverter.Instance}, ConverterParameter={x:Type storageTypes:Login}}"
+                        Background="{StaticResource BackgroundColor1Brush}"
+                        BorderBrush="{StaticResource ControlBorderColorBrush}"
+                        CornerRadius="{StaticResource ControlCornerRadius}"
+                        BorderThickness="{StaticResource ControlBorderThickness}"
+                        Padding="10">
+                    <StackPanel Spacing="10">
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:Login)Data).Username}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:Login)Data).Username}"
+                                     Watermark="{StaticResource Username}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:Login)Data).Email}" />
+                            <TextBox Text="{CompiledBinding ((storageTypes:Login)Data).Email}"
+                                     Watermark="{StaticResource Email}"
+                                     UseFloatingWatermark="True" />
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Padding="5 0"
+                                    Margin="0 0 5 0"
+                                    ToolTip.Tip="{StaticResource Generate}"
+                                    DockPanel.Dock="Left"
+                                    IsVisible="{CompiledBinding !IsView}"
+                                    Width="{CompiledBinding $self.Bounds.Height}">
+                                <PathIcon Data="{StaticResource KeyRegular}" />
+                            </Button>
+                            
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:Login)Data).Email}" />
+                            
+                            <Panel>
+                                <TextBox Classes="RevealPasswordTextBox"
+                                         Text="{CompiledBinding ((storageTypes:Login)Data).Password}"
+                                         Watermark="{StaticResource Password}"
+                                         UseFloatingWatermark="True"
+                                         PasswordChar="•" />
+                                <ProgressBar Maximum="300"
+                                             VerticalAlignment="Bottom" Margin="20 0 20 -2"
+                                             Value="{CompiledBinding ((storageTypes:Login)Data).Password, Converter={x:Static c:GeneralConverters.ComplexityPasswordConverter}, Mode=OneWay}" />
+                            </Panel>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:Login)Data).WebSite}" />
+                            <TextBox x:Name="WebSiteTextBox"
+                                     Text="{CompiledBinding ((storageTypes:Login)Data).WebSite}"
+                                     Watermark="{StaticResource WebSite}"
+                                     UseFloatingWatermark="True" />
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!--BankCard-->
+                <Border IsVisible="{CompiledBinding Data, Converter={x:Static c:EqualsTypeConverter.Instance}, ConverterParameter={x:Type storageTypes:BankCard}}"
+                        Background="{StaticResource BackgroundColor1Brush}"
+                        BorderBrush="{StaticResource ControlBorderColorBrush}"
+                        CornerRadius="{StaticResource ControlCornerRadius}"
+                        BorderThickness="{StaticResource ControlBorderThickness}"
+                        Padding="10">
+                    <StackPanel Spacing="10">
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:BankCard)Data).TypeBankCard}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:BankCard)Data).TypeBankCard}"
+                                     Watermark="{StaticResource TypeBankCard}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:BankCard)Data).CardNumber}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:BankCard)Data).CardNumber}"
+                                     Watermark="{StaticResource CardNumber}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:BankCard)Data).DateCard}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:BankCard)Data).DateCard}"
+                                     Watermark="{StaticResource DateCard}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:BankCard)Data).SecurityCode}"/>
+                            <TextBox Classes="RevealPasswordTextBox"
+                                     Text="{CompiledBinding ((storageTypes:BankCard)Data).SecurityCode}"
+                                     Watermark="{StaticResource SecurityCode}"
+                                     PasswordChar="•"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+                
+                <!--PersonalData-->
+                <Border IsVisible="{CompiledBinding Data, Converter={x:Static c:EqualsTypeConverter.Instance}, ConverterParameter={x:Type storageTypes:PersonalData}}"
+                        Background="{StaticResource BackgroundColor1Brush}"
+                        BorderBrush="{StaticResource ControlBorderColorBrush}"
+                        CornerRadius="{StaticResource ControlCornerRadius}"
+                        BorderThickness="{StaticResource ControlBorderThickness}"
+                        Padding="10">
+                    <StackPanel Spacing="10">
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Fullname}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Fullname}"
+                                     Watermark="{StaticResource FullName}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Number}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Number}"
+                                     Watermark="{StaticResource Number}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).PlaceOfIssue}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).PlaceOfIssue}"
+                                     Watermark="{StaticResource PlaceOfIssue}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).SocialSecurityNumber}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).SocialSecurityNumber}"
+                                     Watermark="{StaticResource SocialSecurityNumber}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Tin}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Tin}"
+                                     Watermark="{StaticResource Tin}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Email}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Email}"
+                                     Watermark="{StaticResource Email}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Telephone}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Telephone}"
+                                     Watermark="{StaticResource Telephone}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Company}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Company}"
+                                     Watermark="{StaticResource Company}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Postcode}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Postcode}"
+                                     Watermark="{StaticResource Postcode}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Country}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Country}"
+                                     Watermark="{StaticResource Country}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Region}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Region}"
+                                     Watermark="{StaticResource Region}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).City}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).City}"
+                                     Watermark="{StaticResource City}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                        
+                        <DockPanel>
+                            <Button Classes="Copy"
+                                    Command="{CompiledBinding CopyString}"
+                                    CommandParameter="{CompiledBinding ((storageTypes:PersonalData)Data).Address}"/>
+                            <TextBox Text="{CompiledBinding ((storageTypes:PersonalData)Data).Address}"
+                                     Watermark="{StaticResource Address}"
+                                     UseFloatingWatermark="True"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
             </StackPanel>
         </SmoothScrollViewer>
         
@@ -57,25 +353,33 @@
                 BorderBrush="{StaticResource ControlBorderColorBrush}"
                 BorderThickness="0 1 0 0"
                 CornerRadius="0 0 5 5">
-            <Panel Margin="15">
+            <Panel Margin="10">
                 <StackPanel Orientation="Horizontal"
                             Spacing="10"
                             HorizontalAlignment="Left">
                     <Button Content="{StaticResource Change}"
-                            IsVisible="{CompiledBinding IsView}" />
+                            IsVisible="{CompiledBinding IsView}"
+                            Command="{CompiledBinding ChangeData}"/>
+                    
                     <Button Content="{StaticResource Save}"
-                            IsVisible="{CompiledBinding !IsView}" />
+                            IsVisible="{CompiledBinding !IsView}"
+                            Command="{CompiledBinding SaveData}" />
+                    
                     <Button Content="{StaticResource Back}"
-                            IsVisible="{CompiledBinding !IsEdit}" />
+                            IsVisible="{CompiledBinding !IsEdit}"
+                            Command="{CompiledBinding Back}"/>
+                    
                     <Button Content="{StaticResource Cancel}"
-                            IsVisible="{CompiledBinding IsEdit}" />
+                            IsVisible="{CompiledBinding IsEdit}" 
+                            Command="{CompiledBinding Cancel}"/>
                 </StackPanel>
                 
                 <Button Theme="{StaticResource DangerButtonTheme}"
                         HorizontalAlignment="Right"
                         Padding="6 0"
                         ToolTip.Tip="{StaticResource Delete}"
-                        IsVisible="{CompiledBinding IsEdit}">
+                        IsVisible="{CompiledBinding IsEdit}"
+                        Command="{CompiledBinding DeleteData}">
                     <PathIcon Data="{StaticResource DeleteRegular}" />
                 </Button>
             </Panel>

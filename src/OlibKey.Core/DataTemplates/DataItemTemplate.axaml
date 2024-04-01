@@ -1,6 +1,5 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:c="using:OlibKey.Core.Converters"
                     xmlns:database="clr-namespace:OlibKey.Core.Models.Database">
     <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type database:Data}">
         <Grid ColumnDefinitions="Auto,*,Auto">
@@ -15,28 +14,24 @@
             </Border>
             
             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock Text="{CompiledBinding Name, Converter={x:Static c:GeneralConverters.EmptyToNotDataConverter}}"
+                <TextBlock Text="{CompiledBinding Name, TargetNullValue={StaticResource NoData}}"
                            FontWeight="Bold"
                            FontSize="16"
                            TextTrimming="CharacterEllipsis" />
 
-                <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}"
+                <TextBlock Foreground="{StaticResource TextFillColor3Brush}"
                            FontSize="12"
                            IsVisible="{CompiledBinding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                            TextTrimming="CharacterEllipsis"
-                           Text="{CompiledBinding Information, TargetNullValue={StaticResource NoData}}">
-                </TextBlock>
+                           Text="{CompiledBinding Information, TargetNullValue={StaticResource NoData}}" />
                 
-                <TextBlock Foreground="{StaticResource TextFillColorTertiaryBrush}"
+                <TextBlock Foreground="{StaticResource TextFillColor3Brush}"
                            IsVisible="{CompiledBinding DeleteDate, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
                            TextTrimming="CharacterEllipsis"
                            FontSize="12">
-                    <TextBlock.Text>
-                        <MultiBinding Converter="{x:Static c:GeneralConverters.StringFormat}">
-                            <StaticResource ResourceKey="Deleted" />
-                            <CompiledBinding Path="DeleteDate" />
-                        </MultiBinding>
-                    </TextBlock.Text>
+                    <Run Text="{StaticResource Deleted}" />
+                    <Run Text=": " />
+                    <Run Text="{CompiledBinding DeleteDate}" />
                 </TextBlock>
             </StackPanel>
             
@@ -49,14 +44,7 @@
                 <Border CornerRadius="99"
                         Width="10"
                         Height="10"
-                        Background="{CompiledBinding Color}">
-                    <Border.IsVisible>
-                        <MultiBinding Converter="{x:Static BoolConverters.And}">
-                            <CompiledBinding Path="UseColor" />
-                            <CompiledBinding Path="Color" Converter="{x:Static c:NotEqualsConverter.Instance}" ConverterParameter="0" />
-                        </MultiBinding>
-                    </Border.IsVisible>
-                </Border>
+                        IsVisible="{CompiledBinding Color, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
                 <ToggleButton Theme="{StaticResource AppBarToggleButtonTheme}"
                               Padding="4"
@@ -70,7 +58,8 @@
                             <CompiledBinding Path="IsFavorite" />
                         </MultiBinding>
                     </ToggleButton.IsVisible>
-                    <Path Data="{StaticResource FavoriteIcon}" Stretch="Uniform" />
+                    
+                    <PathIcon Data="{StaticResource FavoriteIcon}" />
                 </ToggleButton>
             </StackPanel>
         </Grid>

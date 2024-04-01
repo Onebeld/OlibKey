@@ -14,4 +14,10 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
+    
+    <Application.Styles>
+        <Style Selector=":is(Button) > PathIcon">
+            <Setter Property="Foreground" Value="{CompiledBinding $parent[Button].Foreground}" />
+        </Style>
+    </Application.Styles>
 </Application>

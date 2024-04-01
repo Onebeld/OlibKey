@@ -1,4 +1,5 @@
-﻿using Avalonia;
+﻿using System.Text.Json.Serialization;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using OlibKey.Core.Enums;
@@ -16,31 +17,28 @@ public class BankCard : Data
     public string? TypeBankCard
     {
         get => _typeBankCard;
-        set => RaiseAndSet(ref _typeBankCard, value);
+        set => RaiseAndSetNullIfEmpty(ref _typeBankCard, value);
     }
 
     public string? CardNumber
     {
         get => _cardNumber;
-        set => RaiseAndSet(ref _cardNumber, value);
+        set => RaiseAndSetNullIfEmpty(ref _cardNumber, value);
     }
 
     public string? DateCard
     {
         get => _dateCard;
-        set => RaiseAndSet(ref _dateCard, value);
+        set => RaiseAndSetNullIfEmpty(ref _dateCard, value);
     }
 
     public string? SecurityCode
     {
         get => _securityCode;
-        set => RaiseAndSet(ref _securityCode, value);
+        set => RaiseAndSetNullIfEmpty(ref _securityCode, value);
     }
 
-    public override async Task<IImage> GetIcon()
-    {
-        return (DrawingImage)Application.Current!.FindResource("CardIcon")!;
-    }
+    public override async Task<IImage?> GetIcon() => await Task.FromResult<IImage>((DrawingImage)Application.Current!.FindResource("CardIcon")!);
 
     public override bool MatchesSearchCriteria(string text)
     {
@@ -52,6 +50,7 @@ public class BankCard : Data
 
     public override bool MatchesDataType(DataType dataType) => dataType is DataType.BankCard;
 
+    [JsonIgnore]
     public override string? Information
     {
         get

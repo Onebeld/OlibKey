@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Interactivity;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Models.Database;
 using OlibKey.Core.ViewModels.ViewerPages;
@@ -19,7 +20,26 @@ public partial class DataPage : UserControl
     public DataPage(Data data)
     {
         InitializeComponent();
-        ViewModel = new DataPageViewModel(DataViewerMode.Edit, data);
+        ViewModel = new DataPageViewModel(DataViewerMode.View, data);
         DataContext = ViewModel;
+    }
+
+    protected override void OnLoaded(RoutedEventArgs e)
+    {
+        base.OnLoaded(e);
+        
+        WebSiteTextBox.LostFocus += WebSiteTextBoxOnLostFocus;
+    }
+
+    protected override void OnUnloaded(RoutedEventArgs e)
+    {
+        base.OnUnloaded(e);
+        
+        WebSiteTextBox.LostFocus -= WebSiteTextBoxOnLostFocus;
+    }
+
+    private void WebSiteTextBoxOnLostFocus(object? sender, RoutedEventArgs e)
+    {
+        ViewModel.Data.UpdateIcon();
     }
 }

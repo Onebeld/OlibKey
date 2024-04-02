@@ -1,10 +1,12 @@
-﻿using Avalonia.Collections;
+﻿using System.Security.Cryptography;
+using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Models;
-using OlibKey.Core.Models.Database;
+using OlibKey.Core.Models.DatabaseModels;
+using OlibKey.Core.Settings;
 using OlibKey.Core.StaticMembers;
 using OlibKey.Core.Structures;
 using OlibKey.Core.Views.ViewerPages;
@@ -33,13 +35,15 @@ public class ApplicationViewModel : ViewModelBase
 
     private Control? _viewerContent;
 
+    private string _masterPassword = string.Empty;
+
     #region EventHandlers
 
     public event EventHandler? DatabaseCreated;
     public event EventHandler? DatabaseOpened;
     public event EventHandler? DatabaseBlocking;
     public event EventHandler? DatabaseBlocked;
-    public event EventHandler? DatabaseUnblocked;
+    public event EventHandler? DatabaseUnlocked;
 
     #endregion
 
@@ -99,6 +103,12 @@ public class ApplicationViewModel : ViewModelBase
         get => _searchText;
         set => RaiseAndSet(ref _searchText, value);
     }
+    
+    public string MasterPassword
+    {
+        get => _masterPassword;
+        set => RaiseAndSet(ref _masterPassword, value);
+    }
 
     public DataType SelectedDataType
     {
@@ -110,7 +120,7 @@ public class ApplicationViewModel : ViewModelBase
             DoSearch();
         }
     }
-
+    
     #endregion
 
     public ApplicationViewModel()
@@ -139,6 +149,8 @@ public class ApplicationViewModel : ViewModelBase
         ViewerContent = new OlibKeyPage();
         
         DatabaseCreated?.Invoke(this, EventArgs.Empty);
+        
+        OlibKeyApp.ShowNotification("Successful", "StorageCreated", NotificationType.Success);
     }
 
     public async void OpenDatabase()
@@ -149,14 +161,41 @@ public class ApplicationViewModel : ViewModelBase
 
         Session.OpenDatabase(path);
         
-        // TODO: Open database
+        DatabaseOpened?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void UnlockDatabase()
+    {
+        try
+        {
+            Session.UnlockDatabase(MasterPassword);
+
+            MasterPassword = string.Empty;
+
+            DoSearch();
+
+            ViewerContent = new OlibKeyPage();
+
+            DatabaseUnlocked?.Invoke(this, EventArgs.Empty);
+        }
+        catch (CryptographicException cryptographicException)
+        {
+            OlibKeyApp.ShowNotification("Error", "InvalidMasterPassword", NotificationType.Error);
+        }
+        catch (FileNotFoundException fileNotFoundException)
+        {
+            OlibKeyApp.ShowNotification("Error", "StorageFileNotFound", NotificationType.Error);
+        }
+        catch (Exception exception)
+        {
+            OlibKeyApp.ShowNotification("Error", "UnknownErrorOccurred", NotificationType.Error);
+        }
     }
 
     public void AddData()
     {
         SelectedData = null;
         
-        // TODO: Add data
         ViewerContent = new DataPage();
     }
 
@@ -176,6 +215,8 @@ public class ApplicationViewModel : ViewModelBase
         DatabaseBlocking?.Invoke(this, EventArgs.Empty);
         
         Session.LockDatabase();
+        
+        ViewerContent = new OlibKeyPage();
         
         DatabaseBlocked?.Invoke(this, EventArgs.Empty);
     }
@@ -216,41 +257,19 @@ public class ApplicationViewModel : ViewModelBase
         LockDatabase();
     }
 
-    public void GetAllTags()
-    {
-        if (Session.Database is null) return;
-        
-        Tags.Clear();
-        
-        foreach (Data data in Session.Database.Data)
-        {
-            foreach (string tag in data.Tags)
-            {
-                Tag? reqTag = Tags.FirstOrDefault(x => x.Name == tag);
-
-                if (reqTag is null)
-                    Tags.Add(new Tag(tag));
-                else
-                    reqTag.Count += 1;
-            }
-        }
-    }
-
     public void DoSearch()
     {
         if (Session.Database is null) return;
         
         Session.RestartLockerTimer();
 
-        string lowerSearchText = SearchText.ToLower();
-
         List<Data> results = new(Session.Database.Data);
 
         if (SelectedDataType is not DataType.All)
             results = results.FindAll(data => data.MatchesDataType(SelectedDataType));
 
-        if (!string.IsNullOrWhiteSpace(lowerSearchText)) 
-            results = results.FindAll(data => data.MatchesSearchCriteria(lowerSearchText)).ToList();
+        if (!string.IsNullOrWhiteSpace(SearchText)) 
+            results = results.FindAll(data => data.MatchesSearchCriteria(SearchText)).ToList();
 
         List<Data> resultsFromTags = [];
 
@@ -268,5 +287,9 @@ public class ApplicationViewModel : ViewModelBase
     public void Save()
     {
         Session.SaveDatabase();
+
+        IsDirty = false;
+        
+        OlibKeyApp.ShowNotification("Successful", "StorageSaved", NotificationType.Success);
     }
 }

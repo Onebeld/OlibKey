@@ -5,7 +5,8 @@
              xmlns:contr="using:OlibKey.Core.Views.BasicElements"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Views.DatabasePage">
-    <Grid ColumnDefinitions="0.9*,5,*,5,1.5*" Margin="10">
+    <Grid ColumnDefinitions="0.9*,10,*,10,1.5*" Margin="10">
+        <contr:AdditionalPanel Grid.Column="0" />
         <contr:DataList Grid.Column="2" />
         <contr:Viewer Grid.Column="4" />
     </Grid>

@@ -26,6 +26,7 @@
     <s:String x:Key="SaveStorage">Save storage</s:String>
     <s:String x:Key="PasswordChecker">Password checker</s:String>
     <s:String x:Key="StorageSettings">Storage settings</s:String>
+    <s:String x:Key="LockStorage">Lock storage</s:String>
     <s:String x:Key="Trashcan">Trashcan</s:String>
     
     <s:String x:Key="MasterPassword">Master password</s:String>
@@ -42,8 +43,18 @@
     <s:String x:Key="PersonalData">Personal data</s:String>
     <s:String x:Key="Notes">Notes</s:String>
     
+    <s:String x:Key="Successful">Successful!</s:String>
+    <s:String x:Key="Error">Error</s:String>
+    
     <s:String x:Key="ImageFiles">Image files</s:String>
     <s:String x:Key="OlibFiles">Olib files</s:String>
+    
+    <s:String x:Key="FieldCopied">The field has been successfully copied</s:String>
+    <s:String x:Key="InvalidMasterPassword">Invalid master password</s:String>
+    <s:String x:Key="StorageCreated">The storage has been successfully created!</s:String>
+    <s:String x:Key="StorageSaved">The storage has been successfully saved!</s:String>
+    <s:String x:Key="StorageFileNotFound">Storage file not found</s:String>
+    <s:String x:Key="UnknownErrorOccurred">An unknown error occurred</s:String>
     
     <!--Password Generator-->
     <s:String x:Key="PasswordGenerator">Password generator</s:String>
@@ -60,8 +71,11 @@
     <!--Password manager-->
     <s:String x:Key="PasswordManager">Password manager</s:String>
     <s:String x:Key="LetsCreateNewStorage">Let's create a new storage!</s:String>
+    <s:String x:Key="EnterMasterPassword">Enter the master password</s:String>
     <s:String x:Key="Tip">Tip</s:String>
+    <s:String x:Key="Unlock">Unlock</s:String>
     <s:String x:Key="NoData">No data</s:String>
+    <s:String x:Key="Modified">Modified</s:String>
     
     <s:String x:Key="Search">Search</s:String>
     <s:String x:Key="Favorite">Favorite</s:String>
@@ -90,6 +104,7 @@
     <s:String x:Key="ItemInformation">Item information</s:String>
     <s:String x:Key="ChangeElement">Change element</s:String>
     <s:String x:Key="Tags">Tags</s:String>
+    <s:String x:Key="TagName">Tag Name</s:String>
     
     <s:String x:Key="Type">Type</s:String>
     <s:String x:Key="Generate">Generate</s:String>
@@ -98,6 +113,10 @@
     <s:String x:Key="Email">Email</s:String>
     <s:String x:Key="Password">Password</s:String>
     <s:String x:Key="WebSite">Web site</s:String>
+    <s:String x:Key="TwoFactorAuthentication">Two-factor authentication</s:String>
+    <s:String x:Key="SecretKey">Secret key</s:String>
+    <s:String x:Key="Activate">Activate</s:String>
+    <s:String x:Key="Deactivate">Deactivate</s:String>
     
     <s:String x:Key="TypeBankCard">Type bank card</s:String>
     <s:String x:Key="CardNumber">Card number</s:String>

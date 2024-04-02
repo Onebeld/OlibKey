@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:database="clr-namespace:OlibKey.Core.Models.Database">
-    <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type database:Data}">
+                    xmlns:databaseModels="clr-namespace:OlibKey.Core.Models.DatabaseModels">
+    <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type databaseModels:Data}">
         <Grid ColumnDefinitions="Auto,*,Auto">
             <Border Grid.Column="0"
                     Background="White"

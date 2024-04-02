@@ -1,4 +1,5 @@
 ﻿using OlibKey.Core.Helpers;
+using OlibKey.Core.Settings;
 
 namespace OlibKey.Core.Extensions;
 
@@ -10,9 +11,12 @@ public static class StringExtensions
     /// <param name="str">Initial string</param>
     /// <param name="searchText">The string by which similarity is measured</param>
     /// <returns><b>true</b> if the similarity percentage between str and searchText is greater than the predefined similarity threshold, otherwise <b>false</b></returns>
-    public static bool IsDesiredString(this string? str, string searchText)
+    public static bool IsDesiredString(this string? str, string? searchText)
     {
-        if (str is null) return false;
+        if (str is null || searchText is null) return false;
+
+        str = str.ToLower();
+        searchText = searchText.ToLower();
         
         if (str.Contains(searchText))
             return true;

@@ -29,6 +29,13 @@
                                    FontSize="22"
                                    Theme="{StaticResource TitleTextBlockTheme}"
                                    HorizontalAlignment="Center" />
+                        
+                        <TextBlock Text="{StaticResource Modified}"
+                                   Margin="0 -5 0 0"
+                                   IsVisible="{CompiledBinding IsDirty}"
+                                   FontSize="12"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   HorizontalAlignment="Center" />
                     </StackPanel>
                     
                     <StackPanel x:Name="StackPanelMenuButtons" Grid.Row="1" Spacing="5" Margin="15 10 15 15">
@@ -56,7 +63,7 @@
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource CreateStorage}" />
                                 
-                                <TextBlock x:Name="TextBlockHotkeyN" Classes="Hotkey" Text="(Ctrl+N)" />
+                                <TextBlock x:Name="TextBlockHotkeyN" Classes="Hotkey" Text="Ctrl+N" />
                             </DockPanel>
                         </Button>
                         <Button>
@@ -65,7 +72,7 @@
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource LoadStorage}" />
                                 
-                                <TextBlock x:Name="TextBlockHotkeyO" Classes="Hotkey" Text="(Ctrl+O)" />
+                                <TextBlock x:Name="TextBlockHotkeyO" Classes="Hotkey" Text="Ctrl+O" />
                             </DockPanel>
                         </Button>
                         <Button>
@@ -74,11 +81,21 @@
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource SaveStorage}" />
                                 
-                                <TextBlock x:Name="TextBlockHotkeyS" Classes="Hotkey" Text="(Ctrl+S)" />
+                                <TextBlock x:Name="TextBlockHotkeyS" Classes="Hotkey" Text="Ctrl+S" />
                             </DockPanel>
                         </Button>
                         
                         <Separator Margin="0 5" />
+                        
+                        <Button Command="{CompiledBinding LockDatabase}">
+                            <DockPanel>
+                                <PathIcon Data="{StaticResource ShieldRegular}" />
+                                
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource LockStorage}" />
+                                
+                                <TextBlock x:Name="TextBlockHotkeyL" Classes="Hotkey" Text="Ctrl+L" />
+                            </DockPanel>
+                        </Button>
                         
                         <Button>
                             <DockPanel>
@@ -110,6 +127,13 @@
         </Button.Flyout>
         
         <StackPanel Orientation="Horizontal">
+            <Border Width="8"
+                    Height="8"
+                    CornerRadius="99"
+                    Background="{StaticResource ControlFillColor3Brush}"
+                    IsVisible="{CompiledBinding IsDirty}"
+                    Margin="0 0 5 0"/>
+            
             <Border Width="26"
                     Height="26"
                     CornerRadius="99"
@@ -119,7 +143,7 @@
             </Border>
             
             <TextBlock FontSize="12"
-                       Foreground="{StaticResource TextFillColor2Brush}"
+                       Foreground="{StaticResource TextFillColor3Brush}"
                        Text="{CompiledBinding Session.Database.Settings.Name}"
                        Margin="5 0 0 0" VerticalAlignment="Center" />
         </StackPanel>

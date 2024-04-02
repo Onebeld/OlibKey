@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using OlibKey.Core.Settings;
 
 namespace OlibKey.Core.Helpers;
 

@@ -1,6 +1,7 @@
 using Avalonia.Controls.Notifications;
 using Avalonia.Controls.Primitives;
 using OlibKey.Core;
+using OlibKey.Core.Settings;
 using OlibKey.Core.Views.MainWindowPages;
 using OlibKey.Views;
 using PleasantUI.Controls;

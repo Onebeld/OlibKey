@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Media.Imaging;
 using OlibKey.Core.Helpers;
+using OlibKey.Core.Settings;
 using OlibKey.Core.StaticMembers;
 using OlibKey.Core.Structures;
 using PleasantUI;

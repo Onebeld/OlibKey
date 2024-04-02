@@ -1,6 +1,6 @@
 ﻿using PleasantUI;
 
-namespace OlibKey.Core;
+namespace OlibKey.Core.Settings;
 
 public class DatabaseSettings : ViewModelBase
 {

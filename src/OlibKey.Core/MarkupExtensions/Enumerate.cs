@@ -18,6 +18,6 @@ public class Enumerate : MarkupExtension
             return Type.GetEnumValues();
         }
 
-        return new System.Collections.Generic.List<object>();
+        return new List<object>();
     }
 }

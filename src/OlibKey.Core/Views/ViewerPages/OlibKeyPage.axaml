@@ -9,7 +9,7 @@
                   VerticalAlignment="Center"
                   HorizontalAlignment="Center"
                   Data="{StaticResource OlibKeyIconRegular}"
-                  Foreground="{StaticResource TextFillColor2Brush}"
+                  Foreground="{StaticResource TextFillColor3Brush}"
                   Width="NaN"
                   Height="NaN" />
         
@@ -19,7 +19,7 @@
                   VerticalAlignment="Bottom"
                   HorizontalAlignment="Center"
                   Data="{StaticResource OlibKeyText}"
-                  Foreground="{StaticResource TextFillColor2Brush}"
+                  Foreground="{StaticResource TextFillColor3Brush}"
                   Width="NaN"
                   Height="NaN" />
     </Panel>

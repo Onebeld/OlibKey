@@ -4,7 +4,7 @@ using Avalonia.Media;
 using PleasantUI;
 using PleasantUI.Core.Constants;
 
-namespace OlibKey.Core;
+namespace OlibKey.Core.Settings;
 
 public class OlibKeySettings : ViewModelBase
 {

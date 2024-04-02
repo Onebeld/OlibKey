@@ -38,4 +38,11 @@
     <ItemGroup>
       <AdditionalFiles Include="Files\BadPasswords.txt" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\BasicElements\AdditionalPanel.axaml.cs">
+        <DependentUpon>AdditionalPanel.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
 </Project>

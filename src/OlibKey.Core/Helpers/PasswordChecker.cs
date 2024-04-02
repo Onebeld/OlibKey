@@ -1,6 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using OlibKey.Core.StaticMembers;
-using OlibKey.Core.Structures;
 
 namespace OlibKey.Core.Helpers;
 

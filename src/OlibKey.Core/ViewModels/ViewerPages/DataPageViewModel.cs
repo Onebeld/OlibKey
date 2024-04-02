@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
-using System.Runtime.CompilerServices;
+using Avalonia.Controls.Notifications;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Models;
-using OlibKey.Core.Models.Database;
-using OlibKey.Core.Models.Database.StorageTypes;
+using OlibKey.Core.Models.DatabaseModels;
+using OlibKey.Core.Models.DatabaseModels.StorageTypes;
 using OlibKey.Core.Views.ViewerPages;
 using PleasantUI;
 
@@ -53,6 +53,12 @@ public class DataPageViewModel : ViewModelBase
         }
     }
 
+    public OlibTotp Totp
+    {
+        get => _totp;
+        set => RaiseAndSet(ref _totp, value);
+    }
+
     private int DataIndex
     {
         get
@@ -96,12 +102,14 @@ public class DataPageViewModel : ViewModelBase
                     BankCard => DataType.BankCard,
                     PersonalData => DataType.PersonalData,
                     Note => DataType.Note,
+                    
                     _ => _selectedType
                 };
                 
                 RaisePropertyChanged(nameof(SelectedTypeIndex));
 
-                if (Data is Login { IsActivatedTotp: true }) ;
+                if (Data is Login { IsActivatedTotp: true }) 
+                    ActivateTotp();
                 
                 break;
             
@@ -136,13 +144,13 @@ public class DataPageViewModel : ViewModelBase
             case DataViewerMode.Edit:
                 int index = DataIndex;
 
-                /*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.Database.Data[index].Type is DataType.Login)
+                /*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.DatabaseModels.Data[index].Type is DataType.Login)
                 {
-                    if (OlibKeyApp.ViewModel.Session.Database.Data[index].Login?.WebSite != Data.Login?.WebSite)
+                    if (OlibKeyApp.ViewModel.Session.DatabaseModels.Data[index].Login?.WebSite != Data.Login?.WebSite)
                         Data.IsIconChange = true;
                 }
 
-                if (Data.Type != OlibKeyApp.ViewModel.Session.Database.Data[index].Type)
+                if (Data.Type != OlibKeyApp.ViewModel.Session.DatabaseModels.Data[index].Type)
                     Data.IsIconChange = true;*/
 
                 Data.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
@@ -235,8 +243,9 @@ public class DataPageViewModel : ViewModelBase
     public async void CopyString(string str)
     {
         Session.RestartLockerTimer();
-        
-        // TODO: Copy to clipboard
+
+        if (await OlibKeyApp.CopyStringToClipboard(str))
+            OlibKeyApp.ShowNotification("Successful", "FieldCopied", NotificationType.Information);
     }
 
     private void ChangeDataType(DataType dataType)
@@ -272,7 +281,9 @@ public class DataPageViewModel : ViewModelBase
 
         try
         {
-            _totp = new OlibTotp(login.SecretKey);
+            Totp = new OlibTotp(login.SecretKey);
+
+            login.IsActivatedTotp = true;
         }
         catch (Exception e)
         {
@@ -285,6 +296,6 @@ public class DataPageViewModel : ViewModelBase
         if (Data is not Login)
             return;
 
-        _totp.Dispose();
+        Totp.Dispose();
     }
 }

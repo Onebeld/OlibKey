@@ -7,7 +7,7 @@ using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
 using OlibKey.Core.Helpers;
 
-namespace OlibKey.Core.Models.Database.StorageTypes;
+namespace OlibKey.Core.Models.DatabaseModels.StorageTypes;
 
 public class Login : Data
 {

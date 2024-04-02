@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
 using OlibKey.Core.Models;
-using OlibKey.Core.Structures;
 
 namespace OlibKey.Core.Helpers;
 

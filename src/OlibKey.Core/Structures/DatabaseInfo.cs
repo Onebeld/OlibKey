@@ -1,4 +1,6 @@
-﻿namespace OlibKey.Core.Structures;
+﻿using OlibKey.Core.Settings;
+
+namespace OlibKey.Core.Structures;
 
 public struct DatabaseInfo
 {

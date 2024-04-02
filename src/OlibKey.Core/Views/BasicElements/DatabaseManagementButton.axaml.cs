@@ -2,6 +2,7 @@
 using Avalonia.Controls.Converters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.VisualTree;
 
 namespace OlibKey.Core.Views.BasicElements;
 
@@ -11,17 +12,23 @@ public partial class DatabaseManagementButton : UserControl
     {
         InitializeComponent();
 
+        IEnumerable<TextBlock> textBlocks = this.GetVisualDescendants().OfType<TextBlock>();
+
         if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
         {
-            TextBlockHotkeyN.IsVisible = false;
-            TextBlockHotkeyS.IsVisible = false;
-            TextBlockHotkeyO.IsVisible = false;
+            foreach (TextBlock textBlock in textBlocks)
+            {
+                if (textBlock.Classes.Any(x => x == "Hotkey"))
+                    textBlock.IsVisible = false;
+            }
         }
         else
         {
-            TextBlockHotkeyN.Text = PlatformKeyGestureConverter.ToPlatformString(KeyGesture.Parse("Ctrl+N"));
-            TextBlockHotkeyS.Text = PlatformKeyGestureConverter.ToPlatformString(KeyGesture.Parse("Ctrl+S"));
-            TextBlockHotkeyO.Text = PlatformKeyGestureConverter.ToPlatformString(KeyGesture.Parse("Ctrl+O"));
+            foreach (TextBlock textBlock in textBlocks)
+            {
+                if (textBlock.Classes.Any(x => x == "Hotkey"))
+                    textBlock.Text = PlatformKeyGestureConverter.ToPlatformString(KeyGesture.Parse(textBlock.Text));
+            }
         }
 
         foreach (Control control in StackPanelMenuButtons.Children)

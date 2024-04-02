@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewerPages="clr-namespace:OlibKey.Core.ViewModels.ViewerPages"
              xmlns:c="clr-namespace:OlibKey.Core.Converters"
-             xmlns:storageTypes="clr-namespace:OlibKey.Core.Models.Database.StorageTypes"
+             xmlns:storageTypes="clr-namespace:OlibKey.Core.Models.DatabaseModels.StorageTypes"
+             xmlns:a="using:OlibKey.Core"
+             xmlns:databaseModels="clr-namespace:OlibKey.Core.Models.DatabaseModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.ViewerPages.DataPage"
              x:DataType="viewerPages:DataPageViewModel">
@@ -100,9 +102,18 @@
                         <PathIcon />
                     </Button>
                     
-                    <TextBox Text="{CompiledBinding TagName}">
-                        
-                    </TextBox>
+                    <AutoCompleteBox x:Name="TagAutoCompleteBox"
+                                     ItemsSource="{CompiledBinding Session.Database.Tags}"
+                                     IsTextCompletionEnabled="True"
+                                     Text="{CompiledBinding TagName}"
+                                     Watermark="{StaticResource TagName}"
+                                     ValueMemberBinding="{CompiledBinding Name, x:DataType=databaseModels:Tag}">
+                        <AutoCompleteBox.ItemTemplate>
+                            <DataTemplate x:DataType="databaseModels:Tag">
+                                <TextBlock Text="{CompiledBinding Name}" />
+                            </DataTemplate>
+                        </AutoCompleteBox.ItemTemplate>
+                    </AutoCompleteBox>
                 </DockPanel>
                 
                 <Separator Margin="10 10" />
@@ -145,7 +156,7 @@
                             
                             <Button Classes="Copy"
                                     Command="{CompiledBinding CopyString}"
-                                    CommandParameter="{CompiledBinding ((storageTypes:Login)Data).Email}" />
+                                    CommandParameter="{CompiledBinding ((storageTypes:Login)Data).Password}" />
                             
                             <Panel>
                                 <TextBox Classes="RevealPasswordTextBox"
@@ -160,6 +171,13 @@
                         </DockPanel>
                         
                         <DockPanel>
+                            <DockPanel.IsVisible>
+                                <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                                    <CompiledBinding Path="!IsView" />
+                                    <CompiledBinding Path="((storageTypes:Login)Data).WebSite" Converter="{x:Static StringConverters.IsNotNullOrEmpty}" />
+                                </MultiBinding>
+                            </DockPanel.IsVisible>
+                            
                             <Button Classes="Copy"
                                     Command="{CompiledBinding CopyString}"
                                     CommandParameter="{CompiledBinding ((storageTypes:Login)Data).WebSite}" />
@@ -168,6 +186,65 @@
                                      Watermark="{StaticResource WebSite}"
                                      UseFloatingWatermark="True" />
                         </DockPanel>
+                        
+                        <StackPanel Spacing="10">
+                            <StackPanel.IsVisible>
+                                <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                                    <CompiledBinding Path="!IsView" />
+                                    <CompiledBinding Path="((storageTypes:Login)Data).IsActivatedTotp" />
+                                </MultiBinding>
+                            </StackPanel.IsVisible>
+                            
+                            <TextBlock Text="{StaticResource TwoFactorAuthentication}"
+                                       FontWeight="SemiBold" />
+                        
+                            <TextBox Text="{CompiledBinding ((storageTypes:Login)Data).SecretKey}"
+                                     IsVisible="{CompiledBinding !((storageTypes:Login)Data).IsActivatedTotp}"
+                                     Watermark="{StaticResource SecretKey}" />
+                            
+                            <StackPanel Orientation="Horizontal"
+                                        Spacing="10"
+                                        IsVisible="{CompiledBinding ((storageTypes:Login)Data).IsActivatedTotp}">
+                                <Panel>
+                                    <ProgressRing Value="{CompiledBinding Totp.RemainingSeconds, Mode=OneWay}"
+                                                  LargeChange="1"
+                                                  Width="50"
+                                                  Height="50"
+                                                  Maximum="{CompiledBinding Totp.Interval, Mode=OneWay}" />
+                                    <TextBlock Text="{CompiledBinding Totp.RemainingSeconds}"
+                                               FontSize="16"
+                                               FontWeight="SemiBold"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                </Panel>
+                                
+                                <SelectableTextBlock Text="{CompiledBinding Totp.GeneratedCode}"
+                                                     FontSize="20"
+                                                     FontWeight="SemiBold"
+                                                     VerticalAlignment="Center" />
+                                
+                                <Button Classes="Copy"
+                                        Command="{CompiledBinding CopyString}"
+                                        CommandParameter="{CompiledBinding Totp.GeneratedCode}"
+                                        Width="32"
+                                        Height="32"
+                                        VerticalAlignment="Center" />
+                            </StackPanel>
+                            
+                            <Button Content="{StaticResource Activate}"
+                                    Command="{CompiledBinding ActivateTotp}"
+                                    IsVisible="{CompiledBinding !((storageTypes:Login)Data).IsActivatedTotp}"/>
+                            
+                            <Button Content="{StaticResource Deactivate}"
+                                    Command="{CompiledBinding DeactivateTotp}">
+                                <Button.IsVisible>
+                                    <MultiBinding Converter="{x:Static BoolConverters.And}">
+                                        <CompiledBinding Path="!IsView" />
+                                        <CompiledBinding Path="((storageTypes:Login)Data).IsActivatedTotp" />
+                                    </MultiBinding>
+                                </Button.IsVisible>
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
                 

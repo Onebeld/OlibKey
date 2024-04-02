@@ -1,10 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using Avalonia.Input.Platform;
 using Avalonia.Styling;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Models;
-using OlibKey.Core.Structures;
+using OlibKey.Core.Settings;
 using OlibKey.Core.ViewModels;
 using PleasantUI;
 using PleasantUI.Core.Interfaces;
@@ -46,6 +47,9 @@ public class OlibKeyApp : Application
 
     public static void ShowNotification(string title, string description, NotificationType notificationType, TimeSpan timeSpan = default)
     {
+        if (timeSpan == default) 
+            timeSpan = TimeSpan.FromSeconds(4);
+        
         ViewModel.NotificationManager?.Show(
             new Notification(
                 GetLocalizationString(title), 
@@ -53,6 +57,18 @@ public class OlibKeyApp : Application
                 notificationType, 
                 timeSpan)
         );
+    }
+    
+    public static async Task<bool> CopyStringToClipboard(string str)
+    {
+        IClipboard? clipboard = TopLevel.Clipboard;
+
+        if (clipboard is null)
+            return false;
+
+        await clipboard.SetTextAsync(str);
+
+        return true;
     }
 
     /// <summary>

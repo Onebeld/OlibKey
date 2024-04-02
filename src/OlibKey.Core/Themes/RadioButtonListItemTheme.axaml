@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTheme x:Key="RadioButtonListItemTheme" TargetType="RadioButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource TextFillColor1Brush}" />
+        <Setter Property="CornerRadius" Value="{StaticResource ControlCornerRadius}" />
+        <Setter Property="Padding" Value="12 0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinWidth" Value="88" />
+        <Setter Property="MinHeight" Value="40" />
+        
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Panel>
+                    <ContentPresenter Name="PART_ContentPresenter"
+                                      Background="{TemplateBinding Background}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
+                                      ContentTemplate="{TemplateBinding ContentTemplate}"
+                                      Content="{TemplateBinding Content}"
+                                      Padding="{TemplateBinding Padding}"
+                                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      CornerRadius="{TemplateBinding CornerRadius}"
+                                      Margin="2" />
+                    <Border Name="SelectionIndicator"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Width="3"
+                            Height="16"
+                            Margin="1 0 0 0"
+                            CornerRadius="{StaticResource RoundedControlCornerRadius}"
+                            Background="{StaticResource SystemAccentLightColor2Brush}" />
+                </Panel>
+            </ControlTemplate>
+        </Setter>
+        
+        <Style Selector="^ /template/ Border#SelectionIndicator">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:.075" />
+                </Transitions>
+            </Setter>
+            <Setter Property="RenderTransform" Value="none" />
+        </Style>
+        <Style Selector="^:checked /template/ Border#SelectionIndicator">
+            <Setter Property="RenderTransform" Value="scaleY(1)" />
+        </Style>
+        <Style Selector="^:checked:pointerover /template/ Border#SelectionIndicator">
+            <Setter Property="RenderTransform" Value="scaleY(1.2)" />
+        </Style>
+        <Style Selector="^:checked:pressed /template/ Border#SelectionIndicator">
+            <Setter Property="RenderTransform" Value="scaleY(0.8)" />
+        </Style>
+        <Style Selector="^:not(:checked) /template/ Border#SelectionIndicator">
+            <Setter Property="RenderTransform" Value="scaleY(0)" />
+        </Style>
+        
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="{StaticResource ControlFillColor2Brush}" />
+        </Style>
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="{StaticResource ControlFillColor3Brush}" />
+        </Style>
+
+        <Style Selector="^:checked">
+            <Setter Property="Background" Value="{StaticResource ControlFillColor2Brush}" />
+        </Style>
+
+        <Style Selector="^:checked:pointerover">
+            <Setter Property="Background" Value="{StaticResource ControlFillColor3Brush}" />
+        </Style>
+
+        <Style Selector="^:checked:pressed">
+            <Setter Property="Background" Value="{StaticResource ControlFillColor2Brush}" />
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Setter Property="Opacity" Value="0.5" />
+        </Style>
+    </ControlTheme>
+</ResourceDictionary>

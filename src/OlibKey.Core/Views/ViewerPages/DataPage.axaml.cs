@@ -1,7 +1,9 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using OlibKey.Core.Enums;
-using OlibKey.Core.Models.Database;
+using OlibKey.Core.Extensions;
+using OlibKey.Core.Models.DatabaseModels;
 using OlibKey.Core.ViewModels.ViewerPages;
 
 namespace OlibKey.Core.Views.ViewerPages;
@@ -29,6 +31,9 @@ public partial class DataPage : UserControl
         base.OnLoaded(e);
         
         WebSiteTextBox.LostFocus += WebSiteTextBoxOnLostFocus;
+        TagAutoCompleteBox.KeyUp += TagTextBoxOnKeyUp;
+
+        TagAutoCompleteBox.ItemFilter = (search, item) => item is Tag tag && tag.Name.IsDesiredString(search);
     }
 
     protected override void OnUnloaded(RoutedEventArgs e)
@@ -36,6 +41,13 @@ public partial class DataPage : UserControl
         base.OnUnloaded(e);
         
         WebSiteTextBox.LostFocus -= WebSiteTextBoxOnLostFocus;
+        TagAutoCompleteBox.KeyUp -= TagTextBoxOnKeyUp;
+    }
+    
+    private void TagTextBoxOnKeyUp(object? sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+            ViewModel.AddTag();
     }
 
     private void WebSiteTextBoxOnLostFocus(object? sender, RoutedEventArgs e)

@@ -6,7 +6,7 @@ namespace OlibKey.Core.Models;
 
 public class OlibTotp : ViewModelBase, IDisposable
 {
-	private readonly DispatcherTimer _timer;
+	private DispatcherTimer _timer;
 
 	private Totp? _totp;
 	
@@ -20,18 +20,18 @@ public class OlibTotp : ViewModelBase, IDisposable
 		private set => RaiseAndSet(ref _generatedCode, value);
 	}
 
-	public int RemainingSeconds
+	public double RemainingSeconds
 	{
 		get => _remainingSeconds;
-		private set => RaiseAndSet(ref _remainingSeconds, value);
+		private set => RaiseAndSet(ref _remainingSeconds, (int)value);
 	}
 
-	public int Interval
+	public double Interval
 	{
 		get => _interval;
-		private set => RaiseAndSet(ref _interval, value);
+		private set => RaiseAndSet(ref _interval, (int)value);
 	}
-	
+
 	public OlibTotp(string secretKey, int interval = 30, OtpHashMode hashMode = OtpHashMode.Sha1)
 	{
 		Interval = interval;
@@ -53,6 +53,8 @@ public class OlibTotp : ViewModelBase, IDisposable
 		
 		RemainingSeconds = _totp.RemainingSeconds();
 		GeneratedCode = _totp.ComputeTotp();
+		
+		RaisePropertyChanged(nameof(Interval));
 	}
 
 	public void Dispose()
@@ -60,6 +62,6 @@ public class OlibTotp : ViewModelBase, IDisposable
 		_timer.Stop();
 		
 		_totp = null;
-		_timer.Dispatcher.InvokeShutdown();
+		_timer = null!;
 	}
 }

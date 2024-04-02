@@ -18,17 +18,31 @@
                               Height="NaN" />
                 </StackPanel>
                 
-                <TextBlock Text="{StaticResource LetsCreateNewStorage}" Margin="0 15 0 5" TextAlignment="Center" />
-                <Button Theme="{StaticResource AccentButtonTheme}"
-                        Content="{StaticResource CreateStorage}"
-                        Command="{CompiledBinding CreateDatabase}"
-                        Margin="15 0"/>
+                <StackPanel IsVisible="{CompiledBinding Session.PathToFile, Converter={x:Static StringConverters.IsNullOrEmpty}}">
+                    <TextBlock Text="{StaticResource LetsCreateNewStorage}" Margin="0 15 0 5" TextAlignment="Center" />
+                    <Button Theme="{StaticResource AccentButtonTheme}"
+                            Content="{StaticResource CreateStorage}"
+                            Command="{CompiledBinding CreateDatabase}"
+                            Margin="15 0"/>
+                </StackPanel>
+                
+                <StackPanel IsVisible="{CompiledBinding Session.PathToFile, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                    <TextBlock Text="{StaticResource EnterMasterPassword}"
+                               Margin="0 15 0 5"
+                               TextAlignment="Center" />
+                    <TextBox x:Name="MasterPasswordTextBox"
+                             Classes="RevealPasswordTextBox"
+                             Text="{CompiledBinding MasterPassword}"
+                             PasswordChar="•"/>
+                    <Button Content="{StaticResource Unlock}"
+                            Theme="{StaticResource AccentButtonTheme}"
+                            Margin="20 5 20 0"
+                            Command="{CompiledBinding UnlockDatabase}"/>
+                </StackPanel>
             </StackPanel>
-            
             
             <StackPanel VerticalAlignment="Bottom" Margin="25 0 25 70" HorizontalAlignment="Center" Spacing="5">
                 <StackPanel Orientation="Horizontal" Spacing="3">
-                    
                     <PathIcon Data="{StaticResource LampRegular}" Foreground="{StaticResource TextFillColor3Brush}" />
                     
                     <TextBlock Text="{StaticResource Tip}" FontWeight="Bold" Foreground="{StaticResource TextFillColor3Brush}" />

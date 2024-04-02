@@ -3,6 +3,7 @@ using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Models;
+using OlibKey.Core.Settings;
 using OlibKey.Core.StaticMembers;
 using PleasantUI;
 using PleasantUI.Core;

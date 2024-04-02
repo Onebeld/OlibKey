@@ -1,6 +1,4 @@
-﻿using OlibKey.Core.StaticMembers;
-
-namespace OlibKey.Core.UnitTests;
+﻿namespace OlibKey.Core.UnitTests;
 
 public class PasswordTests
 {

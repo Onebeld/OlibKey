@@ -1,5 +1,6 @@
 ﻿using Avalonia.Threading;
 using OlibKey.Core.Enums;
+using OlibKey.Core.Models.DatabaseModels;
 using OlibKey.Core.Structures;
 using PleasantUI;
 
@@ -8,12 +9,12 @@ namespace OlibKey.Core.Models;
 public class Session : ViewModelBase
 {
     private StorageType _storageType = StorageType.None;
-    private Database.Database? _database;
+    private Database? _database;
     private string? _pathToFile;
 
     private string _currentMasterPassword;
 
-    public Database.Database? Database
+    public Database? Database
     {
         get => _database;
         set => RaiseAndSet(ref _database, value);
@@ -37,7 +38,7 @@ public class Session : ViewModelBase
     {
         _currentMasterPassword = databaseInfo.MasterPassword;
 
-        Database = new Database.Database
+        Database = new Database
         {
             Settings = databaseInfo.DatabaseSettings
         };
@@ -56,11 +57,31 @@ public class Session : ViewModelBase
     public void LockDatabase()
     {
         RestartLockerTimer();
+        
+        if (PathToFile is null || Database is null) return;
+        
+        SaveDatabase();
+    }
+    
+    public void UnlockDatabase(string masterPassword)
+    {
+        if (PathToFile is null) return;
+
+        Database = Database.Load(PathToFile, masterPassword);
+
+        _currentMasterPassword = masterPassword;
     }
 
     public void SaveDatabase()
     {
         RestartLockerTimer();
+        
+        if (PathToFile is null || Database is null) return;
+        
+        Database.Save(PathToFile, _currentMasterPassword);
+        
+        Database = null;
+        _currentMasterPassword = string.Empty;
     }
     
     public void ActivateLockerTimer(int minutes, params EventHandler[] tickActions)

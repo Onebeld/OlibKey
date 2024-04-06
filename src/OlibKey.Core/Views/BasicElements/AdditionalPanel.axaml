@@ -1,0 +1,180 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels"
+             xmlns:enums="clr-namespace:OlibKey.Core.Enums"
+             xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.BasicElements.AdditionalPanel"
+             x:DataType="vm:ApplicationViewModel">
+    <Design.DataContext>
+        <vm:ApplicationViewModel />
+    </Design.DataContext>
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <MergeResourceInclude Source="/Themes/ToggleButtonListItemTheme.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Border Background="{StaticResource ControlFillColor1Brush}"
+            BorderBrush="{StaticResource ControlBorderColorBrush}"
+            BorderThickness="1"
+            CornerRadius="8">
+        <SmoothScrollViewer>
+            <StackPanel Margin="10" Spacing="5">
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
+                             IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.All}}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <PathIcon Width="16" Height="16" Data="{StaticResource InfinityRegular}" />
+
+                        <TextBlock Grid.Column="1" 
+                                   Margin="10 0 0 0"
+                                   Text="{StaticResource AllElements}"
+                                   VerticalAlignment="Center" />
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{CompiledBinding Session.Storage.Data.Count}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </RadioButton>
+                
+                <Separator Margin="5"></Separator>
+                
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
+                             IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.Login}}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <PathIcon Width="16" Height="16" Data="{StaticResource GlobeRegular}" />
+
+                        <TextBlock Grid.Column="1"
+                                   Margin="10 0 0 0"
+                                   Text="{StaticResource Login}"
+                                   VerticalAlignment="Center" />
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{CompiledBinding Session.Storage.LoginCount}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </RadioButton>
+                
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
+                             IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.BankCard}}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <PathIcon Width="16" Height="16" Data="{StaticResource CreditCardRegular}" />
+
+                        <TextBlock Grid.Column="1"
+                                   Margin="10 0 0 0"
+                                   Text="{StaticResource BankCard}"
+                                   VerticalAlignment="Center" />
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{CompiledBinding Session.Storage.BankCardCount}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </RadioButton>
+                
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
+                             IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.PersonalData}}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <PathIcon Width="16" Height="16" Data="{StaticResource ContactCardRegular}" />
+
+                        <TextBlock Grid.Column="1"
+                                   Margin="10 0 0 0"
+                                   Text="{StaticResource PersonalData}" 
+                                   VerticalAlignment="Center" />
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{CompiledBinding Session.Storage.PersonalDataCount}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </RadioButton>
+                
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
+                             IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.Note}}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <PathIcon Width="16" Height="16" Data="{StaticResource NoteRegular}" />
+
+                        <TextBlock Grid.Column="1" 
+                                   Margin="10 0 0 0"
+                                   Text="{StaticResource Notes}"
+                                   VerticalAlignment="Center" />
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{CompiledBinding Session.Storage.NotesCount}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </RadioButton>
+                
+                <Separator Margin="5"></Separator>
+
+                <ToggleButton Theme="{StaticResource ToggleButtonListItemTheme}"
+                             IsChecked="{CompiledBinding ShowFavorites}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <PathIcon Width="16" Height="16" Data="{StaticResource FavoriteRegular}" />
+
+                        <TextBlock Grid.Column="1" 
+                                   Margin="10 0 0 0"
+                                   Text="{StaticResource Favorite}"
+                                   VerticalAlignment="Center" />
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{CompiledBinding Session.Storage.FavoritesCount}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </ToggleButton>
+                
+                <Separator Margin="5"></Separator>
+
+                <Expander>
+                    <Expander.Header>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <PathIcon Grid.Column="0" Data="{StaticResource SellRegular}" Margin="0 0 10 0" />
+                            
+                            <TextBlock Grid.Column="1"
+                                       Text="{StaticResource Tags}"
+                                       VerticalAlignment="Center" />
+                            
+                            <TextBlock Grid.Column="2"
+                                       Text="{CompiledBinding Session.Storage.Tags.Count}"
+                                       Foreground="{StaticResource TextFillColor3Brush}"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                    </Expander.Header>
+                    
+                    <ListBox ItemsSource="{CompiledBinding Session.Storage.Tags}"
+                             SelectedItems="{CompiledBinding SelectedTags}"
+                             SelectionMode="Multiple,Toggle">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate x:DataType="storageModels:Tag">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <PathIcon Grid.Column="0"
+                                              Data="{StaticResource TagRegular}"
+                                              Foreground="{StaticResource TextFillColor3Brush}"
+                                              Margin="0 0 10 0" />
+                                    
+                                    <TextBlock Grid.Column="1"
+                                               Text="{CompiledBinding Name}"
+                                               TextTrimming="CharacterEllipsis"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="2"
+                                               Text="{CompiledBinding Count}"
+                                               Foreground="{StaticResource TextFillColor3Brush}"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Expander>
+            </StackPanel>
+        </SmoothScrollViewer>
+    </Border>
+</UserControl>

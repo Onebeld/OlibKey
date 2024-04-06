@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Company>Dmitry Zhutkov (Onebeld)</Company>
+        <Product>OlibKey</Product>
+        <AssemblyVersion>5.0.0</AssemblyVersion>
+        <FileVersion>5.0.0</FileVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Avalonia" Version="11.0.10" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <AvaloniaResource Include="OlibKeyLogo.ico" />
+    </ItemGroup>
+</Project>

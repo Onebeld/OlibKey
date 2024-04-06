@@ -1,0 +1,43 @@
+﻿<PleasantView xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:contr="clr-namespace:OlibKey.Core.Views.BasicElements;assembly=OlibKey.Core"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Android.MainView">
+    <Panel>
+        <Grid Height="44" VerticalAlignment="Top" Margin="45 0 0 0" ZIndex="5" RowDefinitions="Auto,*,Auto">
+            <StackPanel Grid.Row="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <Image Source="{StaticResource {StaticResource OlibKeyIcon}}" Width="16" Height="16" />
+                <Path Stretch="Uniform"
+                      Width="50"
+                      VerticalAlignment="Center"
+                      Data="{StaticResource {StaticResource OlibKeyText}}"
+                      Fill="{StaticResource TextFillColorPrimaryBrush}" />
+            </StackPanel>
+        </Grid>
+        
+        <NavigationView Header="{x:Null}"
+                        IsOpen="False"
+                        SelectionMode="AlwaysSelected">
+            <NavigationViewItem x:Name="PasswordManagerPage"
+                                IsSelected="True"
+                                Header="{DynamicResource PasswordManager}"
+                                Icon="{StaticResource KeyRegular}" />
+        
+            <NavigationViewItem x:Name="AboutPage"
+                                Header="{DynamicResource About}"
+                                Icon="{StaticResource InfoRegular}"
+                                Margin="0 5"
+                                DockPanel.Dock="Bottom" />
+            <NavigationViewItem x:Name="SettingsPage"
+                                Header="{DynamicResource Settings}"
+                                Icon="{StaticResource SettingsRegular}"
+                                DockPanel.Dock="Bottom" />
+            <Panel />
+        </NavigationView>
+    </Panel>
+</PleasantView>

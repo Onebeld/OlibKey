@@ -1,0 +1,55 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.MainWindowPages.CreateDecryptStoragePage"
+             x:DataType="vm:ApplicationViewModel">
+    <SmoothScrollViewer HorizontalScrollBarVisibility="Disabled">
+        <Grid>
+            <StackPanel  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Image Source="{StaticResource OlibKeyIcon}" Height="100" />
+                
+                    <PathIcon Width="240"
+                              Foreground="{StaticResource TextFillColor1Brush}"
+                              Data="{StaticResource OlibKeyText}"
+                              Height="NaN" />
+                </StackPanel>
+                
+                <StackPanel IsVisible="{CompiledBinding Session.PathToFile, Converter={x:Static StringConverters.IsNullOrEmpty}}">
+                    <TextBlock Text="{StaticResource LetsCreateNewStorage}" Margin="0 15 0 5" TextAlignment="Center" />
+                    <Button Theme="{StaticResource AccentButtonTheme}"
+                            Content="{StaticResource CreateStorage}"
+                            Command="{CompiledBinding CreateStorage}"
+                            Margin="15 0"/>
+                </StackPanel>
+                
+                <StackPanel IsVisible="{CompiledBinding Session.PathToFile, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
+                    <TextBlock Text="{StaticResource EnterMasterPassword}"
+                               Margin="0 15 0 5"
+                               TextAlignment="Center" />
+                    <TextBox x:Name="MasterPasswordTextBox"
+                             Classes="RevealPasswordTextBox"
+                             Text="{CompiledBinding MasterPassword}"
+                             PasswordChar="•"/>
+                    <Button Content="{StaticResource Unlock}"
+                            Theme="{StaticResource AccentButtonTheme}"
+                            Margin="20 5 20 0"
+                            Command="{CompiledBinding UnlockStorage}"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel VerticalAlignment="Bottom" Margin="25 0 25 70" HorizontalAlignment="Center" Spacing="5">
+                <StackPanel Orientation="Horizontal" Spacing="3">
+                    <PathIcon Data="{StaticResource LampRegular}" Foreground="{StaticResource TextFillColor3Brush}" />
+                    
+                    <TextBlock Text="{StaticResource Tip}" FontWeight="Bold" Foreground="{StaticResource TextFillColor3Brush}" />
+                </StackPanel>
+                
+                <TextBlock x:Name="TextBlockTip" TextWrapping="Wrap" TextAlignment="Center" Foreground="{StaticResource TextFillColor3Brush}" />
+            </StackPanel>
+        </Grid>
+    </SmoothScrollViewer>
+</UserControl>

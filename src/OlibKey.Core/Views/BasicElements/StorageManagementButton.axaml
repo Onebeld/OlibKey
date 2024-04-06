@@ -1,0 +1,133 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels"
+             xmlns:conv="clr-namespace:OlibKey.Core.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.BasicElements.StorageManagementButton"
+             x:DataType="vm:ApplicationViewModel"
+             IsVisible="{CompiledBinding Session.Storage, Converter={x:Static ObjectConverters.IsNotNull}}">
+    <Button x:Name="ButtonStorageMenu"
+            Theme="{StaticResource AppBarButtonTheme}"
+            Padding="5"
+            ToolTip.Tip="{DynamicResource Menu}">
+        <Button.Flyout>
+            <Flyout Placement="Bottom" ShowMode="Transient">
+                <Grid RowDefinitions="Auto,Auto,Auto" MinWidth="250">
+                    <StackPanel Grid.Row="0" Margin="0 10 0 0" Spacing="5">
+                        <Border HorizontalAlignment="Center"
+                                CornerRadius="99"
+                                Width="80"
+                                Height="80"
+                                ClipToBounds="True"
+                                Background="{StaticResource ControlFillColor2Brush}">
+                            <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                        </Border>
+                        
+                        <TextBlock Text="{CompiledBinding Session.Storage.Settings.Name}"
+                                   FontSize="22"
+                                   Theme="{StaticResource TitleTextBlockTheme}"
+                                   HorizontalAlignment="Center" />
+                        
+                        <TextBlock Text="{StaticResource Modified}"
+                                   Margin="0 -5 0 0"
+                                   IsVisible="{CompiledBinding IsDirty}"
+                                   FontSize="12"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
+                    
+                    <StackPanel x:Name="StackPanelMenuButtons" Grid.Row="1" Spacing="5" Margin="15 10 15 15">
+                        <StackPanel.Styles>
+                            <Style Selector="Button">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                            <Style Selector="Button > DockPanel > PathIcon">
+                                <Setter Property="Margin" Value="0 0 10 0" />
+                                <Setter Property="Width" Value="16" />
+                                <Setter Property="Height" Value="16" />
+                                <Setter Property="DockPanel.Dock" Value="Left" />
+                                <Setter Property="Foreground" Value="{StaticResource TextFillColor1Brush}" />
+                            </Style>
+                            <Style Selector="Button > DockPanel > TextBlock.Hotkey">
+                                <Setter Property="Foreground" Value="{StaticResource TextFillColor3Brush}" />
+                                <Setter Property="FontSize" Value="12" />
+                                <Setter Property="TextAlignment" Value="Right" />
+                            </Style>
+                        </StackPanel.Styles>
+                        
+                        <Button>
+                            <DockPanel>
+                                <PathIcon Data="{StaticResource SaveRegular}" />
+                                
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource SaveStorage}" />
+                                
+                                <TextBlock x:Name="TextBlockHotkeyS" Classes="Hotkey" Text="Ctrl+S" />
+                            </DockPanel>
+                        </Button>
+                        
+                        <Separator Margin="0 5" />
+                        
+                        <Button Command="{CompiledBinding LockStorage}">
+                            <DockPanel>
+                                <PathIcon Data="{StaticResource LockRegular}" />
+                                
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource LockStorage}" />
+                                
+                                <TextBlock x:Name="TextBlockHotkeyL" Classes="Hotkey" Text="Ctrl+L" />
+                            </DockPanel>
+                        </Button>
+                        
+                        <Button>
+                            <DockPanel>
+                                <PathIcon Data="{StaticResource ShieldRegular}" />
+                                
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource PasswordChecker}" />
+                            </DockPanel>
+                        </Button>
+                        <Button Command="{CompiledBinding OpenStorageSettings}">
+                            <DockPanel>
+                                <PathIcon Data="{StaticResource SettingsRegular}" />
+                                
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource StorageSettings}" />
+                            </DockPanel>
+                        </Button>
+                        
+                        <Separator Margin="0 5" IsVisible="{CompiledBinding Session.Storage.Settings.UseTrashcan}" />
+                        
+                        <Button IsVisible="{CompiledBinding Session.Storage.Settings.UseTrashcan}">
+                            <DockPanel>
+                                <PathIcon Data="{StaticResource DeleteRegular}" />
+                                
+                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource Trashcan}" />
+                            </DockPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Flyout>
+        </Button.Flyout>
+        
+        <StackPanel Orientation="Horizontal">
+            <Border Width="8"
+                    Height="8"
+                    CornerRadius="99"
+                    Background="{StaticResource ControlFillColor3Brush}"
+                    IsVisible="{CompiledBinding IsDirty}"
+                    Margin="0 0 5 0"/>
+            
+            <Border Width="26"
+                    Height="26"
+                    CornerRadius="99"
+                    ClipToBounds="True"
+                    Background="{StaticResource ControlFillColor3Brush}">
+                <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
+            </Border>
+            
+            <TextBlock FontSize="12"
+                       Foreground="{StaticResource TextFillColor3Brush}"
+                       Text="{CompiledBinding Session.Storage.Settings.Name}"
+                       Margin="5 0 0 0" VerticalAlignment="Center" />
+        </StackPanel>
+    </Button>
+</UserControl>

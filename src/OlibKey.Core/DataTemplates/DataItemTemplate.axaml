@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageModels">
+    <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type storageModels:Data}">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+            <Border Grid.Column="0"
+                    Background="White"
+                    CornerRadius="99"
+                    Height="25"
+                    Width="25"
+                    Margin="5 0">
+                <Image Source="{CompiledBinding Icon^, FallbackValue={StaticResource OlibKeyUpdateIcon}, TargetNullValue={StaticResource OlibKeyUpdateIcon}}"
+                       Margin="5" />
+            </Border>
+            
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="{CompiledBinding Name, TargetNullValue={StaticResource NoData}}"
+                           FontWeight="Bold"
+                           FontSize="16"
+                           TextTrimming="CharacterEllipsis" />
+
+                <TextBlock Foreground="{StaticResource TextFillColor3Brush}"
+                           FontSize="12"
+                           IsVisible="{CompiledBinding $self.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                           TextTrimming="CharacterEllipsis"
+                           Text="{CompiledBinding Information, TargetNullValue={StaticResource NoData}}" />
+                
+                <TextBlock Foreground="{StaticResource TextFillColor3Brush}"
+                           IsVisible="{CompiledBinding DeleteDate, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+                           TextTrimming="CharacterEllipsis"
+                           FontSize="12">
+                    <Run Text="{StaticResource Deleted}" />
+                    <Run Text=": " />
+                    <Run Text="{CompiledBinding DeleteDate}" />
+                </TextBlock>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        Margin="10 0 10 0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Spacing="5">
+                <Border CornerRadius="99"
+                        Width="10"
+                        Height="10"
+                        IsVisible="{CompiledBinding Color, Converter={x:Static ObjectConverters.IsNotNull}}" />
+
+                <ToggleButton Theme="{StaticResource AppBarToggleButtonTheme}"
+                              Width="24"
+                              Height="24"
+                              Padding="0"
+                              IsChecked="{CompiledBinding IsFavorite}"
+                              ToolTip.Tip="{StaticResource Favorite}"
+                              CornerRadius="{StaticResource RoundedControlCornerRadius}"
+                              IsEnabled="{CompiledBinding $parent[ContentDialog], Converter={x:Static ObjectConverters.IsNull}}">
+                    <ToggleButton.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                            <CompiledBinding Path="$parent[ContentControl].IsPointerOver" />
+                            <CompiledBinding Path="$parent[ISelectable].IsSelected" />
+                            <CompiledBinding Path="IsFavorite" />
+                        </MultiBinding>
+                    </ToggleButton.IsVisible>
+                    
+                    <PathIcon Data="{StaticResource FavoriteRegular}" />
+                </ToggleButton>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

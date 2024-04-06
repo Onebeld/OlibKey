@@ -1,0 +1,207 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.MainWindowPages.AboutPage">
+    <SmoothScrollViewer>
+        <StackPanel Margin="25" Spacing="5">
+            <TextBlock Text="{StaticResource About}"
+                       Margin="0 0 0 10"
+                       Theme="{StaticResource TitleTextBlockTheme}" />
+
+            <Panel>
+                <Grid HorizontalAlignment="Left" ColumnDefinitions="Auto,Auto">
+                    <Image Grid.Column="0" Source="{StaticResource OlibKeyIcon}" Width="70" />
+                    <StackPanel Grid.Column="1" Width="150" Margin="20 0 0 0" VerticalAlignment="Center">
+                        <PathIcon Data="{StaticResource OlibKeyText}"
+                                  Foreground="{StaticResource TextFillColor1Brush}"
+                                  Height="NaN"
+                                  Width="NaN" />
+                        
+                        <TextBlock Foreground="{StaticResource TextFillColor3Brush}" FontSize="12">
+                            <Run Text="{StaticResource License}" /><Run Text=":" />
+                            &#8203;<Run Text="GPL-3.0" />
+                        </TextBlock>
+                        
+                        <TextBlock Margin="0 -2 0 0" Foreground="{StaticResource TextFillColor3Brush}"
+                                   FontSize="12">
+                            <Run Text="{StaticResource Version}" /><Run Text=":" />
+                            &#8203;<Run x:Name="AppVersion" />
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Width="200">
+                    <PathIcon Data="{StaticResource OnebeldIcon}"
+                              Foreground="{StaticResource TextFillColor1Brush}"
+                              Width="NaN" 
+                              Height="NaN" />
+                    
+                    <TextBlock Text="Dmitry Zhutkov"
+                               FontSize="12"
+                               TextAlignment="Right"
+                               Foreground="{StaticResource TextFillColorTertiaryBrush}" />
+                    <Button x:Name="ContactAuthorButton"
+                            Theme="{StaticResource AppBarButtonTheme}"
+                            Content="{StaticResource ContactAuthor}"
+                            Foreground="{StaticResource SystemAccentLightColor1Brush}"
+                            Padding="0 0"
+                            FontSize="12"
+                            HorizontalAlignment="Right">
+                        <Button.Flyout>
+                            <Flyout Placement="Bottom" ShowMode="Transient">
+                                <UniformGrid Columns="3" Margin="15">
+                                    <DockPanel Margin="5">
+                                        <TextBlock Text="{StaticResource WriteLetter}"
+                                                   DockPanel.Dock="Bottom"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0 5 0 0"
+                                                   FontSize="12" />
+                                        <Button x:Name="MailButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource MailRegular}" />
+                                        </Button>
+                                    </DockPanel>
+                                    <DockPanel Margin="5">
+                                        <TextBlock Text="Discord"
+                                                   DockPanel.Dock="Bottom"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0 5 0 0"
+                                                   FontSize="12" />
+                                        <Button x:Name="DiscordButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource DiscordRegular}" />
+                                        </Button>
+                                    </DockPanel>
+                                    <DockPanel x:Name="SocialNetwork" Margin="5">
+                                        <TextBlock Text="{StaticResource SocialNetwork}"
+                                                   DockPanel.Dock="Bottom"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0 5 0 0"
+                                                   FontSize="12" />
+                                        <Button x:Name="SocialNetworkButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource PeopleRegular}" />
+                                        </Button>
+                                    </DockPanel>
+                                    <DockPanel Margin="5">
+                                        <TextBlock Text="Telegram"
+                                                   DockPanel.Dock="Bottom"
+                                                   TextAlignment="Center"
+                                                   TextWrapping="Wrap"
+                                                   Margin="0 5 0 0"
+                                                   FontSize="12" />
+                                        <Button x:Name="TelegramButton" Padding="40 14">
+                                            <PathIcon Data="{StaticResource TelegramIcon}" />
+                                        </Button>
+                                    </DockPanel>
+                                </UniformGrid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+            </Panel>
+            
+            <OptionsDisplayItem Header="{StaticResource UsedLibraries}"
+                                Icon="{StaticResource AppFolderRegular}"
+                                Margin="0 10 0 0"
+                                Expands="True">
+                <OptionsDisplayItem.Content>
+                    <StackPanel Spacing="10">
+                        <Panel Margin="5">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Image Source="{StaticResource AvaloniaUIImage}" Width="30" Height="30" />
+                                <TextBlock Text="Avalonia" FontSize="20" VerticalAlignment="Center" FontWeight="SemiBold" />
+                            </StackPanel>
+                            
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
+                                       Foreground="{StaticResource TextFillColor3Brush}">
+                                <Run Text="{StaticResource Version}" /><Run Text=":" />
+                                &#8203;<Run Text="11.0.4" />
+                            </TextBlock>
+                        </Panel>
+                        <Separator Background="{StaticResource CardStrokeColorDefaultBrush}" Margin="-12 0" />
+                        <Panel Margin="5">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Image Source="{StaticResource PleasantUIIcon}" Width="30" Height="30" />
+                                <Image Source="{StaticResource PleasantUI}" Width="150" VerticalAlignment="Center" />
+                            </StackPanel>
+                            
+                            <StackPanel>
+                                <TextBlock VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           Foreground="{StaticResource TextFillColor3Brush}">
+                                    <Run Text="{StaticResource Version}" /><Run Text=":" />
+                                    &#8203;<Run x:Name="PleasantUIVersion" />
+                                </TextBlock>
+                                <TextBlock VerticalAlignment="Center"
+                                           HorizontalAlignment="Right"
+                                           Foreground="{StaticResource TextFillColor3Brush}">
+                                    <Run Text="{StaticResource Author}" /><Run Text=":" />
+                                    &#8203;<Run Text="Onebeld" />
+                                </TextBlock>
+                            </StackPanel>
+                        </Panel>
+                    </StackPanel>
+                </OptionsDisplayItem.Content>
+            </OptionsDisplayItem>
+            
+            <OptionsDisplayItem Header="{StaticResource Links}"
+                                Icon="{StaticResource LinkRegular}"
+                                Expands="True"
+                                IsExpanded="True">
+                <OptionsDisplayItem.Content>
+                    <StackPanel Spacing="10" Margin="45 0 0 0">
+                        <Button x:Name="PatreonButton"
+                                Theme="{StaticResource AppBarButtonTheme}"
+                                Content="Patreon"
+                                Foreground="{StaticResource SystemAccentLightColor1Brush}"
+                                HorizontalAlignment="Left"
+                                Padding="0 0" />
+                        <Button x:Name="GitHubButton"
+                                Theme="{StaticResource AppBarButtonTheme}"
+                                Content="GitHub"
+                                Foreground="{StaticResource SystemAccentLightColor1Brush}"
+                                HorizontalAlignment="Left"
+                                Padding="0 0" />
+                        <Button x:Name="BoostyButton"
+                                Theme="{StaticResource AppBarButtonTheme}"
+                                Content="Boosty"
+                                Foreground="{StaticResource SystemAccentLightColor1Brush}"
+                                HorizontalAlignment="Left"
+                                Padding="0 0" />
+                    </StackPanel>
+                </OptionsDisplayItem.Content>
+            </OptionsDisplayItem>
+            
+            <Border Background="{StaticResource ControlFillColor1Brush}"
+                    BorderThickness="1"
+                    BorderBrush="{StaticResource ControlBorderColorBrush}"
+                    Padding="12"
+                    CornerRadius="{StaticResource ControlCornerRadius}">
+                <StackPanel>
+                    <TextBlock Text="{StaticResource Description}" FontWeight="Bold" Margin="0 0 0 10" />
+                    <TextBlock Text="{StaticResource OlibKeyDescription}" TextWrapping="Wrap" />
+
+                    <TextBlock TextWrapping="Wrap" Margin="0 10 0 0">
+                        <Run Text="{StaticResource WorksOn}" /><Run Text=":" />
+                        &#8203;<Run x:Name="RunDotNet" />
+                    </TextBlock>
+                    
+                    <TextBlock Text="{StaticResource License}" FontWeight="Bold" Margin="0 10" />
+                    <TextBlock Text="{StaticResource LicenseDescription1}" TextWrapping="Wrap" />
+                    <TextBlock Text="{StaticResource LicenseDescription2}" TextWrapping="Wrap" Margin="0 5 0 0" />
+                    
+                    <TextBlock TextWrapping="Wrap" Margin="0 15 0 0">
+                        <Run Text="{StaticResource Copyright}" />
+                        &#8203;<Run x:Name="RunAuthor" />
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </SmoothScrollViewer>
+</UserControl>

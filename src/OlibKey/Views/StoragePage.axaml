@@ -1,0 +1,13 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:contr="using:OlibKey.Core.Views.BasicElements"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Views.StoragePage">
+    <Grid ColumnDefinitions="0.9*,10,*,10,1.5*" Margin="10">
+        <contr:AdditionalPanel Grid.Column="0" />
+        <contr:DataList Grid.Column="2" />
+        <contr:Viewer Grid.Column="4" />
+    </Grid>
+</UserControl>

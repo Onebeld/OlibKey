@@ -1,81 +1,61 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.ReactiveUI;
-using OlibKey.Core;
-using OlibKey.Structures;
-using OlibKey.ViewModels.Pages;
-using OlibKey.Views.Pages;
-using ReactiveUI;
-using Splat;
-using System;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
-using System.Diagnostics;
-using Avalonia.OpenGL;
-using System.Threading.Tasks;
+using Avalonia.Win32;
 
-namespace OlibKey
+namespace OlibKey;
+
+public class Program
 {
-    public static class Program
-    {
-        public static Settings Settings { get; set; }
+	[STAThread]
+	public static void Main(string[] args) => BuildAvaloniaApp()
+		.StartWithClassicDesktopLifetime(args, ShutdownMode.OnMainWindowClose);
 
-        [STAThread]
-        public static void Main(string[] args)
-        {
-            try
+	public static AppBuilder BuildAvaloniaApp()
+	{
+		AppBuilder appBuilder = AppBuilder.Configure<App>();
+		appBuilder.UseSkia();
+
+#if Windows
+		appBuilder.UseWin32()
+			.With(new AngleOptions
+			{
+				AllowedPlatformApis = new List<AngleOptions.PlatformApi>
+				{
+					AngleOptions.PlatformApi.DirectX11
+				}
+			});
+#elif Linux
+        appBuilder.UseX11();
+#elif OSX
+        appBuilder.UseAvaloniaNative();
+#endif
+
+		appBuilder
+#if Windows
+			.With(new Win32PlatformOptions
+			{
+				OverlayPopups = true,
+			});
+#endif
+#if OSX
+            .With(new MacOSPlatformOptions
             {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && AppDomain.CurrentDomain.BaseDirectory.ToLower().Contains("program files") && !IsAdmin())
-                {
-                    Process.Start(new ProcessStartInfo
-                    {
-                        FileName = "OlibKey",
-                        UseShellExecute = true,
-                        Verb = "runas",
-                        Arguments = args?[0]
-                    });
-                    return;
-                }
-
-                Settings = File.Exists(AppDomain.CurrentDomain.BaseDirectory + "settings.xml")
-                ? SaveAndLoadSettings.LoadSettings()
-                : new Settings();
-
-                BuildAvaloniaApp().Start(AppMain, args);
-            }
-            catch (Exception ex)
+                DisableDefaultApplicationMenuItems = true,
+                ShowInDock = false,
+                DisableNativeMenus = true
+            });
+#endif
+#if Linux
+            .With(new X11PlatformOptions()
             {
+                OverlayPopups = true
+            });
+#endif
 
-                Log.WriteFatal(ex);
-            }
-        }
+#if DEBUG
+		appBuilder.LogToTrace();
+#endif
 
-        private static AppBuilder BuildAvaloniaApp() =>
-            AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .LogToDebug()
-                .UseReactiveUI()
-                .With(new Win32PlatformOptions { AllowEglInitialization = false, UseDeferredRendering = false, OverlayPopups = false })
-                .With(new MacOSPlatformOptions { ShowInDock = true })
-                .With(new AvaloniaNativePlatformOptions { UseGpu = true, UseDeferredRendering = false, OverlayPopups = false })
-                .With(new X11PlatformOptions { UseGpu = true, UseEGL = true });
-
-        private static void AppMain(Application app, string[] args)
-        {
-            App.MainWindowViewModel = new MainWindowViewModel { OpenStorages = args };
-
-            Locator.CurrentMutable.Register<IViewFor<CreateLoginPageViewModel>>(() => new CreateLoginPage());
-            Locator.CurrentMutable.Register<IViewFor<StartPageViewModel>>(() => new StartPage());
-            Locator.CurrentMutable.Register<IViewFor<LoginInformationPageViewModel>>(() => new LoginInformationPage());
-            Locator.CurrentMutable.Register<IViewFor<EditLoginPageViewModel>>(() => new EditLoginPage());
-
-            App.MainWindow = new MainWindow { DataContext = App.MainWindowViewModel };
-
-            app.Run(App.MainWindow);
-        }
-
-        public static bool IsAdmin() => new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
-    }
+		return appBuilder;
+	}
 }

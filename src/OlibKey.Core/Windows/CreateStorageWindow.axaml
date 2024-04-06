@@ -1,0 +1,106 @@
+﻿<ContentDialog xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:OlibKey.Core.ViewModels.Windows"
+             xmlns:conv="using:OlibKey.Core.Converters"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Windows.CreateStorageWindow"
+             x:DataType="vm:CreateStorageViewModel"
+             MaxWidth="400"
+             VerticalAlignment="Center">
+    <Design.DesignStyle>
+        <Style Selector="ContentDialog">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+    </Design.DesignStyle>
+    
+    <SmoothScrollViewer>
+        <StackPanel Margin="20 15" Spacing="5">
+            <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
+                       Text="{StaticResource CreateStorage}"
+                       Margin="0 0 0 10"/>
+            
+            <DockPanel Margin="0 0 0 10">
+                <Border x:Name="BorderImage" DockPanel.Dock="Left"
+                        Background="{StaticResource ControlFillColor2Brush}"
+                        Margin="0 0 10 0"
+                        Width="80"
+                        Height="80"
+                        ClipToBounds="True"
+                        CornerRadius="99"
+                        DragDrop.AllowDrop="True">
+                    <Image Source="{CompiledBinding StorageSettings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                </Border>
+                
+                <TextBox VerticalAlignment="Center"
+                         Watermark="{StaticResource Name}"
+                         Text="{CompiledBinding StorageSettings.Name}" />
+            </DockPanel>
+            
+            <TextBlock Text="{StaticResource MasterPassword}" FontWeight="SemiBold" />
+            
+            <Panel>
+                <TextBox Classes="RevealPasswordTextBox"
+                         Text="{CompiledBinding MasterPassword}"
+                         PasswordChar="•" />
+            
+                <ProgressBar Maximum="300"
+                             MinWidth="0"
+                             VerticalAlignment="Bottom"
+                             Margin="15 0 15 -3"
+                             Value="{CompiledBinding MasterPassword, Converter={x:Static conv:GeneralConverters.ComplexityPasswordConverter}, Mode=OneWay}" />
+            </Panel>
+            
+            
+            <Separator Margin="0 10" />
+            
+            <DockPanel>
+                <TextBlock Margin="0 0 5 0" VerticalAlignment="Center">
+                    <Run Text="{StaticResource Iterations}" /><Run Text=":" />
+                </TextBlock>
+                
+                <NumericUpDown HorizontalContentAlignment="Left"
+                               Value="{CompiledBinding StorageSettings.Iterations}"
+                               Minimum="1"
+                               FormatString="N0" />
+            </DockPanel>
+            
+            <CheckBox Content="{StaticResource UseTrashcan}"
+                      IsChecked="{CompiledBinding StorageSettings.UseTrashcan}" />
+            
+            <Separator Margin="0 10" />
+            
+            <DockPanel>
+                <TextBlock Margin="0 0 5 0" VerticalAlignment="Center" DockPanel.Dock="Left">
+                    <Run Text="{StaticResource Path}" /><Run Text=":" />
+                </TextBlock>
+                
+                <Button DockPanel.Dock="Right"
+                        ToolTip.Tip="{StaticResource ChoosePath}"
+                        Width="{CompiledBinding $self.Bounds.Height}"
+                        Command="{CompiledBinding SelectPath}">
+                    <PathIcon Data="{StaticResource AttachRegular}" />
+                </Button>
+                
+                <TextBox Margin="5 0" Text="{CompiledBinding Path}" />
+            </DockPanel>
+        </StackPanel>
+    </SmoothScrollViewer>
+    
+    <ContentDialog.BottomPanelContent>
+        <UniformGrid Margin="15 0" Rows="1">
+            <Button Theme="{StaticResource AccentButtonTheme}"
+                    Content="{StaticResource Ok}"
+                    VerticalAlignment="Center" 
+                    Margin="5"
+                    Command="{CompiledBinding CloseWithResult}"
+                    CommandParameter="{CompiledBinding $parent[ContentDialog]}" />
+            <Button Content="{StaticResource Cancel}" 
+                    VerticalAlignment="Center"
+                    Margin="5"
+                    Command="{CompiledBinding Close}"
+                    CommandParameter="{CompiledBinding $parent[ContentDialog]}" />
+        </UniformGrid>
+    </ContentDialog.BottomPanelContent>
+</ContentDialog>

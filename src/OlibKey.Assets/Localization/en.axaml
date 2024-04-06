@@ -1,0 +1,180 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=System.Runtime">
+    <s:String x:Key="LanguageKey">en</s:String>
+    
+    <!--English-->
+    <s:String x:Key="Reestablish">Reestablish</s:String>
+    <s:String x:Key="Collapse">Collapse</s:String>
+    <s:String x:Key="Expand">Expand</s:String>
+    <s:String x:Key="Close">Close</s:String>
+    <s:String x:Key="Menu">Menu</s:String>
+    <s:String x:Key="Back">Back</s:String>
+    <s:String x:Key="AddYourNewColor">Add your new color!</s:String>
+    <s:String x:Key="AddColor">Add color</s:String>
+    <s:String x:Key="Add">Add</s:String>
+    
+    <s:String x:Key="Cut">Cut</s:String>
+    <s:String x:Key="Copy">Copy</s:String>
+    <s:String x:Key="Paste">Paste</s:String>
+    <s:String x:Key="Change">Change</s:String>
+    
+    <s:String x:Key="Ok">OK</s:String>
+    <s:String x:Key="Cancel">Cancel</s:String>
+    
+    <s:String x:Key="CreateStorage">Create storage</s:String>
+    <s:String x:Key="LoadStorage">Load storage</s:String>
+    <s:String x:Key="SaveStorage">Save storage</s:String>
+    <s:String x:Key="PasswordChecker">Password checker</s:String>
+    <s:String x:Key="StorageSettings">Storage settings</s:String>
+    <s:String x:Key="LockStorage">Lock storage</s:String>
+    <s:String x:Key="Trashcan">Trashcan</s:String>
+    
+    <s:String x:Key="MasterPassword">Master password</s:String>
+    <s:String x:Key="Iterations">Iterations</s:String>
+    <s:String x:Key="Name">Name</s:String>
+    <s:String x:Key="Path">Path</s:String>
+    <s:String x:Key="ChoosePath">Choose a path</s:String>
+    <s:String x:Key="UseTrashcan">Use trashcan</s:String>
+    <s:String x:Key="NoElements">No elements</s:String>
+    
+    <s:String x:Key="AllElements">All elements</s:String>
+    <s:String x:Key="Login">Login</s:String>
+    <s:String x:Key="BankCard">Bank card</s:String>
+    <s:String x:Key="PersonalData">Personal data</s:String>
+    <s:String x:Key="Notes">Notes</s:String>
+    
+    <s:String x:Key="Successful">Successful!</s:String>
+    <s:String x:Key="Error">Error</s:String>
+    
+    <s:String x:Key="ImageFiles">Image files</s:String>
+    <s:String x:Key="OlibFiles">Olib files</s:String>
+    
+    <s:String x:Key="FieldCopied">The field has been successfully copied</s:String>
+    <s:String x:Key="InvalidMasterPassword">Invalid master password</s:String>
+    <s:String x:Key="StorageCreated">The storage has been successfully created!</s:String>
+    <s:String x:Key="StorageSaved">The storage has been successfully saved!</s:String>
+    <s:String x:Key="StorageFileNotFound">Storage file not found</s:String>
+    <s:String x:Key="UnknownErrorOccurred">An unknown error occurred</s:String>
+    
+    <!--Password Generator-->
+    <s:String x:Key="PasswordGenerator">Password generator</s:String>
+    <s:String x:Key="PasswordC">Password</s:String>
+    <s:String x:Key="OtherSpecialCharacters">Other special characters</s:String>
+
+    <s:String x:Key="Lowercase">Lowercase (abc)</s:String>
+    <s:String x:Key="Uppercase">Uppercase (ABC)</s:String>
+    <s:String x:Key="Length">Length</s:String>
+    <s:String x:Key="Numbers">Numbers (123)</s:String>
+    <s:String x:Key="Special">Special ($%#)</s:String>
+    <s:String x:Key="Underscore">Underscore (_)</s:String>
+    
+    <!--Password manager-->
+    <s:String x:Key="PasswordManager">Password manager</s:String>
+    <s:String x:Key="LetsCreateNewStorage">Let's create a new storage!</s:String>
+    <s:String x:Key="EnterMasterPassword">Enter the master password</s:String>
+    <s:String x:Key="Tip">Tip</s:String>
+    <s:String x:Key="Unlock">Unlock</s:String>
+    <s:String x:Key="NoData">No data</s:String>
+    <s:String x:Key="Modified">Modified</s:String>
+    <s:String x:Key="SortByDate">Sort by date</s:String>
+    <s:String x:Key="SortByAlphabetical">Sort by alphabetical</s:String>
+    
+    <s:String x:Key="Search">Search</s:String>
+    <s:String x:Key="Favorite">Favorite</s:String>
+    <s:String x:Key="Deleted">Deleted</s:String>
+    
+    <!--Tips-->
+    <s:String x:Key="PasswordManagerTip1">Never use your one password for all sites! This will be a rather unfortunate consequence.</s:String>
+    <s:String x:Key="PasswordManagerTip2">Can't remember a complex password? Try playing the word game! Your made-up password is unlikely to ever be guessed.</s:String>
+    <s:String x:Key="PasswordManagerTip3">Do not use your date of birth, someone's name, nickname as a password. This password will be quite easy to guess.</s:String>
+    <s:String x:Key="PasswordManagerTip4">If the service offers to put 2FA, be sure to use it, good OlibKey is able to generate a unique key.</s:String>
+    <s:String x:Key="PasswordManagerTip5">After working on someone else's computer, be sure to log out of your account.</s:String>
+    <s:String x:Key="PasswordManagerTip6">Not all password managers are perfect, including this one.</s:String>
+    <s:String x:Key="PasswordManagerTip7">Check the site you're visiting. Phishing sites just want you to send them your details.</s:String>
+    <s:String x:Key="PasswordManagerTip8">If you are a streamer, pay attention. Even if you accidentally show your password for less than a second - the hacking process is inevitable.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny1">If you don't trust password managers, including this one, use the old-fashioned way - notebook and pen. Just don't show the notebook to anyone.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny2">It's not a bad idea to change your password every month. Am I right, my dear friend who has been using the same password for several years?</s:String>
+    <s:String x:Key="PasswordManagerTipFunny3">If you are streaming an Android emulator, it is recommended that you temporarily hide the screen.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny4">Please, you hear me? Never say your password out loud!</s:String>
+    <s:String x:Key="PasswordManagerTipFunny5">Don't trust your password manager? Do you trust the notepad on your computer?</s:String>
+    <s:String x:Key="PasswordManagerTipFunny6">If you go to a company website that tells you how to create a strong password, you are more likely to be advised to use their password manager.</s:String>
+    <s:String x:Key="PasswordManagerTipFunny7">Since Adam was a boy people used the password as a way to pass on some hidden information from outsiders.</s:String>
+    
+    <!--Data Page-->
+    <s:String x:Key="Save">Save</s:String>
+    <s:String x:Key="AddElement">Add element</s:String>
+    <s:String x:Key="ItemInformation">Item information</s:String>
+    <s:String x:Key="ChangeElement">Change element</s:String>
+    <s:String x:Key="Tags">Tags</s:String>
+    <s:String x:Key="TagName">Tag Name</s:String>
+    <s:String x:Key="SelectImage">Select image</s:String>
+    
+    <s:String x:Key="Type">Type</s:String>
+    <s:String x:Key="Generate">Generate</s:String>
+    
+    <s:String x:Key="Username">Username</s:String>
+    <s:String x:Key="Email">Email</s:String>
+    <s:String x:Key="Password">Password</s:String>
+    <s:String x:Key="WebSite">Web site</s:String>
+    <s:String x:Key="TwoFactorAuthentication">Two-factor authentication</s:String>
+    <s:String x:Key="SecretKey">Secret key</s:String>
+    <s:String x:Key="Activate">Activate</s:String>
+    <s:String x:Key="Deactivate">Deactivate</s:String>
+    
+    <s:String x:Key="TypeBankCard">Type bank card</s:String>
+    <s:String x:Key="CardNumber">Card number</s:String>
+    <s:String x:Key="DateCard">Date card</s:String>
+    <s:String x:Key="SecurityCode">Security code</s:String>
+    
+    <s:String x:Key="FullName">Full name</s:String>
+    <s:String x:Key="Number">Number</s:String>
+    <s:String x:Key="PlaceOfIssue">Place of issue</s:String>
+    <s:String x:Key="SocialSecurityNumber">Social security number</s:String>
+    <s:String x:Key="Tin">Tin</s:String>
+    <s:String x:Key="Telephone">Telephone</s:String>
+    <s:String x:Key="Company">Company</s:String>
+    <s:String x:Key="Postcode">Postcode</s:String>
+    <s:String x:Key="Country">Country</s:String>
+    <s:String x:Key="Region">Region</s:String>
+    <s:String x:Key="City">City</s:String>
+    <s:String x:Key="Address">Address</s:String>
+    
+    
+    <!--Settings-->
+    <s:String x:Key="Settings">Settings</s:String>
+    
+    <s:String x:Key="General">General</s:String>
+    <s:String x:Key="Language">Language</s:String>
+    
+    <s:String x:Key="Appearance">Appearance</s:String>
+    <s:String x:Key="Font">Font</s:String>
+    <s:String x:Key="EnableShadow">Enable shadow</s:String>
+    <s:String x:Key="EnableShadowDescription">Enable shadow</s:String>
+    <s:String x:Key="EnableCustomTitleBar">Enable custom title bar</s:String>
+    <s:String x:Key="EnableBlur">Enable blur</s:String>
+    <s:String x:Key="OpacityLevel">Enable blur</s:String>
+    <s:String x:Key="AccentColor">Accent color</s:String>
+    <s:String x:Key="UseSystemAccentColor">Use system accent color</s:String>
+    <s:String x:Key="Theme">Theme</s:String>
+    <s:String x:Key="System">System</s:String>
+    <s:String x:Key="Light">Light</s:String>
+    <s:String x:Key="Dark">Dark</s:String>
+    
+    <!--About-->
+    <s:String x:Key="About">About</s:String>
+    <s:String x:Key="License">License</s:String>
+    <s:String x:Key="Version">Version</s:String>
+    <s:String x:Key="ContactAuthor">Contact author</s:String>
+    <s:String x:Key="WriteLetter">Write letter</s:String>
+    <s:String x:Key="SocialNetwork">Social network</s:String>
+    <s:String x:Key="UsedLibraries">Used libraries</s:String>
+    <s:String x:Key="Author">Author</s:String>
+    <s:String x:Key="Links">Links</s:String>
+    <s:String x:Key="Description">Description</s:String>
+    <s:String x:Key="WorksOn">Works on</s:String>
+    <s:String x:Key="Copyright">Copyright</s:String>
+    <s:String x:Key="OlibKeyDescription">An application that allows you to store passwords and other data in encrypted form (password manager).</s:String>
+    <s:String x:Key="LicenseDescription1">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</s:String>
+    <s:String x:Key="LicenseDescription2">This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</s:String>
+</ResourceDictionary>

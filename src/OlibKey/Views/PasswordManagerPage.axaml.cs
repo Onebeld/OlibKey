@@ -11,31 +11,31 @@ public partial class PasswordManagerPage : UserControl
     {
         InitializeComponent();
 
-        if (OlibKeyApp.ViewModel.Session.Database is null)
-            Content = new CreateDecryptDatabasePage();
-        else Content = new DatabasePage();
+        if (OlibKeyApp.ViewModel.Session.Storage is null)
+            Content = new CreateDecryptStoragePage();
+        else Content = new StoragePage();
         
-        OlibKeyApp.ViewModel.DatabaseCreated += ViewModelOnDatabaseCreated;
-        OlibKeyApp.ViewModel.DatabaseOpened += ViewModelOnDatabaseOpened;
-        OlibKeyApp.ViewModel.DatabaseUnlocked += ViewModelOnDatabaseCreated;
-        OlibKeyApp.ViewModel.DatabaseBlocked += ViewModelOnDatabaseOpened;
+        OlibKeyApp.ViewModel.StorageCreated += ViewModelOnStorageCreated;
+        OlibKeyApp.ViewModel.StorageOpened += ViewModelOnStorageOpened;
+        OlibKeyApp.ViewModel.StorageUnlocked += ViewModelOnStorageCreated;
+        OlibKeyApp.ViewModel.StorageBlocked += ViewModelOnStorageOpened;
     }
 
-    private void ViewModelOnDatabaseOpened(object? sender, EventArgs e)
+    private void ViewModelOnStorageOpened(object? sender, EventArgs e)
     {
-        Content = new CreateDecryptDatabasePage();
+        Content = new CreateDecryptStoragePage();
     }
 
-    private void ViewModelOnDatabaseCreated(object? sender, EventArgs e)
+    private void ViewModelOnStorageCreated(object? sender, EventArgs e)
     {
-        Content = new DatabasePage();
+        Content = new StoragePage();
     }
     
     protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
     {
         base.OnDetachedFromVisualTree(e);
         
-        OlibKeyApp.ViewModel.DatabaseCreated -= ViewModelOnDatabaseCreated;
-        OlibKeyApp.ViewModel.DatabaseOpened -= ViewModelOnDatabaseOpened;
+        OlibKeyApp.ViewModel.StorageCreated -= ViewModelOnStorageCreated;
+        OlibKeyApp.ViewModel.StorageOpened -= ViewModelOnStorageOpened;
     }
 }

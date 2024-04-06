@@ -4,10 +4,10 @@ using Avalonia.Collections;
 using Avalonia.Media;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
-using OlibKey.Core.Models.DatabaseModels.StorageTypes;
+using OlibKey.Core.Models.StorageModels.StorageTypes;
 using PleasantUI;
 
-namespace OlibKey.Core.Models.DatabaseModels;
+namespace OlibKey.Core.Models.StorageModels;
 
 [JsonDerivedType(typeof(Login), typeDiscriminator: "login")]
 [JsonDerivedType(typeof(BankCard), typeDiscriminator: "bankcard")]

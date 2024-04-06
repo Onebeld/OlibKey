@@ -3,7 +3,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:OlibKey.Core.ViewModels"
-        xmlns:core="using:OlibKey.Core"
         xmlns:contr="using:OlibKey.Core.Views.BasicElements"
         xmlns:appearance="clr-namespace:OlibKey.Core.Converters.Appearance;assembly=OlibKey.Core"
         xmlns:settings="clr-namespace:OlibKey.Core.Settings;assembly=OlibKey.Core"
@@ -24,16 +23,33 @@
         Height="700"
         x:DataType="vm:ApplicationViewModel">
     <PleasantWindow.TitleContent>
-        <contr:DatabaseManagementButton VerticalAlignment="Center" 
-                                        HorizontalAlignment="Right"
-                                        Margin="0 0 5 0"/>
+        <Panel>
+            <TextBox Classes="ClearTextBox"
+                     VerticalAlignment="Center"
+                     Text="{CompiledBinding SearchText}"
+                     Watermark="{DynamicResource Search}"
+                     IsVisible="{CompiledBinding Session.Storage, Converter={x:Static ObjectConverters.IsNotNull}}"
+                     Margin="250 0"
+                     MinWidth="300">
+                <TextBox.InnerLeftContent>
+                    <PathIcon Data="{StaticResource SearchRegular}"
+                              Width="14"
+                              Height="14"
+                              Margin="10 0 5 0" />
+                </TextBox.InnerLeftContent>
+            </TextBox>
+            
+            <contr:StorageManagementButton VerticalAlignment="Center" 
+                                           HorizontalAlignment="Right"
+                                           Margin="0 0 5 0"/>
+        </Panel>
     </PleasantWindow.TitleContent>
     
     <PleasantWindow.KeyBindings>
-        <KeyBinding Command="{CompiledBinding CreateDatabase}" Gesture="Ctrl+N" />
+        <KeyBinding Command="{CompiledBinding CreateStorage}" Gesture="Ctrl+N" />
         <KeyBinding Command="{CompiledBinding Save}" Gesture="Ctrl+S" />
-        <KeyBinding Command="{CompiledBinding OpenDatabase}" Gesture="Ctrl+O" />
-        <KeyBinding Command="{CompiledBinding LockDatabase}" Gesture="Ctrl+L" />
+        <KeyBinding Command="{CompiledBinding OpenStorage}" Gesture="Ctrl+O" />
+        <KeyBinding Command="{CompiledBinding LockStorage}" Gesture="Ctrl+L" />
     </PleasantWindow.KeyBindings>
     
     <Panel>

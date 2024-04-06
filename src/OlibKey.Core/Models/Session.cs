@@ -1,6 +1,6 @@
 ﻿using Avalonia.Threading;
 using OlibKey.Core.Enums;
-using OlibKey.Core.Models.DatabaseModels;
+using OlibKey.Core.Models.StorageModels;
 using OlibKey.Core.Structures;
 using PleasantUI;
 
@@ -9,15 +9,15 @@ namespace OlibKey.Core.Models;
 public class Session : ViewModelBase
 {
     private StorageType _storageType = StorageType.None;
-    private Database? _database;
+    private Storage? _storage;
     private string? _pathToFile;
 
     private string _currentMasterPassword;
 
-    public Database? Database
+    public Storage? Storage
     {
-        get => _database;
-        set => RaiseAndSet(ref _database, value);
+        get => _storage;
+        set => RaiseAndSet(ref _storage, value);
     }
 
     public StorageType StorageType
@@ -34,54 +34,54 @@ public class Session : ViewModelBase
     
     private DispatcherTimer? LockerTimer { get; set; }
 
-    public bool CreateDatabase(DatabaseInfo databaseInfo)
+    public bool CreateStorage(StorageInfo storageInfo)
     {
-        _currentMasterPassword = databaseInfo.MasterPassword;
+        _currentMasterPassword = storageInfo.MasterPassword;
 
-        Database = new Database
+        Storage = new Storage
         {
-            Settings = databaseInfo.DatabaseSettings
+            Settings = storageInfo.StorageSettings
         };
         
-        PathToFile = databaseInfo.Path;
+        PathToFile = storageInfo.Path;
         
         return true;
     }
 
-    public void OpenDatabase(string path)
+    public void OpenStorage(string path)
     {
         PathToFile = path;
         StorageType = StorageType.Disk;
     }
 
-    public void LockDatabase()
+    public void LockStorage()
     {
         RestartLockerTimer();
         
-        if (PathToFile is null || Database is null) return;
+        if (PathToFile is null || Storage is null) return;
         
-        SaveDatabase();
+        SaveStorage();
+        
+        Storage = null;
+        _currentMasterPassword = string.Empty;
     }
     
-    public void UnlockDatabase(string masterPassword)
+    public void UnlockStorage(string masterPassword)
     {
         if (PathToFile is null) return;
 
-        Database = Database.Load(PathToFile, masterPassword);
+        Storage = Storage.Load(PathToFile, masterPassword);
 
         _currentMasterPassword = masterPassword;
     }
 
-    public void SaveDatabase()
+    public void SaveStorage()
     {
         RestartLockerTimer();
         
-        if (PathToFile is null || Database is null) return;
+        if (PathToFile is null || Storage is null) return;
         
-        Database.Save(PathToFile, _currentMasterPassword);
-        
-        Database = null;
-        _currentMasterPassword = string.Empty;
+        Storage.Save(PathToFile, _currentMasterPassword);
     }
     
     public void ActivateLockerTimer(int minutes, params EventHandler[] tickActions)

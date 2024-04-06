@@ -6,9 +6,9 @@ using Avalonia.VisualTree;
 
 namespace OlibKey.Core.Views.BasicElements;
 
-public partial class DatabaseManagementButton : UserControl
+public partial class StorageManagementButton : UserControl
 {
-    public DatabaseManagementButton()
+    public StorageManagementButton()
     {
         InitializeComponent();
 
@@ -43,6 +43,6 @@ public partial class DatabaseManagementButton : UserControl
         if (sender is Button button)
             button.Command?.Execute(button.CommandParameter);
         
-        ButtonDatabaseMenu.Flyout?.Hide();
+        ButtonStorageMenu.Flyout?.Hide();
     }
 }

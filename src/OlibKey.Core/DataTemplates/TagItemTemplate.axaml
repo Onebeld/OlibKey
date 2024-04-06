@@ -7,10 +7,12 @@
                 Background="{StaticResource BackgroundColor1Brush}"
                 BorderBrush="{StaticResource ControlBorderColorBrush}"
                 BorderThickness="{StaticResource ControlBorderThickness}"
-                Padding="5"
-                Margin="0 0 5 0">
+                Padding="10 5"
+                Margin="0 0 5 5">
             <StackPanel Orientation="Horizontal" Spacing="5">
-                <TextBlock Text="{CompiledBinding}" VerticalAlignment="Center" />
+                <PathIcon Width="12" Height="12" Data="{StaticResource SellRegular}" VerticalAlignment="Center" />
+                
+                <TextBlock Text="{CompiledBinding}" VerticalAlignment="Center" Margin="0 -1 0 0" />
                 
                 <Button ToolTip.Tip="{StaticResource Delete}"
                         Theme="{StaticResource AppBarButtonTheme}"

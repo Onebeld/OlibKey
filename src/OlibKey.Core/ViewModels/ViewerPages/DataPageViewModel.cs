@@ -2,8 +2,8 @@
 using Avalonia.Controls.Notifications;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Models;
-using OlibKey.Core.Models.DatabaseModels;
-using OlibKey.Core.Models.DatabaseModels.StorageTypes;
+using OlibKey.Core.Models.StorageModels;
+using OlibKey.Core.Models.StorageModels.StorageTypes;
 using OlibKey.Core.Views.ViewerPages;
 using PleasantUI;
 
@@ -64,11 +64,11 @@ public class DataPageViewModel : ViewModelBase
         get
         {
             if (OlibKeyApp.ViewModel.Session is null || 
-                OlibKeyApp.ViewModel.Session.Database is null || 
+                OlibKeyApp.ViewModel.Session.Storage is null || 
                 OlibKeyApp.ViewModel.SelectedData is null)
                 throw new NullReferenceException();
 
-            return OlibKeyApp.ViewModel.Session.Database.Data.IndexOf(OlibKeyApp.ViewModel.SelectedData);
+            return OlibKeyApp.ViewModel.Session.Storage.Data.IndexOf(OlibKeyApp.ViewModel.SelectedData);
         }
     }
 
@@ -129,34 +129,36 @@ public class DataPageViewModel : ViewModelBase
     {
         Session.RestartLockerTimer();
 
-        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null) throw new NullReferenceException();
+        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null) throw new NullReferenceException();
 
         switch (_viewerMode)
         {
             case DataViewerMode.Create:
                 Data.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-                OlibKeyApp.ViewModel.Session.Database.Data.Add(Data);
+                Session.Storage?.Data.Add(Data);
 
                 OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
                 
+                Session.Storage?.UpdateInfo();
                 OlibKeyApp.ViewModel.DoSearch();
                 break;
             case DataViewerMode.Edit:
                 int index = DataIndex;
 
-                /*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.DatabaseModels.Data[index].Type is DataType.Login)
+                /*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type is DataType.Login)
                 {
-                    if (OlibKeyApp.ViewModel.Session.DatabaseModels.Data[index].Login?.WebSite != Data.Login?.WebSite)
+                    if (OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Login?.WebSite != Data.Login?.WebSite)
                         Data.IsIconChange = true;
                 }
 
-                if (Data.Type != OlibKeyApp.ViewModel.Session.DatabaseModels.Data[index].Type)
+                if (Data.Type != OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type)
                     Data.IsIconChange = true;*/
 
                 Data.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
                 
-                OlibKeyApp.ViewModel.Session.Database.Data[index] = Data;
+                OlibKeyApp.ViewModel.Session.Storage.Data[index] = Data;
                 
+                Session.Storage?.UpdateInfo();
                 OlibKeyApp.ViewModel.DoSearch();
                 OlibKeyApp.ViewModel.SelectedData = Data;
                 break;
@@ -180,21 +182,21 @@ public class DataPageViewModel : ViewModelBase
 
     public void DeleteData()
     {
-        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null)
+        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null)
             throw new NullReferenceException();
         
         Session.RestartLockerTimer();
 
         int index = DataIndex;
 
-        if (OlibKeyApp.ViewModel.Session.Database.Settings.UseTrashcan)
+        if (OlibKeyApp.ViewModel.Session.Storage.Settings.UseTrashcan)
         {
-            Data data = OlibKeyApp.ViewModel.Session.Database.Data[index];
+            Data data = OlibKeyApp.ViewModel.Session.Storage.Data[index];
             data.DeleteDate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-            OlibKeyApp.ViewModel.Session.Database.Trashcan.Data.Add(data);
+            OlibKeyApp.ViewModel.Session.Storage.Trashcan.Data.Add(data);
         }
         
-        OlibKeyApp.ViewModel.Session.Database.Data.RemoveAt(index);
+        OlibKeyApp.ViewModel.Session.Storage.Data.RemoveAt(index);
 
         OlibKeyApp.ViewModel.IsDirty = true;
         OlibKeyApp.ViewModel.DoSearch();
@@ -216,14 +218,14 @@ public class DataPageViewModel : ViewModelBase
 
     public void Cancel()
     {
-        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Database is null)
+        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null)
             throw new NullReferenceException();
         
         Session.RestartLockerTimer();
 
         _viewerMode = DataViewerMode.View;
 
-        Data = (Data)OlibKeyApp.ViewModel.Session.Database.Data[DataIndex].Clone();
+        Data = (Data)OlibKeyApp.ViewModel.Session.Storage.Data[DataIndex].Clone();
         
         RaisePropertyChanged(nameof(IsView));
         RaisePropertyChanged(nameof(IsEdit));
@@ -293,9 +295,11 @@ public class DataPageViewModel : ViewModelBase
 
     public void DeactivateTotp()
     {
-        if (Data is not Login)
+        if (Data is not Login login)
             return;
 
         Totp.Dispose();
+
+        login.IsActivatedTotp = false;
     }
 }

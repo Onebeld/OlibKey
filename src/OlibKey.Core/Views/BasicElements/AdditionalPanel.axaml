@@ -4,10 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OlibKey.Core.ViewModels"
              xmlns:enums="clr-namespace:OlibKey.Core.Enums"
-             xmlns:databaseModels="clr-namespace:OlibKey.Core.Models.DatabaseModels"
+             xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.BasicElements.AdditionalPanel"
              x:DataType="vm:ApplicationViewModel">
+    <Design.DataContext>
+        <vm:ApplicationViewModel />
+    </Design.DataContext>
+    
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -33,7 +37,7 @@
                                    VerticalAlignment="Center" />
                         
                         <TextBlock Grid.Column="2"
-                                   Text="{CompiledBinding Session.Database.Data.Count}"
+                                   Text="{CompiledBinding Session.Storage.Data.Count}"
                                    Foreground="{StaticResource TextFillColor3Brush}"
                                    VerticalAlignment="Center" />
                     </Grid>
@@ -52,7 +56,7 @@
                                    VerticalAlignment="Center" />
                         
                         <TextBlock Grid.Column="2"
-                                   Text="{CompiledBinding Session.Database.LoginCount}"
+                                   Text="{CompiledBinding Session.Storage.LoginCount}"
                                    Foreground="{StaticResource TextFillColor3Brush}"
                                    VerticalAlignment="Center" />
                     </Grid>
@@ -69,7 +73,7 @@
                                    VerticalAlignment="Center" />
                         
                         <TextBlock Grid.Column="2"
-                                   Text="{CompiledBinding Session.Database.BankCardCount}"
+                                   Text="{CompiledBinding Session.Storage.BankCardCount}"
                                    Foreground="{StaticResource TextFillColor3Brush}"
                                    VerticalAlignment="Center" />
                     </Grid>
@@ -86,7 +90,7 @@
                                    VerticalAlignment="Center" />
                         
                         <TextBlock Grid.Column="2"
-                                   Text="{CompiledBinding Session.Database.PersonalDataCount}"
+                                   Text="{CompiledBinding Session.Storage.PersonalDataCount}"
                                    Foreground="{StaticResource TextFillColor3Brush}"
                                    VerticalAlignment="Center" />
                     </Grid>
@@ -103,7 +107,7 @@
                                    VerticalAlignment="Center" />
                         
                         <TextBlock Grid.Column="2"
-                                   Text="{CompiledBinding Session.Database.NotesCount}"
+                                   Text="{CompiledBinding Session.Storage.NotesCount}"
                                    Foreground="{StaticResource TextFillColor3Brush}"
                                    VerticalAlignment="Center" />
                     </Grid>
@@ -111,29 +115,36 @@
                 
                 <Expander>
                     <Expander.Header>
-                        <Grid ColumnDefinitions="*,Auto">
-                            <TextBlock Grid.Column="0"
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <PathIcon Grid.Column="0" Data="{StaticResource SellRegular}" Margin="0 0 10 0" />
+                            
+                            <TextBlock Grid.Column="1"
                                        Text="{StaticResource Tags}"
                                        VerticalAlignment="Center" />
                             
-                            <TextBlock Grid.Column="1"
-                                       Text="{CompiledBinding Session.Database.Tags.Count}"
+                            <TextBlock Grid.Column="2"
+                                       Text="{CompiledBinding Session.Storage.Tags.Count}"
                                        Foreground="{StaticResource TextFillColor3Brush}"
                                        VerticalAlignment="Center" />
                         </Grid>
                     </Expander.Header>
                     
-                    <ListBox ItemsSource="{CompiledBinding Session.Database.Tags}"
+                    <ListBox ItemsSource="{CompiledBinding Session.Storage.Tags}"
                              SelectedItems="{CompiledBinding SelectedTags}"
                              SelectionMode="Multiple,Toggle">
                         <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="databaseModels:Tag">
-                                <Grid ColumnDefinitions="*,Auto">
-                                    <TextBlock Grid.Column="0"
+                            <DataTemplate x:DataType="storageModels:Tag">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <PathIcon Grid.Column="0"
+                                              Data="{StaticResource TagRegular}"
+                                              Foreground="{StaticResource TextFillColor3Brush}"
+                                              Margin="0 0 10 0" />
+                                    
+                                    <TextBlock Grid.Column="1"
                                                Text="{CompiledBinding Name}"
                                                TextTrimming="CharacterEllipsis"
                                                VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="1"
+                                    <TextBlock Grid.Column="2"
                                                Text="{CompiledBinding Count}"
                                                Foreground="{StaticResource TextFillColor3Brush}"
                                                VerticalAlignment="Center" />

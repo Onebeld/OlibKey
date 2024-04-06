@@ -1,7 +1,7 @@
 ﻿using Avalonia.Collections;
 using PleasantUI;
 
-namespace OlibKey.Core.Models.DatabaseModels;
+namespace OlibKey.Core.Models.StorageModels;
 
 public class Trashcan : ViewModelBase
 {

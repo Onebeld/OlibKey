@@ -3,17 +3,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Avalonia.Collections;
 using OlibKey.Core.Helpers;
-using OlibKey.Core.Models.DatabaseModels.StorageTypes;
+using OlibKey.Core.Models.StorageModels.StorageTypes;
 using OlibKey.Core.Settings;
 using PleasantUI;
 
-namespace OlibKey.Core.Models.DatabaseModels;
+namespace OlibKey.Core.Models.StorageModels;
 
-public class Database : ViewModelBase
+public class Storage : ViewModelBase
 {
     private AvaloniaList<Data> _data = [];
     private Trashcan _trashcan = new();
-    private DatabaseSettings _settings = null!;
+    private StorageSettings _settings = null!;
     
     private AvaloniaList<Tag> _tags = [];
 
@@ -34,23 +34,23 @@ public class Database : ViewModelBase
         set => RaiseAndSet(ref _trashcan, value);
     }
 
-    public DatabaseSettings Settings
+    public StorageSettings Settings
     {
         get => _settings;
         set => RaiseAndSet(ref _settings, value);
     }
 
     [JsonIgnore]
-    public int LoginCount => Data.OfType<Login>().Count();
+    public int LoginCount { get; private set; }
     
     [JsonIgnore]
-    public int BankCardCount => Data.OfType<BankCard>().Count();
+    public int BankCardCount { get; private set; }
     
     [JsonIgnore]
-    public int PersonalDataCount => Data.OfType<PersonalData>().Count();
+    public int PersonalDataCount { get; private set; }
     
     [JsonIgnore]
-    public int NotesCount => Data.OfType<Note>().Count();
+    public int NotesCount { get; private set; }
     
     [JsonIgnore]
     public AvaloniaList<Tag> Tags
@@ -61,30 +61,13 @@ public class Database : ViewModelBase
 
     private void DataOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => UpdateInfo();
 
-    private void UpdateInfo()
-    {
-        RaisePropertyChanged(nameof(LoginCount));
-        RaisePropertyChanged(nameof(BankCardCount));
-        RaisePropertyChanged(nameof(PersonalDataCount));
-        RaisePropertyChanged(nameof(NotesCount));
-        
-        Tags.Clear();
-        
-        IEnumerable<IGrouping<string, string>> tags = Data.SelectMany(x => x.Tags).GroupBy(tag => tag);
-
-        foreach (IGrouping<string,string> grouping in tags) 
-            Tags.Add(new Tag(grouping.Key, grouping.Count()));
-        
-        Tags = new AvaloniaList<Tag>(Tags.OrderByDescending(x => x.Count));
-    }
-
     public string Lock(string masterPassword)
     {
         string encryptJson;
         
         {
-            string databaseJson = ToJson();
-            string compressedJson = Compressor.Compress(databaseJson);
+            string storageJson = ToJson();
+            string compressedJson = Compressor.Compress(storageJson);
             encryptJson = Encryptor.EncryptString(compressedJson, masterPassword, Settings.Iterations);
         }
 
@@ -95,7 +78,7 @@ public class Database : ViewModelBase
         return file;
     }
 
-    public static Database Unlock(string fileContent, string masterPassword)
+    public static Storage Unlock(string fileContent, string masterPassword)
     {
         string[] split = fileContent.Split(':');
 
@@ -113,9 +96,9 @@ public class Database : ViewModelBase
             fileContent = Compressor.Decompress(compressedString);
         }
 
-        Database database = FromJson(fileContent);
+        Storage storage = FromJson(fileContent);
 
-        DatabaseSettings settings = new()
+        StorageSettings settings = new()
         {
             Iterations = iterations,
             UseTrashcan = useTrashcan,
@@ -123,11 +106,11 @@ public class Database : ViewModelBase
             ImageData = imageData,
         };
 
-        database.Settings = settings;
+        storage.Settings = settings;
         
-        database.UpdateInfo();
+        storage.UpdateInfo();
         
-        return database;
+        return storage;
     }
 
     public void Save(string path, string masterPassword)
@@ -137,7 +120,7 @@ public class Database : ViewModelBase
         File.WriteAllText(path, fileContent);
     }
 
-    public static Database Load(string path, string masterPassword)
+    public static Storage Load(string path, string masterPassword)
     {
         string file = File.ReadAllText(path);
 
@@ -146,11 +129,54 @@ public class Database : ViewModelBase
 
     public string ToJson()
     {
-        return JsonSerializer.Serialize(this, GenerationContexts.DatabaseGenerationContext.Default.Database);
+        return JsonSerializer.Serialize(this, GenerationContexts.StorageGenerationContext.Default.Storage);
     }
 
-    public static Database FromJson(string json)
+    public static Storage FromJson(string json)
     {
-        return JsonSerializer.Deserialize(json, GenerationContexts.DatabaseGenerationContext.Default.Database) ?? throw new NullReferenceException();
+        return JsonSerializer.Deserialize(json, GenerationContexts.StorageGenerationContext.Default.Storage) ?? throw new NullReferenceException();
+    }
+    
+    public void UpdateInfo()
+    {
+        CalculateCountOfTypes();
+        
+        Tags.Clear();
+        GetTags();
+        
+        RaisePropertyChanged(nameof(LoginCount));
+        RaisePropertyChanged(nameof(BankCardCount));
+        RaisePropertyChanged(nameof(PersonalDataCount));
+        RaisePropertyChanged(nameof(NotesCount));
+    }
+    
+    private void CalculateCountOfTypes()
+    {
+        LoginCount = 0;
+        BankCardCount = 0;
+        PersonalDataCount = 0;
+        NotesCount = 0;
+        
+        foreach (Data data in Data)
+        {
+            if (data.GetType() == typeof(Note))
+                NotesCount++;
+            else if (data.GetType() == typeof(Login))
+                LoginCount++;
+            else if (data.GetType() == typeof(BankCard))
+                BankCardCount++;
+            else if (data.GetType() == typeof(PersonalData)) 
+                PersonalDataCount++;
+        }
+    }
+
+    private void GetTags()
+    {
+        IEnumerable<IGrouping<string, string>> tags = Data.SelectMany(x => x.Tags).GroupBy(tag => tag);
+
+        foreach (IGrouping<string,string> grouping in tags) 
+            Tags.Add(new Tag(grouping.Key, grouping.Count()));
+        
+        Tags = new AvaloniaList<Tag>(Tags.OrderByDescending(x => x.Count));
     }
 }

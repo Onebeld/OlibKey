@@ -5,7 +5,7 @@ using Avalonia.Media;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
 
-namespace OlibKey.Core.Models.DatabaseModels.StorageTypes;
+namespace OlibKey.Core.Models.StorageModels.StorageTypes;
 
 public class BankCard : Data
 {

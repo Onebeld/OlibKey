@@ -1,13 +1,14 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.LogicalTree;
 using OlibKey.Core.StaticMembers;
 
 namespace OlibKey.Core.Views.MainWindowPages;
 
-public partial class CreateDecryptDatabasePage : UserControl
+public partial class CreateDecryptStoragePage : UserControl
 {
-    public CreateDecryptDatabasePage()
+    public CreateDecryptStoragePage()
     {
         InitializeComponent();
 
@@ -17,10 +18,11 @@ public partial class CreateDecryptDatabasePage : UserControl
         MasterPasswordTextBox.KeyUp += MasterPasswordTextBoxOnKeyUp;
     }
 
-    private void MasterPasswordTextBoxOnKeyUp(object? sender, KeyEventArgs e)
+    protected override void OnLoaded(RoutedEventArgs e)
     {
-        if (e.Key == Key.Enter)
-            OlibKeyApp.ViewModel.UnlockDatabase();
+        base.OnLoaded(e);
+        
+        MasterPasswordTextBox.Focus();
     }
 
     protected override void OnDetachedFromLogicalTree(LogicalTreeAttachmentEventArgs e)
@@ -28,5 +30,11 @@ public partial class CreateDecryptDatabasePage : UserControl
         MasterPasswordTextBox.KeyUp -= MasterPasswordTextBoxOnKeyUp;
         
         base.OnDetachedFromLogicalTree(e);
+    }
+    
+    private void MasterPasswordTextBoxOnKeyUp(object? sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+            OlibKeyApp.ViewModel.UnlockStorage();
     }
 }

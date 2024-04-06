@@ -5,15 +5,15 @@ using PleasantUI.Controls;
 
 namespace OlibKey.Core.Windows;
 
-public partial class CreateDatabaseWindow : ContentDialog
+public partial class CreateStorageWindow : ContentDialog
 {
-    public CreateDatabaseViewModel ViewModel { get; }
+    public CreateStorageViewModel ViewModel { get; }
     
-    public CreateDatabaseWindow()
+    public CreateStorageWindow()
     {
         InitializeComponent();
 
-        ViewModel = new CreateDatabaseViewModel();
+        ViewModel = new CreateStorageViewModel();
         DataContext = ViewModel;
         
         SetupDragAndDrop();
@@ -36,7 +36,7 @@ public partial class CreateDatabaseWindow : ContentDialog
                 {
                     List<IStorageItem> filesList = new(files);
 
-                    ViewModel.LoadImage(filesList[0].Path.LocalPath);
+                    ViewModel.StorageSettings.LoadImage(filesList[0].Path.LocalPath);
                 }
             }
         }

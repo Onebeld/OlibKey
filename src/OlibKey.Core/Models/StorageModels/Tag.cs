@@ -1,6 +1,6 @@
 ﻿using PleasantUI;
 
-namespace OlibKey.Core.Models.DatabaseModels;
+namespace OlibKey.Core.Models.StorageModels;
 
 public class Tag(string name, int count) : ViewModelBase
 {

@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using OlibKey.Core.Enums;
 
-namespace OlibKey.Core.Models.DatabaseModels.StorageTypes;
+namespace OlibKey.Core.Models.StorageModels.StorageTypes;
 
 public class Note : Data
 {

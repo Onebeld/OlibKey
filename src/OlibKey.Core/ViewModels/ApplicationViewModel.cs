@@ -1,11 +1,12 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Specialized;
+using System.Security.Cryptography;
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Models;
-using OlibKey.Core.Models.DatabaseModels;
+using OlibKey.Core.Models.StorageModels;
 using OlibKey.Core.Settings;
 using OlibKey.Core.StaticMembers;
 using OlibKey.Core.Structures;
@@ -24,12 +25,14 @@ public class ApplicationViewModel : ViewModelBase
 
     private Data? _selectedData;
     private DataType _selectedDataType = DataType.All;
+    
+    private bool _sortingByAlpha;
+    private bool _sortingByDate;
 
     private bool _isDirty;
 
     private string _searchText = string.Empty;
 
-    private AvaloniaList<Tag> _tags = [];
     private AvaloniaList<Tag> _selectedTags = [];
     private AvaloniaList<Data> _foundedDataList = [];
 
@@ -39,11 +42,11 @@ public class ApplicationViewModel : ViewModelBase
 
     #region EventHandlers
 
-    public event EventHandler? DatabaseCreated;
-    public event EventHandler? DatabaseOpened;
-    public event EventHandler? DatabaseBlocking;
-    public event EventHandler? DatabaseBlocked;
-    public event EventHandler? DatabaseUnlocked;
+    public event EventHandler? StorageCreated;
+    public event EventHandler? StorageOpened;
+    public event EventHandler? StorageBlocking;
+    public event EventHandler? StorageBlocked;
+    public event EventHandler? StorageUnlocked;
 
     #endregion
 
@@ -67,6 +70,28 @@ public class ApplicationViewModel : ViewModelBase
             ShowData(value);
         }
     }
+    
+    public bool SortingByAlpha
+    {
+        get => _sortingByAlpha;
+        set
+        {
+            RaiseAndSet(ref _sortingByAlpha, value);
+            
+            DoSearch();
+        }
+    }
+
+    public bool SortingByDate
+    {
+        get => _sortingByDate;
+        set
+        {
+            RaiseAndSet(ref _sortingByDate, value);
+            
+            DoSearch();
+        }
+    }
 
     public bool IsDirty
     {
@@ -74,16 +99,15 @@ public class ApplicationViewModel : ViewModelBase
         set => RaiseAndSet(ref _isDirty, value);
     }
 
-    public AvaloniaList<Tag> Tags
-    {
-        get => _tags;
-        set => RaiseAndSet(ref _tags, value);
-    }
-
     public AvaloniaList<Tag> SelectedTags
     {
         get => _selectedTags;
-        set => RaiseAndSet(ref _selectedTags, value);
+        set
+        {
+            RaiseAndSet(ref _selectedTags, value);
+            
+            value.CollectionChanged += SelectedTagsOnCollectionChanged;
+        }
     }
 
     public AvaloniaList<Data> FoundedDataList
@@ -129,46 +153,56 @@ public class ApplicationViewModel : ViewModelBase
             .Skip(1)
             .Subscribe(_ => DoSearch());
 
+        SelectedTags.CollectionChanged += SelectedTagsOnCollectionChanged;
+        
         Session = new Session();
     }
 
-    public async void CreateDatabase()
+    public async void CreateStorage()
     {
-        if (OlibKeyApp.Main.ModalWindows.Any(modalWindow => modalWindow is CreateDatabaseWindow))
+        if (OlibKeyApp.Main.ModalWindows.Any(modalWindow => modalWindow is CreateStorageWindow))
             return;
         
-        CreateDatabaseWindow window = new();
-        DatabaseInfo? result = await window.Show<DatabaseInfo?>(OlibKeyApp.Main);
+        CreateStorageWindow window = new();
+        StorageInfo? result = await window.Show<StorageInfo?>(OlibKeyApp.Main);
 
         if (result is null) return;
 
-        Session.CreateDatabase(result.Value);
+        if (Session.Storage is not null) 
+            Session.LockStorage();
+
+        Session.CreateStorage(result.Value);
 
         IsDirty = true;
 
         ViewerContent = new OlibKeyPage();
         
-        DatabaseCreated?.Invoke(this, EventArgs.Empty);
+        DoSearch();
+        
+        StorageCreated?.Invoke(this, EventArgs.Empty);
         
         OlibKeyApp.ShowNotification("Successful", "StorageCreated", NotificationType.Success);
     }
 
-    public async void OpenDatabase()
+    public async void OpenStorage()
     {
         string? path = await StorageProvider.SelectFile(pickerFileTypes: FileTypes.Olib);
         
         if (path is null) return;
-
-        Session.OpenDatabase(path);
         
-        DatabaseOpened?.Invoke(this, EventArgs.Empty);
+        if (Session.Storage is not null) 
+            Session.LockStorage();
+
+        Session.OpenStorage(path);
+        
+        StorageOpened?.Invoke(this, EventArgs.Empty);
     }
 
-    public void UnlockDatabase()
+    public void UnlockStorage()
     {
         try
         {
-            Session.UnlockDatabase(MasterPassword);
+            Session.UnlockStorage(MasterPassword);
 
             MasterPassword = string.Empty;
 
@@ -176,17 +210,17 @@ public class ApplicationViewModel : ViewModelBase
 
             ViewerContent = new OlibKeyPage();
 
-            DatabaseUnlocked?.Invoke(this, EventArgs.Empty);
+            StorageUnlocked?.Invoke(this, EventArgs.Empty);
         }
-        catch (CryptographicException cryptographicException)
+        catch (CryptographicException)
         {
             OlibKeyApp.ShowNotification("Error", "InvalidMasterPassword", NotificationType.Error);
         }
-        catch (FileNotFoundException fileNotFoundException)
+        catch (FileNotFoundException)
         {
             OlibKeyApp.ShowNotification("Error", "StorageFileNotFound", NotificationType.Error);
         }
-        catch (Exception exception)
+        catch (Exception)
         {
             OlibKeyApp.ShowNotification("Error", "UnknownErrorOccurred", NotificationType.Error);
         }
@@ -210,22 +244,33 @@ public class ApplicationViewModel : ViewModelBase
         ViewerContent = new DataPage(data);
     }
 
-    public void LockDatabase()
+    public void LockStorage()
     {
-        DatabaseBlocking?.Invoke(this, EventArgs.Empty);
+        StorageBlocking?.Invoke(this, EventArgs.Empty);
         
-        Session.LockDatabase();
+        Session.LockStorage();
         
         ViewerContent = new OlibKeyPage();
         
-        DatabaseBlocked?.Invoke(this, EventArgs.Empty);
+        StorageBlocked?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OpenDatabaseSettings()
+    public async void OpenStorageSettings()
     {
-        Session.RestartLockerTimer();
+        if (Session.Storage is null) 
+            return;
         
-        // TODO: Open database settings
+        Session.RestartLockerTimer();
+
+        StorageSettingsWindow window = new(Session.Storage.Settings);
+
+        StorageSettings? newSettings = await window.Show<StorageSettings>(OlibKeyApp.Main);
+
+        if (newSettings is null) return;
+        
+        Session.Storage.Settings = newSettings;
+
+        IsDirty = true;
     }
 
     public void OpenTrashcanWindow()
@@ -254,42 +299,50 @@ public class ApplicationViewModel : ViewModelBase
         foreach (PleasantModalWindow modalWindow in OlibKeyApp.Main.ModalWindows) 
             modalWindow.Close();
         
-        LockDatabase();
+        LockStorage();
     }
 
     public void DoSearch()
     {
-        if (Session.Database is null) return;
+        if (Session.Storage is null) return;
         
         Session.RestartLockerTimer();
 
-        List<Data> results = new(Session.Database.Data);
+        List<Data> results = new(Session.Storage.Data);
 
         if (SelectedDataType is not DataType.All)
             results = results.FindAll(data => data.MatchesDataType(SelectedDataType));
 
         if (!string.IsNullOrWhiteSpace(SearchText)) 
             results = results.FindAll(data => data.MatchesSearchCriteria(SearchText)).ToList();
-
-        List<Data> resultsFromTags = [];
-
+        
         if (SelectedTags.Count > 0)
         {
+            List<Data> resultsFromTags = [];
+
             foreach (Tag tag in SelectedTags)
                 resultsFromTags.AddRange(results.FindAll(data => data.Tags.Any(x1 => x1 == tag.Name)));
 
             results = resultsFromTags.Distinct().ToList();
         }
         
+        if (SortingByAlpha)
+            results = results.OrderBy(x => x.Name).ToList();
+        
+        if (SortingByDate)
+            results = results.OrderBy(x => x.TimeChanged ?? x.TimeCreate).ToList();
+        
         FoundedDataList = new AvaloniaList<Data>(results);
     }
 
     public void Save()
     {
-        Session.SaveDatabase();
+        Session.SaveStorage();
 
         IsDirty = false;
         
         OlibKeyApp.ShowNotification("Successful", "StorageSaved", NotificationType.Success);
     }
+    
+    private void SelectedTagsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => DoSearch();
 }

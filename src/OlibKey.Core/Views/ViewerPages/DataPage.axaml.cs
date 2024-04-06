@@ -3,7 +3,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
-using OlibKey.Core.Models.DatabaseModels;
+using OlibKey.Core.Models.StorageModels;
 using OlibKey.Core.ViewModels.ViewerPages;
 
 namespace OlibKey.Core.Views.ViewerPages;

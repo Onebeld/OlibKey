@@ -1,0 +1,74 @@
+﻿<ContentDialog xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:windows="clr-namespace:OlibKey.Core.ViewModels.Windows"
+               xmlns:conv="clr-namespace:OlibKey.Core.Converters"
+               mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+               x:Class="OlibKey.Core.Windows.StorageSettingsWindow"
+               x:DataType="windows:StorageSettingsWindowViewModel"
+               MaxWidth="400"
+               VerticalAlignment="Center">
+    <Design.DesignStyle>
+        <Style Selector="ContentDialog">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+    </Design.DesignStyle>
+    
+    <SmoothScrollViewer>
+        <StackPanel Margin="20 15" Spacing="5">
+            <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
+                       Text="{StaticResource StorageSettings}"
+                       Margin="0 0 0 10"/>
+            
+            <DockPanel Margin="0 0 0 10">
+                <Border x:Name="BorderImage" DockPanel.Dock="Left"
+                        Background="{StaticResource ControlFillColor2Brush}"
+                        Margin="0 0 10 0"
+                        Width="80"
+                        Height="80"
+                        ClipToBounds="True"
+                        CornerRadius="99"
+                        DragDrop.AllowDrop="True">
+                    <Image Source="{CompiledBinding StorageSettings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                </Border>
+                
+                <TextBox VerticalAlignment="Center"
+                         Watermark="{StaticResource Name}"
+                         Text="{CompiledBinding StorageSettings.Name}" />
+            </DockPanel>
+            
+            <DockPanel>
+                <TextBlock Margin="0 0 5 0" VerticalAlignment="Center">
+                    <Run Text="{StaticResource Iterations}" /><Run Text=":" />
+                </TextBlock>
+                
+                <NumericUpDown HorizontalContentAlignment="Left"
+                               Value="{CompiledBinding StorageSettings.Iterations}"
+                               Minimum="1"
+                               FormatString="N0" />
+            </DockPanel>
+            
+            <Separator Margin="10 15" />
+            
+            <CheckBox Content="{StaticResource UseTrashcan}"
+                      IsChecked="{CompiledBinding StorageSettings.UseTrashcan}" />
+        </StackPanel>
+    </SmoothScrollViewer>
+
+    <ContentDialog.BottomPanelContent>
+        <UniformGrid Margin="15 0" Rows="1">
+            <Button Theme="{StaticResource AccentButtonTheme}"
+                    Content="{StaticResource Ok}"
+                    VerticalAlignment="Center" 
+                    Margin="5"
+                    Command="{CompiledBinding CloseWithResult}"
+                    CommandParameter="{CompiledBinding $parent[ContentDialog]}" />
+            <Button Content="{StaticResource Cancel}" 
+                    VerticalAlignment="Center"
+                    Margin="5"
+                    Command="{CompiledBinding Close}"
+                    CommandParameter="{CompiledBinding $parent[ContentDialog]}" />
+        </UniformGrid>
+    </ContentDialog.BottomPanelContent>
+</ContentDialog>

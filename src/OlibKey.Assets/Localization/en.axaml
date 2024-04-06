@@ -12,6 +12,7 @@
     <s:String x:Key="Back">Back</s:String>
     <s:String x:Key="AddYourNewColor">Add your new color!</s:String>
     <s:String x:Key="AddColor">Add color</s:String>
+    <s:String x:Key="Add">Add</s:String>
     
     <s:String x:Key="Cut">Cut</s:String>
     <s:String x:Key="Copy">Copy</s:String>
@@ -76,6 +77,8 @@
     <s:String x:Key="Unlock">Unlock</s:String>
     <s:String x:Key="NoData">No data</s:String>
     <s:String x:Key="Modified">Modified</s:String>
+    <s:String x:Key="SortByDate">Sort by date</s:String>
+    <s:String x:Key="SortByAlphabetical">Sort by alphabetical</s:String>
     
     <s:String x:Key="Search">Search</s:String>
     <s:String x:Key="Favorite">Favorite</s:String>

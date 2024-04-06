@@ -2,10 +2,10 @@
 
 namespace OlibKey.Core.Structures;
 
-public struct DatabaseInfo
+public struct StorageInfo
 {
     public string MasterPassword;
     public string Path;
 
-    public DatabaseSettings DatabaseSettings;
+    public StorageSettings StorageSettings;
 }

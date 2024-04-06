@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OlibKey.Core.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="OlibKey.Core.Views.MainWindowPages.CreateDecryptDatabasePage"
+             x:Class="OlibKey.Core.Views.MainWindowPages.CreateDecryptStoragePage"
              x:DataType="vm:ApplicationViewModel">
     <SmoothScrollViewer HorizontalScrollBarVisibility="Disabled">
         <Grid>
@@ -22,7 +22,7 @@
                     <TextBlock Text="{StaticResource LetsCreateNewStorage}" Margin="0 15 0 5" TextAlignment="Center" />
                     <Button Theme="{StaticResource AccentButtonTheme}"
                             Content="{StaticResource CreateStorage}"
-                            Command="{CompiledBinding CreateDatabase}"
+                            Command="{CompiledBinding CreateStorage}"
                             Margin="15 0"/>
                 </StackPanel>
                 
@@ -37,7 +37,7 @@
                     <Button Content="{StaticResource Unlock}"
                             Theme="{StaticResource AccentButtonTheme}"
                             Margin="20 5 20 0"
-                            Command="{CompiledBinding UnlockDatabase}"/>
+                            Command="{CompiledBinding UnlockStorage}"/>
                 </StackPanel>
             </StackPanel>
             

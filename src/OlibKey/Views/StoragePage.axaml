@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:contr="using:OlibKey.Core.Views.BasicElements"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="OlibKey.Views.DatabasePage">
+             x:Class="OlibKey.Views.StoragePage">
     <Grid ColumnDefinitions="0.9*,10,*,10,1.5*" Margin="10">
         <contr:AdditionalPanel Grid.Column="0" />
         <contr:DataList Grid.Column="2" />

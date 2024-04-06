@@ -5,10 +5,10 @@
              xmlns:vm="using:OlibKey.Core.ViewModels"
              xmlns:conv="clr-namespace:OlibKey.Core.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="OlibKey.Core.Views.BasicElements.DatabaseManagementButton"
+             x:Class="OlibKey.Core.Views.BasicElements.StorageManagementButton"
              x:DataType="vm:ApplicationViewModel"
-             IsVisible="{CompiledBinding Session.Database, Converter={x:Static ObjectConverters.IsNotNull}}">
-    <Button x:Name="ButtonDatabaseMenu"
+             IsVisible="{CompiledBinding Session.Storage, Converter={x:Static ObjectConverters.IsNotNull}}">
+    <Button x:Name="ButtonStorageMenu"
             Theme="{StaticResource AppBarButtonTheme}"
             Padding="5"
             ToolTip.Tip="{DynamicResource Menu}">
@@ -22,10 +22,10 @@
                                 Height="80"
                                 ClipToBounds="True"
                                 Background="{StaticResource ControlFillColor2Brush}">
-                            <Image Source="{CompiledBinding Session.Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                            <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
                         </Border>
                         
-                        <TextBlock Text="{CompiledBinding Session.Database.Settings.Name}"
+                        <TextBlock Text="{CompiledBinding Session.Storage.Settings.Name}"
                                    FontSize="22"
                                    Theme="{StaticResource TitleTextBlockTheme}"
                                    HorizontalAlignment="Center" />
@@ -57,7 +57,7 @@
                             </Style>
                         </StackPanel.Styles>
                         
-                        <Button Command="{CompiledBinding CreateDatabase}">
+                        <Button Command="{CompiledBinding CreateStorage}">
                             <DockPanel>
                                 <PathIcon Data="{StaticResource AddRegular}" />
                                 
@@ -87,7 +87,7 @@
                         
                         <Separator Margin="0 5" />
                         
-                        <Button Command="{CompiledBinding LockDatabase}">
+                        <Button Command="{CompiledBinding LockStorage}">
                             <DockPanel>
                                 <PathIcon Data="{StaticResource ShieldRegular}" />
                                 
@@ -104,7 +104,7 @@
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource PasswordChecker}" />
                             </DockPanel>
                         </Button>
-                        <Button>
+                        <Button Command="{CompiledBinding OpenStorageSettings}">
                             <DockPanel>
                                 <PathIcon Data="{StaticResource SettingsRegular}" />
                                 
@@ -112,9 +112,9 @@
                             </DockPanel>
                         </Button>
                         
-                        <Separator Margin="0 5" IsVisible="{CompiledBinding Session.Database.Settings.UseTrashcan}" />
+                        <Separator Margin="0 5" IsVisible="{CompiledBinding Session.Storage.Settings.UseTrashcan}" />
                         
-                        <Button IsVisible="{CompiledBinding Session.Database.Settings.UseTrashcan}">
+                        <Button IsVisible="{CompiledBinding Session.Storage.Settings.UseTrashcan}">
                             <DockPanel>
                                 <PathIcon Data="{StaticResource DeleteRegular}" />
                                 
@@ -139,12 +139,12 @@
                     CornerRadius="99"
                     ClipToBounds="True"
                     Background="{StaticResource ControlFillColor3Brush}">
-                <Image Source="{CompiledBinding Session.Database.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
+                <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
             </Border>
             
             <TextBlock FontSize="12"
                        Foreground="{StaticResource TextFillColor3Brush}"
-                       Text="{CompiledBinding Session.Database.Settings.Name}"
+                       Text="{CompiledBinding Session.Storage.Settings.Name}"
                        Margin="5 0 0 0" VerticalAlignment="Center" />
         </StackPanel>
     </Button>

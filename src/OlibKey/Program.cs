@@ -6,36 +6,36 @@ namespace OlibKey;
 
 public class Program
 {
-    [STAThread]
-    public static void Main(string[] args) => BuildAvaloniaApp()
-        .StartWithClassicDesktopLifetime(args, ShutdownMode.OnMainWindowClose);
-    
-    public static AppBuilder BuildAvaloniaApp()
-    {
-        AppBuilder appBuilder = AppBuilder.Configure<App>();
-        appBuilder.UseSkia();
+	[STAThread]
+	public static void Main(string[] args) => BuildAvaloniaApp()
+		.StartWithClassicDesktopLifetime(args, ShutdownMode.OnMainWindowClose);
+
+	public static AppBuilder BuildAvaloniaApp()
+	{
+		AppBuilder appBuilder = AppBuilder.Configure<App>();
+		appBuilder.UseSkia();
 
 #if Windows
-        appBuilder.UseWin32()
-            .With(new AngleOptions
-            {
-                AllowedPlatformApis = new List<AngleOptions.PlatformApi>
-                {
-                    AngleOptions.PlatformApi.DirectX11
-                }
-            });
+		appBuilder.UseWin32()
+			.With(new AngleOptions
+			{
+				AllowedPlatformApis = new List<AngleOptions.PlatformApi>
+				{
+					AngleOptions.PlatformApi.DirectX11
+				}
+			});
 #elif Linux
         appBuilder.UseX11();
 #elif OSX
         appBuilder.UseAvaloniaNative();
 #endif
-        
-        appBuilder
+
+		appBuilder
 #if Windows
-            .With(new Win32PlatformOptions
-            {
-                OverlayPopups = true,
-            });
+			.With(new Win32PlatformOptions
+			{
+				OverlayPopups = true,
+			});
 #endif
 #if OSX
             .With(new MacOSPlatformOptions
@@ -53,9 +53,9 @@ public class Program
 #endif
 
 #if DEBUG
-        appBuilder.LogToTrace();
+		appBuilder.LogToTrace();
 #endif
 
-        return appBuilder;
-    }
+		return appBuilder;
+	}
 }

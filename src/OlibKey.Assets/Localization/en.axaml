@@ -108,6 +108,7 @@
     <s:String x:Key="ChangeElement">Change element</s:String>
     <s:String x:Key="Tags">Tags</s:String>
     <s:String x:Key="TagName">Tag Name</s:String>
+    <s:String x:Key="SelectImage">Select image</s:String>
     
     <s:String x:Key="Type">Type</s:String>
     <s:String x:Key="Generate">Generate</s:String>

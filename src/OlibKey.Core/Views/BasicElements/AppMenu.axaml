@@ -1,0 +1,40 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:OlibKey.Core.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="OlibKey.Core.Views.BasicElements.AppMenu"
+             x:DataType="viewModels:ApplicationViewModel">
+    <Menu>
+        <MenuItem Padding="10"
+                  ToolTip.Tip="{StaticResource Menu}">
+            <MenuItem.Header>
+                <PathIcon Data="{StaticResource MenuRegular}" />
+            </MenuItem.Header>
+            
+            <MenuItem Header="{StaticResource CreateStorage}"
+                      Command="{CompiledBinding CreateStorage}"
+                      InputGesture="Ctrl+N">
+                <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource AddRegular}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{StaticResource LoadStorage}"
+                      Command="{CompiledBinding OpenStorage}"
+                      InputGesture="Ctrl+O">
+                <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource OpenRegular}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            
+            <Separator />
+            
+            <MenuItem Header="{StaticResource PasswordGenerator}">
+                <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource KeyRegular}" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+    </Menu>
+</UserControl>

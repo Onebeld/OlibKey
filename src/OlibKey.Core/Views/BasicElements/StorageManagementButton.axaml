@@ -57,24 +57,6 @@
                             </Style>
                         </StackPanel.Styles>
                         
-                        <Button Command="{CompiledBinding CreateStorage}">
-                            <DockPanel>
-                                <PathIcon Data="{StaticResource AddRegular}" />
-                                
-                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource CreateStorage}" />
-                                
-                                <TextBlock x:Name="TextBlockHotkeyN" Classes="Hotkey" Text="Ctrl+N" />
-                            </DockPanel>
-                        </Button>
-                        <Button>
-                            <DockPanel>
-                                <PathIcon Data="{StaticResource OpenRegular}" />
-                                
-                                <TextBlock DockPanel.Dock="Left" Text="{DynamicResource LoadStorage}" />
-                                
-                                <TextBlock x:Name="TextBlockHotkeyO" Classes="Hotkey" Text="Ctrl+O" />
-                            </DockPanel>
-                        </Button>
                         <Button>
                             <DockPanel>
                                 <PathIcon Data="{StaticResource SaveRegular}" />
@@ -89,7 +71,7 @@
                         
                         <Button Command="{CompiledBinding LockStorage}">
                             <DockPanel>
-                                <PathIcon Data="{StaticResource ShieldRegular}" />
+                                <PathIcon Data="{StaticResource LockRegular}" />
                                 
                                 <TextBlock DockPanel.Dock="Left" Text="{DynamicResource LockStorage}" />
                                 

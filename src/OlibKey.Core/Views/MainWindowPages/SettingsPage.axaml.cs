@@ -6,26 +6,26 @@ namespace OlibKey.Core.Views.MainWindowPages;
 
 public partial class SettingsPage : UserControl
 {
-    private readonly SettingsViewModel _viewModel;
-    
-    public SettingsPage()
-    {
-        InitializeComponent();
+	private readonly SettingsViewModel _viewModel;
 
-        _viewModel = new SettingsViewModel();
-        DataContext = _viewModel;
+	public SettingsPage()
+	{
+		InitializeComponent();
 
-        if (OperatingSystem.IsAndroid() || OperatingSystem.IsLinux() || OperatingSystem.IsIOS())
-        {
-            OptionsDisplayItemCustomTitleBar.IsVisible = false;
-            OptionsDisplayItemEnableBlur.IsVisible = false;
-        }
-    }
+		_viewModel = new SettingsViewModel();
+		DataContext = _viewModel;
 
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
+		if (OperatingSystem.IsAndroid() || OperatingSystem.IsLinux() || OperatingSystem.IsIOS())
+		{
+			OptionsDisplayItemCustomTitleBar.IsVisible = false;
+			OptionsDisplayItemEnableBlur.IsVisible = false;
+		}
+	}
 
-        _viewModel.IsNotLoaded = false;
-    }
+	protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+	{
+		base.OnApplyTemplate(e);
+
+		_viewModel.IsNotLoaded = false;
+	}
 }

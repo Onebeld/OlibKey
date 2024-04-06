@@ -11,32 +11,32 @@ namespace OlibKey;
 
 public partial class MainWindow : PleasantWindow
 {
-    public MainWindow()
-    {
-        InitializeComponent();
+	public MainWindow()
+	{
+		InitializeComponent();
 
-        SettingsPage.FuncControl += () => new SettingsPage();
-        PasswordManagerPage.FuncControl += () => new PasswordManagerPage();
-        AboutPage.FuncControl += () => new AboutPage();
-    }
+		SettingsPage.FuncControl += () => new SettingsPage();
+		PasswordManagerPage.FuncControl += () => new PasswordManagerPage();
+		AboutPage.FuncControl += () => new AboutPage();
+	}
 
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-        
-        OlibKeyApp.ViewModel.NotificationManager = new WindowNotificationManager(this)
-        {
-            Position = NotificationPosition.TopRight,
-            MaxItems = 3,
-            ZIndex = 1
-        };
-        
-        Closed += OnClosed;
-    }
+	protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+	{
+		base.OnApplyTemplate(e);
 
-    private void OnClosed(object? sender, EventArgs e)
-    {
-        OlibKeySettings.Save();
-        PleasantSettings.Save();
-    }
+		OlibKeyApp.ViewModel.NotificationManager = new WindowNotificationManager(this)
+		{
+			Position = NotificationPosition.TopRight,
+			MaxItems = 3,
+			ZIndex = 1
+		};
+
+		Closed += OnClosed;
+	}
+
+	private void OnClosed(object? sender, EventArgs e)
+	{
+		OlibKeySettings.Save();
+		PleasantSettings.Save();
+	}
 }

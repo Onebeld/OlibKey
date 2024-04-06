@@ -5,179 +5,179 @@ namespace OlibKey.Core.Helpers;
 
 public static class Encryptor
 {
-    private static byte[] GetRandomBytes()
-    {
-        byte[] ba = new byte[SaltLength];
-        RandomNumberGenerator.Create().GetBytes(ba);
-        return ba;
-    }
+	private static byte[] GetRandomBytes()
+	{
+		byte[] ba = new byte[SaltLength];
+		RandomNumberGenerator.Create().GetBytes(ba);
+		return ba;
+	}
 
-    private const int SaltLength = 128;
+	private const int SaltLength = 128;
 
-    private static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes, int iterations)
-    {
-        byte[] saltBytes = new byte[SaltLength];
-        for (int i = 0; i < SaltLength; i++)
-            saltBytes[i] = (byte)(i + 1);
+	private static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes, int iterations)
+	{
+		byte[] saltBytes = new byte[SaltLength];
+		for (int i = 0; i < SaltLength; i++)
+			saltBytes[i] = (byte)(i + 1);
 
-        using MemoryStream memoryStream = new();
-        using (Rfc2898DeriveBytes key = new(passwordBytes, saltBytes, iterations, HashAlgorithmName.SHA256))
-        {
-            Aes aes = Aes.Create();
-            aes.KeySize = 256;
-            aes.BlockSize = 128;
-            aes.Mode = CipherMode.CBC;
-            
-            aes.Key = key.GetBytes((int)(aes.KeySize * 0.125));
-            aes.IV = key.GetBytes((int)(aes.BlockSize * 0.125));
+		using MemoryStream memoryStream = new();
+		using (Rfc2898DeriveBytes key = new(passwordBytes, saltBytes, iterations, HashAlgorithmName.SHA256))
+		{
+			Aes aes = Aes.Create();
+			aes.KeySize = 256;
+			aes.BlockSize = 128;
+			aes.Mode = CipherMode.CBC;
 
-            using (CryptoStream cryptoStream = new(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write))
-            {
-                cryptoStream.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
-                cryptoStream.Close();
-            }
-        }
+			aes.Key = key.GetBytes((int)(aes.KeySize * 0.125));
+			aes.IV = key.GetBytes((int)(aes.BlockSize * 0.125));
 
-        return memoryStream.ToArray();
-    }
+			using (CryptoStream cryptoStream = new(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write))
+			{
+				cryptoStream.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
+				cryptoStream.Close();
+			}
+		}
 
-    private static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes, int iterations)
-    {
-        byte[] saltBytes = new byte[SaltLength];
-        for (int i = 0; i < SaltLength; i++)
-            saltBytes[i] = (byte)(i + 1);
+		return memoryStream.ToArray();
+	}
 
-        using MemoryStream memoryStream = new();
-        using (Rfc2898DeriveBytes key = new(passwordBytes, saltBytes, iterations, HashAlgorithmName.SHA256))
-        {
-            Aes aes = Aes.Create();
-            aes.KeySize = 256;
-            aes.BlockSize = 128;
-            aes.Mode = CipherMode.CBC;
-            
-            aes.Key = key.GetBytes((int)(aes.KeySize * 0.125));
-            aes.IV = key.GetBytes((int)(aes.BlockSize * 0.125));
+	private static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes, int iterations)
+	{
+		byte[] saltBytes = new byte[SaltLength];
+		for (int i = 0; i < SaltLength; i++)
+			saltBytes[i] = (byte)(i + 1);
 
-            using (CryptoStream cryptoStream = new(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Write)) 
-            { 
-                cryptoStream.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length); 
-                cryptoStream.Close();
-            }
-        }
+		using MemoryStream memoryStream = new();
+		using (Rfc2898DeriveBytes key = new(passwordBytes, saltBytes, iterations, HashAlgorithmName.SHA256))
+		{
+			Aes aes = Aes.Create();
+			aes.KeySize = 256;
+			aes.BlockSize = 128;
+			aes.Mode = CipherMode.CBC;
 
-        return memoryStream.ToArray();
-    }
-    
-    /*public static byte[] EncryptBytes(byte[] data, string password, int iterations)
-    {
-        byte[] salt = new byte[SaltLength];
-        RandomNumberGenerator.Create().GetBytes(salt);
+			aes.Key = key.GetBytes((int)(aes.KeySize * 0.125));
+			aes.IV = key.GetBytes((int)(aes.BlockSize * 0.125));
 
-        Rfc2898DeriveBytes keyDerivation = new(password, salt, iterations, HashAlgorithmName.SHA256);
-        byte[] key = keyDerivation.GetBytes(32);
+			using (CryptoStream cryptoStream = new(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Write))
+			{
+				cryptoStream.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
+				cryptoStream.Close();
+			}
+		}
 
-        byte[] iv = new byte[16];
-        RandomNumberGenerator.Create().GetBytes(iv);
+		return memoryStream.ToArray();
+	}
 
-        using Aes aes = Aes.Create();
+	/*public static byte[] EncryptBytes(byte[] data, string password, int iterations)
+	{
+	    byte[] salt = new byte[SaltLength];
+	    RandomNumberGenerator.Create().GetBytes(salt);
 
-        aes.Key = key;
-        aes.IV = iv;
-        aes.Mode = CipherMode.CBC;
-        aes.Padding = PaddingMode.PKCS7;
+	    Rfc2898DeriveBytes keyDerivation = new(password, salt, iterations, HashAlgorithmName.SHA256);
+	    byte[] key = keyDerivation.GetBytes(32);
 
-        using MemoryStream memoryStream = new();
-        using CryptoStream cryptoStream = new(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
+	    byte[] iv = new byte[16];
+	    RandomNumberGenerator.Create().GetBytes(iv);
 
-        cryptoStream.Write(data, 0, data.Length);
+	    using Aes aes = Aes.Create();
 
-        byte[] encryptedBytes = memoryStream.ToArray();
+	    aes.Key = key;
+	    aes.IV = iv;
+	    aes.Mode = CipherMode.CBC;
+	    aes.Padding = PaddingMode.PKCS7;
 
-        byte[] outputBytes = new byte[salt.Length + iv.Length + encryptedBytes.Length];
-        Buffer.BlockCopy(salt, 0, outputBytes, 0, salt.Length);
-        Buffer.BlockCopy(iv, 0, outputBytes, salt.Length, iv.Length);
-        Buffer.BlockCopy(encryptedBytes, 0, outputBytes, salt.Length + iv.Length, encryptedBytes.Length);
+	    using MemoryStream memoryStream = new();
+	    using CryptoStream cryptoStream = new(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
 
-        return outputBytes;
-    }*/
-    
-    /*public static byte[] DecryptBytes(byte[] data, string password, int iterations)
-    {
-        byte[] salt = new byte[SaltLength];
-        Buffer.BlockCopy(data, 0, salt, 0, salt.Length);
+	    cryptoStream.Write(data, 0, data.Length);
 
-        byte[] iv = new byte[16];
-        Buffer.BlockCopy(data, salt.Length, iv, 0, iv.Length);
+	    byte[] encryptedBytes = memoryStream.ToArray();
 
-        byte[] encryptedData = new byte[data.Length - salt.Length - iv.Length];
-        Buffer.BlockCopy(data, salt.Length + iv.Length, encryptedData, 0, encryptedData.Length);
+	    byte[] outputBytes = new byte[salt.Length + iv.Length + encryptedBytes.Length];
+	    Buffer.BlockCopy(salt, 0, outputBytes, 0, salt.Length);
+	    Buffer.BlockCopy(iv, 0, outputBytes, salt.Length, iv.Length);
+	    Buffer.BlockCopy(encryptedBytes, 0, outputBytes, salt.Length + iv.Length, encryptedBytes.Length);
 
-        Rfc2898DeriveBytes keyDerivation = new(password, salt, iterations, HashAlgorithmName.SHA256);
-        byte[] key = keyDerivation.GetBytes(32);
+	    return outputBytes;
+	}*/
 
-        using Aes aes = Aes.Create();
+	/*public static byte[] DecryptBytes(byte[] data, string password, int iterations)
+	{
+	    byte[] salt = new byte[SaltLength];
+	    Buffer.BlockCopy(data, 0, salt, 0, salt.Length);
 
-        aes.Key = key;
-        aes.IV = iv;
-        aes.Mode = CipherMode.CBC;
-        aes.Padding = PaddingMode.PKCS7;
+	    byte[] iv = new byte[16];
+	    Buffer.BlockCopy(data, salt.Length, iv, 0, iv.Length);
 
-        using MemoryStream memoryStream = new();
-        using CryptoStream cryptoStream = new(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Write);
+	    byte[] encryptedData = new byte[data.Length - salt.Length - iv.Length];
+	    Buffer.BlockCopy(data, salt.Length + iv.Length, encryptedData, 0, encryptedData.Length);
 
-        cryptoStream.Write(encryptedData, 0, encryptedData.Length);
+	    Rfc2898DeriveBytes keyDerivation = new(password, salt, iterations, HashAlgorithmName.SHA256);
+	    byte[] key = keyDerivation.GetBytes(32);
 
-        byte[] decryptedBytes = memoryStream.ToArray();
+	    using Aes aes = Aes.Create();
 
-        return decryptedBytes;
-    }*/
-    
-    /// <summary>
-    /// Encrypts text
-    /// </summary>
-    /// <param name="text">Original text</param>
-    /// <param name="masterPassword">Master password</param>
-    /// <param name="iterations">Number of encryption iterations</param>
-    /// <returns>Encrypted text</returns>
-    public static string EncryptString(string text, string masterPassword, int iterations)
-    {
-        string encryptString = text;
-        byte[] baPwd = Encoding.UTF8.GetBytes(masterPassword);
-        byte[] baPwdHash = SHA256.HashData(baPwd);
+	    aes.Key = key;
+	    aes.IV = iv;
+	    aes.Mode = CipherMode.CBC;
+	    aes.Padding = PaddingMode.PKCS7;
 
-        byte[] baText = Encoding.UTF8.GetBytes(encryptString);
-        byte[] baSalt = GetRandomBytes();
-        byte[] baEncrypted = new byte[baSalt.Length + baText.Length];
-        for (int i = 0; i < baSalt.Length; i++) baEncrypted[i] = baSalt[i];
-        for (int i = 0; i < baText.Length; i++) baEncrypted[i + baSalt.Length] = baText[i];
-        baEncrypted = AES_Encrypt(baEncrypted, baPwdHash, iterations);
+	    using MemoryStream memoryStream = new();
+	    using CryptoStream cryptoStream = new(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Write);
 
-        encryptString = Convert.ToBase64String(baEncrypted);
+	    cryptoStream.Write(encryptedData, 0, encryptedData.Length);
 
-        return encryptString;
-    }
+	    byte[] decryptedBytes = memoryStream.ToArray();
 
-    /// <summary>
-    /// Decrypts text
-    /// </summary>
-    /// <param name="text">Encrypted text</param>
-    /// <param name="masterPassword">Master password</param>
-    /// <param name="iterations">Number of decryption iterations</param>
-    /// <returns>Decrypted text</returns>
-    public static string DecryptString(string text, string masterPassword, int iterations)
-    {
-        string result = text;
+	    return decryptedBytes;
+	}*/
 
-        byte[] baPwdHash = SHA256.HashData(Encoding.UTF8.GetBytes(masterPassword));
+	/// <summary>
+	/// Encrypts text
+	/// </summary>
+	/// <param name="text">Original text</param>
+	/// <param name="masterPassword">Master password</param>
+	/// <param name="iterations">Number of encryption iterations</param>
+	/// <returns>Encrypted text</returns>
+	public static string EncryptString(string text, string masterPassword, int iterations)
+	{
+		string encryptString = text;
+		byte[] baPwd = Encoding.UTF8.GetBytes(masterPassword);
+		byte[] baPwdHash = SHA256.HashData(baPwd);
 
-        byte[] baText = Convert.FromBase64String(result);
-        byte[] baDecrypted = AES_Decrypt(baText, baPwdHash, iterations);
-        byte[] baResult = new byte[baDecrypted.Length - SaltLength];
-        for (int i = 0; i < baResult.Length; i++) baResult[i] = baDecrypted[i + SaltLength];
+		byte[] baText = Encoding.UTF8.GetBytes(encryptString);
+		byte[] baSalt = GetRandomBytes();
+		byte[] baEncrypted = new byte[baSalt.Length + baText.Length];
+		for (int i = 0; i < baSalt.Length; i++) baEncrypted[i] = baSalt[i];
+		for (int i = 0; i < baText.Length; i++) baEncrypted[i + baSalt.Length] = baText[i];
+		baEncrypted = AES_Encrypt(baEncrypted, baPwdHash, iterations);
 
-        result = Encoding.UTF8.GetString(baResult);
-        
+		encryptString = Convert.ToBase64String(baEncrypted);
 
-        return result;
-    }
+		return encryptString;
+	}
+
+	/// <summary>
+	/// Decrypts text
+	/// </summary>
+	/// <param name="text">Encrypted text</param>
+	/// <param name="masterPassword">Master password</param>
+	/// <param name="iterations">Number of decryption iterations</param>
+	/// <returns>Decrypted text</returns>
+	public static string DecryptString(string text, string masterPassword, int iterations)
+	{
+		string result = text;
+
+		byte[] baPwdHash = SHA256.HashData(Encoding.UTF8.GetBytes(masterPassword));
+
+		byte[] baText = Convert.FromBase64String(result);
+		byte[] baDecrypted = AES_Decrypt(baText, baPwdHash, iterations);
+		byte[] baResult = new byte[baDecrypted.Length - SaltLength];
+		for (int i = 0; i < baResult.Length; i++) baResult[i] = baDecrypted[i + SaltLength];
+
+		result = Encoding.UTF8.GetString(baResult);
+
+
+		return result;
+	}
 }

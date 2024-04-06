@@ -4,5 +4,5 @@ namespace OlibKey.Views;
 
 public partial class StoragePage : UserControl
 {
-    public StoragePage() => InitializeComponent();
+	public StoragePage() => InitializeComponent();
 }

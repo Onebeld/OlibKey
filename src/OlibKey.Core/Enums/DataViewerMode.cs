@@ -2,7 +2,7 @@
 
 public enum DataViewerMode
 {
-    Create,
-    Edit,
-    View
+	Create,
+	Edit,
+	View
 }

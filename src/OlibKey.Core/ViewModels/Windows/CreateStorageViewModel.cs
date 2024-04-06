@@ -9,71 +9,72 @@ namespace OlibKey.Core.ViewModels.Windows;
 
 public class CreateStorageViewModel : ViewModelBase
 {
-    private string _masterPassword = string.Empty;
+	private string _masterPassword = string.Empty;
 
-    private StorageSettings _storageSettings = new();
-    
-    private string _path = string.Empty;
+	private StorageSettings _storageSettings = new();
 
-    #region Properties
+	private string _path = string.Empty;
 
-    public string MasterPassword
-    {
-        get => _masterPassword;
-        set => RaiseAndSet(ref _masterPassword, value);
-    }
+	#region Properties
 
-    public StorageSettings StorageSettings
-    {
-        get => _storageSettings;
-        set => RaiseAndSet(ref _storageSettings, value);
-    }
+	public string MasterPassword
+	{
+		get => _masterPassword;
+		set => RaiseAndSet(ref _masterPassword, value);
+	}
 
-    public string Path
-    {
-        get => _path;
-        set => RaiseAndSet(ref _path, value);
-    }
+	public StorageSettings StorageSettings
+	{
+		get => _storageSettings;
+		set => RaiseAndSet(ref _storageSettings, value);
+	}
 
-    #endregion
+	public string Path
+	{
+		get => _path;
+		set => RaiseAndSet(ref _path, value);
+	}
 
-    public async void SelectPath()
-    {
-        string? storagePath = await StorageProvider.SaveFile(pickerFileTypes: FileTypes.Olib, 
-            defaultExtension: "olib", 
-            suggestedFileName: "NewStorage");
-        
-        if (storagePath is null) return;
+	#endregion
 
-        Path = storagePath;
-    }
+	public async void SelectPath()
+	{
+		string? storagePath = await StorageProvider.SaveFile(pickerFileTypes: FileTypes.Olib,
+			defaultExtension: "olib",
+			suggestedFileName: "NewStorage");
 
-    public async void LoadImage()
-    {
-        string? imagePath = await StorageProvider.SelectFile(pickerFileTypes: FileTypes.Images);
-        
-        if (imagePath is null) return;
-        
-        StorageSettings.LoadImage(imagePath);
-    }
+		if (storagePath is null) return;
 
-    public void CloseWithResult(ContentDialog dialog)
-    {
-        if (string.IsNullOrWhiteSpace(MasterPassword) || string.IsNullOrWhiteSpace(Path) || string.IsNullOrWhiteSpace(StorageSettings.Name))
-            return;
+		Path = storagePath;
+	}
 
-        StorageInfo storageInfo = new()
-        {
-            MasterPassword = _masterPassword,
-            Path = _path,
-            StorageSettings = StorageSettings
-        };
-        
-        dialog.Close(storageInfo);
-    }
+	public async void LoadImage()
+	{
+		string? imagePath = await StorageProvider.SelectFile(pickerFileTypes: FileTypes.Images);
 
-    public void Close(ContentDialog dialog)
-    {
-        dialog.Close(null);
-    }
+		if (imagePath is null) return;
+
+		StorageSettings.LoadImage(imagePath);
+	}
+
+	public void CloseWithResult(ContentDialog dialog)
+	{
+		if (string.IsNullOrWhiteSpace(MasterPassword) || string.IsNullOrWhiteSpace(Path) ||
+		    string.IsNullOrWhiteSpace(StorageSettings.Name))
+			return;
+
+		StorageInfo storageInfo = new()
+		{
+			MasterPassword = _masterPassword,
+			Path = _path,
+			StorageSettings = StorageSettings
+		};
+
+		dialog.Close(storageInfo);
+	}
+
+	public void Close(ContentDialog dialog)
+	{
+		dialog.Close(null);
+	}
 }

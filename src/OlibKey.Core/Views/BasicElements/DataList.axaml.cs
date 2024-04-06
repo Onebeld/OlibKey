@@ -4,5 +4,5 @@ namespace OlibKey.Core.Views.BasicElements;
 
 public partial class DataList : UserControl
 {
-    public DataList() => InitializeComponent();
+	public DataList() => InitializeComponent();
 }

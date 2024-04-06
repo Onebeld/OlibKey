@@ -8,63 +8,63 @@ namespace OlibKey.Core.ViewModels.Windows;
 
 public class PasswordGeneratorViewModel : ViewModelBase
 {
-    private readonly ContentDialog? _contentDialog;
-    
-    private string _password = string.Empty;
-    private bool _returnRequired;
+	private readonly ContentDialog? _contentDialog;
 
-    #region Properties
+	private string _password = string.Empty;
+	private bool _returnRequired;
 
-    public string Password
-    {
-        get => _password;
-        set => RaiseAndSet(ref _password, value);
-    }
+	#region Properties
 
-    public bool ReturnRequired
-    {
-        get => _returnRequired;
-        set => RaiseAndSet(ref _returnRequired, value);
-    }
-    
-    public bool ShowTitle { get; set; }
+	public string Password
+	{
+		get => _password;
+		set => RaiseAndSet(ref _password, value);
+	}
 
-    #endregion
+	public bool ReturnRequired
+	{
+		get => _returnRequired;
+		set => RaiseAndSet(ref _returnRequired, value);
+	}
 
-    public PasswordGeneratorViewModel(ContentDialog? contentDialog, bool returnRequired)
-    {
-        _contentDialog = contentDialog;
-        ReturnRequired = returnRequired;
-        
-        _contentDialog?.KeyBindings.Add(new KeyBinding()
-        {
-            Command = Command.Create(SavePassword),
-            Gesture = KeyGesture.Parse("Enter")
-        });
-        
-        GeneratePassword();
-    }
+	public bool ShowTitle { get; set; }
 
-    public async void CopyPassword()
-    {
-        await OlibKeyApp.TopLevel.Clipboard?.SetTextAsync(Password);
-    }
+	#endregion
 
-    public void GeneratePassword()
-    {
-        Password = PasswordGenerator.Generate();
-    }
+	public PasswordGeneratorViewModel(ContentDialog? contentDialog, bool returnRequired)
+	{
+		_contentDialog = contentDialog;
+		ReturnRequired = returnRequired;
 
-    public void SavePassword()
-    {
-        if (string.IsNullOrEmpty(Password))
-            Password = PasswordGenerator.Generate();
-        
-        _contentDialog?.Close(Password);
-    }
+		_contentDialog?.KeyBindings.Add(new KeyBinding
+		{
+			Command = Command.Create(SavePassword),
+			Gesture = KeyGesture.Parse("Enter")
+		});
 
-    public void CloseWindow()
-    {
-        _contentDialog?.Close(null);
-    }
+		GeneratePassword();
+	}
+
+	public async void CopyPassword()
+	{
+		await OlibKeyApp.TopLevel.Clipboard?.SetTextAsync(Password);
+	}
+
+	public void GeneratePassword()
+	{
+		Password = PasswordGenerator.Generate();
+	}
+
+	public void SavePassword()
+	{
+		if (string.IsNullOrEmpty(Password))
+			Password = PasswordGenerator.Generate();
+
+		_contentDialog?.Close(Password);
+	}
+
+	public void CloseWindow()
+	{
+		_contentDialog?.Close(null);
+	}
 }

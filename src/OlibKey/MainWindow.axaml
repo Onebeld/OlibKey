@@ -24,6 +24,8 @@
         x:DataType="vm:ApplicationViewModel">
     <PleasantWindow.TitleContent>
         <Panel>
+            <contr:AppMenu VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5 0 0 0" />
+            
             <TextBox Classes="ClearTextBox"
                      VerticalAlignment="Center"
                      Text="{CompiledBinding SearchText}"

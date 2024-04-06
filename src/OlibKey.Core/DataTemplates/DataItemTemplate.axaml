@@ -47,9 +47,12 @@
                         IsVisible="{CompiledBinding Color, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
                 <ToggleButton Theme="{StaticResource AppBarToggleButtonTheme}"
-                              Padding="4"
+                              Width="24"
+                              Height="24"
+                              Padding="0"
                               IsChecked="{CompiledBinding IsFavorite}"
                               ToolTip.Tip="{StaticResource Favorite}"
+                              CornerRadius="{StaticResource RoundedControlCornerRadius}"
                               IsEnabled="{CompiledBinding $parent[ContentDialog], Converter={x:Static ObjectConverters.IsNull}}">
                     <ToggleButton.IsVisible>
                         <MultiBinding Converter="{x:Static BoolConverters.Or}">
@@ -59,7 +62,7 @@
                         </MultiBinding>
                     </ToggleButton.IsVisible>
                     
-                    <PathIcon Data="{StaticResource FavoriteIcon}" />
+                    <PathIcon Data="{StaticResource FavoriteRegular}" />
                 </ToggleButton>
             </StackPanel>
         </Grid>

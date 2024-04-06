@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using Avalonia.Controls.Notifications;
 using OlibKey.Core.Enums;
+using OlibKey.Core.Helpers;
 using OlibKey.Core.Models;
 using OlibKey.Core.Models.StorageModels;
 using OlibKey.Core.Models.StorageModels.StorageTypes;
@@ -11,295 +12,307 @@ namespace OlibKey.Core.ViewModels.ViewerPages;
 
 public class DataPageViewModel : ViewModelBase
 {
-    private DataType _selectedType = DataType.Login;
-    private DataViewerMode _viewerMode;
+	private DataType _selectedType = DataType.Login;
+	private DataViewerMode _viewerMode;
 
-    private Session _session = null!;
-    private Data _data = null!;
+	private Session _session = null!;
+	private Data _data = null!;
 
-    private string? _tagName;
-    
-    private OlibTotp _totp;
+	private string? _tagName;
 
-    #region Properties
+	private OlibTotp _totp;
 
-    public Session Session
-    {
-        get => _session;
-        set => RaiseAndSet(ref _session, value);
-    }
+	#region Properties
 
-    public Data Data
-    {
-        get => _data;
-        set => RaiseAndSet(ref _data, value);
-    }
+	public Session Session
+	{
+		get => _session;
+		set => RaiseAndSet(ref _session, value);
+	}
 
-    public string? TagName
-    {
-        get => _tagName;
-        set => RaiseAndSet(ref _tagName, value);
-    }
-    
-    public int SelectedTypeIndex
-    {
-        get => (int)_selectedType;
-        set
-        {
-            _selectedType = (DataType)value;
-            RaisePropertyChanged();
-            
-            ChangeDataType(_selectedType);
-        }
-    }
+	public Data Data
+	{
+		get => _data;
+		set => RaiseAndSet(ref _data, value);
+	}
 
-    public OlibTotp Totp
-    {
-        get => _totp;
-        set => RaiseAndSet(ref _totp, value);
-    }
+	public string? TagName
+	{
+		get => _tagName;
+		set => RaiseAndSet(ref _tagName, value);
+	}
 
-    private int DataIndex
-    {
-        get
-        {
-            if (OlibKeyApp.ViewModel.Session is null || 
-                OlibKeyApp.ViewModel.Session.Storage is null || 
-                OlibKeyApp.ViewModel.SelectedData is null)
-                throw new NullReferenceException();
+	public int SelectedTypeIndex
+	{
+		get => (int)_selectedType;
+		set
+		{
+			_selectedType = (DataType)value;
+			RaisePropertyChanged();
 
-            return OlibKeyApp.ViewModel.Session.Storage.Data.IndexOf(OlibKeyApp.ViewModel.SelectedData);
-        }
-    }
+			ChangeDataType(_selectedType);
+		}
+	}
 
-    public bool IsView => _viewerMode is DataViewerMode.View;
+	public OlibTotp Totp
+	{
+		get => _totp;
+		set => RaiseAndSet(ref _totp, value);
+	}
 
-    public bool IsEdit => _viewerMode is DataViewerMode.Edit;
+	private int DataIndex
+	{
+		get
+		{
+			if (OlibKeyApp.ViewModel.Session is null ||
+			    OlibKeyApp.ViewModel.Session.Storage is null ||
+			    OlibKeyApp.ViewModel.SelectedData is null)
+				throw new NullReferenceException();
 
-    public bool IsCreate => _viewerMode is DataViewerMode.Create;
+			return OlibKeyApp.ViewModel.Session.Storage.Data.IndexOf(OlibKeyApp.ViewModel.SelectedData);
+		}
+	}
 
-    #endregion
+	public bool IsView => _viewerMode is DataViewerMode.View;
 
-    public DataPageViewModel(DataViewerMode viewerMode, Data? selectedData = null)
-    {
-        Session = OlibKeyApp.ViewModel.Session;
+	public bool IsEdit => _viewerMode is DataViewerMode.Edit;
 
-        _viewerMode = viewerMode;
+	public bool IsCreate => _viewerMode is DataViewerMode.Create;
 
-        switch (_viewerMode)
-        {
-            case DataViewerMode.Create:
-                Data = new Login();
-                break;
-            case DataViewerMode.View:
-                if (selectedData is null) throw new NullReferenceException();
-                
-                Data = (Data)selectedData.Clone();
+	#endregion
 
-                _selectedType = Data switch
-                {
-                    Login => DataType.Login,
-                    BankCard => DataType.BankCard,
-                    PersonalData => DataType.PersonalData,
-                    Note => DataType.Note,
-                    
-                    _ => _selectedType
-                };
-                
-                RaisePropertyChanged(nameof(SelectedTypeIndex));
+	public DataPageViewModel(DataViewerMode viewerMode, Data? selectedData = null)
+	{
+		Session = OlibKeyApp.ViewModel.Session;
 
-                if (Data is Login { IsActivatedTotp: true }) 
-                    ActivateTotp();
-                
-                break;
-            
-            case DataViewerMode.Edit:
-            default:
-                throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
-        }
-        
-        Session.RestartLockerTimer();
-        
-        RaisePropertyChanged(nameof(IsView));
-        RaisePropertyChanged(nameof(IsEdit));
-        RaisePropertyChanged(nameof(IsCreate));
-    }
+		_viewerMode = viewerMode;
 
-    public void SaveData()
-    {
-        Session.RestartLockerTimer();
+		switch (_viewerMode)
+		{
+			case DataViewerMode.Create:
+				Data = new Login();
+				break;
+			case DataViewerMode.View:
+				if (selectedData is null) throw new NullReferenceException();
 
-        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null) throw new NullReferenceException();
+				Data = (Data)selectedData.Clone();
 
-        switch (_viewerMode)
-        {
-            case DataViewerMode.Create:
-                Data.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-                Session.Storage?.Data.Add(Data);
+				_selectedType = Data switch
+				{
+					Login => DataType.Login,
+					BankCard => DataType.BankCard,
+					PersonalData => DataType.PersonalData,
+					Note => DataType.Note,
 
-                OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
-                
-                Session.Storage?.UpdateInfo();
-                OlibKeyApp.ViewModel.DoSearch();
-                break;
-            case DataViewerMode.Edit:
-                int index = DataIndex;
+					_ => _selectedType
+				};
 
-                /*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type is DataType.Login)
-                {
-                    if (OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Login?.WebSite != Data.Login?.WebSite)
-                        Data.IsIconChange = true;
-                }
+				RaisePropertyChanged(nameof(SelectedTypeIndex));
 
-                if (Data.Type != OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type)
-                    Data.IsIconChange = true;*/
+				if (Data is Login { IsActivatedTotp: true })
+					ActivateTotp();
 
-                Data.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-                
-                OlibKeyApp.ViewModel.Session.Storage.Data[index] = Data;
-                
-                Session.Storage?.UpdateInfo();
-                OlibKeyApp.ViewModel.DoSearch();
-                OlibKeyApp.ViewModel.SelectedData = Data;
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
-        }
+				break;
 
-        OlibKeyApp.ViewModel.IsDirty = true;
-    }
+			case DataViewerMode.Edit:
+			default:
+				throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
+		}
 
-    public void ChangeData()
-    {
-        Session.RestartLockerTimer();
+		Session.RestartLockerTimer();
 
-        _viewerMode = DataViewerMode.Edit;
-        
-        RaisePropertyChanged(nameof(IsView));
-        RaisePropertyChanged(nameof(IsEdit));
-        RaisePropertyChanged(nameof(IsCreate));
-    }
+		RaisePropertyChanged(nameof(IsView));
+		RaisePropertyChanged(nameof(IsEdit));
+		RaisePropertyChanged(nameof(IsCreate));
+	}
 
-    public void DeleteData()
-    {
-        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null)
-            throw new NullReferenceException();
-        
-        Session.RestartLockerTimer();
+	public void SaveData()
+	{
+		Session.RestartLockerTimer();
 
-        int index = DataIndex;
+		if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null)
+			throw new NullReferenceException();
 
-        if (OlibKeyApp.ViewModel.Session.Storage.Settings.UseTrashcan)
-        {
-            Data data = OlibKeyApp.ViewModel.Session.Storage.Data[index];
-            data.DeleteDate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
-            OlibKeyApp.ViewModel.Session.Storage.Trashcan.Data.Add(data);
-        }
-        
-        OlibKeyApp.ViewModel.Session.Storage.Data.RemoveAt(index);
+		switch (_viewerMode)
+		{
+			case DataViewerMode.Create:
+				Data.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+				Session.Storage?.Data.Add(Data);
 
-        OlibKeyApp.ViewModel.IsDirty = true;
-        OlibKeyApp.ViewModel.DoSearch();
-    }
+				OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
 
-    public void AddTag()
-    {
-        if (string.IsNullOrWhiteSpace(TagName)) return;
-        
-        Data.Tags.Add(TagName);
+				OlibKeyApp.ViewModel.DoSearch();
+				break;
+			case DataViewerMode.Edit:
+				int index = DataIndex;
 
-        TagName = null;
-    }
+				/*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type is DataType.Login)
+				{
+				    if (OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Login?.WebSite != Data.Login?.WebSite)
+				        Data.IsIconChange = true;
+				}
 
-    public void DeleteTag(string tag)
-    {
-        Data.Tags.Remove(tag);
-    }
+				if (Data.Type != OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type)
+				    Data.IsIconChange = true;*/
 
-    public void Cancel()
-    {
-        if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null)
-            throw new NullReferenceException();
-        
-        Session.RestartLockerTimer();
+				Data.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
 
-        _viewerMode = DataViewerMode.View;
+				OlibKeyApp.ViewModel.Session.Storage.Data[index] = Data;
 
-        Data = (Data)OlibKeyApp.ViewModel.Session.Storage.Data[DataIndex].Clone();
-        
-        RaisePropertyChanged(nameof(IsView));
-        RaisePropertyChanged(nameof(IsEdit));
-        RaisePropertyChanged(nameof(IsCreate));
-    }
+				OlibKeyApp.ViewModel.DoSearch();
+				OlibKeyApp.ViewModel.SelectedData = Data;
+				break;
+			default:
+				throw new ArgumentOutOfRangeException(nameof(_viewerMode), _viewerMode, null);
+		}
 
-    public void Back()
-    {
-        Session.RestartLockerTimer();
-        
-        if (OlibKeyApp.ViewModel.SelectedData is null)
-            OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
+		OlibKeyApp.ViewModel.IsDirty = true;
+	}
 
-        OlibKeyApp.ViewModel.SelectedData = null;
-    }
+	public void ChangeData()
+	{
+		Session.RestartLockerTimer();
 
-    public async void CopyString(string str)
-    {
-        Session.RestartLockerTimer();
+		_viewerMode = DataViewerMode.Edit;
 
-        if (await OlibKeyApp.CopyStringToClipboard(str))
-            OlibKeyApp.ShowNotification("Successful", "FieldCopied", NotificationType.Information);
-    }
+		RaisePropertyChanged(nameof(IsView));
+		RaisePropertyChanged(nameof(IsEdit));
+		RaisePropertyChanged(nameof(IsCreate));
+	}
 
-    private void ChangeDataType(DataType dataType)
-    {
-        switch (dataType)
-        {
-            case DataType.Login:
-                Data = Data.ConvertData<Login>();
-                break;
-            case DataType.BankCard:
-                Data = Data.ConvertData<BankCard>();
-                break;
-            case DataType.PersonalData:
-                Data = Data.ConvertData<PersonalData>();
-                break;
-            case DataType.Note:
-                Data = Data.ConvertData<Note>();
-                break;
-            
-            case DataType.All:
-            default:
-                throw new ArgumentOutOfRangeException(nameof(dataType), dataType, null);
-        }
-    }
+	public void DeleteData()
+	{
+		if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null)
+			throw new NullReferenceException();
 
-    public void ActivateTotp()
-    {
-        if (Data is not Login login)
-            return;
-        
-        if (string.IsNullOrWhiteSpace(login.SecretKey)) 
-            return;
+		Session.RestartLockerTimer();
 
-        try
-        {
-            Totp = new OlibTotp(login.SecretKey);
+		int index = DataIndex;
 
-            login.IsActivatedTotp = true;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-    }
+		if (OlibKeyApp.ViewModel.Session.Storage.Settings.UseTrashcan)
+		{
+			Data data = OlibKeyApp.ViewModel.Session.Storage.Data[index];
+			data.DeleteDate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+			OlibKeyApp.ViewModel.Session.Storage.Trashcan.Data.Add(data);
+		}
 
-    public void DeactivateTotp()
-    {
-        if (Data is not Login login)
-            return;
+		OlibKeyApp.ViewModel.Session.Storage.Data.RemoveAt(index);
 
-        Totp.Dispose();
+		OlibKeyApp.ViewModel.IsDirty = true;
+		OlibKeyApp.ViewModel.DoSearch();
+	}
 
-        login.IsActivatedTotp = false;
-    }
+	public void AddTag()
+	{
+		if (string.IsNullOrWhiteSpace(TagName)) return;
+
+		Data.Tags.Add(TagName);
+
+		TagName = null;
+	}
+
+	public void DeleteTag(string tag)
+	{
+		Data.Tags.Remove(tag);
+	}
+
+	public void Cancel()
+	{
+		if (OlibKeyApp.ViewModel.Session is null || OlibKeyApp.ViewModel.Session.Storage is null)
+			throw new NullReferenceException();
+
+		Session.RestartLockerTimer();
+
+		_viewerMode = DataViewerMode.View;
+
+		Data = (Data)OlibKeyApp.ViewModel.Session.Storage.Data[DataIndex].Clone();
+
+		RaisePropertyChanged(nameof(IsView));
+		RaisePropertyChanged(nameof(IsEdit));
+		RaisePropertyChanged(nameof(IsCreate));
+	}
+
+	public void Back()
+	{
+		Session.RestartLockerTimer();
+
+		if (OlibKeyApp.ViewModel.SelectedData is null)
+			OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
+
+		OlibKeyApp.ViewModel.SelectedData = null;
+	}
+
+	public async void CopyString(string str)
+	{
+		Session.RestartLockerTimer();
+
+		if (await OlibKeyApp.CopyStringToClipboard(str))
+			OlibKeyApp.ShowNotification("Successful", "FieldCopied", NotificationType.Information);
+	}
+
+	private void ChangeDataType(DataType dataType)
+	{
+		switch (dataType)
+		{
+			case DataType.Login:
+				Data = Data.ConvertData<Login>();
+				break;
+			case DataType.BankCard:
+				Data = Data.ConvertData<BankCard>();
+				break;
+			case DataType.PersonalData:
+				Data = Data.ConvertData<PersonalData>();
+				break;
+			case DataType.Note:
+				Data = Data.ConvertData<Note>();
+				break;
+
+			case DataType.All:
+			default:
+				throw new ArgumentOutOfRangeException(nameof(dataType), dataType, null);
+		}
+	}
+
+	public async void ChangeImage()
+	{
+		string? path = await StorageProvider.SelectFile();
+
+		if (path is null) return;
+		
+		Data.ChangeImageFromPath(path);
+
+		Data.IsSelectedImage = true;
+			
+		Data.UpdateIcon();
+	}
+
+	public void ActivateTotp()
+	{
+		if (Data is not Login login)
+			return;
+
+		if (string.IsNullOrWhiteSpace(login.SecretKey))
+			return;
+
+		try
+		{
+			Totp = new OlibTotp(login.SecretKey);
+
+			login.IsActivatedTotp = true;
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+		}
+	}
+
+	public void DeactivateTotp()
+	{
+		if (Data is not Login login)
+			return;
+
+		Totp.Dispose();
+
+		login.IsActivatedTotp = false;
+	}
 }

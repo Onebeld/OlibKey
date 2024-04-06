@@ -6,55 +6,58 @@ namespace OlibKey.Core.Settings;
 
 public class StorageSettings : ViewModelBase, ICloneable
 {
-    private string _name = string.Empty;
-    private string? _imageData;
-    private int _iterations;
-    private bool _useTrash;
+	private string _name = string.Empty;
+	private string? _imageData;
+	private int _iterations = 10_000;
+	private bool _useTrash = true;
 
-    public string Name
-    {
-        get => _name;
-        set => RaiseAndSet(ref _name, value);
-    }
+	public string Name
+	{
+		get => _name;
+		set => RaiseAndSet(ref _name, value);
+	}
 
-    public string? ImageData
-    {
-        get => _imageData;
-        set => RaiseAndSet(ref _imageData, value);
-    }
-    
-    public int Iterations
-    {
-        get => _iterations;
-        set => RaiseAndSet(ref _iterations, value);
-    }
-    
-    public bool UseTrashcan
-    {
-        get => _useTrash;
-        set => RaiseAndSet(ref _useTrash, value);
-    }
+	public string? ImageData
+	{
+		get => _imageData;
+		set => RaiseAndSet(ref _imageData, value);
+	}
 
-    public void LoadImage(string path)
-    {
-        Bitmap bitmap;
-        
-        try
-        {
-            bitmap = new Bitmap(path);
-        }
-        catch { return; }
+	public int Iterations
+	{
+		get => _iterations;
+		set => RaiseAndSet(ref _iterations, value);
+	}
 
-        bitmap = bitmap.CreateScaledBitmap(new PixelSize(80, 80), BitmapInterpolationMode.MediumQuality);
+	public bool UseTrashcan
+	{
+		get => _useTrash;
+		set => RaiseAndSet(ref _useTrash, value);
+	}
 
-        using MemoryStream memoryStream = new();
-        bitmap.Save(memoryStream);
+	public void LoadImage(string path)
+	{
+		Bitmap bitmap;
 
-        ImageData = Convert.ToBase64String(memoryStream.ToArray());
-    }
+		try
+		{
+			bitmap = new Bitmap(path);
+		}
+		catch
+		{
+			return;
+		}
 
-    public object Clone()
-    {
-        return (StorageSettings)MemberwiseClone();
-    }
+		bitmap = bitmap.CreateScaledBitmap(new PixelSize(80, 80), BitmapInterpolationMode.MediumQuality);
+
+		using MemoryStream memoryStream = new();
+		bitmap.Save(memoryStream);
+
+		ImageData = Convert.ToBase64String(memoryStream.ToArray());
+	}
+
+	public object Clone()
+	{
+		return (StorageSettings)MemberwiseClone();
+	}
 }

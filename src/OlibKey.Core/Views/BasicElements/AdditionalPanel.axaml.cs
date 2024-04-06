@@ -4,5 +4,5 @@ namespace OlibKey.Core.Views.BasicElements;
 
 public partial class AdditionalPanel : UserControl
 {
-    public AdditionalPanel() => InitializeComponent();
+	public AdditionalPanel() => InitializeComponent();
 }

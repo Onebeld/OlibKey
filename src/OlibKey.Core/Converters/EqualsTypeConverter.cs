@@ -6,11 +6,11 @@ namespace OlibKey.Core.Converters;
 public class EqualsTypeConverter : IValueConverter
 {
 	public static readonly EqualsTypeConverter Instance = new();
-	
+
 	public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
 	{
 		if (parameter is not Type type) return false;
-		
+
 		return value?.GetType() == type;
 	}
 

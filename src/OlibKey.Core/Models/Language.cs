@@ -2,9 +2,9 @@
 
 public readonly struct Language(string name, string key, params string[] additionalKeys)
 {
-    public string Name { get; } = name;
+	public string Name { get; } = name;
 
-    public string Key { get; } = key;
+	public string Key { get; } = key;
 
-    public string[] AdditionalKeys { get; } = additionalKeys;
+	public string[] AdditionalKeys { get; } = additionalKeys;
 }

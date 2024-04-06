@@ -8,33 +8,34 @@ namespace OlibKey.Core.Views.MainWindowPages;
 
 public partial class CreateDecryptStoragePage : UserControl
 {
-    public CreateDecryptStoragePage()
-    {
-        InitializeComponent();
+	public CreateDecryptStoragePage()
+	{
+		InitializeComponent();
 
-        Random random = new();
-        TextBlockTip.Text = OlibKeyApp.GetLocalizationString(TextInformation.Tips[random.Next(0, TextInformation.Tips.Length)]);
-        
-        MasterPasswordTextBox.KeyUp += MasterPasswordTextBoxOnKeyUp;
-    }
+		Random random = new();
+		TextBlockTip.Text =
+			OlibKeyApp.GetLocalizationString(TextInformation.Tips[random.Next(0, TextInformation.Tips.Length)]);
 
-    protected override void OnLoaded(RoutedEventArgs e)
-    {
-        base.OnLoaded(e);
-        
-        MasterPasswordTextBox.Focus();
-    }
+		MasterPasswordTextBox.KeyUp += MasterPasswordTextBoxOnKeyUp;
+	}
 
-    protected override void OnDetachedFromLogicalTree(LogicalTreeAttachmentEventArgs e)
-    {
-        MasterPasswordTextBox.KeyUp -= MasterPasswordTextBoxOnKeyUp;
-        
-        base.OnDetachedFromLogicalTree(e);
-    }
-    
-    private void MasterPasswordTextBoxOnKeyUp(object? sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Enter)
-            OlibKeyApp.ViewModel.UnlockStorage();
-    }
+	protected override void OnLoaded(RoutedEventArgs e)
+	{
+		base.OnLoaded(e);
+
+		MasterPasswordTextBox.Focus();
+	}
+
+	protected override void OnDetachedFromLogicalTree(LogicalTreeAttachmentEventArgs e)
+	{
+		MasterPasswordTextBox.KeyUp -= MasterPasswordTextBoxOnKeyUp;
+
+		base.OnDetachedFromLogicalTree(e);
+	}
+
+	private void MasterPasswordTextBoxOnKeyUp(object? sender, KeyEventArgs e)
+	{
+		if (e.Key == Key.Enter)
+			OlibKeyApp.ViewModel.UnlockStorage();
+	}
 }

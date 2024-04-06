@@ -15,7 +15,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <MergeResourceInclude Source="/Themes/RadioButtonListItemTheme.axaml" />
+                <MergeResourceInclude Source="/Themes/ToggleButtonListItemTheme.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -26,7 +26,7 @@
             CornerRadius="8">
         <SmoothScrollViewer>
             <StackPanel Margin="10" Spacing="5">
-                <RadioButton Theme="{StaticResource RadioButtonListItemTheme}"
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
                              IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.All}}">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <PathIcon Width="16" Height="16" Data="{StaticResource InfinityRegular}" />
@@ -45,7 +45,7 @@
                 
                 <Separator Margin="5"></Separator>
                 
-                <RadioButton Theme="{StaticResource RadioButtonListItemTheme}"
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
                              IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.Login}}">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <PathIcon Width="16" Height="16" Data="{StaticResource GlobeRegular}" />
@@ -62,7 +62,7 @@
                     </Grid>
                 </RadioButton>
                 
-                <RadioButton Theme="{StaticResource RadioButtonListItemTheme}"
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
                              IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.BankCard}}">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <PathIcon Width="16" Height="16" Data="{StaticResource CreditCardRegular}" />
@@ -79,7 +79,7 @@
                     </Grid>
                 </RadioButton>
                 
-                <RadioButton Theme="{StaticResource RadioButtonListItemTheme}"
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
                              IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.PersonalData}}">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <PathIcon Width="16" Height="16" Data="{StaticResource ContactCardRegular}" />
@@ -96,7 +96,7 @@
                     </Grid>
                 </RadioButton>
                 
-                <RadioButton Theme="{StaticResource RadioButtonListItemTheme}"
+                <RadioButton Theme="{StaticResource ToggleButtonListItemTheme}"
                              IsChecked="{CompiledBinding SelectedDataType, Converter={x:Static OtherConverters.EnumToBool}, ConverterParameter={x:Static enums:DataType.Note}}">
                     <Grid ColumnDefinitions="Auto,*,Auto">
                         <PathIcon Width="16" Height="16" Data="{StaticResource NoteRegular}" />
@@ -113,6 +113,27 @@
                     </Grid>
                 </RadioButton>
                 
+                <Separator Margin="5"></Separator>
+
+                <ToggleButton Theme="{StaticResource ToggleButtonListItemTheme}"
+                             IsChecked="{CompiledBinding ShowFavorites}">
+                    <Grid ColumnDefinitions="Auto,*,Auto">
+                        <PathIcon Width="16" Height="16" Data="{StaticResource FavoriteRegular}" />
+
+                        <TextBlock Grid.Column="1" 
+                                   Margin="10 0 0 0"
+                                   Text="{StaticResource Favorite}"
+                                   VerticalAlignment="Center" />
+                        
+                        <TextBlock Grid.Column="2"
+                                   Text="{CompiledBinding Session.Storage.FavoritesCount}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+                </ToggleButton>
+                
+                <Separator Margin="5"></Separator>
+
                 <Expander>
                     <Expander.Header>
                         <Grid ColumnDefinitions="Auto,*,Auto">

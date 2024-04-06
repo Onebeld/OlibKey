@@ -20,9 +20,9 @@ public class StorageTests
 			Username = "TestUsername",
 			Password = "TestPassword"
 		});
-		
+
 		TestContext.WriteLine(storage.ToJson());
-		
+
 		Assert.Pass();
 	}
 
@@ -30,7 +30,7 @@ public class StorageTests
 	public void Lock_And_Unlock_Storage()
 	{
 		const string masterPassword = "udfjg02345";
-		
+
 		Storage storage = new();
 		storage.Data.Add(new Login
 		{
@@ -49,7 +49,7 @@ public class StorageTests
 		};
 
 		string file = storage.Lock(masterPassword);
-		
+
 		Storage.Unlock(file, masterPassword);
 
 		Assert.Pass();

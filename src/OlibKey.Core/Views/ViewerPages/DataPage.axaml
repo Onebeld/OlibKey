@@ -5,7 +5,6 @@
              xmlns:viewerPages="clr-namespace:OlibKey.Core.ViewModels.ViewerPages"
              xmlns:c="clr-namespace:OlibKey.Core.Converters"
              xmlns:storageTypes="clr-namespace:OlibKey.Core.Models.StorageModels.StorageTypes"
-             xmlns:a="using:OlibKey.Core"
              xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.ViewerPages.DataPage"
@@ -52,12 +51,20 @@
                            IsVisible="{CompiledBinding IsEdit}"/>
                 
                 <DockPanel>
-                    <Border DockPanel.Dock="Left"
+                    <Border x:Name="ImageBorder"
+                            DockPanel.Dock="Left"
                             Background="#FFFFFFFF"
                             Width="50"
                             Height="50"
                             CornerRadius="99"
                             ClipToBounds="True">
+                        <FlyoutBase.AttachedFlyout>
+                            <Flyout>
+                                <Button Content="{StaticResource SelectImage}"
+                                        Command="{CompiledBinding ChangeImage}" />
+                            </Flyout>
+                        </FlyoutBase.AttachedFlyout>
+                        
                         <Image Source="{CompiledBinding Data.Icon^}"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -72,6 +79,7 @@
                              UseFloatingWatermark="True" />
                 </DockPanel>
                 
+                <!-- Select type -->
                 <StackPanel Spacing="5" IsVisible="{CompiledBinding !IsView}">
                     <TextBlock Text="{StaticResource Type}" FontWeight="SemiBold" />
                     
@@ -83,39 +91,49 @@
                     </ComboBox>
                 </StackPanel>
                 
-                <TextBlock Text="{StaticResource Tags}" FontWeight="SemiBold" />
-                
-                <ItemsControl ItemsSource="{CompiledBinding Data.Tags}"
-                              ItemTemplate="{StaticResource TagItemTemplate}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-                
-                <DockPanel IsVisible="{CompiledBinding !IsView}" Margin="0 5 0 0">
-                    <Button ToolTip.Tip="{StaticResource Add}"
-                            Command="{CompiledBinding AddTag}"
-                            Margin="5 0 0 0"
-                            Width="{CompiledBinding $self.Bounds.Height}"
-                            DockPanel.Dock="Right">
-                        <PathIcon Data="{StaticResource AddRegular}" />
-                    </Button>
+                <!-- Tags -->
+                <StackPanel Spacing="5">
+                    <StackPanel.IsVisible>
+                        <MultiBinding Converter="{x:Static BoolConverters.Or}">
+                            <CompiledBinding Path="!IsView" />
+                            <CompiledBinding Path="!!Data.Tags.Count" />
+                        </MultiBinding>
+                    </StackPanel.IsVisible>
                     
-                    <AutoCompleteBox x:Name="TagAutoCompleteBox"
-                                     ItemsSource="{CompiledBinding Session.Storage.Tags}"
-                                     IsTextCompletionEnabled="True"
-                                     Text="{CompiledBinding TagName}"
-                                     Watermark="{StaticResource TagName}"
-                                     ValueMemberBinding="{CompiledBinding Name, x:DataType=storageModels:Tag}">
-                        <AutoCompleteBox.ItemTemplate>
-                            <DataTemplate x:DataType="storageModels:Tag">
-                                <TextBlock Text="{CompiledBinding Name}" />
-                            </DataTemplate>
-                        </AutoCompleteBox.ItemTemplate>
-                    </AutoCompleteBox>
-                </DockPanel>
+                    <TextBlock Text="{StaticResource Tags}" FontWeight="SemiBold" />
+                
+                    <ItemsControl ItemsSource="{CompiledBinding Data.Tags}"
+                                  ItemTemplate="{StaticResource TagItemTemplate}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                
+                    <DockPanel IsVisible="{CompiledBinding !IsView}" Margin="0 5 0 0">
+                        <Button ToolTip.Tip="{StaticResource Add}"
+                                Command="{CompiledBinding AddTag}"
+                                Margin="5 0 0 0"
+                                Width="{CompiledBinding $self.Bounds.Height}"
+                                DockPanel.Dock="Right">
+                            <PathIcon Data="{StaticResource AddRegular}" />
+                        </Button>
+                    
+                        <AutoCompleteBox x:Name="TagAutoCompleteBox"
+                                         ItemsSource="{CompiledBinding Session.Storage.Tags}"
+                                         IsTextCompletionEnabled="True"
+                                         Text="{CompiledBinding TagName}"
+                                         Watermark="{StaticResource TagName}"
+                                         ValueMemberBinding="{CompiledBinding Name, x:DataType=storageModels:Tag}">
+                            <AutoCompleteBox.ItemTemplate>
+                                <DataTemplate x:DataType="storageModels:Tag">
+                                    <TextBlock Text="{CompiledBinding Name}" />
+                                </DataTemplate>
+                            </AutoCompleteBox.ItemTemplate>
+                        </AutoCompleteBox>
+                    </DockPanel>
+                </StackPanel>
                 
                 <Separator Margin="10 10" />
                 

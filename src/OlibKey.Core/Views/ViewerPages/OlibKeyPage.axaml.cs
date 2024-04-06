@@ -4,8 +4,8 @@ namespace OlibKey.Core.Views.ViewerPages;
 
 public partial class OlibKeyPage : UserControl
 {
-    public OlibKeyPage()
-    {
-        InitializeComponent();
-    }
+	public OlibKeyPage()
+	{
+		InitializeComponent();
+	}
 }

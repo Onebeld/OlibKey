@@ -9,7 +9,7 @@ namespace OlibKey.Core.Windows;
 public partial class StorageSettingsWindow : ContentDialog
 {
 	public StorageSettingsWindowViewModel ViewModel { get; }
-	
+
 	public StorageSettingsWindow()
 	{
 		InitializeComponent();
@@ -21,10 +21,10 @@ public partial class StorageSettingsWindow : ContentDialog
 
 		ViewModel = new StorageSettingsWindowViewModel(storageSettings);
 		DataContext = ViewModel;
-		
+
 		SetupDragAndDrop();
 	}
-	
+
 	private void SetupDragAndDrop()
 	{
 		void DragEnter(object? s, DragEventArgs e)

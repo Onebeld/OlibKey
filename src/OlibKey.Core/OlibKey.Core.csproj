@@ -22,6 +22,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.0.10" />
+        <PackageReference Include="Markdown.Avalonia" Version="11.0.2" />
         <PackageReference Include="Otp.NET" Version="1.3.0"/>
         <PackageReference Include="PleasantUI" Version="4.0.1" />
     </ItemGroup>

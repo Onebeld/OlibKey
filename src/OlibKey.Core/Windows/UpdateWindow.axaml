@@ -1,0 +1,56 @@
+﻿<ContentDialog xmlns="https://github.com/avaloniaui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+               xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
+               mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+               x:Class="OlibKey.Core.Windows.UpdateWindow">
+    <Design.DesignStyle>
+        <Style Selector="ContentDialog">
+            <Setter Property="Opacity" Value="1" />
+        </Style>
+    </Design.DesignStyle>
+    
+    <SmoothScrollViewer>
+        <StackPanel Margin="20 15" Spacing="5">
+            <TextBlock Theme="{StaticResource SubtitleTextBlockTheme}"
+                       Text="{StaticResource UpdateAvailable}"
+                       Margin="0 0 0 10"/>
+            
+            <TextBlock>
+                <Run Text="{StaticResource Version}" /><Run Text=":" />
+                <Run x:Name="VersionRun" />
+            </TextBlock>
+            <TextBlock>
+                <Run Text="{StaticResource ReleaseTime}" /><Run Text=":" />
+                <Run x:Name="ReleaseTimeRun" />
+            </TextBlock>
+            
+            <TextBlock Text="{StaticResource ContentsOfTheUpdate}" FontWeight="SemiBold" Margin="0 20 0 0" />
+            
+            <Border CornerRadius="{StaticResource ControlCornerRadius}"
+                    Background="{StaticResource ControlFillColor1Brush}"
+                    BorderBrush="{StaticResource ControlBorderColorBrush}"
+                    BorderThickness="1"
+                    Padding="10">
+                <md:MarkdownScrollViewer x:Name="MarkdownScrollViewer">
+
+                </md:MarkdownScrollViewer>
+            </Border>
+        </StackPanel>
+    </SmoothScrollViewer>
+
+    <ContentDialog.BottomPanelContent>
+        <UniformGrid Margin="15 0" Rows="1">
+            <Button x:Name="FollowLinkButton"
+                    Theme="{StaticResource AccentButtonTheme}"
+                    Content="{StaticResource FollowLink}"
+                    VerticalAlignment="Center"
+                    Margin="5" />
+            <Button x:Name="CloseButton"
+                    Content="{StaticResource Close}"
+                    VerticalAlignment="Center"
+                    Margin="5" />
+        </UniformGrid>
+    </ContentDialog.BottomPanelContent>
+</ContentDialog>

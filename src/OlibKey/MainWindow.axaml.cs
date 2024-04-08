@@ -1,5 +1,6 @@
 using Avalonia.Controls.Notifications;
 using Avalonia.Controls.Primitives;
+using Avalonia.Interactivity;
 using OlibKey.Core;
 using OlibKey.Core.Settings;
 using OlibKey.Core.Views.MainWindowPages;
@@ -32,6 +33,13 @@ public partial class MainWindow : PleasantWindow
 		};
 
 		Closed += OnClosed;
+	}
+
+	protected override void OnLoaded(RoutedEventArgs e)
+	{
+		base.OnLoaded(e);
+		
+		OlibKeyApp.ViewModel.CheckUpdate();
 	}
 
 	private void OnClosed(object? sender, EventArgs e)

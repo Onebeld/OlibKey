@@ -7,6 +7,7 @@ using OlibKey.Core.Enums;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Models;
 using OlibKey.Core.Models.StorageModels;
+using OlibKey.Core.Other;
 using OlibKey.Core.Settings;
 using OlibKey.Core.StaticMembers;
 using OlibKey.Core.Structures;
@@ -360,4 +361,14 @@ public class ApplicationViewModel : ViewModelBase
 	}
 
 	private void SelectedTagsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) => DoSearch();
+
+	public async void CheckUpdate()
+	{
+		Update? update = await Updater.GetUpdate();
+		
+		if (update is null) return;
+
+		UpdateWindow updateWindow = new(update.Value);
+		updateWindow.Show(OlibKeyApp.Main);
+	}
 }

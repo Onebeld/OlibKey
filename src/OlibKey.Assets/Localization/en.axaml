@@ -57,6 +57,12 @@
     <s:String x:Key="StorageFileNotFound">Storage file not found</s:String>
     <s:String x:Key="UnknownErrorOccurred">An unknown error occurred</s:String>
     
+    <!--Update-->
+    <s:String x:Key="UpdateAvailable">Update available!</s:String>
+    <s:String x:Key="ReleaseTime">Release time</s:String>
+    <s:String x:Key="ContentsOfTheUpdate">Contents of the update</s:String>
+    <s:String x:Key="FollowLink">Follow link</s:String>
+    
     <!--Password Generator-->
     <s:String x:Key="PasswordGenerator">Password generator</s:String>
     <s:String x:Key="PasswordC">Password</s:String>

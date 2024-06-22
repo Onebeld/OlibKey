@@ -139,7 +139,7 @@ public static class Encryptor
 	/// <param name="masterPassword">Master password</param>
 	/// <param name="iterations">Number of encryption iterations</param>
 	/// <returns>Encrypted text</returns>
-	public static string EncryptString(string text, string masterPassword, int iterations)
+	public static byte[] Encrypt(string text, string masterPassword, int iterations)
 	{
 		string encryptString = text;
 		byte[] baPwd = Encoding.UTF8.GetBytes(masterPassword);
@@ -152,9 +152,7 @@ public static class Encryptor
 		for (int i = 0; i < baText.Length; i++) baEncrypted[i + baSalt.Length] = baText[i];
 		baEncrypted = AES_Encrypt(baEncrypted, baPwdHash, iterations);
 
-		encryptString = Convert.ToBase64String(baEncrypted);
-
-		return encryptString;
+		return baEncrypted;
 	}
 
 	/// <summary>
@@ -164,20 +162,14 @@ public static class Encryptor
 	/// <param name="masterPassword">Master password</param>
 	/// <param name="iterations">Number of decryption iterations</param>
 	/// <returns>Decrypted text</returns>
-	public static string DecryptString(string text, string masterPassword, int iterations)
+	public static string Decrypt(byte[] text, string masterPassword, int iterations)
 	{
-		string result = text;
-
 		byte[] baPwdHash = SHA256.HashData(Encoding.UTF8.GetBytes(masterPassword));
 
-		byte[] baText = Convert.FromBase64String(result);
-		byte[] baDecrypted = AES_Decrypt(baText, baPwdHash, iterations);
+		byte[] baDecrypted = AES_Decrypt(text, baPwdHash, iterations);
 		byte[] baResult = new byte[baDecrypted.Length - SaltLength];
 		for (int i = 0; i < baResult.Length; i++) baResult[i] = baDecrypted[i + SaltLength];
 
-		result = Encoding.UTF8.GetString(baResult);
-
-
-		return result;
+		return Encoding.UTF8.GetString(baResult);
 	}
 }

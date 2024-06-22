@@ -135,6 +135,12 @@
                     </DockPanel>
                 </StackPanel>
                 
+                <!--Color-->
+                <StackPanel Spacing="5">
+                    <TextBlock Text="{StaticResource Color}" FontWeight="SemiBold" />
+                    
+                </StackPanel>
+                
                 <Separator Margin="10 10" />
                 
                 <!--Login-->
@@ -229,6 +235,8 @@
                                                   LargeChange="1"
                                                   Width="50"
                                                   Height="50"
+                                                  StartAngle="-90"
+                                                  EndAngle="270"
                                                   Maximum="{CompiledBinding Totp.Interval, Mode=OneWay}" />
                                     <TextBlock Text="{CompiledBinding Totp.RemainingSeconds}"
                                                FontSize="16"

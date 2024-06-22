@@ -21,24 +21,22 @@ public static class GeneralConverters
 
 	public static readonly IValueConverter IntToDoubleConverter =
 		new FuncValueConverter<int, double>(value => value);
+	
 
-
-	public static readonly IValueConverter ImageDataToImageConverter =
-		new FuncValueConverter<string?, Bitmap?>(imageData =>
+	public static readonly IValueConverter BytesToImageConverter =
+		new FuncValueConverter<byte[]?, Bitmap?>(bytes =>
 		{
-			if (imageData is null) return null;
-
-			byte[] array = Convert.FromBase64String(imageData);
-			using MemoryStream memoryStream = new(array);
-
+			if (bytes is null) return null;
+			
+			using MemoryStream memoryStream = new(bytes);
 			return new Bitmap(memoryStream);
 		});
 
-	public static readonly IValueConverter ImageDataToSmallImageConverter =
-		new FuncValueConverter<string?, Bitmap?>(imageData =>
+	public static readonly IValueConverter BytesToSmallImageConverter =
+		new FuncValueConverter<byte[]?, Bitmap?>(imageData =>
 		{
 			Bitmap? bitmap =
-				(Bitmap?)ImageDataToImageConverter.Convert(imageData, typeof(Bitmap), null, CultureInfo.CurrentCulture);
+				(Bitmap?)BytesToImageConverter.Convert(imageData, typeof(Bitmap), null, CultureInfo.CurrentCulture);
 
 			return bitmap?.CreateScaledBitmap(new PixelSize(26, 26), BitmapInterpolationMode.LowQuality);
 		});

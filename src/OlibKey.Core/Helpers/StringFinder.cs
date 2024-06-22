@@ -2,7 +2,7 @@
 
 public static class StringFinder
 {
-	private static int LevenshteinDistance(string source, string target)
+	private static int GetLevenshteinDistance(string source, string target)
 	{
 		if (source == target) return 0;
 		if (source.Length == 0) return target.Length;
@@ -45,7 +45,7 @@ public static class StringFinder
 		if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(target)) return 0.0;
 		if (source == target) return 1.0;
 
-		int stepsToSame = LevenshteinDistance(source, target);
+		int stepsToSame = GetLevenshteinDistance(source, target);
 		return 1.0 - (double)stepsToSame / Math.Max(source.Length, target.Length);
 	}
 }

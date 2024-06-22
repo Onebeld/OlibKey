@@ -7,7 +7,7 @@ namespace OlibKey.Core.Settings;
 public class StorageSettings : ViewModelBase, ICloneable
 {
 	private string _name = string.Empty;
-	private string? _imageData;
+	private byte[]? _imageData;
 	private int _iterations = 10_000;
 	private bool _useTrash = true;
 
@@ -17,7 +17,7 @@ public class StorageSettings : ViewModelBase, ICloneable
 		set => RaiseAndSet(ref _name, value);
 	}
 
-	public string? ImageData
+	public byte[]? ImageData
 	{
 		get => _imageData;
 		set => RaiseAndSet(ref _imageData, value);
@@ -53,7 +53,7 @@ public class StorageSettings : ViewModelBase, ICloneable
 		using MemoryStream memoryStream = new();
 		bitmap.Save(memoryStream);
 
-		ImageData = Convert.ToBase64String(memoryStream.ToArray());
+		ImageData = memoryStream.ToArray();
 	}
 
 	public object Clone()

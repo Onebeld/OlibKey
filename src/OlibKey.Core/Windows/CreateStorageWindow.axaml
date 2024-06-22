@@ -30,7 +30,7 @@
                         ClipToBounds="True"
                         CornerRadius="99"
                         DragDrop.AllowDrop="True">
-                    <Image Source="{CompiledBinding StorageSettings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                    <Image Source="{CompiledBinding StorageSettings.ImageData, Converter={x:Static conv:GeneralConverters.BytesToImageConverter}}" />
                 </Border>
                 
                 <TextBox VerticalAlignment="Center"

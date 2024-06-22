@@ -22,7 +22,7 @@
                                 Height="80"
                                 ClipToBounds="True"
                                 Background="{StaticResource ControlFillColor2Brush}">
-                            <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToImageConverter}}" />
+                            <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.BytesToImageConverter}}" />
                         </Border>
                         
                         <TextBlock Text="{CompiledBinding Session.Storage.Settings.Name}"
@@ -121,7 +121,7 @@
                     CornerRadius="99"
                     ClipToBounds="True"
                     Background="{StaticResource ControlFillColor3Brush}">
-                <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.ImageDataToSmallImageConverter}}" />
+                <Image Source="{CompiledBinding Session.Storage.Settings.ImageData, Converter={x:Static conv:GeneralConverters.BytesToSmallImageConverter}}" />
             </Border>
             
             <TextBlock FontSize="12"

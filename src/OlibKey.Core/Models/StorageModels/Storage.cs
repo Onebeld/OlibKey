@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Text.Json;
+﻿using System.Collections.Specialized;
 using System.Text.Json.Serialization;
 using Avalonia.Collections;
 using OlibKey.Core.Helpers;
@@ -28,9 +25,6 @@ public class Storage : ViewModelBase
 
 			value.CollectionChanged += DataOnCollectionChanged;
 			UpdateInfo();
-
-			foreach (Data data in value) 
-				data.PropertyChanged += DataOnPropertyChanged;
 		}
 	}
 
@@ -46,15 +40,15 @@ public class Storage : ViewModelBase
 		set => RaiseAndSet(ref _settings, value);
 	}
 
-	[JsonIgnore] public int LoginCount { get; private set; }
+	[JsonIgnore] public int LoginCount => Data.OfType<Login>().Count();
 
-	[JsonIgnore] public int BankCardCount { get; private set; }
+	[JsonIgnore] public int BankCardCount => Data.OfType<BankCard>().Count();
 
-	[JsonIgnore] public int PersonalDataCount { get; private set; }
+	[JsonIgnore] public int PersonalDataCount => Data.OfType<PersonalData>().Count();
 
-	[JsonIgnore] public int NotesCount { get; private set; }
+	[JsonIgnore] public int NotesCount => Data.OfType<Note>().Count();
 
-	[JsonIgnore] public int FavoritesCount { get; private set; }
+	[JsonIgnore] public int FavoritesCount => Data.Count(data => data.IsFavorite);
 
 
 	[JsonIgnore]
@@ -66,133 +60,25 @@ public class Storage : ViewModelBase
 
 	private void DataOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
 	{
-		if (e.NewItems is not null)
-			ChangeCountValues(e.NewItems, 1);
-
-		if (e.OldItems is not null)
-			ChangeCountValues(e.OldItems, -1, false);
-
 		UpdateCounts();
 	}
 
-	private void ChangeCountValues(IList list, int value, bool adding = true)
+	public void Save(string path, string masterPassword)
 	{
-		foreach (object item in list)
-		{
-			if (item is not Data data) continue;
-			
-			if (adding)
-				data.PropertyChanged += DataOnPropertyChanged;
-			else 
-				data.PropertyChanged -= DataOnPropertyChanged;
-
-			if (data.GetType() == typeof(Note))
-				NotesCount += value;
-			else if (data.GetType() == typeof(Login))
-				LoginCount += value;
-			else if (data.GetType() == typeof(BankCard))
-				BankCardCount += value;
-			else if (data.GetType() == typeof(PersonalData))
-				PersonalDataCount += value;
-
-			if (data.IsFavorite) FavoritesCount += value;
-		}
+		OlibFileLoader.Save(this, path, masterPassword);
 	}
 
-	private void DataOnPropertyChanged(object? sender, PropertyChangedEventArgs e)
+	public static Storage Load(string path, string masterPassword)
 	{
-		if (sender is not Data data) return;
-
-		if (e.PropertyName == nameof(StorageModels.Data.IsFavorite))
-		{
-			if (data.IsFavorite) FavoritesCount++;
-			else FavoritesCount--;
-
-			RaisePropertyChanged(nameof(FavoritesCount));
-		}
-	}
-
-	public string Lock(string masterPassword)
-	{
-		string encryptJson;
-
-		{
-			string storageJson = ToJson();
-			string compressedJson = Compressor.Compress(storageJson);
-			encryptJson = Encryptor.EncryptString(compressedJson, masterPassword, Settings.Iterations);
-		}
-
-		string file = $"{Settings.Name}:{Settings.Iterations}:{encryptJson}:{Settings.UseTrashcan}:";
-
-		file += Settings.ImageData ?? "none";
-
-		return file;
-	}
-
-	public static Storage Unlock(string fileContent, string masterPassword)
-	{
-		string[] split = fileContent.Split(':');
-
-		string name = split[0];
-		int iterations = int.Parse(split[1]);
-		string encryptString = split[2];
-		bool useTrashcan = bool.Parse(split[3]);
-		string? imageData = split[4];
-
-		if (imageData == "none")
-			imageData = null;
-
-		{
-			string compressedString = Encryptor.DecryptString(encryptString, masterPassword, iterations);
-			fileContent = Compressor.Decompress(compressedString);
-		}
-
-		Storage storage = FromJson(fileContent);
-
-		StorageSettings settings = new()
-		{
-			Iterations = iterations,
-			UseTrashcan = useTrashcan,
-			Name = name,
-			ImageData = imageData,
-		};
-
-		storage.Settings = settings;
-
+		Storage storage = OlibFileLoader.Load(path, masterPassword);
+		
 		storage.UpdateInfo();
 
 		return storage;
 	}
 
-	public void Save(string path, string masterPassword)
-	{
-		string fileContent = Lock(masterPassword);
-
-		File.WriteAllText(path, fileContent);
-	}
-
-	public static Storage Load(string path, string masterPassword)
-	{
-		string file = File.ReadAllText(path);
-
-		return Unlock(file, masterPassword);
-	}
-
-	public string ToJson()
-	{
-		return JsonSerializer.Serialize(this, GenerationContexts.StorageGenerationContext.Default.Storage);
-	}
-
-	public static Storage FromJson(string json)
-	{
-		return JsonSerializer.Deserialize(json, GenerationContexts.StorageGenerationContext.Default.Storage) ??
-		       throw new NullReferenceException();
-	}
-
 	private void UpdateInfo()
 	{
-		CalculateCountOfTypes();
-
 		Tags.Clear();
 		GetTags();
 
@@ -206,30 +92,6 @@ public class Storage : ViewModelBase
 		RaisePropertyChanged(nameof(PersonalDataCount));
 		RaisePropertyChanged(nameof(NotesCount));
 		RaisePropertyChanged(nameof(FavoritesCount));
-	}
-
-	private void CalculateCountOfTypes()
-	{
-		LoginCount = 0;
-		BankCardCount = 0;
-		PersonalDataCount = 0;
-		NotesCount = 0;
-		FavoritesCount = 0;
-
-		foreach (Data data in Data)
-		{
-			if (data.GetType() == typeof(Note))
-				NotesCount++;
-			else if (data.GetType() == typeof(Login))
-				LoginCount++;
-			else if (data.GetType() == typeof(BankCard))
-				BankCardCount++;
-			else if (data.GetType() == typeof(PersonalData))
-				PersonalDataCount++;
-
-			if (data.IsFavorite)
-				FavoritesCount++;
-		}
 	}
 
 	private void GetTags()

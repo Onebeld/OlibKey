@@ -10,10 +10,7 @@ public partial class UpdateWindow : ContentDialog
 {
 	private readonly Update _update;
 	
-	public UpdateWindow()
-	{
-		InitializeComponent();
-	}
+	public UpdateWindow() => InitializeComponent();
 
 	public UpdateWindow(Update update) : this()
 	{

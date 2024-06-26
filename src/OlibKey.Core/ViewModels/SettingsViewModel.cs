@@ -2,9 +2,9 @@
 using Avalonia.Controls.Notifications;
 using Avalonia.Media;
 using OlibKey.Core.Helpers;
-using OlibKey.Core.Models;
 using OlibKey.Core.Settings;
 using OlibKey.Core.StaticMembers;
+using OlibKey.Core.Structures;
 using PleasantUI;
 using PleasantUI.Core;
 using PleasantUI.Core.Enums;
@@ -20,7 +20,7 @@ public class SettingsViewModel : ViewModelBase
 
 	public Language SelectedLanguage
 	{
-		get => Localization.Languages.First(lang => lang.Key == OlibKeySettings.Instance.Language);
+		get => LanguageResourceHandler.Languages.First(lang => lang.Key == OlibKeySettings.Instance.Language);
 		set
 		{
 			if (IsNotLoaded) return;

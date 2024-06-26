@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewerPages="clr-namespace:OlibKey.Core.ViewModels.ViewerPages"
              xmlns:c="clr-namespace:OlibKey.Core.Converters"
-             xmlns:storageTypes="clr-namespace:OlibKey.Core.Models.StorageModels.StorageTypes"
-             xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageModels"
+             xmlns:storageUnits="clr-namespace:OlibKey.Core.Models.StorageUnits"
+             xmlns:storageTypes="clr-namespace:OlibKey.Core.Models.StorageUnits.DataTypes"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.ViewerPages.DataPage"
              x:DataType="viewerPages:DataPageViewModel">
@@ -125,9 +125,9 @@
                                          IsTextCompletionEnabled="True"
                                          Text="{CompiledBinding TagName}"
                                          Watermark="{StaticResource TagName}"
-                                         ValueMemberBinding="{CompiledBinding Name, x:DataType=storageModels:Tag}">
+                                         ValueMemberBinding="{CompiledBinding Name, x:DataType=storageUnits:Tag}">
                             <AutoCompleteBox.ItemTemplate>
-                                <DataTemplate x:DataType="storageModels:Tag">
+                                <DataTemplate x:DataType="storageUnits:Tag">
                                     <TextBlock Text="{CompiledBinding Name}" />
                                 </DataTemplate>
                             </AutoCompleteBox.ItemTemplate>
@@ -231,28 +231,28 @@
                                         Spacing="10"
                                         IsVisible="{CompiledBinding ((storageTypes:Login)Data).IsActivatedTotp}">
                                 <Panel>
-                                    <ProgressRing Value="{CompiledBinding Totp.RemainingSeconds, Mode=OneWay}"
+                                    <ProgressRing Value="{CompiledBinding TotpController.RemainingSeconds, Mode=OneWay}"
                                                   LargeChange="1"
                                                   Width="50"
                                                   Height="50"
                                                   StartAngle="-90"
                                                   EndAngle="270"
-                                                  Maximum="{CompiledBinding Totp.Interval, Mode=OneWay}" />
-                                    <TextBlock Text="{CompiledBinding Totp.RemainingSeconds}"
+                                                  Maximum="{CompiledBinding TotpController.Interval, Mode=OneWay}" />
+                                    <TextBlock Text="{CompiledBinding TotpController.RemainingSeconds}"
                                                FontSize="16"
                                                FontWeight="SemiBold"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"/>
                                 </Panel>
                                 
-                                <SelectableTextBlock Text="{CompiledBinding Totp.GeneratedCode}"
+                                <SelectableTextBlock Text="{CompiledBinding TotpController.GeneratedCode}"
                                                      FontSize="20"
                                                      FontWeight="SemiBold"
                                                      VerticalAlignment="Center" />
                                 
                                 <Button Classes="Copy"
                                         Command="{CompiledBinding CopyString}"
-                                        CommandParameter="{CompiledBinding Totp.GeneratedCode}"
+                                        CommandParameter="{CompiledBinding TotpController.GeneratedCode}"
                                         Width="32"
                                         Height="32"
                                         VerticalAlignment="Center" />
@@ -449,6 +449,21 @@
                         </DockPanel>
                     </StackPanel>
                 </Border>
+                
+                <TextBlock Margin="0 10 0 0"
+                           IsVisible="{CompiledBinding ((storageUnits:Data)Data).TimeCreate, Converter={x:Static ObjectConverters.IsNotNull}}"
+                           FontSize="12"
+                           Foreground="{StaticResource TextFillColor3Brush}">
+                    <Run Text="{StaticResource Created}" /><Run Text=": " />
+                    <Run Text="{CompiledBinding ((storageUnits:Data)Data).TimeCreate}" />
+                </TextBlock>
+                
+                <TextBlock IsVisible="{CompiledBinding ((storageUnits:Data)Data).TimeChanged, Converter={x:Static ObjectConverters.IsNotNull}}"
+                           FontSize="12"
+                           Foreground="{StaticResource TextFillColor3Brush}">
+                    <Run Text="{StaticResource Changed}" /><Run Text=": " />
+                    <Run Text="{CompiledBinding ((storageUnits:Data)Data).TimeChanged}" />
+                </TextBlock>
             </StackPanel>
         </SmoothScrollViewer>
         

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:OlibKey.Core.ViewModels"
              xmlns:enums="clr-namespace:OlibKey.Core.Enums"
-             xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageModels"
+             xmlns:storageUnits="clr-namespace:OlibKey.Core.Models.StorageUnits"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="OlibKey.Core.Views.BasicElements.AdditionalPanel"
              x:DataType="vm:ApplicationViewModel">
@@ -150,29 +150,38 @@
                         </Grid>
                     </Expander.Header>
                     
-                    <ListBox ItemsSource="{CompiledBinding Session.Storage.Tags}"
-                             SelectedItems="{CompiledBinding SelectedTags}"
-                             SelectionMode="Multiple,Toggle">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="storageModels:Tag">
-                                <Grid ColumnDefinitions="Auto,*,Auto">
-                                    <PathIcon Grid.Column="0"
-                                              Data="{StaticResource TagRegular}"
-                                              Foreground="{StaticResource TextFillColor3Brush}"
-                                              Margin="0 0 10 0" />
+                    <Panel Margin="5">
+                        <ListBox ItemsSource="{CompiledBinding Session.Storage.Tags}"
+                                 SelectedItems="{CompiledBinding SelectedTags}"
+                                 SelectionMode="Multiple,Toggle">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate x:DataType="storageUnits:Tag">
+                                    <Grid ColumnDefinitions="Auto,*,Auto">
+                                        <PathIcon Grid.Column="0"
+                                                  Data="{StaticResource TagRegular}"
+                                                  Foreground="{StaticResource TextFillColor3Brush}"
+                                                  Margin="0 0 10 0" />
                                     
-                                    <TextBlock Grid.Column="1"
-                                               Text="{CompiledBinding Name}"
-                                               TextTrimming="CharacterEllipsis"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Grid.Column="2"
-                                               Text="{CompiledBinding Count}"
-                                               Foreground="{StaticResource TextFillColor3Brush}"
-                                               VerticalAlignment="Center" />
-                                </Grid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{CompiledBinding Name}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="2"
+                                                   Text="{CompiledBinding Count}"
+                                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        
+                        <TextBlock Text="{StaticResource NoTags}"
+                                   Foreground="{StaticResource TextFillColor3Brush}"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   IsVisible="{CompiledBinding !Session.Storage.Tags.Count}"
+                                   Margin="0 20" />
+                    </Panel>
                 </Expander>
             </StackPanel>
         </SmoothScrollViewer>

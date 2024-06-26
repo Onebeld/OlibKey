@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageModels">
+                    xmlns:storageModels="clr-namespace:OlibKey.Core.Models.StorageUnits">
     <DataTemplate x:Key="DataItemTemplate" DataType="{x:Type storageModels:Data}">
         <Grid ColumnDefinitions="Auto,*,Auto">
             <Border Grid.Column="0"

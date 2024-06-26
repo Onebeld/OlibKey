@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using OlibKey.Core.Models.StorageModels;
+using OlibKey.Core.Models.StorageUnits;
 
 namespace OlibKey.Core.GenerationContexts;
 

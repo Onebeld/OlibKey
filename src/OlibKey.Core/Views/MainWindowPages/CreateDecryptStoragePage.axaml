@@ -23,7 +23,8 @@
                     <Button Theme="{StaticResource AccentButtonTheme}"
                             Content="{StaticResource CreateStorage}"
                             Command="{CompiledBinding CreateStorage}"
-                            Margin="15 0"/>
+                            Margin="15 0"
+                            IsEnabled="{CompiledBinding !IsLoading}" />
                 </StackPanel>
                 
                 <StackPanel IsVisible="{CompiledBinding Session.PathToFile, Converter={x:Static StringConverters.IsNotNullOrEmpty}}">
@@ -33,12 +34,16 @@
                     <TextBox x:Name="MasterPasswordTextBox"
                              Classes="RevealPasswordTextBox"
                              Text="{CompiledBinding MasterPassword}"
-                             PasswordChar="•"/>
+                             PasswordChar="•"
+                             IsEnabled="{CompiledBinding !IsLoading}" />
                     <Button Content="{StaticResource Unlock}"
                             Theme="{StaticResource AccentButtonTheme}"
                             Margin="20 5 20 0"
-                            Command="{CompiledBinding UnlockStorage}"/>
+                            Command="{CompiledBinding UnlockStorage}"
+                            IsEnabled="{CompiledBinding !IsLoading}" />
                 </StackPanel>
+                
+                <ProgressRing Margin="0 10 0 0" IsIndeterminate="{CompiledBinding IsLoading}" IsVisible="{CompiledBinding IsLoading}" />
             </StackPanel>
             
             <StackPanel VerticalAlignment="Bottom" Margin="25 0 25 70" HorizontalAlignment="Center" Spacing="5">

@@ -5,8 +5,6 @@
              xmlns:vm="using:OlibKey.Core.ViewModels"
              xmlns:helpers="using:OlibKey.Core.Helpers"
              xmlns:struct="using:OlibKey.Core.Structures"
-             xmlns:enums="clr-namespace:PleasantUI.Core.Enums;assembly=PleasantUI"
-             xmlns:markupExtensions="clr-namespace:OlibKey.Core.MarkupExtensions"
              xmlns:appearance="clr-namespace:OlibKey.Core.Converters.Appearance"
              xmlns:models="clr-namespace:OlibKey.Core.Models"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -25,10 +23,10 @@
                                 Icon="{StaticResource LocalLanguageRegular}">
                 <OptionsDisplayItem.ActionButton>
                     <ComboBox MinWidth="150"
-                              ItemsSource="{CompiledBinding Source={x:Static helpers:Localization.Languages}}"
+                              ItemsSource="{CompiledBinding Source={x:Static helpers:LanguageResourceHandler.Languages}}"
                               SelectedItem="{CompiledBinding SelectedLanguage}">
                         <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="models:Language">
+                            <DataTemplate x:DataType="struct:Language">
                                 <TextBlock Text="{CompiledBinding Name}" />
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
@@ -171,8 +169,10 @@
                                 Icon="{StaticResource PaintBrushRegular}">
                 <OptionsDisplayItem.ActionButton>
                     <ComboBox MinWidth="150"
-                              ItemsSource="{markupExtensions:Enumerate {x:Type enums:Theme}}"
-                              SelectedValue="{CompiledBinding SelectedTheme}">
+                              SelectedIndex="{CompiledBinding SelectedTheme}">
+                        <ComboBoxItem Content="{StaticResource System}" />
+                        <ComboBoxItem Content="{StaticResource Light}" />
+                        <ComboBoxItem Content="{StaticResource Dark}" />
                     </ComboBox>
                 </OptionsDisplayItem.ActionButton>
             </OptionsDisplayItem>

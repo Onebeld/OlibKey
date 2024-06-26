@@ -37,6 +37,7 @@
     <s:String x:Key="ChoosePath">Choose a path</s:String>
     <s:String x:Key="UseTrashcan">Use trashcan</s:String>
     <s:String x:Key="NoElements">No elements</s:String>
+    <s:String x:Key="NoTags">No tags</s:String>
     
     <s:String x:Key="AllElements">All elements</s:String>
     <s:String x:Key="Login">Login</s:String>
@@ -46,16 +47,23 @@
     
     <s:String x:Key="Successful">Successful!</s:String>
     <s:String x:Key="Error">Error</s:String>
+    <s:String x:Key="Information">Information</s:String>
     
     <s:String x:Key="ImageFiles">Image files</s:String>
     <s:String x:Key="OlibFiles">Olib files</s:String>
     
+    <s:String x:Key="Tools">Tools</s:String>
+    <s:String x:Key="HashGenerator">Hash generator</s:String>
+
     <s:String x:Key="FieldCopied">The field has been successfully copied</s:String>
     <s:String x:Key="InvalidMasterPassword">Invalid master password</s:String>
     <s:String x:Key="StorageCreated">The storage has been successfully created!</s:String>
     <s:String x:Key="StorageSaved">The storage has been successfully saved!</s:String>
     <s:String x:Key="StorageFileNotFound">Storage file not found</s:String>
     <s:String x:Key="UnknownErrorOccurred">An unknown error occurred</s:String>
+    <s:String x:Key="NoUpdateRequired">No update is required at this time</s:String>
+    
+    <s:String x:Key="CloseOlibKey">Close OlibKey</s:String>
     
     <!--Update-->
     <s:String x:Key="UpdateAvailable">Update available!</s:String>
@@ -146,6 +154,8 @@
     <s:String x:Key="City">City</s:String>
     <s:String x:Key="Address">Address</s:String>
     
+    <s:String x:Key="Created">Created</s:String>
+    <s:String x:Key="Changed">Changed</s:String>
     
     <!--Settings-->
     <s:String x:Key="Settings">Settings</s:String>

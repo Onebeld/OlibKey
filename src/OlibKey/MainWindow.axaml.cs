@@ -44,6 +44,8 @@ public partial class MainWindow : PleasantWindow
 
 	private void OnClosed(object? sender, EventArgs e)
 	{
+		OlibKeyApp.ViewModel.Save();
+		
 		OlibKeySettings.Save();
 		PleasantSettings.Save();
 	}

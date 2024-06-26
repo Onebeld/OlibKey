@@ -1,7 +1,13 @@
 ﻿namespace OlibKey.Core.StaticMembers;
 
+/// <summary>
+/// The TextInformation class provides a static lists of strings.
+/// </summary>
 public static class TextInformation
 {
+	/// <summary>
+	/// The array of keys in which the tip text is placed
+	/// </summary>
 	public static readonly string[] Tips =
 	{
 		"PasswordManagerTip1",

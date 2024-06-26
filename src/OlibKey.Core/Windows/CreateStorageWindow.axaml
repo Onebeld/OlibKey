@@ -69,6 +69,10 @@
             <CheckBox Content="{StaticResource UseTrashcan}"
                       IsChecked="{CompiledBinding StorageSettings.UseTrashcan}" />
             
+            <CheckBox Content="Use hardware binding"
+                      IsChecked="{CompiledBinding StorageSettings.UseHardwareBinding}"
+                      ToolTip.Tip="When using hardware binding, you will only be able to open storage on the current hardware. If you change one component, you will not be able to open the repository." />
+            
             <Separator Margin="0 10" />
             
             <DockPanel>

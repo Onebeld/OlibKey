@@ -1,6 +1,6 @@
 ﻿using Avalonia.Input;
-using OlibKey.Core.Extensions;
 using OlibKey.Core.Helpers;
+using OlibKey.Core.Helpers.Safety;
 using PleasantUI;
 using PleasantUI.Controls;
 

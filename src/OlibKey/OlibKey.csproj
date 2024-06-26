@@ -64,6 +64,7 @@
     <ItemGroup>
         <ProjectReference Include="..\OlibKey.Assets\OlibKey.Assets.csproj"/>
         <ProjectReference Include="..\OlibKey.Core\OlibKey.Core.csproj"/>
+        <ProjectReference Include="..\OlibKey.RemoteRequestHandler\OlibKey.RemoteRequestHandler.csproj" />
     </ItemGroup>
 
     <ItemGroup>

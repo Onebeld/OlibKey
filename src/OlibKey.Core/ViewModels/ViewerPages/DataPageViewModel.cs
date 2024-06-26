@@ -3,8 +3,8 @@ using Avalonia.Controls.Notifications;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Helpers;
 using OlibKey.Core.Models;
-using OlibKey.Core.Models.StorageModels;
-using OlibKey.Core.Models.StorageModels.StorageTypes;
+using OlibKey.Core.Models.StorageUnits;
+using OlibKey.Core.Models.StorageUnits.DataTypes;
 using OlibKey.Core.Views.ViewerPages;
 using PleasantUI;
 
@@ -20,7 +20,7 @@ public class DataPageViewModel : ViewModelBase
 
 	private string? _tagName;
 
-	private OlibTotp _totp;
+	private TotpController _totpController;
 
 	#region Properties
 
@@ -54,10 +54,10 @@ public class DataPageViewModel : ViewModelBase
 		}
 	}
 
-	public OlibTotp Totp
+	public TotpController TotpController
 	{
-		get => _totp;
-		set => RaiseAndSet(ref _totp, value);
+		get => _totpController;
+		set => RaiseAndSet(ref _totpController, value);
 	}
 
 	private int DataIndex
@@ -136,28 +136,20 @@ public class DataPageViewModel : ViewModelBase
 		switch (_viewerMode)
 		{
 			case DataViewerMode.Create:
-				Data.TimeCreate = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+				Data.TimeCreate = DateTime.Now;
 				Session.Storage?.Data.Add(Data);
 
-				OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
+				OlibKeyApp.ViewModel.SetViewerType(typeof(OlibKeyPage));
 
 				OlibKeyApp.ViewModel.DoSearch();
 				break;
 			case DataViewerMode.Edit:
 				int index = DataIndex;
 
-				/*if (Data.Type is DataType.Login && OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type is DataType.Login)
-				{
-				    if (OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Login?.WebSite != Data.Login?.WebSite)
-				        Data.IsIconChange = true;
-				}
-
-				if (Data.Type != OlibKeyApp.ViewModel.Session.StorageModels.Data[index].Type)
-				    Data.IsIconChange = true;*/
-
-				Data.TimeChanged = DateTime.Now.ToString(CultureInfo.CurrentCulture);
+				Data.TimeChanged = DateTime.Now;
 
 				OlibKeyApp.ViewModel.Session.Storage.Data[index] = Data;
+				OlibKeyApp.ViewModel.Session.Storage.UpdateInfo();
 
 				OlibKeyApp.ViewModel.DoSearch();
 				OlibKeyApp.ViewModel.SelectedData = Data;
@@ -237,8 +229,8 @@ public class DataPageViewModel : ViewModelBase
 		Session.RestartLockerTimer();
 
 		if (OlibKeyApp.ViewModel.SelectedData is null)
-			OlibKeyApp.ViewModel.ViewerContent = new OlibKeyPage();
-
+			OlibKeyApp.ViewModel.SetViewerType(typeof(OlibKeyPage));
+		
 		OlibKeyApp.ViewModel.SelectedData = null;
 	}
 
@@ -275,7 +267,7 @@ public class DataPageViewModel : ViewModelBase
 
 	public async void ChangeImage()
 	{
-		string? path = await StorageProvider.SelectFile();
+		string? path = await StorageProviderUtils.SelectFile();
 
 		if (path is null) return;
 		
@@ -296,7 +288,7 @@ public class DataPageViewModel : ViewModelBase
 
 		try
 		{
-			Totp = new OlibTotp(login.SecretKey);
+			TotpController = new TotpController(login.SecretKey);
 
 			login.IsActivatedTotp = true;
 		}
@@ -311,7 +303,7 @@ public class DataPageViewModel : ViewModelBase
 		if (Data is not Login login)
 			return;
 
-		Totp.Dispose();
+		TotpController.Dispose();
 
 		login.IsActivatedTotp = false;
 	}

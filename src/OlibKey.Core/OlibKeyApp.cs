@@ -1,11 +1,12 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Notifications;
 using Avalonia.Input.Platform;
 using Avalonia.Styling;
 using OlibKey.Core.Helpers;
-using OlibKey.Core.Models;
 using OlibKey.Core.Settings;
+using OlibKey.Core.Structures;
 using OlibKey.Core.ViewModels;
 using PleasantUI;
 using PleasantUI.Core.Interfaces;
@@ -24,6 +25,8 @@ public class OlibKeyApp : Application
 	public static ApplicationViewModel ViewModel { get; }
 
 	public static TopLevel TopLevel { get; protected set; }
+	
+	public static Action? OpenMainWindowAction { get; protected set; }
 
 	static OlibKeyApp()
 	{
@@ -38,7 +41,7 @@ public class OlibKeyApp : Application
 	public override void OnFrameworkInitializationCompleted()
 	{
 		_languageDictionaries =
-			Localization.GetLocalizations((ResourceDictionary?)Current?.FindResource("LanguageDictionaries"));
+			LanguageResourceHandler.GetLocalizations((ResourceDictionary?)Current?.FindResource("LanguageDictionaries"));
 
 		UpdateLanguage();
 
@@ -119,7 +122,7 @@ public class OlibKeyApp : Application
 	/// <exception cref="NullReferenceException">Dictionary of languages is null</exception>
 	public static void UpdateLanguage()
 	{
-		Language? language = Localization.Languages.FirstOrDefault(x =>
+		Language? language = LanguageResourceHandler.Languages.FirstOrDefault(x =>
 			x.Key == OlibKeySettings.Instance.Language ||
 			x.AdditionalKeys.Any(lang => lang == OlibKeySettings.Instance.Language));
 
@@ -138,7 +141,7 @@ public class OlibKeyApp : Application
 		{
 			if (resourceProvider is not ResourceDictionary resourceDictionary) continue;
 
-			string languageKey = Localization.GetDictionaryLanguageKey(resourceDictionary);
+			string languageKey = LanguageResourceHandler.GetDictionaryLanguageKey(resourceDictionary);
 
 			if (languageKey != OlibKeySettings.Instance.Language) continue;
 

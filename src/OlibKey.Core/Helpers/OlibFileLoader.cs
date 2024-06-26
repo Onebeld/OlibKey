@@ -1,7 +1,10 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
-using OlibKey.Core.Models.StorageModels;
+using OlibKey.Core.Helpers.Safety;
+using OlibKey.Core.Models.StorageUnits;
 using OlibKey.Core.Settings;
+using OlibKey.SystemHardwareInfoProvider;
 
 namespace OlibKey.Core.Helpers;
 
@@ -14,6 +17,8 @@ namespace OlibKey.Core.Helpers;
 /// </remarks>
 public static class OlibFileLoader
 {
+	private const uint MagicNumber = 0xE36296C5;
+	
 	private const byte MajorVersion = 1;
 	private const byte MinorVersion = 0;
 
@@ -35,11 +40,14 @@ public static class OlibFileLoader
 	/// </remarks>
 	public static void Save(Storage storage, string path, string masterPassword)
 	{
+		if (storage.Settings.UseHardwareBinding)
+			masterPassword = CreateHashWithSecretKey(GetDeviceIdentifiers(), masterPassword);
+		
 		byte[] encryptJson;
 
 		{
 			string storageJson = ToJson(storage);
-			string compressedJson = Compressor.Compress(storageJson);
+			byte[] compressedJson = Compressor.Compress(Encoding.UTF8.GetBytes(storageJson));
 			encryptJson = Encryptor.Encrypt(compressedJson, masterPassword, storage.Settings.Iterations);
 		}
 
@@ -52,6 +60,7 @@ public static class OlibFileLoader
 		
 		WriteData(writer, encryptJson);
 		
+		writer.Write(storage.Settings.UseHardwareBinding);
 		writer.Write(storage.Settings.UseTrashcan);
 		
 		WriteData(writer, storage.Settings.ImageData, true);
@@ -74,6 +83,12 @@ public static class OlibFileLoader
 	public static Storage Load(string path, string masterPassword)
 	{
 		using BinaryReader reader = new(new FileStream(path, FileMode.Open, FileAccess.Read), Encoding.ASCII);
+		
+		// Read magic number
+		uint magicNumber = reader.ReadUInt32();
+		
+		if (magicNumber != MagicNumber)
+			throw new InvalidDataException();
 
 		Version version = ReadVersion(reader);
 		
@@ -86,15 +101,19 @@ public static class OlibFileLoader
 		
 		byte[] encryptedJson = ReadData(reader)!;
 		
+		bool useHardwareBinding = reader.ReadBoolean();
 		bool useTrashcan = reader.ReadBoolean();
 
 		byte[]? image = ReadData(reader, true);
 		
+		if (useHardwareBinding)
+			masterPassword = CreateHashWithSecretKey(GetDeviceIdentifiers(), masterPassword);
+		
 		string fileContent;
 		
 		{
-			string compressedString = Encryptor.Decrypt(encryptedJson, masterPassword, iterations);
-			fileContent = Compressor.Decompress(compressedString);
+			byte[] compressedString = Encryptor.DecryptBytes(encryptedJson, masterPassword, iterations);
+			fileContent = Encoding.UTF8.GetString(Compressor.Decompress(compressedString));
 		}
 		
 		Storage storage = FromJson(fileContent);
@@ -102,6 +121,7 @@ public static class OlibFileLoader
 		StorageSettings settings = new()
 		{
 			Iterations = iterations,
+			UseHardwareBinding = useHardwareBinding,
 			UseTrashcan = useTrashcan,
 			Name = name,
 			ImageData = image
@@ -116,7 +136,7 @@ public static class OlibFileLoader
 
 	private static void WriteVersion(BinaryWriter writer)
 	{
-		writer.Write("OLIBFILE");
+		writer.Write(MagicNumber);
 		writer.Write(MajorVersion);
 		writer.Write(MinorVersion);
 	}
@@ -164,9 +184,6 @@ public static class OlibFileLoader
 
 	private static Version ReadVersion(BinaryReader reader)
 	{
-		// Skip OLIBFILE signature
-		reader.ReadString();
-
 		// Read major and minor version file
 		byte majorVersion = reader.ReadByte();
 		byte minorVersion = reader.ReadByte();
@@ -217,4 +234,40 @@ public static class OlibFileLoader
 	}
 
 	#endregion
+
+	private static string CreateHashWithSecretKey(string hash, string masterPassword)
+	{
+		using HMACSHA3_512 hmac = new(Encoding.UTF8.GetBytes(masterPassword));
+
+		byte[] hashValue = hmac.ComputeHash(Encoding.UTF8.GetBytes(hash));
+		string masterPasswordHash = BitConverter.ToString(hashValue).Replace("-", "");
+		
+		return masterPasswordHash;
+	}
+    
+	private static string GetDeviceIdentifiers()
+	{
+		HardwareInfo hardwareInfo = new();
+		
+		string?[] processorIds = hardwareInfo.GetProcessorIds();
+		string?[] memoryIds = hardwareInfo.GetMemoryIds();
+		string?[] videoControllerIds = hardwareInfo.GetVideoControllerIds();
+		string?[] motherboardIds = hardwareInfo.GetMotherboardIds();
+		
+		string result = string.Empty;
+
+		foreach (string? processorId in processorIds)
+			result += processorId;
+
+		foreach (string? memoryId in memoryIds)
+			result += memoryId;
+
+		foreach (string? videoControllerId in videoControllerIds)
+			result += videoControllerId;
+
+		foreach (string? motherboardId in motherboardIds)
+			result += motherboardId;
+
+		return result;
+	}
 }

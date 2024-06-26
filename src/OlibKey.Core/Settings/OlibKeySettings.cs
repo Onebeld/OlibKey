@@ -205,5 +205,6 @@ public class OlibKeySettings : ViewModelBase
 
 	public static void Reset()
 	{
+		CreateInstance();
 	}
 }

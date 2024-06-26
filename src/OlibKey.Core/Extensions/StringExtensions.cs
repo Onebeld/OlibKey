@@ -21,7 +21,7 @@ public static class StringExtensions
 		if (str.Contains(searchText))
 			return true;
 
-		double percent = StringFinder.CalculateSimilarity(str, searchText);
+		double percent = LevenshteinSimilarityCalculator.Calculate(str, searchText);
 
 		return percent > OlibKeySettings.Instance.SearchSimilarity;
 	}

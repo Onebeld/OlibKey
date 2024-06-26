@@ -3,6 +3,9 @@ using System.Text;
 
 namespace OlibKey.Core.Helpers;
 
+/// <summary>
+/// Provides methods for compressing and decompressing data.
+/// </summary>
 public static class Compressor
 {
 	/// <summary>
@@ -12,6 +15,11 @@ public static class Compressor
 	/// <returns>Compressed text</returns>
 	public static string Compress(string text) => Convert.ToBase64String(Compress(Encoding.UTF8.GetBytes(text)));
 
+	/// <summary>
+	/// Decompresses a compressed text
+	/// </summary>
+	/// <param name="text">Compressed text</param>
+	/// <returns>Original text</returns>
 	public static string Decompress(string text) => Encoding.UTF8.GetString(Decompress(Convert.FromBase64String(text)));
 
 	/// <summary>
@@ -37,7 +45,7 @@ public static class Compressor
 	/// <summary>
 	/// Decompresses a compressed byte array
 	/// </summary>
-	/// <returns>Original text</returns>
+	/// <returns>Original byte array</returns>
 	public static byte[] Decompress(byte[] compressedBuffer)
 	{
 		using MemoryStream output = new();

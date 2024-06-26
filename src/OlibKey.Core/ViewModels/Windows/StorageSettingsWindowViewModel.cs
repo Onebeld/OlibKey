@@ -23,7 +23,7 @@ public class StorageSettingsWindowViewModel : ViewModelBase
 
 	public async void LoadImage()
 	{
-		string? imagePath = await StorageProvider.SelectFile(pickerFileTypes: FileTypes.Images);
+		string? imagePath = await StorageProviderUtils.SelectFile(pickerFileTypes: FileTypes.Images);
 
 		if (imagePath is null) return;
 

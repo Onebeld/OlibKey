@@ -8,7 +8,7 @@ public class Program
 {
 	[STAThread]
 	public static void Main(string[] args) => BuildAvaloniaApp()
-		.StartWithClassicDesktopLifetime(args, ShutdownMode.OnMainWindowClose);
+		.StartWithClassicDesktopLifetime(args, ShutdownMode.OnExplicitShutdown);
 
 	public static AppBuilder BuildAvaloniaApp()
 	{

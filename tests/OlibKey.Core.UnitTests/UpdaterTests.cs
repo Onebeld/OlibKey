@@ -1,5 +1,4 @@
 ﻿using OlibKey.Core.Models;
-using OlibKey.Core.Other;
 
 namespace OlibKey.Core.UnitTests;
 
@@ -8,7 +7,7 @@ public class UpdaterTests
 	[Test]
 	public async Task Get_Update()
 	{
-		Update? update = await Updater.GetUpdate();
+		Update? update = await Update.Get();
 
 		if (update is null)
 		{
@@ -16,12 +15,10 @@ public class UpdaterTests
 			return;
 		}
 
-		Update updateValue = update.Value;
-		
-		TestContext.WriteLine(updateValue.Version);
-		TestContext.WriteLine(updateValue.Link);
-		TestContext.WriteLine(updateValue.PublishedAt);
-		TestContext.WriteLine(updateValue.Body);
+		TestContext.WriteLine(update.Version);
+		TestContext.WriteLine(update.Link);
+		TestContext.WriteLine(update.PublishedAt);
+		TestContext.WriteLine(update.Body);
 		
 		Assert.Pass();
 	}

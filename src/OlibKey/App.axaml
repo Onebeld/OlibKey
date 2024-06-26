@@ -1,6 +1,8 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="OlibKey.App">
+             xmlns:viewModels="clr-namespace:OlibKey.Core.ViewModels;assembly=OlibKey.Core"
+             x:Class="OlibKey.App"
+             x:DataType="viewModels:ApplicationViewModel">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,4 +22,27 @@
             <Setter Property="Foreground" Value="{CompiledBinding $parent[Button].Foreground}" />
         </Style>
     </Application.Styles>
+    
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <TrayIcon Icon="avares://OlibKey.Assets/OlibKeyLogo.ico"
+                      ToolTipText="OlibKey"
+                      Command="{CompiledBinding OpenOlibKey}">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="{DynamicResource Tools}">
+                            <NativeMenu>
+                                <NativeMenuItem Header="{DynamicResource PasswordGenerator}" />
+                                <NativeMenuItem Header="{DynamicResource HashGenerator}" />
+                            </NativeMenu>
+                        </NativeMenuItem>
+                        
+                        <NativeMenuItemSeparator />
+                        
+                        <NativeMenuItem Header="{DynamicResource CloseOlibKey}" Command="{CompiledBinding CloseOlibKey}" />
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
 </Application>

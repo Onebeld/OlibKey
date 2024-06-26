@@ -39,7 +39,7 @@ public class CreateStorageViewModel : ViewModelBase
 
 	public async void SelectPath()
 	{
-		string? storagePath = await StorageProvider.SaveFile(pickerFileTypes: FileTypes.Olib,
+		string? storagePath = await StorageProviderUtils.SaveFile(pickerFileTypes: FileTypes.Olib,
 			defaultExtension: "olib",
 			suggestedFileName: "NewStorage");
 
@@ -50,7 +50,7 @@ public class CreateStorageViewModel : ViewModelBase
 
 	public async void LoadImage()
 	{
-		string? imagePath = await StorageProvider.SelectFile(pickerFileTypes: FileTypes.Images);
+		string? imagePath = await StorageProviderUtils.SelectFile(pickerFileTypes: FileTypes.Images);
 
 		if (imagePath is null) return;
 

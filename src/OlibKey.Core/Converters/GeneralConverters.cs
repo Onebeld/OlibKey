@@ -3,7 +3,7 @@ using Avalonia;
 using Avalonia.Controls.Converters;
 using Avalonia.Data.Converters;
 using Avalonia.Media.Imaging;
-using OlibKey.Core.Helpers;
+using OlibKey.Core.Helpers.Safety;
 
 namespace OlibKey.Core.Converters;
 

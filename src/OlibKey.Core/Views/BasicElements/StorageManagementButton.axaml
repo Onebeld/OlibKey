@@ -10,11 +10,22 @@
              IsVisible="{CompiledBinding Session.Storage, Converter={x:Static ObjectConverters.IsNotNull}}">
     <Button x:Name="ButtonStorageMenu"
             Theme="{StaticResource AppBarButtonTheme}"
-            Padding="5"
-            ToolTip.Tip="{DynamicResource Menu}">
+            Padding="5">
+        <ToolTip.Tip>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{CompiledBinding Session.Storage.Settings.Name}" />
+                <TextBlock Text="{CompiledBinding Session.PathToFile}" />
+                
+                <TextBlock Text="{StaticResource Modified}"
+                           IsVisible="{CompiledBinding IsDirty}"
+                           Margin="0 5 0 0"
+                           FontSize="12" />
+            </StackPanel>
+        </ToolTip.Tip>
+        
         <Button.Flyout>
             <Flyout Placement="Bottom" ShowMode="Transient">
-                <Grid RowDefinitions="Auto,Auto,Auto" MinWidth="250">
+                <Grid RowDefinitions="Auto,Auto,Auto" MinWidth="250" MaxWidth="250">
                     <StackPanel Grid.Row="0" Margin="0 10 0 0" Spacing="5">
                         <Border HorizontalAlignment="Center"
                                 CornerRadius="99"
@@ -26,6 +37,9 @@
                         </Border>
                         
                         <TextBlock Text="{CompiledBinding Session.Storage.Settings.Name}"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   Margin="10 0"
                                    FontSize="22"
                                    Theme="{StaticResource TitleTextBlockTheme}"
                                    HorizontalAlignment="Center" />
@@ -57,7 +71,7 @@
                             </Style>
                         </StackPanel.Styles>
                         
-                        <Button>
+                        <Button Command="{CompiledBinding Save}">
                             <DockPanel>
                                 <PathIcon Data="{StaticResource SaveRegular}" />
                                 
@@ -109,12 +123,21 @@
         </Button.Flyout>
         
         <StackPanel Orientation="Horizontal">
-            <Border Width="8"
-                    Height="8"
-                    CornerRadius="99"
-                    Background="{StaticResource ControlFillColor3Brush}"
-                    IsVisible="{CompiledBinding IsDirty}"
-                    Margin="0 0 5 0"/>
+            <Panel MaxWidth="12" MaxHeight="12" Margin="0 0 5 0">
+                <Border Width="8"
+                        Height="8"
+                        CornerRadius="99"
+                        Background="{StaticResource ControlFillColor3Brush}"
+                        IsVisible="{CompiledBinding IsDirty}" />
+                
+                <ProgressRing IsIndeterminate="{CompiledBinding IsLoading}"
+                              IsVisible="{CompiledBinding IsLoading}"
+                              MinHeight="12"
+                              MinWidth="12"
+                              Width="12"
+                              Height="12" />
+            </Panel>
+            
             
             <Border Width="26"
                     Height="26"
@@ -127,6 +150,8 @@
             <TextBlock FontSize="12"
                        Foreground="{StaticResource TextFillColor3Brush}"
                        Text="{CompiledBinding Session.Storage.Settings.Name}"
+                       TextTrimming="CharacterEllipsis"
+                       MaxWidth="100"
                        Margin="5 0 0 0" VerticalAlignment="Center" />
         </StackPanel>
     </Button>

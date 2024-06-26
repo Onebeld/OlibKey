@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
 using Avalonia.Interactivity;
-using OlibKey.Core.Other;
+using OlibKey.Core.Models;
 using PleasantUI.Controls;
 
 namespace OlibKey.Core.Windows;

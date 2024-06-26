@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using OlibKey.Core;
+using OlibKey.RemoteRequestHandler;
 using PleasantUI.Controls;
 
 namespace OlibKey;
@@ -27,13 +28,36 @@ public class App : OlibKeyApp
 			return;
 		}
 
-		Main = new MainWindow
+		Task.Run(OlibKeyWeb.RunApp);
+
+		desktop.ShutdownRequested += async (sender, args) =>
 		{
-			DataContext = ViewModel
+			await OlibKeyWeb.StopApp();
 		};
 
-		TopLevel = TopLevel.GetTopLevel(Main as PleasantWindow) ?? throw new NullReferenceException("TopLevel is null");
+		OpenMainWindowAction = () =>
+		{
+			if (desktop.MainWindow?.PlatformImpl is not null)
+			{
+				desktop.MainWindow.Topmost = true;
+				desktop.MainWindow.Topmost = false;
+				
+				return;
+			}
+			
+			Main = new MainWindow
+			{
+				DataContext = ViewModel
+			};
 
-		desktop.MainWindow = Main as PleasantWindow;
+			TopLevel = TopLevel.GetTopLevel(Main as PleasantWindow) ??
+			           throw new NullReferenceException("TopLevel is null");
+
+			desktop.MainWindow = Main as PleasantWindow;
+			
+			desktop.MainWindow?.Show();
+		};
+
+		OpenMainWindowAction.Invoke();
 	}
 }

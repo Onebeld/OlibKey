@@ -1,6 +1,6 @@
 ﻿using Avalonia.Threading;
 using OlibKey.Core.Enums;
-using OlibKey.Core.Models.StorageModels;
+using OlibKey.Core.Models.StorageUnits;
 using OlibKey.Core.Structures;
 using PleasantUI;
 
@@ -12,7 +12,7 @@ public class Session : ViewModelBase
 	private Storage? _storage;
 	private string? _pathToFile;
 
-	private string _currentMasterPassword;
+	private string _currentMasterPassword = string.Empty;
 
 	public Storage? Storage
 	{

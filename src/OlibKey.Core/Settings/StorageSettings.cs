@@ -10,6 +10,7 @@ public class StorageSettings : ViewModelBase, ICloneable
 	private byte[]? _imageData;
 	private int _iterations = 10_000;
 	private bool _useTrash = true;
+	private bool _useHardwareBinding;
 
 	public string Name
 	{
@@ -33,6 +34,12 @@ public class StorageSettings : ViewModelBase, ICloneable
 	{
 		get => _useTrash;
 		set => RaiseAndSet(ref _useTrash, value);
+	}
+
+	public bool UseHardwareBinding
+	{
+		get => _useHardwareBinding;
+		set => RaiseAndSet(ref _useHardwareBinding, value);
 	}
 
 	public void LoadImage(string path)

@@ -28,22 +28,12 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\OlibKey.SystemHardwareInfoProvider\OlibKey.SystemHardwareInfoProvider.csproj" />
         <ProjectReference Include="..\OlibKey.Assets\OlibKey.Assets.csproj"/>
-        
-        <ProjectReference Include="..\..\generators\OlibKey.SourceGenerator\OlibKey.SourceGenerator.csproj"
-                          OutputItemType="A"
-                          ReferenceOutputAssembly="false"/>
         
     </ItemGroup>
 
     <ItemGroup>
       <AdditionalFiles Include="Files\BadPasswords.txt" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Views\BasicElements\AdditionalPanel.axaml.cs">
-        <DependentUpon>AdditionalPanel.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
     </ItemGroup>
 </Project>

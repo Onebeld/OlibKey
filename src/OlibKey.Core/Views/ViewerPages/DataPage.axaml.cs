@@ -4,8 +4,8 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using OlibKey.Core.Enums;
 using OlibKey.Core.Extensions;
-using OlibKey.Core.Models.StorageModels;
-using OlibKey.Core.Models.StorageModels.StorageTypes;
+using OlibKey.Core.Models.StorageUnits;
+using OlibKey.Core.Models.StorageUnits.DataTypes;
 using OlibKey.Core.ViewModels.ViewerPages;
 
 namespace OlibKey.Core.Views.ViewerPages;
@@ -23,10 +23,14 @@ public partial class DataPage : UserControl
 		DataContext = ViewModel;
 	}
 
-	public DataPage(Data data)
+	public DataPage(Data? data)
 	{
 		InitializeComponent();
-		ViewModel = new DataPageViewModel(DataViewerMode.View, data);
+		
+		if (data is not null)
+			ViewModel = new DataPageViewModel(DataViewerMode.View, data);
+		else ViewModel = new DataPageViewModel(DataViewerMode.Create);
+
 		DataContext = ViewModel;
 	}
 
